@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ser vs Estar B1–B2 | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;
+  --text:#f0f0ff;--muted:#a8abce;--muted2:#6668a0;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --font:'DM Sans',system-ui,sans-serif;
+  --display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font);
+  background:
+    radial-gradient(ellipse at 10% 10%,rgba(255,43,191,.14),transparent 28%),
+    radial-gradient(ellipse at 90% 15%,rgba(37,217,255,.10),transparent 28%),
+    linear-gradient(155deg,var(--bg1),var(--bg2));
+  color:var(--text);min-height:100vh;
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.app{width:min(900px,96%);margin:16px auto 40px;display:flex;flex-direction:column;gap:14px}
+
+/* HERO */
+.hero{border-radius:24px;padding:24px 28px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.logo-box{width:68px;height:68px;flex-shrink:0;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);box-shadow:0 0 20px rgba(255,43,191,.22);font-family:var(--display);font-size:1.1rem;font-weight:900;color:var(--magenta);text-shadow:1px 1px 0 var(--cyan)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.6rem,3vw,2.7rem);font-weight:900;line-height:.95;background:linear-gradient(90deg,#fff 25%,var(--cyan) 65%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.88rem;line-height:1.55;margin-top:5px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.badge{display:inline-flex;align-items:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.badge.c{border-color:rgba(37,217,255,.3);color:var(--cyan)}
+.badge.m{border-color:rgba(255,43,191,.3);color:var(--magenta2)}
+
+/* SCORE CARDS */
+.score-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.sc-card{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:4px}
+.sc-card .l{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2)}
+.sc-card .v{font-family:var(--display);font-size:1.8rem;font-weight:900;color:var(--cyan);line-height:1}
+.sc-card .v.g{color:var(--good)}.sc-card .v.b{color:var(--bad)}.sc-card .v.w{color:var(--warn)}
+.sc-card .bar{width:100%;height:5px;background:rgba(255,255,255,.08);border-radius:999px;margin-top:4px;overflow:hidden}
+.sc-card .bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--magenta));transition:width .6s ease;width:0%}
+
+/* MAIN */
+.main{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:30px 34px;box-shadow:var(--shadow)}
+.ex-title{font-family:var(--display);font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.ex-instr{font-size:.88rem;color:var(--muted);line-height:1.55;padding:10px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:22px}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+
+/* PROSE */
+.prose{font-size:1.05rem;line-height:2.8;color:var(--text)}
+.prose p{margin-bottom:.4rem}
+
+/* GAP — inline select */
+.gap{display:inline-block;position:relative;vertical-align:middle;margin:0 2px}
+.gap select{
+  font-family:var(--font);font-size:1rem;font-weight:500;
+  height:34px;padding:0 28px 0 10px;
+  border-radius:6px;border:1.5px solid rgba(180,180,240,.3);
+  background:rgba(255,255,255,.06);color:var(--text);
+  cursor:pointer;appearance:none;-webkit-appearance:none;
+  min-width:148px;vertical-align:middle;transition:border-color .15s,background .15s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23a8abce' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 8px center;
+}
+.gap select option{background:#0f0230;color:var(--text)}
+.gap select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.14)}
+.gap select:hover:not([disabled]):not(.st-correct):not(.st-wrong){border-color:rgba(37,217,255,.55);background:rgba(37,217,255,.08)}
+
+/* AFTER CHECK — replace select with inline text result */
+.gap-result{display:none;align-items:center;gap:4px;vertical-align:middle;margin:0 2px}
+.gap-result.visible{display:inline-flex}
+/* wrong answer shown with strikethrough in red, then correct in green */
+.gr-wrong{color:#f87171;font-weight:700;text-decoration:underline;text-decoration-color:#ef4444;text-decoration-style:wavy}
+.gr-correct{color:#4ade80;font-weight:700}
+.gr-icon{font-size:.9rem;line-height:1}
+/* info button */
+.gr-info{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(37,217,255,.18);border:1px solid rgba(37,217,255,.4);
+  color:var(--cyan);font-size:.72rem;font-weight:800;
+  cursor:pointer;flex-shrink:0;position:relative;
+  vertical-align:middle;margin-left:2px;transition:background .15s;
+}
+.gr-info:hover{background:rgba(37,217,255,.35)}
+
+/* TOOLTIP */
+.tt{
+  display:none;position:absolute;
+  bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);
+  background:#0d1a3a;border:1px solid rgba(37,217,255,.35);
+  color:var(--text);font-size:.8rem;font-weight:400;line-height:1.55;
+  padding:10px 13px;border-radius:10px;z-index:100;
+  width:260px;white-space:normal;text-align:left;
+  box-shadow:0 8px 24px rgba(0,0,0,.5);
+}
+.tt::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#0d1a3a}
+.gr-info.open .tt{display:block}
+
+/* correct-only (no wrong answer) */
+.gr-only-correct{color:#4ade80;font-weight:700}
+
+/* FEEDBACK BANNER */
+.feedback{display:none;margin-top:22px;padding:16px 20px;border-radius:12px;font-size:.95rem;line-height:1.7;font-weight:500}
+.feedback.show{display:block}
+.feedback.good{background:rgba(34,197,94,.13);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 12px 12px 0}
+.feedback.partial{background:rgba(245,158,11,.11);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 12px 12px 0}
+.feedback.bad{background:rgba(239,68,68,.12);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 12px 12px 0}
+
+/* ACTIONS */
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{border:0;border-radius:11px;padding:10px 18px;font-weight:800;font-family:var(--font);font-size:.85rem;cursor:pointer;transition:.16s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),#00bfff);color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.btn-dark{background:#0b0220;color:var(--muted);border:1px solid rgba(255,255,255,.08)}
+
+/* VOCAB */
+.vocab{margin-top:22px}
+.vlbl{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--muted2);margin-bottom:7px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{background:rgba(37,217,255,.09);border:1px solid rgba(37,217,255,.18);border-radius:999px;padding:3px 10px;font-size:.71rem;color:var(--cyan);font-weight:700}
+.chip.m{background:rgba(255,43,191,.08);border-color:rgba(255,43,191,.18);color:var(--magenta2)}
+
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.main{padding:20px 16px}.prose{font-size:.97rem;line-height:2.6}.score-row{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<h1 class="sr-only">Ser vs Estar — B1–B2, pretérito e imperfecto</h1>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box" aria-hidden="true">YMF</div>
+    <div class="hero-text">
+      <h1>Ser vs Estar</h1>
+      <p>Un solo texto largo al nivel B1–B2. Elige la forma correcta en cada hueco. Incluye presente, imperfecto y pretérito.</p>
+      <div class="badges">
+        <span class="badge c">Nivel B1–B2</span>
+        <span class="badge m">Ser · Estar</span>
+        <span class="badge">Imperfecto vs Pretérito</span>
+        <span class="badge">By Carlos & Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SCORE CARDS -->
+<div class="score-row" role="region" aria-label="Resultados">
+  <div class="sc-card"><span class="l">Total huecos</span><span class="v" id="sTotal">25</span><div class="bar"><div class="bar-fill" id="sProg"></div></div></div>
+  <div class="sc-card"><span class="l">Respondidas</span><span class="v w" id="sAns">0</span></div>
+  <div class="sc-card"><span class="l">Correctas</span><span class="v g" id="sOk">—</span></div>
+  <div class="sc-card"><span class="l">Errores</span><span class="v b" id="sErr">—</span></div>
+</div>
+
+<!-- EXERCISE -->
+<main class="main">
+  <div class="ex-title">La historia de Valentina</div>
+  <div class="ex-instr">Elige entre las opciones de cada menú para completar el texto. Formas posibles: <em>era / fue / estaba / estuvo / eran / fueron / estaban / estuvieron / es / está / son / están</em>.</div>
+
+  <div class="prose" id="prose"></div>
+
+  <div class="feedback" id="feedback" role="alert"></div>
+
+  <div class="actions">
+    <button class="btn btn-cyan" id="checkBtn" onclick="checkAll()">Revisar todo</button>
+    <button class="btn btn-ghost" onclick="resetAll()">↺ Reiniciar</button>
+    <button class="btn btn-dark" onclick="giveHint()">💡 Pista</button>
+  </div>
+
+  <div class="vocab">
+    <div class="vlbl">Reglas clave</div>
+    <div class="chips">
+      <span class="chip">era / eran → descripción continua en el pasado</span>
+      <span class="chip m">fue / fueron → evento puntual o valoración</span>
+      <span class="chip">estaba / estaban → estado de fondo en progreso</span>
+      <span class="chip m">estuvo / estuvieron → estado con inicio y fin claro</span>
+      <span class="chip">ser + adjetivo → rasgo permanente</span>
+      <span class="chip m">estar + adjetivo → condición temporal</span>
+    </div>
+  </div>
+</main>
+
+<p class="creator">By <span>Carlos & Denisse</span> · Your Mexican Friend</p>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────
+// [answer, [opts], rule]
+const B = [
+  ['era',      ['era','fue','estaba','estuvo'],          'Imperfecto de SER: origen o procedencia → característica permanente en el pasado.'],
+  ['era',      ['era','fue','estaba','estuvo'],          'Imperfecto de SER: profesión habitual en el pasado (rol permanente).'],
+  ['estaba',   ['era','fue','estaba','estuvo'],          'Imperfecto de ESTAR: ubicación como estado de fondo continuo.'],
+  ['era',      ['era','fue','estaba','estuvo'],          'Imperfecto de SER: descripción física permanente de una persona.'],
+  ['estaba',   ['era','fue','estaba','estuvo'],          'Imperfecto de ESTAR: estado emocional habitual o de fondo.'],
+  ['fue',      ['era','fue','estaba','estuvo'],          'Pretérito de SER: valoración de un evento puntual ya terminado ("fue un martes").'],
+  ['estaba',   ['era','fue','estaba','estuvo'],          'Imperfecto de ESTAR: estado físico de fondo mientras ocurría otra acción.'],
+  ['era',      ['era','fue','estaba','estuvo'],          'Imperfecto de SER: rasgo de carácter permanente de una persona.'],
+  ['estaba',   ['era','fue','estaba','estuvo'],          'Imperfecto de ESTAR: estado emocional en ese momento concreto.'],
+  ['fue',      ['era','fue','estaba','estuvo'],          'Pretérito de SER: valoración puntual ("fue una sorpresa enorme").'],
+  ['estuvo',   ['era','fue','estaba','estuvo'],          'Pretérito de ESTAR: estado acotado con inicio y fin claros (dos horas).'],
+  ['era',      ['era','fue','estaba','estuvo'],          'Imperfecto de SER: rasgo de personalidad permanente.'],
+  ['estaba',   ['era','fue','estaba','estuvo'],          'Imperfecto de ESTAR: descripción del ambiente o contexto de fondo.'],
+  ['fue',      ['era','fue','estaba','estuvo'],          'Pretérito de SER: evento único y puntual ya terminado.'],
+  ['eran',     ['eran','fueron','estaban','estuvieron'], 'Imperfecto plural de SER: descripción habitual de personas.'],
+  ['estaban',  ['eran','fueron','estaban','estuvieron'], 'Imperfecto plural de ESTAR: estado físico de fondo (escena descriptiva).'],
+  ['estuvo',   ['era','fue','estaba','estuvo'],          'Pretérito de ESTAR: estado con duración concreta y terminada ("varios días").'],
+  ['fue',      ['era','fue','estaba','estuvo'],          'Pretérito de SER: valoración global de algo terminado ("fue duro").'],
+  ['estaba',   ['era','fue','estaba','estuvo'],          'Imperfecto de ESTAR: estado emocional de fondo antes de otro evento.'],
+  ['es',       ['es','está','era','estaba'],             'Presente de SER: característica permanente del carácter (sigue siendo así).'],
+  ['está',     ['es','está','era','estaba'],             'Presente de ESTAR: estado temporal actual (convencida → puede cambiar).'],
+  ['es',       ['es','está','era','estaba'],             'Presente de SER: profesión actual como identidad permanente.'],
+  ['están',    ['son','están','eran','estaban'],         'Presente plural de ESTAR: situación o ubicación actual (puede cambiar).'],
+  ['fue',      ['era','fue','estaba','estuvo'],          'Pretérito de SER: valoración de algo ya terminado ("fue la mejor decisión").'],
+  ['son',      ['son','están','eran','estaban'],         'Presente plural de SER: característica permanente de un grupo de personas.'],
+];
+
+// ── TEXT ─────────────────────────────────────────────────────
+const PARAS = [
+  `Valentina {1} de Oaxaca, aunque desde pequeña vivía en la Ciudad de México. Su madre {2} profesora de primaria y su padre {3} siempre ocupado trabajando en una fábrica al norte de la ciudad. Valentina {4} una chica alta, de ojos oscuros y pelo rizado, y {5} convencida de que algún día sería escritora.`,
+  `La mañana en que todo cambió {6} un martes de octubre. Valentina {7} desayunando cuando sonó el teléfono. Su tía Rosa, que {8} la persona más optimista de la familia, la llamó para darle una noticia inesperada: la habían seleccionado para un programa de escritura creativa en Madrid. Valentina {9} tan nerviosa que no pudo terminar el café. {10} una sorpresa enorme, de esas que no esperas y que te cambian la vida.`,
+  `Durante la cena de esa noche, Valentina {11} casi callada durante dos horas. Su madre, que {12} muy intuitiva, notó inmediatamente que algo pasaba. La cocina {13} llena del aroma del mole que su madre había preparado, y la conversación {14} lenta y cargada de silencios.`,
+  `Sus padres {15} personas sencillas que nunca habían salido del país. {16} sentados frente a ella, mirándola con esa mezcla de orgullo y miedo que solo los padres saben tener. Cuando Valentina les contó la noticia, su madre lloró. No {17} bien durante varios días: le daba vueltas a la idea de que su hija se fuera tan lejos. {18} duro para todos, pero al final la apoyaron.`,
+  `El viaje a Madrid {19} lleno de incertidumbre en la mente de Valentina. Ella {20} una persona que necesita planear cada detalle, y la idea de improvisar le generaba ansiedad. Sin embargo, también {21} convencida de que las mejores experiencias ocurren cuando te permites soltar el control. Hoy {22} una escritora reconocida: publica artículos, da talleres y tiene una columna semanal en una revista literaria.`,
+  `Sus libros {23} traducidos a cuatro idiomas y disponibles en más de veinte países. Cuando le preguntan por ese viaje, siempre dice que {24} la mejor decisión de su vida. Sus lectores {25} personas de todas las edades que encuentran en sus palabras algo que les resulta familiar, aunque no puedan explicar exactamente qué.`,
+];
+
+// ── BUILD ─────────────────────────────────────────────────────
+let sels = [];
+let checked = false;
+
+function build(){
+  const prose = document.getElementById('prose');
+  prose.innerHTML = '';
+  sels = [];
+
+  PARAS.forEach(para => {
+    const p = document.createElement('p');
+    const parts = para.split(/(\{\d+\})/);
+
+    parts.forEach(part => {
+      const m = part.match(/^\{(\d+)\}$/);
+      if(!m){ p.appendChild(document.createTextNode(part)); return; }
+
+      const n = parseInt(m[1]);
+      const [answer, opts, rule] = B[n-1];
+
+      // wrapper
+      const wrap = document.createElement('span');
+      wrap.className = 'gap';
+      wrap.id = 'gap_'+n;
+
+      // SELECT (shown before check)
+      const sel = document.createElement('select');
+      sel.id = 'sel_'+n;
+      sel.setAttribute('aria-label','hueco '+n);
+      sel.dataset.answer = answer;
+      sel.dataset.n = n;
+
+      const dflt = document.createElement('option');
+      dflt.value = ''; dflt.textContent = '▼  elige';
+      sel.appendChild(dflt);
+      [...opts].sort(()=>Math.random()-.5).forEach(o=>{
+        const op = document.createElement('option');
+        op.value = o; op.textContent = o; sel.appendChild(op);
+      });
+      sel.addEventListener('change', ()=>{ if(!checked) updateScore(); });
+
+      // RESULT (shown after check) — hidden until check
+      const result = document.createElement('span');
+      result.className = 'gap-result';
+      result.id = 'res_'+n;
+
+      wrap.appendChild(sel);
+      wrap.appendChild(result);
+      p.appendChild(wrap);
+      sels.push(sel);
+    });
+
+    prose.appendChild(p);
+  });
+}
+
+// ── SCORE ─────────────────────────────────────────────────────
+function updateScore(){
+  let ans=0, ok=0;
+  sels.forEach(s=>{ if(s.value!==''){ans++; if(s.value===s.dataset.answer)ok++;} });
+  document.getElementById('sAns').textContent = ans;
+  if(checked){
+    document.getElementById('sOk').textContent = ok;
+    document.getElementById('sErr').textContent = sels.length - ok;
+  }
+  const pct = Math.round(ans/sels.length*100);
+  document.getElementById('sProg').style.width = pct+'%';
+}
+
+// ── CHECK ─────────────────────────────────────────────────────
+let openTooltip = null;
+
+function checkAll(){
+  checked = true;
+  let ok = 0;
+
+  sels.forEach(sel=>{
+    const n = parseInt(sel.dataset.n);
+    const answer = sel.dataset.answer;
+    const given = sel.value;
+    const isOk = given === answer;
+    if(isOk) ok++;
+
+    const [,, rule] = B[n-1];
+
+    // hide select
+    sel.style.display = 'none';
+
+    // build result span
+    const result = document.getElementById('res_'+n);
+    result.innerHTML = '';
+    result.classList.add('visible');
+
+    if(isOk){
+      // just show correct answer in green + checkmark
+      const span = document.createElement('span');
+      span.className = 'gr-only-correct';
+      span.textContent = answer;
+      const icon = document.createElement('span');
+      icon.className = 'gr-icon';
+      icon.textContent = ' ✓';
+      icon.style.color = '#4ade80';
+      result.appendChild(span);
+      result.appendChild(icon);
+    } else {
+      // wrong answer underlined red strikethrough
+      const wrongSpan = document.createElement('span');
+      wrongSpan.className = 'gr-wrong';
+      wrongSpan.textContent = given || '—';
+      // separator
+      const sep = document.createTextNode(' ');
+      // correct answer in green
+      const correctSpan = document.createElement('span');
+      correctSpan.className = 'gr-correct';
+      correctSpan.textContent = answer;
+      // x icon
+      const xIcon = document.createElement('span');
+      xIcon.className = 'gr-icon';
+      xIcon.textContent = '✗';
+      xIcon.style.color = '#f87171';
+      xIcon.style.marginLeft = '2px';
+
+      result.appendChild(wrongSpan);
+      result.appendChild(document.createTextNode(' '));
+      result.appendChild(xIcon);
+      result.appendChild(document.createTextNode(' '));
+      result.appendChild(correctSpan);
+    }
+
+    // info button always shown
+    const info = document.createElement('button');
+    info.className = 'gr-info';
+    info.setAttribute('aria-label','Ver explicación del hueco '+n);
+    info.innerHTML = 'i';
+
+    const tt = document.createElement('span');
+    tt.className = 'tt';
+    tt.innerHTML = `<strong style="color:var(--cyan)">${n}.</strong> <strong style="color:${isOk?'#4ade80':'#f87171'}">${answer}</strong><br>${rule}`;
+
+    info.appendChild(tt);
+    info.addEventListener('click', e=>{
+      e.stopPropagation();
+      if(openTooltip && openTooltip !== info){
+        openTooltip.classList.remove('open');
+      }
+      info.classList.toggle('open');
+      openTooltip = info.classList.contains('open') ? info : null;
+    });
+
+    result.appendChild(document.createTextNode(' '));
+    result.appendChild(info);
+  });
+
+  document.addEventListener('click', ()=>{
+    if(openTooltip){ openTooltip.classList.remove('open'); openTooltip=null; }
+  }, {once:false});
+
+  const total = sels.length;
+  const pct = Math.round(ok/total*100);
+  document.getElementById('sOk').textContent = ok;
+  document.getElementById('sErr').textContent = total-ok;
+  document.getElementById('sAns').textContent = total;
+  document.getElementById('sProg').style.width = '100%';
+  document.getElementById('sProg').style.background = pct>=80?'linear-gradient(90deg,#22c55e,#4ade80)':pct>=50?'linear-gradient(90deg,#f59e0b,#fbbf24)':'linear-gradient(90deg,#ef4444,#f87171)';
+
+  const fb = document.getElementById('feedback');
+  fb.classList.add('show');
+  if(pct===100){
+    fb.className='feedback show good';
+    fb.innerHTML=`🎉 <strong>¡Perfecto! ${ok}/${total}.</strong> Dominas ser y estar a nivel B2. Cada forma fue elegida con la razón correcta.`;
+  } else if(pct>=70){
+    fb.className='feedback show partial';
+    fb.innerHTML=`👍 <strong>${ok}/${total} correctas (${pct}%).</strong> Muy bien para nivel B1–B2. Haz clic en el botón <strong>i</strong> junto a cada respuesta para ver la explicación.`;
+  } else if(pct>=40){
+    fb.className='feedback show partial';
+    fb.innerHTML=`📖 <strong>${ok}/${total} correctas (${pct}%).</strong> Vas bien. Repasa la diferencia entre <em>estaba</em> (estado de fondo continuo) y <em>estuvo</em> (estado con inicio y fin).`;
+  } else {
+    fb.className='feedback show bad';
+    fb.innerHTML=`💪 <strong>${ok}/${total} correctas (${pct}%).</strong> Sigue practicando. Empieza por distinguir <em>era</em> (descripción permanente) de <em>estaba</em> (estado temporal).`;
+  }
+
+  document.getElementById('checkBtn').disabled = true;
+}
+
+// ── RESET ─────────────────────────────────────────────────────
+function resetAll(){
+  checked=false;
+  if(openTooltip){openTooltip.classList.remove('open');openTooltip=null;}
+  sels.forEach(s=>{
+    s.value=''; s.style.display='';
+    s.classList.remove('correct','wrong');
+  });
+  document.querySelectorAll('.gap-result').forEach(r=>{r.innerHTML='';r.classList.remove('visible');});
+  document.getElementById('feedback').className='feedback';
+  document.getElementById('feedback').innerHTML='';
+  document.getElementById('checkBtn').disabled=false;
+  document.getElementById('sOk').textContent='—';
+  document.getElementById('sErr').textContent='—';
+  document.getElementById('sAns').textContent='0';
+  document.getElementById('sProg').style.width='0%';
+  document.getElementById('sProg').style.background='linear-gradient(90deg,var(--cyan),var(--magenta))';
+}
+
+// ── HINT ──────────────────────────────────────────────────────
+function giveHint(){
+  if(checked)return;
+  const empty=sels.filter(s=>s.value==='');
+  if(!empty.length)return;
+  const t=empty[0];
+  t.value=t.dataset.answer;
+  t.style.borderColor='rgba(245,158,11,.7)';
+  t.style.color='#fcd34d';
+  t.scrollIntoView({behavior:'smooth',block:'center'});
+  updateScore();
+}
+
+build();
+</script>
+</body>
+</html>

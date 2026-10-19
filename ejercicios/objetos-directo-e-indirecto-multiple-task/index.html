@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pronombres OD / OI | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --od:#f472b6;--od2:#ff91cd;
+  --oi:#25d9ff;--oi2:#7ee8ff;
+  --both:#a78bfa;--both2:#c4b5fd;
+  --font:'DM Sans',system-ui,sans-serif;
+  --display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 10% 10%,rgba(255,43,191,.13),transparent 28%),radial-gradient(ellipse at 90% 15%,rgba(37,217,255,.09),transparent 28%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(980px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);box-shadow:0 0 18px rgba(255,43,191,.22);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta);text-shadow:1px 1px 0 var(--cyan)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.5rem,2.8vw,2.5rem);font-weight:900;line-height:.95;background:linear-gradient(90deg,var(--od) 0%,#fff 40%,var(--oi) 75%,var(--both) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.86rem;line-height:1.5;margin-top:4px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.pill-od{background:rgba(244,114,182,.15);border:1px solid rgba(244,114,182,.35);border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:800;color:var(--od2)}
+.pill-oi{background:rgba(37,217,255,.12);border:1px solid rgba(37,217,255,.3);border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:800;color:var(--oi2)}
+.pill-both{background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3);border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:800;color:var(--both2)}
+
+.ex-tabs{display:flex;gap:6px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:8px;box-shadow:var(--shadow);overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:9px 12px;font-weight:800;font-family:var(--font);font-size:.78rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;box-shadow:0 3px 0 rgba(0,0,0,.2);transform:translateY(-1px)}
+.etab-icon{font-size:1.2rem;line-height:1}
+.etab-label{font-size:.65rem;text-align:center;line-height:1.2;opacity:.9}
+
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:24px 28px;box-shadow:var(--shadow)}
+.ex-header{margin-bottom:16px}
+.ex-title{font-family:var(--display);font-size:1.2rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.86rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:100px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--od),var(--oi));transition:width .35s}
+
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.btn-dark{background:#0b0220;color:var(--muted);border:1px solid rgba(255,255,255,.08)}
+.btn-od{background:linear-gradient(135deg,var(--od),var(--od2));color:#07111f}
+.btn-oi{background:linear-gradient(135deg,var(--oi),var(--oi2));color:#07111f}
+
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;font-weight:500;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.err{background:rgba(239,68,68,.11);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+.fb.info{background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);color:var(--muted);border-radius:0 11px 11px 0}
+
+/* ── EX 1: MULTIPLE CHOICE ── */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:15px 17px;transition:border-color .15s}
+.mc-card:hover{border-color:rgba(37,217,255,.15)}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px}
+.mc-num{font-size:.62rem;font-weight:900;color:var(--muted2);background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0;margin-top:2px}
+.mc-sent{font-size:1rem;line-height:1.65;color:var(--text);flex:1}
+.mc-blank{display:inline-block;min-width:48px;border-bottom:2.5px solid rgba(37,217,255,.4);padding:0 4px;text-align:center;font-weight:800;color:var(--cyan)}
+.mc-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding-left:28px}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px;margin-bottom:3px}
+.mc-opt{border:0;border-radius:9px;padding:7px 16px;font-weight:800;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text);min-width:60px;text-align:center}
+.mc-opt:hover:not(:disabled){border-color:rgba(37,217,255,.4);background:rgba(37,217,255,.09);transform:translateY(-1px)}
+.mc-opt:disabled{cursor:default;transform:none}
+.mc-opt.mc-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.mc-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mc-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-expl{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:7px;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px;padding-left:28px}
+.mc-expl.show{display:block}
+
+/* ── EX 2: CONTRAST (same sentence, different pronoun) ── */
+.contrast-grid{display:flex;flex-direction:column;gap:16px}
+.contrast-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 18px}
+.contrast-word{font-family:var(--display);font-size:1.5rem;font-weight:900;text-align:center;margin-bottom:12px}
+.contrast-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.contrast-card{border-radius:12px;padding:13px 14px}
+.contrast-card.od-card{background:rgba(244,114,182,.07);border:1.5px solid rgba(244,114,182,.22)}
+.contrast-card.oi-card{background:rgba(37,217,255,.06);border:1.5px solid rgba(37,217,255,.2)}
+.cc-label{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;margin-bottom:6px}
+.od-label{color:var(--od2)}.oi-label{color:var(--oi2)}
+.cc-sent{font-size:.95rem;color:var(--text);line-height:1.5;margin-bottom:4px}
+.cc-en{font-size:.76rem;color:var(--muted2);font-style:italic}
+.cc-mean{font-size:.78rem;font-weight:700;margin-top:6px}
+.od-mean{color:var(--od2)}.oi-mean{color:var(--oi2)}
+.contrast-q{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;margin-top:10px}
+.cq-text{font-size:.93rem;margin-bottom:8px;line-height:1.5}
+.cq-opts{display:flex;gap:7px;flex-wrap:wrap}
+.cq-opt{border:0;border-radius:8px;padding:7px 15px;font-weight:800;font-family:var(--font);font-size:.85rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.cq-opt:hover:not(:disabled){background:rgba(255,255,255,.12)}
+.cq-opt:disabled{cursor:default}
+.cq-opt.ok{background:rgba(34,197,94,.16);border-color:var(--good);color:#86efac}
+.cq-opt.bad{background:rgba(239,68,68,.12);border-color:var(--bad);color:#fca5a5}
+
+/* ── EX 3: ERROR HUNT ── */
+.eh-list{display:flex;flex-direction:column;gap:9px}
+.eh-item{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:13px 15px;cursor:pointer;transition:.15s;display:flex;align-items:flex-start;gap:11px}
+.eh-item:hover:not(.revealed){border-color:rgba(37,217,255,.28);background:rgba(37,217,255,.04)}
+.eh-item.revealed{cursor:default}
+.eh-item.correct-sentence{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.06)}
+.eh-item.wrong-sentence{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.06)}
+.eh-num{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:var(--muted2);flex-shrink:0;margin-top:1px}
+.eh-body{flex:1}
+.eh-sent{font-size:.95rem;line-height:1.55}
+.eh-sent .wrong-word{color:var(--bad);text-decoration:underline wavy var(--bad);font-weight:700}
+.eh-badge{font-size:.7rem;font-weight:800;border-radius:999px;padding:2px 9px;flex-shrink:0;margin-top:2px}
+.eh-badge.correct-badge{background:rgba(34,197,94,.15);color:var(--good);border:1px solid rgba(34,197,94,.3)}
+.eh-badge.wrong-badge{background:rgba(239,68,68,.12);color:var(--bad);border:1px solid rgba(239,68,68,.25)}
+.eh-exp{display:none;font-size:.79rem;color:var(--muted);margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.06);line-height:1.55}
+.eh-item.revealed .eh-exp{display:block}
+.eh-filters{display:flex;gap:7px;margin-bottom:13px;align-items:center;flex-wrap:wrap}
+.eh-f{border:0;border-radius:999px;padding:5px 13px;font-weight:700;font-family:var(--font);font-size:.74rem;cursor:pointer;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--muted2);transition:.14s}
+.eh-f.on{background:rgba(37,217,255,.13);color:var(--cyan);border-color:rgba(37,217,255,.3)}
+
+/* ── EX 4: SORT ── */
+.sort-pile{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;min-height:52px;margin-bottom:12px}
+.sort-buckets{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.sort-bucket{border-radius:14px;padding:13px;min-height:130px;display:flex;flex-direction:column;gap:7px;transition:background .2s}
+.sort-bucket.drag-over{box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.bucket-title{font-family:var(--display);font-size:.88rem;font-weight:900;text-align:center}
+.bucket-sub{font-size:.63rem;color:var(--muted2);text-align:center;margin-bottom:4px;line-height:1.3}
+.sort-card{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:9px;padding:6px 12px;font-size:.84rem;font-weight:700;cursor:grab;user-select:none;transition:.15s}
+.sort-card:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sort-card:active{cursor:grabbing}
+.sort-card.drag-ghost{opacity:.35}
+.sort-card.card-correct{background:rgba(34,197,94,.14);border-color:var(--good);color:#86efac;cursor:default}
+.sort-card.card-wrong{background:rgba(239,68,68,.1);border-color:var(--bad);color:#fca5a5;font-size:.76rem}
+
+/* ── EX 5: SPEED ROUND ── */
+.speed-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.speed-stats{display:flex;gap:9px}
+.spstat{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spstat .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.spstat .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spstat .sv.g{color:var(--good)}.spstat .sv.b{color:var(--bad)}.spstat .sv.w{color:var(--warn)}
+.speed-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 20px;text-align:center;width:100%;max-width:500px}
+.speed-sent{font-size:1.1rem;line-height:1.7;color:var(--text);margin-bottom:4px}
+.speed-sent em{font-style:normal;font-weight:900;color:var(--warn);background:rgba(245,158,11,.12);border-radius:5px;padding:0 5px}
+.speed-hint{font-size:.77rem;color:var(--muted2);font-style:italic}
+.speed-input-row{display:flex;gap:8px;justify-content:center;width:100%;max-width:500px}
+.speed-inp{flex:1;max-width:260px;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.3);border-radius:11px;padding:10px 14px;font-family:var(--font);font-size:1rem;font-weight:700;color:var(--text);outline:none;transition:.15s}
+.speed-inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.speed-inp::placeholder{color:var(--muted2);font-weight:400}
+.speed-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:500px;transition:opacity .2s}
+.speed-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.speed-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.timer-row{display:flex;align-items:center;gap:9px;width:100%;max-width:500px}
+.timer-track{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.timer-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--od),var(--oi));transition:width 1s linear}
+.timer-num{font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--muted2);min-width:18px;text-align:right}
+.streak-badge{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak-badge.show{display:inline-flex;align-items:center;gap:4px}
+.speed-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.speed-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.speed-start p{color:var(--muted);font-size:.87rem;max-width:380px;line-height:1.6}
+.combo-flash{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999;text-shadow:0 0 20px rgba(245,158,11,.5)}
+.combo-flash.anim{animation:cf .7s ease forwards}
+@keyframes cf{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+
+/* ── EX 6: REFERENCE ── */
+.ref-section{display:flex;flex-direction:column;gap:16px}
+.ref-table-wrap{overflow-x:auto;border-radius:14px}
+.ref-table{width:100%;border-collapse:collapse;font-size:.86rem}
+.ref-table th{padding:9px 14px;text-align:left;font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08)}
+.ref-table td{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.5}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-table tr:hover td{background:rgba(255,255,255,.03)}
+.td-pron{font-family:var(--display);font-size:.9rem;font-weight:900}
+.td-en{color:var(--muted2);font-style:italic}
+.td-ex{color:var(--muted)}
+.note-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:15px 17px}
+.note-box h3{font-family:var(--display);font-size:.95rem;font-weight:800;margin-bottom:10px;color:var(--warn)}
+.note-row{display:flex;gap:8px;margin-bottom:8px;font-size:.84rem;line-height:1.55;align-items:flex-start}
+.note-row:last-child{margin-bottom:0}
+.note-label{font-weight:800;white-space:nowrap;flex-shrink:0}
+.rule-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.rule-card{background:rgba(255,255,255,.04);border-radius:11px;padding:12px 14px;border:1px solid rgba(255,255,255,.08)}
+.rule-card h4{font-family:var(--display);font-size:.85rem;font-weight:800;margin-bottom:6px}
+.rule-card p{font-size:.8rem;color:var(--muted);line-height:1.5}
+.rule-card em{font-style:normal;font-weight:700;color:var(--text)}
+
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){
+  .panel{padding:16px 13px}
+  .contrast-cards,.sort-buckets{grid-template-columns:1fr}
+  .mc-sent{font-size:.93rem}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="combo-flash" id="comboFlash"></div>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Pronombres Objeto</h1>
+      <p>Six exercises to master direct object pronouns, indirect object pronouns, and how to use both together. The most confusing part of Spanish — finally clear.</p>
+      <div class="badges">
+        <span class="badge">A2–B1</span>
+        <span class="badge" style="border-color:rgba(244,114,182,.35);color:var(--od2)">OD — lo/la/los/las</span>
+        <span class="badge" style="border-color:rgba(37,217,255,.35);color:var(--oi2)">OI — le/les → se</span>
+        <span class="badge" style="border-color:rgba(167,139,250,.35);color:var(--both2)">OD + OI juntos</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">📝</span><span class="etab-label">Multiple<br>choice</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">🔀</span><span class="etab-label">OD vs OI<br>contraste</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">🔍</span><span class="etab-label">Error<br>hunter</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">🗂️</span><span class="etab-label">Clasifica<br>OD/OI/ambos</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">⚡</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">📚</span><span class="etab-label">Referencia</span></button>
+</div>
+
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · Your Mexican Friend</p>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   EX 1 — MULTIPLE CHOICE (20 sentences)
+   sent: Spanish sentence with ___ blank
+   en:   English translation
+   opts: 4 options (real pronouns)
+   ans:  index of correct option
+   exp:  explanation shown after answering
+   type: 'od'|'oi'|'both'
+═══════════════════════════════════════════════════════ */
+const MC = [
+  // OD — replaces a direct object (WHAT is acted upon)
+  { sent:'¿Viste la película? Sí, ___ vi ayer.',
+    en:'Did you see the movie? Yes, I saw it yesterday.',
+    opts:['le','la','lo','les'], ans:1, type:'od',
+    exp:'"La película" is feminine → OD pronoun <strong>la</strong>. Direct object = the thing you see/eat/buy/watch.' },
+  { sent:'No encuentro mis llaves. ¿___ has visto?',
+    en:'I can\'t find my keys. Have you seen them?',
+    opts:['les','las','le','los'], ans:1, type:'od',
+    exp:'"Las llaves" is feminine plural → OD <strong>las</strong>.' },
+  { sent:'¿Dónde está el libro? ___ dejé en la mesa.',
+    en:'Where is the book? I left it on the table.',
+    opts:['Le','Lo','La','Les'], ans:1, type:'od',
+    exp:'"El libro" is masculine → OD <strong>lo</strong>.' },
+  { sent:'Compré flores para mamá y ___ puse en un jarrón.',
+    en:'I bought flowers for mom and put them in a vase.',
+    opts:['les','le','los','las'], ans:2, type:'od',
+    exp:'"Las flores" = feminine plural → but here "las flores" acts as OD → <strong>las</strong>. Wait — "flores" is feminine plural → <strong>las</strong>. Opts corrected → ans=3.' },
+  { sent:'Llama a tu hermano. Aún no ___ has llamado.',
+    en:'Call your brother. You still haven\'t called him.',
+    opts:['le','lo','la','les'], ans:1, type:'od',
+    exp:'In Latin America, "llamar a alguien" = OD → <strong>lo</strong> (masculine, "a tu hermano"). Loísmo accepted in Mexico.' },
+  // OI — replaces an indirect object (TO WHOM / FOR WHOM)
+  { sent:'María ___ escribió un correo a su jefa.',
+    en:'María wrote her boss an email.',
+    opts:['lo','la','le','se'], ans:2, type:'oi',
+    exp:'"A su jefa" is the indirect object (to whom she wrote) → OI <strong>le</strong>.' },
+  { sent:'El profesor ___ explicó la tarea a los estudiantes.',
+    en:'The teacher explained the homework to the students.',
+    opts:['los','las','le','les'], ans:3, type:'oi',
+    exp:'"A los estudiantes" is plural indirect object → OI <strong>les</strong>.' },
+  { sent:'¿___ puedo preguntar algo? Sí, claro.',
+    en:'Can I ask you something? Yes, of course.',
+    opts:['Lo','La','Le','Les'], ans:2, type:'oi',
+    exp:'The question is directed TO you → OI <strong>le</strong> (formal) or <strong>te</strong> (informal). Here "le" is used as formal.' },
+  { sent:'___ dije la verdad a mis padres.',
+    en:'I told my parents the truth.',
+    opts:['Los','Las','Les','Le'], ans:2, type:'oi',
+    exp:'"A mis padres" is plural → OI <strong>les</strong>.' },
+  { sent:'Mi abuela siempre ___ hacía tamales a toda la familia.',
+    en:'My grandmother always made tamales for the whole family.',
+    opts:['los','la','le','les'], ans:3, type:'oi',
+    exp:'"A toda la familia" = plural indirect object → OI <strong>les</strong>.' },
+  // OD + OI TOGETHER — le/les → se before lo/la/los/las
+  { sent:'¿Le diste el regalo a Ana? Sí, ___ ___ di ayer.',
+    en:'Did you give Ana the gift? Yes, I gave it to her yesterday.',
+    opts:['le lo','se lo','le la','se la'], ans:1, type:'both',
+    exp:'OI "le" + OD "lo" → <strong>se lo</strong>. Rule: when le/les comes before lo/la/los/las, le/les → <strong>se</strong>.' },
+  { sent:'¿Le mandaste los documentos al cliente? No, aún no ___ ___ he mandado.',
+    en:'Did you send the documents to the client? No, I haven\'t sent them yet.',
+    opts:['les los','se los','le los','lo les'], ans:1, type:'both',
+    exp:'"Les" (to the client) + "los" (the documents) → <strong>se los</strong>. Always se + OD when combining.' },
+  { sent:'La maestra ___ explicó el tema a nosotros muy bien.',
+    en:'The teacher explained the topic to us very well.',
+    opts:['lo','nos','le','se'], ans:1, type:'oi',
+    exp:'"A nosotros" = first person plural indirect object → <strong>nos</strong>.' },
+  { sent:'¿Me traes el menú? — Ahora ___ traigo.',
+    en:'Can you bring me the menu? — I\'ll bring it to you now.',
+    opts:['te lo','se lo','le lo','me lo'], ans:0, type:'both',
+    exp:'OI "te" (to you) + OD "lo" (the menu) → <strong>te lo</strong>. No swap needed when OI is me/te/nos/os.' },
+  { sent:'No quiero que nadie ___ cuente mis secretos.',
+    en:'I don\'t want anyone to tell my secrets.',
+    opts:['lo','la','los','les'], ans:3, type:'oi',
+    exp:'The implied "to them/others" → OI <strong>les</strong>. "Contar secretos a alguien" = OI.' },
+  // Position / order / placement
+  { sent:'Voy a comprarte un café. → Voy a ___ un café.',
+    en:'I\'m going to buy you a coffee.',
+    opts:['te comprar','comprarte','comprarle','le comprar'], ans:1, type:'oi',
+    exp:'With infinitives, the pronoun can attach to the end: <strong>comprarte</strong>. Both "te voy a comprar" and "voy a comprarte" are correct.' },
+  { sent:'¿Estás leyendo el periódico? — Sí, estoy leyéndolo. / Sí, ___ estoy leyendo.',
+    en:'Are you reading the newspaper? Yes, I\'m reading it.',
+    opts:['le','la','lo','les'], ans:2, type:'od',
+    exp:'"El periódico" = masculine OD → <strong>lo</strong>. Can go before the conjugated verb or attached to the gerund.' },
+  { sent:'¿Le compraste el regalo a tu mamá? — Sí, ___ compré ayer.',
+    en:'Did you buy your mom the gift? Yes, I bought it for her yesterday.',
+    opts:['le lo','lo le','se lo','lo se'], ans:2, type:'both',
+    exp:'OI "le" + OD "lo" → <strong>se lo</strong>. The rule: le/les always becomes <strong>se</strong> before lo/la/los/las.' },
+  { sent:'___ duele la cabeza. ¿Tienes aspirinas?',
+    en:'My head hurts. Do you have aspirin?',
+    opts:['Lo','Le','Me','Se'], ans:2, type:'oi',
+    exp:'"Doler" works like "gustar": the subject is "la cabeza", and the person who feels it is the OI → <strong>me</strong> duele.' },
+  { sent:'El mesero ___ trajo la cuenta sin que se la pidiéramos.',
+    en:'The waiter brought us the bill without us asking for it.',
+    opts:['lo','nos','le','se'], ans:1, type:'oi',
+    exp:'"A nosotros" = OI first person plural → <strong>nos</strong> trajo la cuenta.' },
+];
+// fix opt index 3 for question 4 (flores)
+MC[3].ans = 3;
+
+/* ═══════════════════════════════════════════════════════
+   EX 2 — OD vs OI CONTRAST
+   Same verb, different pronoun = different meaning
+═══════════════════════════════════════════════════════ */
+const CONTRAST = [
+  { verb:'llamar',
+    od:{ sent:'La llamé ayer.',        en:'I called her yesterday.',            mean:'OD: called her (phone/shout)' },
+    oi:{ sent:'Le llamé la atención.', en:'I called her attention / scolded her.',mean:'OI: drew attention TO her' },
+    q:'¿Cuál significa "la regañé" o "llamé su atención"?',
+    opts:['La llamé ayer.','Le llamé la atención.'], ans:1,
+    exp:'"Llamar + OD" = to call someone. "Llamar + OI" = to draw attention to / scold.' },
+  { verb:'pegar',
+    od:{ sent:'Lo pegué en la pared.',  en:'I stuck it on the wall.',            mean:'OD: stuck the thing' },
+    oi:{ sent:'Le pegué en el partido.',en:'I hit him during the game.',         mean:'OI: hit him (to him)' },
+    q:'¿En cuál alguien recibe un golpe?',
+    opts:['Lo pegué en la pared.','Le pegué en el partido.'], ans:1,
+    exp:'"Pegar + OD" = to stick/paste something. "Pegar + OI" = to hit someone (indirect, the person is affected).' },
+  { verb:'decir',
+    od:{ sent:'Lo dije claramente.',    en:'I said it clearly.',                 mean:'OD: said it (the thing)' },
+    oi:{ sent:'Le dije la verdad.',     en:'I told him/her the truth.',          mean:'OI: told TO him/her' },
+    q:'¿Cuál incluye a una persona que recibe la información?',
+    opts:['Lo dije claramente.','Le dije la verdad.'], ans:1,
+    exp:'"Decir + OD (lo/la)" = to say something. "Decir + OI (le/les)" = to tell someone.' },
+  { verb:'pedir',
+    od:{ sent:'Lo pedí en el menú.',    en:'I ordered it from the menu.',        mean:'OD: ordered the dish' },
+    oi:{ sent:'Le pedí un favor.',      en:'I asked him/her a favor.',           mean:'OI: asked OF him/her' },
+    q:'¿Cuál implica que pediste algo A una persona?',
+    opts:['Lo pedí en el menú.','Le pedí un favor.'], ans:1,
+    exp:'"Pedir + OD" = to order/request something. "Pedir + OI" = to ask of someone.' },
+  { verb:'ver',
+    od:{ sent:'La vi en el cine.',      en:'I saw her at the movies.',           mean:'OD: saw her (she was there)' },
+    oi:{ sent:'Le veo el futuro.',      en:'I see the future in him/her.',       mean:'OI: see something in someone' },
+    q:'¿En cuál la persona ES lo que ves (objeto directo)?',
+    opts:['La vi en el cine.','Le veo el futuro.'], ans:0,
+    exp:'"Ver + OD (lo/la)" = to see someone/something directly. "Ver + OI (le)" = to perceive something IN someone.' },
+  { verb:'mandar',
+    od:{ sent:'Lo mandé por correo.',   en:'I sent it by mail.',                 mean:'OD: sent the thing' },
+    oi:{ sent:'Le mandé un mensaje.',   en:'I sent him/her a message.',          mean:'OI: sent TO him/her' },
+    q:'¿Cuál habla de que enviaste algo A una persona específica?',
+    opts:['Lo mandé por correo.','Le mandé un mensaje.'], ans:1,
+    exp:'"Mandar + OD" = to send the item. "Mandar + OI" = to send TO someone.' },
+];
+
+/* ═══════════════════════════════════════════════════════
+   EX 3 — ERROR HUNT (15 sentences)
+   [sentence, hasError:bool, correction|null, explanation]
+═══════════════════════════════════════════════════════ */
+const ERRORS = [
+  ['¿Viste a María? Sí, la vi ayer.',                        false, null,   'CORRECTO: "María" = feminine OD → "la" es correcto.'],
+  ['Le compré un regalo a mi hermano.',                       false, null,   'CORRECTO: "A mi hermano" = OI → "le" es correcto.'],
+  ['¿Dónde están los documentos? Lo dejé en la impresora.',  true,  'Los',  'ERROR: "Los documentos" es plural → OD plural <strong>los</strong>, no "lo".'],
+  ['Le dije la verdad a mis amigos.',                        true,  'Les',  'ERROR: "A mis amigos" es plural → OI plural <strong>les</strong>, no "le".'],
+  ['¿Le diste las llaves a Juan? Sí, se las di.',            false, null,   'CORRECTO: OI "le" + OD "las" → "se las". La regla se aplica bien.'],
+  ['Ella les mandó el informe a los clientes.',              false, null,   'CORRECTO: "A los clientes" = OI plural → "les" es correcto.'],
+  ['¿Me traes el café? — Ahora le traigo.',                  true,  'te lo','ERROR: El pronombre OI es "te" (a ti), no "le". Y falta el OD "lo" (el café) → <strong>te lo</strong> traigo.'],
+  ['No lo conozco a ese señor.',                             false, null,   'CORRECTO: "Ese señor" = OD masculino → "lo". El "a" personal es obligatorio con personas.'],
+  ['Me duelen las rodillas.',                                false, null,   'CORRECTO: "Doler" funciona como "gustar": sujeto = "las rodillas", OI = "me". Correcto.'],
+  ['¿Le explicaste el problema? — Sí, le expliqué.',         true,  'se lo expliqué','ERROR: Hay dos objetos: OI "le" + OD "el problema" (lo). → <strong>se lo expliqué</strong> (le → se antes de lo).'],
+  ['Se lo dije a ella claramente.',                          false, null,   'CORRECTO: OI "le" + OD "lo" → "se lo". La preposición "a ella" aclara el referente. Perfecto.'],
+  ['Las flores las puse en la mesa.',                        false, null,   'CORRECTO: Duplicación del OD para énfasis ("las flores / las"). Construcción correcta y natural.'],
+  ['¿Compraste el libro? — Sí, lo compré.',                  false, null,   'CORRECTO: "El libro" = masculine OD → "lo". Correcto.'],
+  ['¿Le diste el dinero a tus hermanas? — Sí, les di.',      true,  'se lo di','ERROR: OI "les" + OD "el dinero" (lo) → <strong>se lo di</strong>. No se puede omitir el OD.'],
+  ['Nos preparó una sorpresa increíble.',                    false, null,   'CORRECTO: "A nosotros" = OI → "nos". Correcto.'],
+];
+
+/* ═══════════════════════════════════════════════════════
+   EX 4 — DRAG & SORT
+   correct: 'od' | 'oi' | 'both'
+═══════════════════════════════════════════════════════ */
+const SORT_ITEMS = [
+  {id:'c1',  text:'La vi en el parque.',              correct:'od',   exp:'OD: "la" = ella (feminine direct object, the person you saw).'},
+  {id:'c2',  text:'Le di las gracias.',               correct:'oi',   exp:'OI: "le" = to him/her. You gave thanks TO someone.'},
+  {id:'c3',  text:'Se lo expliqué ayer.',             correct:'both', exp:'OD+OI: "se" (le→se) + "lo". Both objects present.'},
+  {id:'c4',  text:'Los compré en el mercado.',        correct:'od',   exp:'OD: "los" = ellos/masculine plural (the things you bought).'},
+  {id:'c5',  text:'Les escribí una carta.',           correct:'oi',   exp:'OI: "les" = to them. The letter is the direct object (unstated here).'},
+  {id:'c6',  text:'Se las mandé esta mañana.',        correct:'both', exp:'OD+OI: "se" (OI, to him/her) + "las" (OD, them).'},
+  {id:'c7',  text:'No la conozco.',                   correct:'od',   exp:'OD: "la" = her/it (feminine). Direct object of "conocer".'},
+  {id:'c8',  text:'Me duele la cabeza.',              correct:'oi',   exp:'OI: "me" = to me. "Doler" uses OI like "gustar".'},
+  {id:'c9',  text:'Te lo cuento ahora.',              correct:'both', exp:'OD+OI: "te" (OI, to you) + "lo" (OD, it).'},
+  {id:'c10', text:'¿Los has visto?',                  correct:'od',   exp:'OD: "los" = them (masculine plural). Direct object of "ver".'},
+  {id:'c11', text:'Le pregunté la dirección.',        correct:'oi',   exp:'OI: "le" = to him/her. The direction is the direct object.'},
+  {id:'c12', text:'Nos trajo el menú.',               correct:'oi',   exp:'OI: "nos" = to us. The menu is the direct object.'},
+  {id:'c13', text:'¿Me lo puedes repetir?',           correct:'both', exp:'OD+OI: "me" (OI, to me) + "lo" (OD, it).'},
+  {id:'c14', text:'La llevo al aeropuerto.',          correct:'od',   exp:'OD: "la" = her. She is the direct object of "llevar".'},
+  {id:'c15', text:'Le debo una disculpa.',            correct:'oi',   exp:'OI: "le" = to him/her. The apology is the direct object.'},
+  {id:'c16', text:'Nos lo prometiste.',               correct:'both', exp:'OD+OI: "nos" (OI, to us) + "lo" (OD, it).'},
+  {id:'c17', text:'¿Lo entiendes?',                   correct:'od',   exp:'OD: "lo" = it (masculine). Direct object of "entender".'},
+  {id:'c18', text:'Le tengo miedo.',                  correct:'oi',   exp:'OI: "le" = to/of him/her. "Tener miedo a alguien" uses OI.'},
+];
+
+/* ═══════════════════════════════════════════════════════
+   EX 5 — SPEED ROUND (type the pronoun)
+   ans: correct pronoun(s)
+   also: accepted variants
+═══════════════════════════════════════════════════════ */
+const SPEED = [
+  {q:'¿Viste la película? — Sí, ___ vi.',              hint:'OD · la película · fem. sing.',     ans:'la',      also:[]},
+  {q:'Le di el libro ___ mis padres.',                  hint:'OI · a mis padres → después de OD', ans:'a',       also:[]},
+  {q:'¿Tienes las llaves? — Sí, ___ tengo.',           hint:'OD · las llaves · fem. plural',      ans:'las',     also:[]},
+  {q:'___ dije la verdad a ella.',                      hint:'OI · a ella · sing.',                ans:'le',      also:[]},
+  {q:'¿Le mandaste el correo? — Sí, ___ ___ mandé.',   hint:'OI + OD · le → se + lo',             ans:'se lo',   also:['selo']},
+  {q:'Me duele ___ espalda.',                           hint:'subject of doler',                   ans:'la',      also:[]},
+  {q:'¿Conoces a Sofía? — No, no ___ conozco.',        hint:'OD · a Sofía · fem.',                ans:'la',      also:[]},
+  {q:'___ pregunté a mis jefes si podía salir.',        hint:'OI · a mis jefes · plural',          ans:'les',     also:[]},
+  {q:'¿Dónde está el coche? ___ dejé en el garaje.',   hint:'OD · el coche · masc.',              ans:'lo',      also:[]},
+  {q:'¿Le diste las flores a tu mamá? — Sí, ___ ___ di.',hint:'OI + OD · le → se + las',         ans:'se las',  also:['selas']},
+  {q:'El médico ___ recetó un descanso.',               hint:'OI · to me/him/her → context: me',  ans:'me',      also:['le']},
+  {q:'¿Compraste los boletos? — No, todavía no ___ compro.',hint:'OD · los boletos · masc. plur.',ans:'los',     also:[]},
+  {q:'¿___ puedo ayudar? — Sí, por favor.',            hint:'OI · to you (formal)',               ans:'le',      also:['te']},
+  {q:'Voy a llamar a mi hermana. Voy a ___ llamar.',   hint:'OD · a mi hermana · fem.',           ans:'la',      also:['llamarla']},
+  {q:'¿Te explico el ejercicio? — Sí, ___ ___ explicas?',hint:'OI + OD · te + lo',               ans:'me lo',   also:['melo']},
+  {q:'Ella siempre ___ trae café por las mañanas.',    hint:'OI · to us/me → context: nos',       ans:'nos',     also:['me','le']},
+  {q:'No entiendo el problema. ¿___ puedes explicar?', hint:'OD · el problema · masc.',           ans:'lo',      also:[]},
+  {q:'¿Conoces ese restaurante? — Sí, ___ conozco bien.',hint:'OD · ese restaurante · masc.',    ans:'lo',      also:[]},
+  {q:'¿___ has dicho ya a tus padres?',                hint:'OI · a tus padres · plural',         ans:'les',     also:[]},
+  {q:'¿Ya compraste el regalo? — Sí, ___ compré ayer.',hint:'OD · el regalo · masc.',            ans:'lo',      also:[]},
+  {q:'La profesora ___ dio tarea a nosotros.',         hint:'OI · a nosotros',                    ans:'nos',     also:[]},
+  {q:'¿Me puedes prestar tu coche? — Sí, ___ presto.',hint:'OD · tu coche · masc.',              ans:'te lo',   also:['lo']},
+  {q:'Ella ___ escribió un poema a mí.',               hint:'OI · a mí',                          ans:'me',      also:[]},
+  {q:'¿Dónde pusiste las llaves? ___ puse en la mesa.',hint:'OD · las llaves · fem. plur.',       ans:'las',     also:[]},
+  {q:'¿Ya le diste las gracias? — Sí, ___ ___ di.',   hint:'OI + OD · le → se + las',            ans:'se las',  also:['selas']},
+  {q:'¿Puedes traer___ el menú?',                      hint:'OI · to me (attached to inf.)',      ans:'me',      also:[]},
+  {q:'No ___ conozco a ese señor.',                    hint:'OD · ese señor · masc.',             ans:'lo',      also:[]},
+  {q:'Mis amigos siempre ___ ayudan.',                 hint:'OI · to me',                         ans:'me',      also:[]},
+  {q:'¿___ entregaste el informe al jefe?',            hint:'OI · al jefe · sing.',               ans:'le',      also:[]},
+  {q:'Ella ___ regaló flores a sus abuelas.',          hint:'OI · a sus abuelas · plural',        ans:'les',     also:[]},
+];
+
+/* ═══════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════ */
+let currentEx=0;
+// ex1
+let mc_answers={}, mc_checked=false;
+// ex2
+let contrast_answered={};
+// ex3
+let eh_answered={}, ehFilter='all';
+// ex4
+let dragItem=null, sortPlaced={}, sortChecked=false, tapSelected=null;
+// ex5
+let speedIdx=0,speedOk=0,speedErr=0,speedStreak=0,speedTimer=null,speedTimeLeft=0,speedAnswered=false;
+
+/* ═══════════════════════════════════════════════════════
+   TAB NAV
+═══════════════════════════════════════════════════════ */
+function goEx(idx){
+  currentEx=idx;
+  [0,1,2,3,4,5].forEach(i=>{
+    document.getElementById('etab-'+i).classList.toggle('active',i===idx);
+  });
+  const fns=[renderMC,renderContrast,renderErrorHunt,renderSort,renderSpeed,renderReference];
+  fns[idx]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ═══════════════════════════════════════════════════════
+   EX 1 — MULTIPLE CHOICE
+═══════════════════════════════════════════════════════ */
+function typeColor(t){ return t==='od'?'var(--od2)':t==='oi'?'var(--oi2)':'var(--both2)'; }
+function typeLabel(t){ return t==='od'?'OD':'OI·'+t==='both'?'OD+OI':'OI'; }
+
+function renderMC(){
+  const answered=Object.keys(mc_answers).length;
+  const pct=Math.round(answered/MC.length*100);
+  let qHTML=MC.map((item,i)=>{
+    const optHTML=item.opts.map((o,oi)=>{
+      let cls='mc-opt';
+      if(mc_checked){
+        if(oi===item.ans) cls+=' mc-show';
+        else if(mc_answers[i]===oi&&oi!==item.ans) cls+=' mc-err';
+      } else if(mc_answers[i]===oi){
+        cls+=oi===item.ans?' mc-ok':' mc-err';
+      }
+      return `<button class="${cls}" id="mco_${i}_${oi}" onclick="answerMC(${i},${oi})" ${mc_checked?'disabled':''}>${o}</button>`;
+    }).join('');
+    const typecol=typeColor(item.type);
+    const explShow=mc_checked||mc_answers[i]!==undefined;
+    return `<div class="mc-card" id="mccard_${i}">
+      <div class="mc-top">
+        <span class="mc-num" style="color:${typecol}">${i+1}</span>
+        <span class="mc-sent">${item.sent.replace('___','<span class="mc-blank">___</span>')}</span>
+      </div>
+      <div class="mc-en">${item.en}</div>
+      <div class="mc-opts">${optHTML}</div>
+      <div class="mc-expl ${explShow?'show':''}" id="mcexp_${i}">${item.exp}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header">
+    <div class="ex-title">📝 Multiple choice</div>
+    <div class="ex-instr">Choose the correct object pronoun. Each question is tagged <span class="pill-od">OD</span> <span class="pill-oi">OI</span> or <span class="pill-both">OD+OI</span> by number color. Read the full sentence — context decides everything.</div>
+  </div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${MC.length}</span></div>
+    <div class="sc"><span class="l">Correctas</span><span class="v g" id="mc_ok">—</span></div>
+    <div class="sc"><span class="l">Errores</span><span class="v b" id="mc_err">—</span></div>
+    <div class="prog-w"><div class="prog-l">Respondidas: <span id="mc_pct">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="mc_prog" style="width:${pct}%"></div></div></div>
+  </div>
+  <div class="mc-list">${qHTML}</div>
+  <div class="fb" id="mc_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="mc_check" onclick="checkMC()" ${mc_checked?'disabled':''}>Revisar todo</button>
+    <button class="btn btn-ghost" onclick="resetMC()">↺ Reiniciar</button>
+  </div></div>`;
+}
+
+function answerMC(qi,oi){
+  if(mc_checked) return;
+  // deselect previous
+  if(mc_answers[qi]!==undefined){
+    const prev=document.getElementById(`mco_${qi}_${mc_answers[qi]}`);
+    if(prev) prev.classList.remove('mc-ok','mc-err');
+  }
+  mc_answers[qi]=oi;
+  const isOk=oi===MC[qi].ans;
+  const btn=document.getElementById(`mco_${qi}_${oi}`);
+  if(btn) btn.classList.add(isOk?'mc-ok':'mc-err');
+  // show explanation
+  const exp=document.getElementById(`mcexp_${qi}`);
+  if(exp) exp.classList.add('show');
+  // progress
+  const pct=Math.round(Object.keys(mc_answers).length/MC.length*100);
+  const el=document.getElementById('mc_pct'); if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('mc_prog'); if(pg)pg.style.width=pct+'%';
+}
+
+function checkMC(){
+  mc_checked=true;
+  let ok=0;
+  MC.forEach((item,i)=>{ if(mc_answers[i]===item.ans) ok++; });
+  const pct=Math.round(ok/MC.length*100);
+  document.getElementById('mc_ok').textContent=ok;
+  document.getElementById('mc_err').textContent=MC.length-ok;
+  document.getElementById('mc_prog').style.width='100%';
+  document.getElementById('mc_pct').textContent='100%';
+  const fb=document.getElementById('mc_fb');
+  if(pct===100){ fb.className='fb show ok'; fb.innerHTML='🏆 <strong>¡Perfecto! 20/20.</strong> Dominas los pronombres de objeto.';}
+  else if(pct>=75){ fb.className='fb show ok'; fb.innerHTML=`👍 <strong>${ok}/20.</strong> Muy bien. Revisa las explicaciones de los errores.`;}
+  else if(pct>=50){ fb.className='fb show partial'; fb.innerHTML=`📖 <strong>${ok}/20.</strong> Recuerda: OD = QUÉ recibes; OI = A QUIÉN va dirigido.`;}
+  else { fb.className='fb show err'; fb.innerHTML=`💪 <strong>${ok}/20.</strong> Revisa la tabla de referencia y vuelve a intentarlo.`;}
+  document.getElementById('mc_check').disabled=true;
+  renderMC();
+}
+function resetMC(){ mc_answers={}; mc_checked=false; renderMC(); }
+
+/* ═══════════════════════════════════════════════════════
+   EX 2 — CONTRAST
+═══════════════════════════════════════════════════════ */
+function renderContrast(){
+  contrast_answered={};
+  let html=`<div class="panel">
+  <div class="ex-header">
+    <div class="ex-title">🔀 OD vs OI — contraste</div>
+    <div class="ex-instr">The same verb with a different pronoun changes the meaning completely. Study both versions, then answer the question.</div>
+  </div>
+  <div class="contrast-grid">`;
+
+  CONTRAST.forEach((item,idx)=>{
+    html+=`<div class="contrast-item">
+      <div class="contrast-word" style="color:var(--warn)">${item.verb}</div>
+      <div class="contrast-cards">
+        <div class="contrast-card od-card">
+          <div class="cc-label od-label">🩷 OD</div>
+          <div class="cc-sent">${item.od.sent}</div>
+          <div class="cc-en">${item.od.en}</div>
+          <div class="cc-mean od-mean">→ ${item.od.mean}</div>
+        </div>
+        <div class="contrast-card oi-card">
+          <div class="cc-label oi-label">🔵 OI</div>
+          <div class="cc-sent">${item.oi.sent}</div>
+          <div class="cc-en">${item.oi.en}</div>
+          <div class="cc-mean oi-mean">→ ${item.oi.mean}</div>
+        </div>
+      </div>
+      <div class="contrast-q">
+        <div class="cq-text">❓ ${item.q}</div>
+        <div class="cq-opts">
+          ${item.opts.map((o,oi)=>`<button class="cq-opt" id="cqo_${idx}_${oi}" onclick="answerContrast(${idx},${oi})">${o}</button>`).join('')}
+        </div>
+        <div class="fb" id="cqfb_${idx}"></div>
+      </div>
+    </div>`;
+  });
+
+  html+=`</div></div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+
+function answerContrast(idx,chosen){
+  if(contrast_answered[idx]!==undefined) return;
+  contrast_answered[idx]=chosen;
+  const item=CONTRAST[idx];
+  const isOk=chosen===item.ans;
+  [0,1].forEach(oi=>{
+    const btn=document.getElementById(`cqo_${idx}_${oi}`);
+    if(!btn)return;
+    btn.disabled=true;
+    if(oi===chosen&&isOk) btn.classList.add('ok');
+    else if(oi===chosen&&!isOk) btn.classList.add('bad');
+    else if(oi===item.ans) btn.classList.add('ok');
+  });
+  const fb=document.getElementById(`cqfb_${idx}`);
+  fb.className='fb show '+(isOk?'ok':'err');
+  fb.innerHTML=isOk?`✓ <strong>¡Correcto!</strong> ${item.exp}`:`✗ ${item.exp}`;
+}
+
+/* ═══════════════════════════════════════════════════════
+   EX 3 — ERROR HUNT
+═══════════════════════════════════════════════════════ */
+function renderErrorHunt(){
+  eh_answered={};
+  let html=`<div class="panel">
+  <div class="ex-header">
+    <div class="ex-title">🔍 Error hunter</div>
+    <div class="ex-instr">Some sentences have the <em>wrong pronoun</em> or a <em>missing pronoun</em>. Click each sentence to reveal whether it's correct or has an error.</div>
+  </div>
+  <div class="eh-filters">
+    <span style="font-size:.78rem;color:var(--muted2);font-weight:700">Filter:</span>
+    <button class="eh-f on" id="ehf-all" onclick="setEhFilter('all')">All</button>
+    <button class="eh-f" id="ehf-err" onclick="setEhFilter('err')">❌ Errors only</button>
+    <button class="eh-f" id="ehf-ok" onclick="setEhFilter('ok')">✅ Correct only</button>
+  </div>
+  <div class="eh-list" id="ehList">`;
+
+  ERRORS.forEach(([sent,hasErr,,exp],idx)=>{
+    html+=`<div class="eh-item" id="ehi_${idx}" data-err="${hasErr}" onclick="revealEh(${idx})">
+      <div class="eh-num">${idx+1}</div>
+      <div class="eh-body">
+        <div class="eh-sent">${sent}</div>
+        <div class="eh-exp">${exp}</div>
+      </div>
+      <div class="eh-badge" id="ehbadge_${idx}" style="display:none"></div>
+    </div>`;
+  });
+
+  html+=`</div>
+  <div class="fb" id="eh_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-cyan" onclick="revealAllEh()">Reveal all</button><button class="btn btn-ghost" onclick="resetEh()">↺ Reset</button></div>
+  </div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+
+function revealEh(idx){
+  if(eh_answered[idx]) return;
+  eh_answered[idx]=true;
+  const [sent,hasErr,correction,exp]=ERRORS[idx];
+  const item=document.getElementById('ehi_'+idx);
+  const badge=document.getElementById('ehbadge_'+idx);
+  item.classList.add('revealed',hasErr?'wrong-sentence':'correct-sentence');
+  badge.style.display='inline-block';
+  badge.className='eh-badge '+(hasErr?'wrong-badge':'correct-badge');
+  badge.textContent=hasErr?'❌ Error':'✅ Correcto';
+  if(hasErr&&correction){
+    // highlight the wrong pronoun — find pronouns and mark them
+    const pronoums=['lo','la','los','las','le','les','se','me','te','nos','os'];
+    let h=sent;
+    pronoums.forEach(p=>{
+      const re=new RegExp(`\\b${p}\\b`,'gi');
+      // Only mark if correction suggests different
+      if(correction&&!correction.toLowerCase().includes(p.toLowerCase())){
+        h=h.replace(re,`<span class="wrong-word">${p}</span>`);
+      }
+    });
+    item.querySelector('.eh-sent').innerHTML=h;
+  }
+  const done=Object.keys(eh_answered).length;
+  if(done===ERRORS.length){
+    const fb=document.getElementById('eh_fb');
+    fb.className='fb show ok';
+    fb.innerHTML=`✓ ¡Revelaste todo! ${ERRORS.filter(e=>e[1]).length} errores de ${ERRORS.length} oraciones.`;
+  }
+}
+function revealAllEh(){ ERRORS.forEach((_,i)=>revealEh(i)); }
+function resetEh(){ eh_answered={}; renderErrorHunt(); }
+function setEhFilter(f){
+  ehFilter=f;
+  ['all','err','ok'].forEach(k=>{
+    const b=document.getElementById('ehf-'+k);
+    if(b) b.className='eh-f'+(k===f?' on':'');
+  });
+  document.querySelectorAll('.eh-item').forEach(item=>{
+    const isErr=item.dataset.err==='true';
+    if(f==='all') item.style.display='';
+    else if(f==='err') item.style.display=isErr?'':'none';
+    else item.style.display=isErr?'none':'';
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   EX 4 — SORT
+═══════════════════════════════════════════════════════ */
+function renderSort(){
+  sortPlaced={}; sortChecked=false; tapSelected=null;
+  const shuffled=[...SORT_ITEMS].sort(()=>Math.random()-.5);
+  const pile=shuffled.map(item=>`
+    <div class="sort-card" id="sc_${item.id}" draggable="true"
+      ondragstart="dragStart(event,'${item.id}')"
+      ondragend="dragEnd(event)"
+      onclick="tapCard('${item.id}')">${item.text}</div>`).join('');
+
+  const buckets=[
+    {id:'od',   label:'OD',     sub:'Objeto Directo<br>lo / la / los / las / me / te / nos', col:'var(--od2)',   bg:'rgba(244,114,182,.07)',  bdr:'rgba(244,114,182,.25)'},
+    {id:'oi',   label:'OI',     sub:'Objeto Indirecto<br>le / les / me / te / nos',           col:'var(--oi2)',   bg:'rgba(37,217,255,.06)',   bdr:'rgba(37,217,255,.2)'},
+    {id:'both', label:'OD + OI',sub:'Ambos juntos<br>se lo / te la / nos los…',              col:'var(--both2)', bg:'rgba(167,139,250,.06)', bdr:'rgba(167,139,250,.22)'},
+  ];
+  const buckHTML=buckets.map(b=>`
+    <div class="sort-bucket" id="bucket-${b.id}"
+      style="background:${b.bg};border:2px dashed ${b.bdr}"
+      ondragover="event.preventDefault();this.classList.add('drag-over')"
+      ondragleave="this.classList.remove('drag-over')"
+      ondrop="dropInto(event,'${b.id}')"
+      onclick="bucketTap('${b.id}')">
+      <div class="bucket-title" style="color:${b.col}">${b.label}</div>
+      <div class="bucket-sub">${b.sub}</div>
+    </div>`).join('');
+
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header">
+    <div class="ex-title">🗂️ Clasifica los pronombres</div>
+    <div class="ex-instr">Drag each sentence to the correct bucket: <span class="pill-od">OD</span> <span class="pill-oi">OI</span> or <span class="pill-both">OD + OI</span>. Identify which type of object pronoun is used — not which verb.</div>
+  </div>
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);margin-bottom:8px">Sentences — drag or tap → tap bucket</div>
+  <div class="sort-pile" id="sortPile">${pile}</div>
+  <div class="sort-buckets">${buckHTML}</div>
+  <div class="fb" id="sort_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="sort_check" onclick="checkSort()" disabled>Revisar</button>
+    <button class="btn btn-ghost" onclick="resetSort()">↺ Reiniciar</button>
+  </div></div>`;
+}
+
+function dragStart(e,id){ dragItem=id; setTimeout(()=>{const c=document.getElementById('sc_'+id);if(c)c.classList.add('drag-ghost');},0); }
+function dragEnd(e){ if(dragItem){const c=document.getElementById('sc_'+dragItem);if(c)c.classList.remove('drag-ghost');} dragItem=null; }
+function dropInto(e,bucket){
+  e.preventDefault();
+  const id=e.dataTransfer?e.dataTransfer.getData('text'):dragItem;
+  document.getElementById('bucket-'+bucket).classList.remove('drag-over');
+  if(!id||sortPlaced[id]) return;
+  placeCard(id,bucket);
+}
+function tapCard(id){
+  if(sortPlaced[id]) return;
+  const card=document.getElementById('sc_'+id);
+  if(!card) return;
+  if(tapSelected===id){ card.style.boxShadow=''; tapSelected=null; return; }
+  if(tapSelected){ const prev=document.getElementById('sc_'+tapSelected); if(prev)prev.style.boxShadow=''; }
+  tapSelected=id;
+  card.style.boxShadow='0 0 0 3px var(--cyan)';
+}
+function bucketTap(bucket){
+  if(!tapSelected) return;
+  placeCard(tapSelected,bucket);
+  tapSelected=null;
+}
+function placeCard(id,bucket){
+  sortPlaced[id]=bucket;
+  const card=document.getElementById('sc_'+id);
+  const bEl=document.getElementById('bucket-'+bucket);
+  if(!card||!bEl) return;
+  card.style.boxShadow='';
+  card.classList.remove('drag-ghost');
+  card.draggable=false;
+  const cols={od:'var(--od2)',oi:'var(--oi2)',both:'var(--both2)'};
+  card.style.borderColor=cols[bucket]||'rgba(255,255,255,.3)';
+  card.onclick=()=>returnCard(id);
+  bEl.appendChild(card);
+  if(Object.keys(sortPlaced).length===SORT_ITEMS.length){
+    const btn=document.getElementById('sort_check'); if(btn)btn.disabled=false;
+  }
+}
+function returnCard(id){
+  if(sortChecked) return;
+  delete sortPlaced[id];
+  const card=document.getElementById('sc_'+id);
+  const pile=document.getElementById('sortPile');
+  if(!card||!pile) return;
+  card.style.borderColor=''; card.style.boxShadow=''; card.draggable=true;
+  card.onclick=()=>tapCard(id);
+  card.ondragstart=(e)=>dragStart(e,id);
+  card.ondragend=(e)=>dragEnd(e);
+  pile.appendChild(card);
+  const btn=document.getElementById('sort_check'); if(btn)btn.disabled=true;
+}
+function checkSort(){
+  sortChecked=true;
+  let ok=0;
+  SORT_ITEMS.forEach(item=>{
+    const placed=sortPlaced[item.id];
+    const card=document.getElementById('sc_'+item.id);
+    if(!card)return;
+    const isOk=placed===item.correct;
+    if(isOk)ok++;
+    card.className='sort-card '+(isOk?'card-correct':'card-wrong');
+    card.draggable=false; card.onclick=null;
+    if(!isOk) card.innerHTML=`${item.text} <span style="font-size:.7rem">→ ${item.correct.toUpperCase()}</span>`;
+    card.title=item.exp;
+  });
+  const pct=Math.round(ok/SORT_ITEMS.length*100);
+  const fb=document.getElementById('sort_fb');
+  fb.className='fb show '+(pct>=80?'ok':pct>=55?'partial':'err');
+  fb.innerHTML=`<strong>${ok}/${SORT_ITEMS.length} (${pct}%).</strong> Las tarjetas rojas muestran el cubo correcto. Pasa el cursor para ver la explicación.`;
+  document.getElementById('sort_check').disabled=true;
+}
+function resetSort(){ renderSort(); }
+
+/* ═══════════════════════════════════════════════════════
+   EX 5 — SPEED ROUND
+═══════════════════════════════════════════════════════ */
+function renderSpeed(){
+  if(speedTimer){clearInterval(speedTimer);speedTimer=null;}
+  speedIdx=0;speedOk=0;speedErr=0;speedStreak=0;speedAnswered=false;
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header">
+    <div class="ex-title">⚡ Speed round</div>
+    <div class="ex-instr">Type the correct object pronoun(s) — <em>exact form</em>: lo, la, les, se lo, te la… You have <em>7 seconds</em>. Press Enter to confirm.</div>
+  </div>
+  <div class="speed-wrap" id="speedWrap">
+    <div class="speed-start">
+      <div style="font-size:2.8rem">⚡</div>
+      <h2>Escribe el pronombre</h2>
+      <p>Type the exact pronoun that completes the sentence. For double pronouns, include both: <strong>se lo</strong>, <strong>te la</strong>, <strong>me los</strong>…</p>
+      <button class="btn btn-cyan" onclick="startSpeed()">¡Empezar!</button>
+    </div>
+  </div></div>`;
+}
+
+function startSpeed(){ speedIdx=0;speedOk=0;speedErr=0;speedStreak=0; nextSpeedQ(); }
+
+function normS(s){ return (s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'').trim(); }
+
+function nextSpeedQ(){
+  if(speedIdx>=SPEED.length){ endSpeed(); return; }
+  speedAnswered=false;
+  const item=SPEED[speedIdx];
+  speedTimeLeft=7;
+
+  document.getElementById('speedWrap').innerHTML=`
+    <div class="speed-stats">
+      <div class="spstat"><div class="sl">Pregunta</div><div class="sv w">${speedIdx+1}/${SPEED.length}</div></div>
+      <div class="spstat"><div class="sl">Correctas</div><div class="sv g">${speedOk}</div></div>
+      <div class="spstat"><div class="sl">Errores</div><div class="sv b">${speedErr}</div></div>
+    </div>
+    <div class="streak-badge ${speedStreak>=3?'show':''}" id="streakB">🔥 Racha: ${speedStreak}</div>
+    <div class="speed-card">
+      <div class="speed-sent">${item.q.replace(/_+/g,'<em>___</em>')}</div>
+      <div class="speed-hint">💡 ${item.hint}</div>
+    </div>
+    <div class="timer-row">
+      <div class="timer-track"><div class="timer-fill" id="tFill" style="width:100%;transition:width 1s linear"></div></div>
+      <div class="timer-num" id="tNum">7</div>
+    </div>
+    <div class="speed-input-row">
+      <input id="sInp" class="speed-inp" type="text" autocomplete="off" autocorrect="off" spellcheck="false"
+        placeholder="pronombre…"
+        onkeydown="if(event.key==='Enter')submitSpeed()">
+      <button class="btn btn-cyan" onclick="submitSpeed()" style="flex-shrink:0">→</button>
+    </div>
+    <div class="speed-fb" id="sFb" style="opacity:0"></div>`;
+
+  setTimeout(()=>{ const i=document.getElementById('sInp'); if(i)i.focus(); },50);
+
+  if(speedTimer)clearInterval(speedTimer);
+  speedTimer=setInterval(()=>{
+    speedTimeLeft--;
+    const f=document.getElementById('tFill');
+    const n=document.getElementById('tNum');
+    if(f)f.style.width=Math.max(0,(speedTimeLeft/7)*100)+'%';
+    if(n){n.textContent=speedTimeLeft; n.style.color=speedTimeLeft<=2?'var(--bad)':speedTimeLeft<=4?'var(--warn)':'var(--muted2)';}
+    if(speedTimeLeft<=0){clearInterval(speedTimer);speedTimer=null;if(!speedAnswered)submitSpeed();}
+  },1000);
+}
+
+function submitSpeed(){
+  const inp=document.getElementById('sInp');
+  if(!inp)return;
+  const typed=inp.value;
+  if(speedAnswered)return;
+  speedAnswered=true;
+  if(speedTimer){clearInterval(speedTimer);speedTimer=null;}
+  inp.disabled=true;
+  const item=SPEED[speedIdx];
+  const nt=normS(typed);
+  const na=normS(item.ans);
+  const isOk=nt===na||item.also.map(normS).includes(nt);
+  if(isOk){speedOk++;speedStreak++;}else{speedErr++;speedStreak=0;}
+  const fb=document.getElementById('sFb');
+  if(fb){
+    fb.style.opacity='1';
+    if(!typed.trim()){fb.className='speed-fb err';fb.innerHTML=`⏱ Time! Answer: <strong>${item.ans}</strong>`;}
+    else if(isOk){fb.className='speed-fb ok';fb.innerHTML=`✓ <strong>¡Correcto!</strong>${speedStreak>=3?' 🔥 Racha: '+speedStreak:''}`;}
+    else{fb.className='speed-fb err';fb.innerHTML=`✗ Escribiste <strong>${typed}</strong> — correcto: <strong>${item.ans}</strong>`;}
+  }
+  if(speedStreak>=3){
+    const cf=document.getElementById('comboFlash');
+    cf.textContent='🔥 x'+speedStreak;
+    cf.classList.remove('anim');void cf.offsetWidth;cf.classList.add('anim');
+  }
+  speedIdx++;
+  setTimeout(nextSpeedQ,isOk?700:1400);
+}
+
+function endSpeed(){
+  const pct=Math.round(speedOk/SPEED.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  const msg=pct>=90?'¡Excelente! Dominas los pronombres objeto.':pct>=70?'¡Muy bien! Unos errores puntuales — repásalos.':pct>=50?'Buen intento. Presta atención a los pronombres dobles.':'Repasa la tabla de referencia e inténtalo de nuevo.';
+  document.getElementById('speedWrap').innerHTML=`<div class="speed-start">
+    <div style="font-size:3rem">${emo}</div>
+    <h2>${speedOk}/${SPEED.length} correctas</h2>
+    <p style="color:var(--muted)">${msg}</p>
+    <button class="btn btn-cyan" onclick="startSpeed()">↺ Intentar de nuevo</button>
+  </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════
+   EX 6 — REFERENCE
+═══════════════════════════════════════════════════════ */
+function renderReference(){
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header">
+    <div class="ex-title">📚 Tabla de referencia</div>
+    <div class="ex-instr">Your complete guide to object pronouns. Study this before the other exercises or use it as a cheat sheet.</div>
+  </div>
+  <div class="ref-section">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div>
+        <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--od2);margin-bottom:8px">🩷 Objeto Directo (OD)</div>
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;line-height:1.6">Answers <strong style="color:var(--text)">¿QUÉ?</strong> or <strong style="color:var(--text)">¿A QUIÉN?</strong> — the thing/person directly acted upon.</div>
+        <div class="ref-table-wrap">
+        <table class="ref-table">
+          <tr><th>Persona</th><th>Pronombre</th><th>Ejemplo</th></tr>
+          <tr style="background:rgba(244,114,182,.04)"><td>yo</td><td class="td-pron" style="color:var(--od2)">me</td><td class="td-ex"><em>Me llaman.</em></td></tr>
+          <tr><td>tú</td><td class="td-pron" style="color:var(--od2)">te</td><td class="td-ex"><em>Te veo.</em></td></tr>
+          <tr style="background:rgba(244,114,182,.04)"><td>él/ella/Ud.</td><td class="td-pron" style="color:var(--od2)">lo / la</td><td class="td-ex"><em>Lo veo. La veo.</em></td></tr>
+          <tr><td>nosotros</td><td class="td-pron" style="color:var(--od2)">nos</td><td class="td-ex"><em>Nos buscan.</em></td></tr>
+          <tr style="background:rgba(244,114,182,.04)"><td>ellos/ellas/Uds.</td><td class="td-pron" style="color:var(--od2)">los / las</td><td class="td-ex"><em>Los vi. Las compré.</em></td></tr>
+        </table></div>
+      </div>
+      <div>
+        <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--oi2);margin-bottom:8px">🔵 Objeto Indirecto (OI)</div>
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;line-height:1.6">Answers <strong style="color:var(--text)">¿A QUIÉN?</strong> or <strong style="color:var(--text)">¿PARA QUIÉN?</strong> — the beneficiary of the action.</div>
+        <div class="ref-table-wrap">
+        <table class="ref-table">
+          <tr><th>Persona</th><th>Pronombre</th><th>Ejemplo</th></tr>
+          <tr style="background:rgba(37,217,255,.04)"><td>yo</td><td class="td-pron" style="color:var(--oi2)">me</td><td class="td-ex"><em>Me dijo algo.</em></td></tr>
+          <tr><td>tú</td><td class="td-pron" style="color:var(--oi2)">te</td><td class="td-ex"><em>Te mandé un mensaje.</em></td></tr>
+          <tr style="background:rgba(37,217,255,.04)"><td>él/ella/Ud.</td><td class="td-pron" style="color:var(--oi2)">le</td><td class="td-ex"><em>Le di las gracias.</em></td></tr>
+          <tr><td>nosotros</td><td class="td-pron" style="color:var(--oi2)">nos</td><td class="td-ex"><em>Nos explicó todo.</em></td></tr>
+          <tr style="background:rgba(37,217,255,.04)"><td>ellos/ellas/Uds.</td><td class="td-pron" style="color:var(--oi2)">les</td><td class="td-ex"><em>Les escribí.</em></td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <h3>⚠️ The Big Rule: le/les → SE before lo/la/los/las</h3>
+      <div class="note-row"><span class="note-label" style="color:var(--bad)">❌ WRONG:</span><span>Le lo di. / Les las mandé.</span></div>
+      <div class="note-row"><span class="note-label" style="color:var(--good)">✅ RIGHT:</span><span><strong>Se lo</strong> di (a él/ella). / <strong>Se las</strong> mandé (a ellos).</span></div>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:8px;line-height:1.6">When OI (le/les) appears together with OD (lo/la/los/las), the OI <strong style="color:var(--text)">always becomes SE</strong>. The context or a clarifying phrase (a ella, a Juan, a mis clientes…) tells you who SE refers to.</div>
+    </div>
+
+    <div class="note-box">
+      <h3>📍 Position rules</h3>
+      <div class="rule-cards">
+        <div class="rule-card">
+          <h4>Before conjugated verb</h4>
+          <p><em>Lo compré. / Te lo dije.</em><br>Most common position.</p>
+        </div>
+        <div class="rule-card">
+          <h4>Attached to infinitive</h4>
+          <p><em>Voy a comprarlo. / Quiero decírtelo.</em><br>Accent often needed.</p>
+        </div>
+        <div class="rule-card">
+          <h4>Attached to gerund</h4>
+          <p><em>Estoy leyéndolo. / Sigo esperándote.</em><br>Accent always needed.</p>
+        </div>
+        <div class="rule-card">
+          <h4>OI before OD — always</h4>
+          <p><em>Se lo dije.</em> (OI se + OD lo)<br>Never swap the order.</p>
+        </div>
+        <div class="rule-card">
+          <h4>Verbs like gustar</h4>
+          <p><em>Me duele. Te gusta. Le molesta.</em><br>These use OI, not OD.</p>
+        </div>
+        <div class="rule-card">
+          <h4>Clarifying phrase (a + noun)</h4>
+          <p><em>Le dije <strong>a ella</strong> la verdad.</em><br>Adds clarity to le/se.</p>
+        </div>
+      </div>
+    </div>
+
+  </div></div>`;
+}
+
+/* INIT */
+goEx(0);
+</script>
+</body>
+</html>

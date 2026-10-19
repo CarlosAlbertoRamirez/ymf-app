@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Posesivos | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --adj:#f472b6;--adj2:#ff91cd;
+  --pro:#25d9ff;--pro2:#7ee8ff;
+  --font:'DM Sans',system-ui,sans-serif;
+  --display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 10% 10%,rgba(255,43,191,.13),transparent 28%),radial-gradient(ellipse at 90% 15%,rgba(37,217,255,.09),transparent 28%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(980px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);box-shadow:0 0 18px rgba(255,43,191,.22);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta);text-shadow:1px 1px 0 var(--cyan)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,2.4rem);font-weight:900;line-height:.95;background:linear-gradient(90deg,var(--adj) 0%,#fff 40%,var(--pro) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.86rem;line-height:1.5;margin-top:4px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.pill-adj{background:rgba(244,114,182,.15);border:1px solid rgba(244,114,182,.35);border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:800;color:var(--adj2)}
+.pill-pro{background:rgba(37,217,255,.12);border:1px solid rgba(37,217,255,.3);border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:800;color:var(--pro2)}
+.ex-tabs{display:flex;gap:6px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:8px;box-shadow:var(--shadow);overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:9px 12px;font-weight:800;font-family:var(--font);font-size:.78rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;box-shadow:0 3px 0 rgba(0,0,0,.2);transform:translateY(-1px)}
+.etab-icon{font-size:1.2rem;line-height:1}
+.etab-label{font-size:.65rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:24px 28px;box-shadow:var(--shadow)}
+.ex-header{margin-bottom:16px}
+.ex-title{font-family:var(--display);font-size:1.2rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.86rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:100px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--adj),var(--pro));transition:width .35s}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;font-weight:500;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.err{background:rgba(239,68,68,.11);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+
+/* ══ EX 1: MATCH (emoji ownership) ══ */
+.match-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.match-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;transition:border-color .15s}
+.match-card:hover{border-color:rgba(37,217,255,.18)}
+.match-header{display:flex;align-items:center;gap:8px}
+.match-num{font-size:.62rem;font-weight:900;color:var(--muted2);background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0}
+.match-context{font-size:.88rem;color:var(--muted);flex:1;line-height:1.4}
+.match-visual{display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(255,255,255,.04);border-radius:12px;padding:12px 8px}
+.match-owner{font-size:2rem;line-height:1}
+.match-arrow{font-size:1.1rem;color:var(--adj2)}
+.match-item{font-size:2.4rem;line-height:1}
+.match-noun{font-size:.8rem;color:var(--muted2);text-align:center;margin-top:2px;font-style:italic}
+.match-opts{display:flex;flex-wrap:wrap;gap:6px}
+.m-opt{border:0;border-radius:9px;padding:7px 14px;font-weight:800;font-family:var(--display);font-size:.92rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.m-opt:hover:not(:disabled){background:rgba(37,217,255,.1);border-color:var(--cyan);transform:translateY(-1px)}
+.m-opt:disabled{cursor:default;transform:none}
+.m-opt.m-ok{background:rgba(34,197,94,.16);border-color:var(--good);color:#86efac}
+.m-opt.m-err{background:rgba(239,68,68,.12);border-color:var(--bad);color:#fca5a5}
+.m-opt.m-show{background:rgba(34,197,94,.1);border-color:var(--good);color:#86efac}
+.m-expl{display:none;font-size:.75rem;color:var(--muted);line-height:1.5;padding:7px 10px;background:rgba(255,255,255,.04);border-radius:8px}
+.m-expl.show{display:block}
+
+/* ══ MC ══ */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:15px 17px}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px}
+.mc-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0;margin-top:2px}
+.mc-sent{font-size:1rem;line-height:1.65;flex:1}
+.mc-blank{display:inline-block;min-width:60px;border-bottom:2.5px solid rgba(37,217,255,.4);padding:0 4px;text-align:center;font-weight:800;color:var(--cyan)}
+.mc-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding-left:28px}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px;margin-bottom:3px}
+.mc-opt{border:0;border-radius:10px;padding:8px 16px;font-weight:800;font-family:var(--display);font-size:.95rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt:hover:not(:disabled){transform:translateY(-1px);border-color:rgba(37,217,255,.4);background:rgba(37,217,255,.09)}
+.mc-opt:disabled{cursor:default;transform:none}
+.mc-opt.mc-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.mc-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mc-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-expl{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:7px;padding:8px 12px 8px 28px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-expl.show{display:block}
+.type-tag{font-size:.65rem;font-weight:800;border-radius:999px;padding:2px 8px;margin-right:4px;display:inline-block}
+.adj-tag{background:rgba(244,114,182,.14);color:var(--adj2)}
+.pro-tag{background:rgba(37,217,255,.13);color:var(--pro2)}
+
+/* ══ ERROR HUNT ══ */
+.eh-list{display:flex;flex-direction:column;gap:9px}
+.eh-item{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:13px 15px;display:flex;align-items:flex-start;gap:11px}
+.eh-item.correct-sentence{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.05)}
+.eh-item.wrong-sentence{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.05)}
+.eh-num{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:var(--muted2);flex-shrink:0;margin-top:1px}
+.eh-body{flex:1}.eh-sent{font-size:.97rem;line-height:1.6}
+.wrong-word{color:var(--bad);text-decoration:underline wavy var(--bad);font-weight:700}
+.eh-correction{font-size:.82rem;font-weight:700;color:var(--good);margin-left:5px}
+.eh-judge-row{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+.eh-judge-btn{border:0;border-radius:9px;padding:7px 15px;font-weight:800;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:.14px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.eh-correct-btn:hover:not(:disabled){border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.1);color:#86efac}
+.eh-error-btn:hover:not(:disabled){border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);color:#fca5a5}
+.eh-judge-btn:disabled{cursor:default;opacity:.5}
+.judge-chosen-ok{border-color:var(--good)!important;background:rgba(34,197,94,.18)!important;color:#86efac!important;opacity:1!important}
+.judge-chosen-err{border-color:var(--bad)!important;background:rgba(239,68,68,.14)!important;color:#fca5a5!important;opacity:1!important}
+.eh-exp{display:none;font-size:.79rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);line-height:1.55}
+.revealed .eh-exp{display:block}
+
+/* ══ SORT ══ */
+.sort-pile{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;min-height:52px;margin-bottom:12px}
+.sort-bucket{border-radius:14px;padding:13px;min-height:90px;display:flex;flex-direction:column;gap:7px;transition:background .2s}
+.sort-bucket.drag-over{box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.bucket-title{font-family:var(--display);font-size:.8rem;font-weight:900;text-align:center}
+.bucket-sub{font-size:.62rem;color:var(--muted2);text-align:center;line-height:1.35}
+.sort-card{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:9px;padding:7px 12px;font-size:.84rem;font-weight:600;cursor:grab;user-select:none;transition:.15s;line-height:1.4}
+.sort-card:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sort-card:active{cursor:grabbing}
+.sort-card.drag-ghost{opacity:.35}
+.sort-card.card-correct{background:rgba(34,197,94,.14);border-color:var(--good);color:#86efac;cursor:default}
+.sort-card.card-wrong{background:rgba(239,68,68,.1);border-color:var(--bad);color:#fca5a5;font-size:.78rem}
+
+/* ══ SPEED ══ */
+.speed-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.speed-stats{display:flex;gap:9px}
+.spstat{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spstat .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.spstat .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spstat .sv.g{color:var(--good)}.spstat .sv.b{color:var(--bad)}.spstat .sv.w{color:var(--warn)}
+.speed-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:20px;text-align:center;width:100%;max-width:520px}
+.speed-sent{font-size:1.05rem;line-height:1.7;margin-bottom:4px}
+.speed-sent em{font-style:normal;font-weight:900;color:var(--warn);background:rgba(245,158,11,.12);border-radius:5px;padding:0 5px}
+.speed-hint{font-size:.77rem;color:var(--muted2);font-style:italic}
+.speed-input-row{display:flex;gap:8px;justify-content:center;width:100%;max-width:520px}
+.speed-inp{flex:1;max-width:220px;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.3);border-radius:11px;padding:10px 14px;font-family:var(--font);font-size:1rem;font-weight:700;color:var(--text);outline:none;transition:.15s}
+.speed-inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.speed-inp::placeholder{color:var(--muted2);font-weight:400}
+.speed-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:520px}
+.speed-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.speed-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.timer-row{display:flex;align-items:center;gap:9px;width:100%;max-width:520px}
+.timer-track{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.timer-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--adj),var(--pro));transition:width 1s linear}
+.timer-num{font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--muted2);min-width:18px;text-align:right}
+.streak-badge{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak-badge.show{display:inline-flex;align-items:center;gap:4px}
+.speed-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.speed-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.speed-start p{color:var(--muted);font-size:.87rem;max-width:400px;line-height:1.6}
+.combo-flash{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.combo-flash.anim{animation:cf .7s ease forwards}
+@keyframes cf{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+
+/* ══ REFERENCE ══ */
+.ref-table{width:100%;border-collapse:collapse;font-size:.86rem;margin-bottom:14px}
+.ref-table th{padding:8px 12px;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+.ref-table td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.5;vertical-align:middle}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-table tr:hover td{background:rgba(255,255,255,.02)}
+.td-key{font-family:var(--display);font-weight:900;font-size:.92rem}
+.td-en{color:var(--muted2);font-style:italic;font-size:.8rem}
+.note-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:15px 17px;margin-bottom:14px}
+.note-box h3{font-family:var(--display);font-size:.95rem;font-weight:800;margin-bottom:10px;color:var(--warn)}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:16px 13px}.match-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="combo-flash" id="comboFlash"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Possessive Adjectives &amp; Pronouns</h1>
+      <p>Six exercises to master mi/tu/su/nuestro (adjectives — before the noun) and mío/tuyo/suyo (pronouns — after the verb). Gender and number always matter.</p>
+      <div class="badges">
+        <span class="badge">A2–B1</span>
+        <span class="badge" style="border-color:rgba(244,114,182,.35);color:var(--adj2)">🏷️ mi/tu/su/nuestro — adjectives</span>
+        <span class="badge" style="border-color:rgba(37,217,255,.35);color:var(--pro2)">💬 mío/tuyo/suyo — pronouns</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">👤</span><span class="etab-label">Who owns<br>it?</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">📝</span><span class="etab-label">Multiple<br>choice</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">🔍</span><span class="etab-label">Error<br>hunter</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">🗂️</span><span class="etab-label">Drag &<br>sort</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">⚡</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">📚</span><span class="etab-label">Reference</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · Your Mexican Friend</p>
+</div>
+<script>
+/* ══════════════════════════════════════════
+   EX 1 — WHO OWNS IT?
+   Emoji owner + emoji item → pick possessive adjective
+   type: 'adj'|'pro'
+══════════════════════════════════════════ */
+const MATCH_ITEMS = [
+  // ADJECTIVES — mi/mis
+  {owner:'🙋',ownerLabel:'yo (I)',    item:'🚗', noun:'coche (m. sing.)', context:'___ coche está en el garaje.',
+   type:'adj', ans:'mi',      opts:['mi','mis','tu','su'],      exp:'<strong>Mi</strong> = my (sing.). "Mi coche" — the possessive does not change for gender, only for number.'},
+  {owner:'🙋',ownerLabel:'yo (I)',    item:'🔑', noun:'llaves (f. plur.)',context:'___ llaves están en la mesa.',
+   type:'adj', ans:'mis',     opts:['mi','mis','tus','sus'],    exp:'<strong>Mis</strong> = my (plur.). "Llaves" is plural, so the possessive must also be plural.'},
+  // ADJECTIVES — tu/tus
+  {owner:'🧑',ownerLabel:'tú (you)',  item:'📱', noun:'teléfono (m. sing.)',context:'___ teléfono está sonando.',
+   type:'adj', ans:'tu',      opts:['tu','tus','mi','su'],      exp:'<strong>Tu</strong> = your (sing., informal). No accent — "tú" with accent is the subject pronoun.'},
+  {owner:'🧑',ownerLabel:'tú (you)',  item:'👟', noun:'zapatos (m. plur.)',context:'¿Dónde están ___ zapatos?',
+   type:'adj', ans:'tus',     opts:['tu','tus','sus','mis'],    exp:'<strong>Tus</strong> = your (plur., informal). "Zapatos" is plural.'},
+  // ADJECTIVES — su/sus (él/ella)
+  {owner:'👩',ownerLabel:'ella (she)', item:'💼', noun:'bolsa (f. sing.)', context:'Ella perdió ___ bolsa.',
+   type:'adj', ans:'su',      opts:['su','sus','mi','tu'],      exp:'<strong>Su</strong> = his/her/its (sing.). Works for él, ella, usted, and ellos/ellas.'},
+  {owner:'👨',ownerLabel:'él (he)',   item:'📚', noun:'libros (m. plur.)',context:'___ libros están en la mochila.',
+   type:'adj', ans:'sus',     opts:['su','sus','mis','tus'],    exp:'<strong>Sus</strong> = his/her/their (plur.). "Libros" is plural.'},
+  // ADJECTIVES — nuestro/nuestra/nuestros/nuestras
+  {owner:'👫',ownerLabel:'nosotros',  item:'🏠', noun:'casa (f. sing.)', context:'___ casa es muy grande.',
+   type:'adj', ans:'nuestra', opts:['nuestro','nuestra','su','mi'], exp:'<strong>Nuestra</strong> — "casa" is feminine, so nuestro becomes <strong>nuestra</strong>. Unlike mi/tu/su, nuestro changes for gender.'},
+  {owner:'👫',ownerLabel:'nosotros',  item:'🐕', noun:'perros (m. plur.)',context:'___ perros son muy simpáticos.',
+   type:'adj', ans:'nuestros',opts:['nuestro','nuestros','sus','tus'],exp:'<strong>Nuestros</strong> — masculine plural of nuestro.'},
+  // ADJECTIVES — su/sus (ellos)
+  {owner:'👨‍👩‍👧',ownerLabel:'ellos (they)',item:'🚐',noun:'coche (m. sing.)',context:'Ellos vendieron ___ coche.',
+   type:'adj', ans:'su',      opts:['su','sus','mi','nuestro'], exp:'<strong>Su</strong> = their (sing.). Same form for él/ella/ellos/ellas/usted/ustedes.'},
+  {owner:'👨‍👩‍👧',ownerLabel:'ellos (they)',item:'🏡',noun:'casas (f. plur.)',context:'___ casas están en venta.',
+   type:'adj', ans:'sus',     opts:['su','sus','nuestras','mis'],exp:'<strong>Sus</strong> = their (plur.).'},
+  // PRONOUNS — mío/mía/míos/mías
+  {owner:'🙋',ownerLabel:'yo (I)',    item:'🎒', noun:'mochila (f. sing.)',context:'Esta mochila es ___.',
+   type:'pro', ans:'mía',     opts:['mío','mía','tuyo','suya'], exp:'<strong>Mía</strong> = mine (fem. sing.). Pronouns change for gender AND number. "Mochila" is feminine.'},
+  {owner:'🙋',ownerLabel:'yo (I)',    item:'🔑', noun:'llaves (f. plur.)',context:'¿Esas llaves son ___?',
+   type:'pro', ans:'mías',    opts:['mías','míos','tuyas','suyas'],exp:'<strong>Mías</strong> = mine (fem. plur.). "Llaves" is feminine plural.'},
+  // PRONOUNS — tuyo/tuya
+  {owner:'🧑',ownerLabel:'tú (you)', item:'📖', noun:'libro (m. sing.)', context:'Este libro es ___.',
+   type:'pro', ans:'tuyo',    opts:['tuyo','tuya','mío','suyo'], exp:'<strong>Tuyo</strong> = yours (masc. sing.). Pronoun goes after the verb.'},
+  {owner:'🧑',ownerLabel:'tú (you)', item:'✏️', noun:'plumas (f. plur.)',context:'Esas plumas son ___.',
+   type:'pro', ans:'tuyas',   opts:['tuyos','tuyas','mías','suyas'],exp:'<strong>Tuyas</strong> = yours (fem. plur.). "Plumas" is feminine plural.'},
+  // PRONOUNS — suyo/suya
+  {owner:'👩',ownerLabel:'ella (she)',item:'🚗', noun:'coche (m. sing.)',context:'El coche rojo es ___.',
+   type:'pro', ans:'suyo',    opts:['suyo','suya','mío','tuyo'], exp:'<strong>Suyo</strong> = his/hers (masc. sing.).'},
+  // PRONOUNS — nuestro/nuestra
+  {owner:'👫',ownerLabel:'nosotros', item:'🏆', noun:'victoria (f. sing.)',context:'La victoria fue ___.',
+   type:'pro', ans:'nuestra', opts:['nuestro','nuestra','suya','mía'],exp:'<strong>Nuestra</strong> = ours (fem. sing.). "Victoria" is feminine.'},
+  // PRONOUNS — suyos/suyas
+  {owner:'👨‍👩‍👧',ownerLabel:'ellos (they)',item:'🐈',noun:'gatos (m. plur.)',context:'Los gatos negros son ___.',
+   type:'pro', ans:'suyos',   opts:['suyo','suyos','tuyos','nuestros'],exp:'<strong>Suyos</strong> = theirs (masc. plur.).'},
+  {owner:'👫',ownerLabel:'nosotros', item:'🌸', noun:'flores (f. plur.)',context:'Esas flores son ___.',
+   type:'pro', ans:'nuestras',opts:['nuestros','nuestras','mías','suyas'],exp:'<strong>Nuestras</strong> = ours (fem. plur.). "Flores" is feminine plural.'},
+];
+
+/* ══════════════════════════════════════════
+   EX 2 — MULTIPLE CHOICE (50 questions)
+══════════════════════════════════════════ */
+const MC = [
+  // ADJECTIVES — MI/MIS
+  {sent:'___ libro está en la mochila.',          en:'My book is in the backpack.',              opts:['Mi','Mis','Tu','Su'],          ans:0, type:'adj', exp:'<strong>Mi</strong> = my (masc. sing.). The possessive adjective does not change for gender — only for number.'},
+  {sent:'___ amigos son muy divertidos.',         en:'My friends are very fun.',                 opts:['Mi','Mis','Tu','Tus'],         ans:1, type:'adj', exp:'<strong>Mis</strong> = my (plural). "Amigos" is plural, so the possessive is also plural.'},
+  {sent:'Perdí ___ cartera ayer.',                en:'I lost my wallet yesterday.',              opts:['mi','mis','tu','su'],          ans:0, type:'adj', exp:'<strong>Mi</strong> = my (fem. sing.). Does not change for gender.'},
+  {sent:'___ padres viven en Monterrey.',         en:'My parents live in Monterrey.',            opts:['Mi','Mis','Tu','Sus'],         ans:1, type:'adj', exp:'<strong>Mis</strong> = my (plural). "Padres" is plural.'},
+  // TU/TUS
+  {sent:'¿Dónde está ___ casa?',                  en:'Where is your house?',                     opts:['mi','tu','su','nuestra'],      ans:1, type:'adj', exp:'<strong>Tu</strong> = your (informal, sing.). No accent — "tú" with accent is the subject pronoun.'},
+  {sent:'¿Dónde están ___ llaves?',               en:'Where are your keys?',                     opts:['tu','tus','su','sus'],         ans:1, type:'adj', exp:'<strong>Tus</strong> = your (informal, plural). "Llaves" is plural.'},
+  {sent:'___ hermana llegó tarde.',               en:'Your sister arrived late.',                opts:['Tu','Tus','Su','Mi'],          ans:0, type:'adj', exp:'<strong>Tu</strong> = your (fem. sing.). The possessive does not change for gender.'},
+  {sent:'¿Has visto a ___ hermanos últimamente?', en:'Have you seen your siblings lately?',      opts:['tu','tus','su','sus'],         ans:1, type:'adj', exp:'<strong>Tus</strong> = your (plural). "Hermanos" is plural.'},
+  // SU/SUS
+  {sent:'Ella perdió ___ cartera.',               en:'She lost her wallet.',                     opts:['mi','tu','su','nuestra'],      ans:2, type:'adj', exp:'<strong>Su</strong> = his/her/its (sing.). Same form for él, ella, usted.'},
+  {sent:'Ellos vendieron ___ coche.',             en:'They sold their car.',                     opts:['mi','tu','su','nuestro'],      ans:2, type:'adj', exp:'<strong>Su</strong> = their (sing. noun). Su/sus works for all third-person and usted.'},
+  {sent:'___ hijos llegaron muy tarde.',          en:'Their children arrived very late.',        opts:['Su','Sus','Tu','Tus'],         ans:1, type:'adj', exp:'<strong>Sus</strong> = their (plural). "Hijos" is plural.'},
+  {sent:'El jefe revisó ___ informe.',            en:'The boss reviewed your/his report.',       opts:['mi','tu','su','nuestro'],      ans:2, type:'adj', exp:'<strong>Su</strong> = his/your (formal). Context tells us whose report it is.'},
+  // NUESTRO/NUESTRA/NUESTROS/NUESTRAS
+  {sent:'___ equipo ganó el partido.',            en:'Our team won the match.',                  opts:['Mi','Tu','Su','Nuestro'],      ans:3, type:'adj', exp:'<strong>Nuestro</strong> = our (masc. sing.). Unlike mi/tu/su, nuestro changes for gender.'},
+  {sent:'___ casa tiene jardín.',                 en:'Our house has a garden.',                  opts:['Nuestro','Nuestra','Su','Mi'], ans:1, type:'adj', exp:'<strong>Nuestra</strong> = our (fem. sing.). "Casa" is feminine.'},
+  {sent:'___ hijos estudian juntos.',             en:'Our children study together.',             opts:['Nuestro','Nuestros','Sus','Mis'],ans:1,type:'adj', exp:'<strong>Nuestros</strong> = our (masc. plural). "Hijos" is masculine plural.'},
+  {sent:'___ abuelas viven en Jalisco.',          en:'Our grandmothers live in Jalisco.',        opts:['Nuestro','Nuestra','Nuestros','Nuestras'],ans:3,type:'adj',exp:'<strong>Nuestras</strong> = our (fem. plural). "Abuelas" is feminine plural.'},
+  // MORE ADJ MIXED
+  {sent:'Cada quien tiene ___ propia opinión.',   en:'Everyone has their own opinion.',          opts:['mi','tu','su','nuestro'],      ans:2, type:'adj', exp:'<strong>Su</strong> = his/her/their (third person, indefinite).'},
+  {sent:'Por favor, devuelve ___ libro.',         en:'Please return my book.',                   opts:['mi','mis','tu','su'],          ans:0, type:'adj', exp:'<strong>Mi</strong> = my (sing.).'},
+  {sent:'¿Es esta ___ mochila?',                  en:'Is this your backpack?',                   opts:['mi','tu','su','nuestra'],      ans:1, type:'adj', exp:'<strong>Tu</strong> = your (informal, sing.).'},
+  {sent:'___ ojos son verdes.',                   en:'Your eyes are green.',                     opts:['Tu','Tus','Su','Mis'],         ans:1, type:'adj', exp:'<strong>Tus</strong> = your (plural). "Ojos" is plural.'},
+  {sent:'¿Cuándo terminaste ___ proyecto?',       en:'When did you finish your project?',        opts:['mi','tu','su','nuestro'],      ans:1, type:'adj', exp:'<strong>Tu</strong> = your (informal, sing.).'},
+  {sent:'___ maletas ya están en el coche.',      en:'Your suitcases are already in the car.',   opts:['Tu','Tus','Su','Mis'],         ans:1, type:'adj', exp:'<strong>Tus</strong> = your (plural). "Maletas" is plural.'},
+  {sent:'___ nombre es muy bonito.',              en:'Her name is very beautiful.',              opts:['Mi','Tu','Su','Nuestra'],      ans:2, type:'adj', exp:'<strong>Su</strong> = her (third person, sing.).'},
+  {sent:'Pasamos toda la tarde en ___ casa.',     en:'We spent the whole afternoon at your house.',opts:['mi','tu','su','nuestra'],    ans:1, type:'adj', exp:'<strong>Tu</strong> = your (informal, sing.).'},
+  {sent:'El médico revisó ___ expediente.',       en:'The doctor reviewed my file.',             opts:['mi','tu','su','nuestro'],      ans:0, type:'adj', exp:'<strong>Mi</strong> = my (sing.).'},
+  // PRONOUNS — MÍO/MÍA/MÍOS/MÍAS
+  {sent:'Este libro es ___.',                     en:'This book is mine.',                       opts:['mío','mía','tuyo','suyo'],     ans:0, type:'pro', exp:'<strong>Mío</strong> = mine (masc. sing.). Pronouns agree with the noun in gender and number.'},
+  {sent:'Esta mochila es ___.',                   en:'This backpack is mine.',                   opts:['mío','mía','tuya','suya'],     ans:1, type:'pro', exp:'<strong>Mía</strong> = mine (fem. sing.). "Mochila" is feminine.'},
+  {sent:'Estos zapatos son ___.',                 en:'These shoes are mine.',                    opts:['mío','míos','mía','mías'],     ans:1, type:'pro', exp:'<strong>Míos</strong> = mine (masc. plural). "Zapatos" is masculine plural.'},
+  {sent:'Esas flores son ___.',                   en:'Those flowers are mine.',                  opts:['míos','mías','tuyas','suyas'], ans:1, type:'pro', exp:'<strong>Mías</strong> = mine (fem. plural). "Flores" is feminine plural.'},
+  {sent:'La culpa es ___.',                       en:'The fault is mine.',                       opts:['mío','mía','tuya','suya'],     ans:1, type:'pro', exp:'<strong>Mía</strong> = mine (fem. sing.). "Culpa" is feminine.'},
+  // PRONOUNS — TUYO/TUYA
+  {sent:'¿Es este bolígrafo ___?',               en:'Is this pen yours?',                       opts:['tuyo','tuya','mío','suyo'],    ans:0, type:'pro', exp:'<strong>Tuyo</strong> = yours (masc. sing.). "Bolígrafo" is masculine.'},
+  {sent:'¿Es esta chaqueta ___?',                en:'Is this jacket yours?',                    opts:['tuyo','tuya','mío','suya'],    ans:1, type:'pro', exp:'<strong>Tuya</strong> = yours (fem. sing.). "Chaqueta" is feminine.'},
+  {sent:'Esos problemas no son ___.',            en:'Those problems are not yours.',             opts:['tuyo','tuyos','míos','suyos'], ans:1, type:'pro', exp:'<strong>Tuyos</strong> = yours (masc. plural). "Problemas" is masculine plural.'},
+  // PRONOUNS — SUYO/SUYA
+  {sent:'El coche azul es ___.',                 en:'The blue car is his/hers.',                opts:['suyo','suya','mío','tuyo'],    ans:0, type:'pro', exp:'<strong>Suyo</strong> = his/hers (masc. sing.). "Coche" is masculine.'},
+  {sent:'La decisión fue ___.',                  en:'The decision was hers/his.',               opts:['suyo','suya','mío','mía'],     ans:1, type:'pro', exp:'<strong>Suya</strong> = his/hers (fem. sing.). "Decisión" is feminine.'},
+  {sent:'Esos errores son ___.',                 en:'Those mistakes are theirs.',               opts:['suyo','suyos','tuyos','míos'], ans:1, type:'pro', exp:'<strong>Suyos</strong> = theirs (masc. plural).'},
+  // PRONOUNS — NUESTRO/NUESTRA
+  {sent:'La victoria fue ___.',                  en:'The victory was ours.',                    opts:['nuestro','nuestra','suya','mía'],ans:1,type:'pro', exp:'<strong>Nuestra</strong> = ours (fem. sing.). "Victoria" is feminine.'},
+  {sent:'Este triunfo es ___.',                  en:'This triumph is ours.',                    opts:['nuestro','nuestra','suyo','mío'],ans:0,type:'pro', exp:'<strong>Nuestro</strong> = ours (masc. sing.). "Triunfo" is masculine.'},
+  {sent:'Los logros son ___.',                   en:'The achievements are ours.',               opts:['nuestro','nuestros','suyos','míos'],ans:1,type:'pro',exp:'<strong>Nuestros</strong> = ours (masc. plural). "Logros" is masculine plural.'},
+  // CONFUSING CASES
+  {sent:'Mi coche es rojo, ¿y el ___?',          en:'My car is red, and yours?',                opts:['mío','tuyo','suyo','nuestro'], ans:1, type:'pro', exp:'<strong>Tuyo</strong> = yours (masc. sing.). After "el" the pronoun replaces the noun.'},
+  {sent:'Esta idea fue ___.',                    en:'This idea was mine.',                      opts:['mío','mía','tuyo','suya'],     ans:1, type:'pro', exp:'<strong>Mía</strong> = mine (fem. sing.). "Idea" is feminine.'},
+  {sent:'No es ___ problema.',                   en:'It is not your problem.',                  opts:['mi','tu','su','nuestro'],      ans:1, type:'adj', exp:'<strong>Tu</strong> = your (adj, before noun). Not "tú" (subject pronoun).'},
+  {sent:'El error fue ___ — yo lo cometí.',      en:'The mistake was mine — I made it.',        opts:['mío','mía','tuyo','suya'],     ans:0, type:'pro', exp:'<strong>Mío</strong> = mine (masc. sing.). "Error" is masculine.'},
+  {sent:'___ familia es muy grande.',            en:'Our family is very big.',                  opts:['Nuestro','Nuestra','Su','Mi'], ans:1, type:'adj', exp:'<strong>Nuestra</strong> = our (fem. sing.). "Familia" is feminine.'},
+  {sent:'La iniciativa fue ___, no de nadie más.',en:'The initiative was ours, not anyone else\'s.',opts:['nuestro','nuestra','suya','mía'],ans:1,type:'pro',exp:'<strong>Nuestra</strong> = ours (fem. sing.). "Iniciativa" is feminine.'},
+  {sent:'¿Es ___ paraguas o el mío?',            en:'Is that umbrella yours or mine?',          opts:['tuyo','tuya','suyo','mío'],    ans:0, type:'pro', exp:'<strong>Tuyo</strong> = yours (masc. sing.). "Paraguas" is masculine.'},
+  {sent:'___ ciudad natal es Oaxaca.',           en:'My hometown is Oaxaca.',                   opts:['Mi','Mis','Tu','Su'],          ans:0, type:'adj', exp:'<strong>Mi</strong> = my (fem. sing.). Possessive adjective does not change for gender.'},
+  {sent:'La responsabilidad es ___.',            en:'The responsibility is yours.',             opts:['tuyo','tuya','mío','suya'],    ans:1, type:'pro', exp:'<strong>Tuya</strong> = yours (fem. sing.). "Responsabilidad" is feminine.'},
+  {sent:'___ ideas siempre son creativas.',      en:'Your ideas are always creative.',          opts:['Tu','Tus','Su','Mis'],         ans:1, type:'adj', exp:'<strong>Tus</strong> = your (plural). "Ideas" is plural.'},
+  {sent:'Este éxito también es ___.',            en:'This success is also yours.',              opts:['tuyo','tuya','suyo','mío'],    ans:0, type:'pro', exp:'<strong>Tuyo</strong> = yours (masc. sing.). "Éxito" is masculine.'},
+];
+
+function seededShuffle(arr,seed){
+  const a=[...arr];let s=seed;
+  for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+const MC_ORDER=MC.map((_,i)=>seededShuffle([0,1,2,3],i*11+5));
+
+/* ══════════════════════════════════════════
+   EX 3 — ERROR HUNT (15)
+══════════════════════════════════════════ */
+const ERRORS = [
+  ['Mi amigos son muy simpáticos.',                     true,  'Mis',       'ERROR: "Amigos" is plural → the possessive must also be plural: <strong>Mis</strong> amigos.'],
+  ['Tu hermana llegó tarde.',                           false, null,        'CORRECT: "Tu" = your (informal, sing.). No accent needed on the possessive. ✓'],
+  ['Su hijos llegaron muy tarde.',                      true,  'Sus',       'ERROR: "Hijos" is plural → <strong>Sus</strong> hijos.'],
+  ['Nuestro casa tiene jardín.',                        true,  'Nuestra',   'ERROR: "Casa" is feminine → <strong>Nuestra</strong> casa. Unlike mi/tu/su, nuestro changes for gender.'],
+  ['Este libro es mío.',                                false, null,        'CORRECT: "Mío" = mine (masc. sing.). Pronoun agrees with the noun. ✓'],
+  ['¿Es esta mochila la tuya?',                        false, null,        'CORRECT: "Tuya" = yours (fem. sing.). Pronoun after the verb. ✓'],
+  ['La culpa es mío.',                                  true,  'mía',       'ERROR: "Culpa" is feminine → <strong>mía</strong>, not "mío".'],
+  ['Perdí mi cartera ayer.',                            false, null,        'CORRECT: "Mi" = my (sing.). Does not change for gender. ✓'],
+  ['El coche rojo es suya.',                            true,  'suyo',      'ERROR: "Coche" is masculine → <strong>suyo</strong>, not "suya".'],
+  ['¿Dónde están tus llaves?',                         false, null,        'CORRECT: "Tus" = your (plural). "Llaves" is plural. ✓'],
+  ['La victoria fue nuestro.',                          true,  'nuestra',   'ERROR: "Victoria" is feminine → <strong>nuestra</strong>, not "nuestro".'],
+  ['Sus padres viven en México.',                       false, null,        'CORRECT: "Sus" = their (plural). "Padres" is plural. ✓'],
+  ['¿Es ese paraguas la tuya?',                        true,  'el tuyo',   'ERROR: "Paraguas" is masculine → <strong>el tuyo</strong>, not "la tuya".'],
+  ['Mis llaves están en la mesa.',                      false, null,        'CORRECT: "Mis" = my (plural). "Llaves" is plural. ✓'],
+  ['Nuestras abuelas viven en Jalisco.',                false, null,        'CORRECT: "Nuestras" = our (fem. plural). "Abuelas" is feminine plural. ✓'],
+];
+
+/* ══════════════════════════════════════════
+   EX 4 — DRAG & SORT (7 buckets)
+══════════════════════════════════════════ */
+const SORT_BUCKETS_DATA = [
+  {id:'adj-sing', label:'Adj. singular',       icon:'🏷️', sub:'mi/tu/su — before a singular noun',    col:'#ff91cd', bg:'rgba(244,114,182,.07)', bdr:'rgba(244,114,182,.25)'},
+  {id:'adj-plur', label:'Adj. plural',          icon:'🏷️', sub:'mis/tus/sus — before a plural noun',   col:'#f472b6', bg:'rgba(244,114,182,.05)', bdr:'rgba(244,114,182,.2)'},
+  {id:'adj-nos',  label:'Adj. nuestro/a/os/as', icon:'🏷️', sub:'nuestro/a/os/as — changes for gender', col:'#fbbf24', bg:'rgba(251,191,36,.06)',  bdr:'rgba(251,191,36,.22)'},
+  {id:'pro-m-s',  label:'Pronoun masc. sing.',  icon:'💬', sub:'mío/tuyo/suyo — masc. sing.',          col:'#7ee8ff', bg:'rgba(37,217,255,.06)',  bdr:'rgba(37,217,255,.22)'},
+  {id:'pro-f-s',  label:'Pronoun fem. sing.',   icon:'💬', sub:'mía/tuya/suya — fem. sing.',           col:'#25d9ff', bg:'rgba(37,217,255,.04)',  bdr:'rgba(37,217,255,.18)'},
+  {id:'pro-m-p',  label:'Pronoun masc. plur.',  icon:'💬', sub:'míos/tuyos/suyos — masc. plur.',       col:'#86efac', bg:'rgba(34,197,94,.06)',   bdr:'rgba(34,197,94,.22)'},
+  {id:'pro-f-p',  label:'Pronoun fem. plur.',   icon:'💬', sub:'mías/tuyas/suyas — fem. plur.',        col:'#4ade80', bg:'rgba(34,197,94,.04)',   bdr:'rgba(34,197,94,.18)'},
+];
+const SORT_ITEMS = [
+  {id:'s1',  text:'Mi coche está aquí.',              correct:'adj-sing', exp:'"Mi" = possessive adjective, singular, before "coche".'},
+  {id:'s2',  text:'Mis llaves son estas.',            correct:'adj-plur', exp:'"Mis" = possessive adjective, plural, before "llaves".'},
+  {id:'s3',  text:'Nuestra casa es grande.',          correct:'adj-nos',  exp:'"Nuestra" = nuestro (fem. sing.) — agrees with "casa".'},
+  {id:'s4',  text:'Este libro es mío.',               correct:'pro-m-s',  exp:'"Mío" = pronoun, masc. sing. — after the verb "es".'},
+  {id:'s5',  text:'Esta mochila es mía.',             correct:'pro-f-s',  exp:'"Mía" = pronoun, fem. sing. — "mochila" is feminine.'},
+  {id:'s6',  text:'Esos zapatos son míos.',           correct:'pro-m-p',  exp:'"Míos" = pronoun, masc. plural — "zapatos" is masc. plural.'},
+  {id:'s7',  text:'Esas flores son mías.',            correct:'pro-f-p',  exp:'"Mías" = pronoun, fem. plural — "flores" is feminine plural.'},
+  {id:'s8',  text:'Tu hermana llegó tarde.',          correct:'adj-sing', exp:'"Tu" = possessive adjective, singular, before "hermana".'},
+  {id:'s9',  text:'Tus amigos son divertidos.',       correct:'adj-plur', exp:'"Tus" = possessive adjective, plural, before "amigos".'},
+  {id:'s10', text:'Nuestros hijos estudian juntos.',  correct:'adj-nos',  exp:'"Nuestros" = nuestro (masc. plural) — agrees with "hijos".'},
+  {id:'s11', text:'¿Es tuyo ese coche?',              correct:'pro-m-s',  exp:'"Tuyo" = pronoun, masc. sing. — "coche" is masculine.'},
+  {id:'s12', text:'¿Es tuya esa chaqueta?',           correct:'pro-f-s',  exp:'"Tuya" = pronoun, fem. sing. — "chaqueta" is feminine.'},
+  {id:'s13', text:'Los errores son tuyos.',           correct:'pro-m-p',  exp:'"Tuyos" = pronoun, masc. plural — "errores" is masc. plural.'},
+  {id:'s14', text:'Esas ideas son tuyas.',            correct:'pro-f-p',  exp:'"Tuyas" = pronoun, fem. plural — "ideas" is feminine plural.'},
+  {id:'s15', text:'Su nombre es muy bonito.',         correct:'adj-sing', exp:'"Su" = possessive adjective, singular, before "nombre".'},
+  {id:'s16', text:'La victoria fue nuestra.',         correct:'pro-f-s',  exp:'"Nuestra" = pronoun, fem. sing. — "victoria" is feminine.'},
+  {id:'s17', text:'Los logros son nuestros.',         correct:'pro-m-p',  exp:'"Nuestros" = pronoun, masc. plural — "logros" is masc. plural.'},
+  {id:'s18', text:'Esas decisiones son suyas.',       correct:'pro-f-p',  exp:'"Suyas" = pronoun, fem. plural — "decisiones" is feminine plural.'},
+];
+
+/* ══════════════════════════════════════════
+   EX 5 — SPEED (type the form)
+══════════════════════════════════════════ */
+const SPEED = [
+  {q:'___ libro está en la mesa. (my)',              hint:'adj · 1st pers. · masc. sing.',      ans:'mi',       also:[]},
+  {q:'___ llaves están aquí. (my)',                  hint:'adj · 1st pers. · plural',           ans:'mis',      also:[]},
+  {q:'¿Dónde está ___ casa? (your)',                 hint:'adj · 2nd pers. · fem. sing.',       ans:'tu',       also:[]},
+  {q:'¿Dónde están ___ zapatos? (your)',             hint:'adj · 2nd pers. · plural',           ans:'tus',      also:[]},
+  {q:'Ella perdió ___ cartera. (her)',               hint:'adj · 3rd pers. · fem. sing.',       ans:'su',       also:[]},
+  {q:'Ellos vendieron ___ coche. (their)',           hint:'adj · 3rd pers. · masc. sing.',      ans:'su',       also:[]},
+  {q:'___ casa tiene jardín. (our, fem.)',           hint:'adj · 1st plur. · fem.',             ans:'nuestra',  also:[]},
+  {q:'___ equipo ganó. (our, masc.)',                hint:'adj · 1st plur. · masc.',            ans:'nuestro',  also:[]},
+  {q:'___ hijos estudian juntos. (our, plur.)',      hint:'adj · 1st plur. · masc. plural',    ans:'nuestros', also:[]},
+  {q:'___ abuelas viven aquí. (our, fem. plur.)',    hint:'adj · 1st plur. · fem. plural',     ans:'nuestras', also:[]},
+  {q:'Este libro es ___. (mine, masc. sing.)',       hint:'pronoun · 1st · masc. sing.',       ans:'mío',      also:['mio']},
+  {q:'Esta mochila es ___. (mine, fem. sing.)',      hint:'pronoun · 1st · fem. sing.',        ans:'mía',      also:['mia']},
+  {q:'Esos errores son ___. (mine, masc. plur.)',    hint:'pronoun · 1st · masc. plur.',       ans:'míos',     also:['mios']},
+  {q:'Esas flores son ___. (mine, fem. plur.)',      hint:'pronoun · 1st · fem. plur.',        ans:'mías',     also:['mias']},
+  {q:'¿Es este bolígrafo ___? (yours, masc.)',       hint:'pronoun · 2nd · masc. sing.',       ans:'tuyo',     also:[]},
+  {q:'¿Es esta chaqueta ___? (yours, fem.)',         hint:'pronoun · 2nd · fem. sing.',        ans:'tuya',     also:[]},
+  {q:'Los libros son ___. (yours, masc. plur.)',     hint:'pronoun · 2nd · masc. plur.',       ans:'tuyos',    also:[]},
+  {q:'Esas ideas son ___. (yours, fem. plur.)',      hint:'pronoun · 2nd · fem. plur.',        ans:'tuyas',    also:[]},
+  {q:'El coche azul es ___. (his/hers, masc.)',      hint:'pronoun · 3rd · masc. sing.',       ans:'suyo',     also:[]},
+  {q:'La decisión fue ___. (his/hers, fem.)',        hint:'pronoun · 3rd · fem. sing.',        ans:'suya',     also:[]},
+  {q:'La victoria fue ___. (ours, fem.)',            hint:'pronoun · 1st plur. · fem.',        ans:'nuestra',  also:[]},
+  {q:'El triunfo es ___. (ours, masc.)',             hint:'pronoun · 1st plur. · masc.',       ans:'nuestro',  also:[]},
+  {q:'___ nombre es bonito. (his/her)',              hint:'adj · 3rd pers. · masc. sing.',     ans:'su',       also:[]},
+  {q:'___ ideas son creativas. (your, plur.)',       hint:'adj · 2nd pers. · plural',          ans:'tus',      also:[]},
+  {q:'___ familia es grande. (our, fem.)',           hint:'adj · 1st plur. · fem.',            ans:'nuestra',  also:[]},
+  {q:'___ padres viven en México. (my)',             hint:'adj · 1st pers. · plural',          ans:'mis',      also:[]},
+  {q:'La culpa es ___. (mine, fem.)',                hint:'pronoun · 1st · fem. sing.',        ans:'mía',      also:['mia']},
+  {q:'¿Es este paraguas ___? (yours, masc.)',        hint:'pronoun · 2nd · masc. sing.',       ans:'tuyo',     also:[]},
+  {q:'Los logros son ___. (ours, masc. plur.)',      hint:'pronoun · 1st plur. · masc. plur.',ans:'nuestros', also:[]},
+  {q:'Esas decisiones son ___. (theirs, fem. plur.)',hint:'pronoun · 3rd · fem. plur.',        ans:'suyas',    also:[]},
+];
+
+/* ══════════════════════════════════════════ STATE ══ */
+let currentEx=0;
+let match_answers={}, match_checked=false;
+let mc_answers={}, mc_checked=false;
+let eh_answered={};
+let dragItem=null,sortPlaced={},sortChecked=false,tapSelected=null;
+let speedIdx=0,speedOk=0,speedErr=0,speedStreak=0,speedTimer=null,speedTimeLeft=0,speedAnswered=false;
+
+// Shuffle match items on load
+(function(){
+  for(let i=MATCH_ITEMS.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [MATCH_ITEMS[i],MATCH_ITEMS[j]]=[MATCH_ITEMS[j],MATCH_ITEMS[i]];
+  }
+})();
+
+function goEx(idx){
+  currentEx=idx;
+  [0,1,2,3,4,5].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===idx));
+  [renderMatch,renderMC,renderErrorHunt,renderSort,renderSpeed,renderReference][idx]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ══ EX 1: WHO OWNS IT? ══ */
+function renderMatch(){
+  const pct=Math.round(Object.keys(match_answers).length/MATCH_ITEMS.length*100);
+  const cardsHTML=MATCH_ITEMS.map((item,i)=>{
+    const order=seededShuffle([0,1,2,3],i*9+3);
+    const typeCol=item.type==='adj'?'var(--adj2)':'var(--pro2)';
+    const typeLbl=item.type==='adj'?'🏷️ Adjective':'💬 Pronoun';
+    const optHTML=order.map(origIdx=>{
+      const o=item.opts[origIdx];
+      let cls='m-opt';
+      if(match_checked){
+        if(origIdx===item.opts.indexOf(item.ans))cls+=' m-show';
+        else if(match_answers[i]===origIdx&&item.opts[origIdx]!==item.ans)cls+=' m-err';
+      } else if(match_answers[i]===origIdx)cls+=item.opts[origIdx]===item.ans?' m-ok':' m-err';
+      return `<button class="${cls}" id="mo_${i}_${origIdx}" onclick="answerMatch(${i},${origIdx})" ${match_checked?'disabled':''}>${o}</button>`;
+    }).join('');
+    const explShow=match_checked||(match_answers[i]!==undefined);
+    return `<div class="match-card">
+      <div class="match-header">
+        <span class="match-num">${i+1}</span>
+        <span class="match-context" style="color:var(--muted)">${item.context.replace('___','<strong style="color:var(--cyan)">___</strong>')}</span>
+        <span style="font-size:.65rem;font-weight:800;color:${typeCol};background:${item.type==='adj'?'rgba(244,114,182,.12)':'rgba(37,217,255,.1)'};border-radius:999px;padding:2px 8px;flex-shrink:0">${typeLbl}</span>
+      </div>
+      <div class="match-visual">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+          <div class="match-owner">${item.owner}</div>
+          <div style="font-size:.65rem;color:var(--muted2)">${item.ownerLabel}</div>
+        </div>
+        <div class="match-arrow">—▶</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+          <div class="match-item">${item.item}</div>
+          <div class="match-noun">${item.noun}</div>
+        </div>
+      </div>
+      <div class="match-opts">${optHTML}</div>
+      <div class="m-expl ${explShow?'show':''}" id="mexp_${i}">${item.exp}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header">
+    <div class="ex-title">👤 Who owns it?</div>
+    <div class="ex-instr">Each card shows an owner (👤) and an item (📦). Choose the correct possessive. The tag tells you whether it needs an <em>adjective</em> (before the noun) or a <em>pronoun</em> (after the verb).</div>
+  </div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${MATCH_ITEMS.length}</span></div>
+    <div class="sc"><span class="l">Correct</span><span class="v g" id="m_ok">—</span></div>
+    <div class="sc"><span class="l">Wrong</span><span class="v b" id="m_err">—</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="m_pct">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="m_prog" style="width:${pct}%"></div></div></div>
+  </div>
+  <div class="match-grid">${cardsHTML}</div>
+  <div class="fb" id="m_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="m_check" onclick="checkMatch()" ${match_checked?'disabled':''}>Check all</button>
+    <button class="btn btn-ghost" onclick="match_answers={};match_checked=false;renderMatch()">↺ Reset</button>
+  </div></div>`;
+}
+function answerMatch(qi,origIdx){
+  if(match_checked)return;
+  if(match_answers[qi]!==undefined){const p=document.getElementById(`mo_${qi}_${match_answers[qi]}`);if(p)p.classList.remove('m-ok','m-err');}
+  match_answers[qi]=origIdx;
+  const isOk=MATCH_ITEMS[qi].opts[origIdx]===MATCH_ITEMS[qi].ans;
+  const btn=document.getElementById(`mo_${qi}_${origIdx}`);if(btn)btn.classList.add(isOk?'m-ok':'m-err');
+  const exp=document.getElementById(`mexp_${qi}`);if(exp)exp.classList.add('show');
+  const pct=Math.round(Object.keys(match_answers).length/MATCH_ITEMS.length*100);
+  const el=document.getElementById('m_pct');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('m_prog');if(pg)pg.style.width=pct+'%';
+}
+function checkMatch(){
+  match_checked=true;let ok=0;
+  MATCH_ITEMS.forEach((item,i)=>{
+    const chosen=match_answers[i];
+    const isOk=chosen!==undefined&&item.opts[chosen]===item.ans;if(isOk)ok++;
+    item.opts.forEach((_,oi)=>{
+      const btn=document.getElementById(`mo_${i}_${oi}`);if(!btn)return;btn.disabled=true;
+      if(item.opts[oi]===item.ans)btn.classList.add('m-show');
+      else if(match_answers[i]===oi&&!isOk)btn.classList.add('m-err');
+    });
+    const exp=document.getElementById(`mexp_${i}`);if(exp)exp.classList.add('show');
+  });
+  const pct=Math.round(ok/MATCH_ITEMS.length*100);
+  document.getElementById('m_ok').textContent=ok;
+  document.getElementById('m_err').textContent=MATCH_ITEMS.length-ok;
+  document.getElementById('m_prog').style.width='100%';document.getElementById('m_pct').textContent='100%';
+  const fb=document.getElementById('m_fb');
+  if(pct===100){fb.className='fb show ok';fb.innerHTML='🏆 <strong>Perfect!</strong>';}
+  else if(pct>=75){fb.className='fb show ok';fb.innerHTML=`👍 <strong>${ok}/${MATCH_ITEMS.length}.</strong> Great job!`;}
+  else{fb.className='fb show partial';fb.innerHTML=`📖 <strong>${ok}/${MATCH_ITEMS.length}.</strong> Key reminder: adjectives go before the noun, pronouns go after the verb. Both must agree in number (and gender for nuestro).`;}
+  document.getElementById('m_check').disabled=true;
+}
+
+/* ══ MC ══ */
+function renderMC(){
+  const pct=Math.round(Object.keys(mc_answers).length/MC.length*100);
+  const qHTML=MC.map((item,i)=>{
+    const order=MC_ORDER[i];
+    const typeCol=item.type==='adj'?'var(--adj2)':'var(--pro2)';
+    const optHTML=order.map(origIdx=>{
+      const o=item.opts[origIdx];
+      let cls='mc-opt';
+      if(mc_checked){
+        if(origIdx===item.ans)cls+=' mc-show';
+        else if(mc_answers[i]===origIdx&&origIdx!==item.ans)cls+=' mc-err';
+      } else if(mc_answers[i]===origIdx)cls+=origIdx===item.ans?' mc-ok':' mc-err';
+      return `<button class="${cls}" id="mco_${i}_${origIdx}" onclick="answerMC(${i},${origIdx})" ${mc_checked?'disabled':''}>${o}</button>`;
+    }).join('');
+    const explShow=mc_checked||(mc_answers[i]!==undefined);
+    const tag=item.type==='adj'?'<span class="type-tag adj-tag">🏷️ Adj</span>':'<span class="type-tag pro-tag">💬 Pronoun</span>';
+    return `<div class="mc-card">
+      <div class="mc-top"><span class="mc-num" style="color:${typeCol}">${i+1}</span><span class="mc-sent">${item.sent.replace('___','<span class="mc-blank">___</span>')}</span></div>
+      <div class="mc-en">${item.en}</div>
+      <div class="mc-opts">${optHTML}</div>
+      <div class="mc-expl ${explShow?'show':''}" id="mcexp_${i}">${tag} ${item.exp}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">📝 Multiple choice</div>
+  <div class="ex-instr">Choose the correct possessive. Number color: 🩷 adjective (before noun) · 🔵 pronoun (after verb). 50 sentences total.</div></div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${MC.length}</span></div>
+    <div class="sc"><span class="l">Correct</span><span class="v g" id="mc_ok">—</span></div>
+    <div class="sc"><span class="l">Wrong</span><span class="v b" id="mc_err">—</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="mc_pct">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="mc_prog" style="width:${pct}%"></div></div></div>
+  </div>
+  <div class="mc-list">${qHTML}</div>
+  <div class="fb" id="mc_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="mc_check" onclick="checkMC()" ${mc_checked?'disabled':''}>Check all</button>
+    <button class="btn btn-ghost" onclick="mc_answers={};mc_checked=false;renderMC()">↺ Reset</button>
+  </div></div>`;
+}
+function answerMC(qi,origIdx){
+  if(mc_checked)return;
+  if(mc_answers[qi]!==undefined){const p=document.getElementById(`mco_${qi}_${mc_answers[qi]}`);if(p)p.classList.remove('mc-ok','mc-err');}
+  mc_answers[qi]=origIdx;
+  const isOk=origIdx===MC[qi].ans;
+  const btn=document.getElementById(`mco_${qi}_${origIdx}`);if(btn)btn.classList.add(isOk?'mc-ok':'mc-err');
+  const exp=document.getElementById(`mcexp_${qi}`);if(exp)exp.classList.add('show');
+  const pct=Math.round(Object.keys(mc_answers).length/MC.length*100);
+  const el=document.getElementById('mc_pct');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('mc_prog');if(pg)pg.style.width=pct+'%';
+}
+function checkMC(){
+  mc_checked=true;let ok=0;
+  MC.forEach((item,i)=>{if(mc_answers[i]===item.ans)ok++;});
+  const pct=Math.round(ok/MC.length*100);
+  document.getElementById('mc_ok').textContent=ok;
+  document.getElementById('mc_err').textContent=MC.length-ok;
+  document.getElementById('mc_prog').style.width='100%';document.getElementById('mc_pct').textContent='100%';
+  const fb=document.getElementById('mc_fb');
+  if(pct===100){fb.className='fb show ok';fb.innerHTML='🏆 <strong>Perfect! 50/50.</strong>';}
+  else if(pct>=75){fb.className='fb show ok';fb.innerHTML=`👍 <strong>${ok}/50.</strong> Great job!`;}
+  else if(pct>=50){fb.className='fb show partial';fb.innerHTML=`📖 <strong>${ok}/50.</strong> Remember: adjectives don\'t change for gender (except nuestro). Pronouns always match gender AND number.`;}
+  else{fb.className='fb show err';fb.innerHTML=`💪 <strong>${ok}/50.</strong> Check the reference card and try again.`;}
+  document.getElementById('mc_check').disabled=true;renderMC();
+}
+
+/* ══ ERROR HUNT ══ */
+function renderErrorHunt(){
+  eh_answered={};
+  let html=`<div class="panel"><div class="ex-header"><div class="ex-title">🔍 Error hunter</div>
+  <div class="ex-instr">Is the possessive used correctly? Decide before seeing the explanation.</div></div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${ERRORS.length}</span></div>
+    <div class="sc"><span class="l">Correct</span><span class="v g" id="eh_ok">0</span></div>
+    <div class="sc"><span class="l">Wrong</span><span class="v b" id="eh_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Progress: <span id="eh_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="eh_prog" style="width:0%"></div></div></div>
+  </div><div class="eh-list">`;
+  ERRORS.forEach(([sent,,,exp],idx)=>{
+    html+=`<div class="eh-item" id="ehi_${idx}"><div class="eh-num">${idx+1}</div>
+      <div class="eh-body">
+        <div class="eh-sent" id="ehsent_${idx}">${sent}</div>
+        <div class="eh-judge-row">
+          <button class="eh-judge-btn eh-correct-btn" onclick="judgeEh(${idx},false)">✅ Correct</button>
+          <button class="eh-judge-btn eh-error-btn" onclick="judgeEh(${idx},true)">❌ Has an error</button>
+        </div>
+        <div class="eh-exp" id="ehexp_${idx}">${exp}</div>
+      </div></div>`;
+  });
+  html+=`</div><div class="fb" id="eh_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="eh_answered={};renderErrorHunt()">↺ Reset</button></div></div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+function judgeEh(idx,studentSaysError){
+  if(eh_answered[idx]!==undefined)return;
+  const [sent,hasErr,correction,exp]=ERRORS[idx];
+  const correct=studentSaysError===hasErr;
+  eh_answered[idx]=correct;
+  const item=document.getElementById('ehi_'+idx);
+  item.classList.add('revealed',correct?'correct-sentence':'wrong-sentence');
+  item.querySelectorAll('.eh-judge-btn').forEach(b=>b.disabled=true);
+  const chosen=item.querySelector(studentSaysError?'.eh-error-btn':'.eh-correct-btn');
+  if(chosen)chosen.classList.add(correct?'judge-chosen-ok':'judge-chosen-err');
+  if(hasErr&&correction){
+    const sentEl=document.getElementById('ehsent_'+idx);
+    const poss=['mi','mis','tu','tus','su','sus','nuestro','nuestra','nuestros','nuestras','mío','mía','míos','mías','tuyo','tuya','tuyos','tuyas','suyo','suya','suyos','suyas','Mi','Mis','Tu','Tus','Su','Sus','Nuestro','Nuestra','Nuestros','Nuestras'];
+    let h=sent;
+    poss.filter(p=>p!==correction&&p.toLowerCase()!==correction.toLowerCase()).forEach(p=>{
+      h=h.replace(new RegExp(`\\b${p}\\b`,'g'),`<span class="wrong-word">${p}</span>`);
+    });
+    sentEl.innerHTML=h+` <span class="eh-correction">→ <strong>${correction}</strong></span>`;
+  }
+  document.getElementById('ehexp_'+idx).classList.add('show');
+  const total=Object.keys(eh_answered).length;
+  const totalOk=Object.values(eh_answered).filter(v=>v).length;
+  document.getElementById('eh_ok').textContent=totalOk;
+  document.getElementById('eh_err').textContent=total-totalOk;
+  document.getElementById('eh_pct').textContent=Math.round(total/ERRORS.length*100)+'%';
+  document.getElementById('eh_prog').style.width=Math.round(total/ERRORS.length*100)+'%';
+  if(total===ERRORS.length){
+    const pct=Math.round(totalOk/ERRORS.length*100);
+    const fb=document.getElementById('eh_fb');
+    fb.className='fb show '+(pct>=80?'ok':'partial');
+    fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${totalOk}/${ERRORS.length}.</strong> ${pct>=80?'Excellent!':'Remember: adjectives only change for number (except nuestro). Pronouns change for both gender and number.'}`;
+  }
+}
+
+/* ══ SORT ══ */
+function renderSort(){
+  sortPlaced={};sortChecked=false;tapSelected=null;
+  const shuffled=[...SORT_ITEMS].sort(()=>Math.random()-.5);
+  const pile=shuffled.map(item=>`<div class="sort-card" id="sc_${item.id}" draggable="true"
+    ondragstart="dragStart(event,'${item.id}')" ondragend="dragEnd(event)"
+    onclick="tapCard('${item.id}')">${item.text}</div>`).join('');
+  const buckHTML=SORT_BUCKETS_DATA.map(b=>`<div class="sort-bucket" id="bucket-${b.id}"
+    style="background:${b.bg};border:2px dashed ${b.bdr};min-height:80px"
+    ondragover="event.preventDefault();this.classList.add('drag-over')"
+    ondragleave="this.classList.remove('drag-over')"
+    ondrop="dropInto(event,'${b.id}')" onclick="bucketTap('${b.id}')">
+    <div class="bucket-title" style="color:${b.col}">${b.icon} ${b.label}</div>
+    <div class="bucket-sub">${b.sub}</div>
+  </div>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">🗂️ Drag & sort</div>
+  <div class="ex-instr">Drag each sentence to the exact possessive category. You need to identify the type (adjective or pronoun), the person, and the gender/number. Tap a card then a bucket on mobile.</div></div>
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);margin-bottom:8px">Cards — drag or tap → tap bucket</div>
+  <div class="sort-pile" id="sortPile">${pile}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:9px;margin-bottom:12px">${buckHTML}</div>
+  <div class="fb" id="sort_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="sort_check" onclick="checkSort()" disabled>Check</button>
+    <button class="btn btn-ghost" onclick="renderSort()">↺ Reset</button>
+  </div></div>`;
+}
+function dragStart(e,id){dragItem=id;setTimeout(()=>{const c=document.getElementById('sc_'+id);if(c)c.classList.add('drag-ghost');},0);}
+function dragEnd(){if(dragItem){const c=document.getElementById('sc_'+dragItem);if(c)c.classList.remove('drag-ghost');}dragItem=null;}
+function dropInto(e,bucket){e.preventDefault();const id=e.dataTransfer?e.dataTransfer.getData('text'):dragItem;document.getElementById('bucket-'+bucket).classList.remove('drag-over');if(!id||sortPlaced[id])return;placeCard(id,bucket);}
+function tapCard(id){if(sortPlaced[id])return;const card=document.getElementById('sc_'+id);if(!card)return;if(tapSelected===id){card.style.boxShadow='';tapSelected=null;return;}if(tapSelected){const p=document.getElementById('sc_'+tapSelected);if(p)p.style.boxShadow='';}tapSelected=id;card.style.boxShadow='0 0 0 3px var(--cyan)';}
+function bucketTap(bucket){if(!tapSelected)return;placeCard(tapSelected,bucket);tapSelected=null;}
+function placeCard(id,bucket){sortPlaced[id]=bucket;const card=document.getElementById('sc_'+id);const bEl=document.getElementById('bucket-'+bucket);if(!card||!bEl)return;card.style.boxShadow='';card.classList.remove('drag-ghost');card.draggable=false;const b=SORT_BUCKETS_DATA.find(x=>x.id===bucket);card.style.borderColor=b?b.col:'rgba(255,255,255,.3)';card.onclick=()=>returnCard(id);bEl.appendChild(card);if(Object.keys(sortPlaced).length===SORT_ITEMS.length){const btn=document.getElementById('sort_check');if(btn)btn.disabled=false;}}
+function returnCard(id){if(sortChecked)return;delete sortPlaced[id];const card=document.getElementById('sc_'+id);const pile=document.getElementById('sortPile');if(!card||!pile)return;card.style.borderColor='';card.style.boxShadow='';card.draggable=true;card.onclick=()=>tapCard(id);pile.appendChild(card);const btn=document.getElementById('sort_check');if(btn)btn.disabled=true;}
+function checkSort(){
+  sortChecked=true;let ok=0;
+  SORT_ITEMS.forEach(item=>{const card=document.getElementById('sc_'+item.id);if(!card)return;const isOk=sortPlaced[item.id]===item.correct;if(isOk)ok++;card.className='sort-card '+(isOk?'card-correct':'card-wrong');card.draggable=false;card.onclick=null;if(!isOk){const b=SORT_BUCKETS_DATA.find(x=>x.id===item.correct);card.innerHTML=`${item.text}<span style="font-size:.7rem;display:block;margin-top:3px">→ ${b?b.icon+' '+b.label:item.correct}</span>`;}card.title=item.exp;});
+  const pct=Math.round(ok/SORT_ITEMS.length*100);
+  const fb=document.getElementById('sort_fb');fb.className='fb show '+(pct>=80?'ok':pct>=55?'partial':'err');
+  fb.innerHTML=`<strong>${ok}/${SORT_ITEMS.length} (${pct}%).</strong> Red cards show the correct bucket.`;
+  document.getElementById('sort_check').disabled=true;
+}
+
+/* ══ SPEED ══ */
+function renderSpeed(){
+  if(speedTimer){clearInterval(speedTimer);speedTimer=null;}
+  speedIdx=0;speedOk=0;speedErr=0;speedStreak=0;speedAnswered=false;
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">⚡ Speed round</div>
+  <div class="ex-instr">Type the exact possessive form. The hint shows the person, type, and gender/number. 15 seconds. Press Enter to confirm.</div></div>
+  <div class="speed-wrap" id="speedWrap">
+    <div class="speed-start"><div style="font-size:2.8rem">⚡</div><h2>Type the possessive</h2>
+    <p>Adjective or pronoun? Singular or plural? Masculine or feminine? 30 sentences — build a streak of 3+!</p>
+    <button class="btn btn-cyan" onclick="startSpeed()">Let's go!</button></div>
+  </div></div>`;
+}
+function startSpeed(){speedIdx=0;speedOk=0;speedErr=0;speedStreak=0;nextSpeedQ();}
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+function nextSpeedQ(){
+  if(speedIdx>=SPEED.length){endSpeed();return;}
+  speedAnswered=false;const item=SPEED[speedIdx];speedTimeLeft=15;
+  document.getElementById('speedWrap').innerHTML=`
+    <div class="speed-stats">
+      <div class="spstat"><div class="sl">Question</div><div class="sv w">${speedIdx+1}/${SPEED.length}</div></div>
+      <div class="spstat"><div class="sl">Correct</div><div class="sv g">${speedOk}</div></div>
+      <div class="spstat"><div class="sl">Wrong</div><div class="sv b">${speedErr}</div></div>
+    </div>
+    <div class="streak-badge ${speedStreak>=3?'show':''}" id="streakB">🔥 Streak: ${speedStreak}</div>
+    <div class="speed-card">
+      <div class="speed-sent">${item.q.replace('___','<em>___</em>')}</div>
+      <div class="speed-hint">💡 ${item.hint}</div>
+    </div>
+    <div class="timer-row">
+      <div class="timer-track"><div class="timer-fill" id="tFill" style="width:100%;transition:width 1s linear"></div></div>
+      <div class="timer-num" id="tNum">15</div>
+    </div>
+    <div class="speed-input-row">
+      <input id="sInp" class="speed-inp" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="type here…" onkeydown="if(event.key==='Enter')submitSpeed()">
+      <button class="btn btn-cyan" onclick="submitSpeed()" style="flex-shrink:0">→</button>
+    </div>
+    <div class="speed-fb" id="sFb" style="opacity:0"></div>`;
+  setTimeout(()=>{const i=document.getElementById('sInp');if(i)i.focus();},50);
+  if(speedTimer)clearInterval(speedTimer);
+  speedTimer=setInterval(()=>{
+    speedTimeLeft--;
+    const f=document.getElementById('tFill'),n=document.getElementById('tNum');
+    if(f)f.style.width=Math.max(0,(speedTimeLeft/15)*100)+'%';
+    if(n){n.textContent=speedTimeLeft;n.style.color=speedTimeLeft<=3?'var(--bad)':speedTimeLeft<=7?'var(--warn)':'var(--muted2)';}
+    if(speedTimeLeft<=0){clearInterval(speedTimer);speedTimer=null;if(!speedAnswered)submitSpeed();}
+  },1000);
+}
+function submitSpeed(){
+  const inp=document.getElementById('sInp');if(!inp||speedAnswered)return;
+  speedAnswered=true;if(speedTimer){clearInterval(speedTimer);speedTimer=null;}inp.disabled=true;
+  const item=SPEED[speedIdx];const nt=normS(inp.value);const na=normS(item.ans);
+  const isOk=nt===na||item.also.map(normS).includes(nt);
+  if(isOk){speedOk++;speedStreak++;}else{speedErr++;speedStreak=0;}
+  const fb=document.getElementById('sFb');
+  if(fb){fb.style.opacity='1';
+    if(!inp.value.trim()){fb.className='speed-fb err';fb.innerHTML=`⏱ Time's up! → <strong>${item.ans}</strong>`;}
+    else if(isOk){fb.className='speed-fb ok';fb.innerHTML=`✓ <strong>Correct!</strong>${speedStreak>=3?' 🔥 x'+speedStreak:''}`;}
+    else{fb.className='speed-fb err';fb.innerHTML=`✗ <strong>${inp.value}</strong> → correct: <strong>${item.ans}</strong>`;}}
+  if(speedStreak>=3){const cf=document.getElementById('comboFlash');cf.textContent='🔥 x'+speedStreak;cf.classList.remove('anim');void cf.offsetWidth;cf.classList.add('anim');}
+  speedIdx++;setTimeout(nextSpeedQ,isOk?700:1400);
+}
+function endSpeed(){
+  const pct=Math.round(speedOk/SPEED.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('speedWrap').innerHTML=`<div class="speed-start"><div style="font-size:3rem">${emo}</div><h2>${speedOk}/${SPEED.length} correct</h2>
+    <p style="color:var(--muted)">${pct>=90?'Excellent! You know all the possessives!':pct>=70?'Great job! Review the ones you missed.':pct>=50?'Remember: adjectives change for number only (except nuestro). Pronouns change for both.':'Check the reference card and try again.'}</p>
+    <button class="btn btn-cyan" onclick="startSpeed()">↺ Try again</button></div>`;
+}
+
+/* ══ REFERENCE ══ */
+function renderReference(){
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">📚 Reference card</div>
+  <div class="ex-instr">Two types of possessives: <em>adjectives</em> (before the noun) and <em>pronouns</em> (after the verb). Both must agree in number — and pronouns also in gender.</div></div>
+
+  <div class="note-box" style="background:rgba(244,114,182,.05);border-color:rgba(244,114,182,.2);margin-bottom:14px">
+    <h3 style="color:var(--adj2)">🏷️ Possessive Adjectives — before the noun</h3>
+    <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;line-height:1.6">Only change for <strong style="color:var(--text)">number</strong> (singular/plural). <strong style="color:var(--warn)">Exception: nuestro</strong> also changes for gender.</div>
+    <table class="ref-table">
+      <tr><th>Person</th><th>Singular</th><th>Plural</th><th>English</th></tr>
+      <tr><td>yo</td><td class="td-key" style="color:var(--adj2)">mi</td><td class="td-key" style="color:var(--adj2)">mis</td><td class="td-en">my</td></tr>
+      <tr><td>tú</td><td class="td-key" style="color:var(--adj2)">tu</td><td class="td-key" style="color:var(--adj2)">tus</td><td class="td-en">your (informal)</td></tr>
+      <tr><td>él/ella/usted</td><td class="td-key" style="color:var(--adj2)">su</td><td class="td-key" style="color:var(--adj2)">sus</td><td class="td-en">his/her/its/your (formal)</td></tr>
+      <tr><td>nosotros</td><td class="td-key" style="color:var(--warn)">nuestro/a</td><td class="td-key" style="color:var(--warn)">nuestros/as</td><td class="td-en">our</td></tr>
+      <tr><td>ellos/ustedes</td><td class="td-key" style="color:var(--adj2)">su</td><td class="td-key" style="color:var(--adj2)">sus</td><td class="td-en">their/your (plural)</td></tr>
+    </table>
+  </div>
+
+  <div class="note-box" style="background:rgba(37,217,255,.04);border-color:rgba(37,217,255,.18)">
+    <h3 style="color:var(--pro2)">💬 Possessive Pronouns — after the verb (replace the noun)</h3>
+    <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px;line-height:1.6">Change for <strong style="color:var(--text)">both gender and number</strong>. <em>Este libro es <strong>mío</strong>. Esta mochila es <strong>mía</strong>.</em></div>
+    <table class="ref-table">
+      <tr><th>English</th><th>Masc. sing.</th><th>Fem. sing.</th><th>Masc. plur.</th><th>Fem. plur.</th></tr>
+      <tr><td class="td-en">mine</td><td class="td-key" style="color:var(--pro2)">mío</td><td class="td-key" style="color:var(--pro2)">mía</td><td class="td-key" style="color:var(--pro2)">míos</td><td class="td-key" style="color:var(--pro2)">mías</td></tr>
+      <tr><td class="td-en">yours (inf.)</td><td class="td-key" style="color:var(--pro2)">tuyo</td><td class="td-key" style="color:var(--pro2)">tuya</td><td class="td-key" style="color:var(--pro2)">tuyos</td><td class="td-key" style="color:var(--pro2)">tuyas</td></tr>
+      <tr><td class="td-en">his/hers/yours (formal)</td><td class="td-key" style="color:var(--pro2)">suyo</td><td class="td-key" style="color:var(--pro2)">suya</td><td class="td-key" style="color:var(--pro2)">suyos</td><td class="td-key" style="color:var(--pro2)">suyas</td></tr>
+      <tr><td class="td-en">ours</td><td class="td-key" style="color:var(--warn)">nuestro</td><td class="td-key" style="color:var(--warn)">nuestra</td><td class="td-key" style="color:var(--warn)">nuestros</td><td class="td-key" style="color:var(--warn)">nuestras</td></tr>
+      <tr><td class="td-en">theirs/yours (plur.)</td><td class="td-key" style="color:var(--pro2)">suyo</td><td class="td-key" style="color:var(--pro2)">suya</td><td class="td-key" style="color:var(--pro2)">suyos</td><td class="td-key" style="color:var(--pro2)">suyas</td></tr>
+    </table>
+  </div>
+
+  <div class="note-box">
+    <h3>⚠️ Key rules</h3>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:.84rem;line-height:1.6">
+      <div><strong style="color:var(--adj2)">mi/tu/su don't change for gender.</strong> "Mi libro" AND "mi casa" — no change. Only number matters: mi → mis, tu → tus, su → sus.</div>
+      <div><strong style="color:var(--warn)">nuestro is the exception.</strong> It changes for both: nuestro/nuestra/nuestros/nuestras.</div>
+      <div><strong style="color:var(--pro2)">Pronouns always match the noun.</strong> "El libro es mío" (masc.) but "La mochila es mía" (fem.).</div>
+      <div><strong style="color:var(--warn)">tu vs tú.</strong> "tu" (no accent) = possessive adjective. "tú" (with accent) = subject pronoun (you).</div>
+      <div><strong style="color:var(--warn)">su/sus is ambiguous.</strong> It can mean his/her/its/your (formal)/their. Context or a clarifying phrase (de él, de ellos…) resolves the ambiguity.</div>
+    </div>
+  </div>
+  </div>`;
+}
+
+goEx(0);
+</script>
+</body>
+</html>

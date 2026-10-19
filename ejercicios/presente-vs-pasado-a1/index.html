@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regular Spanish Verbs Practice</title>
+  <style>
+    :root{
+      --primary:#2563eb;--primaryDark:#1d4ed8;--accent:#f97316;--success:#16a34a;--danger:#dc2626;
+      --text:#172033;--muted:#64748b;--line:#dbe4f0;--soft:#eff6ff;--card:#fff;
+      --shadow:0 24px 60px rgba(15,23,42,.14);--radius:26px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+      background:radial-gradient(circle at top left,rgba(249,115,22,.22),transparent 32%),radial-gradient(circle at bottom right,rgba(37,99,235,.22),transparent 32%),linear-gradient(135deg,#f8fbff,#eaf2ff);
+      display:flex;justify-content:center;align-items:center;padding:28px 16px;
+    }
+    .app{width:100%;max-width:980px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    header{position:relative;overflow:hidden;background:linear-gradient(135deg,#2563eb,#1d4ed8 58%,#f97316);color:#fff;padding:30px}
+    header:after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.13);top:-85px;right:-65px}
+    .brand{position:relative;z-index:1;display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    .logoBox{width:76px;height:76px;border-radius:23px;background:rgba(255,255,255,.20);border:1px solid rgba(255,255,255,.38);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:0 0 auto}
+    .logoBox img{width:100%;height:100%;object-fit:cover}.logoText{font-weight:900;font-size:1.35rem;display:none}
+    h1{position:relative;z-index:1;font-size:clamp(2rem,5vw,3.4rem);line-height:1;margin-bottom:10px}.subtitle{position:relative;z-index:1;font-size:clamp(1rem,2vw,1.25rem);opacity:.95}
+    main{padding:28px}.screen{display:none;animation:fade .28s ease}.screen.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px}.pill{display:inline-flex;background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;border-radius:999px;padding:8px 14px;font-weight:800;font-size:.9rem;margin-bottom:14px}
+    .introText{color:var(--muted);line-height:1.7;margin-top:12px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}.mini{background:var(--soft);border:1px solid #cfe0ff;border-radius:18px;padding:18px}.mini strong{display:block;color:var(--primaryDark);margin-bottom:6px}
+    .stats{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-weight:800;margin-bottom:10px}.bar{height:13px;background:#e5edf8;border-radius:999px;overflow:hidden;margin-bottom:22px}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:999px;transition:.3s}
+    .type{color:var(--primaryDark);font-size:.9rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}.qtitle{font-size:clamp(1.25rem,3vw,1.8rem);line-height:1.35;margin-bottom:10px}.spanish{white-space:pre-line;color:var(--muted);font-size:1.05rem;margin-bottom:16px;line-height:1.55}.verb{display:inline-block;background:#f1f5f9;border:1px solid var(--line);border-radius:999px;padding:8px 14px;color:#334155;font-weight:800;margin:2px 0 16px}.hidden{display:none!important}
+    .options{display:grid;gap:12px;margin-top:16px}.option{width:100%;text-align:left;border:2px solid var(--line);background:white;color:var(--text);border-radius:18px;padding:16px 18px;font-size:1rem;font-weight:800;cursor:pointer;transition:.18s}.option:hover{border-color:#93c5fd;transform:translateY(-1px)}.option.selected{border-color:var(--primary);background:#eff6ff;box-shadow:0 8px 20px rgba(37,99,235,.10)}.option.correct{border-color:var(--success);background:#ecfdf5}.option.incorrect{border-color:var(--danger);background:#fef2f2}
+    .input{width:100%;border:2px solid var(--line);border-radius:18px;padding:16px 18px;font-size:1.1rem;outline:none;margin-top:16px}.input:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(37,99,235,.10)}
+    .feedback{display:none;margin-top:20px;border-radius:18px;padding:16px;border:1px solid transparent;line-height:1.55}.feedback.show{display:block}.feedback.good{background:#ecfdf5;border-color:#bbf7d0;color:#14532d}.feedback.bad{background:#fff7ed;border-color:#fed7aa;color:#7c2d12}.feedback strong{display:block;margin-bottom:6px;font-size:1.05rem}
+    .controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;margin-top:24px}.left,.right{display:flex;gap:12px;flex-wrap:wrap}button{border:0;border-radius:999px;padding:13px 20px;font-size:.98rem;font-weight:900;cursor:pointer;transition:.18s}button:hover:not(:disabled){transform:translateY(-1px)}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--primary);color:#fff}.primary:hover:not(:disabled){background:var(--primaryDark)}.secondary{background:var(--accent);color:#fff}.light{background:#f1f5f9;color:#334155;border:1px solid var(--line)}.danger{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}
+    .results{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}.box{background:#f8fafc;border:1px solid var(--line);border-radius:20px;padding:18px;text-align:center}.box span{display:block;color:var(--muted);font-size:.9rem;margin-bottom:8px}.box strong{font-size:1.7rem;color:var(--primaryDark)}.review{margin-top:22px;display:grid;gap:12px}.reviewItem{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fff}.reviewItem.good{border-left:6px solid var(--success)}.reviewItem.bad{border-left:6px solid var(--danger)}
+    footer{text-align:center;color:var(--muted);padding:18px 28px 28px;font-weight:800}
+    @media(max-width:760px){header,main{padding:22px}.grid,.results{grid-template-columns:1fr}.controls,.left,.right{flex-direction:column}button{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <div class="logoBox">
+          <img src="logo.png" alt="Your Mexican Friend Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+          <span class="logoText">YMF</span>
+        </div>
+        <div><strong>By Carlos and Denisse</strong><br><span>Your Mexican Friend</span></div>
+      </div>
+      <h1>Regular Spanish Verbs Practice</h1>
+      <p class="subtitle">Present Simple and Simple Past – A1 Level</p>
+    </header>
+
+    <main>
+      <section id="startScreen" class="screen active">
+        <div class="card">
+          <span class="pill">A1 Spanish Practice</span>
+          <h2>Practice regular verbs in present and past.</h2>
+          <p class="introText">In this activity, you will practice only regular Spanish verbs ending in <strong>-ar</strong>, <strong>-er</strong>, and <strong>-ir</strong>. You will answer multiple choice, fill in the blank, tense identification, error correction, and mini dialogue questions.</p>
+          <div class="grid">
+            <div class="mini"><strong>45 questions</strong>Mixed and randomized practice.</div>
+            <div class="mini"><strong>Only regular verbs</strong>No ser, estar, ir, tener, hacer, or other irregular verbs.</div>
+            <div class="mini"><strong>No time limit</strong>Students can learn calmly.</div>
+          </div>
+          <button id="startBtn" class="primary">Start</button>
+        </div>
+      </section>
+
+      <section id="quizScreen" class="screen">
+        <div class="stats"><span id="counter">Question 1 of 45</span><span id="score">Score: 0</span></div>
+        <div class="bar"><div id="progress" class="fill"></div></div>
+        <div class="card">
+          <div id="type" class="type"></div>
+          <h2 id="question" class="qtitle"></h2>
+          <p id="spanish" class="spanish"></p>
+          <div id="verb" class="verb hidden"></div>
+          <div id="answerArea"></div>
+          <div id="feedback" class="feedback"></div>
+          <div class="controls">
+            <div class="left"><button id="prevBtn" class="light">Previous</button><button id="tryBtn" class="danger hidden">Try Again</button></div>
+            <div class="right"><button id="checkBtn" class="secondary">Check Answer</button><button id="nextBtn" class="primary">Next</button><button id="finishBtn" class="primary hidden">Finish</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="resultScreen" class="screen">
+        <div class="card">
+          <span class="pill">Final Results</span>
+          <h2 id="resultTitle">Great work!</h2>
+          <p id="resultMsg" class="introText"></p>
+          <div class="results">
+            <div class="box"><span>Final score</span><strong id="finalScore">0/45</strong></div>
+            <div class="box"><span>Percentage</span><strong id="percent">0%</strong></div>
+            <div class="box"><span>Correct</span><strong id="correctNum">0</strong></div>
+            <div class="box"><span>Incorrect</span><strong id="incorrectNum">0</strong></div>
+          </div>
+          <button id="restartBtn" class="primary">Restart</button>
+          <div id="review" class="review"></div>
+        </div>
+      </section>
+    </main>
+    <footer>By Carlos and Denisse – Your Mexican Friend</footer>
+  </div>
+
+<script>
+const bank=[
+{type:"Multiple choice",q:"Every day, I study Spanish.",s:"Todos los días yo ______ español.",verb:"estudiar",options:["estudio","estudié","estudias","estudiamos"],a:"estudio",e:"Use 'estudio' because the sentence is present with 'yo'."},
+{type:"Multiple choice",q:"Yesterday, she worked at home.",s:"Ayer ella ______ en casa.",verb:"trabajar",options:["trabaja","trabajé","trabajó","trabajamos"],a:"trabajó",e:"Use 'trabajó' because the sentence is past with 'ella'."},
+{type:"Fill in the blank",q:"We eat at home every day.",s:"Nosotros ______ en casa todos los días.",verb:"comer",a:"comemos",e:"For regular -er verbs in the present with 'nosotros', use '-emos'."},
+{type:"Fill in the blank",q:"I lived in Mexico last year.",s:"Yo ______ en México el año pasado.",verb:"vivir",a:"viví",e:"For regular -ir verbs in the past with 'yo', use '-í'."},
+{type:"Present or past?",q:"Identify the tense.",s:"Ella bailó en la fiesta.",options:["Present","Past"],a:"Past",e:"'Bailó' is simple past for 'ella'."},
+{type:"Correct the mistake",q:"Choose the correct sentence.",s:"Incorrect: Yo estudió español ayer.",options:["Yo estudio español ayer.","Yo estudié español ayer.","Yo estudias español ayer.","Yo estudiamos español ayer."],a:"Yo estudié español ayer.",e:"With 'yo' in the past, use 'estudié'."},
+{type:"Mini dialogue",q:"Complete the mini dialogue.",s:"A: ¿Qué hiciste ayer?\nB: Yo ______ una película en casa.",verb:"mirar",a:"miré",e:"Use 'miré' for 'yo' in the past."},
+{type:"Multiple choice",q:"They listen to music in the car.",s:"Ellos ______ música en el coche.",verb:"escuchar",options:["escuchan","escucharon","escucho","escuchas"],a:"escuchan",e:"Use 'escuchan' because the sentence is present with 'ellos'."},
+{type:"Multiple choice",q:"Last week, we visited my grandmother.",s:"La semana pasada nosotros ______ a mi abuela.",verb:"visitar",options:["visitamos","visitan","visito","visitaste"],a:"visitamos",e:"'Visitamos' can be present or past for 'nosotros'. Here it is past because of 'la semana pasada'."},
+{type:"Fill in the blank",q:"You drink water every morning.",s:"Tú ______ agua todas las mañanas.",verb:"beber",a:"bebes",e:"For regular -er verbs in the present with 'tú', use '-es'."},
+{type:"Fill in the blank",q:"She received a letter yesterday.",s:"Ella ______ una carta ayer.",verb:"recibir",a:"recibió",e:"For regular -ir verbs in the past with 'ella', use '-ió'."},
+{type:"Present or past?",q:"Identify the tense.",s:"Nosotros caminamos en el parque todos los domingos.",options:["Present","Past"],a:"Present",e:"'Todos los domingos' shows a routine, so this is present."},
+{type:"Correct the mistake",q:"Choose the correct sentence.",s:"Incorrect: Tú come pizza ayer.",options:["Tú comiste pizza ayer.","Tú comes pizza ayer.","Tú comió pizza ayer.","Tú comemos pizza ayer."],a:"Tú comiste pizza ayer.",e:"With 'tú' in the past, use 'comiste'."},
+{type:"Mini dialogue",q:"Complete the mini dialogue.",s:"A: ¿Qué haces los sábados?\nB: Yo ______ con mis amigos.",verb:"bailar",a:"bailo",e:"Use 'bailo' for 'yo' in the present."},
+{type:"Multiple choice",q:"I bought a book yesterday.",s:"Ayer yo ______ un libro.",verb:"comprar",options:["compro","compré","compró","compras"],a:"compré",e:"Use 'compré' because the sentence is past with 'yo'."},
+{type:"Multiple choice",q:"He writes emails at work.",s:"Él ______ correos en el trabajo.",verb:"escribir",options:["escribo","escribe","escribió","escriben"],a:"escribe",e:"Use 'escribe' because the sentence is present with 'él'."},
+{type:"Fill in the blank",q:"They sold the house last month.",s:"Ellos ______ la casa el mes pasado.",verb:"vender",a:"vendieron",e:"For regular -er verbs in the past with 'ellos', use '-ieron'."},
+{type:"Fill in the blank",q:"We open the store at nine.",s:"Nosotros ______ la tienda a las nueve.",verb:"abrir",a:"abrimos",e:"For regular -ir verbs with 'nosotros', use 'abrimos'. Context tells us this is present."},
+{type:"Present or past?",q:"Identify the tense.",s:"Tú respondiste muy bien.",options:["Present","Past"],a:"Past",e:"'Respondiste' is simple past with 'tú'."},
+{type:"Correct the mistake",q:"Choose the correct sentence.",s:"Incorrect: Ella viven en Puebla.",options:["Ella vivo en Puebla.","Ella vive en Puebla.","Ella vivió en Puebla todos los días.","Ella vivimos en Puebla."],a:"Ella vive en Puebla.",e:"With 'ella' in the present, use 'vive'."},
+{type:"Mini dialogue",q:"Complete the mini dialogue.",s:"A: ¿Qué hicieron anoche?\nB: Nosotros ______ una cena sencilla.",verb:"cocinar",a:"cocinamos",e:"Use 'cocinamos' for 'nosotros'. Here it is past because of 'anoche'."},
+{type:"Multiple choice",q:"She needs help today.",s:"Ella ______ ayuda hoy.",verb:"necesitar",options:["necesitó","necesito","necesita","necesitan"],a:"necesita",e:"Use 'necesita' because the sentence is present with 'ella'."},
+{type:"Multiple choice",q:"You practiced Spanish yesterday.",s:"Tú ______ español ayer.",verb:"practicar",options:["practicas","practiqué","practicaste","practicó"],a:"practicaste",e:"Use 'practicaste' because the sentence is past with 'tú'."},
+{type:"Fill in the blank",q:"I run in the morning.",s:"Yo ______ en la mañana.",verb:"correr",a:"corro",e:"For regular -er verbs in the present with 'yo', use '-o'."},
+{type:"Fill in the blank",q:"He decided to study yesterday.",s:"Él ______ estudiar ayer.",verb:"decidir",a:"decidió",e:"For regular -ir verbs in the past with 'él', use '-ió'."},
+{type:"Present or past?",q:"Identify the tense.",s:"Yo lavo los platos después de comer.",options:["Present","Past"],a:"Present",e:"'Lavo' is present with 'yo'."},
+{type:"Correct the mistake",q:"Choose the correct sentence.",s:"Incorrect: Nosotros bebemos café ayer.",options:["Nosotros bebemos café ayer.","Nosotros bebieron café ayer.","Nosotros bebimos café ayer.","Nosotros bebes café ayer."],a:"Nosotros bebimos café ayer.",e:"With 'nosotros' in the past for -er verbs, use '-imos': bebimos."},
+{type:"Mini dialogue",q:"Complete the mini dialogue.",s:"A: ¿Qué compras normalmente?\nB: Yo ______ frutas y verduras.",verb:"comprar",a:"compro",e:"Use 'compro' for 'yo' in the present."},
+{type:"Multiple choice",q:"We learned new words yesterday.",s:"Ayer nosotros ______ palabras nuevas.",verb:"aprender",options:["aprendemos","aprendimos","aprendieron","aprendes"],a:"aprendimos",e:"Use 'aprendimos' because the sentence is past with 'nosotros'."},
+{type:"Multiple choice",q:"They share food with friends.",s:"Ellos ______ comida con amigos.",verb:"compartir",options:["comparten","compartieron","comparto","compartes"],a:"comparten",e:"Use 'comparten' because the sentence is present with 'ellos'."},
+{type:"Fill in the blank",q:"She helped her brother yesterday.",s:"Ella ______ a su hermano ayer.",verb:"ayudar",a:"ayudó",e:"For regular -ar verbs in the past with 'ella', use '-ó'."},
+{type:"Fill in the blank",q:"You answer the question now.",s:"Tú ______ la pregunta ahora.",verb:"responder",a:"respondes",e:"For regular -er verbs in the present with 'tú', use '-es'."},
+{type:"Present or past?",q:"Identify the tense.",s:"Ellos subieron las escaleras.",options:["Present","Past"],a:"Past",e:"'Subieron' is simple past with 'ellos'."},
+{type:"Correct the mistake",q:"Choose the correct sentence.",s:"Incorrect: Él escriben mensajes todos los días.",options:["Él escribe mensajes todos los días.","Él escribo mensajes todos los días.","Él escribieron mensajes todos los días.","Él escribes mensajes todos los días."],a:"Él escribe mensajes todos los días.",e:"With 'él' in the present, use 'escribe'."},
+{type:"Mini dialogue",q:"Complete the mini dialogue.",s:"A: ¿Qué recibiste ayer?\nB: Yo ______ un mensaje importante.",verb:"recibir",a:"recibí",e:"Use 'recibí' for 'yo' in the past."},
+{type:"Multiple choice",q:"I cook dinner every night.",s:"Yo ______ la cena todas las noches.",verb:"cocinar",options:["cociné","cocino","cocina","cocinamos"],a:"cocino",e:"Use 'cocino' because the sentence is present with 'yo'."},
+{type:"Multiple choice",q:"They lived in a small house before.",s:"Ellos ______ en una casa pequeña antes.",verb:"vivir",options:["viven","vivieron","vivimos","vives"],a:"vivieron",e:"Use 'vivieron' because the sentence is past with 'ellos'."},
+{type:"Fill in the blank",q:"We understand the lesson today.",s:"Nosotros ______ la lección hoy.",verb:"comprender",a:"comprendemos",e:"For regular -er verbs in the present with 'nosotros', use '-emos'."},
+{type:"Fill in the blank",q:"You opened the door yesterday.",s:"Tú ______ la puerta ayer.",verb:"abrir",a:"abriste",e:"For regular -ir verbs in the past with 'tú', use '-iste'."},
+{type:"Present or past?",q:"Identify the tense.",s:"Ustedes trabajan mucho.",options:["Present","Past"],a:"Present",e:"'Trabajan' is present for 'ustedes'."},
+{type:"Correct the mistake",q:"Choose the correct sentence.",s:"Incorrect: Ellos caminaron al parque todos los días.",options:["Ellos camina al parque todos los días.","Ellos caminan al parque todos los días.","Ellos caminaste al parque todos los días.","Ellos camino al parque todos los días."],a:"Ellos caminan al parque todos los días.",e:"'Todos los días' shows a routine, so use present: 'caminan'."},
+{type:"Mini dialogue",q:"Complete the mini dialogue.",s:"A: ¿Qué hicieron ustedes ayer?\nB: Nosotros ______ música.",verb:"escuchar",a:"escuchamos",e:"Use 'escuchamos' for 'nosotros'. Here it is past because of 'ayer'."},
+{type:"Multiple choice",q:"She washes the car on Saturdays.",s:"Ella ______ el coche los sábados.",verb:"lavar",options:["lavó","lavo","lava","lavan"],a:"lava",e:"Use 'lava' because the sentence is present with 'ella'."},
+{type:"Multiple choice",q:"I answered the email yesterday.",s:"Ayer yo ______ el correo.",verb:"responder",options:["respondo","respondí","respondió","respondes"],a:"respondí",e:"Use 'respondí' because the sentence is past with 'yo'."},
+{type:"Fill in the blank",q:"They take coffee in the morning.",s:"Ellos ______ café en la mañana.",verb:"tomar",a:"toman",e:"For regular -ar verbs in the present with 'ellos', use '-an'."},
+{type:"Fill in the blank",q:"We wrote three sentences yesterday.",s:"Nosotros ______ tres oraciones ayer.",verb:"escribir",a:"escribimos",e:"For regular -ir verbs with 'nosotros', use 'escribimos'. Context tells us this is past."},
+{type:"Present or past?",q:"Identify the tense.",s:"Yo compré una camisa.",options:["Present","Past"],a:"Past",e:"'Compré' is simple past with 'yo'."}
+];
+let questions=[],i=0,answers=[];
+const $=id=>document.getElementById(id);function norm(x){return String(x||"").trim().toLowerCase().replace(/\s+/g," ")}function shuffle(a){a=[...a];for(let x=a.length-1;x>0;x--){let y=Math.floor(Math.random()*(x+1));[a[x],a[y]]=[a[y],a[x]]}return a}function show(id){["startScreen","quizScreen","resultScreen"].forEach(s=>$(s).classList.remove("active"));$(id).classList.add("active")}function count(){return answers.filter(x=>x.correct).length}
+function start(){questions=shuffle(bank);i=0;answers=questions.map(()=>({value:"",checked:false,correct:false}));show("quizScreen");render()}
+function render(){let q=questions[i],saved=answers[i];$("counter").textContent=`Question ${i+1} of ${questions.length}`;$("score").textContent=`Score: ${count()}`;$("progress").style.width=`${((i+1)/questions.length)*100}%`;$("type").textContent=q.type;$("question").textContent=q.q;$("spanish").textContent=q.s;if(q.verb){$("verb").textContent=`Verb: ${q.verb}`;$("verb").classList.remove("hidden")}else{$("verb").classList.add("hidden")}$("answerArea").innerHTML="";$("feedback").className="feedback";$("feedback").innerHTML="";$("tryBtn").classList.add("hidden");
+if(q.options){let wrap=document.createElement("div");wrap.className="options";q.options.forEach(op=>{let b=document.createElement("button");b.type="button";b.className="option";b.textContent=op;if(saved.value===op)b.classList.add("selected");if(saved.checked){if(op===q.a)b.classList.add("correct");if(saved.value===op&&op!==q.a)b.classList.add("incorrect")}b.onclick=()=>{answers[i].value=op;answers[i].checked=false;answers[i].correct=false;render()};wrap.appendChild(b)});$("answerArea").appendChild(wrap)}else{let inp=document.createElement("input");inp.className="input";inp.placeholder="Type your answer here...";inp.autocomplete="off";inp.value=saved.value||"";inp.oninput=()=>{answers[i].value=inp.value;answers[i].checked=false;answers[i].correct=false;$("feedback").className="feedback";$("tryBtn").classList.add("hidden");$("score").textContent=`Score: ${count()}`};inp.onkeydown=e=>{if(e.key==="Enter")check()};$("answerArea").appendChild(inp);setTimeout(()=>inp.focus(),40)}
+if(saved.checked)feedback(saved.correct);$("prevBtn").disabled=i===0;$("nextBtn").classList.toggle("hidden",i===questions.length-1);$("finishBtn").classList.toggle("hidden",i!==questions.length-1)}
+function check(){let q=questions[i],u=answers[i].value;if(!norm(u)){let f=$("feedback");f.className="feedback bad show";f.innerHTML="<strong>Please answer first.</strong><p>Choose an option or type your answer before checking.</p>";return}let ok=norm(u)===norm(q.a);answers[i].checked=true;answers[i].correct=ok;feedback(ok);$("score").textContent=`Score: ${count()}`;if(q.options){document.querySelectorAll(".option").forEach(b=>{b.classList.remove("correct","incorrect");if(b.textContent===q.a)b.classList.add("correct");if(b.textContent===u&&!ok)b.classList.add("incorrect")})}}
+function feedback(ok){let q=questions[i],f=$("feedback");f.className=`feedback ${ok?"good":"bad"} show`;if(ok){f.innerHTML=`<strong>Correct! Great job.</strong><p>${q.e}</p>`;$("tryBtn").classList.add("hidden")}else{f.innerHTML=`<strong>Not quite. Try again.</strong><p>Review the subject, the tense, and the verb ending. ${q.e}</p>`;$("tryBtn").classList.remove("hidden")}}
+function tryAgain(){answers[i].checked=false;answers[i].correct=false;render()}function next(){if(i<questions.length-1){i++;render()}}function prev(){if(i>0){i--;render()}}
+function finish(){let c=count(),bad=questions.length-c,p=Math.round(c/questions.length*100);$("finalScore").textContent=`${c}/${questions.length}`;$("percent").textContent=`${p}%`;$("correctNum").textContent=c;$("incorrectNum").textContent=bad;if(p>=90){$("resultTitle").textContent="Excellent work!";$("resultMsg").textContent="You have a strong understanding of regular verbs in the present and simple past."}else if(p>=70){$("resultTitle").textContent="Good job!";$("resultMsg").textContent="You are doing well. Review the questions you missed and practice the endings again."}else{$("resultTitle").textContent="Keep practicing!";$("resultMsg").textContent="Regular verbs need repetition. Focus on the endings for each subject and tense."}let r=$("review");r.innerHTML="";questions.forEach((q,idx)=>{let it=document.createElement("div"),ok=answers[idx].correct;it.className=`reviewItem ${ok?"good":"bad"}`;it.innerHTML=`<strong>${idx+1}. ${q.type}</strong><p style="margin-top:6px;color:#64748b;white-space:pre-line;">${q.s}</p><p style="margin-top:8px;"><strong>Your answer:</strong> ${answers[idx].value||"No answer"}</p><p><strong>Correct answer:</strong> ${q.a}</p>`;r.appendChild(it)});show("resultScreen")}
+$("startBtn").onclick=start;$("restartBtn").onclick=start;$("prevBtn").onclick=prev;$("nextBtn").onclick=next;$("checkBtn").onclick=check;$("tryBtn").onclick=tryAgain;$("finishBtn").onclick=finish;
+</script>
+</body>
+</html>

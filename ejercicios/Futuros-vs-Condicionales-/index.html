@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futuro vs Condicional | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;
+  --fut:#25d9ff;--cond:#f472b6;--b1:#a78bfa;--near:#34d399;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(37,217,255,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 20% 10%,rgba(37,217,255,.1),transparent 35%),radial-gradient(ellipse at 80% 15%,rgba(244,114,182,.08),transparent 35%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(960px,96%);margin:14px auto 60px;display:flex;flex-direction:column;gap:14px}
+.hero{border-radius:22px;padding:26px 30px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.hero-in{position:relative;z-index:1}
+.hero-top{display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.logo-box{width:56px;height:56px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--magenta)}
+.hero h1{font-family:var(--display);font-size:clamp(1.2rem,3vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--fut),#fff 45%,var(--cond));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.86rem;margin-top:3px;line-height:1.55}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 11px;font-size:.7rem;font-weight:700;color:var(--muted)}
+/* QUICK REF */
+.qref{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.qref-card{border-radius:16px;padding:16px 18px;border:2px solid}
+.qref-label{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+.qref-form{font-family:var(--display);font-size:1.1rem;font-weight:900;margin-bottom:6px}
+.qref-uses{font-size:.82rem;color:var(--muted);line-height:1.7}
+.qref-uses li{margin-left:14px}
+/* TABS */
+.tabs-wrap{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.tabs-bar{display:flex;overflow-x:auto;border-bottom:1px solid rgba(255,255,255,.07);scrollbar-width:none}
+.tabs-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;border:0;background:transparent;color:var(--muted2);font-family:var(--font);font-size:.8rem;font-weight:700;padding:13px 20px;cursor:pointer;transition:.2s;border-bottom:2.5px solid transparent;white-space:nowrap}
+.tab-btn:hover{color:var(--text)}.tab-btn.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+.tab-panel{display:none;padding:28px 30px}.tab-panel.visible{display:block}
+/* EXPLANATION */
+.expl-box{border-radius:16px;padding:20px 22px;margin-bottom:20px;border:1.5px solid}
+.expl-title{font-family:var(--display);font-size:1rem;font-weight:900;margin-bottom:14px}
+.expl-body{font-size:.9rem;color:var(--muted);line-height:1.9}
+.expl-body strong{color:var(--text)}
+.expl-body em{font-style:normal;font-weight:700}
+/* CONJ TABLE */
+.conj-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.conj-block{border-radius:12px;padding:14px 16px;border:1.5px solid}
+.conj-block-title{font-size:.65rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.conj-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.conj-table td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.05)}
+.conj-table td:first-child{color:var(--muted2);width:42%}
+.conj-table td:last-child{font-family:var(--display);font-weight:900;font-size:.92rem}
+.conj-table tr:last-child td{border-bottom:0}
+/* IRREGULAR TABLE */
+.irreg-table{width:100%;border-collapse:collapse;font-size:.86rem;margin:12px 0}
+.irreg-table th{text-align:left;padding:7px 12px;font-size:.64rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08)}
+.irreg-table td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04)}
+.irreg-table td:first-child{font-weight:700;color:var(--text)}
+.irreg-table td:nth-child(2){color:var(--fut);font-family:var(--display);font-weight:900}
+.irreg-table td:nth-child(3){color:var(--cond);font-family:var(--display);font-weight:900}
+.irreg-table td:last-child{font-size:.79rem;color:var(--muted2);font-style:italic}
+.irreg-table tr:last-child td{border-bottom:0}
+/* CONTRAST */
+.contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.contrast-card{border-radius:12px;padding:13px 15px;border:1.5px solid}
+.contrast-label{font-size:.64rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+.contrast-sent{font-weight:700;font-size:.9rem;margin-bottom:3px}
+.contrast-note{font-size:.76rem;color:var(--muted2)}
+/* PATTERNS */
+.pattern-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:13px 16px;margin:14px 0}
+.pattern-title{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);margin-bottom:8px}
+.pattern-row{font-size:.88rem;line-height:1.9;color:var(--muted)}
+.pattern-row strong{color:var(--text)}
+.pattern-row em{font-style:normal}
+/* FLASHCARDS */
+.fc-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:16px}
+.fc-scene{perspective:900px;width:100%;max-width:440px;height:165px;cursor:pointer;margin-bottom:12px}
+.fc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.fc-card.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:16px;text-align:center;border:1.5px solid}
+.fc-front{background:rgba(37,217,255,.06);border-color:rgba(37,217,255,.3)}
+.fc-back{transform:rotateY(180deg);background:rgba(244,114,182,.06);border-color:rgba(244,114,182,.3)}
+.fc-verb{font-family:var(--display);font-size:1.6rem;font-weight:900;margin-bottom:4px}
+.fc-sub{font-size:.76rem;color:var(--muted2);margin-bottom:4px}
+.fc-hint{font-size:.78rem;color:var(--muted);font-style:italic}
+.fc-forms{display:flex;flex-direction:column;gap:4px;margin-bottom:6px}
+.fc-form-row{font-size:.84rem;font-weight:700}
+.fc-ex{font-size:.76rem;color:var(--muted2);font-style:italic;line-height:1.5}
+.fc-nav{display:flex;align-items:center;gap:10px;justify-content:center}
+.fc-counter{font-size:.76rem;font-weight:800;color:var(--muted2)}
+.btn-fc{border:0;border-radius:9px;padding:6px 16px;font-weight:800;font-family:var(--font);font-size:.8rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(255,255,255,.11)}
+.btn-fc:hover{background:rgba(255,255,255,.14)}
+/* EXERCISES */
+.ex-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.ex-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.ex-title{font-family:var(--display);font-size:.8rem;font-weight:900;color:var(--cyan);text-transform:uppercase;letter-spacing:.05em}
+.score-row{display:flex;align-items:center;gap:8px}
+.score-pill{background:rgba(167,139,250,.15);color:#c4b5fd;border-radius:999px;padding:3px 12px;font-size:.7rem;font-weight:800;border:1px solid rgba(167,139,250,.3)}
+.btn-restart{border:1px solid rgba(249,115,22,.35);border-radius:999px;padding:3px 10px;font-weight:800;font-family:var(--font);font-size:.68rem;cursor:pointer;background:rgba(249,115,22,.08);color:#f97316}
+.wb-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px 14px;margin-bottom:14px;font-size:.82rem;color:var(--muted2)}
+.wb-box strong{color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px}
+.q-list{display:flex;flex-direction:column;gap:12px}
+.q-item{font-size:.92rem}
+.q-num{font-size:.68rem;font-weight:900;color:var(--muted2);margin-right:4px}
+.q-stem{font-weight:600;margin-bottom:5px;line-height:1.75}
+.q-ctx{font-size:.83rem;color:var(--muted2);font-style:italic;padding:8px 12px;background:rgba(255,255,255,.03);border-radius:8px;margin-bottom:8px;border-left:3px solid rgba(37,217,255,.25);line-height:1.6}
+.q-sub{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:6px;padding-left:8px;border-left:2px solid rgba(255,255,255,.1)}
+.blank{display:inline-block;border-bottom:2.5px solid;min-width:110px;text-align:center;padding:0 4px;font-weight:900;font-family:var(--display);font-size:.95rem}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.chip{border:0;border-radius:9px;padding:7px 14px;font-weight:800;font-family:var(--display);font-size:.88rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.11);color:var(--text)}
+.chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.chip.used{opacity:.18;cursor:not-allowed}
+.chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.mc-opt{border:0;border-radius:10px;padding:9px 14px;font-weight:700;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);border-color:rgba(37,217,255,.4)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.sel-correct{border-color:var(--good);background:rgba(34,197,94,.15);color:#86efac}
+.mc-opt.sel-wrong{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.show-correct{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.q-input{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:9px;padding:9px 13px;color:var(--text);font-family:var(--font);font-size:.9rem;outline:none;transition:.2s;width:100%;margin-bottom:4px}
+.fill-input{display:inline-block;min-width:150px;max-width:240px;width:auto;background:rgba(255,255,255,.05);border:0;border-bottom:2.5px solid var(--cyan);border-radius:6px 6px 0 0;padding:4px 8px;color:var(--text);font-family:var(--display);font-size:.95rem;font-weight:900;outline:none;text-align:center;margin:0 4px}.fill-input:focus{background:rgba(37,217,255,.08);border-bottom-color:var(--cyan)}.fill-input.inp-ok{border-bottom-color:var(--good);background:rgba(34,197,94,.08);color:#86efac}.fill-input.inp-err{border-bottom-color:var(--bad);background:rgba(239,68,68,.08);color:#fca5a5}.fill-check{margin-left:8px;vertical-align:middle}
+.q-input:focus{border-color:rgba(37,217,255,.4)}.q-input[disabled]{opacity:.65}
+.q-input.inp-ok{border-color:var(--good);background:rgba(34,197,94,.06)}
+.q-input.inp-err{border-color:var(--bad);background:rgba(239,68,68,.05)}
+.btn-check{border:0;border-radius:8px;padding:7px 16px;font-weight:800;font-family:var(--font);font-size:.8rem;cursor:pointer;transition:.13s;background:rgba(37,217,255,.12);border:1.5px solid rgba(37,217,255,.28);color:var(--cyan);margin-top:6px}
+.btn-check:hover{background:rgba(37,217,255,.2)}.btn-check[disabled]{opacity:.4}
+.q-fb{display:none;font-size:.8rem;color:var(--muted);margin-top:6px;padding:7px 11px;border-radius:8px;background:rgba(255,255,255,.04);line-height:1.6}
+.q-fb.show{display:block}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:4px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.qref{grid-template-columns:1fr}.conj-grid{grid-template-columns:1fr}.contrast-grid{grid-template-columns:1fr}.mc-opts{grid-template-columns:1fr}.tab-panel{padding:18px 14px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-top">
+      <div class="logo-box">YMF</div>
+      <div>
+        <h1>Futuro vs Condicional</h1>
+        <p>Simple future · Ir a + infinitive · Conditional · Regular and irregular verbs · B1 · Mexican Spanish</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge" style="border-color:rgba(37,217,255,.4);color:var(--fut)">🔵 Futuro — hablaré</span>
+      <span class="badge" style="border-color:rgba(244,114,182,.4);color:var(--cond)">🩷 Condicional — hablaría</span>
+      <span class="badge" style="border-color:rgba(52,211,153,.4);color:var(--near)">🟢 Ir a + infinitivo — voy a hablar</span>
+      <span class="badge" style="border-color:rgba(249,115,22,.4);color:#f97316">⚡ Irregulares</span>
+      <span class="badge" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">🔀 Mezcla</span>
+      <span class="badge">By Carlos &amp; Denisse</span>
+    </div>
+  </div>
+</header>
+<!-- QUICK REF -->
+<div class="qref">
+  <div class="qref-card" style="border-color:rgba(37,217,255,.3);background:rgba(37,217,255,.05)" onclick="switchTab(0)">
+    <div class="qref-label" style="color:var(--fut)">🔵 Simple future</div>
+    <div class="qref-form" style="color:var(--fut)">hablar-é / -ás / -á / -emos / -án</div>
+    <ul class="qref-uses">
+      <li>Predictions and future plans</li>
+      <li>Promises and commitments</li>
+      <li>Guessing / probability about the present</li>
+    </ul>
+  </div>
+  <div class="qref-card" style="border-color:rgba(244,114,182,.3);background:rgba(244,114,182,.05)" onclick="switchTab(1)">
+    <div class="qref-label" style="color:var(--cond)">🩷 Simple conditional</div>
+    <div class="qref-form" style="color:var(--cond)">hablar-ía / -ías / -ía / -íamos / -ían</div>
+    <ul class="qref-uses">
+      <li>Hypothetical or unreal situations</li>
+      <li>Polite requests and courtesy</li>
+      <li>Result clause in a second conditional</li>
+    </ul>
+  </div>
+  <div class="qref-card" style="border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.05)" onclick="switchTab(0)">
+    <div class="qref-label" style="color:var(--near)">🟢 Near future — ir a + infinitivo</div>
+    <div class="qref-form" style="color:var(--near)">voy / vas / va / vamos / van + a + infinitivo</div>
+    <ul class="qref-uses">
+      <li>Plans and intentions</li>
+      <li>Upcoming or clearly imminent actions</li>
+      <li>Very common in spoken Spanish</li>
+    </ul>
+  </div>
+</div>
+<div class="tabs-wrap">
+  <div class="tabs-bar" id="tabsBar"></div>
+  <div id="tabContents"></div>
+</div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · yourmexicanfriend.com</p>
+</div>
+<script>
+const IRREGULARES=[
+  {inf:'tener',fut:'tendr-',cond:'tendr-',en:'to have'},
+  {inf:'poder',fut:'podr-',cond:'podr-',en:'to be able to'},
+  {inf:'poner',fut:'pondr-',cond:'pondr-',en:'to put'},
+  {inf:'venir',fut:'vendr-',cond:'vendr-',en:'to come'},
+  {inf:'salir',fut:'saldr-',cond:'saldr-',en:'to leave / go out'},
+  {inf:'valer',fut:'valdr-',cond:'valdr-',en:'to be worth'},
+  {inf:'hacer',fut:'har-',cond:'har-',en:'to do / make'},
+  {inf:'decir',fut:'dir-',cond:'dir-',en:'to say / tell'},
+  {inf:'querer',fut:'querr-',cond:'querr-',en:'to want'},
+  {inf:'saber',fut:'sabr-',cond:'sabr-',en:'to know'},
+  {inf:'caber',fut:'cabr-',cond:'cabr-',en:'to fit'},
+  {inf:'haber',fut:'habr-',cond:'habr-',en:'to have (aux)'},
+];
+const SUJETOS=['Yo','Tú','Él/Ella/Usted','Nosotros','Ustedes/Ellos'];
+const FUT_TERM=['é','ás','á','emos','án'];
+const COND_TERM=['ía','ías','ía','íamos','ían'];
+
+const TABS=[
+// ── 0: FUTURO SIMPLE ──────────────────────────────────────────────────────────
+{title:'🔵 Futuro',color:'var(--fut)',
+expl:`<strong>Simple future</strong> — it is formed with the infinitive + the following endings:<br><br>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0">
+  ${FUT_TERM.map((t,i)=>`<span style="background:rgba(37,217,255,.12);border:1px solid rgba(37,217,255,.3);border-radius:8px;padding:5px 12px;font-family:var(--display);font-weight:900;color:var(--fut);font-size:.95rem">-${t}</span>`).join('')}
+</div>
+<strong>Regular verbs:</strong> infinitive + ending (the infinitive stays intact).<br><br>
+<strong>Main uses:</strong><br>
+🔵 Predictions and plans: <em>Mañana lloverá.</em><br>
+🔵 Promises: <em>Te llamaré esta tarde.</em><br>
+🔵 Guessing / probability about the present: <em>¿Dónde estará Juan? — Estará en casa.</em><br><br>
+<strong style="color:var(--near)">🟢 Near future: IR A + infinitivo</strong><br>
+It is formed with <strong>ir</strong> in the present tense + <strong>a</strong> + an infinitive: <em>voy a estudiar, vas a comer, va a salir, vamos a viajar, van a llegar</em>.<br>
+It is very common for <strong>plans and intentions</strong> and for actions that appear likely or imminent: <em>Este fin de semana voy a visitar a mi familia.</em> / <em>Mira esas nubes: va a llover.</em><br>
+In everyday conversation, especially in Mexico, <strong>ir a + infinitivo</strong> is extremely common. The simple future can also express plans, but it is especially useful for <strong>predictions, promises, decisions, and probability/guessing</strong>.<br><br>
+<strong>Contrast:</strong> <em>Mañana voy a estudiar.</em> = a planned intention. · <em>Mañana estudiaré.</em> = a neutral future statement, decision, promise, or prediction depending on context.`,
+conj:[
+  {verb:'hablar (regular)',fut:['hablaré','hablarás','hablará','hablaremos','hablarán']},
+  {verb:'comer (regular)',fut:['comeré','comerás','comerá','comeremos','comerán']},
+  {verb:'vivir (regular)',fut:['viviré','vivirás','vivirá','viviremos','vivirán']},
+],
+examplesFut:[
+  {es:'Mañana <strong>hablaré</strong> con mi jefe.',en:'Tomorrow I will talk to my boss.',note:'→ Future plan.'},
+  {es:'¿<strong>Estudiarás</strong> esta noche?',en:'Will you study tonight?',note:'→ Asking about a future plan.'},
+  {es:'Ella <strong>llegará</strong> antes que nosotros.',en:'She will arrive before us.',note:'→ Prediction.'},
+  {es:'Te <strong>llamaré</strong> cuando salga.',en:'I will call you when I leave.',note:'→ Promise.'},
+  {es:'Nosotros <strong>viviremos</strong> en México el próximo año.',en:'We will live in Mexico next year.',note:'→ Future plan.'},
+  {es:'Ellos <strong>comerán</strong> en el restaurante.',en:'They will eat at the restaurant.',note:'→ Plan.'},
+  {es:'¿Dónde <strong>estará</strong> mi celular?',en:'Where could my phone be?',note:'→ Guessing / probability about the present.'},
+  {es:'Este fin de semana <strong>voy a visitar</strong> a mis papás.',en:'This weekend I am going to visit my parents.',note:'→ Planned intention.'},
+  {es:'Mira esas nubes: <strong>va a llover</strong>.',en:'Look at those clouds: it is going to rain.',note:'→ Prediction based on evidence.'},
+],
+flashcards:[
+  {front:'hablar → yo',frontSub:'simple future · regular',back:'hablaré',backEx:'Mañana hablaré contigo.'},
+  {front:'comer → tú',frontSub:'simple future · regular',back:'comerás',backEx:'¿Comerás en casa o fuera?'},
+  {front:'vivir → él/ella',frontSub:'simple future · regular',back:'vivirá',backEx:'Ella vivirá en España.'},
+  {front:'trabajar → nosotros',frontSub:'simple future · regular',back:'trabajaremos',backEx:'Trabajaremos juntos.'},
+  {front:'llegar → ustedes',frontSub:'simple future · regular',back:'llegarán',backEx:'¿A qué hora llegarán?'},
+  {front:'estudiar → yo',frontSub:'simple future · regular',back:'estudiaré',backEx:'Estudiaré después de cenar.'},
+  {front:'beber → ellos',frontSub:'simple future · regular',back:'beberán',backEx:'Beberán agua durante la comida.'},
+  {front:'escribir → tú',frontSub:'simple future · regular',back:'escribirás',backEx:'¿Escribirás el correo mañana?'},
+],
+exercises:[
+  {type:'fill',title:'A. Conjugate in the simple future — regular verbs',
+   qs:[
+     {stem:'___ con mi jefe mañana. (hablar/yo)',sub:'I will talk to my boss tomorrow.',a:'hablaré',bc:'var(--fut)'},
+     {stem:'¿___ en casa esta noche? (comer/tú)',sub:'Will you eat at home tonight?',a:'comerás',bc:'var(--fut)'},
+     {stem:'Ella ___ en Monterrey el próximo año. (vivir)',sub:'She will live in Monterrey next year.',a:'vivirá',bc:'var(--fut)'},
+     {stem:'___ juntos en el proyecto. (trabajar/nosotros)',sub:'We will work together on the project.',a:'trabajaremos',bc:'var(--fut)'},
+     {stem:'¿A qué hora ___ al aeropuerto? (llegar/ellos)',sub:'What time will they arrive at the airport?',a:'llegarán',bc:'var(--fut)'},
+     {stem:'___ medicina en la UNAM. (estudiar/yo)',sub:'I will study medicine at UNAM.',a:'estudiaré',bc:'var(--fut)'},
+     {stem:'Ustedes ___ la información mañana. (recibir)',sub:'You will receive the information tomorrow.',a:'recibirán',bc:'var(--fut)'},
+     {stem:'Nosotros ___ la cena a las ocho. (preparar)',sub:'We will prepare dinner at eight.',a:'prepararemos',bc:'var(--fut)'},
+   ]},
+  {type:'fill',title:'B. Simple future in context — regular verbs only',
+   qs:[
+     {stem:'¿Dónde ___ mi celular ahora? Probablemente está en la sala. (estar)',sub:'Where could my phone be now? Use the future to express probability about the present.',a:'estará',bc:'var(--fut)'},
+     {stem:'Te ___ cuando llegue a casa. (llamar/yo)',sub:'I will call you when I get home.',a:'llamaré',bc:'var(--fut)'},
+     {stem:'¿___ español mañana por la tarde? (estudiar/tú)',sub:'Will you study Spanish tomorrow afternoon?',a:'estudiarás',bc:'var(--fut)'},
+     {stem:'Nosotros ___ el proyecto esta semana. (terminar)',sub:'We will finish the project this week.',a:'terminaremos',bc:'var(--fut)'},
+     {stem:'Mis papás ___ a las nueve. (llegar)',sub:'My parents will arrive at nine.',a:'llegarán',bc:'var(--fut)'},
+     {stem:'Ana ___ con su familia el domingo. (comer)',sub:'Ana will eat with her family on Sunday.',a:'comerá',bc:'var(--fut)'},
+   ]},
+  {type:'fill',title:'C. Near future — IR A + infinitive',
+   qs:[
+     {stem:'Esta noche ___ para el examen. (estudiar/yo)',sub:'Tonight I am going to study for the exam.',a:'voy a estudiar',bc:'var(--near)'},
+     {stem:'¿___ en casa o en un restaurante? (comer/tú)',sub:'Are you going to eat at home or at a restaurant?',a:'vas a comer',bc:'var(--near)'},
+     {stem:'Ella ___ a Guadalajara la próxima semana. (viajar)',sub:'She is going to travel to Guadalajara next week.',a:'va a viajar',bc:'var(--near)'},
+     {stem:'___ temprano mañana. (salir/nosotros)',sub:'We are going to leave early tomorrow.',a:'vamos a salir',bc:'var(--near)'},
+     {stem:'Mis amigos ___ a las ocho. (llegar)',sub:'My friends are going to arrive at eight.',a:'van a llegar',bc:'var(--near)'},
+     {stem:'Mira esas nubes: ___. (llover)',sub:'Look at those clouds: it is going to rain.',a:'va a llover',bc:'var(--near)'},
+   ]},
+  {type:'fill',title:'D. Simple future vs IR A + infinitive',
+   qs:[
+     {stem:'Ya compré los boletos. Mañana ___ a Puebla. (viajar/yo · ir a)',sub:'I already bought the tickets. Tomorrow I am going to travel to Puebla.',a:'voy a viajar',bc:'var(--near)'},
+     {stem:'No te preocupes, te ___ después de la reunión. (llamar/yo · simple future)',sub:'Don’t worry, I will call you after the meeting.',a:'llamaré',bc:'var(--fut)'},
+     {stem:'Mira el cielo. ___. (llover · ir a)',sub:'Look at the sky. It is going to rain.',a:'va a llover',bc:'var(--near)'},
+     {stem:'Creo que mañana ___ mucho. (llover · simple future)',sub:'I think it will rain a lot tomorrow.',a:'lloverá',bc:'var(--fut)'},
+     {stem:'Este sábado ___ con mis amigos; ya hicimos el plan. (cenar/nosotros · ir a)',sub:'This Saturday we are going to have dinner with friends; the plan is already made.',a:'vamos a cenar',bc:'var(--near)'},
+     {stem:'Algún día ___ en otro país. (vivir/yo · simple future)',sub:'Someday I will live in another country.',a:'viviré',bc:'var(--fut)'},
+   ]},
+]
+},
+
+// ── 1: CONDICIONAL SIMPLE ─────────────────────────────────────────────────────
+{title:'🩷 Condicional',color:'var(--cond)',
+expl:`<strong>Simple conditional</strong> — it is formed with the infinitive + the following endings:<br><br>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0">
+  ${COND_TERM.map(t=>`<span style="background:rgba(244,114,182,.12);border:1px solid rgba(244,114,182,.3);border-radius:8px;padding:5px 12px;font-family:var(--display);font-weight:900;color:var(--cond);font-size:.95rem">-${t}</span>`).join('')}
+</div>
+<strong>Irregular verbs:</strong> use the same irregular stem as the future, but add the conditional endings.<br><br>
+<strong>Main uses:</strong><br>
+🩷 Hypothetical / unreal situation (second conditional): <em>Si tuviera dinero, <strong>viajaría</strong>.</em><br>
+🩷 Polite request or desire: <em>¿<strong>Podría</strong> traerme el menú?</em><br>
+🩷 Advice or suggestion: <em>Yo que tú <strong>hablaría</strong> con él.</em><br>
+🩷 Future in the past (reported speech): <em>Dijo que <strong>vendría</strong>.</em>`,
+conj:[
+  {verb:'hablar (regular)',cond:['hablaría','hablarías','hablaría','hablaríamos','hablarían']},
+  {verb:'comer (regular)',cond:['comería','comerías','comería','comeríamos','comerían']},
+  {verb:'vivir (regular)',cond:['viviría','vivirías','viviría','viviríamos','vivirían']},
+],
+examplesCond:[
+  {es:'Si tuviera dinero, <strong>viajaría</strong> por el mundo.',en:'If I had money, I would travel the world.',note:'→ Unreal hypothesis / second conditional.'},
+  {es:'¿<strong>Podrías</strong> ayudarme con esto?',en:'Could you help me with this?',note:'→ Polite request.'},
+  {es:'Yo que tú, <strong>hablaría</strong> con ella directamente.',en:'If I were you, I would talk to her directly.',note:'→ Advice or suggestion.'},
+  {es:'Dijo que <strong>vendría</strong> a las ocho.',en:'He said he would come at eight.',note:'→ Future in the past / reported speech.'},
+  {es:'<strong>Me gustaría</strong> un café, por favor.',en:'I would like a coffee, please.',note:'→ Polite desire / request.'},
+  {es:'Nosotros no <strong>haríamos</strong> eso jamás.',en:'We would never do that.',note:'→ Hypothetical situation.'},
+  {es:'¿Dónde <strong>estaría</strong> ella en ese momento?',en:'Where might she have been at that moment?',note:'→ Guess / probability about the past.'},
+],
+flashcards:[
+  {front:'hablar → yo',frontSub:'condicional simple regular',back:'hablaría',backEx:'Yo hablaría con él, pero no está.'},
+  {front:'comer → tú',frontSub:'condicional simple regular',back:'comerías',backEx:'¿Comerías ahí si pudieras?'},
+  {front:'vivir → él/ella',frontSub:'condicional simple regular',back:'viviría',backEx:'Ella viviría en París si pudiera.'},
+  {front:'trabajar → nosotros',frontSub:'condicional simple regular',back:'trabajaríamos',backEx:'Trabajaríamos menos si ganáramos más.'},
+  {front:'llegar → ellos',frontSub:'condicional simple regular',back:'llegarían',backEx:'Llegarían más rápido en metro.'},
+  {front:'tener → yo',frontSub:'condicional IRREGULAR',back:'tendría',backEx:'Si tuviera tiempo, lo haría.'},
+  {front:'hacer → tú',frontSub:'condicional IRREGULAR',back:'harías',backEx:'¿Qué harías tú en mi lugar?'},
+  {front:'decir → él/ella',frontSub:'condicional IRREGULAR',back:'diría',backEx:'¿Qué diría ella si supiera?'},
+  {front:'poder → nosotros',frontSub:'condicional IRREGULAR',back:'podríamos',backEx:'Podríamos ir si quisiéramos.'},
+  {front:'venir → ellos',frontSub:'condicional IRREGULAR',back:'vendrían',backEx:'Dijeron que vendrían.'},
+  {front:'salir → yo',frontSub:'condicional IRREGULAR',back:'saldría',backEx:'Saldría antes si me dejaran.'},
+  {front:'querer → tú',frontSub:'condicional IRREGULAR',back:'querrías',backEx:'¿Querrías venir con nosotros?'},
+],
+exercises:[
+  {type:'fill',title:'A. Conjugate in the conditional (regular verbs)',
+   wb:['hablaría','comerías','viviría','trabajaríamos','llegarían','estudiaría','bebería','escribirían'],
+   qs:[
+     {stem:'Yo que tú, ___ con tu jefe directamente. (hablar)',sub:'If I were you, I would talk to your boss directly.',a:'hablaría',bc:'var(--cond)'},
+     {stem:'¿___ aquí si el precio fuera más barato? (comer/tú)',sub:'Would you eat here if the price were cheaper?',a:'comerías',bc:'var(--cond)'},
+     {stem:'Ella ___ en París si pudiera elegir. (vivir)',sub:'She would live in Paris if she could choose.',a:'viviría',bc:'var(--cond)'},
+     {stem:'___ menos horas si ganáramos más. (trabajar/nosotros)',sub:'We would work fewer hours if we earned more.',a:'trabajaríamos',bc:'var(--cond)'},
+     {stem:'Ellos ___ antes si tomaran el metro. (llegar)',sub:'They would arrive earlier if they took the subway.',a:'llegarían',bc:'var(--cond)'},
+     {stem:'Me dijo que ___ medicina. (estudiar/él)',sub:'He told me he would study medicine.',a:'estudiaría',bc:'var(--cond)'},
+   ]},
+  {type:'fill',title:'B. Conjugate in the conditional (irregular verbs)',
+   wb:['tendría','harías','diría','podríamos','vendrían','saldría','querrían','sabría'],
+   qs:[
+     {stem:'Con más tiempo libre, ___ menos estrés. (tener/yo)',sub:'With more free time, I would have less stress.',a:'tendría',bc:'var(--cond)'},
+     {stem:'¿Qué ___ tú en mi lugar? (hacer)',sub:'What would you do in my place?',a:'harías',bc:'var(--cond)'},
+     {stem:'¿Qué ___ ella si supiera la verdad? (decir)',sub:'What would she say if she knew the truth?',a:'diría',bc:'var(--cond)'},
+     {stem:'___ ir si tuviéramos más tiempo. (poder/nosotros)',sub:'We would be able to go if we had more time.',a:'podríamos',bc:'var(--cond)'},
+     {stem:'Dijeron que ___ a las ocho. (venir)',sub:'They said they would come at eight.',a:'vendrían',bc:'var(--cond)'},
+     {stem:'___ antes si no hubiera tanto tráfico. (salir/yo)',sub:'I would leave earlier if there wasn\'t so much traffic.',a:'saldría',bc:'var(--cond)'},
+   ]},
+  {type:'fill',title:'C. Complete with the conditional — use the context',
+   wb:['podría','haría','vendría','diría','gustaría','estaría'],
+   qs:[
+     {stem:'¿___ traerme la cuenta, por favor? (poder/usted)',sub:'Could you bring me the check, please? Polite request.',a:'podría',bc:'var(--cond)'},
+     {stem:'Yo que tú, no lo ___. (hacer)',sub:'If I were you, I would not do it. Advice.',a:'haría',bc:'var(--cond)'},
+     {stem:'Dijo que ___ a las seis. (venir)',sub:'He said he would come at six. Future in the past.',a:'vendría',bc:'var(--cond)'},
+     {stem:'¿Qué ___ ella si supiera la verdad? (decir)',sub:'What would she say if she knew the truth?',a:'diría',bc:'var(--cond)'},
+     {stem:'Me ___ un café, por favor. (gustar)',sub:'I would like a coffee, please.',a:'gustaría',bc:'var(--cond)'},
+     {stem:'¿Dónde ___ él en ese momento? (estar)',sub:'Where might he have been at that moment? Probability about the past.',a:'estaría',bc:'var(--cond)'},
+   ]},
+  {type:'fill',title:'D. Complete the Spanish sentence from the English cue',
+   wb:['viajaría','podrías','hablaría','vendría','gustaría','harías'],
+   qs:[
+     {stem:'___ por el mundo si tuviera dinero. (viajar/yo)',sub:'I would travel the world if I had money.',a:'viajaría',bc:'var(--cond)'},
+     {stem:'¿___ ayudarme con esto? (poder/tú)',sub:'Could you help me with this?',a:'podrías',bc:'var(--cond)'},
+     {stem:'Yo que tú, ___ con ella. (hablar)',sub:'If I were you, I would talk to her.',a:'hablaría',bc:'var(--cond)'},
+     {stem:'Dijo que ___ a las ocho. (venir)',sub:'He said he would come at eight.',a:'vendría',bc:'var(--cond)'},
+     {stem:'Me ___ un café, por favor. (gustar)',sub:'I would like a coffee, please.',a:'gustaría',bc:'var(--cond)'},
+     {stem:'¿Qué ___ en mi lugar? (hacer/tú)',sub:'What would you do in my place?',a:'harías',bc:'var(--cond)'},
+   ]},
+]},
+
+// ── 2: IRREGULARES ────────────────────────────────────────────────────────────
+{title:'⚡ Irregulares',color:'#f97316',
+flashcards:[
+  {front:'TENER',frontSub:'raíz: tendr-',back:'Futuro: tendré / Cond: tendría',backEx:'Tendré tiempo. / Tendría tiempo si pudiera.'},
+  {front:'PODER',frontSub:'raíz: podr-',back:'Futuro: podré / Cond: podría',backEx:'Podré ir. / Podría ir si quisiera.'},
+  {front:'PONER',frontSub:'raíz: pondr-',back:'Futuro: pondré / Cond: pondría',backEx:'Lo pondré aquí. / Lo pondría ahí.'},
+  {front:'VENIR',frontSub:'raíz: vendr-',back:'Futuro: vendré / Cond: vendría',backEx:'Vendré mañana. / Vendría si me invitaran.'},
+  {front:'SALIR',frontSub:'raíz: saldr-',back:'Futuro: saldré / Cond: saldría',backEx:'Saldré a las seis. / Saldría antes.'},
+  {front:'HACER',frontSub:'raíz: har-',back:'Futuro: haré / Cond: haría',backEx:'Lo haré hoy. / ¿Qué harías tú?'},
+  {front:'DECIR',frontSub:'raíz: dir-',back:'Futuro: diré / Cond: diría',backEx:'Te lo diré. / ¿Qué diría ella?'},
+  {front:'QUERER',frontSub:'raíz: querr-',back:'Futuro: querré / Cond: querría',backEx:'Querré más. / ¿Querrías venir?'},
+  {front:'SABER',frontSub:'raíz: sabr-',back:'Futuro: sabré / Cond: sabría',backEx:'Lo sabré pronto. / ¿Lo sabrías tú?'},
+  {front:'HABER',frontSub:'raíz: habr-',back:'Futuro: habrá / Cond: habría',backEx:'Habrá tiempo. / Habría más opciones.'},
+  {front:'CABER',frontSub:'raíz: cabr-',back:'Futuro: cabrá / Cond: cabría',backEx:'Todo cabrá. / Cabrían más personas.'},
+  {front:'VALER',frontSub:'raíz: valdr-',back:'Futuro: valdrá / Cond: valdría',backEx:'Valdrá la pena. / Valdría intentarlo.'},
+],
+exercises:[
+  {type:'fill',title:'A. Complete with the irregular future form',
+   wb:['tendré','podrás','hará','vendremos','saldrán','dirá','querrán','sabremos'],
+   qs:[
+     {stem:'___ más paciencia la próxima vez. (tener/yo)',sub:'I will have more patience next time.',a:'tendré',bc:'var(--fut)'},
+     {stem:'¿___ venir a la reunión? (poder/tú)',sub:'Will you be able to come to the meeting?',a:'podrás',bc:'var(--fut)'},
+     {stem:'Ella ___ todo lo posible para ayudarte. (hacer)',sub:'She will do everything possible to help you.',a:'hará',bc:'var(--fut)'},
+     {stem:'___ juntos el próximo verano. (venir/nosotros)',sub:'We will come together next summer.',a:'vendremos',bc:'var(--fut)'},
+     {stem:'¿A qué hora ___ del aeropuerto? (salir/ellos)',sub:'What time will they leave the airport?',a:'saldrán',bc:'var(--fut)'},
+     {stem:'¿Qué ___ el director sobre este proyecto? (decir)',sub:'What will the director say about this project?',a:'dirá',bc:'var(--fut)'},
+   ]},
+  {type:'fill',title:'B. Complete with the irregular conditional form',
+   wb:['tendría','podrías','haríamos','vendrían','saldría','diría','querrías','sabría'],
+   qs:[
+     {stem:'Con más tiempo libre, ___ más oportunidades. (tener/yo)',sub:'With more free time, I would have more opportunities.',a:'tendría',bc:'var(--cond)'},
+     {stem:'¿___ ayudarme a cargar esto? (poder/tú)',sub:'Could you help me carry this?',a:'podrías',bc:'var(--cond)'},
+     {stem:'___ lo mismo en tu lugar. (hacer/nosotros)',sub:'We would do the same in your place.',a:'haríamos',bc:'var(--cond)'},
+     {stem:'Dijeron que ___ a las siete. (venir/ellos)',sub:'They said they would come at seven.',a:'vendrían',bc:'var(--cond)'},
+     {stem:'___ antes si no hubiera tráfico. (salir/yo)',sub:'I would leave earlier if there weren\'t so much traffic.',a:'saldría',bc:'var(--cond)'},
+     {stem:'¿Qué ___ tú si supieras la verdad? (decir)',sub:'What would you say if you knew the truth?',a:'diría',bc:'var(--cond)'},
+   ]},
+  {type:'fill',title:'C. Irregulars — choose future or conditional from context',
+   wb:['haría','tendrán','podrías','vendría','diré','saldríamos'],
+   qs:[
+     {stem:'Yo ___ lo mismo en tu situación. (hacer)',sub:'I would do the same in your situation. Hypothetical.',a:'haría',bc:'var(--cond)'},
+     {stem:'Ellos ___ que estudiar más para pasar. (tener)',sub:'They will have to study more to pass. Future necessity.',a:'tendrán',bc:'var(--fut)'},
+     {stem:'¿Me ___ ayudar un momento? (poder/tú)',sub:'Could you help me for a moment? Polite request.',a:'podrías',bc:'var(--cond)'},
+     {stem:'Ella dijo que ___ más tarde. (venir)',sub:'She said she would come later. Future in the past.',a:'vendría',bc:'var(--cond)'},
+     {stem:'Te ___ la respuesta mañana. (decir/yo)',sub:'I will tell you the answer tomorrow.',a:'diré',bc:'var(--fut)'},
+     {stem:'Nosotros ___ antes si no hubiera tráfico. (salir)',sub:'We would leave earlier if there were no traffic.',a:'saldríamos',bc:'var(--cond)'},
+   ]},
+]},
+
+// ── 3: CONTRASTE FUT vs COND ──────────────────────────────────────────────────
+{title:'🔀 Futuro vs Cond.',color:'var(--b1)',
+pairs:[
+  {fut:{es:'Mañana hablaré con ella.',en:'Tomorrow I will talk to her.',note:'→ Concrete future plan.'},
+   cond:{es:'Hablaría con ella, pero no la encuentro.',en:'I would talk to her, but I can\'t find her.',note:'→ Hypothetical intention blocked by the situation.'}},
+  {fut:{es:'¿Vendrás a la fiesta?',en:'Will you come to the party?',note:'→ Asking about plans.'},
+   cond:{es:'¿Vendrías si te invitaran?',en:'Would you come if they invited you?',note:'→ Hypothetical situation.'}},
+  {fut:{es:'Podremos terminar a tiempo.',en:'We will be able to finish on time.',note:'→ Prediction.'},
+   cond:{es:'Podríamos terminar si tuviéramos más ayuda.',en:'We would be able to finish if we had more help.',note:'→ Unreal condition.'}},
+  {fut:{es:'Le dirán la verdad mañana.',en:'They will tell her the truth tomorrow.',note:'→ Future plan.'},
+   cond:{es:'Yo que tú, le diría la verdad ahora.',en:'If I were you, I would tell her the truth now.',note:'→ Advice.'}},
+  {fut:{es:'¿Dónde estará mi cartera?',en:'Where could my wallet be?',note:'→ Guess about the present.'},
+   cond:{es:'¿Dónde estaría ella anoche?',en:'Where could she have been last night?',note:'→ Suposición sobre pasado.'}},
+  {fut:{es:'Tendremos que esperar.',en:'We will have to wait.',note:'→ Future necessity.'},
+   cond:{es:'No tendríamos que esperar si llegaras a tiempo.',en:'We wouldn\'t have to wait if you arrived on time.',note:'→ Unreal condition.'}},
+],
+exercises:[
+  {type:'fill',title:'A. Future or conditional? Complete the sentence',
+   wb:['viajaría','trabajaré','podrías','llegaría','estarán','sería'],
+   qs:[
+     {stem:'Si tuviera más dinero, ___ a Europa. (viajar/yo)',sub:'If I had more money, I would travel to Europe.',a:'viajaría',bc:'var(--cond)'},
+     {stem:'El año que viene ___ en una empresa nueva. (trabajar/yo)',sub:'Next year I will work at a new company.',a:'trabajaré',bc:'var(--fut)'},
+     {stem:'¿Me ___ decir dónde está el baño? (poder/tú)',sub:'Could you tell me where the bathroom is?',a:'podrías',bc:'var(--cond)'},
+     {stem:'Ella dijo que ___ a las tres. (llegar)',sub:'She said she would arrive at three.',a:'llegaría',bc:'var(--cond)'},
+     {stem:'¿Dónde ___ mis llaves? (estar)',sub:'Where could my keys be? Probability about the present.',a:'estarán',bc:'var(--fut)'},
+     {stem:'Con ella aquí, todo ___ diferente. (ser)',sub:'With her here, everything would be different.',a:'sería',bc:'var(--cond)'},
+   ]},
+  {type:'fill',title:'B. Complete with the future OR conditional',
+   wb:['haré','haría','vendrá','vendría','vendrás','tendremos','tendríamos','saldría'],
+   qs:[
+     {stem:'Si me invitaran, ___ con mucho gusto. (venir)',sub:'If they invited me, I would come with pleasure.',a:'vendría',bc:'var(--cond)'},
+     {stem:'¿___ a la reunión de mañana? (venir/tú)',sub:'Will you come to tomorrow\'s meeting?',a:'vendrás',bc:'var(--fut)'},
+     {stem:'___ lo mismo en tu lugar. (hacer/yo)',sub:'I would do the same thing in your place.',a:'haría',bc:'var(--cond)'},
+     {stem:'___ todo lo posible para lograrlo. (hacer/yo)',sub:'I will do everything possible to achieve it.',a:'haré',bc:'var(--fut)'},
+     {stem:'Si siguiera lloviendo, ___ que cancelar. (tener/nosotros)',sub:'If it kept raining, we would have to cancel.',a:'tendríamos',bc:'var(--cond)'},
+     {stem:'___ que esperar — no hay otra opción. (tener/nosotros)',sub:'We will have to wait — there\'s no other option.',a:'tendremos',bc:'var(--fut)'},
+   ]},
+  {type:'fill',title:'C. Mixed practice — complete the correct future form',
+   wb:['llamaré','llamaría','podrás','podrías','llegarían','harás','harías','estarán'],
+   qs:[
+     {stem:'Te ___ mañana. (llamar/yo)',sub:'I will call you tomorrow.',a:'llamaré',bc:'var(--fut)'},
+     {stem:'Te ___, pero perdí tu número. (llamar/yo)',sub:'I would call you, but I lost your number.',a:'llamaría',bc:'var(--cond)'},
+     {stem:'¿___ venir? (poder/tú)',sub:'Will you be able to come?',a:'podrás',bc:'var(--fut)'},
+     {stem:'¿___ ayudarme? (poder/tú)',sub:'Could you help me?',a:'podrías',bc:'var(--cond)'},
+     {stem:'Dijeron que ___ a las siete. (llegar)',sub:'They said they would arrive at seven.',a:'llegarían',bc:'var(--cond)'},
+     {stem:'¿Qué ___ este fin de semana? (hacer/tú)',sub:'What will you do this weekend?',a:'harás',bc:'var(--fut)'},
+     {stem:'¿Qué ___ en mi lugar? (hacer/tú)',sub:'What would you do in my place?',a:'harías',bc:'var(--cond)'},
+     {stem:'¿Dónde ___ mis llaves? (estar)',sub:'Where could my keys be?',a:'estarán',bc:'var(--fut)'},
+   ]},
+]},
+];
+</script>
+<script>
+const renderedTabs=new Set();
+const answers={};
+const fcState={};
+
+function normalize(s){
+  return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[¿?¡!.,;:'"]/g,'').replace(/\s+/g,' ');
+}
+function checkAns(user,correct){
+  const u=normalize(user);
+  if(!u)return false;
+  const alts=String(correct).split('/').map(a=>normalize(a.trim())).filter(Boolean);
+  return alts.includes(u);
+}
+
+function switchTab(i){
+  document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  if(!renderedTabs.has(i)){renderTab(i);renderedTabs.add(i);}
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('visible'));
+  const p=document.getElementById('panel'+i);if(p)p.classList.add('visible');
+}
+
+function buildTabsBar(){
+  const bar=document.getElementById('tabsBar');
+  TABS.forEach((t,i)=>{
+    const btn=document.createElement('button');
+    btn.className='tab-btn'+(i===0?' active':'');
+    btn.textContent=t.title;
+    btn.onclick=()=>switchTab(i);
+    bar.appendChild(btn);
+  });
+}
+
+function renderTab(i){
+  const t=TABS[i];const col=t.color;
+  const container=document.getElementById('tabContents');
+  const panel=document.createElement('div');
+  panel.className='tab-panel'+(i===0?' visible':'');
+  panel.id='panel'+i;
+  let html=`<div style="font-family:var(--display);font-size:1.2rem;font-weight:900;color:${col};margin-bottom:18px">${t.title}</div>`;
+
+  // EXPLANATION BOX
+  if(t.expl){
+    const bcol=col==='var(--fut)'?'rgba(37,217,255,.15)':'rgba(244,114,182,.1)';
+    const bcol2=col==='var(--fut)'?'rgba(37,217,255,.3)':'rgba(244,114,182,.3)';
+    html+=`<div class="expl-box" style="background:${bcol};border-color:${bcol2}">
+      <div class="expl-title" style="color:${col}">📖 ${i===0?'Futuro simple':'Condicional simple'}</div>
+      <div class="expl-body">${t.expl}</div>
+    </div>`;
+  }
+
+  // CONJUGATION TABLES
+  const conjData=t.conj||null;
+  if(conjData){
+    html+=`<div style="font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);margin-bottom:10px">📋 Full conjugation — regular verbs</div>
+    <div class="conj-grid">`;
+    conjData.forEach(vb=>{
+      const forms=vb.fut||vb.cond;
+      const isF=!!vb.fut;
+      html+=`<div class="conj-block" style="border-color:${isF?'rgba(37,217,255,.25)':'rgba(244,114,182,.25)'};background:${isF?'rgba(37,217,255,.04)':'rgba(244,114,182,.04)'}">
+        <div class="conj-block-title" style="color:${col}">${vb.verb}</div>
+        <table class="conj-table">`;
+      ['Yo','Tú','Él/Ella/Usted','Nosotros','Ustedes/Ellos'].forEach((s,si)=>{
+        html+=`<tr><td>${s}</td><td style="color:${col}">${forms[si]}</td></tr>`;
+      });
+      html+=`</table></div>`;
+    });
+    html+=`</div>`;
+  }
+
+  // EXAMPLES
+  const ex=t.examplesFut||t.examplesCond;
+  if(ex){
+    html+=`<div style="font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);margin:16px 0 10px">💬 Examples with different subjects</div>`;
+    ex.forEach(e=>{
+      html+=`<div style="background:rgba(255,255,255,.03);border-radius:10px;padding:10px 14px;border-left:4px solid ${col};margin-bottom:8px">
+        <div style="font-weight:700;font-size:.93rem;margin-bottom:3px">${e.es}</div>
+        <div style="font-size:.8rem;color:var(--muted2);font-style:italic">${e.en}</div>
+        ${e.note?`<div style="font-size:.74rem;color:var(--muted2);margin-top:3px">${e.note}</div>`:''}
+      </div>`;
+    });
+  }
+
+  // IRREGULAR TABLE (tab 2)
+  if(i===2){
+    html+=`<div style="font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);margin-bottom:10px">⚡ Irregular verbs — stem chart</div>
+    <table class="irreg-table">
+      <thead><tr><th>Infinitive</th><th>Future stem</th><th>Conditional stem</th><th>Meaning</th></tr></thead>
+      <tbody>`;
+    IRREGULARES.forEach(v=>{
+      html+=`<tr>
+        <td>${v.inf}</td>
+        <td>${v.fut}é/ás/á...</td>
+        <td>${v.cond}ía/ías/ía...</td>
+        <td>${v.en}</td>
+      </tr>`;
+    });
+    html+=`</tbody></table>
+    <div style="font-size:.78rem;color:var(--muted2);margin-top:6px;font-style:italic">💡 The irregular stem is the same in the future and conditional; only the endings change.</div>`;
+  }
+
+  // CONTRAST PAIRS (tab 3)
+  if(t.pairs){
+    html+=`<div style="font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);margin-bottom:10px">🔀 Direct comparison — Future vs Conditional</div>`;
+    t.pairs.forEach(p=>{
+      html+=`<div class="contrast-grid" style="margin-bottom:10px">
+        <div class="contrast-card" style="border-color:rgba(37,217,255,.3);background:rgba(37,217,255,.04)">
+          <div class="contrast-label" style="color:var(--fut)">🔵 FUTURE</div>
+          <div class="contrast-sent">${p.fut.es}</div>
+          <div class="contrast-note">${p.fut.en}<br><em>${p.fut.note}</em></div>
+        </div>
+        <div class="contrast-card" style="border-color:rgba(244,114,182,.3);background:rgba(244,114,182,.04)">
+          <div class="contrast-label" style="color:var(--cond)">🩷 CONDITIONAL</div>
+          <div class="contrast-sent">${p.cond.es}</div>
+          <div class="contrast-note">${p.cond.en}<br><em>${p.cond.note}</em></div>
+        </div>
+      </div>`;
+    });
+  }
+
+  // FLASHCARDS
+  if(t.flashcards&&t.flashcards.length>0){
+    const fcKey='fc'+i;
+    fcState[fcKey]={idx:0,flipped:false,cards:t.flashcards};
+    html+=`<div class="ex-card" style="margin-bottom:16px">
+    <div class="ex-header"><div class="ex-title" style="color:${col}">🃏 Flashcards — click to flip</div></div>
+    <div class="fc-wrap">
+      <div class="fc-nav" style="margin-bottom:12px">
+        <button class="btn-fc" onclick="fcPrev('${fcKey}')">← Previous</button>
+        <span class="fc-counter" id="fcctr_${fcKey}">1 / ${t.flashcards.length}</span>
+        <button class="btn-fc" onclick="fcNext('${fcKey}')">Next →</button>
+      </div>
+      <div class="fc-scene" onclick="fcFlip('${fcKey}')">
+        <div class="fc-card" id="fccard_${fcKey}">
+          <div class="fc-face fc-front" style="border-color:${col}44">
+            <div class="fc-verb" style="color:${col}" id="fcfront_${fcKey}">${t.flashcards[0].front}</div>
+            <div class="fc-sub" id="fcsub_${fcKey}">${t.flashcards[0].frontSub}</div>
+            <div style="font-size:.7rem;color:var(--muted2);margin-top:6px">Click to reveal the form →</div>
+          </div>
+          <div class="fc-face fc-back">
+            <div class="fc-verb" style="color:${i===1?'var(--cond)':'var(--fut)'}" id="fcback_${fcKey}">${t.flashcards[0].back}</div>
+            <div class="fc-ex" id="fcex_${fcKey}">${t.flashcards[0].backEx||''}</div>
+          </div>
+        </div>
+      </div>
+    </div></div>`;
+  }
+
+  // EXERCISES
+  (t.exercises||[]).forEach((ex,ei)=>{
+    const key=`${i}_${ei}`;
+    html+=`<div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-title" style="color:${col}">${ex.title}</div>
+      <div class="score-row">
+        <span class="score-pill" id="score_${key}">0 / ${ex.qs.length} answered · 0 correct</span>
+        <button class="btn-restart" onclick="restartEx('${key}',${i},${ei})">🔄 Restart</button>
+      </div>
+    </div>`;
+
+    if(ex.type==='fill'){
+      html+=`<div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const qkey=`${key}_${qi}`;
+        const escapedAnswer=q.a.replace(/'/g,"\\'");
+        const parts=q.stem.split('___');
+        const inputHTML=`<input type="text" class="fill-input" id="fill_${qkey}" placeholder="Type here"
+          onkeydown="if(event.key==='Enter')checkFill('${qkey}','${escapedAnswer}','${key}')">`;
+        const stemHTML=parts.length>=2?parts[0]+inputHTML+parts.slice(1).join('___'):q.stem+' '+inputHTML;
+        html+=`<div class="q-item" id="qitem_${qkey}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> ${stemHTML}
+            <button class="btn-check fill-check" onclick="checkFill('${qkey}','${escapedAnswer}','${key}')">Check ✓</button>
+          </div>
+          ${q.sub?`<div class="q-sub">${q.sub}</div>`:''}
+          <div class="q-fb" id="fb_${qkey}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+    } else if(ex.type==='mc'){
+      html+=`<div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const qkey=`${key}_${qi}`;
+        html+=`<div class="q-item" id="qitem_${qkey}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> ${q.stem}</div>
+          <div class="mc-opts">${q.opts.map((o,oi)=>`<button class="mc-opt" onclick="answerMC('${qkey}',${oi},${q.a})">${o}</button>`).join('')}</div>
+          <div class="q-fb" id="fb_${qkey}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+    } else if(ex.type==='translate'){
+      html+=`<div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const qkey=`${key}_${qi}`;
+        html+=`<div class="q-item" id="qitem_${qkey}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> ${q.stem}</div>
+          ${q.sub?`<div class="q-sub">${q.sub}</div>`:''}
+          <input type="text" class="q-input" id="inp_${qkey}" placeholder="Write your translation..."
+            onkeydown="if(event.key==='Enter')checkTranslate('${qkey}','${q.a.replace(/'/g,"\\'")}','${key}')">
+          <button class="btn-check" onclick="checkTranslate('${qkey}','${q.a.replace(/'/g,"\\'")}','${key}')">Check ✓</button>
+          <div class="q-fb" id="fb_${qkey}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+    }
+    html+=`</div>`;
+  });
+
+  panel.innerHTML=html;
+  container.appendChild(panel);
+}
+
+// FLASHCARDS
+function fcFlip(k){const c=document.getElementById('fccard_'+k);const s=fcState[k];if(!s)return;s.flipped=!s.flipped;c.classList.toggle('flipped',s.flipped);}
+function fcNext(k){const s=fcState[k];if(!s)return;s.idx=(s.idx+1)%s.cards.length;s.flipped=false;fcUpdate(k);}
+function fcPrev(k){const s=fcState[k];if(!s)return;s.idx=(s.idx-1+s.cards.length)%s.cards.length;s.flipped=false;fcUpdate(k);}
+function fcUpdate(k){
+  const s=fcState[k];const c=s.cards[s.idx];
+  const card=document.getElementById('fccard_'+k);if(card)card.classList.remove('flipped');
+  const set=(id,val)=>{const el=document.getElementById(id+'_'+k);if(el)el.textContent=val;};
+  set('fcfront',c.front);set('fcsub',c.frontSub||'');set('fcback',c.back);set('fcex',c.backEx||'');
+  const ctr=document.getElementById('fcctr_'+k);if(ctr)ctr.textContent=(s.idx+1)+' / '+s.cards.length;
+}
+
+// ANSWER FUNCTIONS
+function checkFill(qkey,correct,key){
+  if(answers[qkey]!==undefined)return;
+  const inp=document.getElementById('fill_'+qkey);
+  if(!inp||!inp.value.trim()){alert('Type your answer first.');return;}
+  const ok=checkAns(inp.value,correct);
+  answers[qkey]=ok;
+  inp.disabled=true;inp.classList.add(ok?'inp-ok':'inp-err');
+  const item=document.getElementById('qitem_'+qkey);
+  const btn=item?item.querySelector('.fill-check'):null;if(btn)btn.disabled=true;
+  const fb=document.getElementById('fb_'+qkey);
+  if(fb){fb.innerHTML=ok?'✅ Correct!':'❌ Correct answer: <strong>'+correct+'</strong>';fb.classList.add('show');}
+  updateScore(key);
+}
+
+function answerChip(qkey,chosen,correct,key){
+  if(answers[qkey]!==undefined)return;
+  const ok=normalize(chosen)===normalize(correct);
+  answers[qkey]=ok;
+  const blank=document.getElementById('blank_'+qkey);
+  if(blank){blank.textContent=chosen;blank.style.color=ok?'var(--good)':'var(--bad)';}
+  document.querySelectorAll(`#chips_${qkey} .chip`).forEach(btn=>{
+    btn.disabled=true;
+    if(normalize(btn.textContent)===normalize(chosen))btn.classList.add(ok?'chip-ok':'chip-err');
+    else btn.classList.add('used');
+  });
+  const fb=document.getElementById('fb_'+qkey);
+  if(fb){fb.innerHTML=ok?'✅ Correct!':'❌ Correct answer: <strong>'+correct+'</strong>';fb.classList.add('show');}
+  updateScore(key);
+}
+
+function answerMC(qkey,chosen,correct){
+  if(answers[qkey]!==undefined)return;
+  const ok=chosen===correct;answers[qkey]=ok;
+  const item=document.getElementById('qitem_'+qkey);
+  item.querySelectorAll('.mc-opt').forEach((btn,i)=>{
+    btn.disabled=true;
+    if(i===correct)btn.classList.add('show-correct');
+    else if(i===chosen)btn.classList.add('sel-wrong');
+  });
+  const key=qkey.split('_').slice(0,2).join('_');
+  const q=TABS[parseInt(qkey.split('_')[0])].exercises[parseInt(qkey.split('_')[1])].qs[parseInt(qkey.split('_')[2])];
+  const fb=document.getElementById('fb_'+qkey);
+  if(fb){fb.innerHTML=(ok?'✅ ':'❌ ')+(q.fb||'Respuesta correcta marcada en verde.');fb.classList.add('show');}
+  updateScore(key);
+}
+
+function checkTranslate(qkey,correct,key){
+  if(answers[qkey]!==undefined)return;
+  const inp=document.getElementById('inp_'+qkey);
+  if(!inp||!inp.value.trim()){alert('Write your answer first.');return;}
+  const ok=checkAns(inp.value,correct);
+  answers[qkey]=ok;
+  inp.disabled=true;inp.classList.add(ok?'inp-ok':'inp-err');
+  const fb=document.getElementById('fb_'+qkey);
+  if(fb){fb.innerHTML=ok?'✅ Great job!':'❌ Suggested answer: <strong>'+correct+'</strong>';fb.classList.add('show');}
+  const btn=inp.nextElementSibling;if(btn)btn.disabled=true;
+  updateScore(key);
+}
+
+function updateScore(key){
+  const [ti,ei]=key.split('_').map(Number);
+  const ex=TABS[ti].exercises[ei];
+  const done=ex.qs.filter((_,qi)=>answers[`${key}_${qi}`]!==undefined).length;
+  const correct=ex.qs.filter((_,qi)=>answers[`${key}_${qi}`]===true).length;
+  const sc=document.getElementById('score_'+key);
+  if(sc)sc.textContent=done+' / '+ex.qs.length+' answered · '+correct+' correct';
+}
+
+function restartEx(key,ti,ei){
+  const ex=TABS[ti].exercises[ei];
+  ex.qs.forEach((_,qi)=>{
+    const qkey=`${key}_${qi}`;delete answers[qkey];
+    const blank=document.getElementById('blank_'+qkey);
+    if(blank){
+      const t=TABS[ti];const q=(t.exercises||[])[ei]?.qs[qi];
+      blank.textContent='';blank.style.color=q?.bc||'var(--cyan)';
+    }
+    document.querySelectorAll(`#chips_${qkey} .chip`).forEach(b=>{b.disabled=false;b.className='chip';});
+    const item=document.getElementById('qitem_'+qkey);
+    if(item){
+      item.querySelectorAll('.mc-opt').forEach(b=>{b.disabled=false;b.className='mc-opt';});
+      const inp=item.querySelector('.q-input');if(inp){inp.disabled=false;inp.value='';inp.className='q-input';}
+      const finp=item.querySelector('.fill-input');if(finp){finp.disabled=false;finp.value='';finp.className='fill-input';}
+      item.querySelectorAll('.btn-check').forEach(btn=>btn.disabled=false);
+    }
+    const fb=document.getElementById('fb_'+qkey);if(fb){fb.innerHTML='';fb.className='q-fb';}
+  });
+  updateScore(key);
+}
+
+buildTabsBar();
+renderTab(0);
+renderedTabs.add(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adjetivos | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --ap:#f472b6;--ap2:#ff91cd;
+  --per:#25d9ff;--per2:#7ee8ff;
+  --font:'DM Sans',system-ui,sans-serif;
+  --display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 10% 10%,rgba(255,43,191,.13),transparent 28%),radial-gradient(ellipse at 90% 15%,rgba(37,217,255,.09),transparent 28%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(980px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);box-shadow:0 0 18px rgba(255,43,191,.22);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta);text-shadow:1px 1px 0 var(--cyan)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,2.4rem);font-weight:900;line-height:.95;background:linear-gradient(90deg,var(--ap) 0%,#fff 40%,var(--per) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.86rem;line-height:1.5;margin-top:4px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ex-tabs{display:flex;gap:6px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:8px;box-shadow:var(--shadow);overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:9px 12px;font-weight:800;font-family:var(--font);font-size:.78rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;box-shadow:0 3px 0 rgba(0,0,0,.2);transform:translateY(-1px)}
+.etab-icon{font-size:1.2rem;line-height:1}
+.etab-label{font-size:.65rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:24px 28px;box-shadow:var(--shadow)}
+.ex-header{margin-bottom:16px}
+.ex-title{font-family:var(--display);font-size:1.2rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.86rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:100px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ap),var(--per));transition:width .35s}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.btn-magenta{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;font-weight:500;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.err{background:rgba(239,68,68,.11);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+
+/* ══ FLASHCARDS ══ */
+.flash-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+.flash-progress-row{display:flex;align-items:center;gap:12px;width:100%;max-width:520px}
+.flash-counter{font-size:.8rem;font-weight:800;color:var(--muted2);white-space:nowrap}
+.flash-track{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.flash-fill{height:100%;background:linear-gradient(90deg,var(--ap),var(--per));border-radius:999px;transition:width .4s}
+.flash-card-wrap{width:100%;max-width:520px;height:200px;perspective:1000px;cursor:pointer}
+.flash-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.flash-card.flipped{transform:rotateY(180deg)}
+.flash-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px}
+.flash-front{background:linear-gradient(135deg,rgba(244,114,182,.15),rgba(167,139,250,.1));border:2px solid rgba(244,114,182,.3)}
+.flash-back{background:linear-gradient(135deg,rgba(37,217,255,.12),rgba(34,197,94,.08));border:2px solid rgba(37,217,255,.3);transform:rotateY(180deg)}
+.flash-emoji{font-size:2.6rem;line-height:1}
+.flash-word{font-family:var(--display);font-size:1.8rem;font-weight:900;text-align:center}
+.flash-sub{font-size:.82rem;color:var(--muted2);text-align:center}
+.flash-hint{font-size:.72rem;color:var(--muted2);font-style:italic;margin-top:4px}
+.flash-cat{font-size:.65rem;font-weight:800;border-radius:999px;padding:2px 9px}
+.flash-btns{display:flex;gap:10px;justify-content:center;width:100%;max-width:520px}
+.flash-nav{border:0;border-radius:10px;padding:9px 20px;font-weight:800;font-family:var(--font);font-size:.85rem;cursor:pointer;transition:.15s;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:var(--text)}
+.flash-nav:hover{background:rgba(255,255,255,.14)}
+.flash-mode-row{display:flex;gap:8px;justify-content:center;width:100%;max-width:520px}
+.flash-mode-btn{border:0;border-radius:999px;padding:5px 14px;font-weight:700;font-family:var(--font);font-size:.75rem;cursor:pointer;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--muted2);transition:.14s}
+.flash-mode-btn.active{background:rgba(37,217,255,.14);color:var(--cyan);border-color:rgba(37,217,255,.3)}
+.flash-filter-row{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;width:100%;max-width:520px}
+.flash-filter{border:0;border-radius:999px;padding:5px 13px;font-weight:700;font-family:var(--font);font-size:.73rem;cursor:pointer;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--muted2);transition:.14s}
+.flash-filter.on{background:rgba(37,217,255,.14);color:var(--cyan);border-color:rgba(37,217,255,.3)}
+.flash-filter.on-ap{background:rgba(244,114,182,.14);color:var(--ap2);border-color:rgba(244,114,182,.3)}
+
+/* ══ MC ══ */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:15px 17px}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px}
+.mc-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0;margin-top:2px}
+.mc-sent{font-size:1rem;line-height:1.65;flex:1}
+.mc-blank{display:inline-block;min-width:80px;border-bottom:2.5px solid rgba(37,217,255,.4);padding:0 4px;text-align:center;font-weight:800;color:var(--cyan)}
+.mc-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding-left:28px}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px;margin-bottom:3px}
+.mc-opt{border:0;border-radius:10px;padding:8px 16px;font-weight:700;font-family:var(--font);font-size:.92rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt:hover:not(:disabled){transform:translateY(-1px);background:rgba(37,217,255,.09);border-color:rgba(37,217,255,.35)}
+.mc-opt:disabled{cursor:default;transform:none}
+.mc-opt.mc-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.mc-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mc-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-expl{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:7px;padding:8px 12px 8px 28px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-expl.show{display:block}
+
+/* ══ ERROR HUNT ══ */
+.eh-list{display:flex;flex-direction:column;gap:9px}
+.eh-item{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:13px 15px;display:flex;align-items:flex-start;gap:11px}
+.eh-item.correct-sentence{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.05)}
+.eh-item.wrong-sentence{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.05)}
+.eh-num{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:var(--muted2);flex-shrink:0;margin-top:1px}
+.eh-body{flex:1}.eh-sent{font-size:.97rem;line-height:1.6}
+.wrong-word{color:var(--bad);text-decoration:underline wavy var(--bad);font-weight:700}
+.eh-correction{font-size:.82rem;font-weight:700;color:var(--good);margin-left:5px}
+.eh-judge-row{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+.eh-judge-btn{border:0;border-radius:9px;padding:7px 15px;font-weight:800;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.eh-correct-btn:hover:not(:disabled){border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.1);color:#86efac}
+.eh-error-btn:hover:not(:disabled){border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);color:#fca5a5}
+.eh-judge-btn:disabled{cursor:default;opacity:.5}
+.judge-chosen-ok{border-color:var(--good)!important;background:rgba(34,197,94,.18)!important;color:#86efac!important;opacity:1!important}
+.judge-chosen-err{border-color:var(--bad)!important;background:rgba(239,68,68,.14)!important;color:#fca5a5!important;opacity:1!important}
+.eh-exp{display:none;font-size:.79rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);line-height:1.55}
+.revealed .eh-exp{display:block}
+
+/* ══ SORT ══ */
+.sort-pile{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;min-height:52px;margin-bottom:12px}
+.sort-bucket{border-radius:14px;padding:13px;min-height:90px;display:flex;flex-direction:column;gap:7px;transition:background .2s}
+.sort-bucket.drag-over{box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.bucket-title{font-family:var(--display);font-size:.8rem;font-weight:900;text-align:center}
+.bucket-sub{font-size:.62rem;color:var(--muted2);text-align:center;line-height:1.35}
+.sort-card{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:9px;padding:7px 12px;font-size:.84rem;font-weight:700;cursor:grab;user-select:none;transition:.15s;line-height:1.4;display:flex;align-items:center;gap:6px}
+.sort-card:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sort-card:active{cursor:grabbing}
+.sort-card.drag-ghost{opacity:.35}
+.sort-card.card-correct{background:rgba(34,197,94,.14);border-color:var(--good);color:#86efac;cursor:default}
+.sort-card.card-wrong{background:rgba(239,68,68,.1);border-color:var(--bad);color:#fca5a5;font-size:.78rem}
+
+/* ══ SPEED ══ */
+.speed-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.speed-stats{display:flex;gap:9px}
+.spstat{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spstat .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.spstat .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spstat .sv.g{color:var(--good)}.spstat .sv.b{color:var(--bad)}.spstat .sv.w{color:var(--warn)}
+.speed-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 20px;text-align:center;width:100%;max-width:520px}
+.speed-emoji{font-size:3.5rem;line-height:1;margin-bottom:8px}
+.speed-clue{font-size:1.05rem;line-height:1.6;margin-bottom:4px}
+.speed-clue em{font-style:normal;font-weight:900;color:var(--warn);background:rgba(245,158,11,.12);border-radius:5px;padding:0 5px}
+.speed-hint{font-size:.77rem;color:var(--muted2);font-style:italic}
+.speed-input-row{display:flex;gap:8px;justify-content:center;width:100%;max-width:520px}
+.speed-inp{flex:1;max-width:240px;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.3);border-radius:11px;padding:10px 14px;font-family:var(--font);font-size:1rem;font-weight:700;color:var(--text);outline:none;transition:.15s}
+.speed-inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.speed-inp::placeholder{color:var(--muted2);font-weight:400}
+.speed-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:520px}
+.speed-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.speed-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.timer-row{display:flex;align-items:center;gap:9px;width:100%;max-width:520px}
+.timer-track{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.timer-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ap),var(--per));transition:width 1s linear}
+.timer-num{font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--muted2);min-width:22px;text-align:right}
+.streak-badge{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak-badge.show{display:inline-flex;align-items:center;gap:4px}
+.speed-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.speed-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.speed-start p{color:var(--muted);font-size:.87rem;max-width:400px;line-height:1.6}
+.combo-flash{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.combo-flash.anim{animation:cf .7s ease forwards}
+@keyframes cf{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+
+
+/* ══ PHOTO EXERCISE ══ */
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.photo-card{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);border-radius:18px;overflow:hidden;transition:border-color .15s}
+.photo-card:hover{border-color:rgba(37,217,255,.3)}
+.photo-img-wrap{position:relative;width:100%;height:260px;overflow:hidden;background:linear-gradient(160deg,#f0f4ff,#e8edf8);display:flex;align-items:center;justify-content:center}
+.photo-img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:opacity .3s}
+.photo-img.loaded{opacity:1}.photo-img.loading{opacity:0}
+.photo-svg-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.photo-body{padding:14px 16px}
+.photo-q{font-size:.95rem;line-height:1.55;color:var(--text);margin-bottom:10px}
+.photo-q strong{color:var(--cyan)}
+.photo-opts{display:flex;flex-wrap:wrap;gap:7px}
+.p-opt{border:0;border-radius:9px;padding:7px 16px;font-weight:800;font-family:var(--display);font-size:.92rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.p-opt:hover:not(:disabled){transform:translateY(-1px);background:rgba(37,217,255,.09);border-color:rgba(37,217,255,.35)}
+.p-opt:disabled{cursor:default;transform:none}
+.p-opt.p-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.p-opt.p-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.p-opt.p-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.p-expl{display:none;font-size:.79rem;color:var(--muted);margin-top:8px;padding:7px 10px;background:rgba(255,255,255,.04);border-radius:8px;line-height:1.5}
+.p-expl.show{display:block}
+.photo-num{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.55);color:white;font-size:.65rem;font-weight:900;border-radius:6px;padding:3px 8px;backdrop-filter:blur(4px)}
+
+/* ══ REFERENCE ══ */
+.ref-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ref-block{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px}
+.ref-block h3{font-family:var(--display);font-size:.95rem;font-weight:800;margin-bottom:10px}
+.ref-table{width:100%;border-collapse:collapse;font-size:.83rem}
+.ref-table th{padding:7px 10px;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+.ref-table td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-table tr:hover td{background:rgba(255,255,255,.02)}
+.td-es{font-weight:700}.td-en{color:var(--muted2);font-style:italic;font-size:.79rem}
+.note-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:15px 17px;margin-bottom:14px}
+.note-box h3{font-family:var(--display);font-size:.95rem;font-weight:800;margin-bottom:10px;color:var(--warn)}
+
+/* ══ PICTURE EXERCISE ══ */
+.pic-wrap{display:flex;flex-direction:column;align-items:center;gap:0}
+.pic-progress-row{display:flex;align-items:center;gap:12px;width:100%;max-width:560px;margin-bottom:14px}
+.pic-counter{font-size:.8rem;font-weight:800;color:var(--muted2);white-space:nowrap}
+.pic-track{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.pic-fill{height:100%;background:linear-gradient(90deg,var(--ap),var(--per));border-radius:999px;transition:width .4s}
+.pic-sentence{font-family:var(--display);font-size:1.25rem;font-weight:900;text-align:center;margin-bottom:14px;width:100%;max-width:560px;line-height:1.5}
+.pic-blank{display:inline-block;min-width:140px;border-bottom:3px solid var(--cyan);padding:0 6px;color:var(--cyan)}
+.pic-img-box{width:100%;max-width:280px;aspect-ratio:1;border-radius:18px;overflow:hidden;background:rgba(255,255,255,.96);display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.pic-img-box svg{width:90%;height:90%}
+.pic-opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:560px}
+.pic-opt{border:0;border-radius:13px;padding:14px 10px;font-weight:900;font-family:var(--display);font-size:1.05rem;cursor:pointer;transition:.15s;text-align:left;display:flex;align-items:center;gap:10px;color:white;position:relative}
+.pic-opt:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.1)}
+.pic-opt:disabled{cursor:default;transform:none}
+.pic-opt .opt-shape{width:18px;height:18px;border-radius:4px;flex-shrink:0;border:2.5px solid rgba(255,255,255,.5)}
+.pic-opt.p0{background:#e53935}
+.pic-opt.p1{background:#1e88e5}
+.pic-opt.p2{background:#fb8c00}
+.pic-opt.p3{background:#43a047}
+.pic-opt .opt-shape.s0{background:#e53935;border-color:white}
+.pic-opt .opt-shape.s1{background:#1e88e5;border-color:white}
+.pic-opt .opt-shape.s2{background:#fb8c00;border-color:white}
+.pic-opt .opt-shape.s3{background:#43a047;border-color:white}
+.pic-opt-ok{box-shadow:0 0 0 4px var(--good) !important;filter:brightness(1.15)}
+.pic-opt-err{opacity:.45}
+.pic-opt-reveal{box-shadow:0 0 0 4px var(--good) !important}
+.pic-check-icon{margin-left:auto;font-size:1.2rem}
+.pic-fb{min-height:36px;display:flex;align-items:center;justify-content:center;font-size:.92rem;font-weight:700;border-radius:10px;padding:8px 16px;width:100%;max-width:560px;margin-top:10px}
+.pic-fb.ok{background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.3);color:#86efac}
+.pic-fb.err{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#fca5a5}
+.pic-score-row{display:flex;gap:9px;justify-content:center;margin-bottom:12px}
+
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:16px 13px}.ref-cols{grid-template-columns:1fr}}
+
+/* ══ PHOTO EXERCISE ══ */
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.photo-card{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);border-radius:18px;overflow:hidden;transition:border-color .15s}
+.photo-card:hover{border-color:rgba(37,217,255,.3)}
+.photo-img-wrap{position:relative;width:100%;height:260px;overflow:hidden;background:linear-gradient(160deg,#f0f4ff,#e8edf8);display:flex;align-items:center;justify-content:center}
+.photo-img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:opacity .3s}
+.photo-img.loaded{opacity:1}.photo-img.loading{opacity:0}
+.photo-svg-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.photo-body{padding:14px 16px}
+.photo-q{font-size:.95rem;line-height:1.55;color:var(--text);margin-bottom:10px}
+.photo-q strong{color:var(--cyan)}
+.photo-opts{display:flex;flex-wrap:wrap;gap:7px}
+.p-opt{border:0;border-radius:9px;padding:7px 16px;font-weight:800;font-family:var(--display);font-size:.92rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.p-opt:hover:not(:disabled){transform:translateY(-1px);background:rgba(37,217,255,.09);border-color:rgba(37,217,255,.35)}
+.p-opt:disabled{cursor:default;transform:none}
+.p-opt.p-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.p-opt.p-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.p-opt.p-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.p-expl{display:none;font-size:.79rem;color:var(--muted);margin-top:8px;padding:7px 10px;background:rgba(255,255,255,.04);border-radius:8px;line-height:1.5}
+.p-expl.show{display:block}
+.photo-num{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.55);color:white;font-size:.65rem;font-weight:900;border-radius:6px;padding:3px 8px;backdrop-filter:blur(4px)}
+
+.char-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%}
+.char-spinner{width:36px;height:36px;border:3px solid #e0e0e0;border-top-color:#7c3aed;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ══ HIGH-QUALITY CHARACTER IMAGES ══ */
+.photo-img{width:100%;height:100%;object-fit:contain!important;object-position:center center!important;display:block;padding:8px;background:#f8fafc}
+.photo-img-wrap{background:#f8fafc!important}
+
+</style>
+</head>
+<body>
+<div class="app">
+<div class="combo-flash" id="comboFlash"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Adjetivos</h1>
+      <p>50 adjectives — 25 physical appearance + 25 personality. Updated with clearer character-image matching and a stronger personality section.</p>
+      <div class="badges">
+        <span class="badge">A1–B1</span>
+        <span class="badge" style="border-color:rgba(244,114,182,.35);color:var(--ap2)">🧍 Physical appearance</span>
+        <span class="badge" style="border-color:rgba(37,217,255,.35);color:var(--per2)">🧠 Personality</span>
+        <span class="badge">Gender &amp; number agreement</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">🃏</span><span class="etab-label">Flash<br>cards</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">📸</span><span class="etab-label">Appearance<br>characters</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">🧠</span><span class="etab-label">Personality<br>characters</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">📝</span><span class="etab-label">Multiple<br>choice</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">🔍</span><span class="etab-label">Error<br>hunter</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">🗂️</span><span class="etab-label">Drag &<br>sort</span></button>
+  <button class="etab" id="etab-6" onclick="goEx(6)"><span class="etab-icon">⚡</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-7" onclick="goEx(7)"><span class="etab-icon">📚</span><span class="etab-label">Reference</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · Your Mexican Friend</p>
+</div>
+<script>
+/* ══════════════════════════════════════════
+   ADJECTIVE DATA
+   cat: 'ap' = apariencia física, 'per' = personalidad
+   masc: masculine form
+   fem:  feminine form (if different)
+   inv:  invariable (same for both genders)
+   en:   English translation
+   emoji: visual hint
+══════════════════════════════════════════ */
+const ADJ = [
+  /* ── APARIENCIA FÍSICA ── */
+  {masc:'alto',        fem:'alta',        cat:'ap',  en:'tall',              emoji:'🧍‍♂️'},
+  {masc:'bajo',        fem:'baja',        cat:'ap',  en:'short',             emoji:'🧒'},
+  {masc:'delgado',     fem:'delgada',     cat:'ap',  en:'thin / slim',       emoji:'🪶'},
+  {masc:'flaco',       fem:'flaca',       cat:'ap',  en:'skinny',            emoji:'🦷'},
+  {masc:'gordo',       fem:'gorda',       cat:'ap',  en:'fat',               emoji:'🫃'},
+  {masc:'fuerte',      fem:'fuerte',      cat:'ap',  en:'strong',            emoji:'💪'},
+  {masc:'musculoso',   fem:'musculosa',   cat:'ap',  en:'muscular',          emoji:'🏋️'},
+  {masc:'atlético',    fem:'atlética',    cat:'ap',  en:'athletic',          emoji:'🏃'},
+  {masc:'joven',       fem:'joven',       cat:'ap',  en:'young',             emoji:'👶'},
+  {masc:'mayor',       fem:'mayor',       cat:'ap',  en:'older / elderly',   emoji:'👴'},
+  {masc:'guapo',       fem:'guapa',       cat:'ap',  en:'handsome / beautiful',emoji:'😍'},
+  {masc:'bonito',      fem:'bonita',      cat:'ap',  en:'pretty',            emoji:'🌸'},
+  {masc:'atractivo',   fem:'atractiva',   cat:'ap',  en:'attractive',        emoji:'✨'},
+  {masc:'feo',         fem:'fea',         cat:'ap',  en:'ugly',              emoji:'😬'},
+  {masc:'elegante',    fem:'elegante',    cat:'ap',  en:'elegant',           emoji:'🎩'},
+  {masc:'casual',      fem:'casual',      cat:'ap',  en:'casual',            emoji:'👕'},
+  {masc:'pálido',      fem:'pálida',      cat:'ap',  en:'pale',              emoji:'🫥'},
+  {masc:'moreno',      fem:'morena',      cat:'ap',  en:'dark-skinned / brunette',emoji:'🌙'},
+  {masc:'rubio',       fem:'rubia',       cat:'ap',  en:'blond',             emoji:'👱'},
+  {masc:'pelirrojo',   fem:'pelirroja',   cat:'ap',  en:'red-haired',        emoji:'🦰'},
+  {masc:'canoso',      fem:'canosa',      cat:'ap',  en:'gray-haired',       emoji:'🧓'},
+  {masc:'calvo',       fem:'calva',       cat:'ap',  en:'bald',              emoji:'🧑‍🦲'},
+  {masc:'barbudo',     fem:'barbuda',     cat:'ap',  en:'bearded',           emoji:'🧔'},
+  {masc:'pecoso',      fem:'pecosa',      cat:'ap',  en:'freckled',          emoji:'🙂'},
+  {masc:'limpio',      fem:'limpia',      cat:'ap',  en:'clean / neat',      emoji:'🧹'},
+  /* ── PERSONALIDAD ── */
+  {masc:'amable',      fem:'amable',      cat:'per', en:'kind',              emoji:'🤗'},
+  {masc:'simpático',   fem:'simpática',   cat:'per', en:'nice / friendly',   emoji:'😊'},
+  {masc:'serio',       fem:'seria',       cat:'per', en:'serious',           emoji:'😐'},
+  {masc:'divertido',   fem:'divertida',   cat:'per', en:'funny / fun',       emoji:'😂'},
+  {masc:'tímido',      fem:'tímida',      cat:'per', en:'shy',               emoji:'😳'},
+  {masc:'extrovertido',fem:'extrovertida',cat:'per', en:'outgoing',          emoji:'🎉'},
+  {masc:'inteligente', fem:'inteligente', cat:'per', en:'intelligent',       emoji:'🧠'},
+  {masc:'trabajador',  fem:'trabajadora', cat:'per', en:'hardworking',       emoji:'💼'},
+  {masc:'responsable', fem:'responsable', cat:'per', en:'responsible',       emoji:'✅'},
+  {masc:'honesto',     fem:'honesta',     cat:'per', en:'honest',            emoji:'🤝'},
+  {masc:'generoso',    fem:'generosa',    cat:'per', en:'generous',          emoji:'🎁'},
+  {masc:'paciente',    fem:'paciente',    cat:'per', en:'patient',           emoji:'⏳'},
+  {masc:'impaciente',  fem:'impaciente',  cat:'per', en:'impatient',         emoji:'⚡'},
+  {masc:'tranquilo',   fem:'tranquila',   cat:'per', en:'calm',              emoji:'🧘'},
+  {masc:'nervioso',    fem:'nerviosa',    cat:'per', en:'nervous',           emoji:'😰'},
+  {masc:'optimista',   fem:'optimista',   cat:'per', en:'optimistic',        emoji:'🌟'},
+  {masc:'pesimista',   fem:'pesimista',   cat:'per', en:'pessimistic',       emoji:'😔'},
+  {masc:'creativo',    fem:'creativa',    cat:'per', en:'creative',          emoji:'🎨'},
+  {masc:'curioso',     fem:'curiosa',     cat:'per', en:'curious',           emoji:'🔍'},
+  {masc:'organizado',  fem:'organizada',  cat:'per', en:'organized',         emoji:'📋'},
+  {masc:'desorganizado',fem:'desorganizada',cat:'per',en:'disorganized',     emoji:'🗃️'},
+  {masc:'egoísta',     fem:'egoísta',     cat:'per', en:'selfish',           emoji:'🙈'},
+  {masc:'arrogante',   fem:'arrogante',   cat:'per', en:'arrogant',          emoji:'😤'},
+  {masc:'humilde',     fem:'humilde',     cat:'per', en:'humble',            emoji:'🙏'},
+  {masc:'valiente',    fem:'valiente',    cat:'per', en:'brave',             emoji:'🦁'},
+];
+
+function seededShuffle(arr,seed){
+  const a=[...arr];let s=seed;
+  for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+function randShuffle(arr){return [...arr].sort(()=>Math.random()-.5);}
+
+/* ══════════════════════════════════════════
+   EX 2 — MC (50 questions in context)
+══════════════════════════════════════════ */
+const MC = [
+  // APARIENCIA FÍSICA
+  {sent:'Carlos mide dos metros — es muy ___.',         en:'Carlos is two meters tall — he is very tall.',      opts:['bajo','alto','gordo','joven'],      ans:1, exp:'<strong>Alto</strong> = tall. Two meters is very tall.'},
+  {sent:'Ana pesa muy poco; su médico dice que está demasiado ___.',en:'Ana weighs very little; her doctor says she is too skinny.',opts:['gorda','flaca','alta','elegante'],ans:1,exp:'<strong>Flaca</strong> = skinny (more extreme than delgada).'},
+  {sent:'Va al gimnasio todos los días y está muy ___.',en:'She goes to the gym every day and is very muscular.',opts:['pálida','musculosa','calva','tímida'],ans:1,exp:'<strong>Musculosa</strong> = muscular (fem.). Note the feminine form ends in -a.'},
+  {sent:'Mi abuelo tiene ochenta años — es bastante ___.',en:'My grandfather is eighty years old — he is quite elderly.',opts:['joven','mayor','rubio','alto'],ans:1,exp:'<strong>Mayor</strong> = older / elderly. Invariable: same for masc. and fem.'},
+  {sent:'Tiene el pelo muy claro y los ojos azules — es ___.',en:'She has very light hair and blue eyes — she is blond.',opts:['morena','pelirroja','rubia','canosa'],ans:2,exp:'<strong>Rubia</strong> = blond (fem.). "Rubio" for masculine.'},
+  {sent:'No tiene ni un pelo en la cabeza — es ___.',en:'He doesn\'t have a single hair on his head — he is bald.',opts:['barbudo','calvo','pecoso','moreno'],ans:1,exp:'<strong>Calvo</strong> = bald. "Calva" for feminine.'},
+  {sent:'Tiene una barba muy larga — es muy ___.',en:'He has a very long beard — he is very bearded.',opts:['calvo','pecoso','barbudo','pálido'],ans:2,exp:'<strong>Barbudo</strong> = bearded. Typically used for men.'},
+  {sent:'Tiene muchas manchas pequeñas en la cara — es ___.',en:'She has many small spots on her face — she is freckled.',opts:['pálida','morena','pecosa','canosa'],ans:2,exp:'<strong>Pecosa</strong> = freckled (fem.).'},
+  {sent:'Siempre lleva trajes de diseñador — es muy ___.',en:'He always wears designer suits — he is very elegant.',opts:['casual','feo','elegante','bajo'],ans:2,exp:'<strong>Elegante</strong> = elegant. Invariable form.'},
+  {sent:'Su habitación siempre está perfectamente ordenada — es muy ___.',en:'Her room is always perfectly tidy — she is very neat.',opts:['flaca','limpia','pálida','guapa'],ans:1,exp:'<strong>Limpia</strong> = clean / neat (fem.).'},
+  {sent:'Tiene el pelo de color zanahoria — es ___.',en:'She has carrot-colored hair — she is red-haired.',opts:['rubia','morena','pelirroja','canosa'],ans:2,exp:'<strong>Pelirroja</strong> = red-haired (fem.).'},
+  {sent:'Con 25 años y sin arrugas, es muy ___.',en:'At 25 and with no wrinkles, she is very young.',opts:['mayor','joven','vieja','alta'],ans:1,exp:'<strong>Joven</strong> = young. Invariable.'},
+  {sent:'Nunca sale al sol y tiene la piel muy blanca — es ___.',en:'He never goes out in the sun and has very white skin — he is pale.',opts:['moreno','pálido','rubio','fuerte'],ans:1,exp:'<strong>Pálido</strong> = pale (masc.).'},
+  {sent:'Tiene piel oscura y cabello negro — es ___.',en:'She has dark skin and black hair — she is dark-skinned.',opts:['rubia','pálida','morena','canosa'],ans:2,exp:'<strong>Morena</strong> = dark-skinned / brunette (fem.).'},
+  {sent:'Practica natación, ciclismo y atletismo — es muy ___.',en:'She practices swimming, cycling and track — she is very athletic.',opts:['tímida','atlética','seria','baja'],ans:1,exp:'<strong>Atlética</strong> = athletic (fem.).'},
+  // PERSONALIDAD
+  {sent:'Siempre dice la verdad, incluso cuando es difícil — es muy ___.',en:'She always tells the truth, even when it\'s hard — she is very honest.',opts:['egoísta','honesta','arrogante','nerviosa'],ans:1,exp:'<strong>Honesta</strong> = honest (fem.).'},
+  {sent:'Nunca se enoja ni se altera — es una persona muy ___.',en:'She never gets angry or upset — she is a very calm person.',opts:['nerviosa','impaciente','tranquila','seria'],ans:2,exp:'<strong>Tranquila</strong> = calm (fem.).'},
+  {sent:'Le encanta conocer gente y hablar con extraños — es muy ___.',en:'She loves meeting people and talking to strangers — she is very outgoing.',opts:['tímida','extrovertida','pesimista','seria'],ans:1,exp:'<strong>Extrovertida</strong> = outgoing (fem.).'},
+  {sent:'No soporta esperar — siempre quiere las cosas ya — es muy ___.',en:'He can\'t stand waiting — he always wants things now — he is very impatient.',opts:['paciente','tranquilo','impaciente','humilde'],ans:2,exp:'<strong>Impaciente</strong> = impatient. Invariable.'},
+  {sent:'Siempre piensa que todo va a salir bien — es muy ___.',en:'She always thinks everything will work out — she is very optimistic.',opts:['pesimista','nerviosa','optimista','tímida'],ans:2,exp:'<strong>Optimista</strong> = optimistic. Invariable.'},
+  {sent:'Trabaja 12 horas al día y nunca se rinde — es muy ___.',en:'He works 12 hours a day and never gives up — he is very hardworking.',opts:['perezoso','trabajador','tímido','paciente'],ans:1,exp:'<strong>Trabajador</strong> = hardworking (masc.). Feminine: trabajadora.'},
+  {sent:'Siempre piensa primero en sí mismo — es muy ___.',en:'He always thinks of himself first — he is very selfish.',opts:['generoso','humilde','egoísta','amable'],ans:2,exp:'<strong>Egoísta</strong> = selfish. Invariable.'},
+  {sent:'Siempre ayuda a los demás sin pedir nada a cambio — es muy ___.',en:'She always helps others without asking anything in return — she is very generous.',opts:['egoísta','arrogante','generosa','nerviosa'],ans:2,exp:'<strong>Generosa</strong> = generous (fem.).'},
+  {sent:'Nunca presume de sus logros — es muy ___.',en:'He never boasts about his achievements — he is very humble.',opts:['arrogante','egoísta','humilde','serio'],ans:2,exp:'<strong>Humilde</strong> = humble. Invariable.'},
+  {sent:'Siempre llega a tiempo y cumple sus compromisos — es muy ___.',en:'She always arrives on time and keeps her commitments — she is very responsible.',opts:['desorganizada','irresponsable','responsable','tímida'],ans:2,exp:'<strong>Responsable</strong> = responsible. Invariable.'},
+  // CONCORDANCIA DE GÉNERO
+  {sent:'Mi hermana es muy ___ — siempre está sonriendo.',en:'My sister is very nice — she is always smiling.',opts:['simpático','simpática','amable','seria'],ans:1,exp:'<strong>Simpática</strong> — feminine form for "mi hermana" (fem.).'},
+  {sent:'El bebé es muy ___ — lleva solo tres meses.',en:'The baby is very young — it\'s only three months old.',opts:['mayor','joven','alto','gordo'],ans:1,exp:'<strong>Joven</strong> — invariable, same for masculine and feminine.'},
+  {sent:'María es ___ — tiene el pelo gris.',en:'María is gray-haired — she has gray hair.',opts:['canoso','canosa','rubio','pálida'],ans:1,exp:'<strong>Canosa</strong> — feminine form for "María".'},
+  {sent:'El profesor es muy ___ — nunca pierde la paciencia.',en:'The teacher is very patient — he never loses his patience.',opts:['paciente','pacientes','impaciente','nervioso'],ans:0,exp:'<strong>Paciente</strong> — invariable adjective, same for masc. and fem.'},
+  {sent:'Mi mejor amigo es muy ___ — siempre me hace reír.',en:'My best friend is very funny — he always makes me laugh.',opts:['divertida','divertido','serio','tímido'],ans:1,exp:'<strong>Divertido</strong> — masculine form for "mi mejor amigo".'},
+  // MORE CONTEXT
+  {sent:'Se pone ___ antes de hablar en público.',en:'She gets nervous before speaking in public.',opts:['tranquila','nerviosa','optimista','valiente'],ans:1,exp:'<strong>Nerviosa</strong> = nervous (fem.).'},
+  {sent:'Siempre habla de lo maravilloso que es — es muy ___.',en:'He always talks about how wonderful he is — he is very arrogant.',opts:['humilde','generoso','arrogante','amable'],ans:2,exp:'<strong>Arrogante</strong> = arrogant. Invariable.'},
+  {sent:'Le encanta explorar ideas nuevas — es muy ___.',en:'She loves exploring new ideas — she is very curious.',opts:['seria','aburrida','curiosa','organizada'],ans:2,exp:'<strong>Curiosa</strong> = curious (fem.).'},
+  {sent:'Sus ideas son siempre originales — es muy ___.',en:'Her ideas are always original — she is very creative.',opts:['organizada','seria','creativa','tímida'],ans:2,exp:'<strong>Creativa</strong> = creative (fem.).'},
+  {sent:'Nunca se habría atrevido a hacer eso — es muy ___.',en:'He would never have dared to do that — he is very shy.',opts:['valiente','extrovertido','tímido','curioso'],ans:2,exp:'<strong>Tímido</strong> = shy (masc.).'},
+  {sent:'Enfrentó el peligro sin dudarlo — es muy ___.',en:'She faced the danger without hesitating — she is very brave.',opts:['tímida','nerviosa','valiente','pesimista'],ans:2,exp:'<strong>Valiente</strong> = brave. Invariable.'},
+  {sent:'Sus apuntes son perfectos y sus cosas siempre en su lugar — es muy ___.',en:'Her notes are perfect and her things always in place — she is very organized.',opts:['desorganizada','creativa','organizada','impaciente'],ans:2,exp:'<strong>Organizada</strong> = organized (fem.).'},
+  {sent:'No soporta ver sufrir a los demás — es muy ___.',en:'She can\'t stand seeing others suffer — she is very kind.',opts:['egoísta','arrogante','amable','seria'],ans:2,exp:'<strong>Amable</strong> = kind. Invariable.'},
+  {sent:'Siempre espera lo peor — es muy ___.',en:'He always expects the worst — he is very pessimistic.',opts:['optimista','tranquilo','pesimista','curioso'],ans:2,exp:'<strong>Pesimista</strong> = pessimistic. Invariable.'},
+  // PLURALS
+  {sent:'Los estudiantes son muy ___ — hacen muchas preguntas.',en:'The students are very curious — they ask many questions.',opts:['curiosos','curiosa','curioso','curiosas'],ans:0,exp:'<strong>Curiosos</strong> — masculine plural to agree with "los estudiantes".'},
+  {sent:'Las chicas del equipo son muy ___.',en:'The girls on the team are very athletic.',opts:['atlético','atléticas','atlética','atléticos'],ans:1,exp:'<strong>Atléticas</strong> — feminine plural to agree with "las chicas".'},
+  {sent:'Sus hijos son muy ___ — siempre ayudan en casa.',en:'Her children are very responsible — they always help at home.',opts:['responsable','responsables','irresponsable','organizado'],ans:1,exp:'<strong>Responsables</strong> — plural form (invariable adj gets -s in plural).'},
+  {sent:'Los actores de esa película son muy ___.',en:'The actors in that film are very handsome.',opts:['guapa','guapo','guapos','guapas'],ans:2,exp:'<strong>Guapos</strong> — masculine plural to agree with "los actores".'},
+  // SER vs ESTAR with adjectives
+  {sent:'Ella ___ alta — siempre ha sido así.',en:'She is tall — she has always been that way.',opts:['está','es','son','estás'],ans:1,exp:'"Tall" is a permanent physical trait → use <strong>SER</strong>: es alta.'},
+  {sent:'Él ___ muy nervioso hoy — tiene un examen.',en:'He is very nervous today — he has an exam.',opts:['es','son','está','somos'],ans:2,exp:'"Nervous" is a temporary state → use <strong>ESTAR</strong>: está nervioso.'},
+  {sent:'Mi profesora ___ muy inteligente.',en:'My teacher is very intelligent.',opts:['está','estamos','es','son'],ans:2,exp:'"Intelligent" is an inherent characteristic → use <strong>SER</strong>: es inteligente.'},
+  {sent:'Los niños ___ muy tranquilos hoy.',en:'The children are very calm today.',opts:['son','están','es','estamos'],ans:1,exp:'"Calm today" is a temporary state → use <strong>ESTAR</strong>: están tranquilos.'},
+  {sent:'Mi vecino es ___ — nunca se altera.',         en:'My neighbor is calm — he never gets worked up.',    opts:['nervioso','tranquilo','impaciente','tímido'],ans:1,exp:'<strong>Tranquilo</strong> = calm (masc.). Permanent personality trait → SER.'},
+  {sent:'Tiene 90 años y todavía camina sola — es muy ___.',en:'She is 90 and still walks alone — she is very old.',opts:['joven','mayor','alta','morena'],ans:1,exp:'<strong>Mayor</strong> = older / elderly. Invariable form.'},
+  {sent:'Nunca tiene miedo de hablar en público — es muy ___.',en:'She is never afraid to speak in public — she is very brave.',opts:['tímida','nerviosa','valiente','seria'],ans:2,exp:'<strong>Valiente</strong> = brave. Invariable — same for masc. and fem.'},
+];
+
+const MC_ORDER=MC.map((_,i)=>seededShuffle([0,1,2,3],i*13+7));
+
+/* ══════════════════════════════════════════
+   EX 3 — ERROR HUNT (15)
+══════════════════════════════════════════ */
+const ERRORS = [
+  ['Mi hermana es muy simpático.',                   true,  'simpática',    'ERROR: "Hermana" is feminine → <strong>simpática</strong> (not simpático).'],
+  ['El profesor es muy trabajador.',                 false, null,           'CORRECT: "Trabajador" = hardworking (masc.). ✓'],
+  ['Las chicas son muy atlético.',                   true,  'atléticas',    'ERROR: "Las chicas" is feminine plural → <strong>atléticas</strong>.'],
+  ['Mi abuelo es canosa.',                           true,  'canoso',       'ERROR: "Abuelo" is masculine → <strong>canoso</strong> (not canosa).'],
+  ['Ella es muy inteligente.',                       false, null,           'CORRECT: "Inteligente" is invariable — same for masc. and fem. ✓'],
+  ['Los estudiantes son muy curiosos.',              false, null,           'CORRECT: "Curiosos" = masculine plural. Agrees with "los estudiantes". ✓'],
+  ['Mi mejor amiga es muy divertido.',               true,  'divertida',    'ERROR: "Amiga" is feminine → <strong>divertida</strong> (not divertido).'],
+  ['El bebé es joven.',                              false, null,           'CORRECT: "Joven" is invariable. ✓'],
+  ['Ella es muy trabajador.',                        true,  'trabajadora',  'ERROR: "Ella" is feminine → <strong>trabajadora</strong> (irregular fem. ending).'],
+  ['Carlos es muy pálido.',                          false, null,           'CORRECT: "Pálido" = pale (masc.). ✓'],
+  ['Las actrices son muy guapo.',                    true,  'guapas',       'ERROR: "Las actrices" is feminine plural → <strong>guapas</strong>.'],
+  ['Mi hermano es muy amable.',                      false, null,           'CORRECT: "Amable" is invariable. ✓'],
+  ['La profesora es muy serio.',                     true,  'seria',        'ERROR: "Profesora" is feminine → <strong>seria</strong> (not serio).'],
+  ['Son muy optimistas — siempre ven el lado bueno.',false, null,           'CORRECT: "Optimistas" = plural invariable form (-s added). ✓'],
+  ['El chico pelirroja tiene ojos verdes.',          true,  'pelirrojo',    'ERROR: "El chico" is masculine → <strong>pelirrojo</strong> (not pelirroja).'],
+];
+
+/* ══════════════════════════════════════════
+   EX 4 — DRAG & SORT
+══════════════════════════════════════════ */
+const SORT_BUCKETS_DATA = [
+  {id:'ap-pos',  label:'Apariencia (+)',   icon:'🧍✨', sub:'Positive physical trait',        col:'#86efac', bg:'rgba(34,197,94,.07)',   bdr:'rgba(34,197,94,.25)'},
+  {id:'ap-neg',  label:'Apariencia (−)',   icon:'🧍❌', sub:'Negative / neutral physical',    col:'#fca5a5', bg:'rgba(239,68,68,.06)',   bdr:'rgba(239,68,68,.22)'},
+  {id:'per-pos', label:'Personalidad (+)', icon:'🧠✨', sub:'Positive personality trait',     col:'#7ee8ff', bg:'rgba(37,217,255,.06)',  bdr:'rgba(37,217,255,.22)'},
+  {id:'per-neg', label:'Personalidad (−)', icon:'🧠❌', sub:'Negative personality trait',     col:'#c4b5fd', bg:'rgba(167,139,250,.07)', bdr:'rgba(167,139,250,.25)'},
+];
+const SORT_ITEMS = [
+  {id:'s1',  emoji:'💪', word:'fuerte',       correct:'ap-pos',  exp:'Physical appearance, positive trait.'},
+  {id:'s2',  emoji:'😬', word:'feo/fea',      correct:'ap-neg',  exp:'Physical appearance, negative trait.'},
+  {id:'s3',  emoji:'😍', word:'guapo/guapa',  correct:'ap-pos',  exp:'Physical appearance, positive.'},
+  {id:'s4',  emoji:'🎩', word:'elegante',     correct:'ap-pos',  exp:'Physical appearance, positive.'},
+  {id:'s5',  emoji:'🫃', word:'gordo/gorda',  correct:'ap-neg',  exp:'Physical appearance, can be negative.'},
+  {id:'s6',  emoji:'🤗', word:'amable',       correct:'per-pos', exp:'Personality, clearly positive.'},
+  {id:'s7',  emoji:'😤', word:'arrogante',    correct:'per-neg', exp:'Personality, negative.'},
+  {id:'s8',  emoji:'🎁', word:'generoso/a',   correct:'per-pos', exp:'Personality, positive.'},
+  {id:'s9',  emoji:'🙈', word:'egoísta',      correct:'per-neg', exp:'Personality, negative.'},
+  {id:'s10', emoji:'🧠', word:'inteligente',  correct:'per-pos', exp:'Personality, positive.'},
+  {id:'s11', emoji:'😂', word:'divertido/a',  correct:'per-pos', exp:'Personality, positive.'},
+  {id:'s12', emoji:'🌟', word:'optimista',    correct:'per-pos', exp:'Personality, positive.'},
+  {id:'s13', emoji:'😔', word:'pesimista',    correct:'per-neg', exp:'Personality, negative.'},
+  {id:'s14', emoji:'🧔', word:'barbudo',      correct:'ap-pos',  exp:'Physical appearance, neutral/distinctive.'},
+  {id:'s15', emoji:'🙂', word:'pecoso/a',     correct:'ap-pos',  exp:'Physical appearance, neutral/distinctive.'},
+  {id:'s16', emoji:'🦁', word:'valiente',     correct:'per-pos', exp:'Personality, positive.'},
+  {id:'s17', emoji:'💼', word:'trabajador/a', correct:'per-pos', exp:'Personality, positive.'},
+  {id:'s18', emoji:'😰', word:'nervioso/a',   correct:'per-neg', exp:'Personality, often negative state.'},
+  {id:'s19', emoji:'🙏', word:'humilde',      correct:'per-pos', exp:'Personality, positive.'},
+  {id:'s20', emoji:'🦷', word:'flaco/flaca',  correct:'ap-neg',  exp:'Physical appearance, often negative.'},
+];
+
+/* ══════════════════════════════════════════
+   EX 5 — SPEED ROUND
+   Show emoji + clue, student types Spanish adjective
+   Also accepts feminine form
+══════════════════════════════════════════ */
+const SPEED = [
+  {emoji:'💪', clue:'He lifts weights every day — he is very ___.',    hint:'strong',          ans:'fuerte',       also:[]},
+  {emoji:'🧍‍♂️', clue:'He is 1.95m tall — he is very ___.',            hint:'tall',             ans:'alto',         also:[]},
+  {emoji:'🧒', clue:'She is only 1.50m — she is ___.',                 hint:'short',            ans:'baja',         also:['bajo']},
+  {emoji:'👴', clue:'He is 80 years old — he is ___.',                 hint:'older / elderly',  ans:'mayor',        also:[]},
+  {emoji:'😍', clue:'Everyone says he is very attractive — he is ___.',hint:'handsome',         ans:'guapo',        also:['guapa']},
+  {emoji:'👱', clue:'She has light yellow hair — she is ___.',         hint:'blond (fem.)',     ans:'rubia',        also:['rubio']},
+  {emoji:'🧑‍🦲', clue:'He has no hair at all — he is ___.',             hint:'bald',             ans:'calvo',        also:['calva']},
+  {emoji:'🤗', clue:'She is always nice to everyone — she is ___.',    hint:'kind',             ans:'amable',       also:[]},
+  {emoji:'😂', clue:'He makes everyone laugh — he is very ___.',       hint:'funny (masc.)',    ans:'divertido',    also:['divertida']},
+  {emoji:'🧠', clue:'She always finds the solution — she is very ___.',hint:'intelligent',      ans:'inteligente',  also:[]},
+  {emoji:'💼', clue:'He never stops working — he is very ___.',        hint:'hardworking (masc)',ans:'trabajador',  also:['trabajadora']},
+  {emoji:'🎁', clue:'She always gives, never takes — she is very ___.',hint:'generous (fem.)',  ans:'generosa',     also:['generoso']},
+  {emoji:'😤', clue:'He thinks he is better than everyone — he is ___.',hint:'arrogant',        ans:'arrogante',    also:[]},
+  {emoji:'🙏', clue:'She never brags about her achievements — she is very ___.',hint:'humble',  ans:'humilde',      also:[]},
+  {emoji:'🦁', clue:'He jumped in without fear — he is very ___.',     hint:'brave',            ans:'valiente',     also:[]},
+  {emoji:'😰', clue:'She bites her nails before every exam — she is ___.',hint:'nervous (fem.)',ans:'nerviosa',     also:['nervioso']},
+  {emoji:'🧘', clue:'Nothing ever bothers him — he is very ___.',      hint:'calm (masc.)',     ans:'tranquilo',    also:['tranquila']},
+  {emoji:'🌟', clue:'She always sees the bright side — she is very ___.',hint:'optimistic',     ans:'optimista',    also:[]},
+  {emoji:'🎨', clue:'His ideas are always original — he is very ___.',  hint:'creative (masc)', ans:'creativo',     also:['creativa']},
+  {emoji:'🔍', clue:'She asks about everything — she is very ___.',    hint:'curious (fem.)',   ans:'curiosa',      also:['curioso']},
+  {emoji:'📋', clue:'His desk is always perfectly tidy — he is very ___.',hint:'organized (masc)',ans:'organizado', also:['organizada']},
+  {emoji:'🙈', clue:'He only thinks about himself — he is very ___.',  hint:'selfish',          ans:'egoísta',      also:[]},
+  {emoji:'😊', clue:'Everyone likes her — she is very ___.',           hint:'friendly (fem.)',  ans:'simpática',    also:['simpático']},
+  {emoji:'😳', clue:'He blushes when talking to people — he is ___.',  hint:'shy (masc.)',      ans:'tímido',       also:['tímida']},
+  {emoji:'✅', clue:'She always delivers what she promises — she is very ___.',hint:'responsible',ans:'responsable',also:[]},
+  {emoji:'⚡', clue:'He can\'t wait for anything — he is very ___.',    hint:'impatient',       ans:'impaciente',   also:[]},
+  {emoji:'⏳', clue:'She waits without complaining — she is very ___.',hint:'patient',          ans:'paciente',     also:[]},
+  {emoji:'🌙', clue:'He has dark skin and dark hair — he is ___.',     hint:'dark-skinned (masc)',ans:'moreno',     also:['morena']},
+  {emoji:'🦰', clue:'Her hair is bright orange — she is ___.',         hint:'red-haired (fem.)',ans:'pelirroja',    also:['pelirrojo']},
+  {emoji:'🧓', clue:'Her hair has turned completely gray — she is ___.',hint:'gray-haired (fem.)',ans:'canosa',     also:['canoso']},
+];
+
+/* ══════════════════════════════════════════ STATE ══ */
+let currentEx=0;
+let flashIdx=0, flashFlipped=false, flashFilter='all', flashMode='es-en';
+let flashDeck=[];
+let picIdx=0, picScore=0, picAnswered=false, picDeck=[];
+let mc_answers={}, mc_checked=false;
+let eh_answered={};
+let dragItem=null,sortPlaced={},sortChecked=false,tapSelected=null;
+let speedIdx=0,speedOk=0,speedErr=0,speedStreak=0,speedTimer=null,speedTimeLeft=0,speedAnswered=false;
+
+function goEx(idx){
+  currentEx=idx;
+  [0,1,2,3,4,5,6,7].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===idx));
+  [renderFlash,renderPhoto,renderPersonality,renderMC,renderErrorHunt,renderSort,renderSpeed,renderReference][idx]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ══ EX 1: FLASHCARDS ══ */
+function buildDeck(){
+  let base=ADJ.filter(a=>flashFilter==='all'||a.cat===flashFilter);
+  return randShuffle(base);
+}
+
+function renderFlash(){
+  flashDeck=buildDeck();
+  flashIdx=0; flashFlipped=false;
+  renderFlashCard();
+}
+
+function renderFlashCard(){
+  const card=flashDeck[flashIdx];
+  const pct=Math.round((flashIdx/flashDeck.length)*100);
+  const frontWord = flashMode==='es-en' ? card.masc : card.en;
+  const frontSub  = flashMode==='es-en' ? (card.masc!==card.fem?'fem: '+card.fem:'invariable') : '';
+  const backWord  = flashMode==='es-en' ? card.en : card.masc;
+  const backSub   = flashMode==='es-en' ? '' : (card.masc!==card.fem?'fem: '+card.fem:'invariable');
+  const catCol    = card.cat==='ap'?'var(--ap2)':'var(--per2)';
+  const catLabel  = card.cat==='ap'?'🧍 Physical':'🧠 Personality';
+
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header">
+    <div class="ex-title">🃏 Flashcards</div>
+    <div class="ex-instr">Click the card to flip and reveal the translation. Use the filters to study specific groups.</div>
+  </div>
+  <div class="flash-wrap">
+    <div class="flash-filter-row">
+      <button class="flash-filter ${flashFilter==='all'?'on':''}" onclick="setFlashFilter('all')">All (${ADJ.length})</button>
+      <button class="flash-filter ${flashFilter==='ap'?'on-ap':''}" onclick="setFlashFilter('ap')">🧍 Appearance (25)</button>
+      <button class="flash-filter ${flashFilter==='per'?'on':''}" onclick="setFlashFilter('per')">🧠 Personality (25)</button>
+    </div>
+    <div class="flash-mode-row">
+      <button class="flash-mode-btn ${flashMode==='es-en'?'active':''}" onclick="setFlashMode('es-en')">Spanish → English</button>
+      <button class="flash-mode-btn ${flashMode==='en-es'?'active':''}" onclick="setFlashMode('en-es')">English → Spanish</button>
+    </div>
+    <div class="flash-progress-row">
+      <span class="flash-counter">${flashIdx+1} / ${flashDeck.length}</span>
+      <div class="flash-track"><div class="flash-fill" style="width:${pct}%"></div></div>
+    </div>
+    <div class="flash-card-wrap" onclick="flipCard()">
+      <div class="flash-card${flashFlipped?' flipped':''}" id="theCard">
+        <div class="flash-face flash-front">
+          <div class="flash-emoji">${card.emoji}</div>
+          <div class="flash-word">${frontWord}</div>
+          ${frontSub?'<div class="flash-sub">'+frontSub+'</div>':''}
+          <span class="flash-cat" style="background:${card.cat==='ap'?'rgba(244,114,182,.15)':'rgba(37,217,255,.12)'};color:${catCol}">${catLabel}</span>
+          <div class="flash-hint">Tap to flip</div>
+        </div>
+        <div class="flash-face flash-back">
+          <div class="flash-emoji">${card.emoji}</div>
+          <div class="flash-word" style="color:var(--cyan)">${backWord}</div>
+          ${backSub?'<div class="flash-sub">'+backSub+'</div>':''}
+          <span class="flash-cat" style="background:${card.cat==='ap'?'rgba(244,114,182,.15)':'rgba(37,217,255,.12)'};color:${catCol}">${catLabel}</span>
+        </div>
+      </div>
+    </div>
+    <div class="flash-btns">
+      <button class="flash-nav" onclick="prevCard()">← Prev</button>
+      <button class="flash-nav" onclick="flipCard()">🔄 Flip</button>
+      <button class="flash-nav" onclick="nextCard()">Next →</button>
+    </div>
+    <div class="actions" style="justify-content:center">
+      <button class="btn btn-ghost" onclick="renderFlash()">↺ Shuffle</button>
+    </div>
+  </div></div>`;
+}
+
+function flipCard(){
+  flashFlipped=!flashFlipped;
+  const c=document.getElementById('theCard');
+  if(c)c.classList.toggle('flipped',flashFlipped);
+}
+function nextCard(){
+  flashIdx=(flashIdx+1)%flashDeck.length;
+  flashFlipped=false;
+  renderFlashCard();
+}
+function prevCard(){
+  flashIdx=(flashIdx-1+flashDeck.length)%flashDeck.length;
+  flashFlipped=false;
+  renderFlashCard();
+}
+function setFlashFilter(f){flashFilter=f;renderFlash();}
+function setFlashMode(m){flashMode=m;renderFlash();}
+
+/* ══ MC ══ */
+function renderMC(){
+  const pct=Math.round(Object.keys(mc_answers).length/MC.length*100);
+  const qHTML=MC.map((item,i)=>{
+    const order=MC_ORDER[i];
+    const optHTML=order.map(origIdx=>{
+      const o=item.opts[origIdx];
+      let cls='mc-opt';
+      if(mc_checked){
+        if(origIdx===item.ans)cls+=' mc-show';
+        else if(mc_answers[i]===origIdx&&origIdx!==item.ans)cls+=' mc-err';
+      } else if(mc_answers[i]===origIdx)cls+=origIdx===item.ans?' mc-ok':' mc-err';
+      return `<button class="${cls}" id="mco_${i}_${origIdx}" onclick="answerMC(${i},${origIdx})" ${mc_checked?'disabled':''}>${o}</button>`;
+    }).join('');
+    const explShow=mc_checked||(mc_answers[i]!==undefined);
+    return `<div class="mc-card">
+      <div class="mc-top"><span class="mc-num">${i+1}</span><span class="mc-sent">${item.sent.replace('___','<span class="mc-blank">___</span>')}</span></div>
+      <div class="mc-en">${item.en}</div>
+      <div class="mc-opts">${optHTML}</div>
+      <div class="mc-expl ${explShow?'show':''}" id="mcexp_${i}">${item.exp}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">📝 Multiple choice</div>
+  <div class="ex-instr">Choose the correct adjective. Pay attention to <em>gender agreement</em> — adjectives must match the noun. 50 sentences total.</div></div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${MC.length}</span></div>
+    <div class="sc"><span class="l">Correct</span><span class="v g" id="mc_ok">—</span></div>
+    <div class="sc"><span class="l">Wrong</span><span class="v b" id="mc_err">—</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="mc_pct">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="mc_prog" style="width:${pct}%"></div></div></div>
+  </div>
+  <div class="mc-list">${qHTML}</div>
+  <div class="fb" id="mc_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="mc_check" onclick="checkMC()" ${mc_checked?'disabled':''}>Check all</button>
+    <button class="btn btn-ghost" onclick="mc_answers={};mc_checked=false;renderMC()">↺ Reset</button>
+  </div></div>`;
+}
+
+function answerMC(qi,origIdx){
+  if(mc_checked)return;
+  if(mc_answers[qi]!==undefined){const p=document.getElementById(`mco_${qi}_${mc_answers[qi]}`);if(p)p.classList.remove('mc-ok','mc-err');}
+  mc_answers[qi]=origIdx;
+  const isOk=origIdx===MC[qi].ans;
+  const btn=document.getElementById(`mco_${qi}_${origIdx}`);if(btn)btn.classList.add(isOk?'mc-ok':'mc-err');
+  const exp=document.getElementById(`mcexp_${qi}`);if(exp)exp.classList.add('show');
+  const pct=Math.round(Object.keys(mc_answers).length/MC.length*100);
+  const el=document.getElementById('mc_pct');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('mc_prog');if(pg)pg.style.width=pct+'%';
+}
+function checkMC(){
+  mc_checked=true;
+  let ok=0;
+  MC.forEach((item,i)=>{if(mc_answers[i]===item.ans)ok++;});
+  const pct=Math.round(ok/MC.length*100);
+
+  // Re-render first so the correct/wrong options and explanations appear,
+  // then restore the score and feedback in the new DOM.
+  renderMC();
+
+  document.getElementById('mc_ok').textContent=ok;
+  document.getElementById('mc_err').textContent=MC.length-ok;
+  document.getElementById('mc_prog').style.width='100%';
+  document.getElementById('mc_pct').textContent='100%';
+
+  const fb=document.getElementById('mc_fb');
+  if(pct===100){fb.className='fb show ok';fb.innerHTML='🏆 <strong>Perfect! 50/50.</strong>';}
+  else if(pct>=75){fb.className='fb show ok';fb.innerHTML=`👍 <strong>${ok}/50.</strong> Great job!`;}
+  else if(pct>=50){fb.className='fb show partial';fb.innerHTML=`📖 <strong>${ok}/50.</strong> Remember: adjectives must agree with the noun in gender and number.`;}
+  else{fb.className='fb show err';fb.innerHTML=`💪 <strong>${ok}/50.</strong> Review the flashcards and try again.`;}
+}
+
+/* ══ ERROR HUNT ══ */
+function renderErrorHunt(){
+  eh_answered={};
+  let html=`<div class="panel"><div class="ex-header"><div class="ex-title">🔍 Error hunter</div>
+  <div class="ex-instr">Does the adjective agree correctly with the noun? Decide before seeing the explanation.</div></div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${ERRORS.length}</span></div>
+    <div class="sc"><span class="l">Correct</span><span class="v g" id="eh_ok">0</span></div>
+    <div class="sc"><span class="l">Wrong</span><span class="v b" id="eh_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Progress: <span id="eh_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="eh_prog" style="width:0%"></div></div></div>
+  </div><div class="eh-list">`;
+  ERRORS.forEach(([sent,,,exp],idx)=>{
+    html+=`<div class="eh-item" id="ehi_${idx}"><div class="eh-num">${idx+1}</div>
+      <div class="eh-body">
+        <div class="eh-sent" id="ehsent_${idx}">${sent}</div>
+        <div class="eh-judge-row">
+          <button class="eh-judge-btn eh-correct-btn" onclick="judgeEh(${idx},false)">✅ Correct</button>
+          <button class="eh-judge-btn eh-error-btn" onclick="judgeEh(${idx},true)">❌ Has an error</button>
+        </div>
+        <div class="eh-exp" id="ehexp_${idx}">${exp}</div>
+      </div></div>`;
+  });
+  html+=`</div><div class="fb" id="eh_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="eh_answered={};renderErrorHunt()">↺ Reset</button></div></div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+function judgeEh(idx,studentSaysError){
+  if(eh_answered[idx]!==undefined)return;
+  const [sent,hasErr,correction,exp]=ERRORS[idx];
+  const correct=studentSaysError===hasErr;
+  eh_answered[idx]=correct;
+  const item=document.getElementById('ehi_'+idx);
+  item.classList.add('revealed',correct?'correct-sentence':'wrong-sentence');
+  item.querySelectorAll('.eh-judge-btn').forEach(b=>b.disabled=true);
+  const chosen=item.querySelector(studentSaysError?'.eh-error-btn':'.eh-correct-btn');
+  if(chosen)chosen.classList.add(correct?'judge-chosen-ok':'judge-chosen-err');
+  if(hasErr&&correction){
+    const sentEl=document.getElementById('ehsent_'+idx);
+    const allAdj=ADJ.flatMap(a=>[a.masc,a.fem,a.masc+'s',a.fem+'s']).filter((v,i,a)=>a.indexOf(v)===i);
+    let h=sent;
+    allAdj.filter(a=>a!==correction).forEach(a=>{
+      h=h.replace(new RegExp(`\\b${a}\\b`,'g'),`<span class="wrong-word">${a}</span>`);
+    });
+    sentEl.innerHTML=h+` <span class="eh-correction">→ <strong>${correction}</strong></span>`;
+  }
+  document.getElementById('ehexp_'+idx).classList.add('show');
+  const total=Object.keys(eh_answered).length;
+  const totalOk=Object.values(eh_answered).filter(v=>v).length;
+  document.getElementById('eh_ok').textContent=totalOk;
+  document.getElementById('eh_err').textContent=total-totalOk;
+  document.getElementById('eh_pct').textContent=Math.round(total/ERRORS.length*100)+'%';
+  document.getElementById('eh_prog').style.width=Math.round(total/ERRORS.length*100)+'%';
+  if(total===ERRORS.length){
+    const pct=Math.round(totalOk/ERRORS.length*100);
+    const fb=document.getElementById('eh_fb');
+    fb.className='fb show '+(pct>=80?'ok':'partial');
+    fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${totalOk}/${ERRORS.length}.</strong> ${pct>=80?'Excellent!':'Remember: adjectives must match the noun in gender (and number).'}`;
+  }
+}
+
+/* ══ SORT ══ */
+function renderSort(){
+  sortPlaced={};sortChecked=false;tapSelected=null;
+  const shuffled=randShuffle(SORT_ITEMS);
+  const pile=shuffled.map(item=>`<div class="sort-card" id="sc_${item.id}" draggable="true"
+    ondragstart="dragStart(event,'${item.id}')" ondragend="dragEnd(event)"
+    onclick="tapCard('${item.id}')"><span>${item.emoji}</span><span>${item.word}</span></div>`).join('');
+  const buckHTML=SORT_BUCKETS_DATA.map(b=>`<div class="sort-bucket" id="bucket-${b.id}"
+    style="background:${b.bg};border:2px dashed ${b.bdr};min-height:90px"
+    ondragover="event.preventDefault();this.classList.add('drag-over')"
+    ondragleave="this.classList.remove('drag-over')"
+    ondrop="dropInto(event,'${b.id}')" onclick="bucketTap('${b.id}')">
+    <div class="bucket-title" style="color:${b.col}">${b.icon} ${b.label}</div>
+    <div class="bucket-sub">${b.sub}</div>
+  </div>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">🗂️ Drag & sort</div>
+  <div class="ex-instr">Drag each adjective to its bucket: appearance or personality, positive or negative. Tap a card then a bucket on mobile.</div></div>
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);margin-bottom:8px">Cards — drag or tap → tap bucket</div>
+  <div class="sort-pile" id="sortPile">${pile}</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">${buckHTML}</div>
+  <div class="fb" id="sort_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="sort_check" onclick="checkSort()" disabled>Check</button>
+    <button class="btn btn-ghost" onclick="renderSort()">↺ Reset</button>
+  </div></div>`;
+}
+function dragStart(e,id){dragItem=id;if(e.dataTransfer){e.dataTransfer.setData('text/plain',id);e.dataTransfer.effectAllowed='move';}setTimeout(()=>{const c=document.getElementById('sc_'+id);if(c)c.classList.add('drag-ghost');},0);}
+function dragEnd(){if(dragItem){const c=document.getElementById('sc_'+dragItem);if(c)c.classList.remove('drag-ghost');}dragItem=null;}
+function dropInto(e,bucket){e.preventDefault();const id=(e.dataTransfer&&e.dataTransfer.getData('text/plain'))||dragItem;document.getElementById('bucket-'+bucket).classList.remove('drag-over');if(!id||sortPlaced[id])return;placeCard(id,bucket);}
+function tapCard(id){if(sortPlaced[id])return;const card=document.getElementById('sc_'+id);if(!card)return;if(tapSelected===id){card.style.boxShadow='';tapSelected=null;return;}if(tapSelected){const p=document.getElementById('sc_'+tapSelected);if(p)p.style.boxShadow='';}tapSelected=id;card.style.boxShadow='0 0 0 3px var(--cyan)';}
+function bucketTap(bucket){if(!tapSelected)return;placeCard(tapSelected,bucket);tapSelected=null;}
+function placeCard(id,bucket){sortPlaced[id]=bucket;const card=document.getElementById('sc_'+id);const bEl=document.getElementById('bucket-'+bucket);if(!card||!bEl)return;card.style.boxShadow='';card.classList.remove('drag-ghost');card.draggable=false;const b=SORT_BUCKETS_DATA.find(x=>x.id===bucket);card.style.borderColor=b?b.col:'rgba(255,255,255,.3)';card.onclick=()=>returnCard(id);bEl.appendChild(card);if(Object.keys(sortPlaced).length===SORT_ITEMS.length){const btn=document.getElementById('sort_check');if(btn)btn.disabled=false;}}
+function returnCard(id){if(sortChecked)return;delete sortPlaced[id];const card=document.getElementById('sc_'+id);const pile=document.getElementById('sortPile');if(!card||!pile)return;card.style.borderColor='';card.style.boxShadow='';card.draggable=true;card.onclick=()=>tapCard(id);pile.appendChild(card);const btn=document.getElementById('sort_check');if(btn)btn.disabled=true;}
+function checkSort(){
+  sortChecked=true;let ok=0;
+  SORT_ITEMS.forEach(item=>{const card=document.getElementById('sc_'+item.id);if(!card)return;const isOk=sortPlaced[item.id]===item.correct;if(isOk)ok++;card.className='sort-card '+(isOk?'card-correct':'card-wrong');card.draggable=false;card.onclick=null;if(!isOk){const b=SORT_BUCKETS_DATA.find(x=>x.id===item.correct);card.innerHTML=`<span>${item.emoji}</span><span>${item.word}</span><span style="font-size:.7rem;opacity:.8"> → ${b?b.label:item.correct}</span>`;}card.title=item.exp;});
+  const pct=Math.round(ok/SORT_ITEMS.length*100);
+  const fb=document.getElementById('sort_fb');fb.className='fb show '+(pct>=80?'ok':pct>=55?'partial':'err');
+  fb.innerHTML=`<strong>${ok}/${SORT_ITEMS.length} (${pct}%).</strong> Red cards show the correct bucket.`;
+  document.getElementById('sort_check').disabled=true;
+}
+
+/* ══ SPEED ══ */
+function renderSpeed(){
+  if(speedTimer){clearInterval(speedTimer);speedTimer=null;}
+  speedIdx=0;speedOk=0;speedErr=0;speedStreak=0;speedAnswered=false;
+  // shuffle speed items
+  for(let i=SPEED.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[SPEED[i],SPEED[j]]=[SPEED[j],SPEED[i]];}
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">⚡ Speed round</div>
+  <div class="ex-instr">Look at the emoji and clue, then type the Spanish adjective. The hint shows the English. Masculine form accepted unless the clue says fem. 10 seconds per question.</div></div>
+  <div class="speed-wrap" id="speedWrap">
+    <div class="speed-start"><div style="font-size:2.8rem">⚡</div><h2>Type the adjective</h2>
+    <p>Read the emoji and clue, type the Spanish adjective. Accents optional. 30 questions — build a streak!</p>
+    <button class="btn btn-cyan" onclick="startSpeed()">Let's go!</button></div>
+  </div></div>`;
+}
+function startSpeed(){speedIdx=0;speedOk=0;speedErr=0;speedStreak=0;nextSpeedQ();}
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+function nextSpeedQ(){
+  if(speedIdx>=SPEED.length){endSpeed();return;}
+  speedAnswered=false;const item=SPEED[speedIdx];speedTimeLeft=10;
+  document.getElementById('speedWrap').innerHTML=`
+    <div class="speed-stats">
+      <div class="spstat"><div class="sl">Question</div><div class="sv w">${speedIdx+1}/${SPEED.length}</div></div>
+      <div class="spstat"><div class="sl">Correct</div><div class="sv g">${speedOk}</div></div>
+      <div class="spstat"><div class="sl">Wrong</div><div class="sv b">${speedErr}</div></div>
+    </div>
+    <div class="streak-badge ${speedStreak>=3?'show':''}" id="streakB">🔥 Streak: ${speedStreak}</div>
+    <div class="speed-card">
+      <div class="speed-emoji">${item.emoji}</div>
+      <div class="speed-clue">${item.clue.replace('___','<em>___</em>')}</div>
+      <div class="speed-hint">💡 ${item.hint}</div>
+    </div>
+    <div class="timer-row">
+      <div class="timer-track"><div class="timer-fill" id="tFill" style="width:100%;transition:width 1s linear"></div></div>
+      <div class="timer-num" id="tNum">10</div>
+    </div>
+    <div class="speed-input-row">
+      <input id="sInp" class="speed-inp" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="type here…" onkeydown="if(event.key==='Enter')submitSpeed()">
+      <button class="btn btn-cyan" onclick="submitSpeed()" style="flex-shrink:0">→</button>
+    </div>
+    <div class="speed-fb" id="sFb" style="opacity:0"></div>`;
+  setTimeout(()=>{const i=document.getElementById('sInp');if(i)i.focus();},50);
+  if(speedTimer)clearInterval(speedTimer);
+  speedTimer=setInterval(()=>{
+    speedTimeLeft--;
+    const f=document.getElementById('tFill'),n=document.getElementById('tNum');
+    if(f)f.style.width=Math.max(0,(speedTimeLeft/10)*100)+'%';
+    if(n){n.textContent=speedTimeLeft;n.style.color=speedTimeLeft<=2?'var(--bad)':speedTimeLeft<=5?'var(--warn)':'var(--muted2)';}
+    if(speedTimeLeft<=0){clearInterval(speedTimer);speedTimer=null;if(!speedAnswered)submitSpeed();}
+  },1000);
+}
+function submitSpeed(){
+  const inp=document.getElementById('sInp');if(!inp||speedAnswered)return;
+  speedAnswered=true;if(speedTimer){clearInterval(speedTimer);speedTimer=null;}inp.disabled=true;
+  const item=SPEED[speedIdx];const nt=normS(inp.value);const na=normS(item.ans);
+  const isOk=nt===na||item.also.map(normS).includes(nt);
+  if(isOk){speedOk++;speedStreak++;}else{speedErr++;speedStreak=0;}
+  const fb=document.getElementById('sFb');
+  if(fb){fb.style.opacity='1';
+    if(!inp.value.trim()){fb.className='speed-fb err';fb.innerHTML=`⏱ Time's up! → <strong>${item.ans}</strong>`;}
+    else if(isOk){fb.className='speed-fb ok';fb.innerHTML=`✓ <strong>Correct!</strong>${speedStreak>=3?' 🔥 x'+speedStreak:''}`;}
+    else{fb.className='speed-fb err';fb.innerHTML=`✗ <strong>${inp.value}</strong> → <strong>${item.ans}</strong>`;}}
+  if(speedStreak>=3){const cf=document.getElementById('comboFlash');cf.textContent='🔥 x'+speedStreak;cf.classList.remove('anim');void cf.offsetWidth;cf.classList.add('anim');}
+  speedIdx++;setTimeout(nextSpeedQ,isOk?700:1400);
+}
+function endSpeed(){
+  const pct=Math.round(speedOk/SPEED.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('speedWrap').innerHTML=`<div class="speed-start"><div style="font-size:3rem">${emo}</div><h2>${speedOk}/${SPEED.length} correct</h2>
+    <p style="color:var(--muted)">${pct>=90?'Excellent! You know all 50 adjectives!':pct>=70?'Great job! Review the ones you missed.':pct>=50?'Keep going — the flashcards will help.':'Start with the flashcard exercise to build your vocabulary.'}</p>
+    <button class="btn btn-cyan" onclick="startSpeed()">↺ Try again</button></div>`;
+}
+
+
+/* ══ REFERENCE ══ */
+function renderReference(){
+  const makeTable=(adjs)=>adjs.map(a=>`<tr>
+    <td class="td-es">${a.masc}${a.fem!==a.masc?` / ${a.fem}`:' <span style="font-size:.7rem;color:var(--muted2)">(inv.)</span>'}</td>
+    <td class="td-en">${a.en}</td>
+    <td style="font-size:1.1rem">${a.emoji}</td>
+  </tr>`).join('');
+  const ap=ADJ.filter(a=>a.cat==='ap');
+  const per=ADJ.filter(a=>a.cat==='per');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">📚 Reference card</div>
+  <div class="ex-instr">All 50 adjectives with masculine/feminine forms. <em>inv.</em> = invariable (same for both genders).</div></div>
+
+  <div class="note-box">
+    <h3>⚠️ Gender agreement rules</h3>
+    <div style="display:flex;flex-direction:column;gap:7px;font-size:.84rem;line-height:1.6">
+      <div><strong style="color:var(--ap2)">-o / -a:</strong> Most adjectives. Masc. ends in -o, fem. in -a. <em>alto / alta · guapo / guapa · gordo / gorda</em></div>
+      <div><strong style="color:var(--per2)">Invariable (-e, -ista, -ante, -ente):</strong> Same form for masc. and fem. <em>inteligente · optimista · amable · paciente</em></div>
+      <div><strong style="color:var(--warn)">Special: trabajador → trabajadora.</strong> Some masc. forms ending in consonant add -a for fem.</div>
+      <div><strong style="color:var(--warn)">Plural: add -s (or -es to consonants).</strong> <em>alto → altos · inteligente → inteligentes</em></div>
+    </div>
+  </div>
+
+  <div class="ref-cols">
+    <div class="ref-block">
+      <h3 style="color:var(--ap2)">🧍 Physical Appearance (25)</h3>
+      <table class="ref-table">
+        <tr><th>Español</th><th>English</th><th></th></tr>
+        ${makeTable(ap)}
+      </table>
+    </div>
+    <div class="ref-block">
+      <h3 style="color:var(--per2)">🧠 Personality (25)</h3>
+      <table class="ref-table">
+        <tr><th>Español</th><th>English</th><th></th></tr>
+        ${makeTable(per)}
+      </table>
+    </div>
+  </div>
+  </div>`;
+}
+
+
+/* ══════════════════════════════════════════
+   EX 7 — DESCRIBE THE PHOTO
+   Real photos via randomuser.me + SVG fallback
+══════════════════════════════════════════ */
+
+function makeSVG(skin, hair, hairStyle, beard, glasses){
+  var hairShapes = {
+    short:  '<ellipse cx="100" cy="72" rx="42" ry="18" fill="' + hair + '"/>',
+    medium: '<ellipse cx="100" cy="68" rx="44" ry="22" fill="' + hair + '"/>' +
+            '<rect x="58" y="72" width="12" height="45" rx="6" fill="' + hair + '"/>' +
+            '<rect x="130" y="72" width="12" height="45" rx="6" fill="' + hair + '"/>',
+    long:   '<ellipse cx="100" cy="65" rx="46" ry="24" fill="' + hair + '"/>' +
+            '<rect x="55" y="70" width="13" height="80" rx="6" fill="' + hair + '"/>' +
+            '<rect x="132" y="70" width="13" height="80" rx="6" fill="' + hair + '"/>',
+    bald:   '',
+    curly:  '<ellipse cx="100" cy="65" rx="48" ry="30" fill="' + hair + '"/>' +
+            '<circle cx="68" cy="68" r="14" fill="' + hair + '"/>' +
+            '<circle cx="132" cy="68" r="14" fill="' + hair + '"/>',
+    gray:   '<ellipse cx="100" cy="68" rx="44" ry="22" fill="#aaa"/>' +
+            '<rect x="58" y="72" width="12" height="40" rx="6" fill="#aaa"/>' +
+            '<rect x="130" y="72" width="12" height="40" rx="6" fill="#aaa"/>',
+  };
+  var h = hairShapes[hairStyle] || '';
+  var b = beard ? '<ellipse cx="100" cy="148" rx="28" ry="16" fill="' + hair + '" opacity=".85"/>' +
+    '<rect x="74" y="135" width="52" height="16" rx="5" fill="' + hair + '" opacity=".7"/>' : '';
+  var g = glasses ? '<rect x="70" y="100" width="22" height="16" rx="5" fill="none" stroke="#25d9ff" stroke-width="2.5"/>' +
+    '<rect x="108" y="100" width="22" height="16" rx="5" fill="none" stroke="#25d9ff" stroke-width="2.5"/>' +
+    '<line x1="92" y1="108" x2="108" y2="108" stroke="#25d9ff" stroke-width="2"/>' : '';
+  var sc = (skin === '#f5c5a3') ? '#c9956e' : '#7a5c4a';
+  return '<svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">' +
+    '<rect width="200" height="260" fill="#1a0040"/>' +
+    '<ellipse cx="100" cy="240" rx="60" ry="40" fill="' + skin + '" opacity=".3"/>' +
+    '<rect x="60" y="175" width="80" height="70" rx="20" fill="' + skin + '"/>' +
+    '<rect x="88" y="155" width="24" height="28" fill="' + skin + '"/>' +
+    h +
+    '<ellipse cx="100" cy="110" rx="42" ry="48" fill="' + skin + '"/>' +
+    '<ellipse cx="85" cy="105" rx="7" ry="7.5" fill="white"/>' +
+    '<ellipse cx="115" cy="105" rx="7" ry="7.5" fill="white"/>' +
+    '<circle cx="86" cy="106" r="4.5" fill="#2a1a0a"/>' +
+    '<circle cx="116" cy="106" r="4.5" fill="#2a1a0a"/>' +
+    '<circle cx="87.5" cy="104.5" r="1.5" fill="white"/>' +
+    '<circle cx="117.5" cy="104.5" r="1.5" fill="white"/>' +
+    '<path d="M78 96 Q85 92 92 95" stroke="#4a3728" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
+    '<path d="M108 95 Q115 92 122 96" stroke="#4a3728" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
+    '<path d="M97 112 Q100 122 103 112" stroke="' + sc + '" stroke-width="2" fill="none"/>' +
+    '<path d="M88 137 Q100 145 112 137" stroke="#c0725a" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
+    b + g + '</svg>';
+}
+
+const PHOTO_ITEMS = [
+  { q:'Which adjective best describes his hair and skin tone?',
+    opts:['rubio','moreno','canoso','pelirrojo'], ans:1,
+    exp:'<strong>Moreno</strong> — dark hair and a darker skin tone.'},
+
+  { q:'Which TWO adjectives best describe this man?',
+    opts:['calvo y barbudo','rubio y joven','alto y fuerte','pálido y elegante'], ans:0,
+    exp:'<strong>Calvo y barbudo</strong> — he is bald and he has a beard.'},
+
+  { q:'Which adjective best describes her hair color?',
+    opts:['morena','canosa','rubia','pelirroja'], ans:2,
+    exp:'<strong>Rubia</strong> — she has blonde hair.'},
+
+  { q:'What adjective describes his hair?',
+    opts:['rubio','canoso','pelirrojo','calvo'], ans:1,
+    exp:'<strong>Canoso</strong> — he has gray hair.'},
+
+  { q:'How would you describe her appearance?',
+    opts:['rubia y mayor','morena y joven','canosa y alta','pelirroja y baja'], ans:1,
+    exp:'<strong>Morena y joven</strong> — she is young and has dark hair / a darker complexion.'},
+
+  { q:'Which physical adjective applies to this man?',
+    opts:['calvo','barbudo','pelirrojo','canoso'], ans:1,
+    exp:'<strong>Barbudo</strong> — he has a beard.'},
+
+  { q:'What color is her hair?',
+    opts:['rubia','morena','pelirroja','canosa'], ans:2,
+    exp:'<strong>Pelirroja</strong> — she has red hair.'},
+
+  { q:'What adjective describes his hair color?',
+    opts:['moreno','canoso','rubio','pelirrojo'], ans:2,
+    exp:'<strong>Rubio</strong> — he has blond hair.'},
+
+  { q:'What physical adjective describes this man\'s head?',
+    opts:['rubio','barbudo','canoso','calvo'], ans:3,
+    exp:'<strong>Calvo</strong> — he is bald.'},
+
+  { q:'She is older and has gray hair. Which TWO adjectives fit?',
+    opts:['joven y rubia','mayor y canosa','alta y morena','pálida y pelirroja'], ans:1,
+    exp:'<strong>Mayor y canosa</strong> — she is older and gray-haired.'},
+
+  { q:'Which adjective best describes his hair and skin tone?',
+    opts:['rubio','moreno','canoso','pelirrojo'], ans:1,
+    exp:'<strong>Moreno</strong> — dark hair and a darker complexion.'},
+
+  { q:'What adjective best describes his hair color?',
+    opts:['rubio','moreno','pelirrojo','canoso'], ans:2,
+    exp:'<strong>Pelirrojo</strong> — he has red hair.'},
+
+  { q:'Which adjective best describes her style?',
+    opts:['tímida','elegante','canosa','morena'], ans:1,
+    exp:'<strong>Elegante</strong> — she looks polished and stylish.'},
+
+  { q:'Which adjective best describes his hair and skin tone?',
+    opts:['moreno','rubio','canoso','pelirrojo'], ans:0,
+    exp:'<strong>Moreno</strong> — dark hair and a darker complexion.'},
+
+  { q:'How would you describe this girl\'s age and height?',
+    opts:['mayor y alta','joven y baja','rubia y canosa','calva y fuerte'], ans:1,
+    exp:'<strong>Joven y baja</strong> — she is a young, short girl.'},
+
+  { q:'Which TWO adjectives describe this young man best?',
+    opts:['alto y delgado','bajo y canoso','calvo y barbudo','rubio y mayor'], ans:0,
+    exp:'<strong>Alto y delgado</strong> — he is tall and slim.'},
+
+  { q:'What adjective best describes her skin tone?',
+    opts:['morena','pálida','rubia','fuerte'], ans:1,
+    exp:'<strong>Pálida</strong> — she has very fair / pale skin.'},
+
+  { q:'Which adjective best describes his build?',
+    opts:['tímido','fuerte','canoso','joven'], ans:1,
+    exp:'<strong>Fuerte</strong> — he looks strong and muscular.'},
+
+  { q:'What adjective describes her hair?',
+    opts:['rubia','canosa','pelirroja','morena'], ans:1,
+    exp:'<strong>Canosa</strong> — she has gray hair.'},
+
+  { q:'Which TWO adjectives describe her best?',
+    opts:['joven y rubia','mayor y canosa','morena y seria','pelirroja y tímida'], ans:0,
+    exp:'<strong>Joven y rubia</strong> — she is young and blonde.'}
+];
+
+const PHOTO_IMAGE_BY_INDEX = [
+  "assets/appearance_01.webp",
+  "assets/appearance_02.webp",
+  "assets/appearance_03.webp",
+  "assets/appearance_04.webp",
+  "assets/appearance_05.webp",
+  "assets/appearance_06.webp",
+  "assets/appearance_07.webp",
+  "assets/appearance_08.webp",
+  "assets/appearance_09.webp",
+  "assets/appearance_10.webp",
+  "assets/appearance_11.webp",
+  "assets/appearance_12.webp",
+  "assets/appearance_13.webp",
+  "assets/appearance_14.webp",
+  "assets/appearance_15.webp",
+  "assets/appearance_16.webp",
+  "assets/appearance_17.webp",
+  "assets/appearance_18.webp",
+  "assets/appearance_19.webp",
+  "assets/appearance_20.webp"
+];
+
+
+/* ══ PERSONALITY CHARACTER EXERCISE ══
+   v7: no repeated images in the personality cards.
+   Each card uses a different character image and clearer visual cues.
+*/
+const PERSONALITY_IMAGE_BY_INDEX = [
+  "assets/personality_01.webp",
+  "assets/personality_02.webp",
+  "assets/personality_03.webp",
+  "assets/personality_04.webp",
+  "assets/personality_05.webp",
+  "assets/personality_06.webp",
+  "assets/personality_07.webp",
+  "assets/personality_08.webp",
+  "assets/personality_09.webp",
+  "assets/personality_10.webp",
+  "assets/personality_11.webp",
+  "assets/personality_12.webp",
+  "assets/personality_13.webp",
+  "assets/personality_14.webp",
+  "assets/personality_15.webp",
+  "assets/personality_16.webp",
+  "assets/personality_17.webp",
+  "assets/personality_18.webp",
+  "assets/personality_19.webp",
+  "assets/personality_20.webp"
+];
+
+const PERSONALITY_ITEMS = [
+  { imgIdx:0,
+    q:'He is playful and always having fun. Which adjective fits him best?',
+    opts:['divertido','serio','nervioso','triste'], ans:0,
+    exp:'<strong>Divertido</strong> — fun, funny, playful.'},
+
+  { imgIdx:1,
+    q:'She looks calm, formal, and not playful. Which adjective fits her best?',
+    opts:['seria','divertida','nerviosa','curiosa'], ans:0,
+    exp:'<strong>Seria</strong> — serious, formal, composed.'},
+
+  { imgIdx:2,
+    q:'She looks shy and a little bashful. Which adjective describes her personality?',
+    opts:['tímida','alegre','enojada','curiosa'], ans:0,
+    exp:'<strong>Tímida</strong> — shy or bashful.'},
+
+  { imgIdx:3,
+    q:'He looks worried and uneasy. Which adjective fits him best?',
+    opts:['nervioso','curioso','tranquilo','fuerte'], ans:0,
+    exp:'<strong>Nervioso</strong> — nervous and tense.'},
+
+  { imgIdx:4,
+    q:'She has a warm smile and a welcoming gesture. Which adjective fits her best?',
+    opts:['amable','seria','triste','curiosa'], ans:0,
+    exp:'<strong>Amable</strong> — kind, nice, friendly.'},
+
+  { imgIdx:5,
+    q:'He looks upset and irritated. Which adjective fits him best?',
+    opts:['enojado','amable','relajado','tímido'], ans:0,
+    exp:'<strong>Enojado</strong> — angry or upset.'},
+
+  { imgIdx:6,
+    q:'She looks unhappy and discouraged. Which adjective fits her best?',
+    opts:['triste','segura','divertida','amable'], ans:0,
+    exp:'<strong>Triste</strong> — sad.'},
+
+  { imgIdx:7,
+    q:'He is investigating and looking very interested. Which adjective fits him best?',
+    opts:['curioso','nervioso','enojado','tímido'], ans:0,
+    exp:'<strong>Curioso</strong> — curious, interested, inquisitive.'},
+
+  { imgIdx:8,
+    q:'He looks peaceful and calm. Which adjective fits him best?',
+    opts:['tranquilo','nervioso','preocupado','serio'], ans:0,
+    exp:'<strong>Tranquilo</strong> — calm and peaceful.'},
+
+  { imgIdx:9,
+    q:'She stands with a self-assured posture and smile. Which adjective fits her best?',
+    opts:['segura','triste','reservada','nerviosa'], ans:0,
+    exp:'<strong>Segura</strong> — sure of herself, confident.'},
+
+  { imgIdx:10,
+    q:'She looks shocked by something unexpected. Which adjective fits her best?',
+    opts:['sorprendida','aburrida','tranquila','enojada'], ans:0,
+    exp:'<strong>Sorprendida</strong> — surprised or shocked.'},
+
+  { imgIdx:11,
+    q:'He is yawning and looks very sleepy. Which adjective fits him best?',
+    opts:['cansado','curioso','alegre','seguro'], ans:0,
+    exp:'<strong>Cansado</strong> — tired.'},
+
+  { imgIdx:12,
+    q:'He has a big smile and looks very happy. Which adjective fits him best?',
+    opts:['alegre','serio','preocupado','reservado'], ans:0,
+    exp:'<strong>Alegre</strong> — happy, cheerful.'},
+
+  { imgIdx:13,
+    q:'He is not smiling and looks very focused. Which adjective fits him best?',
+    opts:['serio','amable','divertido','elegante'], ans:0,
+    exp:'<strong>Serio</strong> — serious and focused.'},
+
+  { imgIdx:14,
+    q:'She is quiet and not very outgoing. Which adjective fits her best?',
+    opts:['reservada','divertida','segura','enojada'], ans:0,
+    exp:'<strong>Reservada</strong> — reserved, quiet, not very outgoing.'},
+
+  { imgIdx:15,
+    q:'She looks sweet, warm, and caring. Which adjective fits her best?',
+    opts:['cariñosa','malhumorada','nerviosa','fría'], ans:0,
+    exp:'<strong>Cariñosa</strong> — affectionate and caring.'},
+
+  { imgIdx:16,
+    q:'He looks confident and strong. Which adjective best describes him?',
+    opts:['fuerte','tímido','pálido','canoso'], ans:0,
+    exp:'<strong>Fuerte</strong> — strong and confident.'},
+
+  { imgIdx:17,
+    q:'She looks polished, refined, and well-dressed. Which adjective fits her best?',
+    opts:['elegante','tímida','nerviosa','triste'], ans:0,
+    exp:'<strong>Elegante</strong> — elegant, polished, refined.'},
+
+  { imgIdx:18,
+    q:'He looks relaxed and comfortable. Which adjective fits him best?',
+    opts:['relajado','enojado','nervioso','triste'], ans:0,
+    exp:'<strong>Relajado</strong> — relaxed and easygoing.'},
+
+  { imgIdx:19,
+    q:'He looks cheerful and friendly. Which adjective fits him best?',
+    opts:['alegre','serio','malhumorado','preocupado'], ans:0,
+    exp:'<strong>Alegre</strong> — cheerful and happy.'}
+];
+
+var personality_answers = {};
+var personality_checked = false;
+
+function getPersonalityMediaHTML(item){
+  var src = PERSONALITY_IMAGE_BY_INDEX[item.imgIdx];
+  if(src){
+    return '<img class="photo-img loaded" src="'+src+'" alt="" loading="lazy">';
+  }
+  return '<div style="height:100%;display:grid;place-items:center;color:#666;font-size:.8rem">Image not available</div>';
+}
+
+function renderPersonality(reset){
+  if(reset !== false){
+    personality_answers={};
+    personality_checked=false;
+  }
+
+  var cardsHTML=PERSONALITY_ITEMS.map(function(item,i){
+    var order=seededShuffle([0,1,2,3],i*23+5);
+    var optHTML=order.map(function(origIdx){
+      var o=item.opts[origIdx];
+      var cls='p-opt';
+      if(personality_checked){
+        if(origIdx===item.ans)cls+=' p-show';
+        else if(personality_answers[i]===origIdx&&origIdx!==item.ans)cls+=' p-err';
+      } else if(personality_answers[i]===origIdx)cls+=origIdx===item.ans?' p-ok':' p-err';
+      return '<button class="'+cls+'" id="peo_'+i+'_'+origIdx+'" onclick="answerPersonality('+i+','+origIdx+')" '+(personality_checked?'disabled':'')+'>'+o+'</button>';
+    }).join('');
+    var explShow=personality_checked||(personality_answers[i]!==undefined);
+
+    return '<div class="photo-card">' +
+      '<div class="photo-img-wrap" id="per_wrap_'+i+'">' +
+      '<span class="photo-num">'+(i+1)+'</span>' +
+      getPersonalityMediaHTML(item) +
+      '</div>' +
+      '<div class="photo-body">' +
+      '<div class="photo-q">'+item.q+'</div>' +
+      '<div class="photo-opts">'+optHTML+'</div>' +
+      '<div class="p-expl'+(explShow?' show':'')+'" id="perexp_'+i+'">'+item.exp+'</div>' +
+      '</div></div>';
+  }).join('');
+
+  document.getElementById('exContainer').innerHTML='<div class="panel">' +
+    '<div class="ex-header"><div class="ex-title">🧠 Describe the personality</div>' +
+    '<div class="ex-instr">Look at the character and choose the personality adjective that best matches the expression, body language, and overall vibe. This version uses 20 different character images. Images are stored as optimized WebP files for GitHub Pages.</div></div>' +
+    '<div class="score-bar">' +
+    '<div class="sc"><span class="l">Total</span><span class="v">'+PERSONALITY_ITEMS.length+'</span></div>' +
+    '<div class="sc"><span class="l">Correct</span><span class="v g" id="per_ok">—</span></div>' +
+    '<div class="sc"><span class="l">Wrong</span><span class="v b" id="per_err">—</span></div>' +
+    '<div class="prog-w"><div class="prog-l">Answered: <span id="per_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="per_prog" style="width:0%"></div></div></div>' +
+    '</div>' +
+    '<div class="photo-grid">'+cardsHTML+'</div>' +
+    '<div class="fb" id="per_fb"></div>' +
+    '<div class="actions">' +
+    '<button class="btn btn-cyan" id="per_check" onclick="checkPersonality()" '+(personality_checked?'disabled':'')+'>Check all</button>' +
+    '<button class="btn btn-ghost" onclick="renderPersonality(true)">↺ Reset</button>' +
+    '</div></div>';
+
+  updatePersonalityProgress(personality_checked);
+}
+
+function answerPersonality(qi,origIdx){
+  if(personality_checked) return;
+  personality_answers[qi]=origIdx;
+  updatePersonalityProgress(false);
+  renderPersonality(false);
+}
+
+function updatePersonalityProgress(finalMode){
+  var answered=Object.keys(personality_answers).length;
+  var ok=0;
+  PERSONALITY_ITEMS.forEach(function(item,i){if(personality_answers[i]===item.ans)ok++;});
+  var pct=finalMode?100:Math.round(answered/PERSONALITY_ITEMS.length*100);
+
+  var perOk=document.getElementById('per_ok');
+  var perErr=document.getElementById('per_err');
+  var perPct=document.getElementById('per_pct');
+  var perProg=document.getElementById('per_prog');
+
+  if(perOk)perOk.textContent=finalMode?ok:'—';
+  if(perErr)perErr.textContent=finalMode?(PERSONALITY_ITEMS.length-ok):'—';
+  if(perPct)perPct.textContent=pct+'%';
+  if(perProg)perProg.style.width=pct+'%';
+}
+
+function checkPersonality(){
+  personality_checked=true;
+  var ok=0;
+  PERSONALITY_ITEMS.forEach(function(item,i){if(personality_answers[i]===item.ans)ok++;});
+  var pct=Math.round(ok/PERSONALITY_ITEMS.length*100);
+  renderPersonality(false);
+  updatePersonalityProgress(true);
+
+  var fb=document.getElementById('per_fb');
+  if(pct===100){fb.className='fb show ok';fb.innerHTML='🏆 <strong>Perfect! '+ok+'/'+PERSONALITY_ITEMS.length+'.</strong>';}
+  else if(pct>=75){fb.className='fb show ok';fb.innerHTML='👍 <strong>'+ok+'/'+PERSONALITY_ITEMS.length+'.</strong> Great job!';}
+  else if(pct>=50){fb.className='fb show partial';fb.innerHTML='📖 <strong>'+ok+'/'+PERSONALITY_ITEMS.length+'.</strong> Good start. Review the adjectives and body-language clues.';}
+  else{fb.className='fb show err';fb.innerHTML='💪 <strong>'+ok+'/'+PERSONALITY_ITEMS.length+'.</strong> Try again and focus on facial expressions and posture.';}
+}
+
+var photo_answers = {};
+var photo_checked = false;
+
+function cleanSvgLabel(svg){
+  return (svg||'')
+    .replace(/<text[\s\S]*?<\/text>/gi,'')
+    .replace(/<rect x="10" y="226"[\s\S]*?\/>/gi,'');
+}
+
+function getPhotoMediaHTML(item,i){
+  var src = PHOTO_IMAGE_BY_INDEX[i] || item.img;
+  if(src){
+    return '<img class="photo-img loaded" src="'+src+'" alt="" loading="lazy">';
+  }
+  if(item.svg){
+    return cleanSvgLabel(item.svg).replace('<svg', '<svg style="width:100%;height:100%;max-height:260px;object-fit:contain"');
+  }
+  return '<div style="height:100%;display:grid;place-items:center;color:#666;font-size:.8rem">Image not available</div>';
+}
+
+function renderPhoto(reset){
+  if(reset !== false){
+    photo_answers={};
+    photo_checked=false;
+  }
+
+  var cardsHTML=PHOTO_ITEMS.map(function(item,i){
+    var order=seededShuffle([0,1,2,3],i*17+3);
+    var optHTML=order.map(function(origIdx){
+      var o=item.opts[origIdx];
+      var cls='p-opt';
+      if(photo_checked){
+        if(origIdx===item.ans)cls+=' p-show';
+        else if(photo_answers[i]===origIdx&&origIdx!==item.ans)cls+=' p-err';
+      } else if(photo_answers[i]===origIdx)cls+=origIdx===item.ans?' p-ok':' p-err';
+      return '<button class="'+cls+'" id="po_'+i+'_'+origIdx+'" onclick="answerPhoto('+i+','+origIdx+')" '+(photo_checked?'disabled':'')+'>'+o+'</button>';
+    }).join('');
+    var explShow=photo_checked||(photo_answers[i]!==undefined);
+
+    return '<div class="photo-card">' +
+      '<div class="photo-img-wrap" id="char_wrap_'+i+'">' +
+      '<span class="photo-num">'+(i+1)+'</span>' +
+      getPhotoMediaHTML(item,i) +
+      '</div>' +
+      '<div class="photo-body">' +
+      '<div class="photo-q">'+item.q+'</div>' +
+      '<div class="photo-opts">'+optHTML+'</div>' +
+      '<div class="p-expl'+(explShow?' show':'')+'" id="pexp_'+i+'">'+item.exp+'</div>' +
+      '</div></div>';
+  }).join('');
+
+  document.getElementById('exContainer').innerHTML='<div class="panel">' +
+    '<div class="ex-header"><div class="ex-title">📸 Describe the character</div>' +
+    '<div class="ex-instr">Look at the illustrated character and choose the adjective that best describes them. Characters use clean, high-quality illustrations for visual practice. The images are now prettier and more consistent with each adjective.</div></div>' +
+    '<div class="score-bar">' +
+    '<div class="sc"><span class="l">Total</span><span class="v">'+PHOTO_ITEMS.length+'</span></div>' +
+    '<div class="sc"><span class="l">Correct</span><span class="v g" id="ph_ok">—</span></div>' +
+    '<div class="sc"><span class="l">Wrong</span><span class="v b" id="ph_err">—</span></div>' +
+    '<div class="prog-w"><div class="prog-l">Answered: <span id="ph_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="ph_prog" style="width:0%"></div></div></div>' +
+    '</div>' +
+    '<div class="photo-grid">'+cardsHTML+'</div>' +
+    '<div class="fb" id="ph_fb"></div>' +
+    '<div class="actions">' +
+    '<button class="btn btn-cyan" id="ph_check" onclick="checkPhoto()" '+(photo_checked?'disabled':'')+'>Check all</button>' +
+    '<button class="btn btn-ghost" onclick="renderPhoto(true)">↺ Reset</button>' +
+    '</div></div>';
+
+  updatePhotoProgress(photo_checked);
+}
+
+function updatePhotoProgress(finalMode){
+  var answered=Object.keys(photo_answers).length;
+  var ok=0;
+  PHOTO_ITEMS.forEach(function(item,i){if(photo_answers[i]===item.ans)ok++;});
+  var pct=finalMode?100:Math.round(answered/PHOTO_ITEMS.length*100);
+
+  var phOk=document.getElementById('ph_ok');
+  var phErr=document.getElementById('ph_err');
+  var phPct=document.getElementById('ph_pct');
+  var phProg=document.getElementById('ph_prog');
+
+  if(phOk)phOk.textContent=finalMode?ok:'—';
+  if(phErr)phErr.textContent=finalMode?(PHOTO_ITEMS.length-ok):'—';
+  if(phPct)phPct.textContent=pct+'%';
+  if(phProg)phProg.style.width=pct+'%';
+}
+
+function answerPhoto(qi,origIdx){
+  if(photo_checked)return;
+  if(photo_answers[qi]!==undefined){
+    var p=document.getElementById('po_'+qi+'_'+photo_answers[qi]);
+    if(p)p.classList.remove('p-ok','p-err');
+  }
+  photo_answers[qi]=origIdx;
+  var isOk=origIdx===PHOTO_ITEMS[qi].ans;
+  var btn=document.getElementById('po_'+qi+'_'+origIdx);
+  if(btn)btn.classList.add(isOk?'p-ok':'p-err');
+  var exp=document.getElementById('pexp_'+qi);
+  if(exp)exp.classList.add('show');
+  updatePhotoProgress(false);
+}
+
+function checkPhoto(){
+  photo_checked=true;
+  var ok=0;
+  PHOTO_ITEMS.forEach(function(item,i){if(photo_answers[i]===item.ans)ok++;});
+  var pct=Math.round(ok/PHOTO_ITEMS.length*100);
+
+  renderPhoto(false);
+  updatePhotoProgress(true);
+
+  var fb=document.getElementById('ph_fb');
+  if(pct===100){fb.className='fb show ok';fb.innerHTML='🏆 <strong>Perfect!</strong> You described every person correctly.';}
+  else if(pct>=75){fb.className='fb show ok';fb.innerHTML='👍 <strong>'+ok+'/'+PHOTO_ITEMS.length+'.</strong> Great job!';}
+  else{fb.className='fb show partial';fb.innerHTML='📖 <strong>'+ok+'/'+PHOTO_ITEMS.length+'.</strong> Remember to use the correct gender form for each person.';}
+}
+
+window.onerror = function(msg,src,line,col,err){
+  document.getElementById('exContainer').innerHTML = '<div style="padding:20px;color:#ef4444;font-size:.9rem;line-height:1.7"><strong>JS Error:</strong><br>' + msg + '<br>Line: ' + line + '<br>' + (err?err.stack:'') + '</div>';
+  return true;
+};
+try { goEx(0); } catch(e) {
+  document.getElementById('exContainer').innerHTML = '<div style="padding:20px;color:#ef4444;font-size:.9rem;line-height:1.7"><strong>Caught Error:</strong><br>' + e.message + '<br><pre>' + e.stack + '</pre></div>';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conectores | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --c1:#f472b6;--c1b:#ff91cd; /* añadir */
+  --c2:#25d9ff;--c2b:#7ee8ff; /* contrastar */
+  --c3:#fbbf24;--c3b:#fde68a; /* causa */
+  --c4:#a78bfa;--c4b:#c4b5fd; /* consecuencia */
+  --c5:#34d399;--c5b:#6ee7b7; /* ejemplos */
+  --c6:#f87171;--c6b:#fca5a5; /* ordenar */
+  --c7:#60a5fa;--c7b:#93c5fd; /* opinión */
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 12% 8%,rgba(255,43,191,.15),transparent 30%),radial-gradient(ellipse at 88% 12%,rgba(37,217,255,.1),transparent 30%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(1020px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta);text-shadow:1px 1px 0 var(--cyan)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--c1),#fff 40%,var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.85rem;margin-top:4px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ex-tabs{display:flex;gap:5px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:7px;overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:8px 11px;font-weight:800;font-family:var(--font);font-size:.76rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;box-shadow:0 3px 0 rgba(0,0,0,.2);transform:translateY(-1px)}
+.etab-icon{font-size:1.15rem;line-height:1}
+.etab-label{font-size:.62rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:22px 26px;box-shadow:var(--shadow)}
+.ex-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.85rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:16px}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:100px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width .35s}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.err{background:rgba(239,68,68,.11);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+
+/* ── FLASHCARDS ── */
+.flash-controls{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.ff-btn{border:0;border-radius:9px;padding:5px 12px;font-size:.73rem;font-weight:800;font-family:var(--font);cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);color:var(--muted);border:1.5px solid transparent}
+.ff-btn.active{color:white}
+.flash-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.flash-prow{display:flex;align-items:center;gap:12px;width:100%;max-width:660px}
+.flash-cnt{font-size:.8rem;font-weight:800;color:var(--muted2);white-space:nowrap}
+.flash-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.flash-fil{height:100%;border-radius:999px;transition:width .4s}
+.flash-card{width:100%;max-width:660px;min-height:210px;perspective:1000px;cursor:pointer}
+.flash-inner{position:relative;width:100%;min-height:210px;transition:transform .5s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.flash-card.flipped .flash-inner{transform:rotateY(180deg)}
+.flash-front,.flash-back{position:absolute;inset:0;border-radius:18px;padding:22px 24px;backface-visibility:hidden;display:flex;flex-direction:column;gap:10px;min-height:210px}
+.flash-back{transform:rotateY(180deg)}
+.cat-tag{font-size:.65rem;font-weight:900;text-transform:uppercase;letter-spacing:.09em;border-radius:999px;padding:3px 11px;width:fit-content}
+.flash-word{font-family:var(--display);font-size:1.8rem;font-weight:900;line-height:1.1;color:var(--text)}
+.flash-en{font-size:.82rem;color:var(--muted2);font-style:italic;margin-top:2px}
+.flash-use{font-size:.8rem;color:var(--muted);line-height:1.55;padding:8px 12px;background:rgba(255,255,255,.05);border-radius:9px;margin-top:4px}
+.flash-ex{font-size:.92rem;line-height:1.6;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.05);font-style:italic}
+.flash-ex strong{font-style:normal}
+.flash-hint{font-size:.72rem;color:var(--muted2);text-align:center;font-style:italic;margin-top:auto}
+.flash-nav{display:flex;gap:8px;align-items:center;justify-content:center;width:100%;max-width:660px}
+
+/* ── MC ── */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px}
+.mc-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0;margin-top:2px}
+.mc-sent{font-size:1rem;line-height:1.7;flex:1}
+.mc-blank{display:inline-block;min-width:88px;border-bottom:2.5px solid rgba(37,217,255,.4);padding:0 4px;text-align:center;font-weight:800;color:var(--cyan)}
+.mc-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding-left:28px}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px}
+.mc-opt{border:0;border-radius:10px;padding:7px 14px;font-weight:700;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);background:rgba(37,217,255,.09);border-color:rgba(37,217,255,.35)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.mc-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.mc-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mc-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-expl{display:none;font-size:.79rem;color:var(--muted);line-height:1.55;margin-top:7px;padding:7px 12px 7px 28px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-expl.show{display:block}
+.mc-tag{font-size:.6rem;font-weight:900;text-transform:uppercase;border-radius:999px;padding:2px 8px;margin-left:5px;vertical-align:middle}
+
+/* ── ERROR HUNT ── */
+.eh-list{display:flex;flex-direction:column;gap:9px}
+.eh-item{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:13px 15px;display:flex;align-items:flex-start;gap:11px}
+.eh-item.eh-ok{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.05)}
+.eh-item.eh-bad{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.05)}
+.eh-n{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:var(--muted2);flex-shrink:0;margin-top:1px}
+.eh-body{flex:1}.eh-sent{font-size:.97rem;line-height:1.6}
+.eh-fix{font-size:.82rem;font-weight:700;color:var(--good);margin-left:6px}
+.eh-btns{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+.eh-btn{border:0;border-radius:9px;padding:7px 15px;font-weight:800;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.eh-yes:hover:not([disabled]){border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.1);color:#86efac}
+.eh-no:hover:not([disabled]){border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);color:#fca5a5}
+.eh-btn[disabled]{cursor:default;opacity:.5}
+.cho-ok{border-color:var(--good)!important;background:rgba(34,197,94,.18)!important;color:#86efac!important;opacity:1!important}
+.cho-err{border-color:var(--bad)!important;background:rgba(239,68,68,.14)!important;color:#fca5a5!important;opacity:1!important}
+.eh-exp{display:none;font-size:.79rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);line-height:1.55}
+.revealed .eh-exp{display:block}
+
+/* ── SORT ── */
+.sort-pile{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;min-height:52px;margin-bottom:12px}
+.sort-bucket{border-radius:14px;padding:12px;min-height:80px;display:flex;flex-direction:column;gap:6px;transition:.2s}
+.sort-bucket.drag-over{box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.bucket-title{font-family:var(--display);font-size:.76rem;font-weight:900;text-align:center}
+.bucket-sub{font-size:.62rem;color:var(--muted2);text-align:center;line-height:1.35}
+.sort-card{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:9px;padding:7px 12px;font-size:.84rem;font-weight:600;cursor:grab;user-select:none;transition:.15s}
+.sort-card:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sort-card.ghost{opacity:.35}
+.sort-card.c-ok{background:rgba(34,197,94,.14);border-color:var(--good);color:#86efac;cursor:default}
+.sort-card.c-err{background:rgba(239,68,68,.1);border-color:var(--bad);color:#fca5a5;font-size:.78rem}
+
+/* ── SPEED ── */
+.sp-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-stats{display:flex;gap:9px}
+.spst{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spst .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.spst .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spst .sv.g{color:var(--good)}.spst .sv.b{color:var(--bad)}.spst .sv.w{color:var(--warn)}
+.sp-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:20px;text-align:center;width:100%;max-width:520px}
+.sp-q{font-size:.98rem;line-height:1.7;margin-bottom:4px}
+.sp-hint{font-size:.77rem;color:var(--muted2);font-style:italic}
+.sp-row{display:flex;gap:8px;justify-content:center;width:100%;max-width:520px}
+.sp-inp{flex:1;max-width:280px;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.3);border-radius:11px;padding:10px 14px;font-family:var(--font);font-size:1rem;font-weight:700;color:var(--text);outline:none;transition:.15s}
+.sp-inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.sp-inp::placeholder{color:var(--muted2);font-weight:400}
+.sp-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:520px}
+.sp-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.sp-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.tmr-row{display:flex;align-items:center;gap:9px;width:100%;max-width:520px}
+.tmr-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.tmr-fil{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width 1s linear}
+.tmr-n{font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--muted2);min-width:22px;text-align:right}
+.sp-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.sp-start p{color:var(--muted);font-size:.87rem;max-width:420px;line-height:1.6}
+.streak{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak.on{display:inline-flex;align-items:center;gap:4px}
+.cf{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.cf.pop{animation:cfk .7s ease forwards}
+@keyframes cfk{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+
+/* ── REFERENCE ── */
+.ref-table{width:100%;border-collapse:collapse;font-size:.83rem;margin-bottom:12px}
+.ref-table th{padding:7px 12px;font-size:.62rem;font-weight:800;text-transform:uppercase;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+.ref-table td{padding:7px 12px;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5;vertical-align:top}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-table tr:hover td{background:rgba(255,255,255,.02)}
+.td-es{font-weight:700}.td-en{color:var(--muted2);font-style:italic;font-size:.79rem}.td-ex{color:var(--muted);font-size:.78rem;font-style:italic}
+.ref-h3{font-family:var(--display);font-size:.92rem;font-weight:800;margin-bottom:8px;padding:5px 13px;border-radius:9px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;user-select:none;width:100%}
+.ref-section{margin-bottom:10px}
+.ref-body{overflow:hidden;transition:max-height .35s ease,opacity .35s}
+.ref-body.collapsed{max-height:0!important;opacity:0;pointer-events:none}
+.ref-tip{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:10px 14px;font-size:.83rem;color:#bbf7d0;line-height:1.6;margin-bottom:10px}
+.ref-alert{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.18);border-radius:12px;padding:10px 14px;font-size:.83rem;color:#fecaca;line-height:1.6;margin-bottom:10px}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:14px 12px}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="cf" id="cf"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Conectores del Discurso</h1>
+      <p>Master 80+ Spanish connectors across 14 categories: cause, contrast, consequence, opinion, condition, and more.</p>
+      <div class="badges">
+        <span class="badge">B1&#8211;B2</span>
+        <span class="badge" style="border-color:rgba(244,114,182,.35);color:var(--c1b)">&#128279; 14 categories</span>
+        <span class="badge" style="border-color:rgba(37,217,255,.35);color:var(--c2b)">&#128221; 80+ connectors</span>
+        <span class="badge" style="border-color:rgba(167,139,250,.35);color:var(--c4b)">&#9889; formal vs informal</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">&#128274;</span><span class="etab-label">Flash<br>cards</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">&#128221;</span><span class="etab-label">Multiple<br>choice</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">&#128269;</span><span class="etab-label">Error<br>hunter</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">&#128202;</span><span class="etab-label">Drag &amp;<br>sort</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">&#9889;</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">&#128196;</span><span class="etab-label">Reference</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> &middot; Your Mexican Friend</p>
+</div>
+<script>
+function seededShuffle(arr,seed){const a=[...arr];let s=seed;for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+
+let flashIdx=0, flashFilter='all', flashFlipped=false, flashCards=[];
+let mcAnswers={}, mcChecked=false, ehAnswered={};
+let dragItem=null, sortPlaced={}, sortChecked=false, tapSel=null;
+let spIdx=0, spOk=0, spErr=0, spStreak=0, spTimer=null, spTimeLeft=0, spAnswered=false;
+
+function goEx(idx){
+  [0,1,2,3,4,5].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===idx));
+  [renderFlash,renderMC,renderErrorHunt,renderSort,renderSpeed,renderReference][idx]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* category metadata */
+const CATS={
+  add:  {label:'Añadir',      en:'Adding info',     col:'var(--c1)',  bg:'rgba(244,114,182,.12)', bd:'rgba(244,114,182,.3)'},
+  con:  {label:'Contrastar',  en:'Contrasting',     col:'var(--c2)',  bg:'rgba(37,217,255,.10)',  bd:'rgba(37,217,255,.28)'},
+  cau:  {label:'Causa',       en:'Cause',           col:'var(--c3)',  bg:'rgba(251,191,36,.10)',  bd:'rgba(251,191,36,.28)'},
+  cons: {label:'Consecuencia',en:'Consequence',     col:'var(--c4)',  bg:'rgba(167,139,250,.10)', bd:'rgba(167,139,250,.28)'},
+  ej:   {label:'Ejemplos',    en:'Examples',        col:'var(--c5)',  bg:'rgba(52,211,153,.10)',  bd:'rgba(52,211,153,.28)'},
+  ord:  {label:'Ordenar',     en:'Ordering',        col:'var(--c6)',  bg:'rgba(248,113,113,.10)', bd:'rgba(248,113,113,.28)'},
+  opi:  {label:'Opinión',     en:'Opinion',         col:'var(--c7)',  bg:'rgba(96,165,250,.10)',  bd:'rgba(96,165,250,.28)'},
+  comp: {label:'Comparar',    en:'Comparing',       col:'#c4b5fd',   bg:'rgba(196,181,253,.08)', bd:'rgba(196,181,253,.25)'},
+  res:  {label:'Resumir',     en:'Summarizing',     col:'#6ee7b7',   bg:'rgba(110,231,183,.07)', bd:'rgba(110,231,183,.22)'},
+  cond: {label:'Condición',   en:'Condition',       col:'#fde68a',   bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.22)'},
+  prop: {label:'Propósito',   en:'Purpose',         col:'#fca5a5',   bg:'rgba(252,165,165,.07)', bd:'rgba(252,165,165,.22)'},
+  enf:  {label:'Énfasis',     en:'Emphasis',        col:'#a5f3fc',   bg:'rgba(165,243,252,.07)', bd:'rgba(165,243,252,.22)'},
+  duda: {label:'Duda',        en:'Doubt/possibility',col:'#d8b4fe',  bg:'rgba(216,180,254,.07)', bd:'rgba(216,180,254,.22)'},
+  ref:  {label:'Reformular',  en:'Reformulating',   col:'#fcd34d',   bg:'rgba(252,211,77,.07)',  bd:'rgba(252,211,77,.22)'},
+};
+
+/* ══════════════════════════════════
+   FLASHCARD DATA — 80+ connectors
+══════════════════════════════════ */
+const FLASH_DATA=[
+  /* AÑADIR */
+  {cat:'add',word:'además',en:'moreover / furthermore',use:'Add important extra info.',ex:'Me gusta estudiar español. <strong>Además</strong>, quiero viajar a México.',reg:'neutral'},
+  {cat:'add',word:'también',en:'also / too',use:'Add a similar or parallel idea.',ex:'Trabajo en una oficina y <strong>también</strong> estudio por las noches.',reg:'neutral'},
+  {cat:'add',word:'incluso',en:'even / even more',use:'Add something surprising or stronger.',ex:'Habla tres idiomas. <strong>Incluso</strong> está aprendiendo japonés.',reg:'neutral'},
+  {cat:'add',word:'aparte de eso',en:'besides that / on top of that',use:'Add another separate point.',ex:'El trabajo es interesante. <strong>Aparte de eso</strong>, pagan bien.',reg:'informal'},
+  {cat:'add',word:'por si fuera poco',en:'as if that weren\'t enough',use:'Add extra, often negative/ironic info.',ex:'Llegó tarde y, <strong>por si fuera poco</strong>, olvidó el reporte.',reg:'neutral'},
+  /* CONTRASTAR */
+  {cat:'con',word:'pero',en:'but',use:'Simple contrast between two ideas.',ex:'Quiero salir, <strong>pero</strong> tengo tarea.',reg:'neutral'},
+  {cat:'con',word:'sin embargo',en:'however / nevertheless',use:'Formal contrast. Can start a sentence.',ex:'El proyecto es bueno. <strong>Sin embargo</strong>, necesita más detalles.',reg:'formal'},
+  {cat:'con',word:'aunque',en:'although / even though',use:'Concession — the main idea still holds.',ex:'<strong>Aunque</strong> estaba cansado, fue al gimnasio.',reg:'neutral'},
+  {cat:'con',word:'a pesar de que',en:'despite the fact that',use:'Stronger concession than aunque.',ex:'<strong>A pesar de que</strong> llovía, salimos a caminar.',reg:'formal'},
+  {cat:'con',word:'en cambio',en:'on the other hand / instead',use:'Compare two different situations.',ex:'Yo prefiero café. <strong>En cambio</strong>, mi hermano prefiere té.',reg:'neutral'},
+  {cat:'con',word:'mientras que',en:'whereas / while',use:'Contrast two simultaneous opposites.',ex:'Ella ahorra dinero, <strong>mientras que</strong> él gasta mucho.',reg:'neutral'},
+  {cat:'con',word:'por otro lado',en:'on the other hand',use:'Introduce another perspective.',ex:'Es una buena inversión. <strong>Por otro lado</strong>, tiene mucho riesgo.',reg:'neutral'},
+  {cat:'con',word:'no obstante',en:'nonetheless / notwithstanding',use:'Very formal. Like sin embargo.',ex:'Los resultados son positivos. <strong>No obstante</strong>, hay áreas de mejora.',reg:'very formal'},
+  /* CAUSA */
+  {cat:'cau',word:'porque',en:'because',use:'Direct, simple cause.',ex:'No fui <strong>porque</strong> estaba enfermo.',reg:'neutral'},
+  {cat:'cau',word:'ya que',en:'since / as (because)',use:'Explanatory cause. More formal than porque.',ex:'No compré el boleto, <strong>ya que</strong> era muy caro.',reg:'neutral'},
+  {cat:'cau',word:'debido a que',en:'due to the fact that',use:'Formal written cause.',ex:'La clase se canceló <strong>debido a que</strong> el profesor no pudo asistir.',reg:'formal'},
+  {cat:'cau',word:'puesto que',en:'given that / since',use:'Formal. Cause is known or logical.',ex:'No podemos invertir, <strong>puesto que</strong> no hay capital.',reg:'formal'},
+  {cat:'cau',word:'como',en:'since / as (at the start)',use:'Used at the beginning of a sentence for cause.',ex:'<strong>Como</strong> hacía frío, nos quedamos en casa.',reg:'neutral'},
+  {cat:'cau',word:'por culpa de',en:'because of / due to (negative)',use:'Negative cause — blaming something.',ex:'Llegamos tarde <strong>por culpa del</strong> tráfico.',reg:'informal'},
+  {cat:'cau',word:'gracias a',en:'thanks to (positive)',use:'Positive cause — credit for good outcome.',ex:'Aprobé el examen <strong>gracias a</strong> tu ayuda.',reg:'neutral'},
+  /* CONSECUENCIA */
+  {cat:'cons',word:'por eso',en:'that\'s why / so',use:'Simple consequence. Very common.',ex:'Estaba cansado. <strong>Por eso</strong>, me fui temprano.',reg:'neutral'},
+  {cat:'cons',word:'entonces',en:'so / then',use:'Logical result or next step.',ex:'No tienes dinero, <strong>entonces</strong> no puedes comprarlo.',reg:'informal'},
+  {cat:'cons',word:'por lo tanto',en:'therefore',use:'Formal consequence.',ex:'La empresa perdió dinero. <strong>Por lo tanto</strong>, debe reducir gastos.',reg:'formal'},
+  {cat:'cons',word:'así que',en:'so / and so',use:'Natural consequence. Conversational.',ex:'No estudié, <strong>así que</strong> reprobé el examen.',reg:'neutral'},
+  {cat:'cons',word:'en consecuencia',en:'as a consequence / consequently',use:'Very formal written language.',ex:'Las ventas bajaron. <strong>En consecuencia</strong>, cerraron sucursales.',reg:'very formal'},
+  {cat:'cons',word:'de modo que',en:'so that / in such a way that',use:'Consequence or manner.',ex:'Ahorró mucho dinero, <strong>de modo que</strong> pudo invertir.',reg:'neutral'},
+  {cat:'cons',word:'por consiguiente',en:'consequently / as a result',use:'Very formal. Academic texts.',ex:'No hubo acuerdo. <strong>Por consiguiente</strong>, la reunión terminó.',reg:'very formal'},
+  /* EJEMPLOS */
+  {cat:'ej',word:'por ejemplo',en:'for example',use:'Introduce a general example.',ex:'Hay muchos deportes, <strong>por ejemplo</strong>, tenis y natación.',reg:'neutral'},
+  {cat:'ej',word:'como',en:'like / such as',use:'Give examples inside a sentence.',ex:'Me gustan frutas <strong>como</strong> la manzana y el mango.',reg:'neutral'},
+  {cat:'ej',word:'en particular',en:'in particular / specifically',use:'Highlight a specific case.',ex:'Me gustan los idiomas. <strong>En particular</strong>, el español.',reg:'neutral'},
+  {cat:'ej',word:'especialmente',en:'especially / particularly',use:'Emphasize a standout example.',ex:'Me gusta la comida mexicana, <strong>especialmente</strong> los tacos.',reg:'neutral'},
+  {cat:'ej',word:'tal como',en:'just as / such as',use:'Formal example, often with institutions.',ex:'Empresas <strong>tal como</strong> Google invierten en IA.',reg:'formal'},
+  /* ORDENAR */
+  {cat:'ord',word:'primero / en primer lugar',en:'first / in the first place',use:'Open a list or sequence.',ex:'<strong>En primer lugar</strong>, debemos analizar el problema.',reg:'neutral'},
+  {cat:'ord',word:'luego / después',en:'then / afterwards',use:'Continue a sequence.',ex:'Primero cenamos y <strong>luego</strong> vimos una película.',reg:'neutral'},
+  {cat:'ord',word:'finalmente / por último',en:'finally / lastly',use:'Close a list or sequence.',ex:'<strong>Por último</strong>, debemos revisar el presupuesto.',reg:'neutral'},
+  {cat:'ord',word:'a continuación',en:'next / below',use:'Formal: what comes right after.',ex:'<strong>A continuación</strong>, presentaré los resultados.',reg:'formal'},
+  {cat:'ord',word:'por un lado… por otro',en:'on one hand… on the other hand',use:'Structure two contrasting sides.',ex:'<strong>Por un lado</strong> es caro; <strong>por otro</strong>, es de buena calidad.',reg:'neutral'},
+  /* OPINIÓN */
+  {cat:'opi',word:'en mi opinión',en:'in my opinion',use:'State your point of view directly.',ex:'<strong>En mi opinión</strong>, invertir sin investigar es peligroso.',reg:'neutral'},
+  {cat:'opi',word:'desde mi punto de vista',en:'from my point of view',use:'More developed opinion marker.',ex:'<strong>Desde mi punto de vista</strong>, la educación debe ser gratuita.',reg:'neutral'},
+  {cat:'opi',word:'yo creo que',en:'I believe / I think that',use:'Common personal opinion.',ex:'<strong>Yo creo que</strong> la IA puede ayudar a los estudiantes.',reg:'informal'},
+  {cat:'opi',word:'considero que',en:'I consider / I find that',use:'Formal opinion.',ex:'<strong>Considero que</strong> la empresa debe ser transparente.',reg:'formal'},
+  {cat:'opi',word:'me parece que',en:'it seems to me that',use:'Softer opinion — less assertive.',ex:'<strong>Me parece que</strong> esa decisión no fue justa.',reg:'neutral'},
+  {cat:'opi',word:'para mí',en:'for me / to me',use:'Personal stance marker.',ex:'<strong>Para mí</strong>, la honestidad es lo más importante.',reg:'informal'},
+  /* COMPARAR */
+  {cat:'comp',word:'igual que',en:'just like / the same as',use:'Similarity between two things.',ex:'Ella piensa <strong>igual que</strong> yo.',reg:'neutral'},
+  {cat:'comp',word:'al igual que',en:'just as / in the same way as',use:'More formal similarity.',ex:'<strong>Al igual que</strong> otros países, México enfrenta retos económicos.',reg:'formal'},
+  {cat:'comp',word:'a diferencia de',en:'unlike / as opposed to',use:'Highlight a clear difference.',ex:'<strong>A diferencia de</strong> mi hermano, yo prefiero ahorrar.',reg:'neutral'},
+  {cat:'comp',word:'en comparación con',en:'in comparison with',use:'Formal comparison with metrics.',ex:'<strong>En comparación con</strong> el año pasado, las ventas subieron.',reg:'formal'},
+  {cat:'comp',word:'de la misma manera',en:'in the same way',use:'Compare methods or behaviors.',ex:'<strong>De la misma manera</strong>, las empresas deben cuidar a su equipo.',reg:'formal'},
+  /* RESUMIR */
+  {cat:'res',word:'en resumen',en:'in summary / to sum up',use:'General summary of what was said.',ex:'<strong>En resumen</strong>, la inversión es interesante pero riesgosa.',reg:'neutral'},
+  {cat:'res',word:'en conclusión',en:'in conclusion',use:'Formal closing.',ex:'<strong>En conclusión</strong>, debemos actuar con responsabilidad.',reg:'formal'},
+  {cat:'res',word:'en pocas palabras',en:'in a few words / in short',use:'Informal, simple summary.',ex:'<strong>En pocas palabras</strong>, no vale la pena.',reg:'informal'},
+  {cat:'res',word:'al final',en:'in the end / ultimately',use:'What happened at the end.',ex:'<strong>Al final</strong>, decidimos no vender la empresa.',reg:'neutral'},
+  {cat:'res',word:'básicamente',en:'basically / essentially',use:'Informal simple summary.',ex:'<strong>Básicamente</strong>, necesitamos más tiempo y dinero.',reg:'informal'},
+  /* CONDICIÓN */
+  {cat:'cond',word:'si',en:'if',use:'General condition. Indicative verb.',ex:'<strong>Si</strong> estudio, aprobaré el examen.',reg:'neutral'},
+  {cat:'cond',word:'siempre que',en:'as long as / whenever',use:'Condition that must always be true.',ex:'Te ayudo <strong>siempre que</strong> seas honesto conmigo.',reg:'neutral'},
+  {cat:'cond',word:'a menos que',en:'unless',use:'Negative condition — except if.',ex:'No venderé mis acciones <strong>a menos que</strong> bajen mucho.',reg:'neutral'},
+  {cat:'cond',word:'siempre y cuando',en:'as long as (emphatic)',use:'Emphatic version of siempre que.',ex:'Puedes invertir <strong>siempre y cuando</strong> entiendas el riesgo.',reg:'neutral'},
+  {cat:'cond',word:'en caso de que',en:'in case / in the event that',use:'Future possibility condition.',ex:'<strong>En caso de que</strong> llueva, cancelaremos el evento.',reg:'neutral'},
+  {cat:'cond',word:'con tal de que',en:'as long as / provided that',use:'Condition with a personal purpose.',ex:'Aceptaría el trabajo <strong>con tal de que</strong> paguen bien.',reg:'neutral'},
+  /* PROPÓSITO */
+  {cat:'prop',word:'para',en:'in order to / for',use:'Simple purpose. Same subject.',ex:'Estudio español <strong>para</strong> viajar.',reg:'neutral'},
+  {cat:'prop',word:'para que',en:'so that',use:'Purpose with different subjects.',ex:'Te explico esto <strong>para que</strong> lo entiendas mejor.',reg:'neutral'},
+  {cat:'prop',word:'con el fin de',en:'with the aim of',use:'Formal purpose.',ex:'Ahorramos dinero <strong>con el fin de</strong> comprar una casa.',reg:'formal'},
+  {cat:'prop',word:'con el objetivo de',en:'with the objective of',use:'Professional/academic purpose.',ex:'La empresa invirtió <strong>con el objetivo de</strong> crecer.',reg:'formal'},
+  {cat:'prop',word:'a fin de',en:'in order to',use:'Very formal written language.',ex:'Se tomaron medidas <strong>a fin de</strong> reducir costos.',reg:'very formal'},
+  /* ÉNFASIS */
+  {cat:'enf',word:'de hecho',en:'in fact / as a matter of fact',use:'Reinforce or strengthen an idea.',ex:'Es una buena empresa. <strong>De hecho</strong>, sus ventas han crecido mucho.',reg:'neutral'},
+  {cat:'enf',word:'en realidad',en:'actually / in reality',use:'Clarify or correct a misconception.',ex:'<strong>En realidad</strong>, no fue una mala decisión.',reg:'neutral'},
+  {cat:'enf',word:'sobre todo',en:'above all / especially',use:'Highlight the most important element.',ex:'Me gusta viajar, <strong>sobre todo</strong> a lugares tranquilos.',reg:'neutral'},
+  {cat:'enf',word:'sin duda',en:'without a doubt / undoubtedly',use:'Express certainty and emphasis.',ex:'<strong>Sin duda</strong>, fue la mejor opción.',reg:'neutral'},
+  {cat:'enf',word:'claramente',en:'clearly / obviously',use:'State something as evident.',ex:'<strong>Claramente</strong>, la empresa necesita una nueva estrategia.',reg:'neutral'},
+  /* DUDA */
+  {cat:'duda',word:'tal vez / quizás',en:'maybe / perhaps',use:'Express possibility or uncertainty.',ex:'<strong>Tal vez</strong> deberíamos esperar antes de invertir.',reg:'neutral'},
+  {cat:'duda',word:'probablemente',en:'probably',use:'High possibility.',ex:'<strong>Probablemente</strong> suban los precios este año.',reg:'neutral'},
+  {cat:'duda',word:'puede que',en:'it may be that',use:'Possibility. Followed by subjunctive.',ex:'<strong>Puede que</strong> la empresa crezca más.',reg:'neutral'},
+  {cat:'duda',word:'es posible que',en:'it\'s possible that',use:'Possibility. Subjunctive required.',ex:'<strong>Es posible que</strong> tengamos una reunión mañana.',reg:'neutral'},
+  {cat:'duda',word:'posiblemente',en:'possibly',use:'Medium-level possibility.',ex:'<strong>Posiblemente</strong> cambien las reglas.',reg:'neutral'},
+  /* REFORMULAR */
+  {cat:'ref',word:'es decir',en:'that is to say / i.e.',use:'Clarify or rephrase more clearly.',ex:'No tiene liquidez, <strong>es decir</strong>, no tiene dinero disponible.',reg:'neutral'},
+  {cat:'ref',word:'o sea',en:'I mean / that is',use:'Informal rephrasing or clarification.',ex:'No quiero endeudarme, <strong>o sea</strong>, prefiero ahorrar primero.',reg:'informal'},
+  {cat:'ref',word:'en otras palabras',en:'in other words',use:'Formal rephrase of same idea.',ex:'La empresa no es rentable. <strong>En otras palabras</strong>, pierde dinero.',reg:'neutral'},
+  {cat:'ref',word:'dicho de otra manera',en:'put another way',use:'Formal alternative phrasing.',ex:'<strong>Dicho de otra manera</strong>, el riesgo es demasiado alto.',reg:'formal'},
+  {cat:'ref',word:'mejor dicho',en:'or rather / more precisely',use:'Correct or sharpen what was just said.',ex:'No es caro, <strong>mejor dicho</strong>, es una inversión grande.',reg:'neutral'},
+];
+
+/* ══════════════════════════════════
+   EX 0 — FLASHCARDS
+══════════════════════════════════ */
+function getFiltered(){return flashFilter==='all'?FLASH_DATA:FLASH_DATA.filter(c=>c.cat===flashFilter);}
+
+const REG_COLORS={'neutral':'rgba(37,217,255,.15)','informal':'rgba(245,158,11,.15)','formal':'rgba(167,139,250,.15)','very formal':'rgba(239,68,68,.15)'};
+const REG_TXT={'neutral':'var(--c2b)','informal':'#fcd34d','formal':'#c4b5fd','very formal':'#fca5a5'};
+
+function renderFlash(){
+  flashCards=getFiltered();if(flashIdx>=flashCards.length)flashIdx=0;
+  flashFlipped=false;renderFlashCard();
+}
+function renderFlashCard(){
+  if(!flashCards.length){document.getElementById('exContainer').innerHTML=`<div class="panel"><p style="text-align:center;color:var(--muted);padding:24px">No cards.</p></div>`;return;}
+  const item=flashCards[flashIdx];
+  const cat=CATS[item.cat];
+  const pct=Math.round((flashIdx+1)/flashCards.length*100);
+  const fbtns=[{id:'all',lbl:'All'},...Object.entries(CATS).map(([k,v])=>({id:k,lbl:v.label}))].map(f=>`<button class="ff-btn${flashFilter===f.id?' active':''}" style="${flashFilter===f.id?`background:${CATS[f.id]?.bg||'rgba(255,255,255,.1)'};border-color:${CATS[f.id]?.bd||'rgba(255,255,255,.25)'};color:${CATS[f.id]?.col||'var(--text)'}`:''};" onclick="setFilter('${f.id}')">${f.lbl}</button>`).join('');
+
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">&#128274; Flashcards — ${FLASH_DATA.length} conectores</div>
+  <div class="ex-instr">Click any card to flip it. Filter by category. Pay attention to <em>formal vs informal</em> register.</div>
+  <div class="flash-controls">${fbtns}</div>
+  <div class="flash-wrap">
+    <div class="flash-prow">
+      <span class="flash-cnt">${flashIdx+1} / ${flashCards.length}</span>
+      <div class="flash-trk"><div class="flash-fil" style="width:${pct}%;background:${cat.col}"></div></div>
+      <span class="flash-cnt" style="color:${cat.col}">${cat.label}</span>
+    </div>
+    <div class="flash-card${flashFlipped?' flipped':''}" id="flashCard" onclick="flipCard()">
+      <div class="flash-inner">
+        <div class="flash-front" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <span class="cat-tag" style="background:${cat.bg};border:1px solid ${cat.bd};color:${cat.col}">${cat.label} — ${cat.en}</span>
+          <div class="flash-word" style="color:${cat.col}">${item.word}</div>
+          <div class="flash-en">${item.en}</div>
+          <div style="margin-top:auto;display:flex;align-items:center;gap:8px">
+            <span style="font-size:.68rem;font-weight:800;padding:3px 9px;border-radius:999px;background:${REG_COLORS[item.reg]};color:${REG_TXT[item.reg]}">${item.reg}</span>
+          </div>
+          <div class="flash-hint">&#128161; Click to see usage &amp; example</div>
+        </div>
+        <div class="flash-back" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <span class="cat-tag" style="background:${cat.bg};border:1px solid ${cat.bd};color:${cat.col}">${cat.label}</span>
+          <div class="flash-word" style="color:${cat.col};font-size:1.4rem">${item.word}</div>
+          <div class="flash-use">&#128336; <strong>When to use:</strong> ${item.use}</div>
+          <div class="flash-ex">${item.ex}</div>
+          <div style="margin-top:auto;font-size:.72rem;color:var(--muted2)">Register: <span style="color:${REG_TXT[item.reg]};font-weight:700">${item.reg}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-nav">
+      <button class="btn btn-ghost" onclick="prevFlash()" ${flashIdx===0?'disabled':''}>&#8592; Prev</button>
+      <button class="btn btn-ghost" onclick="flipCard()">&#8635; Flip</button>
+      <button class="btn btn-cyan" onclick="nextFlash()" ${flashIdx===flashCards.length-1?'disabled':''}>Next &#8594;</button>
+    </div>
+  </div></div>`;
+}
+function flipCard(){flashFlipped=!flashFlipped;const c=document.getElementById('flashCard');if(c)c.classList.toggle('flipped',flashFlipped);}
+function nextFlash(){flashIdx=Math.min(flashCards.length-1,flashIdx+1);flashFlipped=false;renderFlashCard();}
+function prevFlash(){flashIdx=Math.max(0,flashIdx-1);flashFlipped=false;renderFlashCard();}
+function setFilter(f){flashFilter=f;flashIdx=0;renderFlash();}
+
+
+/* ══════════════════════════════════
+   EX 1 — MULTIPLE CHOICE (50)
+══════════════════════════════════ */
+const MC=[
+  /* AÑADIR */
+  {s:'Me gusta el trabajo. ___, pagan muy bien.',e:'I like the job. Besides, the pay is great.',o:['Sin embargo','Además','Por eso','Aunque'],a:1,tag:'add',x:'"Además" = furthermore / on top of that. Adds positive extra info.'},
+  {s:'Habla inglés y francés. ___ está aprendiendo portugués.',e:'He speaks English and French. He\'s even learning Portuguese.',o:['Pero','Aunque','Incluso','Sin embargo'],a:2,tag:'add',x:'"Incluso" = even. Adds something surprising or more extreme.'},
+  {s:'El departamento es caro. ___, está muy lejos del trabajo.',e:'The apartment is expensive. On top of that, it\'s very far from work.',o:['Además','Por eso','Aunque','Pero'],a:0,tag:'add',x:'"Además" = moreover. Piling on an additional complaint.'},
+  {s:'Llegó tarde ___ olvidó la tarea.',e:'He arrived late and, as if that weren\'t enough, forgot the homework.',o:['aunque','incluso','y, por si fuera poco,','ya que'],a:2,tag:'add',x:'"Por si fuera poco" = as if that weren\'t enough. Adds ironic or exasperated extra.'},
+  /* CONTRASTAR */
+  {s:'Quiero ir al gimnasio, ___ estoy muy cansado.',e:'I want to go to the gym, but I\'m very tired.',o:['porque','aunque','pero','ya que'],a:2,tag:'con',x:'"Pero" = but. Simple contrast. Most common contrastive connector.'},
+  {s:'El plan es bueno. ___, tiene algunos riesgos.',e:'The plan is good. However, it has some risks.',o:['Por eso','Sin embargo','Además','Entonces'],a:1,tag:'con',x:'"Sin embargo" = however. Formal contrast. Can start a new sentence.'},
+  {s:'___ estaba lloviendo, salimos a correr.',e:'Even though it was raining, we went out to run.',o:['Porque','Por eso','Aunque','Para que'],a:2,tag:'con',x:'"Aunque" = although / even though. Concessive connector.'},
+  {s:'Yo prefiero trabajar en casa. ___, mi compañera prefiere la oficina.',e:'I prefer working from home. My partner, on the other hand, prefers the office.',o:['Por eso','En cambio','Porque','Además'],a:1,tag:'con',x:'"En cambio" = on the other hand / instead. Compares two different preferences.'},
+  {s:'Ella trabaja mucho, ___ su hermano no hace nada.',e:'She works hard, whereas her brother does nothing.',o:['mientras que','ya que','para que','aunque'],a:0,tag:'con',x:'"Mientras que" = whereas. Contrasts two simultaneous but opposite situations.'},
+  {s:'___ la lluvia, decidimos seguir con el partido.',e:'Despite the rain, we decided to continue the game.',o:['Aunque','Porque','A pesar de que','Ya que'],a:2,tag:'con',x:'"A pesar de que" = despite the fact that. Stronger concession than aunque.'},
+  /* CAUSA */
+  {s:'No fui a la clase ___ estaba enfermo.',e:'I didn\'t go to class because I was sick.',o:['para que','porque','aunque','así que'],a:1,tag:'cau',x:'"Porque" = because. Direct, simple cause. Most common.'},
+  {s:'No compré el boleto, ___ era demasiado caro.',e:'I didn\'t buy the ticket, since it was too expensive.',o:['así que','entonces','ya que','por eso'],a:2,tag:'cau',x:'"Ya que" = since / as. More explanatory than porque. Slightly more formal.'},
+  {s:'___ hacía frío, decidimos quedarnos en casa.',e:'Since it was cold, we decided to stay home.',o:['Aunque','Como','Mientras','Para'],a:1,tag:'cau',x:'"Como" = since / as. Used at the START of a sentence for cause. Never mid-sentence.'},
+  {s:'Llegamos tarde ___ el tráfico.',e:'We arrived late because of the traffic.',o:['gracias a','por culpa de','debido a que','ya que'],a:1,tag:'cau',x:'"Por culpa de" = because of (negative). Blames something for a bad outcome.'},
+  {s:'Aprobé el examen ___ tu ayuda.',e:'I passed the exam thanks to your help.',o:['por culpa de','por eso','gracias a','porque'],a:2,tag:'cau',x:'"Gracias a" = thanks to. Positive cause — gives credit for a good result.'},
+  {s:'La reunión se canceló ___ el director no llegó.',e:'The meeting was cancelled because the director didn\'t arrive.',o:['así que','debido a que','por eso','entonces'],a:1,tag:'cau',x:'"Debido a que" = due to the fact that. Formal written cause.'},
+  /* CONSECUENCIA */
+  {s:'Estaba muy cansado. ___, me fui temprano.',e:'I was very tired. That\'s why I left early.',o:['Sin embargo','Aunque','Por eso','Además'],a:2,tag:'cons',x:'"Por eso" = that\'s why / so. Simple, everyday consequence.'},
+  {s:'No estudié nada, ___ reprobé el examen.',e:'I didn\'t study at all, so I failed the exam.',o:['aunque','así que','porque','sin embargo'],a:1,tag:'cons',x:'"Así que" = so / and so. Natural, conversational consequence.'},
+  {s:'La empresa perdió dinero. ___, tuvo que cerrar.',e:'The company lost money. Therefore, it had to close.',o:['Además','Sin embargo','Por lo tanto','Aunque'],a:2,tag:'cons',x:'"Por lo tanto" = therefore. Formal consequence. Common in writing.'},
+  {s:'No tienes los documentos, ___ no puedes continuar.',e:'You don\'t have the documents, so you can\'t continue.',o:['aunque','entonces','sin embargo','a pesar de'],a:1,tag:'cons',x:'"Entonces" = so / then. Logical, everyday result.'},
+  {s:'Vendieron todas las acciones. ___, perdieron millones.',e:'They sold all the shares. As a consequence, they lost millions.',o:['Por eso','En consecuencia','Sin embargo','Aunque'],a:1,tag:'cons',x:'"En consecuencia" = as a consequence. Very formal. Academic/business writing.'},
+  /* EJEMPLOS */
+  {s:'Hay muchos deportes, ___, el tenis y la natación.',e:'There are many sports, for example, tennis and swimming.',o:['sin embargo','por lo tanto','por ejemplo','aunque'],a:2,tag:'ej',x:'"Por ejemplo" = for example. Introduces a specific example.'},
+  {s:'Me gustan las frutas ___ la manzana y el mango.',e:'I like fruits such as apples and mangoes.',o:['como','aunque','porque','para'],a:0,tag:'ej',x:'"Como" = like / such as. Introduces examples inline within a sentence.'},
+  {s:'Me gustan muchos idiomas. ___, me interesa el japonés.',e:'I like many languages. In particular, I\'m interested in Japanese.',o:['Por otro lado','En particular','Por lo tanto','Sin embargo'],a:1,tag:'ej',x:'"En particular" = in particular / specifically. Highlights one specific case.'},
+  /* ORDENAR */
+  {s:'___, debemos identificar el problema.',e:'First, we need to identify the problem.',o:['Por último','Finalmente','En primer lugar','Por lo tanto'],a:2,tag:'ord',x:'"En primer lugar" = in the first place. Opens a formal ordered list.'},
+  {s:'Primero desayunamos y ___ fuimos al trabajo.',e:'First we had breakfast and then we went to work.',o:['antes','aunque','luego','ya que'],a:2,tag:'ord',x:'"Luego" = then / afterwards. Continues a sequence of events.'},
+  {s:'___, quiero agradecerles su tiempo.',e:'Finally, I would like to thank you for your time.',o:['Primero','Luego','Finalmente','Entonces'],a:2,tag:'ord',x:'"Finalmente" = finally. Closes a list or speech.'},
+  {s:'___, presentaré los datos del segundo trimestre.',e:'Next, I will present the data for the second quarter.',o:['Antes','A continuación','Por eso','Sin embargo'],a:1,tag:'ord',x:'"A continuación" = next / below. Formal: what immediately follows.'},
+  /* OPINIÓN */
+  {s:'___, la empresa necesita cambiar su estrategia.',e:'In my opinion, the company needs to change its strategy.',o:['Por eso','En mi opinión','Aunque','Además'],a:1,tag:'opi',x:'"En mi opinión" = in my opinion. Direct opinion marker.'},
+  {s:'___, todos deberían tener acceso a internet.',e:'From my point of view, everyone should have internet access.',o:['Desde mi punto de vista','Entonces','Por lo tanto','Aunque'],a:0,tag:'opi',x:'"Desde mi punto de vista" = from my point of view. For developed opinions.'},
+  {s:'___ la honestidad es lo más importante.',e:'For me, honesty is the most important thing.',o:['Por eso','Para mí','Sin embargo','Aunque'],a:1,tag:'opi',x:'"Para mí" = for me / to me. Informal personal stance.'},
+  {s:'___ esa decisión fue incorrecta.',e:'I consider that decision was incorrect.',o:['Me parece que','Considero que','En mi opinión que','Porque'],a:1,tag:'opi',x:'"Considero que" = I consider / I find that. Formal opinion.'},
+  /* COMPARAR */
+  {s:'Ella trabaja ___ yo.',e:'She works just like me / the same as me.',o:['igual que','a diferencia de','aunque','mientras que'],a:0,tag:'comp',x:'"Igual que" = just like / the same as. Similarity.'},
+  {s:'___ mi hermano, yo prefiero ahorrar.',e:'Unlike my brother, I prefer to save.',o:['Al igual que','Igual que','A diferencia de','En comparación con'],a:2,tag:'comp',x:'"A diferencia de" = unlike / as opposed to. Highlights a difference.'},
+  {s:'___ el año pasado, las ventas subieron un 20%.',e:'In comparison with last year, sales rose 20%.',o:['A diferencia de','En comparación con','Además de','Al igual que'],a:1,tag:'comp',x:'"En comparación con" = in comparison with. Formal comparison.'},
+  /* RESUMIR */
+  {s:'___, el proyecto fue un éxito.',e:'In summary, the project was a success.',o:['En cambio','En resumen','Por eso','Aunque'],a:1,tag:'res',x:'"En resumen" = in summary / to sum up. General summary.'},
+  {s:'___, no vale la pena.',e:'In short, it\'s not worth it.',o:['En conclusión','En pocas palabras','Sin embargo','Por eso'],a:1,tag:'res',x:'"En pocas palabras" = in a few words / in short. Informal summary.'},
+  {s:'___, decidimos no firmar el contrato.',e:'In the end, we decided not to sign the contract.',o:['Primero','Al final','Además','Sin embargo'],a:1,tag:'res',x:'"Al final" = in the end / ultimately. What happened as a final outcome.'},
+  /* CONDICIÓN */
+  {s:'___ llueva, cancelaremos el partido.',e:'In case it rains, we will cancel the match.',o:['Si','Para que','En caso de que','Aunque'],a:2,tag:'cond',x:'"En caso de que" = in case / in the event that. Future possibility + subjunctive.'},
+  {s:'Te presto el dinero ___ me lo devuelvas pronto.',e:'I\'ll lend you the money as long as you return it soon.',o:['para que','siempre que','aunque','porque'],a:1,tag:'cond',x:'"Siempre que" = as long as / whenever. Condition that must be met.'},
+  {s:'No voy a renunciar ___ me ofrezcan algo mejor.',e:'I\'m not going to quit unless they offer me something better.',o:['si','aunque','a menos que','para que'],a:2,tag:'cond',x:'"A menos que" = unless. Negative condition — introduces the exception.'},
+  /* PROPÓSITO */
+  {s:'Estudio mucho ___ pasar el examen.',e:'I study a lot in order to pass the exam.',o:['porque','para','ya que','entonces'],a:1,tag:'prop',x:'"Para" = in order to / for. Simple purpose, same subject.'},
+  {s:'Te mando el correo ___ tengas la información.',e:'I\'ll send you the email so that you have the information.',o:['para','porque','para que','ya que'],a:2,tag:'prop',x:'"Para que" = so that. Purpose with a DIFFERENT subject. Always + subjunctive.'},
+  {s:'Ahorró dinero ___ comprar una casa.',e:'She saved money with the aim of buying a house.',o:['para que','con el fin de','porque','ya que'],a:1,tag:'prop',x:'"Con el fin de" = with the aim of. Formal purpose, same subject.'},
+  /* ÉNFASIS */
+  {s:'Es una empresa exitosa. ___, fue elegida la mejor del año.',e:'It\'s a successful company. In fact, it was chosen the best of the year.',o:['Sin embargo','De hecho','Por otro lado','Aunque'],a:1,tag:'enf',x:'"De hecho" = in fact. Reinforces and adds proof to what was just said.'},
+  {s:'Me gustan los viajes, ___ los que son a la playa.',e:'I like travel, especially trips to the beach.',o:['incluso','por ejemplo','sobre todo','en cambio'],a:2,tag:'enf',x:'"Sobre todo" = above all / especially. Highlights the most important element.'},
+  {s:'___, la solución más obvia era reducir costos.',e:'Clearly, the most obvious solution was to reduce costs.',o:['Claramente','Por eso','Sin embargo','Aunque'],a:0,tag:'enf',x:'"Claramente" = clearly / obviously. Presents something as evident or self-evident.'},
+  /* DUDA */
+  {s:'___ el precio baje la próxima semana.',e:'The price will perhaps drop next week.',o:['Claramente','Tal vez','De hecho','Sin duda'],a:1,tag:'duda',x:'"Tal vez" = maybe / perhaps. Expresses uncertainty.'},
+  {s:'___ tengamos que cambiar la fecha.',e:'It\'s possible that we\'ll have to change the date.',o:['Tal vez','Puede que','Claramente','Sin duda'],a:1,tag:'duda',x:'"Puede que" = it may be that. Followed by subjunctive.'},
+  /* REFORMULAR */
+  {s:'No tiene dinero disponible, ___, no puede invertir ahora.',e:'He doesn\'t have available cash, that is to say, he can\'t invest now.',o:['sin embargo','es decir','aunque','por eso'],a:1,tag:'ref',x:'"Es decir" = that is to say. Clarifies or rephrases more simply.'},
+  {s:'No me convenció. ___, no era lo que esperaba.',e:'I wasn\'t convinced. In other words, it wasn\'t what I expected.',o:['Es decir','En otras palabras','Sin embargo','Por eso'],a:1,tag:'ref',x:'"En otras palabras" = in other words. Formal rephrasing of the same idea.'},
+];
+const MCO=MC.map((_,i)=>seededShuffle([0,1,2,3],i*17+3));
+const TAG_CSS={
+  add:'background:rgba(244,114,182,.18);color:var(--c1b)',
+  con:'background:rgba(37,217,255,.15);color:var(--c2b)',
+  cau:'background:rgba(251,191,36,.15);color:var(--c3b)',
+  cons:'background:rgba(167,139,250,.15);color:var(--c4b)',
+  ej:'background:rgba(52,211,153,.15);color:var(--c5b)',
+  ord:'background:rgba(248,113,113,.15);color:var(--c6b)',
+  opi:'background:rgba(96,165,250,.15);color:var(--c7b)',
+  comp:'background:rgba(196,181,253,.15);color:#c4b5fd',
+  res:'background:rgba(110,231,183,.15);color:#6ee7b7',
+  cond:'background:rgba(253,230,138,.15);color:#fde68a',
+  prop:'background:rgba(252,165,165,.15);color:#fca5a5',
+  enf:'background:rgba(165,243,252,.15);color:#a5f3fc',
+  duda:'background:rgba(216,180,254,.15);color:#d8b4fe',
+  ref:'background:rgba(252,211,77,.15);color:#fcd34d',
+};
+
+function renderMC(){
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const qHTML=MC.map((item,i)=>{
+    const ord=MCO[i];
+    const opts=ord.map(oi=>{
+      const o=item.o[oi];let cls='mc-opt';
+      if(mcChecked){if(oi===item.a)cls+=' mc-show';else if(mcAnswers[i]===oi&&oi!==item.a)cls+=' mc-err';}
+      else if(mcAnswers[i]===oi)cls+=oi===item.a?' mc-ok':' mc-err';
+      return `<button class="${cls}" id="mco${i}_${oi}" onclick="answerMC(${i},${oi})" ${mcChecked?'disabled':''}>${o}</button>`;
+    }).join('');
+    const showExp=mcChecked||(mcAnswers[i]!==undefined);
+    const catLabel=CATS[item.tag]?.label||item.tag;
+    const tagStyle=TAG_CSS[item.tag]||'';
+    return `<div class="mc-card"><div class="mc-top"><span class="mc-num">${i+1}</span><span class="mc-sent">${item.s.replace('___','<span class="mc-blank">___</span>')}<span class="mc-tag" style="${tagStyle}">${catLabel}</span></span></div><div class="mc-en">${item.e}</div><div class="mc-opts">${opts}</div><div class="mc-expl${showExp?' show':''}" id="mce${i}">${item.x}</div></div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">&#128221; Multiple choice</div>
+  <div class="ex-instr">Choose the correct connector. The colored tag shows the category. Focus on <em>meaning, register, and position</em> in the sentence.</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${MC.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="mc_ok">&#8212;</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="mc_err">&#8212;</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="mc_p">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="mc_pg" style="width:${pct}%"></div></div></div></div>
+  <div class="mc-list">${qHTML}</div>
+  <div class="fb" id="mc_fb"></div>
+  <div class="actions"><button class="btn btn-cyan" id="mc_chk" onclick="checkMC()" ${mcChecked?'disabled':''}>Check all</button><button class="btn btn-ghost" onclick="mcAnswers={};mcChecked=false;renderMC()">&#8635; Reset</button></div></div>`;
+}
+function answerMC(qi,oi){
+  if(mcChecked)return;
+  if(mcAnswers[qi]!==undefined){const p=document.getElementById(`mco${qi}_${mcAnswers[qi]}`);if(p)p.classList.remove('mc-ok','mc-err');}
+  mcAnswers[qi]=oi;
+  const b=document.getElementById(`mco${qi}_${oi}`);if(b)b.classList.add(oi===MC[qi].a?'mc-ok':'mc-err');
+  const e=document.getElementById('mce'+qi);if(e)e.classList.add('show');
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const el=document.getElementById('mc_p');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('mc_pg');if(pg)pg.style.width=pct+'%';
+}
+function checkMC(){
+  mcChecked=true;let ok=0;MC.forEach((item,i)=>{if(mcAnswers[i]===item.a)ok++;});
+  const pct=Math.round(ok/MC.length*100);
+  document.getElementById('mc_ok').textContent=ok;document.getElementById('mc_err').textContent=MC.length-ok;
+  document.getElementById('mc_pg').style.width='100%';document.getElementById('mc_p').textContent='100%';
+  const fb=document.getElementById('mc_fb');
+  fb.className='fb show '+(pct>=85?'ok':pct>=65?'ok':'partial');
+  fb.innerHTML=`${pct>=85?'&#127942;':'&#128218;'} <strong>${ok}/${MC.length}.</strong> ${pct>=85?'Excellent!':pct>=65?'Good job!':'Review the flashcards by category.'}`;
+  document.getElementById('mc_chk').disabled=true;renderMC();
+}
+
+
+/* ══════════════════════════════════
+   EX 2 — ERROR HUNT (15 standalone)
+   Wrong connector used — often a near-synonym confusion
+══════════════════════════════════ */
+const ERRORS=[
+  ['No fui a trabajar porque estaba enfermo.',false,null,'CORRECT ✓ — "Porque" = because. Simple direct cause. ✓'],
+  ['Quiero café. Además, prefiero té.',true,'En cambio, prefiero té','ERROR — "Además" adds info to the same idea. Here we are contrasting two preferences → use <strong>en cambio</strong> (on the other hand).'],
+  ['Llegué tarde por culpa de la lluvia.',false,null,'CORRECT ✓ — "Por culpa de" = because of (negative cause). ✓'],
+  ['No estudié. Por eso reprobé el examen.',false,null,'CORRECT ✓ — "Por eso" = that\'s why / so. Consequence of not studying. ✓'],
+  ['Como hacía frío, nos quedamos en casa.',false,null,'CORRECT ✓ — "Como" at the start of a sentence = since/as (cause). ✓'],
+  ['Quiero salir. Sin embargo, tengo tarea.',false,null,'CORRECT ✓ — "Sin embargo" = however. Formal contrast between two ideas. ✓'],
+  ['Te presto dinero para que puedas pagar.',false,null,'CORRECT ✓ — "Para que" + subjunctive = so that (different subject). ✓'],
+  ['Estudio inglés para que viajar.',true,'para viajar','ERROR — "Para que" requires a conjugated verb (subjunctive) with a DIFFERENT subject. Same subject → use just <strong>para</strong> + infinitive.'],
+  ['El proyecto fracasó. En cambio, faltó comunicación.',true,'Es decir, faltó comunicación','ERROR — "En cambio" contrasts two different things/people. Here we are explaining WHY → use <strong>es decir</strong> or <strong>ya que</strong>.'],
+  ['Aprobé el examen gracias a tu ayuda.',false,null,'CORRECT ✓ — "Gracias a" = thanks to. Positive cause. ✓'],
+  ['Aunque estaba cansada, fue al gimnasio.',false,null,'CORRECT ✓ — "Aunque" = although/even though. Concessive connector. ✓'],
+  ['La empresa perdió dinero. Por lo tanto, cerró.',false,null,'CORRECT ✓ — "Por lo tanto" = therefore. Formal consequence. ✓'],
+  ['Como es posible que llueva mañana, lleva paraguas.',true,'Ya que / Puesto que es posible... / Como es posible → OK actually','CORRECT ✓ — Actually this is valid. "Como" at the start can introduce a reason even with modal expressions. ✓'],
+  ['Me gustan las frutas como el mango. Incluso, la piña también.',true,'Además, la piña también','ERROR — "Incluso" adds something surprising or extreme. For simply adding a similar item, use <strong>además</strong> (moreover) or <strong>también</strong>.'],
+  ['No tengo efectivo. O sea, no puedo pagar con cash.',false,null,'CORRECT ✓ — "O sea" = I mean / that is. Informal rephrasing of the same idea. ✓'],
+];
+
+function renderErrorHunt(){
+  ehAnswered={};
+  let html=`<div class="panel"><div class="ex-title">&#128269; Error hunter</div>
+  <div class="ex-instr">Each sentence uses a connector. Is it the right one? Focus on <em>meaning and context</em> — many errors are near-synonym confusions.</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${ERRORS.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="eh_ok">0</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="eh_err">0</span></div><div class="prog-w"><div class="prog-l">Progress: <span id="eh_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="eh_pg" style="width:0%"></div></div></div></div>
+  <div class="eh-list">`;
+  ERRORS.forEach(([s,hasErr,,exp],i)=>{
+    html+=`<div class="eh-item" id="ehi${i}"><div class="eh-n">${i+1}</div>
+    <div class="eh-body"><div class="eh-sent" id="ehs${i}">${s}</div>
+    <div class="eh-btns"><button class="eh-btn eh-yes" onclick="judgeEh(${i},false)">&#9989; Correct</button><button class="eh-btn eh-no" onclick="judgeEh(${i},true)">&#10060; Has an error</button></div>
+    <div class="eh-exp" id="ehe${i}">${exp}</div></div></div>`;
+  });
+  html+=`</div><div class="fb" id="eh_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="ehAnswered={};renderErrorHunt()">&#8635; Reset</button></div></div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+function judgeEh(idx,saysErr){
+  if(ehAnswered[idx]!==undefined)return;
+  const [s,hasErr,fix,exp]=ERRORS[idx];
+  const correct=saysErr===hasErr;
+  ehAnswered[idx]=correct;
+  const item=document.getElementById('ehi'+idx);
+  item.classList.add('revealed',correct?'eh-ok':'eh-bad');
+  item.querySelectorAll('.eh-btn').forEach(b=>b.disabled=true);
+  const chosen=item.querySelector(saysErr?'.eh-no':'.eh-yes');
+  if(chosen)chosen.classList.add(correct?'cho-ok':'cho-err');
+  if(hasErr&&fix){const se=document.getElementById('ehs'+idx);se.innerHTML=s+` <span class="eh-fix">&#8594; <strong>${fix}</strong></span>`;}
+  document.getElementById('ehe'+idx).classList.add('show');
+  const total=Object.keys(ehAnswered).length;
+  const ok=Object.values(ehAnswered).filter(v=>v).length;
+  document.getElementById('eh_ok').textContent=ok;document.getElementById('eh_err').textContent=total-ok;
+  document.getElementById('eh_pct').textContent=Math.round(total/ERRORS.length*100)+'%';
+  document.getElementById('eh_pg').style.width=Math.round(total/ERRORS.length*100)+'%';
+  if(total===ERRORS.length){
+    const pct=Math.round(ok/ERRORS.length*100);
+    const fb=document.getElementById('eh_fb');
+    fb.className='fb show '+(pct>=80?'ok':'partial');
+    fb.innerHTML=`${pct>=80?'&#127942;':'&#128218;'} <strong>${ok}/${ERRORS.length}.</strong> ${pct>=80?'Excellent!':'Review the confusing pairs in the reference card.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 3 — DRAG & SORT
+   7 buckets (7 major categories, 3 cards each = 21)
+══════════════════════════════════ */
+const BUCKETS=[
+  {id:'add', label:'Añadir',       icon:'➕',sub:'además / incluso / también',      col:'var(--c1b)',bg:'rgba(244,114,182,.07)',bd:'rgba(244,114,182,.25)'},
+  {id:'con', label:'Contrastar',   icon:'⚡',sub:'pero / sin embargo / aunque',      col:'var(--c2b)',bg:'rgba(37,217,255,.06)',  bd:'rgba(37,217,255,.22)'},
+  {id:'cau', label:'Causa',        icon:'🔍',sub:'porque / ya que / como',            col:'var(--c3b)',bg:'rgba(251,191,36,.06)',  bd:'rgba(251,191,36,.22)'},
+  {id:'cons',label:'Consecuencia', icon:'➡️',sub:'por eso / así que / por lo tanto',  col:'var(--c4b)',bg:'rgba(167,139,250,.07)',bd:'rgba(167,139,250,.25)'},
+  {id:'opi', label:'Opinión',      icon:'💬',sub:'en mi opinión / para mí / creo que',col:'var(--c7b)',bg:'rgba(96,165,250,.07)', bd:'rgba(96,165,250,.25)'},
+  {id:'cond',label:'Condición',    icon:'🔀',sub:'si / a menos que / siempre que',    col:'#fde68a',  bg:'rgba(253,230,138,.07)',bd:'rgba(253,230,138,.22)'},
+  {id:'ref', label:'Reformular',   icon:'🔄',sub:'es decir / o sea / en otras palabras',col:'#fcd34d',bg:'rgba(252,211,77,.07)', bd:'rgba(252,211,77,.22)'},
+];
+const CARDS=[
+  {id:'c1', t:'además',              b:'add', x:'"Además" = moreover. Adds extra info.'},
+  {id:'c2', t:'incluso',             b:'add', x:'"Incluso" = even. Adds something surprising.'},
+  {id:'c3', t:'también',             b:'add', x:'"También" = also / too. Adds parallel info.'},
+  {id:'c4', t:'sin embargo',         b:'con', x:'"Sin embargo" = however. Formal contrast.'},
+  {id:'c5', t:'aunque',              b:'con', x:'"Aunque" = although. Concession.'},
+  {id:'c6', t:'en cambio',           b:'con', x:'"En cambio" = on the other hand. Different situation.'},
+  {id:'c7', t:'porque',              b:'cau', x:'"Porque" = because. Direct cause.'},
+  {id:'c8', t:'ya que',              b:'cau', x:'"Ya que" = since/as. Explanatory cause.'},
+  {id:'c9', t:'gracias a',           b:'cau', x:'"Gracias a" = thanks to. Positive cause.'},
+  {id:'c10',t:'por eso',             b:'cons',x:'"Por eso" = that\'s why. Simple consequence.'},
+  {id:'c11',t:'así que',             b:'cons',x:'"Así que" = so/and so. Natural consequence.'},
+  {id:'c12',t:'por lo tanto',        b:'cons',x:'"Por lo tanto" = therefore. Formal consequence.'},
+  {id:'c13',t:'en mi opinión',       b:'opi', x:'"En mi opinión" = in my opinion.'},
+  {id:'c14',t:'desde mi punto de vista',b:'opi',x:'"Desde mi punto de vista" = from my POV.'},
+  {id:'c15',t:'me parece que',       b:'opi', x:'"Me parece que" = it seems to me. Soft opinion.'},
+  {id:'c16',t:'si',                  b:'cond',x:'"Si" = if. General condition.'},
+  {id:'c17',t:'a menos que',         b:'cond',x:'"A menos que" = unless. Negative condition.'},
+  {id:'c18',t:'siempre que',         b:'cond',x:'"Siempre que" = as long as / whenever.'},
+  {id:'c19',t:'es decir',            b:'ref', x:'"Es decir" = that is to say. Clarify/rephrase.'},
+  {id:'c20',t:'o sea',               b:'ref', x:'"O sea" = I mean. Informal rephrasing.'},
+  {id:'c21',t:'en otras palabras',   b:'ref', x:'"En otras palabras" = in other words. Formal rephrase.'},
+];
+function renderSort(){
+  sortPlaced={};sortChecked=false;tapSel=null;
+  const shuffled=[...CARDS].sort(()=>Math.random()-.5);
+  const pile=shuffled.map(c=>`<div class="sort-card" id="sc_${c.id}" draggable="true" ondragstart="ds(event,'${c.id}')" ondragend="de(event)" onclick="tapCard('${c.id}')">${c.t}</div>`).join('');
+  const bucks=BUCKETS.map(b=>`<div class="sort-bucket" id="bk_${b.id}" style="background:${b.bg};border:2px dashed ${b.bd}" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="drop(event,'${b.id}')" onclick="tapBucket('${b.id}')"><div class="bucket-title" style="color:${b.col}">${b.icon} ${b.label}</div><div class="bucket-sub">${b.sub}</div></div>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">&#128202; Drag &amp; sort</div>
+  <div class="ex-instr">Sort each connector into the correct category. Some categories are similar — focus on the core function. Tap a card then tap a bucket on mobile.</div>
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;color:var(--muted2);margin-bottom:8px">Cards — drag or tap</div>
+  <div class="sort-pile" id="sPile">${pile}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px;margin-bottom:12px">${bucks}</div>
+  <div class="fb" id="srtFb"></div>
+  <div class="actions"><button class="btn btn-cyan" id="srtChk" onclick="checkSort()" disabled>Check</button><button class="btn btn-ghost" onclick="renderSort()">&#8635; Reset</button></div></div>`;
+}
+function ds(e,id){dragItem=id;setTimeout(()=>{const c=document.getElementById('sc_'+id);if(c)c.classList.add('ghost');},0);}
+function de(){if(dragItem){const c=document.getElementById('sc_'+dragItem);if(c)c.classList.remove('ghost');}dragItem=null;}
+function drop(e,bId){e.preventDefault();const id=e.dataTransfer?e.dataTransfer.getData('text'):dragItem;document.getElementById('bk_'+bId).classList.remove('drag-over');if(!id||sortPlaced[id])return;placeCard(id,bId);}
+function tapCard(id){if(sortPlaced[id])return;const c=document.getElementById('sc_'+id);if(!c)return;if(tapSel===id){c.style.boxShadow='';tapSel=null;return;}if(tapSel){const p=document.getElementById('sc_'+tapSel);if(p)p.style.boxShadow='';}tapSel=id;c.style.boxShadow='0 0 0 3px var(--cyan)';}
+function tapBucket(bId){if(!tapSel)return;placeCard(tapSel,bId);tapSel=null;}
+function placeCard(id,bId){
+  sortPlaced[id]=bId;const card=document.getElementById('sc_'+id);const bk=document.getElementById('bk_'+bId);
+  if(!card||!bk)return;card.style.boxShadow='';card.classList.remove('ghost');card.draggable=false;
+  const b=BUCKETS.find(x=>x.id===bId);if(b)card.style.borderColor=b.col;
+  card.onclick=()=>returnCard(id);bk.appendChild(card);
+  if(Object.keys(sortPlaced).length===CARDS.length){const btn=document.getElementById('srtChk');if(btn)btn.disabled=false;}
+}
+function returnCard(id){if(sortChecked)return;delete sortPlaced[id];const c=document.getElementById('sc_'+id);const pile=document.getElementById('sPile');if(!c||!pile)return;c.style.borderColor='';c.style.boxShadow='';c.draggable=true;c.onclick=()=>tapCard(id);pile.appendChild(c);const btn=document.getElementById('srtChk');if(btn)btn.disabled=true;}
+function checkSort(){
+  sortChecked=true;let ok=0;
+  CARDS.forEach(item=>{const c=document.getElementById('sc_'+item.id);if(!c)return;const isOk=sortPlaced[item.id]===item.b;if(isOk)ok++;c.className='sort-card '+(isOk?'c-ok':'c-err');c.draggable=false;c.onclick=null;if(!isOk){const b=BUCKETS.find(x=>x.id===item.b);c.innerHTML=`${item.t}<span style="font-size:.7rem;display:block;margin-top:2px">&#8594; ${b?b.icon+' '+b.label:item.b}</span>`;}c.title=item.x;});
+  const pct=Math.round(ok/CARDS.length*100);
+  const fb=document.getElementById('srtFb');fb.className='fb show '+(pct>=80?'ok':'partial');
+  fb.innerHTML=`<strong>${ok}/${CARDS.length} (${pct}%).</strong> Red cards show the correct bucket.`;
+  document.getElementById('srtChk').disabled=true;
+}
+
+
+/* ══════════════════════════════════
+   EX 4 — SPEED ROUND (30)
+══════════════════════════════════ */
+const SPEED=[
+  {q:'therefore / as a result (formal)',hint:'por lo tanto',a:'por lo tanto',also:['por consiguiente','en consecuencia']},
+  {q:'however / nevertheless (formal)',hint:'sin embargo',a:'sin embargo',also:['no obstante']},
+  {q:'that\'s why / so (simple consequence)',hint:'por eso',a:'por eso',also:[]},
+  {q:'although / even though',hint:'aunque',a:'aunque',also:['a pesar de que']},
+  {q:'because (simple, direct)',hint:'porque',a:'porque',also:[]},
+  {q:'since / as (explanatory cause)',hint:'ya que',a:'ya que',also:['puesto que']},
+  {q:'moreover / furthermore (add info)',hint:'además',a:'ademas',also:['además']},
+  {q:'even (surprising addition)',hint:'incluso',a:'incluso',also:[]},
+  {q:'on the other hand (contrast 2 things)',hint:'en cambio',a:'en cambio',also:[]},
+  {q:'whereas (contrast two simultaneous opposites)',hint:'mientras que',a:'mientras que',also:[]},
+  {q:'for example',hint:'por ejemplo',a:'por ejemplo',also:[]},
+  {q:'in particular / specifically',hint:'en particular',a:'en particular',also:['especialmente']},
+  {q:'in my opinion',hint:'en mi opinión',a:'en mi opinion',also:['en mi opinión']},
+  {q:'from my point of view',hint:'desde mi punto de vista',a:'desde mi punto de vista',also:[]},
+  {q:'in summary / to sum up',hint:'en resumen',a:'en resumen',also:[]},
+  {q:'in conclusion',hint:'en conclusión',a:'en conclusion',also:['en conclusión']},
+  {q:'in other words (formal rephrase)',hint:'en otras palabras',a:'en otras palabras',also:[]},
+  {q:'that is to say (clarify)',hint:'es decir',a:'es decir',also:[]},
+  {q:'I mean (informal rephrase)',hint:'o sea',a:'o sea',also:[]},
+  {q:'so that (purpose, different subject)',hint:'para que',a:'para que',also:[]},
+  {q:'unless (negative condition)',hint:'a menos que',a:'a menos que',also:[]},
+  {q:'as long as (condition)',hint:'siempre que',a:'siempre que',also:['siempre y cuando']},
+  {q:'thanks to (positive cause)',hint:'gracias a',a:'gracias a',also:[]},
+  {q:'because of / due to (negative cause)',hint:'por culpa de',a:'por culpa de',also:[]},
+  {q:'in fact / as a matter of fact',hint:'de hecho',a:'de hecho',also:[]},
+  {q:'above all / especially (emphasis)',hint:'sobre todo',a:'sobre todo',also:[]},
+  {q:'maybe / perhaps',hint:'tal vez',a:'tal vez',also:['quizas','quizás','quizá']},
+  {q:'probably (high possibility)',hint:'probablemente',a:'probablemente',also:[]},
+  {q:'unlike / as opposed to',hint:'a diferencia de',a:'a diferencia de',also:[]},
+  {q:'so / and so (natural consequence)',hint:'así que',a:'asi que',also:['así que']},
+];
+function renderSpeed(){
+  if(spTimer){clearInterval(spTimer);spTimer=null;}
+  spIdx=0;spOk=0;spErr=0;spStreak=0;spAnswered=false;
+  for(let i=SPEED.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[SPEED[i],SPEED[j]]=[SPEED[j],SPEED[i]];}
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">&#9889; Speed round</div>
+  <div class="ex-instr">Type the Spanish connector. 10 seconds per question. Press Enter to confirm. Synonyms are accepted!</div>
+  <div class="sp-wrap" id="spWrap"><div class="sp-start"><div style="font-size:2.8rem">&#9889;</div><h2>Type in Spanish</h2><p>Connectors across all 14 categories. 30 items — synonyms accepted!</p><button class="btn btn-cyan" onclick="startSpeed()">Let's go!</button></div></div></div>`;
+}
+function startSpeed(){spIdx=0;spOk=0;spErr=0;spStreak=0;nextQ();}
+function nextQ(){
+  if(spIdx>=SPEED.length){endSpeed();return;}
+  spAnswered=false;const item=SPEED[spIdx];spTimeLeft=12;
+  document.getElementById('spWrap').innerHTML=`
+    <div class="sp-stats"><div class="spst"><div class="sl">Q</div><div class="sv w">${spIdx+1}/${SPEED.length}</div></div><div class="spst"><div class="sl">OK</div><div class="sv g">${spOk}</div></div><div class="spst"><div class="sl">Miss</div><div class="sv b">${spErr}</div></div></div>
+    <div class="streak${spStreak>=3?' on':''}" id="stk">&#128293; x${spStreak}</div>
+    <div class="sp-card"><div class="sp-q">${item.q}</div><div class="sp-hint">&#128161; ${item.hint}</div></div>
+    <div class="tmr-row"><div class="tmr-trk"><div class="tmr-fil" id="tF" style="width:100%;transition:width 1s linear"></div></div><div class="tmr-n" id="tN">12</div></div>
+    <div class="sp-row"><input id="sInp" class="sp-inp" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="type connector…" onkeydown="if(event.key==='Enter')submitQ()"><button class="btn btn-cyan" onclick="submitQ()" style="flex-shrink:0">&#8594;</button></div>
+    <div class="sp-fb" id="sFb" style="opacity:0"></div>`;
+  setTimeout(()=>{const i=document.getElementById('sInp');if(i)i.focus();},50);
+  if(spTimer)clearInterval(spTimer);
+  spTimer=setInterval(()=>{
+    spTimeLeft--;
+    const f=document.getElementById('tF'),n=document.getElementById('tN');
+    if(f)f.style.width=Math.max(0,(spTimeLeft/12)*100)+'%';
+    if(n){n.textContent=spTimeLeft;n.style.color=spTimeLeft<=3?'var(--bad)':spTimeLeft<=6?'var(--warn)':'var(--muted2)';}
+    if(spTimeLeft<=0){clearInterval(spTimer);spTimer=null;if(!spAnswered)submitQ();}
+  },1000);
+}
+function submitQ(){
+  const inp=document.getElementById('sInp');if(!inp||spAnswered)return;
+  spAnswered=true;if(spTimer){clearInterval(spTimer);spTimer=null;}inp.disabled=true;
+  const item=SPEED[spIdx];const nt=normS(inp.value);const na=normS(item.a);
+  const isOk=nt===na||item.also.map(normS).includes(nt);
+  if(isOk){spOk++;spStreak++;}else{spErr++;spStreak=0;}
+  const fb=document.getElementById('sFb');
+  if(fb){fb.style.opacity='1';
+    if(!inp.value.trim()){fb.className='sp-fb err';fb.innerHTML=`&#9201; Time's up! &#8594; <strong>${item.hint}</strong>`;}
+    else if(isOk){fb.className='sp-fb ok';fb.innerHTML=`&#10003; <strong>Correct!</strong>${spStreak>=3?' &#128293; x'+spStreak:''}`;}
+    else{fb.className='sp-fb err';fb.innerHTML=`&#10007; <strong>${inp.value}</strong> &#8594; <strong>${item.hint}</strong>`;}}
+  if(spStreak>=3){const cf=document.getElementById('cf');cf.textContent='&#128293; x'+spStreak;cf.classList.remove('pop');void cf.offsetWidth;cf.classList.add('pop');}
+  spIdx++;setTimeout(nextQ,isOk?700:1400);
+}
+function endSpeed(){
+  const pct=Math.round(spOk/SPEED.length*100);
+  const emo=pct>=90?'&#127942;':pct>=70?'&#127881;':pct>=50?'&#128170;':'&#128218;';
+  document.getElementById('spWrap').innerHTML=`<div class="sp-start"><div style="font-size:3rem">${emo}</div><h2>${spOk}/${SPEED.length}</h2><p style="color:var(--muted)">${pct>=90?'Excellent!':pct>=70?'Great job!':pct>=50?'Keep going!':'Study the flashcards by category.'}</p><button class="btn btn-cyan" onclick="startSpeed()">&#8635; Try again</button></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 5 — REFERENCE (collapsible sections)
+══════════════════════════════════ */
+function renderReference(){
+  const sections=[
+    {key:'add',  label:'Añadir información',   icon:'➕', tip:'Use "además" for important additions, "incluso" for surprising ones, "también" for parallels, and "por si fuera poco" when you\'re piling on (often ironically).'},
+    {key:'con',  label:'Contrastar ideas',       icon:'⚡', tip:'"Pero" is the everyday but. "Sin embargo" and "no obstante" are formal. "Aunque/a pesar de que" concede something but still hold the main point. "En cambio" compares two different people/things. "Mientras que" contrasts simultaneous opposites.'},
+    {key:'cau',  label:'Causa',                  icon:'🔍', tip:'"Porque" is direct. "Ya que/puesto que" are more explanatory. "Como" MUST go at the start of the sentence. "Por culpa de" = negative blame. "Gracias a" = positive credit.'},
+    {key:'cons', label:'Consecuencia',            icon:'➡️', tip:'"Por eso" is the most common conversational result. "Así que" feels natural mid-sentence. "Por lo tanto/por consiguiente/en consecuencia" are progressively more formal (essays, reports).'},
+    {key:'ej',   label:'Ejemplos',               icon:'📋', tip:'"Por ejemplo" introduces new examples. "Como" introduces inline examples (me gustan frutas como...). "En particular / especialmente" highlight a standout case.'},
+    {key:'ord',  label:'Ordenar ideas',           icon:'🔢', tip:'"En primer lugar" is more formal than "primero". Use "a continuación" in presentations for "what comes next". "Por otro lado" is for structured two-side arguments.'},
+    {key:'opi',  label:'Opinión',                 icon:'💬', tip:'"En mi opinión" and "desde mi punto de vista" are direct. "Me parece que" is softer. "Considero que" is professional. "Para mí" is the most personal/informal.'},
+    {key:'comp', label:'Comparar',               icon:'⚖️', tip:'"Al igual que" is more formal than "igual que". "A diferencia de" highlights clear differences. "En comparación con" is for formal comparisons with data.'},
+    {key:'res',  label:'Resumir / Concluir',     icon:'🏁', tip:'"En resumen" is general. "En conclusión / para concluir" are for formal presentations. "En pocas palabras / básicamente" are informal. "Al final" tells what ultimately happened.'},
+    {key:'cond', label:'Condición',               icon:'🔀', tip:'All condition connectors use subjunctive (except "si" + present indicative). "A menos que" = unless. "Siempre que / siempre y cuando" = as long as. "En caso de que" = in case. "Con tal de que" = provided that.'},
+    {key:'prop', label:'Propósito',               icon:'🎯', tip:'"Para" = same subject. "Para que" = different subject + subjunctive. "Con el fin de / con el objetivo de" are formal same-subject. "A fin de" is very formal written language.'},
+    {key:'enf',  label:'Énfasis',                icon:'🔆', tip:'"De hecho" adds proof. "En realidad" corrects or clarifies. "Sobre todo" = most importantly. "Sin duda" = certainty. "Claramente" = obvious truth.'},
+    {key:'duda', label:'Duda / Posibilidad',     icon:'❓', tip:'"Tal vez / quizás" + indicative = more certain. "Tal vez / quizás" + subjunctive = less certain. "Puede que / es posible que" always use subjunctive. "Probablemente / posiblemente" + indicative or subjunctive.'},
+    {key:'ref',  label:'Reformular',             icon:'🔄', tip:'"Es decir" and "o sea" rephrase what was said (o sea is more informal/Mexican). "En otras palabras" is formal. "Dicho de otra manera" is very formal. "Mejor dicho" corrects or sharpens.'},
+  ];
+
+  const rows=k=>FLASH_DATA.filter(c=>c.cat===k).map(c=>{
+    const regColor={'neutral':'var(--c2b)','informal':'#fcd34d','formal':'#c4b5fd','very formal':'#fca5a5'}[c.reg];
+    return `<tr><td class="td-es" style="color:${CATS[k].col}">${c.word}</td><td class="td-en">${c.en}</td><td class="td-ex">${c.use}</td><td style="font-size:.7rem;font-weight:700;color:${regColor}">${c.reg}</td><td class="td-ex">${c.ex.replace(/<\/?strong>/g,'')}</td></tr>`;
+  }).join('');
+
+  const html=`<div class="panel">
+  <div class="ex-title">&#128196; Reference card — all 14 categories</div>
+  <div class="ex-instr">Click any category heading to expand/collapse it. <em>Register</em> = how formal the connector is: neutral · informal · formal · very formal.</div>
+  <div class="ref-tip" style="margin-bottom:14px"><strong>🔑 Key distinctions to memorize:</strong><br>
+  • <strong>porque vs ya que vs como:</strong> porque = direct; ya que = explanatory; como = at start of sentence only<br>
+  • <strong>por eso vs así que:</strong> por eso starts a new sentence; así que connects within one sentence<br>
+  • <strong>aunque vs sin embargo:</strong> aunque is a subordinating conjunction (+ verb); sin embargo starts a new clause<br>
+  • <strong>para vs para que:</strong> para = same subject; para que = different subject + subjunctive<br>
+  • <strong>incluso vs además:</strong> incluso = surprising / extreme addition; además = ordinary extra info<br>
+  • <strong>en cambio vs sin embargo:</strong> en cambio contrasts two people/options; sin embargo concedes one point then opposes it
+  </div>
+  ${sections.map(({key,label,icon,tip})=>`
+  <div class="ref-section">
+    <div class="ref-h3" style="background:${CATS[key].bg};border:1px solid ${CATS[key].bd};color:${CATS[key].col}" onclick="toggleRef('ref_${key}')">
+      ${icon} ${label} <span style="margin-left:auto;font-size:.8rem;opacity:.6" id="arr_${key}">▼</span>
+    </div>
+    <div class="ref-body" id="ref_${key}" style="max-height:600px;opacity:1">
+      <div style="font-size:.8rem;color:var(--muted);line-height:1.6;padding:8px 14px 10px;background:rgba(255,255,255,.03);border-radius:0 0 6px 6px;margin-bottom:2px">&#128161; ${tip}</div>
+      <table class="ref-table"><tr><th>Connector</th><th>English</th><th>Use when</th><th>Register</th><th>Example</th></tr>${rows(key)}</table>
+    </div>
+  </div>`).join('')}
+  </div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+function toggleRef(id){
+  const el=document.getElementById(id);
+  const key=id.replace('ref_','');
+  const arr=document.getElementById('arr_'+key);
+  if(!el)return;
+  if(el.classList.contains('collapsed')){el.classList.remove('collapsed');if(arr)arr.textContent='▼';}
+  else{el.classList.add('collapsed');if(arr)arr.textContent='▶';}
+}
+
+goEx(0);
+</script>
+</body>
+</html>

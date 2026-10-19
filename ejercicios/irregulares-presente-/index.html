@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verbos Irregulares B1 | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 10% 10%,rgba(255,43,191,.13),transparent 28%),radial-gradient(ellipse at 90% 15%,rgba(37,217,255,.09),transparent 28%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(960px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+
+/* HERO */
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);box-shadow:0 0 18px rgba(255,43,191,.22);font-family:var(--display);font-size:1rem;font-weight:900;color:var(--magenta);text-shadow:1px 1px 0 var(--cyan)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.5rem,2.8vw,2.5rem);font-weight:900;line-height:.95;background:linear-gradient(90deg,#fff 25%,var(--cyan) 65%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.86rem;line-height:1.5;margin-top:4px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.badge.c{border-color:rgba(37,217,255,.3);color:var(--cyan)}
+.badge.m{border-color:rgba(255,43,191,.3);color:var(--magenta2)}
+
+/* TABS */
+.tabs{display:flex;gap:8px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:10px;box-shadow:var(--shadow)}
+.tab-btn{flex:1;border:0;border-radius:11px;padding:11px 14px;font-weight:800;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.18s;color:var(--muted);background:transparent;display:flex;align-items:center;justify-content:center;gap:7px}
+.tab-btn:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.tab-btn.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;box-shadow:0 3px 0 rgba(0,0,0,.2);transform:translateY(-1px)}
+.tab-badge{background:rgba(255,255,255,.2);border-radius:999px;padding:1px 7px;font-size:.7rem;font-weight:900}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:26px 30px;box-shadow:var(--shadow)}
+.hidden{display:none!important}
+
+/* FILL */
+.fill-title{font-family:var(--display);font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.fill-instr{font-size:.87rem;color:var(--muted);line-height:1.55;padding:10px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:18px}
+.fill-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.sc{display:flex;flex-direction:column;align-items:center;gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:12px;padding:8px 14px}
+.sc .l{font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:120px}
+.prog-l{font-size:.68rem;color:var(--muted2);font-weight:700;margin-bottom:4px}
+.prog-t{height:6px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--magenta));transition:width .4s}
+.prose{font-size:1.02rem;line-height:2.8;color:var(--text)}
+.prose p{margin-bottom:.5rem}
+.vg{display:inline-block;position:relative;margin:0 2px;vertical-align:middle}
+.vg select{font-family:var(--font);font-size:.98rem;font-weight:600;height:34px;padding:0 28px 0 10px;border-radius:7px;border:1.5px solid rgba(180,180,240,.3);background:rgba(255,255,255,.06);color:var(--text);cursor:pointer;appearance:none;-webkit-appearance:none;min-width:118px;vertical-align:middle;transition:.15s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23a8abce' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 7px center}
+.vg select option{background:#0f0230;color:var(--text)}
+.vg select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.12)}
+.vg select:hover:not([disabled]):not(.ok):not(.no){border-color:rgba(37,217,255,.55);background:rgba(37,217,255,.08)}
+.vg .hint-lbl{font-size:.66rem;color:var(--muted2);margin-left:2px;white-space:nowrap;vertical-align:middle}
+.verb-result{display:none;align-items:center;gap:3px;vertical-align:middle;font-weight:700;font-size:.98rem}
+.verb-result.show{display:inline-flex}
+.vr-wrong{color:#f87171;text-decoration:underline wavy #ef4444}
+.vr-right{color:#4ade80}
+.vr-info{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:rgba(37,217,255,.18);border:1px solid rgba(37,217,255,.35);color:var(--cyan);font-size:.68rem;font-weight:900;cursor:pointer;margin-left:2px;position:relative;vertical-align:middle}
+.vr-tip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#0d1a3a;border:1px solid rgba(37,217,255,.3);color:var(--text);font-size:.76rem;font-weight:400;line-height:1.5;padding:8px 11px;border-radius:9px;z-index:50;width:220px;white-space:normal;text-align:left;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.vr-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#0d1a3a}
+.vr-info.open .vr-tip{display:block}
+.fill-fb{display:none;margin-top:18px;padding:13px 18px;border-radius:12px;font-size:.9rem;line-height:1.65;font-weight:500}
+.fill-fb.show{display:block}
+.fill-fb.good{background:rgba(34,197,94,.13);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 12px 12px 0}
+.fill-fb.partial{background:rgba(245,158,11,.11);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 12px 12px 0}
+.fill-fb.bad{background:rgba(239,68,68,.12);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 12px 12px 0}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.btn{border:0;border-radius:11px;padding:10px 18px;font-weight:800;font-family:var(--font);font-size:.85rem;cursor:pointer;transition:.16s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-magenta{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.btn-dark{background:#0b0220;color:var(--muted);border:1px solid rgba(255,255,255,.08)}
+.vchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
+.vchip{background:rgba(37,217,255,.09);border:1px solid rgba(37,217,255,.18);border-radius:999px;padding:3px 10px;font-size:.71rem;color:var(--cyan);font-weight:700}
+.vchip.m{background:rgba(255,43,191,.08);border-color:rgba(255,43,191,.18);color:var(--magenta2)}
+
+/* SPEED */
+.speed-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.speed-left{display:flex;flex-direction:column;gap:14px}
+.timer-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+.timer-ring{position:relative;width:120px;height:120px}
+.timer-ring svg{transform:rotate(-90deg)}
+.timer-ring circle{fill:none;stroke-width:8}
+.timer-track{stroke:rgba(255,255,255,.08)}
+.timer-progress{stroke:var(--cyan);stroke-linecap:round;transition:stroke-dashoffset .9s linear,stroke .3s}
+.timer-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:2.2rem;font-weight:900;color:var(--cyan)}
+.timer-num.warn{color:var(--warn)}
+.timer-num.danger{color:var(--bad);animation:tpulse .5s ease-in-out infinite}
+@keyframes tpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.speed-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.sstat{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:12px;padding:10px;text-align:center}
+.sstat .sl{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.sstat .sv{font-family:var(--display);font-size:1.5rem;font-weight:900;color:var(--cyan);margin-top:2px}
+.sstat .sv.g{color:var(--good)}.sstat .sv.b{color:var(--bad)}.sstat .sv.w{color:var(--warn)}
+.speed-card{background:rgba(255,255,255,.04);border:2px solid rgba(37,217,255,.2);border-radius:18px;padding:22px;text-align:center}
+.speed-verb-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);margin-bottom:8px}
+.speed-pronoun{font-size:1.5rem;font-weight:700;color:var(--magenta2);margin-bottom:4px}
+.speed-infinitive{font-family:var(--display);font-size:2.4rem;font-weight:900;color:var(--cyan);line-height:1;margin-bottom:6px}
+.speed-eng{font-size:.82rem;color:var(--muted2)}
+/* tiles */
+.speed-tiles{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-top:14px;min-height:38px}
+.speed-tile{width:30px;height:36px;border-radius:7px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.95rem;font-weight:800;color:var(--muted2);transition:.2s}
+/* typing input */
+.speed-input-wrap{margin-top:12px;display:flex;flex-direction:column;align-items:center;gap:9px}
+.speed-input{font-family:var(--display);font-size:1.55rem;font-weight:800;text-align:center;width:100%;max-width:260px;padding:11px 14px;border-radius:12px;border:2px solid rgba(37,217,255,.35);background:rgba(37,217,255,.07);color:var(--text);outline:none;transition:.15s;letter-spacing:.04em}
+.speed-input::placeholder{color:rgba(255,255,255,.2);font-size:1rem;font-family:var(--font);font-weight:400}
+.speed-input:focus{border-color:var(--cyan);background:rgba(37,217,255,.12);box-shadow:0 0 0 4px rgba(37,217,255,.1)}
+.speed-input.correct{border-color:var(--good)!important;background:rgba(34,197,94,.14)!important;color:#86efac!important;pointer-events:none}
+.speed-input.wrong{border-color:var(--bad)!important;background:rgba(239,68,68,.13)!important;color:#fca5a5!important;pointer-events:none;animation:shk .3s ease}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.speed-submit{border:0;border-radius:10px;padding:10px 26px;font-weight:800;font-family:var(--font);font-size:.92rem;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.18)}
+.speed-submit:hover{transform:translateY(-2px)}.speed-submit:active{transform:translateY(0)}
+.speed-submit:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.speed-mini-fb{height:30px;display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:700;margin-top:6px;border-radius:8px;transition:.2s}
+.speed-mini-fb.ok{color:#4ade80;background:rgba(34,197,94,.1)}
+.speed-mini-fb.no{color:#f87171;background:rgba(239,68,68,.1)}
+.streak-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.78rem;font-weight:800;color:#fcd34d;margin-top:4px}
+.streak-badge.hidden{display:none}
+.speed-start{text-align:center;padding:20px 0;display:flex;flex-direction:column;align-items:center;gap:14px}
+.speed-start h2{font-family:var(--display);font-size:1.6rem;font-weight:900}
+.speed-start p{color:var(--muted);max-width:420px;line-height:1.6;font-size:.92rem}
+.speed-end{text-align:center;padding:20px 0}
+.speed-end .big{font-family:var(--display);font-size:3rem;font-weight:900;color:var(--cyan)}
+.speed-end .grade{font-size:1rem;color:var(--muted);margin-top:10px;line-height:1.65}
+.combo-flash{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2.2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999;text-shadow:0 0 20px rgba(245,158,11,.5)}
+.combo-flash.show{animation:cfAnim .7s ease forwards}
+@keyframes cfAnim{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:680px){.speed-layout{grid-template-columns:1fr}.prose{font-size:.95rem;line-height:2.5}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="combo-flash" id="comboFlash"></div>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box" aria-hidden="true">YMF</div>
+    <div class="hero-text">
+      <h1>Verbos Irregulares</h1>
+      <p>Presente de indicativo — cambio vocálico, go-verbs e irregulares totales. Practica con calma y luego escribe a toda velocidad.</p>
+      <div class="badges">
+        <span class="badge c">Nivel B1</span>
+        <span class="badge m">Presente irregular</span>
+        <span class="badge">Fill-in · Speed Round (escribir)</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="tabs" role="tablist">
+  <button class="tab-btn active" id="tab-fill" onclick="showMode('fill')" role="tab">
+    📝 Texto con huecos <span class="tab-badge" id="fillBadge">30</span>
+  </button>
+  <button class="tab-btn" id="tab-speed" onclick="showMode('speed')" role="tab">
+    ⚡ Speed Round <span class="tab-badge">Escribe</span>
+  </button>
+</div>
+
+<!-- FILL -->
+<div class="panel" id="mode-fill">
+  <div class="fill-title">Diario de Andrés: un día en la oficina</div>
+  <div class="fill-instr">Elige la forma correcta del verbo en presente. Ahora cada oración coincide con el sujeto de la pista: <em>yo, él/ella, nosotros o ellos/ellas</em>.</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v" id="fTotal">30</span></div>
+    <div class="sc"><span class="l">Correctas</span><span class="v g" id="fOk">—</span></div>
+    <div class="sc"><span class="l">Errores</span><span class="v b" id="fErr">—</span></div>
+    <div class="prog-w">
+      <div class="prog-l">Progreso: <span id="fPct">0%</span></div>
+      <div class="prog-t"><div class="prog-f" id="fProg" style="width:0%"></div></div>
+    </div>
+  </div>
+  <div class="prose" id="prose"></div>
+  <div class="fill-fb" id="fillFb" role="alert"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="checkFillBtn" onclick="checkFill()">Revisar todo</button>
+    <button class="btn btn-ghost" onclick="resetFill()">&#x21BA; Reiniciar</button>
+    <button class="btn btn-dark" onclick="hintFill()">&#x1F4A1; Pista</button>
+  </div>
+  <div style="margin-top:16px">
+    <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--muted2);margin-bottom:7px">Verbos en este texto</div>
+    <div class="vchips" id="verbChips"></div>
+  </div>
+</div>
+
+<!-- SPEED -->
+<div class="panel hidden" id="mode-speed">
+  <div id="speedStart" class="speed-start">
+    <div style="font-size:3.5rem">&#x26A1;</div>
+    <h2>Speed Round</h2>
+    <p><strong>Escribe</strong> la conjugación correcta antes de que se acabe el tiempo. Las tildes son opcionales. Confirma con Enter o el botón. Las rachas dan puntos extra.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <button class="btn btn-magenta" onclick="startSpeed(60)">60 segundos</button>
+      <button class="btn btn-cyan" onclick="startSpeed(90)">90 segundos</button>
+      <button class="btn btn-ghost" onclick="startSpeed(120)">2 minutos</button>
+    </div>
+  </div>
+
+  <div id="speedGame" class="hidden">
+    <div class="speed-layout">
+      <div class="speed-left">
+        <div class="timer-wrap">
+          <div class="timer-ring">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle class="timer-track" cx="60" cy="60" r="52"/>
+              <circle class="timer-progress" id="timerCircle" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="0"/>
+            </svg>
+            <div class="timer-num" id="timerNum">60</div>
+          </div>
+          <div class="streak-badge hidden" id="streakBadge">Racha: <span id="streakNum">0</span></div>
+        </div>
+        <div class="speed-stats">
+          <div class="sstat"><div class="sl">Puntos</div><div class="sv w" id="sPoints">0</div></div>
+          <div class="sstat"><div class="sl">Correctas</div><div class="sv g" id="sOk">0</div></div>
+          <div class="sstat"><div class="sl">Errores</div><div class="sv b" id="sErr">0</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="speed-card">
+          <div class="speed-verb-label">Conjuga en presente indicativo</div>
+          <div class="speed-pronoun" id="sPronoun"></div>
+          <div class="speed-infinitive" id="sInfinitive"></div>
+          <div class="speed-eng" id="sEng"></div>
+          <div class="speed-tiles" id="sTiles"></div>
+          <div class="speed-input-wrap">
+            <input class="speed-input" id="sInput" type="text"
+              placeholder="escribe aquí…"
+              autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+              aria-label="Escribe la conjugación correcta">
+            <button class="speed-submit" id="sSubmit" onclick="submitSpeed()">Confirmar →</button>
+          </div>
+          <div class="speed-mini-fb" id="sMiniFb"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="speedEnd" class="hidden speed-end">
+    <div style="font-size:3rem;margin-bottom:8px">&#x1F3C1;</div>
+    <div class="big" id="endPoints">0</div>
+    <div style="font-size:.85rem;color:var(--muted2);margin-top:2px">puntos</div>
+    <div class="grade" id="endGrade"></div>
+    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-magenta" onclick="restartSpeed()">Jugar de nuevo</button>
+      <button class="btn btn-ghost" onclick="showMode('fill')">Ir al texto</button>
+    </div>
+  </div>
+</div>
+
+<p class="creator">By <span>Carlos &amp; Denisse</span> · Your Mexican Friend</p>
+</div>
+
+<script>
+const VERBS = {
+  querer:  {eng:'to want',       type:'e→ie',    conj:{yo:'quiero',  tu:'quieres', el:'quiere',   nos:'queremos',  ellos:'quieren'}},
+  poder:   {eng:'can / to be able',type:'o→ue',  conj:{yo:'puedo',   tu:'puedes',  el:'puede',    nos:'podemos',   ellos:'pueden'}},
+  entender:{eng:'to understand', type:'e→ie',    conj:{yo:'entiendo',tu:'entiendes',el:'entiende', nos:'entendemos',ellos:'entienden'}},
+  pensar:  {eng:'to think',      type:'e→ie',    conj:{yo:'pienso',  tu:'piensas', el:'piensa',   nos:'pensamos',  ellos:'piensan'}},
+  empezar: {eng:'to start',      type:'e→ie',    conj:{yo:'empiezo', tu:'empiezas',el:'empieza',  nos:'empezamos', ellos:'empiezan'}},
+  perder:  {eng:'to lose',       type:'e→ie',    conj:{yo:'pierdo',  tu:'pierdes', el:'pierde',   nos:'perdemos',  ellos:'pierden'}},
+  preferir:{eng:'to prefer',     type:'e→ie',    conj:{yo:'prefiero',tu:'prefieres',el:'prefiere', nos:'preferimos',ellos:'prefieren'}},
+  volver:  {eng:'to return',     type:'o→ue',    conj:{yo:'vuelvo',  tu:'vuelves', el:'vuelve',   nos:'volvemos',  ellos:'vuelven'}},
+  dormir:  {eng:'to sleep',      type:'o→ue',    conj:{yo:'duermo',  tu:'duermes', el:'duerme',   nos:'dormimos',  ellos:'duermen'}},
+  encontrar:{eng:'to find',      type:'o→ue',    conj:{yo:'encuentro',tu:'encuentras',el:'encuentra',nos:'encontramos',ellos:'encuentran'}},
+  recordar:{eng:'to remember',   type:'o→ue',    conj:{yo:'recuerdo',tu:'recuerdas',el:'recuerda', nos:'recordamos',ellos:'recuerdan'}},
+  pedir:   {eng:'to ask for',    type:'e→i',     conj:{yo:'pido',    tu:'pides',   el:'pide',     nos:'pedimos',   ellos:'piden'}},
+  servir:  {eng:'to serve',      type:'e→i',     conj:{yo:'sirvo',   tu:'sirves',  el:'sirve',    nos:'servimos',  ellos:'sirven'}},
+  seguir:  {eng:'to follow',     type:'e→i',     conj:{yo:'sigo',    tu:'sigues',  el:'sigue',    nos:'seguimos',  ellos:'siguen'}},
+  repetir: {eng:'to repeat',     type:'e→i',     conj:{yo:'repito',  tu:'repites', el:'repite',   nos:'repetimos', ellos:'repiten'}},
+  tener:   {eng:'to have',       type:'-go+e→ie',conj:{yo:'tengo',   tu:'tienes',  el:'tiene',    nos:'tenemos',   ellos:'tienen'}},
+  venir:   {eng:'to come',       type:'-go+e→ie',conj:{yo:'vengo',   tu:'vienes',  el:'viene',    nos:'venimos',   ellos:'vienen'}},
+  hacer:   {eng:'to do / make',  type:'-go',     conj:{yo:'hago',    tu:'haces',   el:'hace',     nos:'hacemos',   ellos:'hacen'}},
+  salir:   {eng:'to leave',      type:'-go',     conj:{yo:'salgo',   tu:'sales',   el:'sale',     nos:'salimos',   ellos:'salen'}},
+  poner:   {eng:'to put',        type:'-go',     conj:{yo:'pongo',   tu:'pones',   el:'pone',     nos:'ponemos',   ellos:'ponen'}},
+  traer:   {eng:'to bring',      type:'-go',     conj:{yo:'traigo',  tu:'traes',   el:'trae',     nos:'traemos',   ellos:'traen'}},
+  decir:   {eng:'to say',        type:'-go+e→i', conj:{yo:'digo',    tu:'dices',   el:'dice',     nos:'decimos',   ellos:'dicen'}},
+  ser:     {eng:'to be (perm.)', type:'irregular',conj:{yo:'soy',    tu:'eres',    el:'es',       nos:'somos',     ellos:'son'}},
+  estar:   {eng:'to be (temp.)', type:'irregular',conj:{yo:'estoy',  tu:'estás',   el:'está',     nos:'estamos',   ellos:'están'}},
+  ir:      {eng:'to go',         type:'irregular',conj:{yo:'voy',    tu:'vas',     el:'va',       nos:'vamos',     ellos:'van'}},
+  saber:   {eng:'to know (fact)',type:'irregular',conj:{yo:'sé',     tu:'sabes',   el:'sabe',     nos:'sabemos',   ellos:'saben'}},
+  conocer: {eng:'to know (person)',type:'irregular',conj:{yo:'conozco',tu:'conoces',el:'conoce',  nos:'conocemos', ellos:'conocen'}},
+  dar:     {eng:'to give',       type:'irregular',conj:{yo:'doy',    tu:'das',     el:'da',       nos:'damos',     ellos:'dan'}},
+};
+
+const SUBJ_DISPLAY = {yo:'yo',tu:'tú',el:'él/ella',nos:'nosotros',ellos:'ellos/ellas'};
+
+// [verb, subj_key, [distractor1,distractor2,distractor3]]
+const BLANKS = [
+  ['tener','yo',    ['tenemos','tiene','tienes']],
+  ['querer','el',   ['quiero','queremos','quieren']],
+  ['salir','yo',    ['sale','sales','salimos']],
+  ['ir','nos',      ['van','voy','vas']],
+  ['hacer','yo',    ['hacemos','hace','haces']],
+  ['estar','el',    ['estás','estoy','estamos']],
+  ['poder','nos',   ['puedo','pueden','puede']],
+  ['entender','yo', ['entiende','entendemos','entiendes']],
+  ['pedir','el',    ['pido','pedimos','piden']],
+  ['saber','yo',    ['sabes','sabe','sabemos']],
+  ['venir','ellos', ['viene','venimos','vengo']],
+  ['ser','el',      ['está','soy','somos']],
+  ['traer','yo',    ['trae','traemos','traen']],
+  ['pensar','yo',   ['piensa','pensamos','piensan']],
+  ['encontrar','ellos',['encuentra','encuentro','encontramos']],
+  ['decir','el',    ['digo','dicen','decimos']],
+  ['preferir','yo', ['prefiere','preferimos','prefieres']],
+  ['conocer','yo',  ['conoce','conoces','conocemos']],
+  ['volver','nos',  ['vuelvo','vuelven','vuelve']],
+  ['seguir','yo',   ['sigue','sigues','seguimos']],
+  ['dormir','el',   ['duermo','duermes','dormimos']],
+  ['recordar','yo', ['recuerda','recuerdas','recordamos']],
+  ['poner','yo',    ['pone','pones','ponemos']],
+  ['dar','yo',      ['da','das','damos']],
+  ['servir','el',   ['sirvo','sirven','servimos']],
+  ['empezar','nos', ['empiezo','empiezan','empieza']],
+  ['hacer','ellos', ['hago','hace','hacemos']],
+  ['ir','yo',       ['vas','va','vamos']],
+  ['tener','ellos', ['tengo','tiene','tenemos']],
+  ['perder','yo',   ['pierde','pierdes','perdemos']],
+];
+
+const RULES = {
+  'e→ie':'Cambio vocálico e→ie en todas las personas salvo nosotros/vosotros.',
+  'o→ue':'Cambio vocálico o→ue en todas las personas salvo nosotros/vosotros.',
+  'e→i': 'Cambio vocálico e→i en todas las personas salvo nosotros/vosotros.',
+  '-go': 'Verbo GO: la forma yo añade -go. Las demás personas son regulares.',
+  '-go+e→ie':'Verbo GO + diptongación: yo=-go, tú/él tienen e→ie.',
+  '-go+e→i':'Verbo GO + cambio e→i: yo=digo, tú=dices, él=dice...',
+  'irregular':'Completamente irregular. Hay que memorizarlo forma a forma.',
+};
+
+const PARAGRAPHS = [
+  'Son las siete de la mañana y Andrés ya está despierto. Yo {1|tener,yo} mucho trabajo hoy. Mi empresa {2|querer,el} terminar un proyecto importante antes del viernes. Yo {3|salir,yo} de casa a las ocho porque mis compañeros y yo {4|ir,nos} al centro en metro. Antes de salir, yo {5|hacer,yo} un café rápido.',
+  'En el metro, Andrés {6|estar,el} un poco nervioso. Mis compañeros y yo {7|poder,nos} ayudar con la presentación, pero yo {8|entender,yo} el problema mejor que los demás. El jefe {9|pedir,el} una presentación para hoy por la tarde. Yo no {10|saber,yo} cómo explicar algunos datos. Mis compañeros {11|venir,ellos} al trabajo en coche, pero yo prefiero el metro.',
+  'En la oficina, Andrés trabaja con Paula. Paula {12|ser,el} la directora del departamento. Yo {13|traer,yo} todos los documentos en mi mochila. Yo {14|pensar,yo} que la presentación va a salir bien. Mis colegas {15|encontrar,ellos} los datos muy interesantes. El jefe {16|decir,el} que el trabajo es excelente.',
+  'A mediodía, Andrés come con Paula. Yo {17|preferir,yo} la comida mexicana. En el restaurante, yo {18|conocer,yo} a un cliente nuevo. Después de comer, Paula y yo {19|volver,nos} a la oficina. Yo {20|seguir,yo} trabajando hasta las seis. A veces mi compañero Luis {21|dormir,el} la siesta en el sofá, pero hoy no tiene tiempo.',
+  'Por la tarde, yo {22|recordar,yo} que tengo una reunión. Yo {23|poner,yo} todos mis papeles en orden y yo {24|dar,yo} una copia a Paula. Ella siempre {25|servir,el} café durante las reuniones. Paula y yo {26|empezar,nos} la reunión a las cuatro en punto. Mis colegas {27|hacer,ellos} muchas preguntas. Yo {28|ir,yo} a la pizarra y explico todo muy bien.',
+  'Al final del día, Andrés está feliz. Mis compañeros {29|tener,ellos} ganas de volver a casa. Sin embargo, antes de salir, yo {30|perder,yo} las llaves y las busco por toda la oficina. Al final las encuentro en mi mochila. ¡Qué día tan largo!',
+];
+
+
+function seededOptions(options, seed){
+  const arr=[...new Set(options)];
+  let x=(seed*9301+49297)%233280;
+  for(let i=arr.length-1;i>0;i--){
+    x=(x*9301+49297)%233280;
+    const j=Math.floor((x/233280)*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
+function getAnswer(i){
+  const [verb,subj] = BLANKS[i];
+  return VERBS[verb].conj[subj];
+}
+function getRule(i){
+  const [verb,subj] = BLANKS[i];
+  const v = VERBS[verb];
+  const ans = v.conj[subj];
+  return '<strong>' + verb + ' → ' + ans + '</strong>: ' + (RULES[v.type]||'');
+}
+
+/* ── STATE ── */
+let fillChecked = false;
+let openTip = null;
+let speedTimer = null, speedTimeLeft = 60, speedTotalTime = 60;
+let speedPoints = 0, speedOk = 0, speedErr = 0, speedStreak = 0;
+let speedAnswered = false, speedCard = null, speedUsed = [];
+
+/* ── MODE ── */
+function showMode(m){
+  ['fill','speed'].forEach(x=>{
+    document.getElementById('mode-'+x).classList.toggle('hidden',x!==m);
+    document.getElementById('tab-'+x).classList.toggle('active',x===m);
+  });
+  if(m==='speed' && !speedTimer) showSpeedStart();
+}
+
+/* ── BUILD FILL ── */
+function buildFill(){
+  const prose = document.getElementById('prose');
+  prose.innerHTML = '';
+  PARAGRAPHS.forEach(para=>{
+    const p = document.createElement('p');
+    const parts = para.split(/(\{\d+\|[^}]+\})/);
+    parts.forEach(part=>{
+      const m = part.match(/^\{(\d+)\|([^,]+),([^}]+)\}$/);
+      if(!m){ p.appendChild(document.createTextNode(part)); return; }
+      const n = parseInt(m[1]);
+      const verb = m[2], subj = m[3];
+      const bIdx = n-1;
+      const answer = getAnswer(bIdx);
+      const distractors = BLANKS[bIdx][2];
+      const opts = seededOptions([answer,...distractors], n);
+
+      const wrap = document.createElement('span');
+      wrap.className='vg'; wrap.id='vg_'+n;
+
+      const sel = document.createElement('select');
+      sel.id='vs_'+n; sel.dataset.answer=answer; sel.dataset.n=n;
+      sel.setAttribute('aria-label','hueco '+n+': '+verb+', '+SUBJ_DISPLAY[subj]);
+      const dflt=document.createElement('option'); dflt.value=''; dflt.textContent='▾ elige'; sel.appendChild(dflt);
+      opts.forEach(o=>{ const op=document.createElement('option'); op.value=o; op.textContent=o; sel.appendChild(op); });
+      sel.addEventListener('change',()=>{ if(!fillChecked) updateFillScore(); });
+
+      const hl = document.createElement('span');
+      hl.className='hint-lbl'; hl.textContent='('+verb+', '+SUBJ_DISPLAY[subj]+')';
+
+      const result = document.createElement('span');
+      result.className='verb-result'; result.id='vr_'+n;
+
+      wrap.appendChild(sel); wrap.appendChild(hl); wrap.appendChild(result);
+      p.appendChild(wrap);
+    });
+    prose.appendChild(p);
+  });
+  buildChips();
+}
+
+function buildChips(){
+  const wrap = document.getElementById('verbChips');
+  wrap.innerHTML='';
+  const seen=new Set();
+  const typeM = new Set(['-go+e→ie','-go+e→i','-go']);
+  BLANKS.forEach(([verb])=>{
+    if(seen.has(verb)) return; seen.add(verb);
+    const v=VERBS[verb];
+    const chip=document.createElement('span');
+    chip.className='vchip '+(typeM.has(v.type)?'m':'');
+    chip.textContent=verb+' ('+v.type+')';
+    chip.title=v.eng;
+    wrap.appendChild(chip);
+  });
+}
+
+function updateFillScore(){
+  let ans=0,ok=0;
+  BLANKS.forEach((_,i)=>{
+    const s=document.getElementById('vs_'+(i+1));
+    if(s&&s.value!==''){ans++; if(s.value===s.dataset.answer)ok++;}
+  });
+  const pct=Math.round(ans/BLANKS.length*100);
+  document.getElementById('fPct').textContent=pct+'%';
+  document.getElementById('fProg').style.width=pct+'%';
+}
+
+function checkFill(){
+  fillChecked=true;
+  let ok=0;
+  openTip=null;
+  BLANKS.forEach((_,i)=>{
+    const n=i+1;
+    const sel=document.getElementById('vs_'+n);
+    const result=document.getElementById('vr_'+n);
+    if(!sel||!result) return;
+    const answer=sel.dataset.answer, given=sel.value;
+    const isOk=given===answer;
+    if(isOk) ok++;
+    sel.style.display='none';
+    const vg=document.getElementById('vg_'+n);
+    vg.querySelectorAll('.hint-lbl').forEach(e=>e.remove());
+    result.innerHTML=''; result.classList.add('show');
+    if(isOk){
+      result.innerHTML='<span class="vr-right">'+answer+'</span><span style="color:#4ade80"> ✓</span>';
+    } else {
+      result.innerHTML='<span class="vr-wrong">'+(given||'—')+'</span> <span style="color:#f87171">✗</span> <span class="vr-right">'+answer+'</span>';
+    }
+    const info=document.createElement('span');
+    info.className='vr-info'; info.textContent='i';
+    const tip=document.createElement('span'); tip.className='vr-tip'; tip.innerHTML=getRule(i);
+    info.appendChild(tip);
+    info.addEventListener('click',e=>{
+      e.stopPropagation();
+      if(openTip&&openTip!==info) openTip.classList.remove('open');
+      info.classList.toggle('open');
+      openTip=info.classList.contains('open')?info:null;
+    });
+    result.appendChild(document.createTextNode(' ')); result.appendChild(info);
+  });
+
+  document.addEventListener('click',()=>{ if(openTip){openTip.classList.remove('open');openTip=null;} });
+  const total=BLANKS.length, pct=Math.round(ok/total*100);
+  document.getElementById('fOk').textContent=ok;
+  document.getElementById('fErr').textContent=total-ok;
+  document.getElementById('fProg').style.width='100%';
+  document.getElementById('fPct').textContent='100%';
+  const fb=document.getElementById('fillFb'); fb.classList.add('show');
+  if(pct===100){fb.className='fill-fb show good';fb.innerHTML='&#x1F3C6; <strong>¡Perfecto! '+ok+'/'+total+'.</strong> Dominas los verbos irregulares. ¡Ahora prueba el Speed Round escribiendo!';}
+  else if(pct>=70){fb.className='fill-fb show partial';fb.innerHTML='&#x1F44D; <strong>'+ok+'/'+total+' ('+pct+'%).</strong> Muy bien. Haz clic en <strong>i</strong> junto a cada error para ver la regla.';}
+  else if(pct>=40){fb.className='fill-fb show partial';fb.innerHTML='&#x1F4D6; <strong>'+ok+'/'+total+' ('+pct+'%).</strong> Repasa los verbos GO y los cambios vocálicos o→ue.';}
+  else{fb.className='fill-fb show bad';fb.innerHTML='&#x1F4AA; <strong>'+ok+'/'+total+' ('+pct+'%).</strong> Empieza con: hacer→hago, salir→salgo, poner→pongo.';}
+  document.getElementById('checkFillBtn').disabled=true;
+}
+
+function resetFill(){
+  fillChecked=false;
+  buildFill();
+  document.getElementById('fillFb').className='fill-fb'; document.getElementById('fillFb').innerHTML='';
+  document.getElementById('checkFillBtn').disabled=false;
+  ['fOk','fErr'].forEach(id=>document.getElementById(id).textContent='—');
+  document.getElementById('fProg').style.width='0%'; document.getElementById('fPct').textContent='0%';
+}
+
+function hintFill(){
+  if(fillChecked) return;
+  const empty=BLANKS.map((_,i)=>i).filter(i=>{ const s=document.getElementById('vs_'+(i+1)); return s&&s.value===''; });
+  if(!empty.length) return;
+  const i=empty[0], sel=document.getElementById('vs_'+(i+1));
+  sel.value=getAnswer(i); sel.style.borderColor='rgba(245,158,11,.6)'; sel.style.color='#fcd34d';
+  sel.scrollIntoView({behavior:'smooth',block:'center'}); updateFillScore();
+}
+
+/* ── SPEED CARDS ── */
+const SPEED_CARDS=[];
+(function(){
+  const subjects=['yo','tu','el','nos','ellos'];
+  Object.keys(VERBS).forEach(vk=>{
+    subjects.forEach(subj=>{
+      const v=VERBS[vk];
+      if(!v.conj[subj]) return;
+      SPEED_CARDS.push({verb:vk,subj,eng:v.eng,answer:v.conj[subj],type:v.type});
+    });
+  });
+})();
+
+function showSpeedStart(){
+  document.getElementById('speedStart').classList.remove('hidden');
+  document.getElementById('speedGame').classList.add('hidden');
+  document.getElementById('speedEnd').classList.add('hidden');
+}
+
+function startSpeed(secs){
+  speedTotalTime=secs; speedTimeLeft=secs;
+  speedPoints=0; speedOk=0; speedErr=0; speedStreak=0; speedUsed=[];
+  document.getElementById('speedStart').classList.add('hidden');
+  document.getElementById('speedGame').classList.remove('hidden');
+  document.getElementById('speedEnd').classList.add('hidden');
+  ['sPoints','sOk','sErr'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('streakBadge').classList.add('hidden');
+  updateRing(); nextCard();
+  speedTimer=setInterval(()=>{
+    speedTimeLeft--;
+    updateRing();
+    if(speedTimeLeft<=0){ clearInterval(speedTimer); speedTimer=null; endSpeed(); }
+  },1000);
+}
+
+function updateRing(){
+  const circ=326.7, pct=speedTimeLeft/speedTotalTime;
+  document.getElementById('timerCircle').setAttribute('stroke-dashoffset',circ*(1-pct));
+  const num=document.getElementById('timerNum');
+  num.textContent=speedTimeLeft;
+  num.className='timer-num';
+  const circle=document.getElementById('timerCircle');
+  if(speedTimeLeft<=10){num.classList.add('danger');circle.style.stroke='var(--bad)';}
+  else if(speedTimeLeft<=20){num.classList.add('warn');circle.style.stroke='var(--warn)';}
+  else{circle.style.stroke='var(--cyan)';}
+}
+
+function nextCard(){
+  speedAnswered=false;
+  const avail=SPEED_CARDS.filter(c=>!speedUsed.includes(c.verb+'_'+c.subj));
+  const pool=avail.length>0?avail:SPEED_CARDS;
+  const card=pool[Math.floor(Math.random()*pool.length)];
+  speedUsed.push(card.verb+'_'+card.subj);
+  if(speedUsed.length>20) speedUsed.shift();
+  speedCard=card;
+
+  document.getElementById('sPronoun').textContent=SUBJ_DISPLAY[card.subj]||card.subj;
+  document.getElementById('sInfinitive').textContent=card.verb;
+  document.getElementById('sEng').textContent=card.eng;
+  document.getElementById('sMiniFb').className='speed-mini-fb';
+  document.getElementById('sMiniFb').textContent='';
+
+  // tiles showing number of letters
+  const tilesWrap=document.getElementById('sTiles');
+  tilesWrap.innerHTML='';
+  [...card.answer].forEach(()=>{
+    const tile=document.createElement('div');
+    tile.className='speed-tile'; tile.textContent='_';
+    tilesWrap.appendChild(tile);
+  });
+
+  const inp=document.getElementById('sInput');
+  inp.value=''; inp.className='speed-input'; inp.disabled=false;
+  document.getElementById('sSubmit').disabled=false;
+  setTimeout(()=>inp.focus(),80);
+}
+
+function normalizeStr(s){
+  return s.trim().toLowerCase()
+    .normalize('NFD').replace(/\u0300|\u0301|\u0302|\u0303|\u0308/g,'')
+    .replace(/[^a-z]/g,'');
+}
+
+function submitSpeed(){
+  if(speedAnswered||!speedTimer) return;
+  const inp=document.getElementById('sInput');
+  const typed=inp.value.trim();
+  if(!typed) return;
+  speedAnswered=true;
+  const correct=speedCard.answer;
+  const isOk=normalizeStr(typed)===normalizeStr(correct);
+  inp.disabled=true;
+  document.getElementById('sSubmit').disabled=true;
+  inp.classList.add(isOk?'correct':'wrong');
+  if(isOk) inp.value=correct;
+
+  // reveal tiles
+  const tiles=document.getElementById('sTiles').children;
+  [...correct].forEach((ch,i)=>{ if(tiles[i]) tiles[i].textContent=ch; });
+
+  const fb=document.getElementById('sMiniFb');
+  if(isOk){
+    speedOk++; speedStreak++;
+    const bonus=speedStreak>=3?speedStreak-2:0;
+    const pts=10+bonus*5;
+    speedPoints+=pts;
+    fb.className='speed-mini-fb ok';
+    fb.textContent=pts>10?'+'+pts+' (racha x'+speedStreak+')':'+'+pts;
+    if(speedStreak>=3){
+      const el=document.getElementById('comboFlash');
+      el.textContent='Combo x'+speedStreak+'!';
+      el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+    }
+  } else {
+    speedErr++; speedStreak=0;
+    fb.className='speed-mini-fb no';
+    fb.innerHTML='&#x2717; &nbsp;<strong>'+correct+'</strong>';
+  }
+
+  document.getElementById('sPoints').textContent=speedPoints;
+  document.getElementById('sOk').textContent=speedOk;
+  document.getElementById('sErr').textContent=speedErr;
+  const sb=document.getElementById('streakBadge');
+  if(speedStreak>=3){ sb.classList.remove('hidden'); document.getElementById('streakNum').textContent=speedStreak; }
+  else sb.classList.add('hidden');
+
+  setTimeout(()=>{ if(speedTimer) nextCard(); }, isOk?550:1100);
+}
+
+// Enter key
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    const inp=document.getElementById('sInput');
+    if(inp&&!inp.disabled&&document.activeElement===inp){ e.preventDefault(); submitSpeed(); }
+  }
+});
+
+function endSpeed(){
+  document.getElementById('speedGame').classList.add('hidden');
+  document.getElementById('speedEnd').classList.remove('hidden');
+  document.getElementById('endPoints').textContent=speedPoints;
+  const total=speedOk+speedErr;
+  const acc=total>0?Math.round(speedOk/total*100):0;
+  const msgs=[
+    [90,'Conjugas los verbos irregulares con fluidez total. ¡Impresionante!'],
+    [70,'Muy bien. Tienes buena base — sigue practicando para automatizarlo.'],
+    [50,'Bien encaminado/a. Repasa los verbos GO y los cambios vocálicos.'],
+    [0,'Sigue practicando. Empieza memorizando 5 verbos GO y sus formas yo.'],
+  ];
+  const msg=msgs.find(([t])=>acc>=t)[1];
+  document.getElementById('endGrade').innerHTML='<strong>'+speedOk+' correctas</strong> de '+total+' ('+acc+'% precisión)<br><br>'+msg;
+}
+
+function restartSpeed(){
+  if(speedTimer){clearInterval(speedTimer);speedTimer=null;}
+  showSpeedStart();
+}
+
+// INIT
+document.getElementById('fillBadge').textContent=BLANKS.length;
+buildFill();
+</script>
+</body>
+</html>

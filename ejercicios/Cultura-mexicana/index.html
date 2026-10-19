@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cultura y Tradiciones de México | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --comida:#f97316;--comida2:#fdba74;
+  --musica:#a78bfa;--musica2:#c4b5fd;
+  --historia:#fbbf24;--historia2:#fde68a;
+  --geo:#34d399;--geo2:#6ee7b7;
+  --trad:#f472b6;--trad2:#ff91cd;
+  --simb:#60a5fa;--simb2:#93c5fd;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 12% 8%,rgba(249,115,22,.13),transparent 30%),radial-gradient(ellipse at 88% 12%,rgba(52,211,153,.1),transparent 30%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(1020px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--comida),#fff 40%,var(--geo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.85rem;margin-top:4px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ex-tabs{display:flex;gap:5px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:7px;overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:8px 11px;font-weight:800;font-family:var(--font);font-size:.74rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;transform:translateY(-1px)}
+.etab-icon{font-size:1.15rem;line-height:1}
+.etab-label{font-size:.6rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:22px 26px;box-shadow:var(--shadow)}
+.ex-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.85rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:16px}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:90px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;transition:width .35s;background:linear-gradient(90deg,var(--comida),var(--geo))}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.err{background:rgba(239,68,68,.11);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+
+/* ── CAT TAGS ── */
+.cat-pill{font-size:.65rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;border-radius:999px;padding:3px 11px}
+.tag{font-size:.6rem;font-weight:900;text-transform:uppercase;border-radius:999px;padding:2px 8px;vertical-align:middle;margin-left:4px}
+.tag-comida{background:rgba(249,115,22,.18);color:var(--comida2)}
+.tag-musica{background:rgba(167,139,250,.18);color:var(--musica2)}
+.tag-historia{background:rgba(251,191,36,.18);color:var(--historia2)}
+.tag-geo{background:rgba(52,211,153,.18);color:var(--geo2)}
+.tag-trad{background:rgba(244,114,182,.18);color:var(--trad2)}
+.tag-simb{background:rgba(96,165,250,.18);color:var(--simb2)}
+
+/* ── KNOWLEDGE FLASHCARDS (EX 0) ── */
+.flash-controls{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.ff-btn{border:0;border-radius:9px;padding:5px 12px;font-size:.73rem;font-weight:800;font-family:var(--font);cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);color:var(--muted);border:1.5px solid transparent}
+.ff-btn.active{color:white}
+.flash-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.flash-prow{display:flex;align-items:center;gap:12px;width:100%;max-width:660px}
+.flash-cnt{font-size:.8rem;font-weight:800;color:var(--muted2);white-space:nowrap}
+.flash-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.flash-fil{height:100%;border-radius:999px;transition:width .4s}
+.flash-card{width:100%;max-width:660px;min-height:230px;perspective:1000px;cursor:pointer}
+.flash-inner{position:relative;width:100%;min-height:230px;transition:transform .5s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.flash-card.flipped .flash-inner{transform:rotateY(180deg)}
+.flash-front,.flash-back{position:absolute;inset:0;border-radius:18px;padding:22px 24px;backface-visibility:hidden;display:flex;flex-direction:column;gap:10px;min-height:230px}
+.flash-back{transform:rotateY(180deg)}
+.flash-emoji{font-size:2.6rem;line-height:1}
+.flash-word{font-family:var(--display);font-size:1.5rem;font-weight:900;line-height:1.15;color:var(--text)}
+.flash-sub{font-size:.8rem;color:var(--muted2);font-style:italic;margin-top:2px}
+.flash-fact{font-size:.88rem;line-height:1.65;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:10px;margin-top:4px}
+.flash-fact strong{color:var(--text)}
+.flash-hint{font-size:.72rem;color:var(--muted2);text-align:center;font-style:italic;margin-top:auto}
+.flash-nav{display:flex;gap:8px;align-items:center;justify-content:center;width:100%;max-width:660px}
+
+/* ── PICTURE/MATCH CARDS (EX 1) ── */
+.pic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.pic-card{border-radius:18px;overflow:hidden;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);transition:transform .15s}
+.pic-card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.4)}
+.pic-card.ok{border-color:var(--good);box-shadow:0 0 0 2px rgba(34,197,94,.3)}
+.pic-card.err{border-color:var(--bad);box-shadow:0 0 0 2px rgba(239,68,68,.25)}
+.pic-emoji-box{background:linear-gradient(160deg,#1c0d30,#2a1245);display:flex;align-items:center;justify-content:center;padding:22px;min-height:110px;font-size:3.4rem}
+.pic-q{padding:12px 14px 8px;font-size:.92rem;font-weight:700;text-align:center;line-height:1.45;background:rgba(0,0,0,.2)}
+.pic-task{font-size:.7rem;color:var(--muted2);display:block;margin-top:3px;font-weight:400}
+.pic-btns{display:grid;grid-template-columns:1fr 1fr}
+.pic-btn{border:0;padding:11px 8px 11px 22px;font-weight:800;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:.12s;color:white;text-align:left;position:relative;line-height:1.3}
+.pic-btn:hover:not([disabled]){filter:brightness(1.15)}
+.pic-btn[disabled]{cursor:default}
+.pic-btn::before{content:attr(data-l);position:absolute;left:7px;top:50%;transform:translateY(-50%);font-size:.68rem;opacity:.65;font-weight:900}
+.pic-btn.c1{background:#c0392b}.pic-btn.c2{background:#2980b9}
+.pic-btn.c3{background:#d35400}.pic-btn.c4{background:#27ae60}
+.pic-btn.revealed{box-shadow:inset 0 0 0 3px white}
+.pic-btn.revealed::after{content:"✓";position:absolute;right:8px;top:50%;transform:translateY(-50%)}
+.pic-btn.dim{opacity:.28}
+.pic-exp{font-size:.76rem;padding:8px 12px;background:rgba(0,0,0,.35);color:var(--muted);line-height:1.5;text-align:center;display:none}
+.pic-exp.show{display:block}
+
+/* ── MC ── */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px}
+.mc-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0;margin-top:2px}
+.mc-sent{font-size:1rem;line-height:1.65;flex:1}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px;margin-top:10px}
+.mc-opt{border:0;border-radius:10px;padding:7px 14px;font-weight:700;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);background:rgba(37,217,255,.09);border-color:rgba(37,217,255,.35)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.mc-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.mc-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mc-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-expl{display:none;font-size:.79rem;color:var(--muted);line-height:1.55;margin-top:7px;padding:7px 12px 7px 28px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-expl.show{display:block}
+
+/* ── ERROR HUNT / VERDADERO-FALSO ── */
+.eh-list{display:flex;flex-direction:column;gap:9px}
+.eh-item{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:13px 15px;display:flex;align-items:flex-start;gap:11px}
+.eh-item.eh-ok{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.05)}
+.eh-item.eh-bad{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.05)}
+.eh-n{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:var(--muted2);flex-shrink:0;margin-top:1px}
+.eh-body{flex:1}.eh-sent{font-size:.97rem;line-height:1.6}
+.eh-fix{font-size:.82rem;font-weight:700;color:var(--good);margin-left:6px}
+.eh-btns{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+.eh-btn{border:0;border-radius:9px;padding:7px 15px;font-weight:800;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.eh-yes:hover:not([disabled]){border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.1);color:#86efac}
+.eh-no:hover:not([disabled]){border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);color:#fca5a5}
+.eh-btn[disabled]{cursor:default;opacity:.5}
+.cho-ok{border-color:var(--good)!important;background:rgba(34,197,94,.18)!important;color:#86efac!important;opacity:1!important}
+.cho-err{border-color:var(--bad)!important;background:rgba(239,68,68,.14)!important;color:#fca5a5!important;opacity:1!important}
+.eh-exp{display:none;font-size:.79rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);line-height:1.55}
+.revealed .eh-exp{display:block}
+
+/* ── DRAG & SORT ── */
+.sort-pile{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;min-height:52px;margin-bottom:12px}
+.sort-bucket{border-radius:14px;padding:12px;min-height:80px;display:flex;flex-direction:column;gap:6px;transition:.2s}
+.sort-bucket.drag-over{box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.bucket-title{font-family:var(--display);font-size:.76rem;font-weight:900;text-align:center}
+.bucket-sub{font-size:.62rem;color:var(--muted2);text-align:center;line-height:1.35}
+.sort-card{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:9px;padding:7px 12px;font-size:.84rem;font-weight:600;cursor:grab;user-select:none;transition:.15s}
+.sort-card:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sort-card.ghost{opacity:.35}
+.sort-card.c-ok{background:rgba(34,197,94,.14);border-color:var(--good);color:#86efac;cursor:default}
+.sort-card.c-err{background:rgba(239,68,68,.1);border-color:var(--bad);color:#fca5a5;font-size:.78rem}
+
+/* ── SPEED ── */
+.sp-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-stats{display:flex;gap:9px}
+.spst{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spst .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.spst .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spst .sv.g{color:var(--good)}.spst .sv.b{color:var(--bad)}.spst .sv.w{color:var(--warn)}
+.sp-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:20px;text-align:center;width:100%;max-width:520px}
+.sp-q{font-size:.98rem;line-height:1.7;margin-bottom:4px}
+.sp-hint{font-size:.77rem;color:var(--muted2);font-style:italic}
+.sp-row{display:flex;gap:8px;justify-content:center;width:100%;max-width:520px}
+.sp-inp{flex:1;max-width:280px;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.3);border-radius:11px;padding:10px 14px;font-family:var(--font);font-size:1rem;font-weight:700;color:var(--text);outline:none;transition:.15s}
+.sp-inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.sp-inp::placeholder{color:var(--muted2);font-weight:400}
+.sp-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:520px}
+.sp-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.sp-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.tmr-row{display:flex;align-items:center;gap:9px;width:100%;max-width:520px}
+.tmr-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.tmr-fil{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--comida),var(--geo));transition:width 1s linear}
+.tmr-n{font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--muted2);min-width:22px;text-align:right}
+.sp-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.streak{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak.on{display:inline-flex;align-items:center;gap:4px}
+.cf{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.cf.pop{animation:cfk .7s ease forwards}
+@keyframes cfk{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+
+/* ── REFERENCE / MAP ── */
+.ref-section{margin-bottom:18px}
+.ref-h3{font-family:var(--display);font-size:.92rem;font-weight:800;padding:6px 14px;border-radius:9px;display:inline-flex;align-items:center;gap:6px;margin-bottom:10px}
+.ref-table{width:100%;border-collapse:collapse;font-size:.83rem;margin-bottom:10px}
+.ref-table th{padding:6px 12px;font-size:.6rem;font-weight:800;text-transform:uppercase;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+.ref-table td{padding:6px 12px;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-table tr:hover td{background:rgba(255,255,255,.02)}
+.ref-tip{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:10px 14px;font-size:.83rem;color:#bbf7d0;line-height:1.6;margin-bottom:12px}
+.region-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-bottom:10px}
+.region-item{background:rgba(255,255,255,.04);border-radius:10px;padding:9px 11px;text-align:center}
+.region-item .re{font-size:1.3rem}
+.region-item .rn{font-size:.75rem;font-weight:700;margin-top:3px}
+.region-item .rc{font-size:.65rem;color:var(--muted2);margin-top:1px}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:14px 12px}.pic-grid{grid-template-columns:1fr}.region-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="cf" id="cf"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Cultura y Tradiciones de México</h1>
+      <p>Comida, música, historia, geografía y tradiciones mexicanas — conocimiento esencial para entender México.</p>
+      <div class="badges">
+        <span class="badge">A1&#8211;A2</span>
+        <span class="badge" style="border-color:rgba(249,115,22,.4);color:var(--comida2)">&#127790; Comida</span>
+        <span class="badge" style="border-color:rgba(167,139,250,.4);color:var(--musica2)">&#127932; M&#250;sica</span>
+        <span class="badge" style="border-color:rgba(251,191,36,.4);color:var(--historia2)">&#127963;&#65039; Historia</span>
+        <span class="badge" style="border-color:rgba(52,211,153,.4);color:var(--geo2)">&#128506;&#65039; Geograf&#237;a</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">&#128218;</span><span class="etab-label">Datos<br>clave</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">&#127790;</span><span class="etab-label">¿Qué<br>es esto?</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">&#128221;</span><span class="etab-label">Trivia<br>(MC)</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">&#10067;</span><span class="etab-label">Verdadero<br>o falso</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">&#128202;</span><span class="etab-label">Clasi-<br>fica</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">&#9889;</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-6" onclick="goEx(6)"><span class="etab-icon">&#128196;</span><span class="etab-label">Refer-<br>encia</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> &middot; Your Mexican Friend</p>
+</div>
+<script>
+function seededShuffle(arr,seed){const a=[...arr];let s=seed;for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+
+let flashIdx=0, flashFilter='all', flashFlipped=false, flashCards=[];
+let picAnswers={}, mcAnswers={}, mcChecked=false, ehAnswered={};
+let dragItem=null, sortPlaced={}, sortChecked=false, tapSel=null;
+let spIdx=0, spOk=0, spErr=0, spStreak=0, spTimer=null, spTimeLeft=0, spAnswered=false;
+
+function goEx(idx){
+  [0,1,2,3,4,5,6].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===idx));
+  [renderFlash,renderPicCards,renderMC,renderErrorHunt,renderSort,renderSpeed,renderReference][idx]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const CATS={
+  comida:  {label:'Comida',    icon:'🌮', col:'var(--comida)',  bg:'rgba(249,115,22,.1)',  bd:'rgba(249,115,22,.3)'},
+  musica:  {label:'Música',    icon:'🎺', col:'var(--musica)',  bg:'rgba(167,139,250,.1)', bd:'rgba(167,139,250,.3)'},
+  historia:{label:'Historia',  icon:'🏺', col:'var(--historia)',bg:'rgba(251,191,36,.1)',  bd:'rgba(251,191,36,.3)'},
+  geo:     {label:'Geografía', icon:'🗺️', col:'var(--geo)',     bg:'rgba(52,211,153,.1)',  bd:'rgba(52,211,153,.3)'},
+  trad:    {label:'Tradiciones',icon:'💀', col:'var(--trad)',    bg:'rgba(244,114,182,.1)', bd:'rgba(244,114,182,.3)'},
+  simb:    {label:'Símbolos',  icon:'🇲🇽', col:'var(--simb)',    bg:'rgba(96,165,250,.1)',  bd:'rgba(96,165,250,.3)'},
+};
+
+/* ══════════════════════════════════
+   FLASHCARD DATA — 36 knowledge cards
+══════════════════════════════════ */
+const FLASH_DATA=[
+  /* COMIDA (8) */
+  {cat:'comida',emoji:'🌮',word:'El taco',sub:'Comida más famosa de México',fact:'Tortilla de maíz o trigo rellena de carne, frijoles, queso, salsa, etc. Hay miles de variedades: al pastor, de carnitas, de barbacoa, de pescado.'},
+  {cat:'comida',emoji:'🍫',word:'El mole',sub:'Salsa compleja con más de 20 ingredientes',fact:'Salsa espesa hecha con chiles, especias y a veces chocolate. El mole poblano (de Puebla) es el más conocido. Se sirve sobre pollo o pavo.'},
+  {cat:'comida',emoji:'🍲',word:'El pozole',sub:'Sopa tradicional con maíz cacahuazintle',fact:'Sopa hecha con maíz especial (cacahuazintle), carne de cerdo o pollo. Se sirve con lechuga, rábano, orégano y chile. Hay pozole rojo, verde y blanco.'},
+  {cat:'comida',emoji:'🫔',word:'El tamal',sub:'Masa de maíz envuelta en hoja',fact:'Masa de maíz rellena (de carne, queso, dulce) envuelta en hoja de maíz o de plátano y cocida al vapor. Tradicional en Día de la Candelaria (2 de febrero).'},
+  {cat:'comida',emoji:'🌽',word:'El elote',sub:'Maíz tierno, comida callejera clásica',fact:'Maíz cocido o asado, servido en la mazorca con mayonesa, queso, chile y limón. "Elote" es maíz tierno; "esquites" es la versión en vaso, desgranada.'},
+  {cat:'comida',emoji:'🌶️',word:'Chiles en nogada',sub:'Platillo patriótico (verde, blanco, rojo)',fact:'Chile poblano relleno de picadillo, bañado en salsa de nuez (nogada) blanca y decorado con granada roja. Representa los colores de la bandera mexicana. Se come en agosto-septiembre.'},
+  {cat:'comida',emoji:'🥑',word:'El guacamole',sub:'Puré de aguacate',fact:'Aguacate machacado con cebolla, cilantro, limón, chile y a veces jitomate. Palabra de origen náhuatl: "ahuacamolli" (mezcla de aguacate).'},
+  {cat:'comida',emoji:'🫓',word:'La tortilla',sub:'Base de la comida mexicana, de maíz',fact:'Disco delgado de masa de maíz (o trigo en el norte) cocido en comal. Es la base de tacos, quesadillas, enchiladas y más. México consume más tortillas que cualquier otro país.'},
+  /* MÚSICA (6) */
+  {cat:'musica',emoji:'🎺',word:'El mariachi',sub:'Música tradicional con trompetas y violines',fact:'Grupo musical con violines, trompetas, guitarrón y vihuela, vestidos con traje de charro. Originario de Jalisco. Declarado Patrimonio Cultural Inmaterial por la UNESCO en 2011.'},
+  {cat:'musica',emoji:'🪗',word:'La banda',sub:'Música con muchos instrumentos de viento',fact:'Música regional, especialmente de Sinaloa, con tuba, trombones, clarinetes y percusión. Muy popular para fiestas y bailes.'},
+  {cat:'musica',emoji:'🎸',word:'La ranchera',sub:'Canciones sobre amor y vida del campo',fact:'Género musical que habla de amor, patria y la vida rural. Cantantes famosos: Vicente Fernández, José Alfredo Jiménez, Pedro Infante.'},
+  {cat:'musica',emoji:'🪕',word:'El son jarocho',sub:'Música de Veracruz, base de "La Bamba"',fact:'Estilo musical de Veracruz con arpa, jarana y zapateado (baile con los pies). "La Bamba" es la canción más famosa de este género.'},
+  {cat:'musica',emoji:'🥁',word:'La cumbia',sub:'Ritmo bailable muy popular',fact:'Aunque originaria de Colombia, la cumbia se adoptó y transformó mucho en México, especialmente la cumbia sonidera y la cumbia norteña.'},
+  {cat:'musica',emoji:'🎻',word:'El corrido',sub:'Canción-historia, narra eventos y personajes',fact:'Canción narrativa que cuenta historias, a menudo sobre la Revolución, héroes populares o eventos importantes. Tradición oral musical.'},
+  /* HISTORIA (8) */
+  {cat:'historia',emoji:'🏺',word:'Los aztecas (mexicas)',sub:'Civilización que fundó Tenochtitlan',fact:'Pueblo que fundó Tenochtitlan en 1325 (hoy Ciudad de México) sobre un lago, según la leyenda donde vieron un águila comiendo una serpiente sobre un nopal — símbolo en la bandera actual.'},
+  {cat:'historia',emoji:'⛵',word:'La conquista española',sub:'Hernán Cortés llegó en 1519',fact:'Hernán Cortés llegó a México en 1519. En 1521 cayó Tenochtitlan, capital azteca, comenzando 300 años de dominio colonial español (Nueva España).'},
+  {cat:'historia',emoji:'🔔',word:'El Grito de Dolores',sub:'16 de septiembre de 1810',fact:'El cura Miguel Hidalgo llamó al pueblo a levantarse contra España la madrugada del 16 de septiembre de 1810 en el pueblo de Dolores. Inicio de la Guerra de Independencia.'},
+  {cat:'historia',emoji:'🦅',word:'Independencia de México',sub:'Consumada en 1821',fact:'Después de 11 años de guerra, México se independizó de España en 1821. El 16 de septiembre se celebra cada año como Día de la Independencia.'},
+  {cat:'historia',emoji:'⚔️',word:'La Revolución Mexicana',sub:'1910 — Inicio del conflicto',fact:'Movimiento armado contra el dictador Porfirio Díaz, iniciado en 1910. Figuras clave: Francisco I. Madero, Emiliano Zapata, Pancho Villa. Cambió radicalmente la política y sociedad mexicana.'},
+  {cat:'historia',emoji:'🌾',word:'Emiliano Zapata',sub:'Líder revolucionario del sur, "Tierra y Libertad"',fact:'Líder campesino del estado de Morelos durante la Revolución. Su lema era "Tierra y Libertad", luchando por la reforma agraria y los derechos de los campesinos.'},
+  {cat:'historia',emoji:'🐎',word:'Pancho Villa',sub:'Líder revolucionario del norte',fact:'General revolucionario del norte de México (Chihuahua). Su nombre real era Doroteo Arango. Lideró la famosa División del Norte durante la Revolución.'},
+  {cat:'historia',emoji:'🏛️',word:'Benito Juárez',sub:'Primer presidente indígena de México',fact:'Presidente de México (1858-1872), de origen zapoteco (Oaxaca). Defendió la separación Iglesia-Estado. Es una figura central de la historia mexicana, conocido por la frase "el respeto al derecho ajeno es la paz".'},
+  /* GEOGRAFÍA (8) */
+  {cat:'geo',emoji:'🏔️',word:'El Popocatépetl',sub:'Volcán activo cerca de la CDMX',fact:'Volcán activo de 5,426 metros, visible desde Ciudad de México y Puebla. Su nombre náhuatl significa "montaña que humea". Junto a él está el Iztaccíhuatl ("mujer dormida").'},
+  {cat:'geo',emoji:'🏖️',word:'Cancún y la Riviera Maya',sub:'Costa caribeña de Quintana Roo',fact:'Zona turística en el estado de Quintana Roo, en la Península de Yucatán, famosa por playas de arena blanca y mar turquesa del Caribe.'},
+  {cat:'geo',emoji:'🌵',word:'El desierto de Sonora',sub:'Uno de los desiertos más grandes de México',fact:'Gran desierto en el norte de México (estado de Sonora) y suroeste de Estados Unidos. Hogar del cactus saguaro, símbolo del paisaje norteño.'},
+  {cat:'geo',emoji:'🗺️',word:'32 estados',sub:'División política de México',fact:'México tiene 31 estados más la Ciudad de México (CDMX), que es la capital del país. Cada estado tiene su propia capital, gobierno y tradiciones.'},
+  {cat:'geo',emoji:'🌊',word:'Dos océanos',sub:'Pacífico y Atlántico (Golfo de México)',fact:'México tiene costa en el Océano Pacífico (oeste) y en el Golfo de México / Mar Caribe (este, parte del Atlántico) — uno de los pocos países con litoral en dos océanos distintos.'},
+  {cat:'geo',emoji:'🏛️',word:'Ciudad de México (CDMX)',sub:'Capital del país, una de las más grandes del mundo',fact:'Capital de México, construida sobre la antigua Tenochtitlan. Una de las ciudades más grandes y pobladas del mundo, con más de 9 millones de habitantes (más de 21 millones en la zona metropolitana).'},
+  {cat:'geo',emoji:'⛰️',word:'La Sierra Madre',sub:'Cordillera principal de México',fact:'Sistema montañoso que recorre México: Sierra Madre Occidental, Oriental y del Sur. Divide al país en regiones climáticas muy distintas.'},
+  {cat:'geo',emoji:'🐢',word:'Frontera con Estados Unidos',sub:'Una de las fronteras más largas del mundo',fact:'México comparte frontera con Estados Unidos al norte (más de 3,100 km) y con Guatemala y Belice al sur.'},
+  /* TRADICIONES (6) */
+  {cat:'trad',emoji:'💀',word:'Día de Muertos',sub:'1 y 2 de noviembre',fact:'Tradición donde las familias honran a sus seres queridos fallecidos con ofrendas, flores de cempasúchil, calaveras de azúcar y pan de muerto. Patrimonio de la Humanidad por la UNESCO.'},
+  {cat:'trad',emoji:'🕯️',word:'Las Posadas',sub:'16 al 24 de diciembre',fact:'Celebración navideña que representa el viaje de María y José buscando posada. Hay procesiones, piñatas y ponche cada noche durante 9 días antes de Navidad.'},
+  {cat:'trad',emoji:'👗',word:'La Quinceañera',sub:'Celebración de los 15 años',fact:'Fiesta tradicional para celebrar que una joven cumple 15 años, marcando su paso a la adultez. Incluye misa, vals y gran celebración con familia y amigos.'},
+  {cat:'trad',emoji:'🇲🇽',word:'Día de la Independencia',sub:'16 de septiembre',fact:'Se celebra con el "Grito" (recordando a Hidalgo), desfiles, comida típica, fuegos artificiales y los colores verde, blanco y rojo por todo el país.'},
+  {cat:'trad',emoji:'🌹',word:'Día de la Virgen de Guadalupe',sub:'12 de diciembre',fact:'Una de las festividades religiosas más importantes de México. Millones de peregrinos visitan la Basílica de Guadalupe en la CDMX cada año.'},
+  {cat:'trad',emoji:'🪅',word:'La piñata',sub:'Tradición en fiestas y posadas',fact:'Figura de cartón rellena de dulces que se rompe con un palo, mientras los demás cantan. Tradicionalmente tenía 7 picos, representando los 7 pecados capitales.'},
+  /* SÍMBOLOS (4) */
+  {cat:'simb',emoji:'🦅',word:'El escudo nacional',sub:'Águila, serpiente y nopal',fact:'Muestra un águila devorando una serpiente, parada sobre un nopal — basado en la leyenda de la fundación de Tenochtitlan. Aparece en el centro de la bandera.'},
+  {cat:'simb',emoji:'🇲🇽',word:'La bandera mexicana',sub:'Verde, blanco y rojo',fact:'Tres franjas verticales: verde (esperanza), blanco (unidad), rojo (sangre de los héroes). El escudo nacional está en el centro de la franja blanca.'},
+  {cat:'simb',emoji:'🎵',word:'El Himno Nacional Mexicano',sub:'Escrito en 1853',fact:'Letra de Francisco González Bocanegra, música de Jaime Nunó. Se canta en eventos oficiales, escuelas y partidos de fútbol de la selección nacional.'},
+  {cat:'simb',emoji:'🌵',word:'El nopal',sub:'Cactus presente en el escudo y la comida',fact:'Cactus icónico de México, presente en el escudo nacional. También es un alimento muy común — se come asado, en ensaladas o en tacos.'},
+];
+
+/* ══════════════════════════════════
+   EX 0 — KNOWLEDGE FLASHCARDS
+══════════════════════════════════ */
+function getFiltered(){return flashFilter==='all'?FLASH_DATA:FLASH_DATA.filter(c=>c.cat===flashFilter);}
+
+function renderFlash(){
+  flashCards=getFiltered();if(flashIdx>=flashCards.length)flashIdx=0;
+  flashFlipped=false;renderFlashCard();
+}
+function renderFlashCard(){
+  if(!flashCards.length){document.getElementById('exContainer').innerHTML=`<div class="panel"><p style="text-align:center;color:var(--muted);padding:24px">No cards.</p></div>`;return;}
+  const item=flashCards[flashIdx];
+  const cat=CATS[item.cat];
+  const pct=Math.round((flashIdx+1)/flashCards.length*100);
+  const fbtns=[{id:'all',lbl:'Todas'},...Object.entries(CATS).map(([k,v])=>({id:k,lbl:v.label}))].map(f=>`<button class="ff-btn${flashFilter===f.id?' active':''}" style="${flashFilter===f.id?`background:${CATS[f.id]?.bg||'rgba(255,255,255,.1)'};border-color:${CATS[f.id]?.bd||'rgba(255,255,255,.25)'};color:${CATS[f.id]?.col||'var(--text)'}`:''};" onclick="setFilter('${f.id}')">${f.lbl}</button>`).join('');
+
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📚 Datos clave — ${FLASH_DATA.length} tarjetas de conocimiento</div>
+  <div class="ex-instr">Click any card to flip it and learn the fact. Filter by category to focus on what you want to learn.</div>
+  <div class="flash-controls">${fbtns}</div>
+  <div class="flash-wrap">
+    <div class="flash-prow">
+      <span class="flash-cnt">${flashIdx+1} / ${flashCards.length}</span>
+      <div class="flash-trk"><div class="flash-fil" style="width:${pct}%;background:${cat.col}"></div></div>
+      <span class="flash-cnt" style="color:${cat.col}">${cat.icon} ${cat.label}</span>
+    </div>
+    <div class="flash-card${flashFlipped?' flipped':''}" id="flashCard" onclick="flipCard()">
+      <div class="flash-inner">
+        <div class="flash-front" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <span class="cat-pill" style="background:${cat.bg};border:1px solid ${cat.bd};color:${cat.col}">${cat.icon} ${cat.label}</span>
+          <div class="flash-emoji">${item.emoji}</div>
+          <div class="flash-word" style="color:${cat.col}">${item.word}</div>
+          <div class="flash-sub">${item.sub}</div>
+          <div class="flash-hint">💡 Click to learn more</div>
+        </div>
+        <div class="flash-back" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <span class="cat-pill" style="background:${cat.bg};border:1px solid ${cat.bd};color:${cat.col}">${cat.icon} ${cat.label}</span>
+          <div class="flash-word" style="color:${cat.col};font-size:1.2rem">${item.emoji} ${item.word}</div>
+          <div class="flash-fact">${item.fact}</div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-nav">
+      <button class="btn btn-ghost" onclick="prevFlash()" ${flashIdx===0?'disabled':''}>&#8592; Prev</button>
+      <button class="btn btn-ghost" onclick="flipCard()">&#8635; Flip</button>
+      <button class="btn btn-cyan" onclick="nextFlash()" ${flashIdx===flashCards.length-1?'disabled':''}>Next &#8594;</button>
+    </div>
+  </div></div>`;
+}
+function flipCard(){flashFlipped=!flashFlipped;const c=document.getElementById('flashCard');if(c)c.classList.toggle('flipped',flashFlipped);}
+function nextFlash(){flashIdx=Math.min(flashCards.length-1,flashIdx+1);flashFlipped=false;renderFlashCard();}
+function prevFlash(){flashIdx=Math.max(0,flashIdx-1);flashFlipped=false;renderFlashCard();}
+function setFilter(f){flashFilter=f;flashIdx=0;renderFlash();}
+
+/* ══════════════════════════════════
+   EX 1 — ¿QUÉ ES ESTO? (12 emoji + descripción)
+══════════════════════════════════ */
+const PIC_ITEMS=[
+  {emoji:'🌮',q:'¿Qué es esto?',sub:'Tortilla rellena de carne, salsa y más',
+   opts:['El elote','El taco','El tamal','El mole'],ans:1,
+   exp:'"El taco" — la comida más famosa de México. Tortilla rellena de muchos ingredientes diferentes.'},
+  {emoji:'💀',q:'¿Qué tradición usa calaveras de azúcar?',sub:'Se celebra el 1 y 2 de noviembre',
+   opts:['Las Posadas','La Quinceañera','Día de Muertos','Día de la Independencia'],ans:2,
+   exp:'"Día de Muertos" — tradición donde se honra a los seres queridos fallecidos con ofrendas y calaveras de azúcar.'},
+  {emoji:'🎺',q:'¿Qué tipo de música usa trompetas, violines y guitarrón?',sub:'Originario de Jalisco',
+   opts:['La banda','El mariachi','La cumbia','El corrido'],ans:1,
+   exp:'"El mariachi" — música tradicional con violines, trompetas, guitarrón y vihuela, originaria de Jalisco.'},
+  {emoji:'🏺',q:'¿Qué civilización fundó Tenochtitlan?',sub:'Vieron un águila comiendo una serpiente',
+   opts:['Los mayas','Los aztecas (mexicas)','Los olmecas','Los zapotecas'],ans:1,
+   exp:'"Los aztecas (mexicas)" — fundaron Tenochtitlan en 1325, hoy Ciudad de México.'},
+  {emoji:'🦅',q:'¿Qué aparece en el centro de la bandera mexicana?',sub:'Basado en una leyenda azteca',
+   opts:['Un sol','Un águila con una serpiente','Una pirámide','Un volcán'],ans:1,
+   exp:'"Un águila con una serpiente" — el escudo nacional, basado en la leyenda de la fundación de Tenochtitlan.'},
+  {emoji:'🌶️',q:'¿Qué platillo representa los colores de la bandera (verde, blanco, rojo)?',sub:'Se come en agosto-septiembre',
+   opts:['Chiles en nogada','El pozole','El mole','El guacamole'],ans:0,
+   exp:'"Chiles en nogada" — chile poblano relleno, con salsa blanca de nuez y granada roja, representando la bandera.'},
+  {emoji:'🔔',q:'¿Qué evento marcó el inicio de la Independencia de México?',sub:'16 de septiembre de 1810',
+   opts:['La Revolución Mexicana','El Grito de Dolores','La llegada de Cortés','La firma de la Constitución'],ans:1,
+   exp:'"El Grito de Dolores" — Miguel Hidalgo llamó al pueblo a levantarse contra España en 1810.'},
+  {emoji:'🏔️',q:'¿Qué volcán activo es visible desde la Ciudad de México?',sub:'Su nombre significa "montaña que humea"',
+   opts:['El Iztaccíhuatl','El Pico de Orizaba','El Popocatépetl','El Nevado de Toluca'],ans:2,
+   exp:'"El Popocatépetl" — volcán activo de 5,426 metros, visible desde CDMX y Puebla.'},
+  {emoji:'🐎',q:'¿Quién lideró la "División del Norte" en la Revolución?',sub:'Su nombre real era Doroteo Arango',
+   opts:['Emiliano Zapata','Benito Juárez','Pancho Villa','Miguel Hidalgo'],ans:2,
+   exp:'"Pancho Villa" — general revolucionario del norte, lideró la famosa División del Norte.'},
+  {emoji:'🌾',q:'¿Quién usó el lema "Tierra y Libertad"?',sub:'Líder campesino del estado de Morelos',
+   opts:['Pancho Villa','Emiliano Zapata','Porfirio Díaz','Francisco I. Madero'],ans:1,
+   exp:'"Emiliano Zapata" — líder revolucionario del sur, luchó por la reforma agraria con el lema "Tierra y Libertad".'},
+  {emoji:'🪅',q:'¿Cuántos picos tenía tradicionalmente una piñata?',sub:'Cada pico representa algo simbólico',
+   opts:['5','7','9','12'],ans:1,
+   exp:'"7" — representando los 7 pecados capitales en la tradición original de las piñatas en las Posadas.'},
+  {emoji:'🗺️',q:'¿Cuántos estados tiene México (incluyendo la CDMX)?',sub:'División política del país',
+   opts:['28','30','32','35'],ans:2,
+   exp:'"32" — 31 estados más la Ciudad de México (CDMX), que es la capital del país.'},
+];
+
+function renderPicCards(){
+  const ok=Object.values(picAnswers).filter(v=>v).length;
+  const ans=Object.keys(picAnswers).length;
+  const total=PIC_ITEMS.length;
+  const pct=Math.round(ans/total*100);
+  const cards=PIC_ITEMS.map((item,idx)=>{
+    const done=picAnswers[idx]!==undefined;
+    const isOk=picAnswers[idx]===true;
+    const colors=['c1','c2','c3','c4'];
+    const letters=['A','B','C','D'];
+    const btns=item.opts.map((o,oi)=>{
+      let cls=`pic-btn ${colors[oi]}`;
+      if(done)cls+=oi===item.ans?' revealed':' dim';
+      return `<button class="${cls}" data-l="${letters[oi]}" onclick="answerPic(${idx},${oi})" ${done?'disabled':''}>${o}</button>`;
+    }).join('');
+    return `<div class="pic-card${done?(isOk?' ok':' err'):''}" id="pc${idx}">
+      <div class="pic-emoji-box">${item.emoji}</div>
+      <div class="pic-q">${item.q}<span class="pic-task">${item.sub}</span></div>
+      <div class="pic-btns">${btns}</div>
+      <div class="pic-exp${done?' show':''}">${done?(isOk?'✓ ':'✗ ')+item.exp:''}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🌮 ¿Qué es esto?</div>
+  <div class="ex-instr">Look at the emoji and clue, then choose the correct answer. Covers comida, música, historia, símbolos y más.</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Cards</span><span class="v">${total}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="pOk">${ok}</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="pErr">${ans-ok}</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: ${pct}%</div><div class="prog-t"><div class="prog-f" id="pPg" style="width:${pct}%"></div></div></div>
+  </div>
+  <div class="pic-grid">${cards}</div>
+  <div class="actions"><button class="btn btn-ghost" onclick="picAnswers={};renderPicCards()">↺ Reset</button></div></div>`;
+}
+function answerPic(idx,oi){
+  if(picAnswers[idx]!==undefined)return;
+  const item=PIC_ITEMS[idx];const isOk=oi===item.ans;
+  picAnswers[idx]=isOk;
+  const card=document.getElementById('pc'+idx);
+  if(card){
+    card.classList.add(isOk?'ok':'err');
+    card.querySelectorAll('.pic-btn').forEach((b,bi)=>{
+      b.disabled=true;b.classList.remove('revealed','dim');
+      b.classList.add(bi===item.ans?'revealed':'dim');
+    });
+    const e=card.querySelector('.pic-exp');
+    if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+item.exp;}
+  }
+  const ok=Object.values(picAnswers).filter(v=>v).length;
+  const a=Object.keys(picAnswers).length;
+  const pct=Math.round(a/PIC_ITEMS.length*100);
+  const e1=document.getElementById('pOk');if(e1)e1.textContent=ok;
+  const e2=document.getElementById('pErr');if(e2)e2.textContent=a-ok;
+  const pg=document.getElementById('pPg');if(pg)pg.style.width=pct+'%';
+}
+
+/* ══════════════════════════════════
+   EX 2 — MULTIPLE CHOICE TRIVIA (50)
+══════════════════════════════════ */
+const MC=[
+  /* COMIDA (10) */
+  {s:'¿De qué está hecha la tortilla tradicional?',o:['Trigo','Maíz','Arroz','Papa'],a:1,tag:'tag-comida',x:'La tortilla tradicional mexicana es de maíz. En el norte de México también se usa tortilla de trigo (harina).'},
+  {s:'¿Qué ingrediente especial lleva el mole poblano además de chiles y especias?',o:['Miel','Chocolate','Vainilla','Canela'],a:1,tag:'tag-comida',x:'El mole poblano incluye chocolate entre sus más de 20 ingredientes — una combinación única de dulce y picante.'},
+  {s:'¿Cómo se llama el maíz tierno cocido o asado que se vende en la calle?',o:['Tamal','Elote','Pozole','Atole'],a:1,tag:'tag-comida',x:'"Elote" — maíz tierno servido en la mazorca, comida callejera muy popular.'},
+  {s:'¿Cuál es el ingrediente principal del guacamole?',o:['Tomate','Aguacate','Cebolla','Limón'],a:1,tag:'tag-comida',x:'El guacamole es principalmente aguacate machacado, mezclado con cebolla, cilantro, limón y chile.'},
+  {s:'¿En qué se envuelve tradicionalmente un tamal?',o:['Papel aluminio','Hoja de maíz o plátano','Plástico','Tela'],a:1,tag:'tag-comida',x:'Los tamales se envuelven en hoja de maíz (común en el centro) o de plátano (común en el sur).'},
+  {s:'¿Qué carne es típica del pozole tradicional?',o:['Res','Pollo o cerdo','Pescado','Cordero'],a:1,tag:'tag-comida',x:'El pozole tradicional usa carne de cerdo o pollo, junto con maíz cacahuazintle especial.'},
+  {s:'¿De qué estado es típico el mole poblano?',o:['Jalisco','Puebla','Oaxaca','Yucatán'],a:1,tag:'tag-comida',x:'El mole poblano es originario de Puebla, aunque hay variedades de mole en muchos estados, especialmente Oaxaca.'},
+  {s:'¿Qué fruta se usa para decorar los chiles en nogada?',o:['Manzana','Granada','Uva','Naranja'],a:1,tag:'tag-comida',x:'La granada roja decora los chiles en nogada, completando los colores de la bandera mexicana.'},
+  {s:'¿Qué significa "esquites"?',o:['Tortillas fritas','Elote desgranado en vaso','Frijoles refritos','Salsa picante'],a:1,tag:'tag-comida',x:'Los esquites son granos de elote cocidos servidos en un vaso, con mayonesa, queso, chile y limón.'},
+  {s:'¿Cuál NO es una salsa o platillo mexicano?',o:['Pico de gallo','Salsa verde','Paella','Salsa roja'],a:2,tag:'tag-comida',x:'La paella es un platillo español, no mexicano. El resto son salsas típicas de México.'},
+  /* MÚSICA (8) */
+  {s:'¿De qué estado es originario el mariachi?',o:['Veracruz','Jalisco','Sonora','Chiapas'],a:1,tag:'tag-musica',x:'El mariachi es originario de Jalisco, donde también se usa el traje de charro.'},
+  {s:'¿Qué instrumento NO es típico del mariachi?',o:['Violín','Trompeta','Batería electrónica','Guitarrón'],a:2,tag:'tag-musica',x:'El mariachi usa instrumentos acústicos: violín, trompeta, guitarrón, vihuela — no batería electrónica.'},
+  {s:'¿Qué tipo de música es típica de Sinaloa, con tuba y trombones?',o:['El mariachi','La banda','El son jarocho','El bolero'],a:1,tag:'tag-musica',x:'"La banda" — música regional de Sinaloa con muchos instrumentos de viento.'},
+  {s:'¿Qué famosa canción proviene del son jarocho de Veracruz?',o:['Cielito Lindo','La Bamba','México Lindo y Querido','Las Mañanitas'],a:1,tag:'tag-musica',x:'"La Bamba" es la canción más famosa del son jarocho, género musical de Veracruz.'},
+  {s:'¿Qué cantante es conocido como "El Rey" de la música ranchera?',o:['Pedro Infante','Vicente Fernández','Juan Gabriel','José José'],a:1,tag:'tag-musica',x:'Vicente Fernández es uno de los más grandes íconos de la música ranchera mexicana.'},
+  {s:'¿Qué tipo de canción narra historias, a menudo de la Revolución?',o:['El bolero','El corrido','La cumbia','El danzón'],a:1,tag:'tag-musica',x:'"El corrido" es una canción narrativa que cuenta historias de eventos, héroes y personajes.'},
+  {s:'¿Qué traje usan tradicionalmente los mariachis?',o:['Guayabera','Traje de charro','Huipil','Sarape'],a:1,tag:'tag-musica',x:'El traje de charro, con botones plateados y sombrero, es el uniforme tradicional del mariachi.'},
+  {s:'¿La UNESCO declaró al mariachi Patrimonio Cultural Inmaterial en qué año (aproximado)?',o:['1990s','2011','2020','1950s'],a:1,tag:'tag-musica',x:'La UNESCO reconoció al mariachi como Patrimonio Cultural Inmaterial de la Humanidad en 2011.'},
+  /* HISTORIA (10) */
+  {s:'¿En qué año llegó Hernán Cortés a México?',o:['1492','1519','1521','1810'],a:1,tag:'tag-historia',x:'Hernán Cortés llegó a las costas de México en 1519, iniciando la conquista.'},
+  {s:'¿Cuándo cayó Tenochtitlan ante los españoles?',o:['1519','1521','1810','1910'],a:1,tag:'tag-historia',x:'Tenochtitlan, capital azteca, cayó en 1521, marcando el inicio del dominio colonial español.'},
+  {s:'¿Quién dio el "Grito de Dolores"?',o:['Benito Juárez','Miguel Hidalgo','Emiliano Zapata','Porfirio Díaz'],a:1,tag:'tag-historia',x:'El cura Miguel Hidalgo dio el Grito de Dolores el 16 de septiembre de 1810, iniciando la guerra de independencia.'},
+  {s:'¿En qué año se consumó la Independencia de México?',o:['1810','1821','1910','1857'],a:1,tag:'tag-historia',x:'Después de 11 años de guerra, México logró su independencia de España en 1821.'},
+  {s:'¿En qué año inició la Revolución Mexicana?',o:['1810','1857','1910','1929'],a:2,tag:'tag-historia',x:'La Revolución Mexicana comenzó en 1910 contra el dictador Porfirio Díaz.'},
+  {s:'¿Cuál era el lema de Emiliano Zapata?',o:['Tierra y Libertad','Patria o Muerte','Sufragio Efectivo','Viva México'],a:0,tag:'tag-historia',x:'"Tierra y Libertad" — el lema de Zapata, luchando por la reforma agraria para los campesinos.'},
+  {s:'¿Cuál era el nombre real de Pancho Villa?',o:['José Doroteo Arango','Francisco Madero','Porfirio Díaz','Venustiano Carranza'],a:0,tag:'tag-historia',x:'Pancho Villa nació como José Doroteo Arango; "Pancho Villa" fue su nombre adoptado.'},
+  {s:'¿De qué origen étnico era Benito Juárez?',o:['Maya','Zapoteco','Azteca','Mixteco'],a:1,tag:'tag-historia',x:'Benito Juárez era de origen zapoteco, de Oaxaca — primer presidente indígena de México.'},
+  {s:'¿Qué dictador gobernó México antes de la Revolución?',o:['Antonio López de Santa Anna','Porfirio Díaz','Maximiliano','Agustín de Iturbide'],a:1,tag:'tag-historia',x:'Porfirio Díaz gobernó México por más de 30 años antes de ser derrocado por la Revolución de 1910.'},
+  {s:'¿Quién fundó Tenochtitlan según la leyenda del águila?',o:['Los mayas','Los aztecas (mexicas)','Los toltecas','Los olmecas'],a:1,tag:'tag-historia',x:'Los aztecas (mexicas) fundaron Tenochtitlan en 1325, donde vieron la señal del águila comiendo serpiente.'},
+  /* GEOGRAFÍA (10) */
+  {s:'¿Cuántos estados tiene México (incluyendo CDMX)?',o:['28','30','32','35'],a:2,tag:'tag-geo',x:'México tiene 31 estados más la Ciudad de México (CDMX) = 32 entidades federativas.'},
+  {s:'¿Cuál es la capital de México?',o:['Guadalajara','Ciudad de México','Monterrey','Puebla'],a:1,tag:'tag-geo',x:'Ciudad de México (CDMX) es la capital del país, construida sobre la antigua Tenochtitlan.'},
+  {s:'¿Con qué países comparte frontera México al sur?',o:['Cuba y Honduras','Guatemala y Belice','Panamá y Costa Rica','El Salvador y Nicaragua'],a:1,tag:'tag-geo',x:'México comparte frontera sur con Guatemala y Belice.'},
+  {s:'¿Qué océano está al oeste de México?',o:['Atlántico','Pacífico','Índico','Ártico'],a:1,tag:'tag-geo',x:'El Océano Pacífico está al oeste de México; el Golfo de México (Atlántico) está al este.'},
+  {s:'¿Cómo se llama el volcán activo cerca de la CDMX, "montaña que humea"?',o:['Iztaccíhuatl','Popocatépetl','Pico de Orizaba','Nevado de Toluca'],a:1,tag:'tag-geo',x:'El Popocatépetl, su nombre náhuatl significa "montaña que humea".'},
+  {s:'¿En qué península está Cancún?',o:['Baja California','Yucatán','Sonora','Florida'],a:1,tag:'tag-geo',x:'Cancún está en la Península de Yucatán, en el estado de Quintana Roo.'},
+  {s:'¿Cuál es el desierto grande del norte de México?',o:['Desierto de Atacama','Desierto de Sonora','Desierto del Sahara','Desierto de Gobi'],a:1,tag:'tag-geo',x:'El desierto de Sonora se extiende por el norte de México y el suroeste de Estados Unidos.'},
+  {s:'¿Cuál es el sistema montañoso principal de México?',o:['Los Andes','Sierra Madre','Montañas Rocosas','Alpes'],a:1,tag:'tag-geo',x:'La Sierra Madre (Occidental, Oriental y del Sur) es el sistema montañoso principal del país.'},
+  {s:'¿Aproximadamente cuántos kilómetros mide la frontera entre México y EE.UU.?',o:['500 km','1,500 km','3,100 km','5,000 km'],a:2,tag:'tag-geo',x:'La frontera entre México y Estados Unidos mide más de 3,100 km, una de las más largas del mundo.'},
+  {s:'¿Cuántos habitantes tiene aproximadamente la zona metropolitana de la CDMX?',o:['2 millones','9 millones','21 millones','50 millones'],a:2,tag:'tag-geo',x:'La zona metropolitana de Ciudad de México tiene más de 21 millones de habitantes, una de las más grandes del mundo.'},
+  /* TRADICIONES (8) */
+  {s:'¿Cuándo se celebra el Día de Muertos?',o:['31 de octubre','1 y 2 de noviembre','24 de diciembre','12 de diciembre'],a:1,tag:'tag-trad',x:'El Día de Muertos se celebra el 1 y 2 de noviembre, honrando a los seres queridos fallecidos.'},
+  {s:'¿Qué flor es típica de las ofrendas del Día de Muertos?',o:['Rosa','Cempasúchil','Girasol','Tulipán'],a:1,tag:'tag-trad',x:'La flor de cempasúchil (color naranja) es esencial en las ofrendas del Día de Muertos.'},
+  {s:'¿Cuántos días duran tradicionalmente las Posadas?',o:['5','7','9','12'],a:2,tag:'tag-trad',x:'Las Posadas duran 9 días, del 16 al 24 de diciembre, representando el viaje de María y José.'},
+  {s:'¿Qué edad se celebra en una Quinceañera?',o:['13','15','16','18'],a:1,tag:'tag-trad',x:'La Quinceañera celebra los 15 años de una joven, marcando su paso a la adultez.'},
+  {s:'¿Cuándo se celebra el Día de la Independencia de México?',o:['5 de mayo','16 de septiembre','20 de noviembre','12 de octubre'],a:1,tag:'tag-trad',x:'El 16 de septiembre se celebra la Independencia, recordando el Grito de Dolores de 1810.'},
+  {s:'¿Cuándo se celebra el Día de la Virgen de Guadalupe?',o:['12 de diciembre','25 de diciembre','6 de enero','2 de febrero'],a:0,tag:'tag-trad',x:'El 12 de diciembre, millones de peregrinos visitan la Basílica de Guadalupe en la CDMX.'},
+  {s:'¿Qué se rompe tradicionalmente en una posada, lleno de dulces?',o:['Un cántaro','Una piñata','Un globo','Una caja'],a:1,tag:'tag-trad',x:'La piñata, llena de dulces, se rompe con un palo mientras los demás cantan y la persona tiene los ojos vendados.'},
+  {s:'¿Qué evento conmemora el 5 de mayo?',o:['La Independencia','La Batalla de Puebla','La Revolución','El Día de la Bandera'],a:1,tag:'tag-trad',x:'El 5 de mayo conmemora la Batalla de Puebla de 1862, donde México venció al ejército francés. NO es el día de la independencia (eso es el 16 de septiembre).'},
+  /* SÍMBOLOS (4) */
+  {s:'¿Qué colores tiene la bandera mexicana?',o:['Rojo, blanco y azul','Verde, blanco y rojo','Verde, amarillo y rojo','Azul, blanco y rojo'],a:1,tag:'tag-simb',x:'La bandera mexicana tiene tres franjas: verde, blanco y rojo, con el escudo nacional en el centro.'},
+  {s:'¿Qué representa el color verde en la bandera mexicana?',o:['La naturaleza','La esperanza','El campo','La libertad'],a:1,tag:'tag-simb',x:'El verde representa la esperanza; el blanco la unidad; el rojo la sangre de los héroes nacionales.'},
+  {s:'¿Quién escribió la letra del Himno Nacional Mexicano?',o:['Jaime Nunó','Francisco González Bocanegra','Benito Juárez','Vicente Fernández'],a:1,tag:'tag-simb',x:'Francisco González Bocanegra escribió la letra; Jaime Nunó compuso la música, en 1853.'},
+  {s:'¿Qué cactus aparece en el escudo nacional?',o:['Saguaro','Nopal','Biznaga','Órgano'],a:1,tag:'tag-simb',x:'El nopal aparece en el escudo, con el águila parada sobre él, devorando una serpiente.'},
+];
+const MCO=MC.map((_,i)=>seededShuffle([0,1,2,3],i*17+3));
+const TAG_LBL_MC={'tag-comida':'COMIDA','tag-musica':'MÚSICA','tag-historia':'HISTORIA','tag-geo':'GEOGRAFÍA','tag-trad':'TRADICIONES','tag-simb':'SÍMBOLOS'};
+
+function renderMC(){
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const qHTML=MC.map((item,i)=>{
+    const ord=MCO[i];
+    const opts=ord.map(oi=>{
+      const o=item.o[oi];let cls='mc-opt';
+      if(mcChecked){if(oi===item.a)cls+=' mc-show';else if(mcAnswers[i]===oi&&oi!==item.a)cls+=' mc-err';}
+      else if(mcAnswers[i]===oi)cls+=oi===item.a?' mc-ok':' mc-err';
+      return `<button class="${cls}" id="mco${i}_${oi}" onclick="answerMC(${i},${oi})" ${mcChecked?'disabled':''}>${o}</button>`;
+    }).join('');
+    const showExp=mcChecked||(mcAnswers[i]!==undefined);
+    const tagLbl=TAG_LBL_MC[item.tag]||'';
+    return `<div class="mc-card"><div class="mc-top"><span class="mc-num">${i+1}</span><span class="mc-sent">${item.s}<span class="tag ${item.tag}">${tagLbl}</span></span></div><div class="mc-opts">${opts}</div><div class="mc-expl${showExp?' show':''}" id="mce${i}">${item.x}</div></div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">📝 Trivia — Multiple choice</div>
+  <div class="ex-instr">Test your knowledge of Mexican food, music, history, geography, traditions and symbols.</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${MC.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="mc_ok">—</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="mc_err">—</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="mc_p">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="mc_pg" style="width:${pct}%"></div></div></div></div>
+  <div class="mc-list">${qHTML}</div>
+  <div class="fb" id="mc_fb"></div>
+  <div class="actions"><button class="btn btn-cyan" id="mc_chk" onclick="checkMC()" ${mcChecked?'disabled':''}>Check all</button><button class="btn btn-ghost" onclick="mcAnswers={};mcChecked=false;renderMC()">↺ Reset</button></div></div>`;
+}
+function answerMC(qi,oi){
+  if(mcChecked)return;
+  if(mcAnswers[qi]!==undefined){const p=document.getElementById(`mco${qi}_${mcAnswers[qi]}`);if(p)p.classList.remove('mc-ok','mc-err');}
+  mcAnswers[qi]=oi;
+  const b=document.getElementById(`mco${qi}_${oi}`);if(b)b.classList.add(oi===MC[qi].a?'mc-ok':'mc-err');
+  const e=document.getElementById('mce'+qi);if(e)e.classList.add('show');
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const el=document.getElementById('mc_p');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('mc_pg');if(pg)pg.style.width=pct+'%';
+}
+function checkMC(){
+  mcChecked=true;let ok=0;MC.forEach((item,i)=>{if(mcAnswers[i]===item.a)ok++;});
+  const pct=Math.round(ok/MC.length*100);
+  document.getElementById('mc_ok').textContent=ok;document.getElementById('mc_err').textContent=MC.length-ok;
+  document.getElementById('mc_pg').style.width='100%';document.getElementById('mc_p').textContent='100%';
+  const fb=document.getElementById('mc_fb');
+  fb.className='fb show '+(pct>=85?'ok':'partial');
+  fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${MC.length}.</strong> ${pct>=85?'Excellent! ¡Eres un experto en cultura mexicana!':'Review the flashcards and try again.'}`;
+  document.getElementById('mc_chk').disabled=true;renderMC();
+}
+
+/* ══════════════════════════════════
+   EX 3 — VERDADERO O FALSO (16)
+══════════════════════════════════ */
+const ERRORS=[
+  ['El taco es la comida más conocida internacionalmente de México.',false,null,'VERDADERO ✓ — El taco es probablemente el platillo mexicano más reconocido en todo el mundo. ✓'],
+  ['El mole poblano lleva chocolate entre sus ingredientes.',false,null,'VERDADERO ✓ — Sí, el mole poblano combina chiles, especias y chocolate — una mezcla única de sabores. ✓'],
+  ['Los tacos siempre se hacen con tortilla de trigo.',true,'tortilla de maíz (tradicionalmente)','FALSO — Tradicionalmente los tacos se hacen con tortilla de maíz. La de trigo (harina) es más común en el norte de México, pero no es la regla general.'],
+  ['El mariachi es originario de Veracruz.',true,'Jalisco','FALSO — El mariachi es originario de Jalisco, no de Veracruz. Veracruz es la cuna del son jarocho.'],
+  ['"La Bamba" es una canción del género son jarocho.',false,null,'VERDADERO ✓ — "La Bamba" es la canción más famosa del son jarocho, género musical de Veracruz. ✓'],
+  ['Hernán Cortés llegó a México en 1810.',true,'1519','FALSO — Cortés llegó en 1519. El año 1810 corresponde al inicio de la guerra de Independencia, casi 300 años después.'],
+  ['El Grito de Dolores ocurrió el 16 de septiembre de 1810.',false,null,'VERDADERO ✓ — Miguel Hidalgo dio el Grito de Dolores esa fecha exacta, iniciando la guerra de Independencia. ✓'],
+  ['México se independizó de España en el mismo año del Grito de Dolores (1810).',true,'1821 (11 años después)','FALSO — El Grito fue en 1810, pero la Independencia se consumó hasta 1821, después de 11 años de guerra.'],
+  ['Emiliano Zapata luchó principalmente por la reforma agraria.',false,null,'VERDADERO ✓ — Su lema "Tierra y Libertad" reflejaba su lucha por los derechos de los campesinos y la tierra. ✓'],
+  ['Pancho Villa y Emiliano Zapata son la misma persona.',true,'dos líderes diferentes','FALSO — Son dos líderes revolucionarios distintos: Villa lideró en el norte, Zapata en el sur (Morelos).'],
+  ['Benito Juárez fue el primer presidente indígena de México.',false,null,'VERDADERO ✓ — Juárez, de origen zapoteco (Oaxaca), fue presidente de México de 1858 a 1872. ✓'],
+  ['México tiene costa solo en el Océano Pacífico.',true,'Pacífico Y Golfo de México/Caribe','FALSO — México tiene costa en DOS océanos: el Pacífico al oeste, y el Golfo de México/Caribe (Atlántico) al este.'],
+  ['México tiene 32 estados, incluyendo la Ciudad de México.',false,null,'VERDADERO ✓ — 31 estados más la CDMX (Ciudad de México) = 32 entidades federativas. ✓'],
+  ['El Popocatépetl es un volcán inactivo.',true,'activo','FALSO — El Popocatépetl es un volcán ACTIVO, uno de los más vigilados de México por su actividad reciente.'],
+  ['El Día de Muertos se celebra el mismo día que Halloween (31 de octubre).',true,'1 y 2 de noviembre','FALSO — El Día de Muertos se celebra el 1 y 2 de noviembre, días después de Halloween, aunque a veces se confunden.'],
+  ['La bandera mexicana tiene los colores verde, blanco y rojo.',false,null,'VERDADERO ✓ — Verde (esperanza), blanco (unidad) y rojo (sangre de los héroes), con el escudo nacional al centro. ✓'],
+];
+
+function renderErrorHunt(){
+  ehAnswered={};
+  let html=`<div class="panel"><div class="ex-title">❓ Verdadero o falso</div>
+  <div class="ex-instr">Decide if each statement about Mexican culture is <em>verdadero</em> or <em>falso</em>. Read carefully — some look similar but the details matter!</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${ERRORS.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="eh_ok">0</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="eh_err">0</span></div><div class="prog-w"><div class="prog-l">Progress: <span id="eh_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="eh_pg" style="width:0%"></div></div></div></div>
+  <div class="eh-list">`;
+  ERRORS.forEach(([s,hasErr,,exp],i)=>{
+    html+=`<div class="eh-item" id="ehi${i}"><div class="eh-n">${i+1}</div>
+    <div class="eh-body"><div class="eh-sent" id="ehs${i}">${s}</div>
+    <div class="eh-btns"><button class="eh-btn eh-yes" onclick="judgeEh(${i},false)">✅ Verdadero</button><button class="eh-btn eh-no" onclick="judgeEh(${i},true)">❌ Falso</button></div>
+    <div class="eh-exp" id="ehe${i}">${exp}</div></div></div>`;
+  });
+  html+=`</div><div class="fb" id="eh_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="ehAnswered={};renderErrorHunt()">↺ Reset</button></div></div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+function judgeEh(idx,saysErr){
+  if(ehAnswered[idx]!==undefined)return;
+  const [s,hasErr,fix,exp]=ERRORS[idx];
+  const correct=saysErr===hasErr;
+  ehAnswered[idx]=correct;
+  const item=document.getElementById('ehi'+idx);
+  item.classList.add('revealed',correct?'eh-ok':'eh-bad');
+  item.querySelectorAll('.eh-btn').forEach(b=>b.disabled=true);
+  const chosen=item.querySelector(saysErr?'.eh-no':'.eh-yes');
+  if(chosen)chosen.classList.add(correct?'cho-ok':'cho-err');
+  if(hasErr&&fix){const se=document.getElementById('ehs'+idx);se.innerHTML=s+` <span class="eh-fix">→ <strong>${fix}</strong></span>`;}
+  document.getElementById('ehe'+idx).classList.add('show');
+  const total=Object.keys(ehAnswered).length;
+  const ok=Object.values(ehAnswered).filter(v=>v).length;
+  document.getElementById('eh_ok').textContent=ok;document.getElementById('eh_err').textContent=total-ok;
+  document.getElementById('eh_pct').textContent=Math.round(total/ERRORS.length*100)+'%';
+  document.getElementById('eh_pg').style.width=Math.round(total/ERRORS.length*100)+'%';
+  if(total===ERRORS.length){
+    const pct=Math.round(ok/ERRORS.length*100);
+    const fb=document.getElementById('eh_fb');
+    fb.className='fb show '+(pct>=80?'ok':'partial');
+    fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${ok}/${ERRORS.length}.</strong> ${pct>=80?'Excellent!':'Review the flashcards for the facts you missed.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 4 — CLASIFICA (drag & sort)
+   6 buckets: las 6 categorías
+══════════════════════════════════ */
+const BUCKETS=[
+  {id:'comida',  label:'Comida',     icon:'🌮',sub:'platillos típicos',      col:'var(--comida2)',bg:'rgba(249,115,22,.06)', bd:'rgba(249,115,22,.22)'},
+  {id:'musica',  label:'Música',     icon:'🎺',sub:'géneros e instrumentos', col:'var(--musica2)', bg:'rgba(167,139,250,.06)',bd:'rgba(167,139,250,.22)'},
+  {id:'historia',label:'Historia',   icon:'🏺',sub:'eventos y personajes',   col:'var(--historia2)',bg:'rgba(251,191,36,.06)',bd:'rgba(251,191,36,.22)'},
+  {id:'geo',     label:'Geografía',  icon:'🗺️',sub:'lugares y naturaleza',  col:'var(--geo2)',    bg:'rgba(52,211,153,.06)', bd:'rgba(52,211,153,.22)'},
+  {id:'trad',    label:'Tradiciones',icon:'💀',sub:'fiestas y costumbres',   col:'var(--trad2)',   bg:'rgba(244,114,182,.06)',bd:'rgba(244,114,182,.22)'},
+];
+const CARDS=[
+  {id:'c1', t:'El mole',           b:'comida', x:'Comida — salsa con chocolate y chiles.'},
+  {id:'c2', t:'El pozole',         b:'comida', x:'Comida — sopa con maíz cacahuazintle.'},
+  {id:'c3', t:'Chiles en nogada',  b:'comida', x:'Comida — platillo patriótico.'},
+  {id:'c4', t:'El elote',          b:'comida', x:'Comida — maíz tierno asado o cocido.'},
+  {id:'c5', t:'El mariachi',       b:'musica', x:'Música — originario de Jalisco.'},
+  {id:'c6', t:'La cumbia',         b:'musica', x:'Música — ritmo bailable popular.'},
+  {id:'c7', t:'El corrido',        b:'musica', x:'Música — canción narrativa.'},
+  {id:'c8', t:'El son jarocho',    b:'musica', x:'Música — de Veracruz, base de "La Bamba".'},
+  {id:'c9', t:'Hernán Cortés',     b:'historia', x:'Historia — conquistador español, llegó en 1519.'},
+  {id:'c10',t:'Miguel Hidalgo',    b:'historia', x:'Historia — dio el Grito de Dolores en 1810.'},
+  {id:'c11',t:'Pancho Villa',      b:'historia', x:'Historia — líder revolucionario del norte.'},
+  {id:'c12',t:'Benito Juárez',     b:'historia', x:'Historia — primer presidente indígena.'},
+  {id:'c13',t:'El Popocatépetl',   b:'geo', x:'Geografía — volcán activo cerca de la CDMX.'},
+  {id:'c14',t:'La Sierra Madre',   b:'geo', x:'Geografía — sistema montañoso principal.'},
+  {id:'c15',t:'El desierto de Sonora', b:'geo', x:'Geografía — gran desierto del norte.'},
+  {id:'c16',t:'Cancún',            b:'geo', x:'Geografía — destino turístico en Quintana Roo.'},
+  {id:'c17',t:'Día de Muertos',    b:'trad', x:'Tradición — 1 y 2 de noviembre.'},
+  {id:'c18',t:'Las Posadas',       b:'trad', x:'Tradición — celebración navideña de 9 días.'},
+  {id:'c19',t:'La Quinceañera',    b:'trad', x:'Tradición — celebración de los 15 años.'},
+  {id:'c20',t:'La piñata',         b:'trad', x:'Tradición — figura llena de dulces.'},
+];
+function renderSort(){
+  sortPlaced={};sortChecked=false;tapSel=null;
+  const shuffled=[...CARDS].sort(()=>Math.random()-.5);
+  const pile=shuffled.map(c=>`<div class="sort-card" id="sc_${c.id}" draggable="true" ondragstart="ds(event,'${c.id}')" ondragend="de(event)" onclick="tapCard('${c.id}')">${c.t}</div>`).join('');
+  const bucks=BUCKETS.map(b=>`<div class="sort-bucket" id="bk_${b.id}" style="background:${b.bg};border:2px dashed ${b.bd}" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="drop(event,'${b.id}')" onclick="tapBucket('${b.id}')"><div class="bucket-title" style="color:${b.col}">${b.icon} ${b.label}</div><div class="bucket-sub">${b.sub}</div></div>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">📊 Clasifica</div>
+  <div class="ex-instr">Sort each item into the correct category. Tap a card then tap a bucket on mobile.</div>
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;color:var(--muted2);margin-bottom:8px">Cards</div>
+  <div class="sort-pile" id="sPile">${pile}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:9px;margin-bottom:12px">${bucks}</div>
+  <div class="fb" id="srtFb"></div>
+  <div class="actions"><button class="btn btn-cyan" id="srtChk" onclick="checkSort()" disabled>Check</button><button class="btn btn-ghost" onclick="renderSort()">↺ Reset</button></div></div>`;
+}
+function ds(e,id){dragItem=id;setTimeout(()=>{const c=document.getElementById('sc_'+id);if(c)c.classList.add('ghost');},0);}
+function de(){if(dragItem){const c=document.getElementById('sc_'+dragItem);if(c)c.classList.remove('ghost');}dragItem=null;}
+function drop(e,bId){e.preventDefault();const id=e.dataTransfer?e.dataTransfer.getData('text'):dragItem;document.getElementById('bk_'+bId).classList.remove('drag-over');if(!id||sortPlaced[id])return;placeCard(id,bId);}
+function tapCard(id){if(sortPlaced[id])return;const c=document.getElementById('sc_'+id);if(!c)return;if(tapSel===id){c.style.boxShadow='';tapSel=null;return;}if(tapSel){const p=document.getElementById('sc_'+tapSel);if(p)p.style.boxShadow='';}tapSel=id;c.style.boxShadow='0 0 0 3px var(--cyan)';}
+function tapBucket(bId){if(!tapSel)return;placeCard(tapSel,bId);tapSel=null;}
+function placeCard(id,bId){
+  sortPlaced[id]=bId;const card=document.getElementById('sc_'+id);const bk=document.getElementById('bk_'+bId);
+  if(!card||!bk)return;card.style.boxShadow='';card.classList.remove('ghost');card.draggable=false;
+  const b=BUCKETS.find(x=>x.id===bId);if(b)card.style.borderColor=b.col;
+  card.onclick=()=>returnCard(id);bk.appendChild(card);
+  if(Object.keys(sortPlaced).length===CARDS.length){const btn=document.getElementById('srtChk');if(btn)btn.disabled=false;}
+}
+function returnCard(id){if(sortChecked)return;delete sortPlaced[id];const c=document.getElementById('sc_'+id);const pile=document.getElementById('sPile');if(!c||!pile)return;c.style.borderColor='';c.style.boxShadow='';c.draggable=true;c.onclick=()=>tapCard(id);pile.appendChild(c);const btn=document.getElementById('srtChk');if(btn)btn.disabled=true;}
+function checkSort(){
+  sortChecked=true;let ok=0;
+  CARDS.forEach(item=>{const c=document.getElementById('sc_'+item.id);if(!c)return;const isOk=sortPlaced[item.id]===item.b;if(isOk)ok++;c.className='sort-card '+(isOk?'c-ok':'c-err');c.draggable=false;c.onclick=null;if(!isOk){const b=BUCKETS.find(x=>x.id===item.b);c.innerHTML=`${item.t}<span style="font-size:.7rem;display:block;margin-top:2px">→ ${b?b.icon+' '+b.label:item.b}</span>`;}c.title=item.x;});
+  const pct=Math.round(ok/CARDS.length*100);
+  const fb=document.getElementById('srtFb');fb.className='fb show '+(pct>=80?'ok':'partial');
+  fb.innerHTML=`<strong>${ok}/${CARDS.length} (${pct}%).</strong> Red cards show the correct bucket.`;
+  document.getElementById('srtChk').disabled=true;
+}
+
+/* ══════════════════════════════════
+   EX 5 — SPEED ROUND (30)
+══════════════════════════════════ */
+const SPEED=[
+  {q:'Comida más famosa de México (tortilla rellena)',hint:'el taco',a:'taco',also:['el taco']},
+  {q:'Salsa con chocolate, originaria de Puebla',hint:'el mole',a:'mole',also:['el mole']},
+  {q:'Sopa con maíz cacahuazintle',hint:'el pozole',a:'pozole',also:['el pozole']},
+  {q:'Maíz tierno asado, comida callejera',hint:'el elote',a:'elote',also:['el elote']},
+  {q:'Masa de maíz envuelta en hoja, cocida al vapor',hint:'el tamal',a:'tamal',also:['el tamal']},
+  {q:'Música con violines, trompetas y guitarrón',hint:'el mariachi',a:'mariachi',also:['el mariachi']},
+  {q:'Estado de origen del mariachi',hint:'Jalisco',a:'jalisco',also:[]},
+  {q:'Canción famosa del son jarocho de Veracruz',hint:'La Bamba',a:'la bamba',also:['bamba']},
+  {q:'Civilización que fundó Tenochtitlan',hint:'los aztecas (mexicas)',a:'aztecas',also:['mexicas','los aztecas']},
+  {q:'Año en que llegó Hernán Cortés a México',hint:'1519',a:'1519',also:[]},
+  {q:'Año en que cayó Tenochtitlan',hint:'1521',a:'1521',also:[]},
+  {q:'Quién dio el Grito de Dolores',hint:'Miguel Hidalgo',a:'miguel hidalgo',also:['hidalgo']},
+  {q:'Fecha del Grito de Dolores',hint:'16 de septiembre',a:'16 de septiembre',also:['16 septiembre']},
+  {q:'Año de la Independencia consumada',hint:'1821',a:'1821',also:[]},
+  {q:'Año de inicio de la Revolución Mexicana',hint:'1910',a:'1910',also:[]},
+  {q:'Lema de Emiliano Zapata',hint:'Tierra y Libertad',a:'tierra y libertad',also:[]},
+  {q:'Líder revolucionario del norte, "División del Norte"',hint:'Pancho Villa',a:'pancho villa',also:['villa']},
+  {q:'Primer presidente indígena de México',hint:'Benito Juárez',a:'benito juarez',also:['juarez']},
+  {q:'Capital de México',hint:'Ciudad de México',a:'ciudad de mexico',also:['cdmx']},
+  {q:'Número de estados mexicanos (incluyendo CDMX)',hint:'32',a:'32',also:[]},
+  {q:'Volcán activo cerca de la CDMX',hint:'Popocatépetl',a:'popocatepetl',also:[]},
+  {q:'Océano al oeste de México',hint:'el Pacífico',a:'pacifico',also:['el pacifico']},
+  {q:'Países con frontera al sur de México',hint:'Guatemala y Belice',a:'guatemala y belice',also:['guatemala','belice']},
+  {q:'Fecha del Día de Muertos',hint:'1 y 2 de noviembre',a:'1 y 2 de noviembre',also:['1 de noviembre']},
+  {q:'Flor típica de las ofrendas del Día de Muertos',hint:'cempasúchil',a:'cempasuchil',also:[]},
+  {q:'Días que duran las Posadas',hint:'9',a:'9',also:['nueve']},
+  {q:'Edad que se celebra en una Quinceañera',hint:'15',a:'15',also:['quince']},
+  {q:'Colores de la bandera mexicana',hint:'verde, blanco y rojo',a:'verde blanco y rojo',also:[]},
+  {q:'Qué animal está en el escudo nacional, sobre un nopal',hint:'un águila',a:'aguila',also:['el aguila']},
+  {q:'Fecha de la Independencia de México (celebración anual)',hint:'16 de septiembre',a:'16 de septiembre',also:['16 septiembre']},
+];
+
+function renderSpeed(){
+  if(spTimer){clearInterval(spTimer);spTimer=null;}
+  spIdx=0;spOk=0;spErr=0;spStreak=0;spAnswered=false;
+  for(let i=SPEED.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[SPEED[i],SPEED[j]]=[SPEED[j],SPEED[i]];}
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">⚡ Speed round</div>
+  <div class="ex-instr">Type the answer. 12 seconds per question. Press Enter to confirm. Synonyms accepted!</div>
+  <div class="sp-wrap" id="spWrap"><div class="sp-start"><div style="font-size:2.8rem">⚡</div><h2>Trivia rápida</h2><p style="color:var(--muted);max-width:420px">30 preguntas sobre comida, música, historia, geografía y tradiciones de México.</p><button class="btn btn-cyan" onclick="startSpeed()">Let's go!</button></div></div></div>`;
+}
+function startSpeed(){spIdx=0;spOk=0;spErr=0;spStreak=0;nextQ();}
+function nextQ(){
+  if(spIdx>=SPEED.length){endSpeed();return;}
+  spAnswered=false;const item=SPEED[spIdx];spTimeLeft=12;
+  document.getElementById('spWrap').innerHTML=`
+    <div class="sp-stats"><div class="spst"><div class="sl">Q</div><div class="sv w">${spIdx+1}/${SPEED.length}</div></div><div class="spst"><div class="sl">OK</div><div class="sv g">${spOk}</div></div><div class="spst"><div class="sl">Miss</div><div class="sv b">${spErr}</div></div></div>
+    <div class="streak${spStreak>=3?' on':''}" id="stk">🔥 x${spStreak}</div>
+    <div class="sp-card"><div class="sp-q">${item.q}</div><div class="sp-hint">💡 ${item.hint}</div></div>
+    <div class="tmr-row"><div class="tmr-trk"><div class="tmr-fil" id="tF" style="width:100%;transition:width 1s linear"></div></div><div class="tmr-n" id="tN">12</div></div>
+    <div class="sp-row"><input id="sInp" class="sp-inp" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="type answer…" onkeydown="if(event.key==='Enter')submitQ()"><button class="btn btn-cyan" onclick="submitQ()" style="flex-shrink:0">→</button></div>
+    <div class="sp-fb" id="sFb" style="opacity:0"></div>`;
+  setTimeout(()=>{const i=document.getElementById('sInp');if(i)i.focus();},50);
+  if(spTimer)clearInterval(spTimer);
+  spTimer=setInterval(()=>{
+    spTimeLeft--;
+    const f=document.getElementById('tF'),n=document.getElementById('tN');
+    if(f)f.style.width=Math.max(0,(spTimeLeft/12)*100)+'%';
+    if(n){n.textContent=spTimeLeft;n.style.color=spTimeLeft<=3?'var(--bad)':spTimeLeft<=6?'var(--warn)':'var(--muted2)';}
+    if(spTimeLeft<=0){clearInterval(spTimer);spTimer=null;if(!spAnswered)submitQ();}
+  },1000);
+}
+function submitQ(){
+  const inp=document.getElementById('sInp');if(!inp||spAnswered)return;
+  spAnswered=true;if(spTimer){clearInterval(spTimer);spTimer=null;}inp.disabled=true;
+  const item=SPEED[spIdx];const nt=normS(inp.value);const na=normS(item.a);
+  const isOk=nt===na||item.also.map(normS).includes(nt)||(nt.length>2&&na.includes(nt));
+  if(isOk){spOk++;spStreak++;}else{spErr++;spStreak=0;}
+  const fb=document.getElementById('sFb');
+  if(fb){fb.style.opacity='1';
+    if(!inp.value.trim()){fb.className='sp-fb err';fb.innerHTML=`⏱ Time's up! → <strong>${item.hint}</strong>`;}
+    else if(isOk){fb.className='sp-fb ok';fb.innerHTML=`✓ <strong>Correct!</strong>${spStreak>=3?' 🔥 x'+spStreak:''}`;}
+    else{fb.className='sp-fb err';fb.innerHTML=`✗ <strong>${inp.value}</strong> → <strong>${item.hint}</strong>`;}}
+  if(spStreak>=3){const cf=document.getElementById('cf');cf.textContent='🔥 x'+spStreak;cf.classList.remove('pop');void cf.offsetWidth;cf.classList.add('pop');}
+  spIdx++;setTimeout(nextQ,isOk?700:1500);
+}
+function endSpeed(){
+  const pct=Math.round(spOk/SPEED.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('spWrap').innerHTML=`<div class="sp-start"><div style="font-size:3rem">${emo}</div><h2>${spOk}/${SPEED.length}</h2><p style="color:var(--muted)">${pct>=90?'Excellent! Eres un experto en cultura mexicana!':pct>=70?'Great job!':pct>=50?'Keep learning!':'Review the flashcards.'}</p><button class="btn btn-cyan" onclick="startSpeed()">↺ Try again</button></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 6 — REFERENCE CARD
+══════════════════════════════════ */
+function renderReference(){
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📄 Reference card — Cultura y Tradiciones de México</div>
+  <div class="ex-instr">Complete summary of key facts: comida, música, historia, geografía, tradiciones y símbolos.</div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--comida2);background:rgba(249,115,22,.1)">🌮 Comida — platillos esenciales</div>
+    <table class="ref-table"><tr><th>Platillo</th><th>Qué es</th><th>Origen / nota</th></tr>
+    <tr><td>Taco</td><td style="color:var(--muted)">Tortilla rellena</td><td style="color:var(--muted)">Comida más famosa de México</td></tr>
+    <tr><td>Mole</td><td style="color:var(--muted)">Salsa con chiles + chocolate</td><td style="color:var(--muted)">Puebla (mole poblano)</td></tr>
+    <tr><td>Pozole</td><td style="color:var(--muted)">Sopa de maíz especial</td><td style="color:var(--muted)">Maíz cacahuazintle</td></tr>
+    <tr><td>Tamal</td><td style="color:var(--muted)">Masa envuelta en hoja</td><td style="color:var(--muted)">Tradicional Día de la Candelaria</td></tr>
+    <tr><td>Elote</td><td style="color:var(--muted)">Maíz tierno</td><td style="color:var(--muted)">Comida callejera</td></tr>
+    <tr><td>Chiles en nogada</td><td style="color:var(--muted)">Chile relleno, salsa de nuez</td><td style="color:var(--muted)">Colores de la bandera (ago-sep)</td></tr>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--musica2);background:rgba(167,139,250,.08)">🎺 Música — géneros principales</div>
+    <table class="ref-table"><tr><th>Género</th><th>Instrumentos / estilo</th><th>Región</th></tr>
+    <tr><td>Mariachi</td><td style="color:var(--muted)">Violín, trompeta, guitarrón</td><td style="color:var(--muted)">Jalisco</td></tr>
+    <tr><td>Banda</td><td style="color:var(--muted)">Tuba, trombones, percusión</td><td style="color:var(--muted)">Sinaloa</td></tr>
+    <tr><td>Ranchera</td><td style="color:var(--muted)">Canciones de amor y campo</td><td style="color:var(--muted)">Nacional</td></tr>
+    <tr><td>Son jarocho</td><td style="color:var(--muted)">Arpa, jarana, zapateado</td><td style="color:var(--muted)">Veracruz</td></tr>
+    <tr><td>Corrido</td><td style="color:var(--muted)">Canción narrativa</td><td style="color:var(--muted)">Nacional, época revolucionaria</td></tr>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--historia2);background:rgba(251,191,36,.08)">🏺 Historia — línea de tiempo básica</div>
+    <table class="ref-table"><tr><th>Año</th><th>Evento</th></tr>
+    <tr><td style="font-weight:800;color:var(--historia2)">1325</td><td style="color:var(--muted)">Fundación de Tenochtitlan por los aztecas</td></tr>
+    <tr><td style="font-weight:800;color:var(--historia2)">1519</td><td style="color:var(--muted)">Llegada de Hernán Cortés</td></tr>
+    <tr><td style="font-weight:800;color:var(--historia2)">1521</td><td style="color:var(--muted)">Caída de Tenochtitlan — inicia la colonia</td></tr>
+    <tr><td style="font-weight:800;color:var(--historia2)">1810</td><td style="color:var(--muted)">Grito de Dolores (Miguel Hidalgo) — inicia la guerra de Independencia</td></tr>
+    <tr><td style="font-weight:800;color:var(--historia2)">1821</td><td style="color:var(--muted)">Consumación de la Independencia</td></tr>
+    <tr><td style="font-weight:800;color:var(--historia2)">1858-1872</td><td style="color:var(--muted)">Presidencia de Benito Juárez</td></tr>
+    <tr><td style="font-weight:800;color:var(--historia2)">1910</td><td style="color:var(--muted)">Inicio de la Revolución Mexicana</td></tr>
+    </table>
+    <div class="ref-tip">💡 Personajes clave de la Revolución: Francisco I. Madero, Emiliano Zapata (sur), Pancho Villa (norte).</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--geo2);background:rgba(52,211,153,.08)">🗺️ Geografía — datos básicos</div>
+    <div class="region-grid">
+      <div class="region-item"><div class="re">🏛️</div><div class="rn">CDMX</div><div class="rc">Capital del país</div></div>
+      <div class="region-item"><div class="re">🌊</div><div class="rn">2 océanos</div><div class="rc">Pacífico y Atlántico</div></div>
+      <div class="region-item"><div class="re">🗺️</div><div class="rn">32 estados</div><div class="rc">31 + CDMX</div></div>
+      <div class="region-item"><div class="re">🏔️</div><div class="rn">Popocatépetl</div><div class="rc">Volcán activo</div></div>
+      <div class="region-item"><div class="re">🌵</div><div class="rn">Desierto de Sonora</div><div class="rc">Norte del país</div></div>
+      <div class="region-item"><div class="re">🏖️</div><div class="rn">Cancún</div><div class="rc">Quintana Roo, Caribe</div></div>
+      <div class="region-item"><div class="re">⛰️</div><div class="rn">Sierra Madre</div><div class="rc">Cordillera principal</div></div>
+      <div class="region-item"><div class="re">🐢</div><div class="rn">Frontera EE.UU.</div><div class="rc">~3,100 km</div></div>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--trad2);background:rgba(244,114,182,.07)">💀 Tradiciones — calendario de fiestas</div>
+    <table class="ref-table"><tr><th>Fecha</th><th>Celebración</th></tr>
+    <tr><td style="font-weight:800;color:var(--trad2)">1-2 nov</td><td style="color:var(--muted)">Día de Muertos</td></tr>
+    <tr><td style="font-weight:800;color:var(--trad2)">12 dic</td><td style="color:var(--muted)">Día de la Virgen de Guadalupe</td></tr>
+    <tr><td style="font-weight:800;color:var(--trad2)">16-24 dic</td><td style="color:var(--muted)">Las Posadas</td></tr>
+    <tr><td style="font-weight:800;color:var(--trad2)">16 sep</td><td style="color:var(--muted)">Día de la Independencia</td></tr>
+    <tr><td style="font-weight:800;color:var(--trad2)">5 may</td><td style="color:var(--muted)">Batalla de Puebla (NO es independencia)</td></tr>
+    <tr><td style="font-weight:800;color:var(--trad2)">cualquier fecha</td><td style="color:var(--muted)">Quinceañera (al cumplir 15 años)</td></tr>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--simb2);background:rgba(96,165,250,.06)">🇲🇽 Símbolos nacionales</div>
+    <table class="ref-table"><tr><th>Símbolo</th><th>Significado</th></tr>
+    <tr><td>Verde</td><td style="color:var(--muted)">Esperanza</td></tr>
+    <tr><td>Blanco</td><td style="color:var(--muted)">Unidad</td></tr>
+    <tr><td>Rojo</td><td style="color:var(--muted)">Sangre de los héroes</td></tr>
+    <tr><td>Águila + serpiente + nopal</td><td style="color:var(--muted)">Escudo nacional — leyenda de Tenochtitlan</td></tr>
+    <tr><td>Himno Nacional</td><td style="color:var(--muted)">Letra: González Bocanegra · Música: Jaime Nunó (1853)</td></tr>
+    </table>
+  </div>
+
+  </div>`;
+}
+
+goEx(0);
+</script>
+</body>
+</html>

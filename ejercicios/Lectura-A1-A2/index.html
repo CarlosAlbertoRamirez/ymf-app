@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecturas A1–A2 | YMF</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --a1:#34d399;--a2:#f97316;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(37,217,255,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 20% 10%,rgba(167,139,250,.12),transparent 35%),radial-gradient(ellipse at 80% 15%,rgba(34,211,153,.07),transparent 35%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(940px,96%);margin:14px auto 60px;display:flex;flex-direction:column;gap:14px}
+.hero{border-radius:22px;padding:26px 30px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.hero-in{position:relative;z-index:1}
+.hero-top{display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.logo-box{width:54px;height:54px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.8rem;font-weight:900;color:var(--magenta)}
+.hero h1{font-family:var(--display);font-size:clamp(1.2rem,3vw,1.9rem);font-weight:900;background:linear-gradient(90deg,var(--a1),#fff 45%,var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.86rem;margin-top:3px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 11px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.tts-notice{background:rgba(37,217,255,.06);border:1px solid rgba(37,217,255,.2);border-radius:10px;padding:10px 14px;font-size:.78rem;color:#7de8ff;line-height:1.6}
+.tabs-wrap{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.tabs-bar{display:flex;overflow-x:auto;border-bottom:1px solid rgba(255,255,255,.07);scrollbar-width:none}
+.tabs-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;border:0;background:transparent;color:var(--muted2);font-family:var(--font);font-size:.78rem;font-weight:700;padding:12px 15px;cursor:pointer;transition:.2s;border-bottom:2.5px solid transparent;white-space:nowrap}
+.tab-btn:hover{color:var(--text)}.tab-btn.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+.reading-panel{padding:26px 28px;display:none}.reading-panel.visible{display:block}
+/* HEADER */
+.reading-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.reading-icon{font-size:2rem;line-height:1;flex-shrink:0;margin-top:2px}
+.reading-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:4px}
+.reading-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.rtag{border-radius:999px;padding:2px 10px;font-size:.68rem;font-weight:900;border:1.5px solid}
+.level-a1{border-color:rgba(52,211,153,.5);color:var(--a1);background:rgba(52,211,153,.08)}
+.level-a2{border-color:rgba(249,115,22,.5);color:var(--a2);background:rgba(249,115,22,.08)}
+.type-tag{border-color:rgba(255,255,255,.15);color:var(--muted);background:rgba(255,255,255,.04)}
+/* TTS BAR */
+.tts-bar{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:11px}
+.tts-btn{border:0;border-radius:8px;padding:7px 14px;font-weight:800;font-family:var(--font);font-size:.8rem;cursor:pointer;transition:.13s;display:inline-flex;align-items:center;gap:5px}
+.tts-play{background:linear-gradient(135deg,var(--a1),#16a34a);color:#fff}
+.tts-stop{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+.tts-btn:hover{transform:translateY(-1px)}.tts-btn:active{transform:none}
+.tts-speed{display:flex;align-items:center;gap:5px;margin-left:auto}
+.tts-speed label{font-size:.72rem;color:var(--muted2);font-weight:700}
+.tts-speed select{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:var(--text);font-family:var(--font);font-size:.78rem;padding:5px 8px;cursor:pointer}
+.tts-status{font-size:.72rem;color:var(--muted2);font-weight:700}
+/* TEXT */
+.text-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 24px;margin-bottom:18px;font-size:.96rem;line-height:1.95;color:var(--text)}
+.text-box p{margin-bottom:.9em}.text-box p:last-child{margin-bottom:0}
+/* DIALOGUE */
+.dial-wrap{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.dial-bubble{display:flex;gap:10px;align-items:flex-start}
+.dial-bubble.right{flex-direction:row-reverse}
+.dial-avatar{width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;border:2px solid rgba(255,255,255,.12)}
+.dial-body{max-width:75%}
+.dial-name{font-size:.65rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;color:var(--muted2)}
+.dial-bubble.right .dial-name{text-align:right}
+.dial-msg{border-radius:14px;padding:10px 14px;font-size:.9rem;line-height:1.6;position:relative}
+.dial-bubble.left .dial-msg{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-top-left-radius:4px}
+.dial-bubble.right .dial-msg{background:rgba(37,217,255,.09);border:1px solid rgba(37,217,255,.2);border-top-right-radius:4px}
+/* GLOSSARY */
+.glossary{margin-bottom:20px}
+.section-label{font-family:var(--display);font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);margin-bottom:10px}
+.glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:7px}
+.gloss-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px 12px}
+.gloss-word{font-family:var(--display);font-size:.88rem;font-weight:900;color:var(--cyan)}
+.gloss-en{font-size:.75rem;color:var(--muted);margin-top:2px}
+.gloss-es{font-size:.72rem;color:var(--muted2);font-style:italic;margin-top:1px}
+/* QUESTIONS */
+.q-wrap{display:flex;flex-direction:column;gap:11px}
+.q-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;transition:.2s}
+.q-card.correct{border-color:var(--good);background:rgba(34,197,94,.05)}
+.q-card.wrong{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.q-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.08);border-radius:5px;padding:2px 7px;display:inline-block;margin-bottom:7px;color:var(--muted)}
+.q-type-badge{font-size:.62rem;font-weight:900;border-radius:999px;padding:2px 8px;margin-left:5px;background:rgba(255,255,255,.06);color:var(--muted2)}
+.q-stem{font-size:.93rem;line-height:1.6;font-weight:600;margin-bottom:9px}
+.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.mc-opt{border:0;border-radius:8px;padding:8px 12px;font-weight:700;font-family:var(--font);font-size:.84rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);border-color:rgba(37,217,255,.4)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.show-correct{border-color:var(--good);background:rgba(34,197,94,.15);color:#86efac}
+.mc-opt.sel-wrong{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.vf-opts{display:flex;gap:9px}
+.vf-btn{border:0;border-radius:9px;padding:8px 22px;font-weight:900;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.13s;border:2px solid}
+.vf-btn.t{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#86efac}
+.vf-btn.f{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#fca5a5}
+.vf-btn:hover:not([disabled]){transform:translateY(-2px);filter:brightness(1.2)}
+.vf-btn[disabled]{cursor:default;transform:none}
+.vf-btn.sel-correct{filter:brightness(1.3);border-width:2.5px}
+.vf-btn.sel-wrong{filter:brightness(.7)}
+.chips-row{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:0;border-radius:8px;padding:7px 14px;font-weight:800;font-family:var(--display);font-size:.88rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.chip.used{opacity:.2;cursor:not-allowed}
+.chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.q-blank{display:inline-block;border-bottom:2.5px solid var(--cyan);min-width:80px;text-align:center;padding:0 4px;color:var(--cyan);font-weight:800;font-family:var(--display);font-size:.95rem}
+.q-fb{display:none;font-size:.78rem;color:var(--muted);margin-top:8px;padding:7px 11px;border-radius:7px;background:rgba(255,255,255,.04);line-height:1.6}
+.q-fb.show{display:block}
+.score-row{margin-bottom:12px}
+.score-pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:3px 12px;font-size:.76rem;font-weight:800;color:var(--muted)}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:4px}
+.creator span{color:var(--magenta2)}
+@media(max-width:560px){.mc-opts{grid-template-columns:1fr}.reading-panel{padding:18px 14px}.glossary-grid{grid-template-columns:1fr 1fr}.dial-body{max-width:88%}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-top">
+      <div class="logo-box">YMF</div>
+      <div>
+        <h1>Lecturas de Comprensión</h1>
+        <p>Reading comprehension in Mexican Spanish · Levels A1 &amp; A2 · With natural audio 🔊</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge" style="border-color:rgba(52,211,153,.4);color:var(--a1)">🟢 A1</span>
+      <span class="badge" style="border-color:rgba(249,115,22,.4);color:var(--a2)">🟡 A2</span>
+      <span class="badge">🔊 Natural voice audio</span>
+      <span class="badge">📖 Glossary included</span>
+      <span class="badge">By Carlos &amp; Denisse</span>
+    </div>
+  </div>
+</header>
+<div class="tts-notice">🔊 <strong>Audio:</strong> Uses Google Translate's voice engine — much more natural than browser TTS. Requires internet. Works in all browsers. Click ▶ Play on any reading to listen. / <em>Usa el motor de voz de Google Translate. Requiere internet.</em></div>
+<div class="tabs-wrap">
+  <div class="tabs-bar" id="tabsBar"></div>
+  <div id="tabContents"></div>
+</div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · yourmexicanfriend.com</p>
+</div>
+<script>
+const READINGS=[
+// ─── 1: WhatsApp A1 — DIALOGUE ───────────────────────────────────────────────
+{
+  level:'A1',type:'Diálogo',icon:'💬',
+  title:'¿Vamos a comer tacos?',
+  subtitle:'Two friends make plans for lunch over WhatsApp. Follow the conversation!',
+  isDial:true,
+  speakers:{
+    'Sofía':{side:'left',avatar:'👩',color:'#34d399'},
+    'Luis':{side:'right',avatar:'👦',color:'#25d9ff'},
+  },
+  dialogue:[
+    {who:'Sofía',msg:'¡Hola, Luis! ¿Cómo estás? Hace mucho que no hablamos.'},
+    {who:'Luis',msg:'¡Hola, Sofía! Estoy bien, gracias. Un poco ocupado con el trabajo, pero bien. ¿Y tú?'},
+    {who:'Sofía',msg:'Yo también estoy bien. Oye, tengo mucha hambre y quiero ir a comer tacos. ¿Tienes planes hoy al mediodía?'},
+    {who:'Luis',msg:'No, hoy estoy libre a la hora de la comida. ¿A qué restaurante quieres ir?'},
+    {who:'Sofía',msg:'Quiero ir a los Tacos El Compa, en la colonia Roma. Dicen que son muy buenos y tienen tacos de pastor, bistec y pollo.'},
+    {who:'Luis',msg:'¡Ah, sí! Yo fui una vez con mi hermano y estuvo muy rico. Los tacos de pastor son mis favoritos.'},
+    {who:'Sofía',msg:'Perfecto. ¿A qué hora te queda bien? ¿A la una o a la una y media?'},
+    {who:'Luis',msg:'A la una y media me queda mejor. Así termino una junta que tengo.'},
+    {who:'Sofía',msg:'Okey, a la una y media entonces. El restaurante está en la calle Álvaro Obregón, número 312. ¿Lo puedes buscar en el mapa?'},
+    {who:'Luis',msg:'Sí, ya lo estoy buscando... Listo, ya lo encontré. Está a quince minutos de mi oficina. Voy caminando.'},
+    {who:'Sofía',msg:'Perfecto. Nos vemos allá. ¡Ah, y trae hambre porque las porciones son grandes!'},
+    {who:'Luis',msg:'¡Jaja! No te preocupes, siempre tengo hambre. Nos vemos a la una y media. ¡Hasta luego! 🌮'},
+    {who:'Sofía',msg:'¡Hasta luego! 😄'},
+  ],
+  ttsText:'Hola Luis, cómo estás, hace mucho que no hablamos. Hola Sofía, estoy bien, gracias, un poco ocupado con el trabajo, pero bien, y tú. Yo también estoy bien. Oye, tengo mucha hambre y quiero ir a comer tacos, tienes planes hoy al mediodía. No, hoy estoy libre a la hora de la comida, a qué restaurante quieres ir. Quiero ir a los Tacos El Compa, en la colonia Roma, dicen que son muy buenos y tienen tacos de pastor, bistec y pollo. Ah sí, yo fui una vez con mi hermano y estuvo muy rico, los tacos de pastor son mis favoritos. Perfecto, a qué hora te queda bien, a la una o a la una y media. A la una y media me queda mejor, así termino una junta que tengo. Okey, a la una y media entonces, el restaurante está en la calle Álvaro Obregón, número trescientos doce. Sí, ya lo estoy buscando, listo, ya lo encontré, está a quince minutos de mi oficina, voy caminando. Perfecto, nos vemos allá, y trae hambre porque las porciones son grandes. No te preocupes, siempre tengo hambre, nos vemos a la una y media, hasta luego. Hasta luego.',
+  glossary:[
+    {w:'hace mucho que no hablamos',en:'we haven\'t talked in a while',es:'expresión para cuando pasó tiempo sin hablar'},
+    {w:'al mediodía',en:'at noon / at lunchtime',es:'a las 12:00 del día'},
+    {w:'a la hora de la comida',en:'at lunchtime (Mexican expression)',es:'la comida en México = el almuerzo'},
+    {w:'junta',en:'meeting (work)',es:'reunión de trabajo — muy mexicano'},
+    {w:'me queda mejor',en:'works better for me',es:'es más conveniente para mí'},
+    {w:'porciones',en:'portions / servings',es:'la cantidad de comida que sirven'},
+    {w:'no te preocupes',en:'don\'t worry',es:'expresión muy común en México'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿Por qué Sofía le escribe a Luis?',opts:['Para contarle un problema del trabajo','Para invitarlo a comer tacos','Para preguntarle cómo está su familia','Para pedirle dinero prestado'],a:1,fb:'Sofía quiere ir a los Tacos El Compa y lo invita a Luis.'},
+    {type:'vf',stem:'"Luis ya conoce el restaurante Tacos El Compa." — ¿Verdadero o falso?',a:'t',fb:'Verdadero. Luis dice: "Yo fui una vez con mi hermano y estuvo muy rico."'},
+    {type:'mc',stem:'¿A qué hora van a comer?',opts:['A las doce del día','A la una de la tarde','A la una y media','A las dos'],a:2,fb:'Luis dice que a la una y media le queda mejor porque tiene una junta antes.'},
+    {type:'fill',stem:'El restaurante está en la calle ___, número 312.',chips:['Álvaro Obregón','Insurgentes','Reforma','Juárez'],a:'Álvaro Obregón',fb:'Sofía dice: "El restaurante está en la calle Álvaro Obregón, número 312."'},
+    {type:'vf',stem:'"Luis va a llegar al restaurante en coche." — ¿Verdadero o falso?',a:'f',fb:'Falso. Luis dice: "Está a quince minutos de mi oficina. Voy caminando."'},
+    {type:'mc',stem:'¿Cuál es el taco favorito de Luis?',opts:['De bistec','De pollo','De pastor','De canasta'],a:2,fb:'Luis dice: "Los tacos de pastor son mis favoritos."'},
+  ]
+},
+// ─── 2: Ana A1 — NARRATIVE ───────────────────────────────────────────────────
+{
+  level:'A1',type:'Narrativo',icon:'🏫',
+  title:'El primer día de Ana',
+  subtitle:'A short story about Ana\'s very first day at a new school.',
+  isDial:false,
+  paragraphs:[
+    'Hoy es el primer día de clases de Ana en su nueva escuela. Ana tiene diez años y está en quinto grado. Ella llegó a vivir a esta ciudad hace solo tres semanas con su mamá, su papá y su hermano pequeño, que se llama Diego y tiene seis años. Ana está un poco nerviosa porque no conoce a nadie en la escuela nueva.',
+    'En la mañana, Ana se despierta a las seis y media. Se baña con agua fría porque hace calor, se viste con su uniforme azul y blanco, y baja a la cocina a desayunar. Su mamá le preparó huevos con frijoles y una taza de leche con chocolate. También le preparó una mochila con tres cuadernos, lápices de colores, una regla y una botella de agua.',
+    'Ana camina a la escuela con su papá. La escuela está a cinco minutos de su casa, así que van a pie todos los días. Cuando llegan, su papá le da un abrazo y le dice: "Vas a estar muy bien, mi amor. Ya vas a ver." Ana sonríe y entra al salón de clases.',
+    'Adentro, Ana conoce a su maestra, la señora García, que es muy amable y tiene voz suave. La señora García le presenta a Ana al grupo y le da el lugar de junto a una niña que se llama Valentina. Valentina también es nueva en la escuela — llegó el mes pasado de Guadalajara. Las dos niñas hablan en el recreo y se hacen amigas muy rápido.',
+    'Al final del día, Ana regresa a casa a las dos de la tarde. Su mamá la espera en la puerta y le pregunta: "¿Cómo te fue?" Ana le responde con una gran sonrisa: "¡Muy bien, mamá! Hice una amiga. Se llama Valentina." Su mamá la abraza y le dice que está muy orgullosa de ella.',
+  ],
+  ttsText:'Hoy es el primer día de clases de Ana en su nueva escuela. Ana tiene diez años y está en quinto grado. Ella llegó a vivir a esta ciudad hace solo tres semanas con su mamá, su papá y su hermano pequeño, que se llama Diego y tiene seis años. Ana está un poco nerviosa porque no conoce a nadie en la escuela nueva. En la mañana, Ana se despierta a las seis y media. Se baña con agua fría porque hace calor, se viste con su uniforme azul y blanco, y baja a la cocina a desayunar. Su mamá le preparó huevos con frijoles y una taza de leche con chocolate. También le preparó una mochila con tres cuadernos, lápices de colores, una regla y una botella de agua. Ana camina a la escuela con su papá. La escuela está a cinco minutos de su casa, así que van a pie todos los días. Cuando llegan, su papá le da un abrazo y le dice: vas a estar muy bien, mi amor, ya vas a ver. Ana sonríe y entra al salón de clases. Adentro, Ana conoce a su maestra, la señora García, que es muy amable y tiene voz suave. La señora García le presenta a Ana al grupo y le da el lugar de junto a una niña que se llama Valentina. Valentina también es nueva en la escuela, llegó el mes pasado de Guadalajara. Las dos niñas hablan en el recreo y se hacen amigas muy rápido. Al final del día, Ana regresa a casa a las dos de la tarde. Su mamá la espera en la puerta y le pregunta cómo te fue. Ana le responde con una gran sonrisa: muy bien mamá, hice una amiga, se llama Valentina. Su mamá la abraza y le dice que está muy orgullosa de ella.',
+  glossary:[
+    {w:'primer día',en:'first day',es:'el día número uno'},
+    {w:'a pie',en:'on foot / walking',es:'sin coche, caminando'},
+    {w:'uniforme',en:'school uniform',es:'ropa obligatoria de la escuela'},
+    {w:'mochila',en:'backpack',es:'bolsa para llevar cosas a la escuela'},
+    {w:'recreo',en:'recess / break time',es:'tiempo libre entre clases'},
+    {w:'se hacen amigas',en:'they become friends',es:'hacerse amigos = to become friends'},
+    {w:'orgullosa',en:'proud',es:'sentir satisfacción por alguien'},
+    {w:'amable',en:'kind / friendly',es:'que trata bien a los demás'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿Por qué Ana está nerviosa?',opts:['Porque olvidó su tarea','Porque no conoce a nadie en la escuela','Porque no le gusta su maestra','Porque llegó tarde'],a:1,fb:'El texto dice: "Ana está un poco nerviosa porque no conoce a nadie en la escuela nueva."'},
+    {type:'vf',stem:'"Ana desayuna cereal con leche." — ¿Verdadero o falso?',a:'f',fb:'Falso. Ana desayuna huevos con frijoles y una taza de leche con chocolate.'},
+    {type:'mc',stem:'¿Cómo va Ana a la escuela?',opts:['En coche con su mamá','En autobús','Caminando con su papá','En bicicleta sola'],a:2,fb:'El texto dice: "Ana camina a la escuela con su papá."'},
+    {type:'fill',stem:'La nueva amiga de Ana se llama ___ y llegó de Guadalajara.',chips:['Valentina','García','Sofía','Laura'],a:'Valentina',fb:'El texto dice: "una niña que se llama Valentina... llegó el mes pasado de Guadalajara."'},
+    {type:'mc',stem:'¿A qué hora regresa Ana a casa?',opts:['A la una','A la una y media','A las dos','A las tres'],a:2,fb:'El texto dice: "Ana regresa a casa a las dos de la tarde."'},
+    {type:'vf',stem:'"La mamá de Ana la espera en la puerta cuando regresa." — ¿Verdadero o falso?',a:'t',fb:'Verdadero. El texto dice: "Su mamá la espera en la puerta."'},
+  ]
+},
+// ─── 3: Receta A1 ─────────────────────────────────────────────────────────────
+{
+  level:'A1',type:'Cotidiano',icon:'🫙',
+  title:'Agua de jamaica',
+  subtitle:'A classic Mexican drink — learn how to make it and understand the recipe!',
+  isDial:false,
+  paragraphs:[
+    'El agua de jamaica es una de las bebidas más populares de México. Se hace con flores de jamaica secas, agua, azúcar y a veces un poco de limón. Es de color rojo oscuro y tiene un sabor ácido y dulce al mismo tiempo. En los mercados, las taquerías y los restaurantes de comida mexicana siempre puedes pedir un vaso de agua de jamaica.',
+    'Para hacer agua de jamaica necesitas los siguientes ingredientes: dos tazas de flores de jamaica secas, ocho tazas de agua, media taza de azúcar y el jugo de un limón (opcional). Estos ingredientes son suficientes para cuatro personas.',
+    'La preparación es muy fácil. Primero, pon las flores de jamaica en una olla con cuatro tazas de agua. Calienta el agua hasta que hierva. Cuando el agua está hirviendo, apaga la estufa y deja reposar las flores por veinte minutos. El agua se pone de color rojo.',
+    'Después, cuela las flores para separar el líquido. Pon el líquido rojo en una jarra grande y agrega las otras cuatro tazas de agua fría. Agrega el azúcar y revuelve bien hasta que se disuelva. Si quieres, exprime el limón y mezcla todo.',
+    'Finalmente, pon la jarra en el refrigerador por una hora para que el agua esté bien fría. Sirve con mucho hielo y disfruta. El agua de jamaica es perfecta para los días de calor.',
+  ],
+  ttsText:'El agua de jamaica es una de las bebidas más populares de México. Se hace con flores de jamaica secas, agua, azúcar y a veces un poco de limón. Es de color rojo oscuro y tiene un sabor ácido y dulce al mismo tiempo. En los mercados, las taquerías y los restaurantes de comida mexicana siempre puedes pedir un vaso de agua de jamaica. Para hacer agua de jamaica necesitas los siguientes ingredientes: dos tazas de flores de jamaica secas, ocho tazas de agua, media taza de azúcar y el jugo de un limón, opcional. Estos ingredientes son suficientes para cuatro personas. La preparación es muy fácil. Primero, pon las flores de jamaica en una olla con cuatro tazas de agua. Calienta el agua hasta que hierva. Cuando el agua está hirviendo, apaga la estufa y deja reposar las flores por veinte minutos. El agua se pone de color rojo. Después, cuela las flores para separar el líquido. Pon el líquido rojo en una jarra grande y agrega las otras cuatro tazas de agua fría. Agrega el azúcar y revuelve bien hasta que se disuelva. Si quieres, exprime el limón y mezcla todo. Finalmente, pon la jarra en el refrigerador por una hora para que el agua esté bien fría. Sirve con mucho hielo y disfruta. El agua de jamaica es perfecta para los días de calor.',
+  glossary:[
+    {w:'flores de jamaica',en:'hibiscus flowers (dried)',es:'flor roja para hacer agua fresca'},
+    {w:'ácido',en:'sour / acidic',es:'sabor como el limón'},
+    {w:'hierva',en:'boils',es:'hervir = cuando el agua burbujea por el calor'},
+    {w:'reposar',en:'to rest / steep',es:'dejar quieto para que se absorba el sabor'},
+    {w:'colar',en:'to strain',es:'separar el líquido de los sólidos'},
+    {w:'jarra',en:'pitcher / jug',es:'recipiente grande para bebidas'},
+    {w:'revuelve',en:'stir / mix',es:'mover con una cuchara para mezclar'},
+    {w:'exprime',en:'squeeze',es:'presionar el limón para sacar el jugo'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿De qué color es el agua de jamaica?',opts:['Amarillo','Azul','Rojo oscuro','Naranja'],a:2,fb:'El texto dice: "Es de color rojo oscuro."'},
+    {type:'vf',stem:'"El limón es un ingrediente obligatorio para el agua de jamaica." — ¿Verdadero o falso?',a:'f',fb:'Falso. El texto dice que el jugo de limón es "opcional".'},
+    {type:'mc',stem:'¿Cuánto tiempo hay que dejar reposar las flores en el agua caliente?',opts:['Diez minutos','Quince minutos','Veinte minutos','Treinta minutos'],a:2,fb:'El texto dice: "deja reposar las flores por veinte minutos."'},
+    {type:'fill',stem:'Después de colar las flores, el líquido se pone en una ___ grande.',chips:['jarra','olla','taza','botella'],a:'jarra',fb:'El texto dice: "Pon el líquido rojo en una jarra grande."'},
+    {type:'mc',stem:'¿Para cuántas personas alcanza esta receta?',opts:['Para dos','Para tres','Para cuatro','Para seis'],a:2,fb:'El texto dice: "Estos ingredientes son suficientes para cuatro personas."'},
+  ]
+},
+// ─── 4: Taquería A2 ──────────────────────────────────────────────────────────
+{
+  level:'A2',type:'Cotidiano',icon:'🌮',
+  title:'Tacos El Compa — anuncio',
+  subtitle:'Read this Mexican taquería advertisement and answer the questions.',
+  isDial:false,
+  paragraphs:[
+    '🌮 TACOS EL COMPA — ¡Los mejores tacos de la colonia Roma!\n📍 Calle Álvaro Obregón 312, Col. Roma Norte, Ciudad de México',
+    'Somos una taquería familiar con más de 20 años de experiencia. Usamos ingredientes frescos y recetas tradicionales de la Ciudad de México. Nuestros tacos están hechos a mano, con tortillas recién hechas en comal. Todos nuestros guisados se preparan desde la madrugada para que estén listos cuando abren las puertas.',
+    '🍽️ Menú:\n• Tacos de pastor — $25 c/u\n• Tacos de bistec — $28 c/u\n• Tacos de pollo — $22 c/u\n• Tacos de nopales y queso — $20 c/u\n• Quesadilla de queso — $35\n• Quesadilla de flor de calabaza — $40\n• Orden de guacamole — $30\n• Orden de frijoles negros — $20',
+    '🥤 Para tomar ofrecemos aguas frescas de temporada (jamaica, horchata, limón), refrescos en lata y agua natural. Si vienes en familia o con amigos, puedes pedir una jarra de agua fresca por solo $45.',
+    '⭐ Promociones especiales:\nLos martes: 4 tacos de pastor por $80.\nLos jueves: quesadilla gratis con la compra de 5 tacos.\nLos sábados: desayuno especial de 8 a 11 a.m. con huevos, frijoles, tortillas y café por $65.\n\n⏰ Horarios:\nLunes a viernes: 8:00 a.m. – 10:00 p.m.\nSábado y domingo: 9:00 a.m. – 11:00 p.m.\n\n📞 Pedidos a domicilio: 55-1234-5678\nTambién puedes ordenar por WhatsApp. ¡Hacemos entregas en un radio de 3 km!\n¡Te esperamos! 🙌',
+  ],
+  ttsText:'Tacos El Compa, los mejores tacos de la colonia Roma. Calle Álvaro Obregón trescientos doce, Colonia Roma Norte, Ciudad de México. Somos una taquería familiar con más de veinte años de experiencia. Usamos ingredientes frescos y recetas tradicionales de la Ciudad de México. Nuestros tacos están hechos a mano, con tortillas recién hechas en comal. Todos nuestros guisados se preparan desde la madrugada para que estén listos cuando abren las puertas. Menú: tacos de pastor, veinte y cinco pesos cada uno. Tacos de bistec, veinte y ocho pesos. Tacos de pollo, veinte y dos pesos. Tacos de nopales y queso, veinte pesos. Quesadilla de queso, treinta y cinco pesos. Orden de guacamole, treinta pesos. Para tomar ofrecemos aguas frescas de temporada, refrescos en lata y agua natural. Si vienes en familia puedes pedir una jarra de agua fresca por solo cuarenta y cinco pesos. Promociones especiales: los martes, cuatro tacos de pastor por ochenta pesos. Los jueves, quesadilla gratis con la compra de cinco tacos. Los sábados, desayuno especial de ocho a once de la mañana con huevos, frijoles, tortillas y café por sesenta y cinco pesos. Horarios: lunes a viernes de ocho de la mañana a diez de la noche. Sábado y domingo de nueve de la mañana a once de la noche. Pedidos a domicilio al cincuenta y cinco, doce treinta y cuatro, cincuenta y seis setenta y ocho. También puedes ordenar por WhatsApp. Hacemos entregas en un radio de tres kilómetros. Te esperamos.',
+  glossary:[
+    {w:'recién hechas',en:'freshly made',es:'hechas en el momento, no antes'},
+    {w:'comal',en:'flat griddle (traditional)',es:'plancha circular para hacer tortillas'},
+    {w:'guisados',en:'cooked fillings / stews',es:'los ingredientes cocinados de los tacos'},
+    {w:'madrugada',en:'early morning / before dawn',es:'entre las 12 y las 5 de la mañana'},
+    {w:'de temporada',en:'seasonal',es:'disponible según la época del año'},
+    {w:'jarra',en:'pitcher',es:'recipiente grande para servir bebidas'},
+    {w:'a domicilio',en:'home delivery',es:'entrega en tu casa'},
+    {w:'radio',en:'radius',es:'distancia desde un punto central'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿Cuántos años de experiencia tiene Tacos El Compa?',opts:['10 años','15 años','Más de 20 años','30 años'],a:2,fb:'El texto dice: "una taquería familiar con más de 20 años de experiencia."'},
+    {type:'vf',stem:'"El domingo la taquería abre a las 8:00 a.m." — ¿Verdadero o falso?',a:'f',fb:'Falso. El sábado y domingo abren a las 9:00 a.m.'},
+    {type:'mc',stem:'¿Qué promoción hay los jueves?',opts:['4 tacos por $80','Desayuno especial por $65','Quesadilla gratis con 5 tacos','Agua fresca gratis'],a:2,fb:'El texto dice: "Los jueves: quesadilla gratis con la compra de 5 tacos."'},
+    {type:'fill',stem:'Los tacos de Tacos El Compa se hacen con tortillas recién hechas en ___.',chips:['comal','horno','sartén','parrilla'],a:'comal',fb:'El texto dice: "tortillas recién hechas en comal."'},
+    {type:'mc',stem:'¿Hasta dónde hacen entregas a domicilio?',opts:['1 km','2 km','3 km','5 km'],a:2,fb:'El texto dice: "Hacemos entregas en un radio de 3 km."'},
+    {type:'vf',stem:'"Puedes ordenar a domicilio por WhatsApp." — ¿Verdadero o falso?',a:'t',fb:'Verdadero. El anuncio dice: "También puedes ordenar por WhatsApp."'},
+  ]
+},
+];
+</script>
+<script>
+READINGS.push(
+// ─── 5: Día de Muertos A2 ────────────────────────────────────────────────────
+{
+  level:'A2',type:'Cultural',icon:'💀',
+  title:'El Día de Muertos',
+  subtitle:'One of Mexico\'s most important traditions — learn about it in Spanish.',
+  isDial:false,
+  paragraphs:[
+    'El Día de Muertos es una de las celebraciones más importantes y más conocidas de México. Se celebra el 1 y el 2 de noviembre de cada año. Es una tradición que mezcla costumbres indígenas prehispánicas con elementos de la religión católica que llegaron con los españoles. En 2008, la UNESCO declaró esta celebración Patrimonio Cultural Inmaterial de la Humanidad.',
+    'El objetivo principal del Día de Muertos es recordar y honrar a las personas que ya murieron, a quienes se llama "difuntos" o "fallecidos". A diferencia de lo que algunas personas piensan, no es una celebración triste. Al contrario, es una fiesta llena de color, música, comida y recuerdos. Las familias creen que durante estos dos días, el alma de los difuntos puede volver al mundo de los vivos para visitar a su familia.',
+    'Una de las partes más importantes de la celebración es la ofrenda. La ofrenda es una mesa o un altar que las familias preparan en sus casas o en el cementerio. En la ofrenda se colocan fotos del difunto, sus objetos personales favoritos, comida, agua, flores y velas. La flor más característica es el cempasúchil, una flor de color naranja brillante. Según la tradición, el olor fuerte de esta flor ayuda a guiar el alma del difunto de regreso a casa.',
+    'La comida también juega un papel muy importante. Las familias cocinan los platillos favoritos de los difuntos para que los puedan "comer" durante su visita. También se pone pan de muerto, un pan dulce especial con forma redonda, decorado con azúcar y a veces con una cruz de masa encima. El chocolate caliente es la bebida tradicional que acompaña al pan de muerto.',
+    'En muchos estados de México, especialmente en Oaxaca, Michoacán y el Estado de México, las familias van al cementerio la noche del 1 al 2 de noviembre. Limpian y decoran las tumbas con flores, velas y más ofrendas. Algunas familias se quedan allí toda la noche, tocando música, cantando y recordando a sus seres queridos. Es una noche mágica, llena de luz de velas, olor a cempasúchil y recuerdos.',
+  ],
+  ttsText:'El Día de Muertos es una de las celebraciones más importantes y más conocidas de México. Se celebra el primero y el dos de noviembre de cada año. Es una tradición que mezcla costumbres indígenas prehispánicas con elementos de la religión católica que llegaron con los españoles. En dos mil ocho, la UNESCO declaró esta celebración Patrimonio Cultural Inmaterial de la Humanidad. El objetivo principal del Día de Muertos es recordar y honrar a las personas que ya murieron, a quienes se llama difuntos o fallecidos. A diferencia de lo que algunas personas piensan, no es una celebración triste. Al contrario, es una fiesta llena de color, música, comida y recuerdos. Las familias creen que durante estos dos días, el alma de los difuntos puede volver al mundo de los vivos para visitar a su familia. Una de las partes más importantes de la celebración es la ofrenda. La ofrenda es una mesa o un altar que las familias preparan en sus casas o en el cementerio. En la ofrenda se colocan fotos del difunto, sus objetos personales favoritos, comida, agua, flores y velas. La flor más característica es el cempasúchil, una flor de color naranja brillante. Según la tradición, el olor fuerte de esta flor ayuda a guiar el alma del difunto de regreso a casa. La comida también juega un papel muy importante. Las familias cocinan los platillos favoritos de los difuntos para que los puedan comer durante su visita. También se pone pan de muerto, un pan dulce especial con forma redonda, decorado con azúcar y a veces con una cruz de masa encima. El chocolate caliente es la bebida tradicional que acompaña al pan de muerto. En muchos estados de México, especialmente en Oaxaca, Michoacán y el Estado de México, las familias van al cementerio la noche del primero al dos de noviembre. Limpian y decoran las tumbas con flores, velas y más ofrendas. Algunas familias se quedan allí toda la noche, tocando música, cantando y recordando a sus seres queridos. Es una noche mágica, llena de luz de velas, olor a cempasúchil y recuerdos.',
+  glossary:[
+    {w:'Patrimonio de la Humanidad',en:'World Heritage / Intangible Cultural Heritage',es:'reconocimiento de la UNESCO'},
+    {w:'difuntos / fallecidos',en:'deceased / the dead',es:'personas que ya murieron'},
+    {w:'honrar',en:'to honor',es:'mostrar respeto y cariño'},
+    {w:'alma',en:'soul',es:'espíritu de una persona'},
+    {w:'ofrenda',en:'offering / altar',es:'mesa decorada para recordar al difunto'},
+    {w:'cempasúchil',en:'marigold (Mexican variety)',es:'flor naranja típica del Día de Muertos'},
+    {w:'pan de muerto',en:'bread of the dead',es:'pan dulce tradicional de noviembre'},
+    {w:'seres queridos',en:'loved ones',es:'personas que amamos'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿En qué año la UNESCO reconoció el Día de Muertos?',opts:['1998','2003','2008','2015'],a:2,fb:'El texto dice: "En 2008, la UNESCO declaró esta celebración Patrimonio Cultural Inmaterial de la Humanidad."'},
+    {type:'vf',stem:'"El Día de Muertos es una celebración triste y solemne." — ¿Verdadero o falso?',a:'f',fb:'Falso. El texto dice: "no es una celebración triste. Al contrario, es una fiesta llena de color, música, comida y recuerdos."'},
+    {type:'mc',stem:'¿Para qué sirve el olor del cempasúchil según la tradición?',opts:['Para decorar el altar','Para guiar el alma del difunto a casa','Para hacer el pan de muerto','Para perfumar la ropa'],a:1,fb:'El texto dice: "el olor fuerte de esta flor ayuda a guiar el alma del difunto de regreso a casa."'},
+    {type:'fill',stem:'La bebida tradicional que acompaña al pan de muerto es el ___ caliente.',chips:['chocolate','café','atole','té'],a:'chocolate',fb:'El texto dice: "El chocolate caliente es la bebida tradicional que acompaña al pan de muerto."'},
+    {type:'mc',stem:'¿Qué hacen algunas familias en el cementerio la noche del 1 al 2 de noviembre?',opts:['Solo dejan flores y se van','Se quedan toda la noche con música y recuerdos','Hacen una fiesta con fuegos artificiales','Leen poemas en silencio'],a:1,fb:'El texto dice: "Algunas familias se quedan allí toda la noche, tocando música, cantando y recordando a sus seres queridos."'},
+    {type:'vf',stem:'"En la ofrenda solo se ponen flores y velas." — ¿Verdadero o falso?',a:'f',fb:'Falso. La ofrenda incluye fotos, objetos personales, comida, agua, flores y velas.'},
+  ]
+},
+// ─── 6: Marco A2 ─────────────────────────────────────────────────────────────
+{
+  level:'A2',type:'Narrativo',icon:'😅',
+  title:'El lunes terrible de Marco',
+  subtitle:'Everything goes wrong for Marco on Monday morning. Can you follow his disaster?',
+  isDial:false,
+  paragraphs:[
+    'Marco Villanueva es diseñador gráfico y trabaja en una agencia de publicidad en la colonia Nápoles, en la Ciudad de México. Normalmente Marco es muy puntual — siempre llega a la oficina cinco minutos antes de las nueve. Pero el lunes pasado fue diferente. Fue, como él mismo dijo después, "el lunes más terrible de mi vida".',
+    'Todo empezó la noche del domingo. Marco se quedó viendo una serie en Netflix hasta las dos de la mañana. Pensó: "Pongo la alarma a las siete y me levanto bien." Pero lo que no sabía es que su teléfono tenía solo un tres por ciento de batería. A las tres de la mañana, el teléfono se apagó solo. Sin alarma. Sin batería. Sin nada.',
+    'Marco abrió los ojos a las ocho cuarenta y cinco. Eran exactamente quince minutos antes de que empezara su junta más importante del mes. Se levantó de un salto, se lavó la cara con agua fría, se vistió con lo que encontró primero — un pantalón café y una camisa azul que no combinaban para nada — y salió corriendo sin desayunar, sin café y sin el cargador de su computadora.',
+    'Cuando llegó al metro Insurgentes, vio una fila que daba vuelta a la esquina. El metro estaba retrasado por un problema técnico. Marco esperó dieciséis minutos apretado entre mucha gente. Cuando por fin llegó el metro, estaba tan lleno que casi no pudo entrar. En la estación de Chilpancingo, tuvo que bajarse porque había un problema con las puertas y el metro no avanzaba.',
+    'Marco salió a la calle y buscó un taxi. Ninguno quería parar. Entonces abrió la aplicación de Uber pero su teléfono — que había cargado un diez por ciento mientras esperaba el metro — se apagó de nuevo. En ese momento, empezó a llover. Marco no traía paraguas ni chamarra. Corrió cuatro cuadras bajo la lluvia y llegó a la oficina a las diez y cuarto, completamente mojado, sin teléfono y sin cargador.',
+    'Su jefa, la señora Domínguez, lo vio entrar desde su escritorio y levantó una ceja. Marco, chorreando agua, soltó una risita nerviosa y dijo: "Buenos días. Hubo un pequeño problema con el metro." La señora Domínguez lo miró cinco segundos en silencio y luego dijo: "Siéntate, Marco. Te traigo un café. Y la próxima vez... pon dos alarmas."',
+  ],
+  ttsText:'Marco Villanueva es diseñador gráfico y trabaja en una agencia de publicidad en la colonia Nápoles, en la Ciudad de México. Normalmente Marco es muy puntual, siempre llega a la oficina cinco minutos antes de las nueve. Pero el lunes pasado fue diferente. Fue, como él mismo dijo después, el lunes más terrible de mi vida. Todo empezó la noche del domingo. Marco se quedó viendo una serie en Netflix hasta las dos de la mañana. Pensó: pongo la alarma a las siete y me levanto bien. Pero lo que no sabía es que su teléfono tenía solo un tres por ciento de batería. A las tres de la mañana, el teléfono se apagó solo. Sin alarma, sin batería, sin nada. Marco abrió los ojos a las ocho cuarenta y cinco. Eran exactamente quince minutos antes de que empezara su junta más importante del mes. Se levantó de un salto, se lavó la cara con agua fría, se vistió con lo que encontró primero, un pantalón café y una camisa azul que no combinaban para nada, y salió corriendo sin desayunar, sin café y sin el cargador de su computadora. Cuando llegó al metro Insurgentes, vio una fila que daba vuelta a la esquina. El metro estaba retrasado por un problema técnico. Marco esperó dieciséis minutos apretado entre mucha gente. Cuando por fin llegó el metro, estaba tan lleno que casi no pudo entrar. En la estación de Chilpancingo, tuvo que bajarse porque había un problema con las puertas. Marco salió a la calle y buscó un taxi. Ninguno quería parar. Entonces abrió la aplicación de Uber pero su teléfono se apagó de nuevo. En ese momento, empezó a llover. Marco no traía paraguas ni chamarra. Corrió cuatro cuadras bajo la lluvia y llegó a la oficina a las diez y cuarto, completamente mojado, sin teléfono y sin cargador. Su jefa, la señora Domínguez, lo vio entrar desde su escritorio y levantó una ceja. Marco, chorreando agua, soltó una risita nerviosa y dijo: buenos días, hubo un pequeño problema con el metro. La señora Domínguez lo miró cinco segundos en silencio y luego dijo: siéntate Marco, te traigo un café. Y la próxima vez, pon dos alarmas.',
+  glossary:[
+    {w:'puntual',en:'punctual / on time',es:'que llega a la hora correcta'},
+    {w:'se quedó viendo',en:'he stayed watching',es:'quedarse = to stay/remain doing something'},
+    {w:'se levantó de un salto',en:'he jumped out of bed',es:'levantarse muy rápido con urgencia'},
+    {w:'no combinaban',en:'they didn\'t match',es:'los colores no iban bien juntos'},
+    {w:'retrasado',en:'delayed / late',es:'que no llegó a tiempo'},
+    {w:'apretado',en:'squeezed / packed in',es:'con muy poco espacio'},
+    {w:'chorreando',en:'dripping / soaking wet',es:'cuando cae agua de la ropa'},
+    {w:'levantó una ceja',en:'raised an eyebrow',es:'gesto de sorpresa o desconfianza'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿Por qué no sonó la alarma de Marco?',opts:['La desactivó antes de dormir','Su teléfono se quedó sin batería','Durmió con audífonos puestos','El teléfono se cayó al piso'],a:1,fb:'El texto dice: "su teléfono tenía solo un tres por ciento de batería... el teléfono se apagó solo."'},
+    {type:'vf',stem:'"Marco desayunó rápido antes de salir." — ¿Verdadero o falso?',a:'f',fb:'Falso. El texto dice que salió "sin desayunar, sin café y sin el cargador de su computadora."'},
+    {type:'mc',stem:'¿Por qué Marco tuvo que bajarse del metro en Chilpancingo?',opts:['Porque llegó a su estación','Porque había mucha gente','Por un problema con las puertas','Porque se quedó dormido'],a:2,fb:'El texto dice: "tuvo que bajarse porque había un problema con las puertas y el metro no avanzaba."'},
+    {type:'fill',stem:'Marco llegó a la oficina completamente ___, a las diez y cuarto.',chips:['mojado','cansado','enojado','perdido'],a:'mojado',fb:'El texto dice: "llegó a la oficina a las diez y cuarto, completamente mojado."'},
+    {type:'mc',stem:'¿Qué le dijo la jefa a Marco al final?',opts:['Que estaba despedido','Que le iba a poner una falta','Que le traía un café y que pusiera dos alarmas','Que se fuera a su casa a cambiarse'],a:2,fb:'La señora Domínguez le dijo: "Siéntate, Marco. Te traigo un café. Y la próxima vez... pon dos alarmas."'},
+    {type:'vf',stem:'"Marco encontró un taxi rápidamente cerca del metro." — ¿Verdadero o falso?',a:'f',fb:'Falso. El texto dice: "Marco salió a la calle y buscó un taxi. Ninguno quería parar."'},
+  ]
+},
+// ─── 7: CDMX A2 ──────────────────────────────────────────────────────────────
+{
+  level:'A2',type:'Cultural',icon:'🏙️',
+  title:'La Ciudad de México',
+  subtitle:'Discover the capital — neighborhoods, food, transport, and culture.',
+  isDial:false,
+  paragraphs:[
+    'La Ciudad de México, conocida como CDMX o simplemente "el D.F." entre las generaciones mayores, es la capital de México y el centro político, económico y cultural del país. Con más de 9 millones de habitantes dentro de la ciudad y más de 21 millones en su área metropolitana, es una de las ciudades más pobladas del mundo y la más grande de América Latina.',
+    'La ciudad está organizada en 16 alcaldías, que son las divisiones administrativas principales. Pero en el día a día, los chilangos — como se le llama a la gente de la CDMX — se refieren más a sus colonias, que son como los barrios o vecindarios. Algunas de las más conocidas son la Roma, la Condesa, Coyoacán, Polanco, la Del Valle y la Doctores. Cada colonia tiene su propio ambiente, su arquitectura y su oferta de restaurantes, cafés, mercados y vida cultural.',
+    'El transporte público es fundamental para moverse por la ciudad. El Metro del D.F. es uno de los más usados de América: tiene 12 líneas, más de 195 estaciones y transporta millones de personas cada día. Además del metro, existen el Metrobús (con carriles exclusivos en avenidas principales), el trolebús, las micros y combis, y por supuesto los taxis y aplicaciones como Uber, Didi y Cabify. En los últimos años, la bicicleta se ha vuelto muy popular gracias al sistema de préstamo Ecobici.',
+    'La gastronomía de la CDMX es mundialmente famosa. Es casi imposible caminar dos cuadras sin encontrar un puesto de tacos, una taquería, una fonda o un mercado con comida deliciosa. Algunos platillos típicos son los tacos de canasta, las tortas de tamal, los esquites, las tlayudas, el pozole y los tamales. Los mercados como La Merced, el Mercado de Jamaica y el Mercado de Medellín son lugares perfectos para probar comida local y comprar ingredientes frescos.',
+    'Finalmente, la CDMX tiene una oferta cultural impresionante. El centro histórico es Patrimonio de la Humanidad y alberga el Zócalo, la Catedral Metropolitana y las ruinas del Templo Mayor azteca. El Bosque de Chapultepec es el parque urbano más grande de América Latina y dentro de él está el famoso Museo Nacional de Antropología. Para los amantes del arte, están el Museo Soumaya, el Museo Tamayo y la Casa Azul de Frida Kahlo en Coyoacán. Y si quieres vivir algo único, los canales de Xochimilco te esperan con sus trajineras de colores.',
+  ],
+  ttsText:'La Ciudad de México, conocida como CDMX o simplemente el D.F. entre las generaciones mayores, es la capital de México y el centro político, económico y cultural del país. Con más de nueve millones de habitantes dentro de la ciudad y más de veintiún millones en su área metropolitana, es una de las ciudades más pobladas del mundo y la más grande de América Latina. La ciudad está organizada en dieciséis alcaldías. Pero en el día a día, los chilangos, como se le llama a la gente de la CDMX, se refieren más a sus colonias, que son como los barrios o vecindarios. Algunas de las más conocidas son la Roma, la Condesa, Coyoacán, Polanco, la Del Valle y la Doctores. El transporte público es fundamental para moverse por la ciudad. El Metro tiene doce líneas, más de ciento noventa y cinco estaciones y transporta millones de personas cada día. Además del metro, existen el Metrobús, el trolebús, las micros y combis, y los taxis y aplicaciones como Uber, Didi y Cabify. En los últimos años, la bicicleta se ha vuelto muy popular gracias al sistema de préstamo Ecobici. La gastronomía de la CDMX es mundialmente famosa. Algunos platillos típicos son los tacos de canasta, las tortas de tamal, los esquites, las tlayudas, el pozole y los tamales. Los mercados como La Merced, el Mercado de Jamaica y el Mercado de Medellín son lugares perfectos para probar comida local. Finalmente, la CDMX tiene una oferta cultural impresionante. El centro histórico es Patrimonio de la Humanidad y alberga el Zócalo, la Catedral Metropolitana y las ruinas del Templo Mayor azteca. El Bosque de Chapultepec es el parque urbano más grande de América Latina. Para los amantes del arte, están el Museo Soumaya, el Museo Tamayo y la Casa Azul de Frida Kahlo en Coyoacán. Y si quieres vivir algo único, los canales de Xochimilco te esperan con sus trajineras de colores.',
+  glossary:[
+    {w:'chilangos',en:'people from Mexico City (informal)',es:'apodo de los habitantes de la CDMX'},
+    {w:'alcaldías',en:'boroughs / administrative districts',es:'las 16 divisiones de la CDMX'},
+    {w:'colonias',en:'neighborhoods',es:'zonas o barrios dentro de la ciudad'},
+    {w:'Ecobici',en:'Mexico City\'s bike-share system',es:'sistema de bicicletas compartidas'},
+    {w:'fonda',en:'small family-run restaurant',es:'restaurante pequeño y económico'},
+    {w:'esquites',en:'corn in a cup (street food)',es:'elote con crema, limón, chile y queso'},
+    {w:'trajineras',en:'colorful flat-bottomed boats',es:'barcas de colores en Xochimilco'},
+    {w:'alberga',en:'houses / contains',es:'tiene dentro, contiene'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿Cómo se llama informalmente a la gente de la CDMX?',opts:['Defeños','Capitalinos','Chilangos','Mexicanos'],a:2,fb:'El texto dice: "los chilangos — como se le llama a la gente de la CDMX."'},
+    {type:'vf',stem:'"El metro de la CDMX tiene más de 195 estaciones." — ¿Verdadero o falso?',a:'t',fb:'Verdadero. El texto dice: "más de 195 estaciones."'},
+    {type:'mc',stem:'¿Dónde está la Casa Azul de Frida Kahlo?',opts:['En Polanco','En la Roma','En Coyoacán','En el centro histórico'],a:2,fb:'El texto dice: "la Casa Azul de Frida Kahlo en Coyoacán."'},
+    {type:'fill',stem:'Las trajineras de colores están en los canales de ___.',chips:['Xochimilco','Chapultepec','La Merced','Coyoacán'],a:'Xochimilco',fb:'El texto dice: "los canales de Xochimilco te esperan con sus trajineras de colores."'},
+    {type:'mc',stem:'¿Cuál es el sistema de bicicletas compartidas de la CDMX?',opts:['Citibike','Ecobici','Metrobici','Bikemex'],a:1,fb:'El texto dice: "gracias al sistema de préstamo Ecobici."'},
+    {type:'vf',stem:'"El Bosque de Chapultepec es el parque más grande de América Latina." — ¿Verdadero o falso?',a:'t',fb:'Verdadero. El texto dice: "El Bosque de Chapultepec es el parque urbano más grande de América Latina."'},
+  ]
+},
+// ─── 8: Tienda de ropa A2 — DIALOGUE ─────────────────────────────────────────
+{
+  level:'A2',type:'Diálogo',icon:'👕',
+  title:'En la tienda de ropa',
+  subtitle:'Karen wants to buy a dress for a party. Follow her conversation with the store clerk.',
+  isDial:true,
+  speakers:{
+    'Vendedora':{side:'left',avatar:'👩‍💼',color:'#f97316'},
+    'Karen':{side:'right',avatar:'👩',color:'#a78bfa'},
+  },
+  dialogue:[
+    {who:'Vendedora',msg:'¡Buenas tardes! Bienvenida. ¿En qué le puedo ayudar?'},
+    {who:'Karen',msg:'Buenas tardes. Estoy buscando un vestido para una fiesta el próximo sábado. ¿Tienen algo elegante pero no muy formal?'},
+    {who:'Vendedora',msg:'¡Claro que sí! Tenemos varias opciones muy bonitas. ¿Tiene algún color en mente? ¿O alguna talla específica?'},
+    {who:'Karen',msg:'Me gustan los colores oscuros, como el negro, el azul marino o el verde botella. Y mi talla es la M, a veces la S dependiendo del corte.'},
+    {who:'Vendedora',msg:'Perfecto. Le traigo algunas opciones. Un momento, por favor... Mire, este vestido negro tiene un corte muy favorecedor. Es de manga larga y llega a la rodilla. También tenemos este azul marino con bordados dorados en el escote. Los dos están en talla M.'},
+    {who:'Karen',msg:'Uy, me gustan los dos. ¿Puedo probármelos?'},
+    {who:'Vendedora',msg:'Por supuesto. Los probadores están al fondo a la derecha. Le llevo los dos vestidos.'},
+    {who:'Karen',msg:'Gracias. Oiga, ¿cuánto cuesta el negro?'},
+    {who:'Vendedora',msg:'El negro está en ochocientos cincuenta pesos. Y el azul marino con los bordados está en mil doscientos, porque es de una colección nueva.'},
+    {who:'Karen',msg:'Está bien. Ahorita lo pruebo y le digo... (unos minutos después) Me encantó el negro. Me queda perfecto y es muy cómodo. Me lo llevo.'},
+    {who:'Vendedora',msg:'¡Qué bonito le quedó! Es una excelente elección para una fiesta. ¿Va a pagar en efectivo o con tarjeta?'},
+    {who:'Karen',msg:'Con tarjeta, por favor. ¿Tienen mensualidades sin intereses?'},
+    {who:'Vendedora',msg:'Sí, tenemos tres mensualidades sin intereses con Banamex y BBVA. Con otras tarjetas, depende del banco.'},
+    {who:'Karen',msg:'Perfecto, voy a pagar con mi Banamex entonces. Muchas gracias por la atención, fue muy amable.'},
+    {who:'Vendedora',msg:'¡Gracias a usted! Que le vaya muy bien en la fiesta. ¡Hasta luego!'},
+  ],
+  ttsText:'Buenas tardes, bienvenida, en qué le puedo ayudar. Buenas tardes, estoy buscando un vestido para una fiesta el próximo sábado, tienen algo elegante pero no muy formal. Claro que sí, tenemos varias opciones muy bonitas, tiene algún color en mente, o alguna talla específica. Me gustan los colores oscuros, como el negro, el azul marino o el verde botella. Y mi talla es la M, a veces la S dependiendo del corte. Perfecto, le traigo algunas opciones, un momento por favor. Mire, este vestido negro tiene un corte muy favorecedor, es de manga larga y llega a la rodilla. También tenemos este azul marino con bordados dorados en el escote. Los dos están en talla M. Me gustan los dos, puedo probármelos. Por supuesto, los probadores están al fondo a la derecha. Le llevo los dos vestidos. Gracias. Oiga, cuánto cuesta el negro. El negro está en ochocientos cincuenta pesos. Y el azul marino con los bordados está en mil doscientos, porque es de una colección nueva. Está bien, ahorita lo pruebo y le digo. Me encantó el negro, me queda perfecto y es muy cómodo, me lo llevo. Qué bonito le quedó, es una excelente elección para una fiesta, va a pagar en efectivo o con tarjeta. Con tarjeta por favor, tienen mensualidades sin intereses. Sí, tenemos tres mensualidades sin intereses con Banamex y BBVA. Con otras tarjetas depende del banco. Perfecto, voy a pagar con mi Banamex entonces, muchas gracias por la atención, fue muy amable. Gracias a usted, que le vaya muy bien en la fiesta, hasta luego.',
+  glossary:[
+    {w:'talla',en:'size (clothing)',es:'S, M, L, XL — el tamaño de la ropa'},
+    {w:'corte',en:'cut / fit (of clothing)',es:'cómo está hecha y cómo queda la ropa'},
+    {w:'favorecedor',en:'flattering',es:'que hace que una persona se vea bien'},
+    {w:'bordados',en:'embroidery',es:'decoración hecha con hilo sobre la tela'},
+    {w:'escote',en:'neckline',es:'la abertura en la parte superior del vestido'},
+    {w:'probadores',en:'fitting rooms / changing rooms',es:'cuartos para probarse la ropa'},
+    {w:'mensualidades sin intereses',en:'interest-free monthly payments',es:'pagar en partes sin costo extra'},
+    {w:'en efectivo',en:'in cash',es:'pagar con billetes y monedas'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿Para qué ocasión busca Karen el vestido?',opts:['Para una boda','Para una fiesta el sábado','Para ir al trabajo','Para una graduación'],a:1,fb:'Karen dice: "Estoy buscando un vestido para una fiesta el próximo sábado."'},
+    {type:'vf',stem:'"Karen prefiere colores claros como el blanco y el rosa." — ¿Verdadero o falso?',a:'f',fb:'Falso. Karen dice: "Me gustan los colores oscuros, como el negro, el azul marino o el verde botella."'},
+    {type:'mc',stem:'¿Cuánto cuesta el vestido negro?',opts:['$650','$850','$1,200','$750'],a:1,fb:'La vendedora dice: "El negro está en ochocientos cincuenta pesos."'},
+    {type:'fill',stem:'Karen decide pagar con su tarjeta de ___ para tener mensualidades sin intereses.',chips:['Banamex','BBVA','Santander','Citibank'],a:'Banamex',fb:'Karen dice: "voy a pagar con mi Banamex entonces." Y la vendedora confirmó que tienen mensualidades con Banamex.'},
+    {type:'mc',stem:'¿Dónde están los probadores?',opts:['A la izquierda al entrar','Al centro de la tienda','Al fondo a la derecha','En el segundo piso'],a:2,fb:'La vendedora dice: "Los probadores están al fondo a la derecha."'},
+    {type:'vf',stem:'"Karen se lleva el vestido azul marino." — ¿Verdadero o falso?',a:'f',fb:'Falso. Karen dice: "Me encantó el negro... Me lo llevo."'},
+  ]
+}
+);
+</script>
+<script>
+// ── TTS via Google Translate ──────────────────────────────────────────────────
+let currentAudios=[],ttsPlaying=false,ttsTabIdx=-1;
+
+function chunkText(text,maxLen){
+  const chunks=[];
+  const sentences=text.match(/[^.!?]+[.!?]*/g)||[text];
+  let current='';
+  sentences.forEach(s=>{
+    if((current+s).length>maxLen&&current.length>0){chunks.push(current.trim());current=s;}
+    else current+=s;
+  });
+  if(current.trim())chunks.push(current.trim());
+  return chunks;
+}
+
+function gttsUrl(text,speed){
+  const sl=speed<0.8?0.3:speed>1.1?1.5:1;
+  // slow param only supports true/false in gtts
+  const slow=speed<0.85?'true':'false';
+  return`https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=es&client=tw-ob&ttsspeed=${slow}`;
+}
+
+async function playTTS(tabIdx){
+  stopTTS();
+  ttsTabIdx=tabIdx;
+  ttsPlaying=true;
+  const r=READINGS[tabIdx];
+  const speed=parseFloat(document.getElementById('speed'+tabIdx).value);
+  const text=r.ttsText;
+  const chunks=chunkText(text,180);
+  setStatus(tabIdx,'⏳ Loading...');
+  document.getElementById('playbtn'+tabIdx).textContent='⏸ Playing...';
+
+  for(let i=0;i<chunks.length;i++){
+    if(!ttsPlaying||ttsTabIdx!==tabIdx)break;
+    setStatus(tabIdx,`▶ ${i+1}/${chunks.length}`);
+    await playChunk(chunks[i],speed,tabIdx);
+  }
+  if(ttsPlaying&&ttsTabIdx===tabIdx){
+    setStatus(tabIdx,'✓ Done');
+    document.getElementById('playbtn'+tabIdx).textContent='▶ Play again';
+    ttsPlaying=false;
+  }
+}
+
+function playChunk(text,speed,tabIdx){
+  return new Promise(resolve=>{
+    if(!ttsPlaying||ttsTabIdx!==tabIdx){resolve();return;}
+    const slow=speed<0.85;
+    const url=`https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=es&client=tw-ob`;
+    const audio=new Audio();
+    audio.crossOrigin='anonymous';
+    audio.src=url;
+    audio.playbackRate=speed>1?speed:1;
+    currentAudios.push(audio);
+    let resolved=false;
+    function done(){if(!resolved){resolved=true;resolve();}}
+
+    audio.onended=()=>done();
+
+    audio.onerror=()=>{
+      // Google blocked — stop audio completely before fallback
+      try{audio.pause();audio.src='';}catch(e){}
+      fallbackSpeech(text,speed,done);
+    };
+
+    audio.play().catch(()=>{
+      // Autoplay blocked — stop audio before fallback
+      try{audio.pause();audio.src='';}catch(e){}
+      fallbackSpeech(text,speed,done);
+    });
+  });
+}
+
+function fallbackSpeech(text,speed,done){
+  if(!('speechSynthesis' in window)){done();return;}
+  speechSynthesis.cancel(); // clear any queued speech first
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-MX';
+  u.rate=speed;
+  const voices=speechSynthesis.getVoices();
+  const v=voices.find(v=>v.lang==='es-MX')||voices.find(v=>v.lang.startsWith('es'))||null;
+  if(v)u.voice=v;
+  u.onend=()=>done();
+  u.onerror=()=>done();
+  speechSynthesis.speak(u);
+}
+
+function stopTTS(){
+  ttsPlaying=false;
+  currentAudios.forEach(a=>{try{a.pause();a.src='';}catch(e){}});
+  currentAudios=[];
+  if('speechSynthesis' in window)speechSynthesis.cancel();
+  document.querySelectorAll('[id^="ttsstatus"]').forEach(el=>el.textContent='');
+  document.querySelectorAll('[id^="playbtn"]').forEach(el=>el.textContent='▶ Play');
+}
+
+function setStatus(tabIdx,msg){
+  const el=document.getElementById('ttsstatus'+tabIdx);
+  if(el)el.textContent=msg;
+}
+
+// ── TABS & RENDER ─────────────────────────────────────────────────────────────
+const renderedTabs=new Set();
+const answers={};
+
+function switchTab(i){
+  document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  document.querySelectorAll('.reading-panel').forEach((p,j)=>p.classList.toggle('visible',i===j));
+  if(!renderedTabs.has(i)){renderReading(i);renderedTabs.add(i);}
+  stopTTS();
+}
+
+function buildTabsBar(){
+  const bar=document.getElementById('tabsBar');
+  READINGS.forEach((r,i)=>{
+    const btn=document.createElement('button');
+    btn.className='tab-btn'+(i===0?' active':'');
+    btn.textContent=`${r.icon} ${i+1}. ${r.title}`;
+    btn.onclick=()=>switchTab(i);
+    bar.appendChild(btn);
+  });
+}
+
+function renderReading(i){
+  const r=READINGS[i];
+  const container=document.getElementById('tabContents');
+  const panel=document.createElement('div');
+  panel.className='reading-panel'+(i===0?' visible':'');
+  panel.id='panel'+i;
+
+  const levelCls=r.level==='A1'?'level-a1':'level-a2';
+  let html=`<div class="reading-header">
+    <div class="reading-icon">${r.icon}</div>
+    <div>
+      <div class="reading-title">${r.title}</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:2px">${r.subtitle}</div>
+      <div class="reading-tags">
+        <span class="rtag ${levelCls}">${r.level}</span>
+        <span class="rtag type-tag">${r.type}</span>
+      </div>
+    </div>
+  </div>`;
+
+  // TTS bar
+  html+=`<div class="tts-bar">
+    <button class="tts-btn tts-play" id="playbtn${i}" onclick="playTTS(${i})">▶ Play</button>
+    <button class="tts-btn tts-stop" onclick="stopTTS()">⏹ Stop</button>
+    <span class="tts-status" id="ttsstatus${i}"></span>
+    <div class="tts-speed">
+      <label>Speed:</label>
+      <select id="speed${i}">
+        <option value="0.75">🐢 Slow</option>
+        <option value="1" selected>🚶 Normal</option>
+        <option value="1.25">🏃 Fast</option>
+      </select>
+    </div>
+  </div>`;
+
+  // Content: dialogue vs paragraphs
+  if(r.isDial){
+    html+=`<div class="dial-wrap">`;
+    r.dialogue.forEach(line=>{
+      const spk=r.speakers[line.who];
+      const side=spk?spk.side:'left';
+      const avatar=spk?spk.avatar:'👤';
+      const color=spk?spk.color:'var(--muted)';
+      html+=`<div class="dial-bubble ${side}">
+        <div class="dial-avatar" style="background:${color}22;border-color:${color}44">${avatar}</div>
+        <div class="dial-body">
+          <div class="dial-name" style="color:${color}">${line.who}</div>
+          <div class="dial-msg">${line.msg}</div>
+        </div>
+      </div>`;
+    });
+    html+=`</div>`;
+  } else {
+    html+=`<div class="text-box">`;
+    r.paragraphs.forEach(p=>{
+      html+=`<p>${p.replace(/\n/g,'<br>')}</p>`;
+    });
+    html+=`</div>`;
+  }
+
+  // Glossary
+  html+=`<div class="glossary">
+    <div class="section-label">📚 Vocabulary / Vocabulario</div>
+    <div class="glossary-grid">`;
+  r.glossary.forEach(g=>{
+    html+=`<div class="gloss-item">
+      <div class="gloss-word">${g.w}</div>
+      <div class="gloss-en">🇺🇸 ${g.en}</div>
+      <div class="gloss-es">🇲🇽 ${g.es}</div>
+    </div>`;
+  });
+  html+=`</div></div>`;
+
+  // Questions
+  html+=`<div class="section-label" style="margin-bottom:12px">❓ Questions / Preguntas</div>`;
+  html+=`<div class="score-row"><span class="score-pill" id="score${i}">0 / ${r.qs.length} answered</span></div>`;
+  html+=`<div class="q-wrap">`;
+  r.qs.forEach((q,qi)=>{
+    const typeLabel={mc:'multiple choice',vf:'true / false',fill:'fill in'}[q.type];
+    let stemDisplay=q.stem;
+    let extraBefore='';
+    if(q.type==='fill'){
+      const parts=q.stem.split('___');
+      stemDisplay=parts.length>=2?`${parts[0]}<span class="q-blank" id="blank${i}_${qi}"></span>${parts[1]}`:q.stem;
+    }
+    html+=`<div class="q-card" id="qcard${i}_${qi}">
+      <span class="q-num">Q${qi+1}</span><span class="q-type-badge">${typeLabel}</span>
+      <div class="q-stem">${stemDisplay}</div>`;
+    if(q.type==='mc'){
+      html+=`<div class="mc-opts">`;
+      q.opts.forEach((o,oi)=>html+=`<button class="mc-opt" onclick="ansQ(${i},${qi},'mc',${oi})">${o}</button>`);
+      html+=`</div>`;
+    } else if(q.type==='vf'){
+      html+=`<div class="vf-opts">
+        <button class="vf-btn t" onclick="ansQ(${i},${qi},'vf','t')">✅ Verdadero / True</button>
+        <button class="vf-btn f" onclick="ansQ(${i},${qi},'vf','f')">❌ Falso / False</button>
+      </div>`;
+    } else if(q.type==='fill'){
+      html+=`<div class="chips-row" id="chips${i}_${qi}">`;
+      q.chips.forEach(c=>html+=`<button class="chip" onclick="ansQ(${i},${qi},'fill',this.textContent)">${c}</button>`);
+      html+=`</div>`;
+    }
+    html+=`<div class="q-fb" id="fb${i}_${qi}"></div></div>`;
+  });
+  html+=`</div>`;
+  panel.innerHTML=html;
+  container.appendChild(panel);
+}
+
+// ── ANSWER HANDLER ────────────────────────────────────────────────────────────
+function ansQ(ri,qi,type,chosen){
+  const key=`${ri}_${qi}`;
+  if(answers[key]!==undefined)return;
+  const q=READINGS[ri].qs[qi];
+  const ok=type==='mc'?chosen===q.a:type==='vf'?chosen===q.a:chosen===q.a;
+  answers[key]=ok;
+  const card=document.getElementById(`qcard${ri}_${qi}`);
+  card.classList.add(ok?'correct':'wrong');
+  if(type==='mc'){
+    card.querySelectorAll('.mc-opt').forEach((b,i)=>{
+      b.disabled=true;
+      if(i===q.a)b.classList.add('show-correct');
+      else if(i===chosen)b.classList.add('sel-wrong');
+    });
+  } else if(type==='vf'){
+    card.querySelectorAll('.vf-btn').forEach(b=>b.disabled=true);
+    const tBtn=card.querySelector('.vf-btn.t'),fBtn=card.querySelector('.vf-btn.f');
+    if(q.a==='t')tBtn.classList.add('sel-correct');else fBtn.classList.add('sel-correct');
+    if(!ok)(chosen==='t'?tBtn:fBtn).classList.add('sel-wrong');
+  } else if(type==='fill'){
+    const blank=document.getElementById(`blank${ri}_${qi}`);
+    if(blank){blank.textContent=chosen;blank.style.color=ok?'var(--good)':'var(--bad)';}
+    document.querySelectorAll(`#chips${ri}_${qi} .chip`).forEach(b=>{
+      b.disabled=true;
+      if(b.textContent===chosen)b.classList.add(ok?'chip-ok':'chip-err');
+      else b.classList.add('used');
+    });
+  }
+  const fb=document.getElementById(`fb${ri}_${qi}`);
+  if(fb){fb.innerHTML=(ok?'✅ ':'❌ ')+q.fb;fb.classList.add('show');}
+  const done=READINGS[ri].qs.filter((_,j)=>answers[`${ri}_${j}`]!==undefined).length;
+  const correct=READINGS[ri].qs.filter((_,j)=>answers[`${ri}_${j}`]===true).length;
+  const sc=document.getElementById(`score${ri}`);
+  if(sc)sc.textContent=`${done} / ${READINGS[ri].qs.length} answered — ${correct} correct`;
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+buildTabsBar();
+renderReading(0);
+renderedTabs.add(0);
+</script>
+</body>
+</html>

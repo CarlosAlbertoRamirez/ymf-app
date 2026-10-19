@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass: El Reto de las 40 Preguntas (B1-B2)</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #6366f1;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --correct: #22c55e;
+            --wrong: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; padding: 20px;
+        }
+
+        .app-container { width: 100%; max-width: 850px; background: var(--card-bg); border-radius: 28px; padding: 2rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .stat-box { background: #334155; padding: 5px 12px; border-radius: 10px; font-weight: bold; font-size: 0.9rem; }
+        .progress-bar { height: 8px; background: #334155; border-radius: 4px; margin-bottom: 2rem; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: 0.4s; }
+        
+        .instruction { color: var(--accent); text-transform: uppercase; font-size: 0.8rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .difficulty { font-size: 0.7rem; padding: 2px 8px; border-radius: 5px; float: right; font-weight: bold; }
+        .dif-medio { background: #92400e; color: #fbbf24; }
+        .dif-difícil { background: #991b1b; color: #f87171; }
+        
+        .question-text { font-size: 1.3rem; margin-bottom: 2rem; line-height: 1.4; min-height: 60px; }
+
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .opt-btn { background: #2d3748; border: 2px solid transparent; color: white; padding: 1rem; border-radius: 15px; cursor: pointer; text-align: left; transition: 0.2s; font-size: 0.95rem; }
+        .opt-btn:hover { background: #3e4a5f; border-color: var(--accent); }
+        .opt-btn.selected { border-color: var(--accent); background: #3e4a5f; }
+
+        .text-input { width: 100%; padding: 1.2rem; background: #0f172a; border: 2px solid #334155; border-radius: 15px; color: white; font-size: 1.2rem; outline: none; }
+
+        #feedback-area { display: none; margin-top: 20px; padding: 1.5rem; border-radius: 15px; border-left: 5px solid var(--accent); background: rgba(255,255,255,0.05); }
+
+        .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .word-item { background: #475569; padding: 8px 15px; border-radius: 8px; cursor: pointer; }
+        .word-drop { min-height: 60px; background: #0f172a; border: 2px dashed #334155; border-radius: 15px; padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .actions { display: flex; gap: 10px; margin-top: 2rem; }
+        .main-btn { flex: 1; padding: 12px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; }
+        .btn-submit { background: var(--accent); color: white; }
+        .btn-hint { background: #475569; color: white; max-width: 100px; }
+
+        #results-screen { display: none; text-align: center; }
+        .error-log { text-align: left; background: #0f172a; padding: 15px; border-radius: 15px; margin-top: 20px; max-height: 300px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+
+<div class="app-container" id="app">
+    <div id="quiz-ui">
+        <div class="header">
+            <div class="stats">
+                <span class="stat-box">Q: <span id="q-curr">1</span>/40</span>
+                <span class="stat-box">✅ <span id="s-corr">0</span></span>
+                <span class="stat-box">PTS: <span id="s-pts">0</span></span>
+            </div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="p-fill"></div></div>
+
+        <div id="q-diff" class="difficulty"></div>
+        <div class="instruction" id="q-inst"></div>
+        <div class="question-text" id="q-text"></div>
+        
+        <div id="answer-zone"></div>
+
+        <div id="feedback-area">
+            <h4 id="f-title"></h4>
+            <p id="f-expl" style="margin-top: 10px; font-size: 0.9rem; line-height: 1.4;"></p>
+        </div>
+
+        <div class="actions">
+            <button class="main-btn btn-hint" onclick="showHint()">Pista</button>
+            <button class="main-btn btn-submit" id="btn-next" onclick="checkAnswer()">Enviar</button>
+        </div>
+    </div>
+
+    <div id="results-screen">
+        <h2>🎉 Resultados del Reto B1/B2</h2>
+        <h1 id="res-percent" style="font-size: 4rem; color: var(--accent);">0%</h1>
+        <p id="res-score"></p>
+        <div class="error-log" id="error-log"></div>
+        <button class="main-btn btn-submit" style="margin-top: 20px;" onclick="location.reload()">Reintentar nivel B2</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        // MIX B1/B2 - SUBJUNTIVO MEXICANO Y ESTRUCTURAS COMPLEJAS
+        { type: "multiple-choice", difficulty: "medio", instruction: "Probabilidad", question: "Es probable que ellos no ________ (saber) que la fiesta se canceló.", options: ["saben", "sepan", "supieran", "sabrían"], correctAnswer: "sepan", hint: "Probabilidad presente.", explanation: "Expresiones de probabilidad como 'es probable que' requieren presente de subjuntivo." },
+        { type: "input", difficulty: "difícil", instruction: "Condición Irreal", question: "Si ________ (tener) más tiempo, terminaría el libro hoy mismo.", correctAnswer: "tuviera", hint: "Hipótesis en el presente.", explanation: "Las oraciones condicionales con 'si' que expresan situaciones poco probables usan el Imperfecto de Subjuntivo." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Conector Concesivo", question: "Iremos a la Huasteca aunque ________ (llover).", options: ["llueve", "llueva", "lloverá", "llovió"], correctAnswer: "llueva", hint: "Obstáculo hipotético.", explanation: "'Aunque' con subjuntivo indica que el obstáculo no importa o es una hipótesis futura." },
+        { type: "error-correction", difficulty: "difícil", instruction: "Duda Pasada", question: "*No creo que él terminó la tarea ayer.", options: ["No creo que él terminó...", "No creo que él haya terminado...", "No creo que él termina..."], correctAnswer: "No creo que él haya terminado...", hint: "Pasado reciente + duda.", explanation: "La negación del verbo creer ('no creo que') exige subjuntivo; al ser pasado, usamos el Pretérito Perfecto de Subjuntivo." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Cambio de Sujeto", question: "Mi jefe me sugirió que ________ (tomar) el curso de finanzas.", options: ["tomo", "tomara", "tomé", "tomaría"], correctAnswer: "tomara", hint: "Sugerencia en pasado.", explanation: "Verbos de influencia en pasado (sugirió) requieren la correlación con el Imperfecto de Subjuntivo." },
+        { type: "input", difficulty: "medio", instruction: "Finalidad", question: "Te lo explico detalladamente para que no ________ (haber) dudas.", correctAnswer: "haya", hint: "Para que + ?", explanation: "La conjunción de finalidad 'para que' siempre introduce el modo subjuntivo." },
+        { type: "word-order", difficulty: "difícil", instruction: "Ordena la frase", question: "venga / dudo / que / hoy / alguien", correctAnswer: "dudo que alguien venga hoy", hint: "Verbo de duda primero.", explanation: "Duda + que + sujeto + presente de subjuntivo." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Opinión Negativa", question: "No me parece que esa ________ (ser) la mejor solución.", options: ["es", "sea", "era", "fuese"], correctAnswer: "sea", hint: "Opinión negada.", explanation: "Al negar una opinión, el verbo de la subordinada debe ir en subjuntivo." },
+        { type: "dialogue", difficulty: "difícil", instruction: "Estilo Indirecto", question: "—¿Qué te pidió tu mamá? <br> —Que le ________ (comprar) unas tortillas.", options: ["compro", "comprara", "compré", "compraría"], correctAnswer: "comprara", hint: "Mandato en el pasado.", explanation: "Para reportar una orden dada en el pasado, usamos el Imperfecto de Subjuntivo." },
+        { type: "true-false", difficulty: "medio", instruction: "Análisis gramatical", question: "En la frase 'Buscamos un hotel que tenga alberca', el subjuntivo se usa porque el hotel es específico.", options: ["Verdadero", "Falso"], correctAnswer: "Falso", hint: "Piensa en la existencia del objeto.", explanation: "Falso. Se usa subjuntivo porque el antecedente es indeterminado; no sabemos si existe ese hotel específico todavía." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Emoción", question: "Me extraña mucho que Luis no me ________ (llamar) ayer.", options: ["llama", "llamó", "llamara", "llame"], correctAnswer: "llamara", hint: "Emoción sobre el pasado.", explanation: "Verbos de sentimiento o extrañeza sobre hechos pasados disparan el Imperfecto de Subjuntivo." },
+        { type: "input", difficulty: "difícil", instruction: "Pasado del Subjuntivo", question: "Si me ________ (haber) dicho la verdad, no estaría enojado.", correctAnswer: "hubieras", hint: "Condición imposible pasada.", explanation: "Estructura: Si + Pluscuamperfecto de Subjuntivo + Condicional." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Temporalidad", question: "Te daré el dinero en cuanto ________ (recibir) mi quincena.", options: ["recibo", "reciba", "recibiera", "recibí"], correctAnswer: "reciba", hint: "Acción futura vinculada.", explanation: "Los conectores temporales (en cuanto, cuando) usan subjuntivo para acciones futuras." },
+        { type: "classification", difficulty: "medio", instruction: "Modo", question: "Es evidente que ellos TIENEN razón.", options: ["Indicativo", "Subjuntivo", "Infinitivo"], correctAnswer: "Indicativo", hint: "Certeza absoluta.", explanation: "'Es evidente que' expresa certeza, por lo que no requiere subjuntivo." },
+        { type: "multiple-choice", difficulty: "difícil", instruction: "Cortesía", question: "Señor, ________ (querer) pedirle permiso para salir temprano.", options: ["Quiero", "Quise", "Quisiera", "Querré"], correctAnswer: "Quisiera", hint: "Uso cortés.", explanation: "El imperfecto de subjuntivo se usa habitualmente para peticiones corteses." },
+        { type: "input", difficulty: "medio", instruction: "Deseo", question: "¡Ojalá ________ (poder) ir a la boda el próximo mes!", correctAnswer: "pueda", hint: "Deseo posible.", explanation: "Ojalá + presente de subjuntivo indica un deseo con posibilidad de realizarse." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Relativo", question: "Hazlo como ________ (querer), no me importa.", options: ["quieres", "quieras", "querrás", "quisieras"], correctAnswer: "quieras", hint: "Modo indeterminado.", explanation: "Al no especificar la manera exacta, el relativo 'como' exige subjuntivo." },
+        { type: "error-correction", difficulty: "medio", instruction: "Verbo de influencia", question: "*Te prohíbo que sales de noche.", options: ["Te prohíbo que sales...", "Te prohíbo que salgas...", "Te prohíbo que saldrás..."], correctAnswer: "Te prohíbo que salgas...", hint: "Prohibición = Subjuntivo.", explanation: "Prohibir es un verbo de influencia que requiere presente de subjuntivo." },
+        { type: "true-false", difficulty: "medio", instruction: "Uso de 'Tal vez'", question: "Con 'Tal vez' se usa subjuntivo para expresar una duda más fuerte que con el indicativo.", options: ["Verdadero", "Falso"], correctAnswer: "Verdadero", hint: "Niveles de duda.", explanation: "Verdadero. El subjuntivo aumenta la sensación de incertidumbre en el hablante." },
+        { type: "multiple-choice", difficulty: "difícil", instruction: "Condición Pasada", question: "Si ________ (ser) más inteligente, habría aceptado la oferta.", options: ["fuera", "sea", "era", "fuese"], correctAnswer: "fuera", hint: "Hipótesis sobre la identidad.", explanation: "Tanto 'fuera' como 'fuese' son correctos para el imperfecto de subjuntivo." },
+        // ... (Continuaría hasta las 40 preguntas con esta misma lógica de dificultad B1/B2)
+        { type: "input", difficulty: "medio", instruction: "Deseo", question: "Que ________ (tener) un excelente viaje.", correctAnswer: "tengas", hint: "Deseo indirecto.", explanation: "Las frases que omiten 'Espero que' pero inician con 'Que' usan presente de subjuntivo." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Duda", question: "No estoy seguro de que eso ________ (funcionar).", options: ["funciona", "funcione", "funcionó", "funcionara"], correctAnswer: "funcione", hint: "Inseguridad.", explanation: "La falta de certeza ('no estoy seguro') requiere el modo subjuntivo." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Existencia", question: "¿Hay alguien aquí que ________ (saber) arreglar esto?", options: ["sabe", "sepa", "supiera", "sabía"], correctAnswer: "sepa", hint: "Pregunta sobre existencia.", explanation: "En preguntas sobre la existencia de alguien con ciertas cualidades, se usa subjuntivo." },
+        { type: "input", difficulty: "difícil", instruction: "Perfecto Subjuntivo", question: "Espero que tú ya ________ (haber / comer) cuando llegue.", correctAnswer: "hayas comido", hint: "Acción terminada en el futuro.", explanation: "El Pretérito Perfecto de Subjuntivo indica una acción terminada antes de otro punto futuro." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Sentimiento", question: "Me da miedo que ________ (perder) las llaves otra vez.", options: ["pierdes", "pierdas", "perdiste", "perdías"], correctAnswer: "pierdas", hint: "Miedo = Emoción.", explanation: "Los verbos que expresan miedo o temor requieren subjuntivo." },
+        { type: "word-order", difficulty: "medio", instruction: "Ordena", question: "que / no / me / digas / pidas / eso", correctAnswer: "no me pidas que diga eso", hint: "Doble verbo.", explanation: "Petición negativa + que + subjuntivo." },
+        { type: "multiple-choice", difficulty: "difícil", instruction: "C1/B2 - Concesiva", question: "Por muy rápido que ________ (correr), no llegarás a tiempo.", options: ["corres", "corras", "correrás", "corrieras"], correctAnswer: "corras", hint: "Intensificador.", explanation: "La estructura 'Por muy + adj/adv + que' siempre requiere subjuntivo." },
+        { type: "input", difficulty: "medio", instruction: "Opinión", question: "Es una lástima que no ________ (venir) Carlos a la cena.", correctAnswer: "venga", hint: "Lástima = Emoción.", explanation: "Las valoraciones subjetivas (es una lástima, es increíble) usan subjuntivo." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Mandato", question: "Dile a tu hermano que ________ (limpiar) su cuarto.", options: ["limpia", "limpie", "limpió", "limpiara"], correctAnswer: "limpie", hint: "Orden a tercero.", explanation: "Decir con valor de mandato requiere presente de subjuntivo." },
+        { type: "true-false", difficulty: "difícil", instruction: "Matiz", question: "La frase 'Buscaba a alguien que me ayudara' implica que finalmente encontré a esa persona.", options: ["Verdadero", "Falso"], correctAnswer: "Falso", hint: "Intención vs Realidad.", explanation: "Falso. El uso del subjuntivo enfatiza la búsqueda de la cualidad, no el éxito de la acción." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Cambio Sujeto", question: "Te recomiendo que no ________ (beber) tanta soda.", options: ["bebes", "bebas", "bebiste", "bebieras"], correctAnswer: "bebas", hint: "Consejo.", explanation: "Recomendar es un verbo de influencia para el presente de subjuntivo." },
+        { type: "input", difficulty: "difícil", instruction: "Pluscuamperfecto", question: "Me habría gustado que me ________ (invitar) a tu graduación.", correctAnswer: "hubieras invitado", hint: "Sentimiento pasado sobre hecho pasado.", explanation: "Pluscuamperfecto de Subjuntivo para deseos o lamentos sobre el pasado." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Negación", question: "No es que no me ________ (gustar), pero prefiero el otro.", options: ["gusta", "guste", "gustara", "gustó"], correctAnswer: "guste", hint: "Justificación negada.", explanation: "La estructura 'No es que...' se usa para desmentir una idea y requiere subjuntivo." },
+        { type: "multiple-choice", difficulty: "difícil", instruction: "Pasado", question: "Fue una sorpresa que ella ________ (ganar) el concurso.", options: ["gana", "gane", "ganara", "ganó"], correctAnswer: "ganara", hint: "Valoración en pasado.", explanation: "Valoración de un hecho pasado requiere el Imperfecto de Subjuntivo." },
+        { type: "input", difficulty: "medio", instruction: "Finalidad", question: "Ahorro dinero para que mis hijos ________ (poder) estudiar.", correctAnswer: "puedan", hint: "Objetivo futuro.", explanation: "Subjuntivo tras 'para que'." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Frecuencia", question: "Siempre que ________ (tener) tiempo, voy al cine.", options: ["tengo", "tenga", "tuviera", "tendré"], correctAnswer: "tengo", hint: "Hábito real.", explanation: "Cuidado: 'Siempre que' con valor de hábito usa indicativo. (Pregunta trampa de nivel B2)." },
+        { type: "multiple-choice", difficulty: "difícil", instruction: "Condición", question: "Como no ________ (llegar) pronto, me voy sin ti.", options: ["llegues", "llegas", "llegarás", "llegaste"], correctAnswer: "llegues", hint: "Amenaza/Condición.", explanation: "'Como' con valor condicional (amenaza) requiere subjuntivo." },
+        { type: "input", difficulty: "medio", instruction: "Duda", question: "Dudo que ellos ________ (estar) en casa ahora.", correctAnswer: "estén", hint: "Duda presente.", explanation: "Dudar + que + presente de subjuntivo." },
+        { type: "multiple-choice", difficulty: "medio", instruction: "Deseo", question: "Espero que todo ________ (salir) bien en tu examen.", options: ["sale", "salga", "salió", "saliera"], correctAnswer: "salga", hint: "Futuro deseado.", explanation: "Esperar requiere presente de subjuntivo para deseos futuros." },
+        { type: "multiple-choice", difficulty: "difícil", instruction: "Emoción Pasada", question: "Me molestó que tú me ________ (mentir) ayer.", options: ["mientes", "mintieras", "mientas", "mentiste"], correctAnswer: "mintieras", hint: "Molestia en pasado.", explanation: "Hechos que causaron emoción en el pasado van en Imperfecto de Subjuntivo." }
+    ];
+
+    let current = 0; score = 0; pts = 0;
+    let errors = [];
+    let selectedWords = [];
+
+    function loadQuestion() {
+        const q = quizData[current];
+        document.getElementById('q-curr').innerText = current + 1;
+        document.getElementById('p-fill').style.width = `${((current + 1) / 40) * 100}%`;
+        document.getElementById('q-diff').innerText = q.difficulty;
+        document.getElementById('q-diff').className = `difficulty dif-${q.difficulty}`;
+        document.getElementById('q-inst').innerText = q.instruction;
+        document.getElementById('q-text').innerHTML = q.question;
+        document.getElementById('feedback-area').style.display = 'none';
+        
+        const zone = document.getElementById('answer-zone');
+        zone.innerHTML = '';
+
+        if(['multiple-choice', 'classification', 'error-correction', 'dialogue', 'true-false'].includes(q.type)) {
+            const grid = document.createElement('div');
+            grid.className = 'options-grid';
+            q.options.forEach(opt => {
+                const b = document.createElement('button');
+                b.className = 'opt-btn';
+                b.innerText = opt;
+                b.onclick = () => {
+                    document.querySelectorAll('.opt-btn').forEach(x => x.classList.remove('selected'));
+                    b.classList.add('selected');
+                };
+                grid.appendChild(b);
+            });
+            zone.appendChild(grid);
+        } else if(q.type === 'input') {
+            zone.innerHTML = `<input type="text" id="user-in" class="text-input" placeholder="Escribe el verbo conjugado...">`;
+        } else if(q.type === 'word-order') {
+            selectedWords = [];
+            zone.innerHTML = `<div class="word-drop" id="drop" style="margin-bottom:10px"></div><div class="word-bank" id="bank"></div>`;
+            q.question.split(' / ').sort(() => Math.random() - 0.5).forEach(w => {
+                const s = document.createElement('span');
+                s.className = 'word-item';
+                s.innerText = w;
+                s.onclick = () => {
+                    if(s.parentNode.id === 'bank') { document.getElementById('drop').appendChild(s); selectedWords.push(w); }
+                    else { document.getElementById('bank').appendChild(s); selectedWords = selectedWords.filter(x => x !== w); }
+                };
+                document.getElementById('bank').appendChild(s);
+            });
+        }
+        document.getElementById('btn-next').innerText = "Enviar";
+        document.getElementById('btn-next').onclick = checkAnswer;
+    }
+
+    function checkAnswer() {
+        const q = quizData[current];
+        let userAns = "";
+        if(q.type === 'input') userAns = document.getElementById('user-in').value.trim();
+        else if(q.type === 'word-order') userAns = selectedWords.join(' ');
+        else {
+            const sel = document.querySelector('.opt-btn.selected');
+            userAns = sel ? sel.innerText : "";
+        }
+
+        if(!userAns) return alert("Por favor, responde la pregunta.");
+
+        const isCorrect = userAns.toLowerCase() === q.correctAnswer.toLowerCase();
+        const f = document.getElementById('feedback-area');
+        f.style.display = 'block';
+        
+        if(isCorrect) {
+            score++; pts += 10;
+            document.getElementById('f-title').innerText = "¡Excelente! ✅";
+            document.getElementById('f-title').style.color = "var(--correct)";
+        } else {
+            errors.push({q: q.question, correct: q.correctAnswer, expl: q.explanation});
+            document.getElementById('f-title').innerText = "Cuidado ❌";
+            document.getElementById('f-title').style.color = "var(--wrong)";
+        }
+        
+        document.getElementById('f-expl').innerHTML = `<strong>Respuesta correcta:</strong> ${q.correctAnswer}<br><br>${q.explanation}`;
+        updateStats();
+
+        document.getElementById('btn-next').innerText = "Siguiente";
+        document.getElementById('btn-next').onclick = next;
+    }
+
+    function next() {
+        current++;
+        if(current < 40) loadQuestion();
+        else finish();
+    }
+
+    function showHint() {
+        alert("Pista: " + quizData[current].hint);
+        pts -= 2; updateStats();
+    }
+
+    function updateStats() {
+        document.getElementById('s-corr').innerText = score;
+        document.getElementById('s-pts').innerText = pts;
+    }
+
+    function finish() {
+        document.getElementById('quiz-ui').style.display = 'none';
+        document.getElementById('results-screen').style.display = 'block';
+        const perc = Math.round((score / 40) * 100);
+        document.getElementById('res-percent').innerText = perc + "%";
+        document.getElementById('res-score').innerText = `Dominio del Subjuntivo: ${score} de 40. Puntos acumulados: ${pts}`;
+        
+        const log = document.getElementById('error-log');
+        log.innerHTML = "<h3>Análisis de puntos débiles:</h3>";
+        errors.forEach(e => {
+            log.innerHTML += `<div style="margin-bottom:15px; border-bottom:1px solid #334155; padding-bottom:5px;">
+                <p style="color:var(--text-muted)">Pregunta: ${e.q}</p>
+                <p style="color:var(--correct)">✔ Correcto: ${e.correct}</p>
+                <small>${e.expl}</small>
+            </div>`;
+        });
+    }
+
+    loadQuestion();
+</script>
+</body>
+</html>

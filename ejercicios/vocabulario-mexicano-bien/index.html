@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vocabulario Mexicano | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --comida:#f97316;--comida2:#fdba74;
+  --lugar:#34d399;--lugar2:#6ee7b7;
+  --casa:#a78bfa;--casa2:#c4b5fd;
+  --calle:#60a5fa;--calle2:#93c5fd;
+  --fiestas:#f472b6;--fiestas2:#ff91cd;
+  --extra:#fbbf24;--extra2:#fde68a;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 12% 8%,rgba(249,115,22,.13),transparent 30%),radial-gradient(ellipse at 88% 12%,rgba(52,211,153,.1),transparent 30%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(1020px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--comida),#fff 40%,var(--lugar));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.85rem;margin-top:4px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ex-tabs{display:flex;gap:4px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:7px;overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:7px 10px;font-weight:800;font-family:var(--font);font-size:.72rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;transform:translateY(-1px)}
+.etab-icon{font-size:1.1rem;line-height:1}
+.etab-label{font-size:.58rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:22px 26px;box-shadow:var(--shadow)}
+.ex-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.85rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:16px}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:90px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;transition:width .35s;background:linear-gradient(90deg,var(--comida),var(--lugar))}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+/* ── AUDIO ── */
+.btn-audio{background:rgba(37,217,255,.12);border:1.5px solid rgba(37,217,255,.28);color:var(--cyan);border-radius:8px;padding:4px 10px;font-size:.74rem;font-weight:800;cursor:pointer;transition:.13s;font-family:var(--font);display:inline-flex;align-items:center;gap:4px}
+.btn-audio:hover{background:rgba(37,217,255,.22)}.btn-audio.playing{animation:ablink .8s infinite}
+@keyframes ablink{0%,100%{opacity:1}50%{opacity:.5}}
+/* ── FLASHCARDS ── */
+.fc-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.fc-fbtn{border:0;border-radius:9px;padding:5px 13px;font-size:.73rem;font-weight:800;font-family:var(--font);cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);color:var(--muted);border:1.5px solid transparent}
+.fc-fbtn.active{color:white}
+.fc-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.fc-prow{display:flex;align-items:center;gap:12px;width:100%;max-width:660px}
+.fc-cnt{font-size:.8rem;font-weight:800;color:var(--muted2);white-space:nowrap}
+.fc-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.fc-fil{height:100%;border-radius:999px;transition:width .4s}
+.fc-card{width:100%;max-width:660px;min-height:260px;perspective:1000px;cursor:pointer}
+.fc-inner{position:relative;width:100%;min-height:260px;transition:transform .5s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.fc-card.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;border-radius:20px;padding:24px 26px;backface-visibility:hidden;display:flex;flex-direction:column;gap:8px;min-height:260px}
+.fc-back{transform:rotateY(180deg)}
+.fc-emoji{font-size:3rem;line-height:1}
+.fc-es{font-family:var(--display);font-size:2.2rem;font-weight:900;line-height:1.1}
+.fc-en{font-size:1rem;font-weight:600;color:var(--muted)}
+.fc-pron{font-size:.8rem;color:var(--muted2);font-style:italic}
+.fc-ex{font-size:.88rem;line-height:1.65;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:10px}
+.fc-note{font-size:.78rem;color:var(--muted2);line-height:1.5;padding:7px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.fc-hint{font-size:.72rem;color:var(--muted2);text-align:center;font-style:italic;margin-top:auto}
+.fc-nav{display:flex;gap:8px;align-items:center;justify-content:center;width:100%;max-width:660px}
+/* ── PICTURE MATCH ── */
+.pm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.pm-card{border-radius:18px;overflow:hidden;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);transition:transform .15s}
+.pm-card:hover{transform:translateY(-2px)}
+.pm-card.ok{border-color:var(--good);box-shadow:0 0 0 2px rgba(34,197,94,.3)}
+.pm-card.err{border-color:var(--bad);box-shadow:0 0 0 2px rgba(239,68,68,.25)}
+.pm-emoji{font-size:3.5rem;display:flex;align-items:center;justify-content:center;padding:22px;background:linear-gradient(160deg,#1c0d30,#2a1245);min-height:110px}
+.pm-q{padding:11px 14px 8px;font-size:.92rem;font-weight:700;text-align:center;background:rgba(0,0,0,.2);line-height:1.45}
+.pm-q-en{font-size:.72rem;color:var(--muted2);font-style:italic;display:block;margin-top:2px}
+.pm-btns{display:grid;grid-template-columns:1fr 1fr}
+.pm-btn{border:0;padding:10px 8px 10px 20px;font-weight:800;font-family:var(--font);font-size:.85rem;cursor:pointer;color:white;text-align:left;position:relative;transition:.12s;line-height:1.3}
+.pm-btn:hover:not([disabled]){filter:brightness(1.15)}
+.pm-btn[disabled]{cursor:default}
+.pm-btn::before{content:attr(data-l);position:absolute;left:6px;top:50%;transform:translateY(-50%);font-size:.65rem;opacity:.6;font-weight:900}
+.pm-btn.c1{background:#c0392b}.pm-btn.c2{background:#2980b9}.pm-btn.c3{background:#d35400}.pm-btn.c4{background:#27ae60}
+.pm-btn.revealed{box-shadow:inset 0 0 0 3px white}
+.pm-btn.revealed::after{content:"✓";position:absolute;right:7px;top:50%;transform:translateY(-50%)}
+.pm-btn.dim{opacity:.25}
+.pm-exp{display:none;font-size:.76rem;padding:8px 12px;background:rgba(0,0,0,.3);color:var(--muted);line-height:1.5;text-align:center}
+.pm-exp.show{display:block}
+/* ── CHAT DIALOGUES ── */
+.dial-wrap{display:flex;flex-direction:column;gap:16px}
+.dial-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden}
+.dial-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.dial-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.dial-scene{padding:9px 16px;background:rgba(0,0,0,.2);font-size:.75rem;color:var(--muted2);font-style:italic}
+.chat-body{padding:13px 16px;display:flex;flex-direction:column;gap:8px}
+.chat-row{display:flex;align-items:flex-end;gap:8px}
+.chat-row.right{flex-direction:row-reverse}
+.chat-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;background:rgba(255,255,255,.08)}
+.chat-bub{max-width:80%;padding:9px 13px;border-radius:16px;font-size:.9rem;line-height:1.55}
+.chat-row.left .chat-bub{background:rgba(255,255,255,.09);border-radius:4px 16px 16px 16px}
+.chat-row.right .chat-bub{background:rgba(52,211,153,.16);border:1px solid rgba(52,211,153,.22);border-radius:16px 4px 16px 16px}
+.chat-who{font-size:.6rem;font-weight:900;text-transform:uppercase;color:var(--muted2);margin-bottom:3px}
+.voc-tag{display:inline-block;background:rgba(37,217,255,.14);border:1px solid rgba(37,217,255,.3);color:var(--cyan);border-radius:5px;padding:1px 6px;font-size:.7rem;font-weight:800;margin:0 2px}
+.dial-q-area{padding:12px 16px;background:rgba(0,0,0,.12);border-top:1px solid rgba(255,255,255,.06)}
+.dial-q-txt{font-size:.87rem;font-weight:700;color:var(--muted);margin-bottom:10px}
+.dial-opts{display:flex;flex-direction:column;gap:7px}
+.dial-opt{border:0;border-radius:10px;padding:10px 15px;font-weight:600;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left}
+.dial-opt:hover:not([disabled]){transform:translateX(4px);border-color:rgba(37,217,255,.35)}
+.dial-opt[disabled]{cursor:default;transform:none}
+.dial-opt.d-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.dial-opt.d-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.dial-opt.d-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.dial-exp{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;padding:8px 16px 12px;background:rgba(255,255,255,.03)}
+.dial-exp.show{display:block}
+/* ── FILL-IN ── */
+.fill-list{display:flex;flex-direction:column;gap:14px}
+.fill-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;padding:17px}
+.fill-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.fill-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.fill-ctx{font-size:.75rem;color:var(--muted2);font-style:italic;margin-bottom:7px}
+.fill-q{font-size:1rem;line-height:1.85;font-weight:600;margin-bottom:8px}
+.fill-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px}
+.fill-blank{display:inline-block;border-bottom:2.5px solid var(--cyan);min-width:90px;text-align:center;padding:0 4px;color:var(--cyan);font-weight:800;font-family:var(--display);font-size:1rem}
+.fill-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px}
+.fill-chip{border:0;border-radius:9px;padding:7px 14px;font-weight:700;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.fill-chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.fill-chip.used{opacity:.22;cursor:not-allowed}
+.fill-chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.fill-chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.15);color:#fca5a5}
+.fill-exp{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:6px;padding:7px 11px;background:rgba(255,255,255,.04);border-radius:8px}
+.fill-exp.show{display:block}
+/* ── SORT ── */
+.sort-pile{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;min-height:52px;margin-bottom:12px}
+.sort-bucket{border-radius:14px;padding:12px;min-height:76px;display:flex;flex-direction:column;gap:6px;transition:.2s}
+.sort-bucket.drag-over{box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.bucket-title{font-family:var(--display);font-size:.76rem;font-weight:900;text-align:center}
+.sort-chip{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:9px;padding:7px 12px;font-size:.84rem;font-weight:600;cursor:grab;user-select:none;transition:.15s}
+.sort-chip:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sort-chip.ghost{opacity:.35}
+.sort-chip.c-ok{cursor:default}
+.sort-chip.c-err{font-size:.78rem}
+/* ── SPEED ── */
+.sp-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-stats{display:flex;gap:9px}
+.spst{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spst .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.spst .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spst .sv.g{color:var(--good)}.spst .sv.b{color:var(--bad)}.spst .sv.w{color:var(--warn)}
+.sp-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:20px;text-align:center;width:100%;max-width:520px}
+.sp-emoji{font-size:2.5rem;margin-bottom:6px}
+.sp-q{font-size:1rem;line-height:1.6;margin-bottom:4px}
+.sp-en{font-size:.82rem;color:var(--muted2);font-style:italic;margin-bottom:4px}
+.sp-hint{font-size:.76rem;color:var(--muted2)}
+.sp-row{display:flex;gap:8px;justify-content:center;width:100%;max-width:520px}
+.sp-inp{flex:1;max-width:260px;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.3);border-radius:11px;padding:10px 14px;font-family:var(--display);font-size:1rem;font-weight:800;color:var(--text);outline:none;transition:.15s}
+.sp-inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.sp-inp::placeholder{color:var(--muted2);font-weight:400}
+.sp-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:520px}
+.sp-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.sp-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.tmr-row{display:flex;align-items:center;gap:9px;width:100%;max-width:520px}
+.tmr-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.tmr-fil{height:100%;border-radius:999px;transition:width 1s linear;background:linear-gradient(90deg,var(--comida),var(--lugar))}
+.tmr-n{font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--muted2);min-width:22px;text-align:right}
+.sp-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.streak{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak.on{display:inline-flex;align-items:center;gap:4px}
+.cf{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.cf.pop{animation:cfk .7s ease forwards}
+@keyframes cfk{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+/* ── REFERENCE ── */
+.ref-search{width:100%;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.25);color:var(--text);border-radius:11px;padding:10px 16px;font-family:var(--font);font-size:.95rem;outline:none;transition:.15s;margin-bottom:12px}
+.ref-search:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.ref-search::placeholder{color:var(--muted2)}
+.ref-row{display:flex;gap:10px;align-items:center;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04);transition:.13s;flex-wrap:wrap}
+.ref-row:hover{background:rgba(255,255,255,.03)}
+.ref-row:last-child{border-bottom:none}
+.rr-emoji{font-size:1.4rem;width:30px;text-align:center;flex-shrink:0}
+.rr-es{font-family:var(--display);font-weight:900;font-size:.95rem;min-width:140px;cursor:pointer}
+.rr-es:hover{text-decoration:underline}
+.rr-en{color:var(--muted2);font-style:italic;font-size:.82rem;flex:1}
+.rr-note{font-size:.72rem;color:var(--muted2);min-width:120px;text-align:right}
+.ref-section-h{font-family:var(--display);font-size:.88rem;font-weight:900;padding:7px 12px;border-radius:9px;display:inline-flex;align-items:center;gap:6px;margin:14px 0 8px}
+.ref-count{font-size:.73rem;color:var(--muted2);font-weight:700;margin-bottom:10px}
+.hl{background:rgba(37,217,255,.2);border-radius:3px;padding:0 2px}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:14px 12px}.pm-grid{grid-template-columns:1fr 1fr}.pm-grid>*:nth-child(odd):last-child{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="cf" id="cf"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Vocabulario Mexicano 🇲🇽</h1>
+      <p>60 essential words from everyday Mexican life — food, places, home, street, celebrations and more. With audio, dialogues and real context.</p>
+      <div class="badges">
+        <span class="badge">🆕 A1–A2</span>
+        <span class="badge" style="border-color:rgba(249,115,22,.4);color:var(--comida2)">🌮 Comida</span>
+        <span class="badge" style="border-color:rgba(52,211,153,.4);color:var(--lugar2)">📍 Lugares</span>
+        <span class="badge" style="border-color:rgba(244,114,182,.4);color:var(--fiestas2)">🎉 Fiestas</span>
+        <span class="badge" style="border-color:rgba(37,217,255,.4);color:var(--cyan)">🔊 Audio</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">📖</span><span class="etab-label">Flash-<br>cards</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">🖼️</span><span class="etab-label">¿Cómo<br>se dice?</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">💬</span><span class="etab-label">Diá-<br>logos</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">✏️</span><span class="etab-label">Com-<br>pleta</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">📊</span><span class="etab-label">Clasi-<br>fica</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">⚡</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-6" onclick="goEx(6)"><span class="etab-icon">📄</span><span class="etab-label">Refer-<br>encia</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · Your Mexican Friend</p>
+</div>
+<script>
+/* ── Smart audio ── */
+let _voice=null;
+function initVoice(){
+  if(!window.speechSynthesis)return;
+  const pick=()=>{
+    const vs=window.speechSynthesis.getVoices();if(!vs.length)return;
+    const tests=[v=>v.name==='Paulina',v=>v.name.includes('Paulina'),
+      v=>v.lang==='es-MX'&&v.localService,v=>v.lang==='es-MX',
+      v=>v.name.includes('Google')&&v.lang.startsWith('es'),
+      v=>v.lang.startsWith('es')&&v.localService,v=>v.lang.startsWith('es')];
+    for(const t of tests){const f=vs.find(t);if(f){_voice=f;break;}}
+  };
+  pick();
+  if(window.speechSynthesis.onvoiceschanged!==undefined)
+    window.speechSynthesis.onvoiceschanged=pick;
+  setTimeout(pick,800);
+}
+initVoice();
+function speak(text,btn){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('.btn-audio').forEach(b=>{b.classList.remove('playing');b.textContent='🔊';});
+  const u=new SpeechSynthesisUtterance(text);
+  if(_voice)u.voice=_voice;
+  u.lang=_voice?_voice.lang:'es-MX';u.rate=0.82;u.pitch=1.0;
+  if(btn){btn.classList.add('playing');btn.textContent='🔊▶';}
+  u.onend=u.onerror=()=>{if(btn){btn.classList.remove('playing');btn.textContent='🔊';}};
+  window.speechSynthesis.speak(u);
+}
+
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+function seededShuffle(arr,seed){const a=[...arr];let s=seed;for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let fcIdx=0,fcFilter='all',fcFlipped=false,fcCards=[];
+let pmAns={},dialAns={},fillAns={};
+let dragItem=null,sortPlaced={},sortChecked=false,tapSel=null;
+let spIdx=0,spOk=0,spErr=0,spStreak=0,spTimer=null,spTimeLeft=0,spAnswered=false;
+
+function goEx(n){
+  [0,1,2,3,4,5,6].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===n));
+  [renderFlash,renderPM,renderDial,renderFill,renderSort,renderSpeed,renderRef][n]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const CATS={
+  comida: {label:'Comida y mercado',icon:'🌮',col:'var(--comida)',bg:'rgba(249,115,22,.1)',bd:'rgba(249,115,22,.28)'},
+  lugar:  {label:'Lugares',         icon:'📍',col:'var(--lugar)', bg:'rgba(52,211,153,.1)',bd:'rgba(52,211,153,.28)'},
+  casa:   {label:'Casa y objetos',  icon:'🏠',col:'var(--casa)',  bg:'rgba(167,139,250,.1)',bd:'rgba(167,139,250,.28)'},
+  calle:  {label:'Calle y transporte',icon:'🚌',col:'var(--calle)',bg:'rgba(96,165,250,.1)',bd:'rgba(96,165,250,.28)'},
+  fiestas:{label:'Fiestas y familia',icon:'🎉',col:'var(--fiestas)',bg:'rgba(244,114,182,.1)',bd:'rgba(244,114,182,.28)'},
+  extra:  {label:'Cosas mexicanas', icon:'🌵',col:'var(--extra)', bg:'rgba(251,191,36,.1)',bd:'rgba(251,191,36,.28)'},
+};
+
+/* ══════════════════════════════════
+   VOCABULARY DATA — 60 items
+   Fields: cat, emoji, es, en, pron, ex_es, ex_en, note
+══════════════════════════════════ */
+const VOC=[
+  /* COMIDA Y MERCADO (12) */
+  {cat:'comida',emoji:'🌮',es:'el taco',en:'taco',pron:'TAH-koh',
+   ex_es:'Voy por dos tacos de pastor, por favor.',ex_en:'I\'ll get two tacos al pastor, please.',
+   note:'Corn tortilla folded around filling. Al pastor, de canasta, de bistec — Mexico has hundreds of varieties.'},
+  {cat:'comida',emoji:'🫓',es:'la tortilla',en:'tortilla',pron:'tor-TEE-yah',
+   ex_es:'¿Me da una tortilla para el taco?',ex_en:'Can I get a tortilla for the taco?',
+   note:'Thin flatbread made from corn (maíz) or wheat flour (harina). The base of Mexican cuisine.'},
+  {cat:'comida',emoji:'🥑',es:'el aguacate',en:'avocado',pron:'ah-gwah-KAH-teh',
+   ex_es:'El guacamole es de aguacate, limón y sal.',ex_en:'Guacamole is avocado, lime and salt.',
+   note:'Avocado in Mexican Spanish. In Spain they often say "palta" but in Mexico it\'s always aguacate.'},
+  {cat:'comida',emoji:'🫙',es:'la salsa',en:'salsa / sauce',pron:'SAL-sah',
+   ex_es:'¿Me pone salsa verde, por favor?',ex_en:'Can you add green salsa, please?',
+   note:'In Mexico "salsa" always means hot sauce, not a dance! Salsa verde (green tomatillo), salsa roja (red chili).'},
+  {cat:'comida',emoji:'🌶️',es:'el chile',en:'chili pepper',pron:'CHEE-leh',
+   ex_es:'¿Está picante? No como mucho chile.',ex_en:'Is it spicy? I don\'t eat much chili.',
+   note:'Essential in Mexican cooking. Jalapeño, serrano, habanero, poblano — each has a different heat and flavor.'},
+  {cat:'comida',emoji:'🍋',es:'el limón',en:'lime (not lemon!)',pron:'lee-MON',
+   ex_es:'Ponle limón y sal al elote.',ex_en:'Put lime and salt on the corn.',
+   note:'⚠️ In Mexico, "limón" = LIME (small green citrus), not the yellow lemon. Lemon is "limón amarillo" if needed.'},
+  {cat:'comida',emoji:'🌽',es:'el elote',en:'corn on the cob',pron:'eh-LOH-teh',
+   ex_es:'Un elote con mayonesa y chile, por favor.',ex_en:'A corn cob with mayo and chili, please.',
+   note:'Street food classic. Served on the cob or in a cup (esquites). From Nahuatl "elotl."'},
+  {cat:'comida',emoji:'🫘',es:'los frijoles',en:'beans',pron:'free-HOH-les',
+   ex_es:'¿Me da arroz y frijoles de guarnición?',ex_en:'Can I get rice and beans as a side?',
+   note:'Black or pinto beans. A staple at almost every Mexican meal. "Frijoles de la olla" = pot beans.'},
+  {cat:'comida',emoji:'🥤',es:'el agua fresca',en:'fruit water drink',pron:'AH-gwah FRES-kah',
+   ex_es:'Quiero un agua de jamaica, por favor.',ex_en:'I want a hibiscus water, please.',
+   note:'Non-alcoholic water-based drink with fruit or flowers. Jamaica (hibiscus), tamarindo, horchata (rice milk).'},
+  {cat:'comida',emoji:'🛒',es:'el tianguis',en:'street market / outdoor market',pron:'tee-AN-gees',
+   ex_es:'Los domingos vamos al tianguis del barrio.',ex_en:'On Sundays we go to the neighborhood market.',
+   note:'Open-air weekly market, often in a street or plaza. From Nahuatl "tianquiztli." Very common in CDMX.'},
+  {cat:'comida',emoji:'🏪',es:'la tienda de abarrotes',en:'corner store / bodega',pron:'ah-bah-ROH-tes',
+   ex_es:'Voy a la tienda a comprar leche.',ex_en:'I\'m going to the corner store to buy milk.',
+   note:'The neighborhood corner store. Sells everything basic. The owner is often called "el tendero."'},
+  {cat:'comida',emoji:'🌮',es:'la taquería',en:'taco stand / taco restaurant',pron:'tah-keh-REE-ah',
+   ex_es:'Hay una taquería muy buena cerca de aquí.',ex_en:'There\'s a really good taco place near here.',
+   note:'A place that specializes in tacos. Can be a small street stand or a full restaurant.'},
+  /* LUGARES (10) */
+  {cat:'lugar',emoji:'🏙️',es:'la colonia',en:'neighborhood / district',pron:'koh-LOH-nyah',
+   ex_es:'Vivo en la Colonia Roma, en la CDMX.',ex_en:'I live in Colonia Roma, in Mexico City.',
+   note:'The Mexican equivalent of a neighborhood or district. Addresses include the colonia name.'},
+  {cat:'lugar',emoji:'🏛️',es:'el centro histórico',en:'historic downtown / old town',pron:'SEN-troh ees-TOH-ree-koh',
+   ex_es:'El Zócalo está en el centro histórico.',ex_en:'The Zócalo is in the historic center.',
+   note:'The historic center of a city, usually with colonial buildings and the main plaza (zócalo).'},
+  {cat:'lugar',emoji:'🏟️',es:'el zócalo',en:'main plaza / town square',pron:'SOH-kah-loh',
+   ex_es:'Vamos al Zócalo a ver el desfile.',ex_en:'Let\'s go to the Zócalo to see the parade.',
+   note:'The main public square of a Mexican city or town. The Zócalo in CDMX is one of the largest in the world.'},
+  {cat:'lugar',emoji:'⛽',es:'la gasolinera',en:'gas station',pron:'gah-soh-lee-NEH-rah',
+   ex_es:'Para en la gasolinera, necesito echar gasolina.',ex_en:'Stop at the gas station, I need to get gas.',
+   note:'Gas station. "Echar gasolina" = to fill up with gas. Attendants pump it for you in Mexico.'},
+  {cat:'lugar',emoji:'🏥',es:'el IMSS / el ISSSTE',en:'public health clinic',pron:'eem-ESS / ees-TEH',
+   ex_es:'Voy al IMSS, tengo cita con el doctor.',ex_en:'I\'m going to the IMSS clinic, I have a doctor\'s appointment.',
+   note:'IMSS = social security health system for private workers. ISSSTE = for government workers. Free healthcare.'},
+  {cat:'lugar',emoji:'🏫',es:'la secundaria',en:'middle school (grades 7–9)',pron:'seh-koon-DAH-ryah',
+   ex_es:'Mi hijo está en segundo de secundaria.',ex_en:'My son is in second year of middle school.',
+   note:'Mexican school system: primaria (grades 1-6) → secundaria (7-9) → preparatoria/bachillerato (10-12) → universidad.'},
+  {cat:'lugar',emoji:'🏪',es:'la farmacia',en:'pharmacy',pron:'far-MAH-syah',
+   ex_es:'¿Hay una farmacia cerca? Necesito medicina.',ex_en:'Is there a pharmacy nearby? I need medicine.',
+   note:'"Farmacia del Ahorro" and "Farmacias Guadalajara" are two of the most common chains in Mexico.'},
+  {cat:'lugar',emoji:'🌳',es:'el parque',en:'park',pron:'PAR-keh',
+   ex_es:'Los domingos la familia se reúne en el parque.',ex_en:'On Sundays the family gathers at the park.',
+   note:'Central parks in Mexican neighborhoods are social hubs — food stalls, exercise, families, all mixed together.'},
+  {cat:'lugar',emoji:'🏪',es:'la papelería',en:'stationery store',pron:'pah-peh-leh-REE-ah',
+   ex_es:'Voy a la papelería a comprar cuadernos.',ex_en:'I\'m going to the stationery store to buy notebooks.',
+   note:'Sells office and school supplies. Very common in every neighborhood. Often also photocopies and prints.'},
+  {cat:'lugar',emoji:'🎪',es:'la feria',en:'fair / carnival',pron:'FEH-ryah',
+   ex_es:'¡Hay feria en el barrio este fin de semana!',ex_en:'There\'s a fair in the neighborhood this weekend!',
+   note:'Traveling fair with rides, food and games. Also: feria = cash/change (slang). Different meanings!'},
+  /* CASA Y OBJETOS (10) */
+  {cat:'casa',emoji:'🛁',es:'el baño',en:'bathroom',pron:'BAH-nyoh',
+   ex_es:'¿Dónde está el baño, por favor?',ex_en:'Where is the bathroom, please?',
+   note:'"¿Dónde está el baño?" is one of the most useful sentences you\'ll ever say. Also: "sanitarios" on signs.'},
+  {cat:'casa',emoji:'🍳',es:'el comal',en:'flat griddle (for tortillas)',pron:'koh-MAL',
+   ex_es:'Las tortillas se calientan en el comal.',ex_en:'Tortillas are heated on the comal.',
+   note:'Flat clay or metal griddle used to cook and heat tortillas. Found in almost every Mexican kitchen.'},
+  {cat:'casa',emoji:'🪣',es:'la cubeta',en:'bucket',pron:'koo-BEH-tah',
+   ex_es:'Llena la cubeta con agua fría.',ex_en:'Fill the bucket with cold water.',
+   note:'Bucket. Also used for buying food in bulk — "una cubeta de pollo" from a chicken place.'},
+  {cat:'casa',emoji:'🧹',es:'la escoba',en:'broom',pron:'es-KOH-bah',
+   ex_es:'¿Dónde está la escoba? Hay que barrer.',ex_en:'Where\'s the broom? We need to sweep.',
+   note:'"Barrer" = to sweep. "La trapeadora/el trapeador" = mop. Very common household vocabulary.'},
+  {cat:'casa',emoji:'🛏️',es:'la recámara',en:'bedroom',pron:'reh-KAH-mah-rah',
+   ex_es:'Mi recámara tiene dos camas.',ex_en:'My bedroom has two beds.',
+   note:'Mexican Spanish for bedroom. In Spain they say "dormitorio" or "habitación." "Recámara" is distinctly Mexican.'},
+  {cat:'casa',emoji:'🚿',es:'la regadera',en:'shower / watering can',pron:'reh-gah-DEH-rah',
+   ex_es:'El agua de la regadera está fría.',ex_en:'The shower water is cold.',
+   note:'In Mexico "regadera" = shower. In most other Spanish-speaking countries "ducha" is used instead.'},
+  {cat:'casa',emoji:'🛋️',es:'la sala',en:'living room',pron:'SAH-lah',
+   ex_es:'La familia se junta en la sala por las noches.',ex_en:'The family gathers in the living room at night.',
+   note:'"Sala" = living room. "Comedor" = dining room. "Cocina" = kitchen. Very standard vocabulary.'},
+  {cat:'casa',emoji:'🔑',es:'la llave',en:'key / faucet',pron:'YAH-beh',
+   ex_es:'No encuentro mis llaves. ¿Las viste?',ex_en:'I can\'t find my keys. Did you see them?',
+   note:'⚠️ "Llave" = key for a lock, BUT also = faucet/tap in Mexico! "Cierra la llave" = turn off the faucet.'},
+  {cat:'casa',emoji:'🧺',es:'el mandado',en:'grocery shopping / errands',pron:'man-DAH-doh',
+   ex_es:'Voy a hacer el mandado, ¿necesitas algo?',ex_en:'I\'m going to do the shopping, do you need anything?',
+   note:'"Hacer el mandado" = to do the grocery shopping or run errands. Deeply Mexican expression.'},
+  {cat:'casa',emoji:'💡',es:'la luz',en:'electricity / light',pron:'loos',
+   ex_es:'Apaga la luz cuando salgas.',ex_en:'Turn off the light when you leave.',
+   note:'"La luz" = light but also = electricity. "El recibo de la luz" = the electricity bill. "Se fue la luz" = power went out.'},
+  /* CALLE Y TRANSPORTE (10) */
+  {cat:'calle',emoji:'🚌',es:'el camión',en:'bus (Mexico)',pron:'kah-MYON',
+   ex_es:'¿A qué hora pasa el camión?',ex_en:'What time does the bus come?',
+   note:'In Mexico, "camión" = city bus (not the word for truck, which is also camión but context-dependent!). The bus driver is "el camionero."'},
+  {cat:'calle',emoji:'🚇',es:'el metro',en:'subway / metro',pron:'MEH-troh',
+   ex_es:'El metro de la CDMX es muy barato.',ex_en:'The CDMX metro is very cheap.',
+   note:'Mexico City\'s metro system has 12 lines. Each station has an icon (not just letters) — designed to help people who can\'t read.'},
+  {cat:'calle',emoji:'🚕',es:'el pesero',en:'minibus (Mexico City)',pron:'peh-SEH-roh',
+   ex_es:'El pesero pasa por Insurgentes.',ex_en:'The pesero runs along Insurgentes.',
+   note:'Small bus (usually a minivan) that runs fixed routes in CDMX. Called "combi" in some areas. The name comes from the old 1-peso fare.'},
+  {cat:'calle',emoji:'🛣️',es:'el crucero',en:'intersection / crossroads',pron:'kroo-SEH-roh',
+   ex_es:'Gira a la derecha en el crucero.',ex_en:'Turn right at the intersection.',
+   note:'Intersection. Also: "crucero" = place where people sell things at traffic lights. Context matters!'},
+  {cat:'calle',emoji:'🅿️',es:'la banqueta',en:'sidewalk / pavement',pron:'ban-KEH-tah',
+   ex_es:'Camina por la banqueta, no por la calle.',ex_en:'Walk on the sidewalk, not in the street.',
+   note:'Sidewalk in Mexican Spanish. In most of Latin America they say "acera" or "vereda." "Banqueta" is very Mexican.'},
+  {cat:'calle',emoji:'🚦',es:'el semáforo',en:'traffic light',pron:'seh-MAH-foh-roh',
+   ex_es:'Para en el semáforo en rojo.',ex_en:'Stop at the red traffic light.',
+   note:'"El semáforo está en rojo/verde/amarillo" = the light is red/green/yellow. Very useful for giving directions.'},
+  {cat:'calle',emoji:'🗺️',es:'la cuadra',en:'city block',pron:'KWAH-drah',
+   ex_es:'Está a dos cuadras de aquí.',ex_en:'It\'s two blocks from here.',
+   note:'"A dos cuadras" = two blocks away. How Mexicans give directions: "camina dos cuadras y dobla a la derecha."'},
+  {cat:'calle',emoji:'🚶',es:'el cruce peatonal',en:'crosswalk / pedestrian crossing',pron:'KROO-seh peh-ah-toh-NAL',
+   ex_es:'Cruza por el cruce peatonal.',ex_en:'Cross at the pedestrian crossing.',
+   note:'Crosswalk. "Peatón" = pedestrian. "Cruzar" = to cross. Also called "paso de cebra" (zebra crossing).'},
+  {cat:'calle',emoji:'🏪',es:'el Oxxo',en:'convenience store (chain)',pron:'OHK-soh',
+   ex_es:'Paso al Oxxo a comprar agua.',ex_en:'I\'ll stop at the Oxxo to buy water.',
+   note:'The most common convenience store chain in Mexico (over 20,000 locations). Mexicans use Oxxo for everything — bills, deposits, snacks, ATM.'},
+  {cat:'calle',emoji:'🧃',es:'el puesto',en:'street stall / stand',pron:'PWEHS-toh',
+   ex_es:'Hay un puesto de jugos en la esquina.',ex_en:'There\'s a juice stand on the corner.',
+   note:'A small street stall or stand. "Puesto de tacos" = taco stand. "El mercado tiene muchos puestos" = the market has many stalls.'},
+  /* FIESTAS Y FAMILIA (10) */
+  {cat:'fiestas',emoji:'💀',es:'la ofrenda',en:'Day of the Dead altar / offering',pron:'oh-FREN-dah',
+   ex_es:'Pusimos la ofrenda con fotos y flores.',ex_en:'We set up the altar with photos and flowers.',
+   note:'The altar built for Día de Muertos (Nov 1-2). Includes photos, food, marigolds (cempasúchil), candles, and favorite items of the deceased.'},
+  {cat:'fiestas',emoji:'🌼',es:'el cempasúchil',en:'marigold (Day of the Dead flower)',pron:'sem-pah-SOO-cheel',
+   ex_es:'Las flores de cempasúchil son naranja.',ex_en:'Cempasúchil flowers are orange.',
+   note:'The iconic orange marigold of Día de Muertos. From Nahuatl "cempoalxóchitl" (twenty-flower). Its scent is said to guide spirits home.'},
+  {cat:'fiestas',emoji:'🎊',es:'la quinceañera',en:'15th birthday celebration',pron:'keen-seh-ah-NYEH-rah',
+   ex_es:'La quinceañera de mi prima es el sábado.',ex_en:'My cousin\'s quinceañera is on Saturday.',
+   note:'Celebration of a girl\'s 15th birthday, marking the transition to womanhood. Includes a mass, formal dress, waltz, and a big party.'},
+  {cat:'fiestas',emoji:'🥁',es:'la piñata',en:'piñata',pron:'pee-NYAH-tah',
+   ex_es:'¡Rompe la piñata! Cierra los ojos.',ex_en:'Break the piñata! Close your eyes.',
+   note:'Decorated figure filled with candy. Traditionally 7 points representing the 7 deadly sins. The song: "Dale, dale, dale..."'},
+  {cat:'fiestas',emoji:'🎆',es:'los fuegos artificiales',en:'fireworks',pron:'FWEH-gos ar-tee-fee-SYAH-les',
+   ex_es:'Los fuegos artificiales son a las 12 de la noche.',ex_en:'Fireworks are at midnight.',
+   note:'Also called "los cohetes" informally. Huge part of Mexican celebrations — independence, Christmas, local patron saint days.'},
+  {cat:'fiestas',emoji:'👴',es:'el abuelo / la abuela',en:'grandfather / grandmother',pron:'ah-BWEH-loh / ah-BWEH-lah',
+   ex_es:'Los domingos comemos en casa de los abuelos.',ex_en:'On Sundays we eat at our grandparents\' house.',
+   note:'In Mexico, Sunday family lunch at the grandparents\' is a very important tradition. "Abuelito/abuelita" are the affectionate forms.'},
+  {cat:'fiestas',emoji:'🧑‍🤝‍🧑',es:'el compadre / la comadre',en:'co-parent (godparent relationship)',pron:'kom-PAH-dreh / koh-MAH-dreh',
+   ex_es:'Mi compadre me ayudó a construir la casa.',ex_en:'My compadre helped me build the house.',
+   note:'The parent of your child\'s godparent (padrino/madrina). A very important relationship in Mexican culture — implies deep trust and mutual obligation.'},
+  {cat:'fiestas',emoji:'🕯️',es:'las posadas',en:'Christmas processions (Dec 16-24)',pron:'poh-SAH-das',
+   ex_es:'Las posadas empiezan el 16 de diciembre.',ex_en:'The posadas start on December 16th.',
+   note:'Nine nights of celebration before Christmas. Each night reenacts Mary and Joseph searching for shelter. Includes songs, piñatas, ponche.'},
+  {cat:'fiestas',emoji:'🌹',es:'la madrina / el padrino',en:'godmother / godfather',pron:'mah-DREE-nah / pah-DREE-noh',
+   ex_es:'Mi madrina me regaló ropa para el bautizo.',ex_en:'My godmother gave me clothes for the baptism.',
+   note:'Godparents are central to Mexican Catholic tradition. They sponsor events (bautizo, quinceañera, boda) and maintain a close bond for life.'},
+  {cat:'fiestas',emoji:'🍞',es:'el pan de muerto',en:'Day of the Dead bread',pron:'pan deh MWER-toh',
+   ex_es:'El pan de muerto es dulce y tiene azúcar.',ex_en:'Pan de muerto is sweet and has sugar on top.',
+   note:'Sweet bread shaped like a mound with bones, baked for Día de Muertos. Flavored with anise and orange zest. Left on the ofrenda as an offering.'},
+  /* COSAS MEXICANAS (8) */
+  {cat:'extra',emoji:'🌵',es:'el sarape',en:'colorful Mexican blanket / shawl',pron:'sah-RAH-peh',
+   ex_es:'Compré un sarape en el mercado de artesanías.',ex_en:'I bought a sarape at the crafts market.',
+   note:'Colorful striped blanket or garment, especially from Saltillo and Tlaxcala. A symbol of Mexican craftsmanship.'},
+  {cat:'extra',emoji:'🎨',es:'la artesanía',en:'handicraft / handmade craft',pron:'ar-teh-sah-NEE-ah',
+   ex_es:'Las artesanías de Oaxaca son muy famosas.',ex_en:'Oaxacan handicrafts are very famous.',
+   note:'Handmade traditional crafts — pottery, weaving, wood carving, embroidery. Each region has its own specialty.'},
+  {cat:'extra',emoji:'🧪',es:'el metate',en:'stone grinder (for corn and spices)',pron:'meh-TAH-teh',
+   ex_es:'Mi abuela usaba el metate para moler el maíz.',ex_en:'My grandmother used the metate to grind corn.',
+   note:'Pre-Hispanic stone tool for grinding corn, chiles and spices. Still used in traditional cooking, especially in rural areas.'},
+  {cat:'extra',emoji:'💊',es:'el curandero / la curandera',en:'traditional healer',pron:'koo-ran-DEH-roh',
+   ex_es:'En el pueblo hay una curandera que usa plantas.',ex_en:'In the village there\'s a healer who uses plants.',
+   note:'Traditional healer who uses medicinal plants, rituals and folk medicine. Important in rural communities and indigenous traditions.'},
+  {cat:'extra',emoji:'🌿',es:'el té de manzanilla',en:'chamomile tea',pron:'man-sah-NEE-yah',
+   ex_es:'¿Te duele el estómago? Toma un té de manzanilla.',ex_en:'Does your stomach hurt? Have some chamomile tea.',
+   note:'Chamomile tea — the go-to home remedy in Mexico for stomach problems, stress or colds. "Remedios caseros" (home remedies) are very important.'},
+  {cat:'extra',emoji:'🪔',es:'la vela',en:'candle',pron:'BEH-lah',
+   ex_es:'Ponemos velas en la ofrenda de Día de Muertos.',ex_en:'We put candles on the Day of the Dead altar.',
+   note:'Candles are central to Mexican religious and cultural life — used at home altars, in churches, on ofrendas, and during posadas.'},
+  {cat:'extra',emoji:'🏷️',es:'el aguinaldo',en:'Christmas bonus (mandatory)',pron:'ah-gwee-NAL-doh',
+   ex_es:'Usé mi aguinaldo para comprar regalos de Navidad.',ex_en:'I used my Christmas bonus to buy Christmas gifts.',
+   note:'Legally required 13th-month salary bonus paid in December. Mandatory by law in Mexico. Amount = minimum 15 days\' salary.'},
+  {cat:'extra',emoji:'📋',es:'el RFC',en:'tax ID number (Mexico)',pron:'er-reh-EF-seh',
+   ex_es:'Necesito tu RFC para facturar.',ex_en:'I need your RFC to issue an invoice.',
+   note:'Registro Federal de Contribuyentes. Mexico\'s tax ID. You need it to issue or receive official invoices ("facturas"). Very common in daily business.'},
+];
+
+/* ══════════════════════════════════
+   EX 0 — FLASHCARDS
+══════════════════════════════════ */
+function getFC(){return fcFilter==='all'?VOC:VOC.filter(v=>v.cat===fcFilter);}
+
+function renderFlash(){
+  fcCards=getFC();if(fcIdx>=fcCards.length)fcIdx=0;
+  fcFlipped=false;renderFCCard();
+}
+function renderFCCard(){
+  if(!fcCards.length){document.getElementById('exContainer').innerHTML='<div class="panel"><p>No cards.</p></div>';return;}
+  const item=fcCards[fcIdx];const cat=CATS[item.cat];
+  const pct=Math.round((fcIdx+1)/fcCards.length*100);
+  const hasAudio=!!window.speechSynthesis;
+  const fbtns=[{id:'all',lbl:'All ('+VOC.length+')'},...Object.entries(CATS).map(([k,v])=>({id:k,lbl:v.icon+' '+v.label}))].map(f=>`<button class="fc-fbtn${fcFilter===f.id?' active':''}" style="${fcFilter===f.id?`background:${CATS[f.id]?.bg||'rgba(255,255,255,.1)'};border-color:${CATS[f.id]?.bd||'rgba(255,255,255,.25)'};color:${CATS[f.id]?.col||'var(--text)'}`:''};" onclick="setFC('${f.id}')">${f.lbl}</button>`).join('');
+
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📖 Flashcards — ${VOC.length} palabras mexicanas + 🔊 audio</div>
+  <div class="ex-instr">Front: the Spanish word + pronunciation. Back: English meaning, real example in both languages, and cultural note. <em>Click any card to flip!</em></div>
+  <div class="fc-filter">${fbtns}</div>
+  <div class="fc-wrap">
+    <div class="fc-prow">
+      <span class="fc-cnt">${fcIdx+1}/${fcCards.length}</span>
+      <div class="fc-trk"><div class="fc-fil" style="width:${pct}%;background:${cat.col}"></div></div>
+      <span class="fc-cnt" style="color:${cat.col}">${cat.icon} ${cat.label}</span>
+    </div>
+    <div class="fc-card${fcFlipped?' flipped':''}" id="fcCard" onclick="flipFC()">
+      <div class="fc-inner">
+        <div class="fc-front" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <span style="font-size:.65rem;font-weight:900;text-transform:uppercase;color:${cat.col};letter-spacing:.08em">${cat.icon} ${cat.label}</span>
+          <div class="fc-emoji">${item.emoji}</div>
+          <div class="fc-es" style="color:${cat.col}">${item.es}</div>
+          <div class="fc-pron">🔊 /${item.pron}/</div>
+          ${hasAudio?`<button class="btn-audio" onclick="event.stopPropagation();speak('${item.es}',this)">🔊 Listen</button>`:''}
+          <div class="fc-hint">👆 Click to flip</div>
+        </div>
+        <div class="fc-back" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <span style="font-size:.65rem;font-weight:900;text-transform:uppercase;color:${cat.col};letter-spacing:.08em">${cat.icon} ${cat.label}</span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:1.8rem">${item.emoji}</span>
+            <div>
+              <div class="fc-es" style="color:${cat.col};font-size:1.5rem">${item.es}</div>
+              <div class="fc-en">${item.en}</div>
+            </div>
+            ${hasAudio?`<button class="btn-audio" onclick="event.stopPropagation();speak('${item.es}',this)" style="margin-left:auto">🔊</button>`:''}
+          </div>
+          <div class="fc-ex">🇲🇽 <em>${item.ex_es}</em><br>🇬🇧 <span style="color:var(--muted2)">${item.ex_en}</span></div>
+          <div class="fc-note">📌 ${item.note}</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="btn btn-ghost" onclick="prevFC()" ${fcIdx===0?'disabled':''}>← Prev</button>
+      <button class="btn btn-ghost" onclick="flipFC()">↺ Flip</button>
+      <button class="btn btn-cyan" onclick="nextFC()" ${fcIdx===fcCards.length-1?'disabled':''}>Next →</button>
+    </div>
+  </div></div>`;
+}
+function flipFC(){fcFlipped=!fcFlipped;const c=document.getElementById('fcCard');if(c)c.classList.toggle('flipped',fcFlipped);}
+function nextFC(){fcIdx=Math.min(fcCards.length-1,fcIdx+1);fcFlipped=false;renderFCCard();}
+function prevFC(){fcIdx=Math.max(0,fcIdx-1);fcFlipped=false;renderFCCard();}
+function setFC(f){fcFilter=f;fcIdx=0;renderFlash();}
+
+/* ══════════════════════════════════
+   EX 1 — ¿CÓMO SE DICE? (picture match, 16)
+══════════════════════════════════ */
+const PM=[
+  {emoji:'🌮',q:'A corn tortilla folded around filling',qe:'',
+   opts:['la enchilada','el taco','el burrito','la quesadilla'],a:1,
+   exp:'🌮 "El taco" — the most iconic Mexican food. A corn tortilla folded around any filling. Endless varieties!'},
+  {emoji:'🌽',q:'Corn on the cob — Mexican street food classic',qe:'',
+   opts:['el maíz','la mazorca','el elote','el esquite'],a:2,
+   exp:'🌽 "El elote" — corn on the cob, sold on streets with mayo, cheese, chili and lime. "Esquites" = same but in a cup.'},
+  {emoji:'🏙️',q:'The neighborhood or district where you live in Mexico',qe:'',
+   opts:['el municipio','la colonia','el barrio','la zona'],a:1,
+   exp:'📍 "La colonia" — the standard term for neighborhood/district in Mexico. Your address always includes the colonia.'},
+  {emoji:'🛒',q:'A weekly outdoor market in Mexico (from Nahuatl)',qe:'',
+   opts:['el mercado','la plaza','el tianguis','la feria'],a:2,
+   exp:'🛒 "El tianguis" — open-air street market from Nahuatl "tianquiztli." Usually weekly, in a plaza or closed street.'},
+  {emoji:'🚌',q:'City bus in Mexico City (NOT a truck)',qe:'',
+   opts:['el autobús','el camión','la combi','el pesero'],a:1,
+   exp:'🚌 "El camión" — city bus in Mexican Spanish. In other countries "camión" means truck! Context tells you which.'},
+  {emoji:'🏟️',q:'The main public square of a Mexican city',qe:'',
+   opts:['la plaza','el parque','el zócalo','el patio'],a:2,
+   exp:'🏟️ "El zócalo" — main public square. Every Mexican city has one. The CDMX Zócalo is one of the world\'s largest.'},
+  {emoji:'💀',q:'The altar built for Day of the Dead',qe:'',
+   opts:['el altar','la ofrenda','el monumento','la capilla'],a:1,
+   exp:'💀 "La ofrenda" — Day of the Dead altar with photos, food, marigolds and candles for the deceased.'},
+  {emoji:'🛁',q:'How Mexicans say "shower" (not "ducha")',qe:'',
+   opts:['la ducha','el baño','la regadera','la tina'],a:2,
+   exp:'🚿 "La regadera" — shower in Mexican Spanish. In Spain they say "ducha." "Regadera" also means watering can!'},
+  {emoji:'🅿️',q:'Sidewalk / pavement in Mexican Spanish',qe:'',
+   opts:['la acera','la banqueta','el pavimento','el andador'],a:1,
+   exp:'🅿️ "La banqueta" — sidewalk. Very Mexican! Most other countries say "acera" or "vereda."'},
+  {emoji:'🌼',q:'The orange flower of Day of the Dead',qe:'',
+   opts:['la rosa','el girasol','el cempasúchil','la margarita'],a:2,
+   exp:'🌼 "El cempasúchil" — the marigold. From Nahuatl "twenty-flower." Its scent guides spirits back home.'},
+  {emoji:'🛋️',q:'Living room in Mexican Spanish',qe:'',
+   opts:['la habitación','la sala','el cuarto','el vestíbulo'],a:1,
+   exp:'🛋️ "La sala" — living room. "Comedor" = dining room. "Recámara" = bedroom (distinctly Mexican).'},
+  {emoji:'🍳',q:'Flat griddle used to heat tortillas (Mexican kitchen essential)',qe:'',
+   opts:['la sartén','el comal','la parrilla','el plato'],a:1,
+   exp:'🍳 "El comal" — the flat clay or metal griddle essential for heating tortillas and cooking quesadillas.'},
+  {emoji:'🚕',q:'Small minibus that runs fixed routes in CDMX (old name from its 1-peso fare)',qe:'',
+   opts:['el taxi','el pesero','la combi','el microbús'],a:1,
+   exp:'🚕 "El pesero" — minibus in CDMX. Named after the old 1-peso fare. Also called "combi" in some areas.'},
+  {emoji:'🎊',q:'The celebration of a girl\'s 15th birthday in Mexico',qe:'',
+   opts:['la fiesta de cumpleaños','la quinceañera','la boda','el bautizo'],a:1,
+   exp:'🎊 "La quinceañera" — the 15th birthday celebration marking a girl\'s transition to womanhood. Very important tradition.'},
+  {emoji:'🗺️',q:'"It\'s two ___ from here." How Mexicans measure distances in the city.',qe:'',
+   opts:['calles','cuadras','metros','bloques'],a:1,
+   exp:'🗺️ "Cuadras" — city blocks. "Está a dos cuadras" = it\'s two blocks away. How all Mexicans give directions!'},
+  {emoji:'🏪',q:'The convenience store found on every corner in Mexico (over 20,000 locations)',qe:'',
+   opts:['el Walmart','el 7-Eleven','el Oxxo','la tienda'],a:2,
+   exp:'🏪 "El Oxxo" — ubiquitous convenience store chain. Used for everything: snacks, bills, ATM, transfers.'},
+];
+
+function renderPM(){
+  pmAns={};
+  const tot=PM.length;
+  const letters=['A','B','C','D'];const colors=['pm-btn c1','pm-btn c2','pm-btn c3','pm-btn c4'];
+  const cards=PM.map((item,idx)=>{
+    const btns=item.opts.map((o,oi)=>{
+      let cls=colors[oi];
+      if(pmAns[idx]!==undefined)cls+=oi===item.a?' revealed':' dim';
+      return `<button class="${cls}" data-l="${letters[oi]}" onclick="answerPM(${idx},${oi})" ${pmAns[idx]!==undefined?'disabled':''}>${o}</button>`;
+    }).join('');
+    const done=pmAns[idx]!==undefined;
+    return `<div class="pm-card${done?(pmAns[idx]?' ok':' err'):''}" id="pmc${idx}">
+      <div class="pm-emoji">${item.emoji}</div>
+      <div class="pm-q">${item.q}</div>
+      <div class="pm-btns">${btns}</div>
+      <div class="pm-exp${done?' show':''}" id="pme${idx}">${done?item.exp:''}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🖼️ ¿Cómo se dice? — Vocabulary match</div>
+  <div class="ex-instr">Look at the emoji and English description. Choose the correct Spanish word. Some are <em>uniquely Mexican</em> — they differ from other Spanish-speaking countries!</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Cards</span><span class="v">${tot}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="pm_ok">0</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="pm_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="pm_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="pm_pg" style="width:0%"></div></div></div>
+  </div>
+  <div class="pm-grid">${cards}</div>
+  <div class="fb" id="pm_fb" style="margin-top:10px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="pmAns={};renderPM()">↺ Reset</button></div></div>`;
+}
+function answerPM(idx,oi){
+  if(pmAns[idx]!==undefined)return;
+  const item=PM[idx];const isOk=oi===item.a;
+  pmAns[idx]=isOk;
+  const card=document.getElementById('pmc'+idx);
+  if(card){
+    card.classList.add(isOk?'ok':'err');
+    card.querySelectorAll('.pm-btn').forEach((b,bi)=>{b.disabled=true;b.classList.remove('revealed','dim');b.classList.add(bi===item.a?'revealed':'dim');});
+    const e=card.querySelector('.pm-exp');if(e){e.classList.add('show');e.innerHTML=item.exp;}
+  }
+  const tot=Object.keys(pmAns).length;
+  const ok=Object.values(pmAns).filter(v=>v).length;
+  document.getElementById('pm_ok').textContent=ok;
+  document.getElementById('pm_err').textContent=tot-ok;
+  document.getElementById('pm_pct').textContent=Math.round(tot/PM.length*100)+'%';
+  document.getElementById('pm_pg').style.width=Math.round(tot/PM.length*100)+'%';
+  if(tot===PM.length){
+    const pct=Math.round(ok/tot*100);
+    const fb=document.getElementById('pm_fb');
+    fb.className='fb show '+(pct>=85?'ok':'partial');
+    fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Excelente! You know your Mexican vocabulary!':'Study the flashcards and try again.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 2 — DIÁLOGOS (12, chat bubbles, bilingual)
+══════════════════════════════════ */
+const DIALS=[
+  {scene:'At a taquería — ordering food 🌮',
+   chat:[
+     {side:'left',av:'👨‍🍳',who:'Taquero',es:'¿Qué va a querer?',en:'What would you like?'},
+     {side:'right',av:'🙋',who:'Tú',es:'Me da tres tacos de pastor con salsa verde y limón.',en:'Give me three tacos al pastor with green salsa and lime.'},
+     {side:'left',av:'👨‍🍳',who:'Taquero',es:'¿Le pongo cebolla y cilantro?',en:'Should I put onion and cilantro?'},
+     {side:'right',av:'🙋',who:'Tú',es:'Sí, por favor. ¿Cuánto es?',en:'Yes, please. How much is it?'},
+   ],
+   q:'What does "¿Le pongo cebolla y cilantro?" mean?',
+   opts:['Do you like onion and cilantro?','Should I put onion and cilantro on it?','Is this with onion and cilantro?','Do you have onion and cilantro?'],
+   a:1,exp:'🌮 "¿Le pongo?" = Should I put (it) for you? The taquero is asking about toppings. "Le" here = for you (indirect object). Common at taquerías — always say "sí" or specify what you want!'},
+  {scene:'Asking for directions on the street 🗺️',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'Disculpe, ¿dónde está el metro más cercano?',en:'Excuse me, where is the nearest metro?'},
+     {side:'left',av:'👩',who:'Señora',es:'Está a tres cuadras. Camina derecho y en el semáforo dobla a la izquierda.',en:'It\'s three blocks away. Walk straight and at the traffic light turn left.'},
+     {side:'right',av:'🙋',who:'Tú',es:'Muchas gracias. ¿Hay una farmacia por aquí también?',en:'Thank you very much. Is there a pharmacy around here too?'},
+     {side:'left',av:'👩',who:'Señora',es:'Sí, en la siguiente cuadra.',en:'Yes, on the next block.'},
+   ],
+   q:'What does "dobla a la izquierda en el semáforo" mean?',
+   opts:['The traffic light is on the left','Turn left at the traffic light','The traffic light turns left','There\'s a left turn signal'],
+   a:1,exp:'🗺️ "Doblar" = to turn (when giving directions). "Semáforo" = traffic light. "A la izquierda" = to the left. "Sigue derecho" = go straight. These are the core direction-giving words in Mexico.'},
+  {scene:'At a tianguis — bargaining 💰',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'¿A cómo está el aguacate?',en:'How much is the avocado?'},
+     {side:'left',av:'👩',who:'Vendedora',es:'A veinte pesos el kilo.',en:'Twenty pesos a kilo.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Me hace precio si llevo dos kilos?',en:'Can you give me a deal if I take two kilos?'},
+     {side:'left',av:'👩',who:'Vendedora',es:'Ándale, en treinta y cinco los dos.',en:'Deal, thirty-five for both.'},
+   ],
+   q:'"¿Me hace precio?" is a way to ask for...',
+   opts:['the price of something','a discount or deal','the weight of the product','payment in cash'],
+   a:1,exp:'💰 "¿Me hace precio?" = Can you give me a deal/discount? Essential for shopping at tianguis and markets. Also: "¿No me deja en menos?" or "¿Le bajo algo?" — all are ways to bargain in Mexico.'},
+  {scene:'Taking the metro — asking about lines 🚇',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'Perdón, ¿cuál camión va al Centro Histórico?',en:'Excuse me, which bus goes to the Historic Center?'},
+     {side:'left',av:'👨',who:'Señor',es:'El metro es más fácil. Toma la línea 2 hasta el Zócalo.',en:'The metro is easier. Take line 2 to the Zócalo.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Y el pesero no llega?',en:'And the pesero doesn\'t get there?'},
+     {side:'left',av:'👨',who:'Señor',es:'Sí llega pero tarda más. El metro es directo.',en:'It does get there but takes longer. The metro is direct.'},
+   ],
+   q:'What is "el pesero" in this conversation?',
+   opts:['a taxi service','a minibus on a fixed route','a subway line','a bus ticket'],
+   a:1,exp:'🚕 "El pesero" = minibus that runs a fixed route in CDMX. Named after the old 1-peso fare. Cheaper than a taxi but slower than the metro. Also called "combi."'},
+  {scene:'Sunday family lunch 👨‍👩‍👧‍👦',
+   chat:[
+     {side:'left',av:'👵',who:'Abuela',es:'¡Ya está la comida! Siéntense todos.',en:'The food is ready! Everyone sit down.'},
+     {side:'left',av:'👦',who:'Nieto',es:'Abuela, ¿hay frijoles?',en:'Grandma, are there beans?'},
+     {side:'left',av:'👵',who:'Abuela',es:'Claro, de la olla. Con arroz y salsa.',en:'Of course, pot beans. With rice and salsa.'},
+     {side:'right',av:'🙋',who:'Tú',es:'Todo huele delicioso. ¿Qué es eso?',en:'Everything smells delicious. What is that?'},
+   ],
+   q:'"Frijoles de la olla" means...',
+   opts:['canned beans','fried beans','pot beans (freshly cooked)','beans from the store'],
+   a:2,exp:'🍳 "De la olla" = from the pot. "Frijoles de la olla" = freshly cooked pot beans, the most traditional version. "Frijoles refritos" = refried beans. Both are staples of Mexican cooking.'},
+  {scene:'Preparing for Día de Muertos 💀',
+   chat:[
+     {side:'left',av:'👩',who:'Mamá',es:'Hay que ir al mercado por cempasúchil y velas.',en:'We need to go to the market for marigolds and candles.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Y el pan de muerto? ¿Ya lo compraron?',en:'And the pan de muerto? Did you already buy it?'},
+     {side:'left',av:'👩',who:'Mamá',es:'No, lo compramos en la panadería de siempre.',en:'No, we\'ll buy it at our usual bakery.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Qué más falta para la ofrenda?',en:'What else is missing for the altar?'},
+   ],
+   q:'What items are mentioned for the ofrenda?',
+   opts:['marigolds and candles only','marigolds, candles and pan de muerto','bread and photos','flowers and food'],
+   a:1,exp:'💀 The classic ofrenda includes: cempasúchil (marigolds), velas (candles), pan de muerto, fotos (photos), and the favorite food/drink of the deceased. All mentioned in this conversation.'},
+  {scene:'Calling a plumber about the faucet 🔧',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'La llave del baño está goteando.',en:'The bathroom faucet is dripping.'},
+     {side:'left',av:'👨',who:'Plomero',es:'¿Es la llave del lavabo o de la regadera?',en:'Is it the sink faucet or the shower?'},
+     {side:'right',av:'🙋',who:'Tú',es:'De la regadera. No para de gotear.',en:'The shower. It won\'t stop dripping.'},
+     {side:'left',av:'👨',who:'Plomero',es:'Ahorita paso a revisarla.',en:'I\'ll stop by to check it right away.'},
+   ],
+   q:'In this conversation, "la llave" refers to...',
+   opts:['a door key','a car key','a faucet / tap','a wrench'],
+   a:2,exp:'🔑 "La llave" has two meanings in Mexico: 1) a key (for locks), 2) a faucet/tap. Context tells you which! "Cierra la llave" = turn off the faucet. "¿Dónde están mis llaves?" = Where are my keys?'},
+  {scene:'At the colonia corner store 🏪',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'Buenas tardes. ¿Tiene leche y huevos?',en:'Good afternoon. Do you have milk and eggs?'},
+     {side:'left',av:'👴',who:'Tendero',es:'Sí, aquí están. ¿Algo más?',en:'Yes, here they are. Anything else?'},
+     {side:'right',av:'🙋',who:'Tú',es:'Unos limones y una bolsita de sal, por favor.',en:'Some limes and a small bag of salt, please.'},
+     {side:'left',av:'👴',who:'Tendero',es:'Son cuarenta y cinco pesos en total.',en:'That\'s forty-five pesos in total.'},
+   ],
+   q:'What is "el tendero" in this context?',
+   opts:['the store owner/shopkeeper','the customer','a delivery person','a neighbor'],
+   a:0,exp:'🏪 "El tendero/la tendera" = the corner store owner or shopkeeper. "La tienda de abarrotes" = neighborhood corner store. Essential part of Mexican daily life — open early, close late, sells everything basic.'},
+  {scene:'At the school picking up a child 🏫',
+   chat:[
+     {side:'left',av:'👩',who:'Maestra',es:'Mañana no hay clases porque es día festivo.',en:'Tomorrow there\'s no school because it\'s a holiday.'},
+     {side:'right',av:'🙋',who:'Mamá',es:'Ah, ¿qué día festivo es?',en:'Oh, what holiday is it?'},
+     {side:'left',av:'👩',who:'Maestra',es:'El 20 de noviembre, aniversario de la Revolución Mexicana.',en:'November 20th, anniversary of the Mexican Revolution.'},
+     {side:'right',av:'🙋',who:'Mamá',es:'Entendido. Gracias, maestra.',en:'Understood. Thank you, teacher.'},
+   ],
+   q:'The Mexican Revolution started in what year (based on the holiday)?',
+   opts:['1810','1910','1910 (based on the context of the anniversary)','2010'],
+   a:2,exp:'🏫 November 20, 1910 is when the Mexican Revolution began. It\'s a public holiday. The independence day is September 16 (1810). Teachers ("maestra/maestro") are highly respected in Mexico.'},
+  {scene:'Discussing the quinceañera preparations 🎊',
+   chat:[
+     {side:'left',av:'👩',who:'Tía',es:'¿Ya confirmaron al padrino del vals?',en:'Did you confirm the godfather for the waltz?'},
+     {side:'left',av:'👩‍🦱',who:'Mamá',es:'Sí, mi compadre Roberto se encargó de eso.',en:'Yes, my compadre Roberto took care of that.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Y la piñata? ¿Ya la encargaron?',en:'And the piñata? Did you order it already?'},
+     {side:'left',av:'👩‍🦱',who:'Mamá',es:'Sí, viene con siete picos, la tradicional.',en:'Yes, it\'s coming with seven points, the traditional one.'},
+   ],
+   q:'"Mi compadre" refers to...',
+   opts:['a close friend','the godfather relationship — parent of your child\'s godparent','a neighbor','a cousin'],
+   a:1,exp:'🤝 "Compadre/comadre" = the person who is the godparent of your child. A sacred bond in Mexican culture. Implies deep trust, loyalty and mutual obligation. "Mi compadre" is often used informally for any very close male friend too.'},
+  {scene:'Doing errands in the morning 🧺',
+   chat:[
+     {side:'left',av:'👨',who:'Papá',es:'Voy a hacer el mandado. ¿Necesitan algo?',en:'I\'m going to do the shopping. Do you need anything?'},
+     {side:'right',av:'🙋',who:'Tú',es:'Sí, por favor trae limones del tianguis, están más baratos.',en:'Yes, please bring limes from the street market, they\'re cheaper there.'},
+     {side:'left',av:'👨',who:'Papá',es:'¿Algo más? ¿Paso al Oxxo también?',en:'Anything else? Should I also stop at the Oxxo?'},
+     {side:'right',av:'🙋',who:'Tú',es:'Sí, compra agua y un par de bolillos.',en:'Yes, buy water and a couple of bolillos.'},
+   ],
+   q:'What is "hacer el mandado"?',
+   opts:['to run fast','to do the grocery shopping / errands','to make a delivery','to clean the house'],
+   a:1,exp:'🧺 "Hacer el mandado" = to do the grocery shopping or run errands. Very Mexican expression. "El mandado" = the grocery list/shopping. "¿Ya hiciste el mandado?" = Did you already do the shopping?'},
+  {scene:'Talking about health — home remedies 🌿',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'Me duele el estómago. ¿Qué hago?',en:'My stomach hurts. What should I do?'},
+     {side:'left',av:'👵',who:'Abuela',es:'Tómate un té de manzanilla con miel. Es lo mejor.',en:'Have chamomile tea with honey. It\'s the best.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Y si no mejoro, voy al IMSS?',en:'And if I don\'t get better, do I go to the IMSS?'},
+     {side:'left',av:'👵',who:'Abuela',es:'Sí, pero primero descansa y el té de manzanilla.',en:'Yes, but first rest and the chamomile tea.'},
+   ],
+   q:'What is the IMSS?',
+   opts:['a pharmacy chain','Mexico\'s public health system for workers','a type of hospital for emergencies only','a private clinic'],
+   a:1,exp:'🏥 IMSS (Instituto Mexicano del Seguro Social) = public healthcare system for private sector workers. Free or very low cost. "Tengo cita en el IMSS" = I have an IMSS appointment. Many Mexicans use home remedies first!'},
+];
+
+let dialAnswers={};
+function renderDial(){
+  dialAnswers={};
+  const tot=DIALS.length;
+  const html=DIALS.map((d,i)=>{
+    const msgs=d.chat.map(m=>`<div class="chat-row ${m.side}">
+      <div class="chat-av">${m.av}</div>
+      <div>
+        <div class="chat-who">${m.who}</div>
+        <div class="chat-bub">
+          ${m.es}
+          <button class="btn-audio" style="margin-left:6px;font-size:.7rem;padding:3px 8px" onclick="speak('${m.es.replace(/'/g,"\\'")}',this)">🔊</button>
+          <div style="font-size:.74rem;color:var(--muted2);font-style:italic;margin-top:3px">${m.en}</div>
+        </div>
+      </div>
+    </div>`).join('');
+    const opts=d.opts.map((o,oi)=>`<button class="dial-opt" id="do${i}_${oi}" onclick="answerDial(${i},${oi})">${o}</button>`).join('');
+    return `<div class="dial-card" id="dc${i}">
+      <div class="dial-scene">📍 ${d.scene}</div>
+      <div class="chat-body">${msgs}</div>
+      <div class="dial-q-area">
+        <div class="dial-q-txt">👉 ${d.q}</div>
+        <div class="dial-opts">${opts}</div>
+        <div class="dial-exp" id="de${i}"></div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">💬 Diálogos — Real Mexican conversations</div>
+  <div class="ex-instr">Read the conversation (with English translation below each line). Click 🔊 to hear any line. Then answer the question about meaning or context.</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="d_ok">0</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="d_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="d_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="d_pg" style="width:0%"></div></div></div>
+  </div>
+  <div class="dial-wrap">${html}</div>
+  <div class="fb" id="d_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="dialAnswers={};renderDial()">↺ Reset</button></div></div>`;
+}
+function answerDial(qi,oi){
+  if(dialAnswers[qi]!==undefined)return;
+  const d=DIALS[qi];const isOk=oi===d.a;
+  dialAnswers[qi]=isOk;
+  const card=document.getElementById('dc'+qi);if(card)card.classList.add(isOk?'ok':'err');
+  d.opts.forEach((_,x)=>{const b=document.getElementById(`do${qi}_${x}`);if(!b)return;b.disabled=true;if(x===d.a)b.classList.add('d-show');else if(x===oi&&!isOk)b.classList.add('d-err');});
+  const e=document.getElementById('de'+qi);if(e){e.classList.add('show');e.innerHTML=`${isOk?'✓':'✗'} ${d.exp}`;}
+  const tot=Object.keys(dialAnswers).length;
+  const ok=Object.values(dialAnswers).filter(v=>v).length;
+  document.getElementById('d_ok').textContent=ok;document.getElementById('d_err').textContent=tot-ok;
+  document.getElementById('d_pct').textContent=Math.round(tot/DIALS.length*100)+'%';
+  document.getElementById('d_pg').style.width=Math.round(tot/DIALS.length*100)+'%';
+  if(tot===DIALS.length){
+    const pct=Math.round(ok/tot*100);
+    const fb=document.getElementById('d_fb');
+    fb.className='fb show '+(pct>=85?'ok':'partial');
+    fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Excelente! You understand Mexican conversations!':'Review the flashcards and try again.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 3 — COMPLETA LA ORACIÓN (18)
+   Click chip to fill blank — bilingual context
+══════════════════════════════════ */
+const FILLS=[
+  {ctx:'Ordering at a street stand / En el puesto de la calle',
+   q:'Quiero un ___ de pastor con limón y salsa, por favor.',qe:'I want a pastor ___ with lime and salsa, please.',
+   opts:['burrito','taco','torta','tamale'],a:1,
+   exp:'"Taco" — tortilla folded around filling. "Con limón y salsa" = with lime and salsa. Classic taquería order.'},
+  {ctx:'Giving someone your address / Dando tu dirección',
+   q:'Vivo en la ___ Condesa, cerca del parque.',qe:'I live in the Condesa ___, near the park.',
+   opts:['zona','sección','colonia','área'],a:2,
+   exp:'"Colonia" — the standard term for neighborhood/district in Mexico. Always used in addresses.'},
+  {ctx:'Going to the Sunday market / El mercado dominical',
+   q:'Los domingos vamos al ___ a comprar frutas y verduras.',qe:'On Sundays we go to the outdoor market to buy fruits and vegetables.',
+   opts:['supermercado','tianguis','centro comercial','Oxxo'],a:1,
+   exp:'"Tianguis" — open-air street market from Nahuatl. Usually weekly. Often cheaper than supermarkets.'},
+  {ctx:'Talking about transport / Sobre transporte',
+   q:'El ___ pasa cada 15 minutos por esta calle.',qe:'The city bus comes every 15 minutes on this street.',
+   opts:['taxi','metro','camión','pesero'],a:2,
+   exp:'"Camión" = city bus in Mexico. NOT a truck in this context! "El pesero/combi" is a smaller minibus.'},
+  {ctx:'Making guacamole / Haciendo guacamole',
+   q:'El guacamole lleva ___, limón, sal y chile.',qe:'Guacamole has ___, lime, salt and chili.',
+   opts:['tomate','aguacate','pepino','espinaca'],a:1,
+   exp:'"Aguacate" = avocado. The main ingredient of guacamole. From Nahuatl "ahuacatl."'},
+  {ctx:'Asking for something spicy / Preguntando por lo picante',
+   q:'¿Le pongo ___ habanero o está muy picante para usted?',qe:'Should I add habanero ___ or is it too spicy for you?',
+   opts:['salsa','frijol','arroz','tortilla'],a:0,
+   exp:'"Salsa" — in Mexico always means hot sauce. Habanero is one of the hottest. "¿Qué tan picante lo quiere?" = How spicy do you want it?'},
+  {ctx:'Describing where the bank is / Diciendo dónde está el banco',
+   q:'El banco está a dos ___ de aquí, después del semáforo.',qe:'The bank is two ___ from here, past the traffic light.',
+   opts:['kilómetros','metros','cuadras','minutos'],a:2,
+   exp:'"Cuadras" = city blocks. How Mexicans measure walking distances. "Caminas dos cuadras y lo ves."'},
+  {ctx:'In the kitchen / En la cocina',
+   q:'Calienta las tortillas en el ___ antes de servir.',qe:'Heat the tortillas on the ___ before serving.',
+   opts:['sartén','comal','horno','microondas'],a:1,
+   exp:'"Comal" — the flat griddle used to heat tortillas and cook quesadillas. A must-have in Mexican kitchens.'},
+  {ctx:'Describing your home / Describiendo tu casa',
+   q:'Mi ___ tiene una cama grande y una ventana.',qe:'My ___ has a big bed and a window.',
+   opts:['sala','cocina','recámara','comedor'],a:2,
+   exp:'"Recámara" = bedroom in Mexican Spanish. Very distinctly Mexican — most other countries say "dormitorio."'},
+  {ctx:'Day of the Dead preparations / Preparativos del Día de Muertos',
+   q:'Compramos flores de ___ para poner en la ofrenda.',qe:'We bought ___ flowers to put on the altar.',
+   opts:['rosa','margarita','cempasúchil','girasol'],a:2,
+   exp:'"Cempasúchil" — the orange marigold of Día de Muertos. From Nahuatl. Its scent guides spirits home.'},
+  {ctx:'Talking about a shower / Hablando de la regadera',
+   q:'El agua de la ___ está muy fría hoy.',qe:'The ___ water is very cold today.',
+   opts:['ducha','tina','regadera','piscina'],a:2,
+   exp:'"Regadera" = shower in Mexican Spanish. Other countries say "ducha." "Regadera" also means watering can — two very different things!'},
+  {ctx:'Going for errands / Haciendo el mandado',
+   q:'Voy a hacer el ___. ¿Necesitas algo del mercado?',qe:'I\'m going to do the ___. Do you need anything from the market?',
+   opts:['trabajo','mandado','favor','viaje'],a:1,
+   exp:'"Hacer el mandado" = to do the grocery shopping / run errands. Deeply Mexican expression.'},
+  {ctx:'At a family celebration / En una celebración familiar',
+   q:'La ___ de mi prima fue una fiesta enorme con 200 personas.',qe:'My cousin\'s ___ was a huge party with 200 people.',
+   opts:['boda','bautizo','quinceañera','graduación'],a:2,
+   exp:'"Quinceañera" = the 15th birthday celebration. One of the most important traditions in Mexican family life.'},
+  {ctx:'At a store / En la tienda',
+   q:'Paso al ___ a sacar dinero y comprar agua.',qe:'I\'ll stop at the ___ to get money and buy water.',
+   opts:['banco','IMSS','Oxxo','tianguis'],a:2,
+   exp:'"Oxxo" — the ubiquitous convenience store. Mexicans use it for everything: snacks, ATM, paying bills, transfers.'},
+  {ctx:'Talking about corn / Hablando del maíz',
+   q:'El ___ con mayonesa y chile es mi botana favorita.',qe:'___ with mayo and chili is my favorite snack.',
+   opts:['tamal','frijol','elote','aguacate'],a:2,
+   exp:'"Elote" = corn on the cob. Classic street food. "Esquites" = same thing in a cup. From Nahuatl "elotl."'},
+  {ctx:'Asking about the market / Preguntando sobre el mercado',
+   q:'En el ___ del barrio venden frutas frescas todos los jueves.',qe:'At the neighborhood ___, they sell fresh fruit every Thursday.',
+   opts:['supermercado','tienda','tianguis','restaurante'],a:2,
+   exp:'"Tianguis" — street market, usually once a week. From Nahuatl. Often the freshest and cheapest produce.'},
+  {ctx:'Family relationship / Relación familiar',
+   q:'Mi ___ me ayudó mucho cuando nació mi hijo.',qe:'My ___ helped me a lot when my son was born.',
+   opts:['vecino','compadre','jefe','cliente'],a:1,
+   exp:'"Compadre" = co-parent/godfather relationship. One of the most important bonds in Mexican culture. Implies deep loyalty and mutual help.'},
+  {ctx:'Health advice / Consejos de salud',
+   q:'¿Te duele la panza? Tómate un té de ___.',qe:'Does your stomach hurt? Have a ___ tea.',
+   opts:['café','manzanilla','limón','menta'],a:1,
+   exp:'"Manzanilla" = chamomile. The most common home remedy in Mexico for stomach issues. "Remedios caseros" are deeply embedded in Mexican culture.'},
+];
+
+let fillAnswers={};
+function renderFill(){
+  fillAnswers={};
+  const tot=FILLS.length;
+  const html=FILLS.map((f,i)=>{
+    const chips=f.opts.map((o,oi)=>`<button class="fill-chip" id="fchip${i}_${oi}" onclick="answerFill(${i},${oi})">${o}</button>`).join('');
+    return `<div class="fill-card" id="fcard${i}">
+      <div class="fill-ctx">📍 ${f.ctx}</div>
+      <div class="fill-q" id="fq${i}">${f.q.replace('___','<span class="fill-blank" id="fb${i}">___</span>')}</div>
+      <div class="fill-en">${f.qe.replace('___','___')}</div>
+      <div class="fill-chips">${chips}</div>
+      <div class="fill-exp" id="fexp${i}"></div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">✏️ Completa la oración</div>
+  <div class="ex-instr">Choose the word that fits the blank. Context clue is shown in <em>English below each sentence</em>. Think about vocabulary, not grammar!</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="fi_ok">0</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="fi_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="fi_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="fi_pg" style="width:0%"></div></div></div>
+  </div>
+  <div class="fill-list">${html}</div>
+  <div class="fb" id="fi_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="fillAnswers={};renderFill()">↺ Reset</button></div></div>`;
+}
+function answerFill(qi,oi){
+  if(fillAnswers[qi]!==undefined)return;
+  const f=FILLS[qi];const isOk=oi===f.a;
+  fillAnswers[qi]=isOk;
+  const card=document.getElementById('fcard'+qi);if(card)card.classList.add(isOk?'ok':'err');
+  const blank=document.getElementById('fb'+qi);
+  if(blank)blank.innerHTML=`<span class="fill-chip ${isOk?'chip-ok':'chip-err'}" style="cursor:default">${f.opts[oi]}</span>${!isOk?` <span class="fill-chip chip-ok" style="cursor:default">${f.opts[f.a]}</span>`:''}`;
+  document.querySelectorAll(`[id^="fchip${qi}_"]`).forEach(c=>{c.disabled=true;c.classList.add('used');});
+  const e=document.getElementById('fexp'+qi);if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+f.exp;}
+  const tot=Object.keys(fillAnswers).length;
+  const ok=FILLS.filter((_,i2)=>fillAnswers[i2]===FILLS[i2]?.a).length;
+  document.getElementById('fi_ok').textContent=ok;document.getElementById('fi_err').textContent=tot-ok;
+  document.getElementById('fi_pct').textContent=Math.round(tot/FILLS.length*100)+'%';
+  document.getElementById('fi_pg').style.width=Math.round(tot/FILLS.length*100)+'%';
+  if(tot===FILLS.length){
+    const pct=Math.round(ok/tot*100);
+    const fb=document.getElementById('fi_fb');
+    fb.className='fb show '+(pct>=85?'ok':'partial');
+    fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Muy bien!':'Review and try again.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 4 — CLASIFICA (drag & sort, 5 buckets)
+══════════════════════════════════ */
+const SORT_BUCKETS=[
+  {id:'comida',label:'🌮 Comida y mercado',sub:'food, drinks, markets',col:'var(--comida2)',bg:'rgba(249,115,22,.07)',bd:'rgba(249,115,22,.25)'},
+  {id:'lugar', label:'📍 Lugares',         sub:'places around the city',col:'var(--lugar2)', bg:'rgba(52,211,153,.07)', bd:'rgba(52,211,153,.25)'},
+  {id:'calle', label:'🚌 Calle y transporte',sub:'street & getting around',col:'var(--calle2)', bg:'rgba(96,165,250,.07)', bd:'rgba(96,165,250,.25)'},
+  {id:'fiestas',label:'🎉 Fiestas y familia',sub:'celebrations & family',col:'var(--fiestas2)',bg:'rgba(244,114,182,.07)',bd:'rgba(244,114,182,.25)'},
+  {id:'extra', label:'🌵 Cosas mexicanas',  sub:'uniquely Mexican items', col:'var(--extra2)', bg:'rgba(251,191,36,.07)', bd:'rgba(251,191,36,.25)'},
+];
+const SORT_CARDS=[
+  {id:'s1',t:'el taco',       b:'comida', x:'Comida — tortilla rellena.'},
+  {id:'s2',t:'el limón',      b:'comida', x:'Comida — lime (not lemon!) in Mexico.'},
+  {id:'s3',t:'el tianguis',   b:'comida', x:'Mercado — open-air street market.'},
+  {id:'s4',t:'el elote',      b:'comida', x:'Comida — corn on the cob.'},
+  {id:'s5',t:'la colonia',    b:'lugar',  x:'Lugar — neighborhood/district.'},
+  {id:'s6',t:'el zócalo',     b:'lugar',  x:'Lugar — main public square.'},
+  {id:'s7',t:'la farmacia',   b:'lugar',  x:'Lugar — pharmacy.'},
+  {id:'s8',t:'la papelería',  b:'lugar',  x:'Lugar — stationery/office supply store.'},
+  {id:'s9',t:'el camión',     b:'calle',  x:'Calle — city bus in Mexico.'},
+  {id:'s10',t:'la banqueta',  b:'calle',  x:'Calle — sidewalk (Mexican Spanish).'},
+  {id:'s11',t:'el semáforo',  b:'calle',  x:'Calle — traffic light.'},
+  {id:'s12',t:'el Oxxo',      b:'calle',  x:'Calle — ubiquitous convenience store.'},
+  {id:'s13',t:'la ofrenda',   b:'fiestas',x:'Fiestas — Day of the Dead altar.'},
+  {id:'s14',t:'la quinceañera',b:'fiestas',x:'Fiestas — 15th birthday celebration.'},
+  {id:'s15',t:'las posadas',  b:'fiestas',x:'Fiestas — Christmas processions (Dec 16-24).'},
+  {id:'s16',t:'el compadre',  b:'fiestas',x:'Familia — godfather relationship.'},
+  {id:'s17',t:'el sarape',    b:'extra',  x:'Cosas mexicanas — colorful blanket/shawl.'},
+  {id:'s18',t:'el aguinaldo', b:'extra',  x:'Cosas mexicanas — mandatory Christmas bonus.'},
+  {id:'s19',t:'el RFC',       b:'extra',  x:'Cosas mexicanas — Mexican tax ID.'},
+  {id:'s20',t:'el metate',    b:'extra',  x:'Cosas mexicanas — stone grinding tool.'},
+];
+
+function renderSort(){
+  sortPlaced={};sortChecked=false;tapSel=null;
+  const shuffled=[...SORT_CARDS].sort(()=>Math.random()-.5);
+  const pile=shuffled.map(c=>`<div class="sort-chip" id="sc_${c.id}" draggable="true"
+    ondragstart="dragItem='${c.id}';setTimeout(()=>{const e=document.getElementById('sc_${c.id}');if(e)e.classList.add('ghost');},0)"
+    ondragend="const e=document.getElementById('sc_${c.id}');if(e)e.classList.remove('ghost');dragItem=null"
+    onclick="tapCard('${c.id}')">${c.t}</div>`).join('');
+  const bucks=SORT_BUCKETS.map(b=>`<div class="sort-bucket" id="bk_${b.id}"
+    style="background:${b.bg};border:2px dashed ${b.bd}"
+    ondragover="event.preventDefault();this.classList.add('drag-over')"
+    ondragleave="this.classList.remove('drag-over')"
+    ondrop="dropCard(event,'${b.id}')"
+    onclick="tapBucket('${b.id}')">
+    <div class="bucket-title" style="color:${b.col}">${b.label}</div>
+    <div style="font-size:.63rem;color:var(--muted2);text-align:center;margin-top:2px">${b.sub}</div>
+  </div>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📊 Clasifica el vocabulario</div>
+  <div class="ex-instr">Drag each word into the correct category. Tap a word then tap a bucket on mobile.</div>
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;color:var(--muted2);margin-bottom:8px">Words (${SORT_CARDS.length})</div>
+  <div class="sort-pile" id="sPile">${pile}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:9px;margin-bottom:12px">${bucks}</div>
+  <div class="fb" id="srtFb"></div>
+  <div class="actions"><button class="btn btn-cyan" id="srtChk" onclick="checkSort()" disabled>Check</button><button class="btn btn-ghost" onclick="renderSort()">↺ Reset</button></div></div>`;
+}
+function tapCard(id){if(sortPlaced[id])return;const c=document.getElementById('sc_'+id);if(!c)return;if(tapSel===id){c.style.boxShadow='';tapSel=null;return;}if(tapSel){const p=document.getElementById('sc_'+tapSel);if(p)p.style.boxShadow='';}tapSel=id;c.style.boxShadow='0 0 0 3px var(--cyan)';}
+function tapBucket(bId){if(!tapSel)return;placeCard(tapSel,bId);tapSel=null;}
+function dropCard(e,bId){e.preventDefault();document.getElementById('bk_'+bId).classList.remove('drag-over');if(!dragItem||sortPlaced[dragItem])return;placeCard(dragItem,bId);}
+function placeCard(id,bId){
+  sortPlaced[id]=bId;const card=document.getElementById('sc_'+id);const bk=document.getElementById('bk_'+bId);
+  if(!card||!bk)return;card.style.boxShadow='';card.classList.remove('ghost');card.draggable=false;
+  const b=SORT_BUCKETS.find(x=>x.id===bId);if(b)card.style.borderColor=b.col;
+  card.onclick=()=>{if(sortChecked)return;delete sortPlaced[id];card.style.borderColor='';card.style.boxShadow='';card.draggable=true;card.onclick=()=>tapCard(id);document.getElementById('sPile').appendChild(card);const btn=document.getElementById('srtChk');if(btn)btn.disabled=true;};
+  bk.appendChild(card);
+  if(Object.keys(sortPlaced).length===SORT_CARDS.length){const btn=document.getElementById('srtChk');if(btn)btn.disabled=false;}
+}
+function checkSort(){
+  sortChecked=true;let ok=0;
+  SORT_CARDS.forEach(item=>{const c=document.getElementById('sc_'+item.id);if(!c)return;const isOk=sortPlaced[item.id]===item.b;if(isOk)ok++;c.className='sort-chip '+(isOk?'c-ok':'c-err');c.draggable=false;c.onclick=null;if(!isOk){const b=SORT_BUCKETS.find(x=>x.id===item.b);c.innerHTML=`${item.t}<span style="font-size:.7rem;display:block;margin-top:2px">→ ${b?b.label:item.b}</span>`;}c.title=item.x;});
+  const pct=Math.round(ok/SORT_CARDS.length*100);
+  const fb=document.getElementById('srtFb');fb.className='fb show '+(pct>=80?'ok':'partial');
+  fb.innerHTML=`<strong>${ok}/${SORT_CARDS.length} (${pct}%).</strong> Hover red cards to see the correct category.`;
+  document.getElementById('srtChk').disabled=true;
+}
+
+/* ══════════════════════════════════
+   EX 5 — SPEED ROUND (25)
+   English prompt → type Spanish word
+══════════════════════════════════ */
+const SPEED=[
+  {emoji:'🌮',q:'Corn tortilla with filling — Mexico\'s most iconic food',hint:'el taco',a:'taco',also:['el taco']},
+  {emoji:'🥑',q:'Avocado (Mexican Spanish)',hint:'el aguacate',a:'aguacate',also:['el aguacate']},
+  {emoji:'🌶️',q:'Chili pepper',hint:'el chile',a:'chile',also:['el chile']},
+  {emoji:'🍋',q:'Lime in Mexico (NOT yellow lemon!)',hint:'el limón',a:'limon',also:['el limón','limón']},
+  {emoji:'🌽',q:'Corn on the cob — Mexican street food',hint:'el elote',a:'elote',also:['el elote']},
+  {emoji:'🫘',q:'Beans (staple Mexican food)',hint:'los frijoles',a:'frijoles',also:['los frijoles']},
+  {emoji:'🛒',q:'Open-air street market (from Nahuatl)',hint:'el tianguis',a:'tianguis',also:['el tianguis']},
+  {emoji:'🏙️',q:'Neighborhood / district in Mexico City',hint:'la colonia',a:'colonia',also:['la colonia']},
+  {emoji:'🏟️',q:'Main public square of a Mexican city',hint:'el zócalo',a:'zocalo',also:['el zócalo','zócalo']},
+  {emoji:'🚌',q:'City bus in Mexico (not a truck here!)',hint:'el camión',a:'camion',also:['el camión','camión']},
+  {emoji:'🚕',q:'Small minibus on a fixed route in CDMX',hint:'el pesero',a:'pesero',also:['el pesero']},
+  {emoji:'🅿️',q:'Sidewalk — uniquely Mexican word',hint:'la banqueta',a:'banqueta',also:['la banqueta']},
+  {emoji:'🗺️',q:'City block — how Mexicans measure distance',hint:'la cuadra',a:'cuadra',also:['la cuadra']},
+  {emoji:'🚦',q:'Traffic light',hint:'el semáforo',a:'semaforo',also:['el semáforo','semáforo']},
+  {emoji:'🏪',q:'Mexico\'s most common convenience store chain',hint:'el Oxxo',a:'oxxo',also:['el oxxo']},
+  {emoji:'💀',q:'Day of the Dead altar / offering',hint:'la ofrenda',a:'ofrenda',also:['la ofrenda']},
+  {emoji:'🌼',q:'Orange marigold flower for Day of the Dead',hint:'cempasúchil',a:'cempasuchil',also:['cempasúchil','el cempasúchil']},
+  {emoji:'🎊',q:'15th birthday celebration for a girl',hint:'la quinceañera',a:'quinceanera',also:['la quinceañera','quinceañera']},
+  {emoji:'🥁',q:'Decorated figure filled with candy, hit with a stick',hint:'la piñata',a:'pinata',also:['la piñata','piñata']},
+  {emoji:'🛁',q:'Shower in Mexican Spanish (not "ducha")',hint:'la regadera',a:'regadera',also:['la regadera']},
+  {emoji:'🛋️',q:'Living room in Mexican Spanish',hint:'la sala',a:'sala',also:['la sala']},
+  {emoji:'🛏️',q:'Bedroom — distinctly Mexican word',hint:'la recámara',a:'recamara',also:['la recámara','recámara']},
+  {emoji:'🍳',q:'Flat griddle for heating tortillas',hint:'el comal',a:'comal',also:['el comal']},
+  {emoji:'🧺',q:'"Hacer el ___" = to do the grocery shopping',hint:'mandado',a:'mandado',also:['el mandado']},
+  {emoji:'🍞',q:'Sweet bread baked for Day of the Dead',hint:'pan de muerto',a:'pan de muerto',also:['el pan de muerto']},
+];
+
+function renderSpeed(){
+  if(spTimer){clearInterval(spTimer);spTimer=null;}
+  spIdx=0;spOk=0;spErr=0;spStreak=0;spAnswered=false;
+  const arr=[...SPEED];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  window.__sp=arr;
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">⚡ Speed round</div>
+  <div class="ex-instr">See the English description + emoji, type the Spanish word. Accents are optional! 12 seconds each.</div>
+  <div class="sp-wrap" id="spWrap"><div class="sp-start"><div style="font-size:2.8rem">⚡</div><h2>English → Español</h2><p style="color:var(--muted);max-width:400px">25 Mexican vocabulary words — food, places, transport, traditions and more.</p><button class="btn btn-cyan" onclick="startSpeed()">¡Empezamos!</button></div></div></div>`;
+}
+function startSpeed(){spIdx=0;spOk=0;spErr=0;spStreak=0;nextQ();}
+function nextQ(){
+  const arr=window.__sp;if(spIdx>=arr.length){endSpeed();return;}
+  spAnswered=false;const item=arr[spIdx];spTimeLeft=12;
+  document.getElementById('spWrap').innerHTML=`
+    <div class="sp-stats"><div class="spst"><div class="sl">Q</div><div class="sv w">${spIdx+1}/${arr.length}</div></div><div class="spst"><div class="sl">OK</div><div class="sv g">${spOk}</div></div><div class="spst"><div class="sl">Miss</div><div class="sv b">${spErr}</div></div></div>
+    <div class="streak${spStreak>=3?' on':''}" id="stk">🔥 x${spStreak}</div>
+    <div class="sp-card">
+      <div class="sp-emoji">${item.emoji}</div>
+      <div class="sp-q">${item.q}</div>
+      <div class="sp-hint">💡 ${item.hint}</div>
+    </div>
+    <div class="tmr-row"><div class="tmr-trk"><div class="tmr-fil" id="tF" style="width:100%;transition:width 1s linear"></div></div><div class="tmr-n" id="tN">12</div></div>
+    <div class="sp-row"><input id="sInp" class="sp-inp" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="escribe en español…" onkeydown="if(event.key==='Enter')submitQ()"><button class="btn btn-cyan" onclick="submitQ()" style="flex-shrink:0">→</button></div>
+    <div class="sp-fb" id="sFb" style="opacity:0"></div>`;
+  setTimeout(()=>{const i=document.getElementById('sInp');if(i)i.focus();},50);
+  if(spTimer)clearInterval(spTimer);
+  spTimer=setInterval(()=>{
+    spTimeLeft--;const f=document.getElementById('tF'),n=document.getElementById('tN');
+    if(f)f.style.width=Math.max(0,(spTimeLeft/12)*100)+'%';
+    if(n){n.textContent=spTimeLeft;n.style.color=spTimeLeft<=3?'var(--bad)':spTimeLeft<=5?'var(--warn)':'var(--muted2)';}
+    if(spTimeLeft<=0){clearInterval(spTimer);spTimer=null;if(!spAnswered)submitQ();}
+  },1000);
+}
+function submitQ(){
+  const arr=window.__sp;const inp=document.getElementById('sInp');if(!inp||spAnswered)return;
+  spAnswered=true;if(spTimer){clearInterval(spTimer);spTimer=null;}inp.disabled=true;
+  const item=arr[spIdx];const nt=normS(inp.value);const na=normS(item.a);
+  const isOk=nt===na||item.also.map(normS).includes(nt)||(nt.length>2&&(na.includes(nt)||nt.includes(na)));
+  if(isOk){spOk++;spStreak++;}else{spErr++;spStreak=0;}
+  const fb=document.getElementById('sFb');
+  if(fb){fb.style.opacity='1';
+    if(!inp.value.trim()){fb.className='sp-fb err';fb.innerHTML=`⏱ → <strong>${item.hint}</strong>`;}
+    else if(isOk){fb.className='sp-fb ok';fb.innerHTML=`✓ Correct!${spStreak>=3?' 🔥 x'+spStreak:''}`;}
+    else{fb.className='sp-fb err';fb.innerHTML=`✗ <strong>${inp.value}</strong> → <strong>${item.hint}</strong>`;}}
+  if(spStreak>=3){const cf=document.getElementById('cf');cf.textContent='🔥 x'+spStreak;cf.classList.remove('pop');void cf.offsetWidth;cf.classList.add('pop');}
+  spIdx++;setTimeout(nextQ,isOk?700:1500);
+}
+function endSpeed(){
+  const pct=Math.round(spOk/SPEED.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('spWrap').innerHTML=`<div class="sp-start"><div style="font-size:3rem">${emo}</div><h2>${spOk}/${SPEED.length}</h2><p style="color:var(--muted)">${pct>=90?'¡Excelente! You know your Mexican vocab!':pct>=70?'¡Muy bien! Almost there.':pct>=50?'Good start — keep practicing.':'Review the flashcards first.'}</p><button class="btn btn-cyan" onclick="startSpeed()">↺ Try again</button></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 6 — REFERENCIA (searchable, with audio)
+══════════════════════════════════ */
+function buildRows(q){
+  const sq=normS(q||'');
+  const filtered=sq.length<2?VOC:VOC.filter(v=>
+    normS(v.es).includes(sq)||normS(v.en).includes(sq)||
+    normS(CATS[v.cat]?.label||'').includes(sq)||normS(v.note).includes(sq)
+  );
+  const hl=str=>sq.length>=2?str.replace(new RegExp('('+sq.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<span class="hl">$1</span>'):str;
+  let prev='';
+  let html='';
+  filtered.forEach(item=>{
+    const cat=CATS[item.cat];
+    if(item.cat!==prev){
+      prev=item.cat;
+      html+=`<div class="ref-section-h" style="color:${cat.col};background:${cat.bg}">${cat.icon} ${cat.label}</div>`;
+    }
+    html+=`<div class="ref-row">
+      <div class="rr-emoji">${item.emoji}</div>
+      <div class="rr-es" style="color:${cat.col}" onclick="speak('${item.es}',null)">${hl(item.es)}</div>
+      <div class="rr-en">${hl(item.en)}</div>
+      <div class="rr-note">${item.note.slice(0,50)}${item.note.length>50?'…':''}</div>
+    </div>`;
+  });
+  return {count:filtered.length,html};
+}
+
+function renderRef(){
+  const {count,html}=buildRows('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📄 Referencia — ${VOC.length} Mexican vocabulary words</div>
+  <div class="ex-instr">Search in English or Spanish. Click any word to <em>hear it</em>. Hover the note for the full cultural explanation.</div>
+  <input class="ref-search" id="refQ" placeholder="Search… e.g. 'bus', 'taco', 'fiestas', 'colonia'" oninput="updateRef(this.value)" autocomplete="off">
+  <div class="ref-count" id="refCnt">Showing all ${count} words</div>
+  <div id="refRows">${html}</div>
+  </div>`;
+}
+function updateRef(q){
+  const {count,html}=buildRows(q);
+  const el=document.getElementById('refRows');if(el)el.innerHTML=html;
+  const ct=document.getElementById('refCnt');if(ct)ct.textContent=count<VOC.length?`Showing ${count} of ${VOC.length} words`:`Showing all ${count} words`;
+}
+
+goEx(0);
+</script>
+</body>
+</html>

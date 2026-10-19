@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 Spanish Test | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;--info:#60a5fa;
+  --s1:#f97316;--s2:#f472b6;--s3:#a78bfa;--s4:#34d399;
+  --s5:#60a5fa;--s6:#fbbf24;--s7:#e879f9;--s8:#2dd4bf;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(37,217,255,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 20% 10%,rgba(167,139,250,.12),transparent 35%),radial-gradient(ellipse at 80% 15%,rgba(249,115,22,.09),transparent 35%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(900px,96%);margin:14px auto 60px;display:flex;flex-direction:column;gap:14px}
+
+/* HERO */
+.hero{border-radius:22px;padding:26px 30px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.hero-in{position:relative;z-index:1}
+.hero-top{display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.logo-box{width:56px;height:56px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--magenta)}
+.hero h1{font-family:var(--display);font-size:clamp(1.3rem,3vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--s1),#fff 40%,var(--s3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.88rem;margin-top:4px;line-height:1.55}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 11px;font-size:.7rem;font-weight:700;color:var(--muted)}
+
+/* PROGRESS BAR */
+.test-progress{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:16px;padding:14px 18px}
+.prog-sections{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}
+.prog-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;transition:.3s;cursor:default;flex-shrink:0;border:2px solid transparent}
+.prog-dot.done{background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.4);color:#86efac}
+.prog-dot.active{background:rgba(37,217,255,.15);border-color:var(--cyan);color:var(--cyan)}
+.prog-dot.locked{background:rgba(255,255,255,.04);color:var(--muted2)}
+.prog-bar-wrap{height:6px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden}
+.prog-bar-fill{height:100%;border-radius:999px;transition:width .5s;background:linear-gradient(90deg,var(--s1),var(--cyan))}
+.prog-label{display:flex;justify-content:space-between;margin-top:6px;font-size:.72rem;color:var(--muted2);font-weight:700}
+
+/* SECTION CARD */
+.section-card{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:24px 28px;box-shadow:var(--shadow)}
+.sec-header{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.sec-icon{font-size:1.8rem;line-height:1}
+.sec-title{font-family:var(--display);font-size:1.2rem;font-weight:900}
+.sec-sub{font-size:.83rem;color:var(--muted);margin-bottom:18px;line-height:1.5}
+.sec-progress{display:flex;align-items:center;gap:8px;margin-bottom:18px;font-size:.72rem;color:var(--muted2);font-weight:700}
+.sec-prog-bar{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden}
+.sec-prog-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--s3));transition:width .3s}
+
+/* QUESTIONS */
+.q-wrap{display:flex;flex-direction:column;gap:14px}
+.q-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 18px;transition:.2s}
+.q-card.answered.correct{border-color:var(--good);background:rgba(34,197,94,.05)}
+.q-card.answered.wrong{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.q-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.08);border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:8px;color:var(--muted)}
+.q-type-badge{display:inline-block;border-radius:999px;padding:2px 9px;font-size:.62rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-left:6px}
+.q-stem{font-size:.97rem;line-height:1.7;font-weight:600;margin-bottom:10px}
+.q-ctx{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:8px}
+.q-emoji{font-size:2.5rem;text-align:center;margin:8px 0;display:block}
+/* MC options */
+.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.mc-opt{border:0;border-radius:10px;padding:9px 14px;font-weight:700;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);border-color:rgba(37,217,255,.4)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.sel-correct{border-color:var(--good);background:rgba(34,197,94,.15);color:#86efac}
+.mc-opt.sel-wrong{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.show-correct{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+/* VF options */
+.vf-opts{display:flex;gap:10px}
+.vf-btn{border:0;border-radius:11px;padding:10px 28px;font-weight:900;font-family:var(--display);font-size:1rem;cursor:pointer;transition:.14s;border:2px solid}
+.vf-btn.t{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#86efac}
+.vf-btn.f{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#fca5a5}
+.vf-btn:hover:not([disabled]){transform:translateY(-2px);filter:brightness(1.2)}
+.vf-btn[disabled]{cursor:default;transform:none}
+.vf-btn.sel-correct{filter:brightness(1.3);border-width:2.5px}
+.vf-btn.sel-wrong{filter:brightness(.7);border-color:var(--bad)}
+/* Fill chips */
+.fill-chips{display:flex;flex-wrap:wrap;gap:7px}
+.fill-chip{border:0;border-radius:9px;padding:8px 16px;font-weight:800;font-family:var(--display);font-size:.95rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.fill-chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.fill-chip.used{opacity:.2;cursor:not-allowed}
+.fill-chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.fill-chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.fill-blank{display:inline-block;border-bottom:2.5px solid var(--cyan);min-width:90px;text-align:center;padding:0 6px;color:var(--cyan);font-weight:800;font-family:var(--display);font-size:1rem}
+/* Order */
+.order-pool{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px;min-height:44px;padding:8px;background:rgba(255,255,255,.03);border-radius:10px;border:1.5px dashed rgba(255,255,255,.12)}
+.order-answer{display:flex;flex-wrap:wrap;gap:7px;min-height:44px;padding:8px;background:rgba(37,217,255,.04);border-radius:10px;border:1.5px dashed rgba(37,217,255,.2);margin-bottom:8px}
+.order-word{border:0;border-radius:8px;padding:7px 13px;font-weight:700;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.09);border:1.5px solid rgba(255,255,255,.14);color:var(--text);display:inline-block}
+.order-word:hover:not([disabled]){transform:translateY(-2px)}
+.order-word.in-answer{background:rgba(37,217,255,.1);border-color:rgba(37,217,255,.3);color:var(--cyan)}
+.order-word.order-ok{background:rgba(34,197,94,.15);border-color:var(--good);color:#86efac;cursor:default}
+.order-word.order-err{background:rgba(239,68,68,.12);border-color:var(--bad);color:#fca5a5;cursor:default}
+.order-check{border:0;border-radius:10px;padding:8px 20px;font-weight:800;font-family:var(--font);font-size:.85rem;cursor:pointer;background:rgba(37,217,255,.12);border:1.5px solid rgba(37,217,255,.3);color:var(--cyan);transition:.14s}
+.order-check:hover:not([disabled]){background:rgba(37,217,255,.2)}
+.order-check[disabled]{opacity:.4;cursor:default}
+/* Feedback */
+.q-fb{display:none;font-size:.8rem;color:var(--muted);margin-top:8px;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,.04);line-height:1.6}
+.q-fb.show{display:block}
+/* SECTION RESULT */
+.sec-result{display:none;margin-top:20px;padding:20px;border-radius:16px;text-align:center}
+.sec-result.show{display:block}
+.sec-score-big{font-family:var(--display);font-size:3rem;font-weight:900;line-height:1}
+.sec-score-label{font-size:.85rem;color:var(--muted);margin-top:4px}
+.sec-feedback{font-size:.9rem;line-height:1.6;margin-top:12px;padding:12px 16px;border-radius:12px;text-align:left}
+/* FINAL RESULTS */
+.final-hidden{display:none}
+.final-card{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:28px;box-shadow:var(--shadow)}
+.final-title{font-family:var(--display);font-size:1.5rem;font-weight:900;text-align:center;margin-bottom:20px;background:linear-gradient(90deg,var(--s1),#fff 40%,var(--s3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:24px}
+.sec-score-card{border-radius:13px;padding:14px 16px;border:1.5px solid}
+.sec-score-name{font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.sec-score-num{font-family:var(--display);font-size:1.5rem;font-weight:900}
+.sec-score-bar{height:5px;border-radius:999px;margin-top:8px;background:rgba(255,255,255,.08);overflow:hidden}
+.sec-score-bar-fill{height:100%;border-radius:999px}
+.diag-section{margin-bottom:16px;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.diag-title{font-weight:800;font-size:.9rem;margin-bottom:6px}
+.diag-body{font-size:.83rem;color:var(--muted);line-height:1.65}
+/* OVERALL SCORE RING */
+.ring-wrap{display:flex;justify-content:center;margin-bottom:24px}
+.ring-svg{width:160px;height:160px}
+/* UTILS */
+.btn{border:0;border-radius:12px;padding:11px 24px;font-weight:800;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),#00bfff);color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.btn-magenta{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:#fff}
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:4px}
+.creator span{color:var(--magenta2)}
+@media(max-width:560px){.mc-opts{grid-template-columns:1fr}.vf-opts{flex-direction:column}.prog-dot{width:24px;height:24px;font-size:.7rem}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-top">
+      <div class="logo-box">YMF</div>
+      <div>
+        <h1>A1 Spanish Test</h1>
+        <p>8 sections · 110 questions · Vocabulary, grammar, and verbs · A full diagnostic at the end</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge">🆕 Level A1</span>
+      <span class="badge" style="border-color:rgba(249,115,22,.4);color:#fb923c">🔤 Greetings</span>
+      <span class="badge" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">🔢 Numbers</span>
+      <span class="badge" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">💬 Verbs</span>
+      <span class="badge" style="border-color:rgba(251,191,36,.4);color:#fde68a">⏰ Tenses</span>
+      <span class="badge">By Carlos &amp; Denisse</span>
+    </div>
+  </div>
+</header>
+
+<div class="test-progress" id="testProgress">
+  <div class="prog-sections" id="progDots"></div>
+  <div class="prog-bar-wrap"><div class="prog-bar-fill" id="progFill" style="width:0%"></div></div>
+  <div class="prog-label"><span id="progLeft">Section 1 of 8</span><span id="progRight">0 / 110 answered</span></div>
+</div>
+
+<div id="sectionContainer"></div>
+<div id="finalContainer" class="final-hidden"></div>
+
+<p class="creator">By <span>Carlos &amp; Denisse</span> · yourmexicanfriend.com</p>
+</div>
+<script>
+/* ══════════════════════════════════════════════════════
+   A1 SPANISH TEST — Engine + Data
+   8 sections, ~110 questions
+   Types: MC (multiple choice), VF (true/false),
+          FILL (chip selection), ORDER (word order)
+══════════════════════════════════════════════════════ */
+
+const SECTIONS=[
+  {id:0,icon:'🔤',title:'Greetings & Introductions',color:'var(--s1)',colorHex:'#f97316',sub:'Saying hello, goodbye, and introducing yourself in Spanish.'},
+  {id:1,icon:'🔢',title:'Numbers 1–100',color:'var(--s2)',colorHex:'#f472b6',sub:'Counting, writing, and recognizing Spanish numbers.'},
+  {id:2,icon:'👨‍👩‍👧',title:'Family & People',color:'var(--s3)',colorHex:'#a78bfa',sub:'Vocabulary for family members and describing people.'},
+  {id:3,icon:'🎨',title:'Colors & Objects',color:'var(--s4)',colorHex:'#34d399',sub:'Basic colors and common everyday objects.'},
+  {id:4,icon:'🍕',title:'Food & Drinks',color:'var(--s5)',colorHex:'#60a5fa',sub:'Common food, drinks, and expressions at the table.'},
+  {id:5,icon:'📝',title:'Articles & Gender',color:'var(--s6)',colorHex:'#fbbf24',sub:'El, la, un, una — and making nouns plural.'},
+  {id:6,icon:'💬',title:'Regular Verbs — Present',color:'var(--s7)',colorHex:'#e879f9',sub:'-AR, -ER, -IR verbs in the present tense.'},
+  {id:7,icon:'⏰',title:'Past, Future & Present Progressive',color:'var(--s8)',colorHex:'#2dd4bf',sub:'Regular verbs in the preterite, simple future, and present progressive.'},
+];
+
+/* ── QUESTION DATA ─────────────────────────────────── */
+
+// TYPE: mc={type:'mc',stem,opts:[],a (0-based index),fb}
+//       vf={type:'vf',stem,a:'t'|'f',fb}
+//       fill={type:'fill',stem (with ___),chips:[],a (index into chips),fb}
+//       order={type:'order',words:[],correct:'full sentence',fb}
+
+const Q=[
+/* ══ SECTION 0: Greetings (14) ══════════════════════ */
+// Q0
+{s:0,type:'mc',stem:'How do you say "Good morning" in Spanish?',
+ opts:['Buenas noches','Buenos días','Buenas tardes','Hasta luego'],a:1,
+ fb:'"Buenos días" = Good morning. "Buenas tardes" = Good afternoon. "Buenas noches" = Good evening/night.'},
+// Q1
+{s:0,type:'vf',stem:'"Hasta luego" means "See you later."',a:'t',
+ fb:'"Hasta luego" literally means "until later" — used when saying goodbye, equivalent to "see you later."'},
+// Q2
+{s:0,type:'mc',stem:'Someone asks "¿Cómo te llamas?" What are they asking?',
+ opts:['How old are you?','Where are you from?','What is your name?','How are you?'],a:2,
+ fb:'"¿Cómo te llamas?" = What is your name? (literally: "What do you call yourself?")'},
+// Q3
+{s:0,type:'fill',stem:'— Hola, ¿cómo ___?\n— Bien, gracias.',chips:['estás','eres','tienes','hablas'],a:0,
+ fb:'"¿Cómo estás?" = How are you? This uses the verb ESTAR, not SER.'},
+// Q4
+{s:0,type:'vf',stem:'"Mucho gusto" is used when meeting someone for the first time.',a:'t',
+ fb:'"Mucho gusto" = Nice to meet you. It is used when you are introduced to someone.'},
+// Q5
+{s:0,type:'mc',stem:'How do you say "I am from Mexico" in Spanish?',
+ opts:['Soy de México.','Estoy de México.','Vivo México.','Tengo de México.'],a:0,
+ fb:'"Soy de México" = I am from Mexico. Use SER + de + place of origin.'},
+// Q6
+{s:0,type:'order',words:['me','llamo','Carlos','Yo'],correct:'Yo me llamo Carlos.',
+ fb:'Word order: Yo (I) + me llamo (my name is / I am called) + Carlos. The subject pronoun "yo" can also be omitted: "Me llamo Carlos."'},
+// Q7
+{s:0,type:'mc',stem:'What does "¿De dónde eres?" mean?',
+ opts:['What do you do?','Where are you from?','How old are you?','Do you speak Spanish?'],a:1,
+ fb:'"¿De dónde eres?" = Where are you from? Literal: "From where are you?"'},
+// Q8
+{s:0,type:'fill',stem:'Ella ___ de España.',chips:['es','está','tiene','hay'],a:0,
+ fb:'"Ella es de España" = She is from Spain. Use SER (es) for origin/nationality.'},
+// Q9
+{s:0,type:'vf',stem:'"Por favor" means "Thank you."',a:'f',
+ fb:'"Por favor" = Please. "Gracias" = Thank you. "De nada" = You\'re welcome.'},
+// Q10
+{s:0,type:'mc',stem:'🌙 What greeting matches this emoji?',
+ opts:['Buenos días','Buenas tardes','Buenas noches','Buen provecho'],a:2,
+ fb:'"Buenas noches" = Good night / Good evening — used in the evening or at night.'},
+// Q11
+{s:0,type:'mc',stem:'How do you ask "How old are you?" in Spanish?',
+ opts:['¿Cómo te llamas?','¿De dónde eres?','¿Cuántos años tienes?','¿Hablas inglés?'],a:2,
+ fb:'"¿Cuántos años tienes?" = How old are you? Literal: "How many years do you have?"'},
+// Q12
+{s:0,type:'fill',stem:'— ___, mucho gusto.\n— Igualmente.',chips:['Hola','Adiós','Hasta luego','Perdón'],a:0,
+ fb:'"Hola, mucho gusto" = Hello, nice to meet you. "Igualmente" = Likewise.'},
+// Q13
+{s:0,type:'vf',stem:'"Yo soy estudiante" means "I am a student."',a:'t',
+ fb:'"Yo soy estudiante" = I am a student. In Spanish, an indefinite article is normally not used with professions after SER.'},
+
+/* ══ SECTION 1: Numbers 1–100 (14) ══════════════════ */
+// Q14
+{s:1,type:'mc',stem:'🎲 How do you say the number 15 in Spanish?',
+ opts:['Cinco','Quince','Cincuenta','Catorce'],a:1,
+ fb:'"Quince" = 15. Catorce = 14, Cinco = 5, Cincuenta = 50.'},
+// Q15
+{s:1,type:'fill',stem:'Hay ___ estudiantes en la clase. (30)',chips:['treinta','trece','cuarenta','tres'],a:0,
+ fb:'"Treinta" = 30. Trece = 13, Cuarenta = 40, Tres = 3.'},
+// Q16
+{s:1,type:'vf',stem:'"Veinte" is the Spanish word for 20.',a:'t',
+ fb:'"Veinte" = 20. 21 = veintiuno, 22 = veintidós, 23 = veintitrés…'},
+// Q17
+{s:1,type:'mc',stem:'What number is "cincuenta y siete"?',
+ opts:['47','57','75','67'],a:1,
+ fb:'"Cincuenta" = 50, and "siete" = 7, so "cincuenta y siete" = 57. Compound numbers from 31 to 99 use "y" between the tens and units.'},
+// Q18
+{s:1,type:'mc',stem:'📞 A phone number includes "ochenta y tres." What digits are those?',
+ opts:['38','83','13','80'],a:1,
+ fb:'"Ochenta" = 80, and "tres" = 3, so "ochenta y tres" = 83.'},
+// Q19
+{s:1,type:'fill',stem:'Mi número favorito es ___ (100).',chips:['cien','diez','mil','ciento'],a:0,
+ fb:'"Cien" is used for exactly 100. "Ciento" is used for numbers from 101 to 199: ciento uno, ciento dos, and so on.'},
+// Q20
+{s:1,type:'vf',stem:'"Treinta y uno" = 31.',a:'t',
+ fb:'"Treinta" (30) + "y" (and) + "uno" (1) = 31. This pattern continues: cuarenta y dos = 42, etc.'},
+// Q21
+{s:1,type:'mc',stem:'How do you say 44 in Spanish?',
+ opts:['Cuarenta y cuatro','Catorce','Cuatro y cuarenta','Cuarenta cuatro'],a:0,
+ fb:'"Cuarenta y cuatro" = 44. In compound numbers from 31 to 99, use "y" between the tens and units.'},
+// Q22
+{s:1,type:'mc',stem:'🎂 "Tengo veintidós años." How old is this person?',
+ opts:['12','20','22','32'],a:2,
+ fb:'"Veintidós" = 22. "Tengo veintidós años" = I am 22 years old.'},
+// Q23
+{s:1,type:'fill',stem:'___ más tres son diez. (7 + 3)',chips:['Siete','Seis','Cuatro','Diez'],a:0,
+ fb:'"Siete más tres son diez" = Seven plus three equals ten. In Spanish, "más" means "plus," and "son" can be used to express the result.'},
+// Q24
+{s:1,type:'vf',stem:'"Noventa" means 19.',a:'f',
+ fb:'"Noventa" = 90. 19 = diecinueve. Common confusion: nueve (9), diecinueve (19), noventa (90).'},
+// Q25
+{s:1,type:'mc',stem:'Which number comes between "sesenta" and "ochenta"?',
+ opts:['Cincuenta','Setenta','Noventa','Cuarenta'],a:1,
+ fb:'60 = sesenta · 70 = setenta · 80 = ochenta. Setenta (70) goes between them.'},
+// Q26
+{s:1,type:'mc',stem:'How do you say "I have 16 books"?',
+ opts:['Tengo dieciséis libros.','Tengo seis libros.','Tengo sesenta libros.','Tengo catorce libros.'],a:0,
+ fb:'"Dieciséis" = 16. Numbers 16–19 are written as one word: dieciséis, diecisiete, dieciocho, diecinueve.'},
+// Q27
+{s:1,type:'order',words:['tengo','años','Yo','veinticinco'],correct:'Yo tengo veinticinco años.',
+ fb:'"Yo tengo veinticinco años" = I am 25 years old. TENER is used for age in Spanish.'},
+
+/* ══ SECTION 2: Family & People (12) ════════════════ */
+// Q28
+{s:2,type:'mc',stem:'👩 What is the Spanish word for "mother"?',
+ opts:['hermana','abuela','madre','tía'],a:2,
+ fb:'"Madre" = mother. In everyday speech, people also commonly use "mamá."'},
+// Q29
+{s:2,type:'vf',stem:'"El hermano" means "the brother."',a:'t',
+ fb:'"Hermano" = brother. "Hermana" = sister. Note the masculine article "el."'},
+// Q30
+{s:2,type:'mc',stem:'👴 Which word means "grandfather"?',
+ opts:['abuelo','tío','padre','primo'],a:0,
+ fb:'"Abuelo" = grandfather, and "abuela" = grandmother. In this pair, the ending changes from -o to -a.'},
+// Q31
+{s:2,type:'fill',stem:'Mi ___ tiene tres hijos. (uncle)',chips:['tío','primo','cuñado','sobrino'],a:0,
+ fb:'"Tío" = uncle. "Primo" = cousin. "Cuñado" = brother-in-law. "Sobrino" = nephew.'},
+// Q32
+{s:2,type:'mc',stem:'How do you say "I have two sisters"?',
+ opts:['Tengo dos hermanos.','Tengo dos hermanas.','Soy dos hermanas.','Hay dos hermanas.'],a:1,
+ fb:'"Tengo dos hermanas" = I have two sisters. Use TENER (tengo) for possession. "Hermanas" is feminine plural.'},
+// Q33
+{s:2,type:'vf',stem:'"La prima" refers to a female cousin.',a:'t',
+ fb:'"La prima" = female cousin, and "el primo" = male cousin. Many family nouns mark gender with -o/-a and the corresponding article.'},
+// Q34
+{s:2,type:'mc',stem:'🧒 Which word means "son"?',
+ opts:['niño','sobrino','hijo','hermano'],a:2,
+ fb:'"Hijo" = son. "Hija" = daughter, "niño" = boy or child, and "sobrino" = nephew.'},
+// Q35
+{s:2,type:'order',words:['tiene','Mi','dos','madre','hermanos'],correct:'Mi madre tiene dos hermanos.',
+ fb:'"Mi madre tiene dos hermanos" = My mother has two brothers. Mi = my, madre = mother, tiene = has.'},
+// Q36
+{s:2,type:'fill',stem:'Ella es mi ___. (wife)',chips:['esposa','novia','hermana','prima'],a:0,
+ fb:'"Esposa" = wife. "Novia" = girlfriend. "Hermana" = sister. "Prima" = cousin.'},
+// Q37
+{s:2,type:'vf',stem:'"Los padres" refers only to the father.',a:'f',
+ fb:'"Los padres" usually means "the parents." "El padre" means "the father." In a different context, "los padres" can also mean "the fathers."'},
+// Q38
+{s:2,type:'mc',stem:'Which sentence correctly says "My family is big"?',
+ opts:['Mi familia es grande.','Mi familia está grande.','Mi familia tiene grande.','Mi familia son grandes.'],a:0,
+ fb:'"Mi familia es grande" = My family is big. Use SER to describe a general characteristic of the family.'},
+// Q39
+{s:2,type:'mc',stem:'👦👧 When referring to both sons and daughters, what does "los hijos" mean?',
+ opts:['the sons','the daughters','the children (sons/daughters)','the brothers'],a:2,
+ fb:'In a mixed group, "los hijos" means "the children"—sons and daughters. Depending on the context, it can also mean "the sons."'},
+
+/* ══ SECTION 3: Colors & Objects (12) ══════════════ */
+// Q40
+{s:3,type:'mc',stem:'🔴 What color is this?',
+ opts:['azul','rojo','verde','amarillo'],a:1,
+ fb:'"Rojo" = red. Azul = blue, verde = green, amarillo = yellow.'},
+// Q41
+{s:3,type:'vf',stem:'"El libro" is masculine in Spanish.',a:'t',
+ fb:'"El libro" = the book (masculine). In Spanish, nouns have grammatical gender. "El" marks masculine.'},
+// Q42
+{s:3,type:'mc',stem:'🟡 How do you say "yellow" in Spanish?',
+ opts:['morado','naranja','amarillo','rosado'],a:2,
+ fb:'"Amarillo" = yellow. Morado = purple, naranja = orange, rosado = pink.'},
+// Q43
+{s:3,type:'fill',stem:'La pizarra es ___. (black)',chips:['negra','blanca','roja','verde'],a:0,
+ fb:'"La pizarra es negra" = The blackboard is black. Note: "negra" is feminine to agree with "la pizarra."'},
+// Q44
+{s:3,type:'mc',stem:'Which word means "window"?',
+ opts:['puerta','silla','ventana','mesa'],a:2,
+ fb:'"Ventana" = window. Puerta = door, silla = chair, mesa = table.'},
+// Q45
+{s:3,type:'vf',stem:'"El bolígrafo" means "the pencil."',a:'f',
+ fb:'"El bolígrafo" = the pen. "El lápiz" = the pencil. Common mix-up for A1 learners!'},
+// Q46
+{s:3,type:'order',words:['es','cuaderno','Mi','azul'],correct:'Mi cuaderno es azul.',
+ fb:'"Mi cuaderno es azul" = My notebook is blue. In Spanish, adjectives usually come AFTER the noun.'},
+// Q47
+{s:3,type:'mc',stem:'🟢 Which color is "verde"?',
+ opts:['blue','green','gray','orange'],a:1,
+ fb:'"Verde" = green. It does not change for masculine/feminine: el carro verde, la casa verde.'},
+// Q48
+{s:3,type:'fill',stem:'La ___ es grande y marrón. (table)',chips:['mesa','silla','puerta','cama'],a:0,
+ fb:'"La mesa" = the table. "Marrón" = brown. Silla = chair, puerta = door, cama = bed.'},
+// Q49
+{s:3,type:'mc',stem:'How do you say "The car is white"?',
+ opts:['El carro es blanco.','El carro está blanco.','El carro es blanca.','Los carros es blanco.'],a:0,
+ fb:'"El carro es blanco" = The car is white. Use SER to describe the car’s usual color. "Blanco" agrees with the masculine noun "carro."'},
+// Q50
+{s:3,type:'vf',stem:'In Spanish, color adjectives agree with the noun in gender and number.',a:'t',
+ fb:'True! Compare "el libro rojo" and "la mochila roja." Some colors change for gender, while colors such as "azul" and "verde" keep the same singular form but still change in the plural: azules, verdes.'},
+// Q51
+{s:3,type:'mc',stem:'📚 What is the Spanish word for "backpack"?',
+ opts:['cuaderno','mochila','lápiz','regla'],a:1,
+ fb:'"La mochila" = the backpack. Cuaderno = notebook, lápiz = pencil, regla = ruler.'},
+
+/* ══ SECTION 4: Food & Drinks (12) ════════════════ */
+// Q52
+{s:4,type:'mc',stem:'🍎 What is the Spanish word for "apple"?',
+ opts:['naranja','manzana','uva','fresa'],a:1,
+ fb:'"La manzana" = the apple. Naranja = orange, uva = grape, fresa = strawberry.'},
+// Q53
+{s:4,type:'vf',stem:'"El agua" is feminine even though it uses the article "el."',a:'t',
+ fb:'True! "Agua" is feminine, but in the singular it uses "el" because it begins with a stressed a sound: "el agua fría." The adjective remains feminine.'},
+// Q54
+{s:4,type:'mc',stem:'🥛 How do you ask for water at a restaurant?',
+ opts:['Quiero un café.','Me gustan los tacos.','Quisiera un vaso de agua, por favor.','Tengo hambre.'],a:2,
+ fb:'"Quisiera un vaso de agua, por favor" = I would like a glass of water, please. This is a polite way to order.'},
+// Q55
+{s:4,type:'fill',stem:'Yo ___ mucha hambre. (I am very hungry)',chips:['tengo','soy','estoy','hay'],a:0,
+ fb:'"Tengo hambre" = I am hungry. In Spanish, hunger and thirst use TENER (to have), not ESTAR. "Tengo sed" = I am thirsty.'},
+// Q56
+{s:4,type:'mc',stem:'🥩 Which word means "meat"?',
+ opts:['pollo','carne','pescado','cerdo'],a:1,
+ fb:'"La carne" = meat (general). Pollo = chicken, pescado = fish, cerdo = pork.'},
+// Q57
+{s:4,type:'vf',stem:'"Me gusta el café" means "I like coffee."',a:'t',
+ fb:'"Me gusta el café" = I like coffee. GUSTAR works differently: the thing you like is the subject. "Me gusta" (singular) / "me gustan" (plural).'},
+// Q58
+{s:4,type:'order',words:['el','No','arroz','me','gusta'],correct:'No me gusta el arroz.',
+ fb:'"No me gusta el arroz" = I do not like rice. Put "no" before "me gusta" for negation.'},
+// Q59
+{s:4,type:'mc',stem:'🍳 What does "el desayuno" mean?',
+ opts:['lunch','dinner','breakfast','snack'],a:2,
+ fb:'"El desayuno" = breakfast. In Mexico, "la comida" commonly refers to lunch or the main midday meal. "La cena" = dinner.'},
+// Q60
+{s:4,type:'fill',stem:'Ella bebe ___ todas las mañanas. (coffee)',chips:['café','leche','agua','jugo'],a:0,
+ fb:'"Café" = coffee. "Leche" = milk. "Agua" = water. "Jugo" = juice.'},
+// Q61
+{s:4,type:'mc',stem:'🍕 How do you say "I want a pizza"?',
+ opts:['Quiero una pizza.','Quiero un pizza.','Tengo una pizza.','Hay una pizza.'],a:0,
+ fb:'"Quiero una pizza" = I want a pizza. "Pizza" is feminine → "una." Use QUERER for wanting things.'},
+// Q62
+{s:4,type:'vf',stem:'"Tengo sed" means "I am thirsty."',a:'t',
+ fb:'"Tengo sed" = I am thirsty. Like hunger, thirst uses TENER in Spanish. "Sed" = thirst.'},
+// Q63
+{s:4,type:'mc',stem:'Which phrase is the most common way to say "Enjoy your meal" in Mexico?',
+ opts:['Buena suerte','Buen provecho','De acuerdo','Con permiso'],a:1,
+ fb:'"Buen provecho" = Enjoy your meal / Bon appétit. Very common in Mexican Spanish at the table.'},
+
+/* ══ SECTION 5: Articles & Gender (14) ════════════ */
+// Q64
+{s:5,type:'mc',stem:'Which definite article goes with "libro"?',
+ opts:['la','el','un','una'],a:1,
+ fb:'"El libro" = the book. "Libro" is masculine → "el" (definite) or "un" (indefinite). "El" is the definite article.'},
+// Q65
+{s:5,type:'fill',stem:'Necesito ___ mochila nueva. (indefinite)',chips:['una','un','la','el'],a:0,
+ fb:'"Una mochila" = a backpack. "Mochila" is feminine → "una" (indefinite). "La mochila" (definite) = the backpack.'},
+// Q66
+{s:5,type:'vf',stem:'"La profesora" is the feminine form of "el profesor."',a:'t',
+ fb:'True! Many nouns for professions have masculine and feminine forms: profesor → profesora and médico → médica.'},
+// Q67
+{s:5,type:'mc',stem:'What is the plural of "el estudiante"?',
+ opts:['los estudiante','las estudiantes','los estudiantes','el estudiantes'],a:2,
+ fb:'"Los estudiantes" = the students. Plural: change el → los, and add -s/-es to the noun.'},
+// Q68
+{s:5,type:'order',words:['un','Hay','la','en','lápiz','mesa'],correct:'Hay un lápiz en la mesa.',
+ fb:'"Hay un lápiz en la mesa" = There is a pencil on the table. "Hay" = there is / there are.'},
+// Q69
+{s:5,type:'mc',stem:'Which sentence correctly means "I have a big problem"?',
+ opts:['Tengo un problema grande.','Tengo una problema grande.','Tengo el problema grande.','Tengo la problema grande.'],a:0,
+ fb:'"Un problema" — "problema" ends in -a but is MASCULINE! Common exceptions: el problema, el mapa, el día, el idioma.'},
+// Q70
+{s:5,type:'fill',stem:'___ casas son muy bonitas. (definite article)',chips:['Las','Los','Unas','El'],a:0,
+ fb:'"Las casas" = the houses (feminine plural). Casa → feminine → las. Add -s for plural.'},
+// Q71
+{s:5,type:'vf',stem:'Words ending in -ción are generally feminine.',a:'t',
+ fb:'True! Nouns ending in -ción, -sión, -tad, and -dad are generally feminine: la canción, la televisión, la libertad, and la ciudad.'},
+// Q72
+{s:5,type:'mc',stem:'Choose the correct article for "ciudad" (city):',
+ opts:['el ciudad','la ciudad','un ciudad','los ciudad'],a:1,
+ fb:'"La ciudad" = the city. Words ending in -dad are feminine. "La ciudad" → "las ciudades" (plural).'},
+// Q73
+{s:5,type:'mc',stem:'Choose the correct articles: "Quiero ___ café y ___ agua mineral."',opts:['un · un','un · una','el · la','una · una'],a:0,
+ fb:'The correct phrase is "un café y un agua mineral." Although "agua" is feminine, the singular indefinite article is "un" before its stressed initial a sound. The adjective "mineral" still agrees with the feminine noun.'},
+// Q74
+{s:5,type:'vf',stem:'"Los libros" is the plural of "el libro."',a:'t',
+ fb:'"El libro" → "los libros." Plural rule: add -s after vowels, -es after consonants. "El" → "los."'},
+// Q75
+{s:5,type:'mc',stem:'What is the plural of "la canción"?',
+ opts:['las canciones','los canciones','las canción','las cancions'],a:0,
+ fb:'"Las canciones" = the songs. To form the plural, add -es and remove the written accent: canción → canciones.'},
+// Q76
+{s:5,type:'order',words:['son','libros','Los','interesantes','muy'],correct:'Los libros son muy interesantes.',
+ fb:'"Los libros son muy interesantes" = The books are very interesting. Plural noun → plural verb (son) → plural adjective.'},
+// Q77
+{s:5,type:'mc',stem:'Which of these words is MASCULINE?',
+ opts:['la mano','la flor','el mapa','la canción'],a:2,
+ fb:'"El mapa" = the map — masculine, even though it ends in -a! Common exception. "La mano" is also a famous exception (feminine ending in -o).'},
+
+
+/* ══ SECTION 6: Regular Verbs — Present (16) ══════ */
+// Q78
+{s:6,type:'mc',stem:'Complete: "Yo ___ español todos los días." (hablar)',
+ opts:['hablas','habla','hablo','hablan'],a:2,
+ fb:'"Yo hablo" = I speak. -AR verb conjugation: hablo / hablas / habla / hablamos / hablan.'},
+// Q79
+{s:6,type:'vf',stem:'"Ella come mucho" uses the verb COMER correctly.',a:'t',
+ fb:'"Ella come" = She eats. -ER verb: como / comes / come / comemos / comen. "Come" is the él/ella form.'},
+// Q80
+{s:6,type:'fill',stem:'Nosotros ___ en un apartamento. (vivir)',chips:['vivimos','viven','vive','vivo'],a:0,
+ fb:'"Nosotros vivimos" = We live. The nosotros form of a regular -IR verb ends in -imos: vivimos, escribimos, compartimos.'},
+// Q81
+{s:6,type:'mc',stem:'Which sentence is correct? (trabajar)',
+ opts:['Tú trabajas mucho.','Tú trabaja mucho.','Tú trabajar mucho.','Tú trabajamos mucho.'],a:0,
+ fb:'"Tú trabajas" = You work. -AR verb tú form = -as. The -s ending is the key marker for tú.'},
+// Q82
+{s:6,type:'order',words:['bebe','Ella','café','mucho'],correct:'Ella bebe mucho café.',
+ fb:'"Ella bebe mucho café" = She drinks a lot of coffee. Bebe = ella form of BEBER (-ER verb, drop -er, add -e).'},
+// Q83
+{s:6,type:'mc',stem:'What is the "ellos" form of the verb CAMINAR?',
+ opts:['camina','camino','caminan','caminas'],a:2,
+ fb:'"Ellos caminan" = They walk. -AN is the ellos/ellas ending for -AR verbs. Compare: -ER/-IR verbs use -en.'},
+// Q84
+{s:6,type:'fill',stem:'Tú ___ mucho en el trabajo. (escribir)',chips:['escribes','escribe','escribo','escribimos'],a:0,
+ fb:'"Tú escribes" = You write. -IR verb tú form = -es (same as -ER verbs for tú).'},
+// Q85
+{s:6,type:'vf',stem:'"Nosotros comemos" is the nosotros form of COMER.',a:'t',
+ fb:'"Nosotros comemos" = We eat. -ER nosotros form = -emos. Compare: -AR → -amos, -IR → -imos.'},
+// Q86
+{s:6,type:'mc',stem:'Complete: "Ustedes ___ mucho español." (estudiar)',
+ opts:['estudia','estudias','estudian','estudiamos'],a:2,
+ fb:'"Ustedes estudian" = You all study. In Mexican Spanish, ustedes is used for plural "you" (not vosotros).'},
+// Q87
+{s:6,type:'fill',stem:'Yo ___ una carta. (escribir)',chips:['escribo','escribes','escribe','escriben'],a:0,
+ fb:'"Yo escribo" = I write. -IR verb yo form = -o. Same -o ending as -AR and -ER verbs for yo.'},
+// Q88
+{s:6,type:'mc',stem:'Which is NOT a regular -AR verb?',
+ opts:['hablar','caminar','comer','trabajar'],a:2,
+ fb:'"Comer" is an -ER verb, not -AR. Regular -AR verbs: hablar, caminar, trabajar, estudiar, llamar…'},
+// Q89
+{s:6,type:'order',words:['los','Nosotros','escuchamos','días','todos','música'],correct:'Nosotros escuchamos música todos los días.',
+ fb:'"Nosotros escuchamos música todos los días" = We listen to music every day. -AR nosotros = -amos.'},
+// Q90
+{s:6,type:'vf',stem:'The verb LEER is an -ER verb.',a:'t',
+ fb:'"Leer" = to read — yes, -ER verb! Leo / lees / lee / leemos / leen.'},
+// Q91
+{s:6,type:'mc',stem:'Complete: "Mi hermano ___ mucho." (correr)',
+ opts:['corres','corre','corro','corren'],a:1,
+ fb:'"Mi hermano corre" = My brother runs. -ER él/ella form = -e. Correr: corro / corres / corre / corremos / corren.'},
+// Q92
+{s:6,type:'fill',stem:'Ellos ___ en la universidad. (estudiar)',chips:['estudian','estudia','estudiamos','estudias'],a:0,
+ fb:'"Ellos estudian" = They study. -AR ellos/ellas form = -an. Important: don\'t confuse with -ER/-IR which use -en.'},
+// Q93
+{s:6,type:'mc',stem:'Which sentence correctly says "We drink water every day"?',
+ opts:['Nosotros beben agua todos los días.','Nosotros bebemos agua todos los días.','Nosotros bebe agua todos los días.','Nosotros bebemos aguas todos los días.'],a:1,
+ fb:'"Nosotros bebemos agua todos los días." -ER nosotros = -emos. "Agua" has no plural here (uncountable in this context).'},
+
+/* ══ SECTION 7: Past, Future & Present Progressive (16) ══ */
+// Q94
+{s:7,type:'mc',stem:'Complete with the preterite: "Ayer yo ___ ocho horas." (trabajar)',
+ opts:['trabajo','trabajaste','trabajé','trabajaré'],a:2,
+ fb:'"Yo trabajé ocho horas" = I worked for eight hours. For regular -AR verbs, the preterite yo ending is -é.'},
+// Q95
+{s:7,type:'vf',stem:'"Ella comió pizza ayer" means "She ate pizza yesterday."',a:'t',
+ fb:'"Comió" = she ate (pretérito of COMER). -ER past él/ella ending = -ió. "Ayer" = yesterday.'},
+// Q96
+{s:7,type:'fill',stem:'Complete using the simple future: Mañana nosotros ___ en el parque. (caminar)',chips:['caminaremos','caminamos','caminarán','caminaron'],a:0,
+ fb:'"Caminaremos" = we will walk. To form the simple future for nosotros, use the infinitive plus -emos.'},
+// Q97
+{s:7,type:'mc',stem:'What does "Estoy comiendo" mean?',
+ opts:['I ate','I will eat','I am eating','I eat'],a:2,
+ fb:'"Estoy comiendo" = I am eating (present progressive). Formula: ESTAR (conjugated) + gerund (-ando/-iendo).'},
+// Q98
+{s:7,type:'order',words:['vivió','años','en','Ella','diez','México','por'],correct:'Ella vivió en México por diez años.',
+ fb:'"Ella vivió en México por diez años" = She lived in Mexico for ten years. -IR past él/ella = -ió.'},
+// Q99
+{s:7,type:'mc',stem:'Complete: "Ellos ___ la carta mañana." (escribir — future)',
+ opts:['escribieron','escriben','escribirán','escribirá'],a:2,
+ fb:'"Ellos escribirán" = They will write. Future: infinitive + -án for ellos. Note: -AR/-ER/-IR all use the same future endings.'},
+// Q100
+{s:7,type:'fill',stem:'Tú estás ___ en este momento. (hablar — gerund)',chips:['hablando','hablado','hablar','hablas'],a:0,
+ fb:'"Hablando" is the gerund form of HABLAR. Regular -AR verbs use -ando, while regular -ER and -IR verbs use -iendo: comiendo, viviendo.'},
+// Q101
+{s:7,type:'vf',stem:'"Nosotros bebimos agua" is in the past tense.',a:'t',
+ fb:'"Bebimos" = we drank (pretérito of BEBER). -ER nosotros past = -imos. "Nosotros bebimos" = we drank.'},
+// Q102
+{s:7,type:'mc',stem:'Which sentence is in the FUTURE tense?',
+ opts:['Ella comió tacos.','Ella come tacos.','Ella comerá tacos.','Ella está comiendo tacos.'],a:2,
+ fb:'"Ella comerá tacos" = She will eat tacos. Future = infinitive (comer) + -á. The -rá/-rán ending signals future.'},
+// Q103
+{s:7,type:'fill',stem:'¿Qué estás ___? (hacer — gerund)',chips:['haciendo','hecho','hacer','haces'],a:0,
+ fb:'"¿Qué estás haciendo?" = What are you doing? The gerund of HACER is "haciendo." Regular -ER and -IR verbs usually form the gerund with -iendo.'},
+// Q104
+{s:7,type:'mc',stem:'Complete with the preterite: "Yo ___ en España durante un año." (vivir)',
+ opts:['vivo','viviré','viví','vivía'],a:2,
+ fb:'"Yo viví en España durante un año" = I lived in Spain for one year. For regular -IR verbs, the preterite yo ending is -í.'},
+// Q105
+{s:7,type:'vf',stem:'"Ellos estudiarán mañana" means "They studied yesterday."',a:'f',
+ fb:'"Estudiarán" = they will study (future). "Mañana" = tomorrow. The past would be "estudiaron" (they studied).'},
+// Q106
+{s:7,type:'order',words:['está','Mi','corriendo','hermano','en','el','parque'],correct:'Mi hermano está corriendo en el parque.',
+ fb:'"Mi hermano está corriendo en el parque" = My brother is running in the park. Present progressive: está + corriendo.'},
+// Q107
+{s:7,type:'mc',stem:'What is the gerund form of VIVIR?',
+ opts:['vivando','vivendo','viviendo','vivado'],a:2,
+ fb:'"Viviendo" = living. -IR gerund = -iendo. -AR gerund = -ando. "Estoy viviendo en México" = I am living in Mexico.'},
+// Q108
+{s:7,type:'fill',stem:'Nosotros ___ la película anoche. (mirar — preterite)',chips:['miramos','miraremos','miraron','miran'],a:0,
+ fb:'"Nosotros miramos la película anoche" = We watched the movie last night. For regular -AR verbs, the nosotros form is -amos in both the present and the preterite; the time expression clarifies the meaning.'},
+// Q109
+{s:7,type:'mc',stem:'Which sentence means "She is writing a letter right now"?',
+ opts:['Ella escribió una carta.','Ella está escribiendo una carta.','Ella escribirá una carta.','Ella escribe una carta.'],a:1,
+ fb:'"Ella está escribiendo una carta" = She is writing a letter (right now). Present progressive: está + escribiendo.'},
+];
+
+const TOTAL_Q=Q.length;
+
+/* ══════════════════════════════════
+   ENGINE
+══════════════════════════════════ */
+let curSection=0;
+const answers={};      // qi → {correct:bool, chosen}
+const orderState={};   // qi → [words in answer so far]
+const secScores={};    // si → {ok,total}
+
+function totalAnswered(){return Object.keys(answers).length;}
+function secQuestions(si){return Q.filter(q=>q.s===si);}
+function secAnswered(si){return Q.filter((q,i)=>q.s===si&&answers[i]!==undefined).length;}
+function secOk(si){return Q.filter((q,i)=>q.s===si&&answers[i]?.correct).length;}
+
+function updateProgress(){
+  const pct=Math.round(totalAnswered()/TOTAL_Q*100);
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progLeft').textContent=`Section ${curSection+1} of ${SECTIONS.length}`;
+  document.getElementById('progRight').textContent=`${totalAnswered()} / ${TOTAL_Q} answered`;
+  renderDots();
+}
+function renderDots(){
+  const dots=document.getElementById('progDots');if(!dots)return;
+  dots.innerHTML=SECTIONS.map((s,i)=>{
+    const done=secAnswered(i)===secQuestions(i).length&&secQuestions(i).length>0;
+    const active=i===curSection;
+    const cls=done?'done':active?'active':'locked';
+    return `<div class="prog-dot ${cls}" title="${s.title}" onclick="renderSection(${i})" style="cursor:pointer">${s.icon}</div>`;
+  }).join('');
+}
+
+/* ── SECTION RENDER ─────────────────────────────── */
+function renderSection(si){
+  curSection=si;updateProgress();
+  const sec=SECTIONS[si];
+  const qs=Q.map((q,i)=>({...q,qi:i})).filter(q=>q.s===si);
+  const answered=qs.filter(q=>answers[q.qi]!==undefined).length;
+  const allDone=answered===qs.length&&qs.length>0;
+
+  const qHtml=qs.map(q=>renderQ(q)).join('');
+  const prevBtn=si>0?`<button class="btn btn-ghost" onclick="renderSection(${si-1});window.scrollTo({top:0,behavior:'smooth'})">← Previous</button>`:'';
+  const nextBtn=si<SECTIONS.length-1?`<button class="btn btn-cyan" onclick="renderSection(${si+1});window.scrollTo({top:0,behavior:'smooth'})">Next Section →</button>`:`<button class="btn btn-cyan" onclick="showFinal()">See My Results 🎯</button>`;
+
+  document.getElementById('sectionContainer').innerHTML=`
+  <div class="section-card">
+    <div class="sec-header">
+      <span class="sec-icon">${sec.icon}</span>
+      <div>
+        <div class="sec-title" style="color:${sec.color}">${sec.title}</div>
+      </div>
+    </div>
+    <div class="sec-sub">${sec.sub}</div>
+    <div class="sec-progress">
+      <span>${answered}/${qs.length} answered</span>
+      <div class="sec-prog-bar"><div class="sec-prog-fill" id="secProg${si}" style="width:${Math.round(answered/qs.length*100)}%"></div></div>
+    </div>
+    <div class="q-wrap">${qHtml}</div>
+    <div id="secResult${si}" class="sec-result${allDone?' show':''}">
+      ${allDone?buildSecResult(si):''}
+    </div>
+    <div class="actions" id="secActions${si}">
+      ${prevBtn}${nextBtn}
+    </div>
+  </div>`;
+}
+
+function renderQ(q){
+  const {qi,type,stem,opts,a,chips,words,correct,fb,s}=q;
+  const done=answers[qi]!==undefined;
+  const isOk=answers[qi]?.correct;
+  const cardCls=done?` answered ${isOk?'correct':'wrong'}`:'';
+  const typeBadge={mc:'multiple choice',vf:'true / false',fill:'fill in',order:'word order'};
+  const typeBadgeEl=`<span class="q-type-badge" style="background:rgba(255,255,255,.07);color:var(--muted2)">${typeBadge[type]}</span>`;
+  let inner='';
+
+  if(type==='mc'){
+    inner=opts.map((o,oi)=>{
+      let cls='mc-opt';
+      if(done){if(oi===a)cls+=' show-correct';else if(answers[qi]?.chosen===oi&&oi!==a)cls+=' sel-wrong';}
+      return `<button class="${cls}" onclick="answerMC(${qi},${oi},${a})" ${done?'disabled':''}>${o}</button>`;
+    }).join('');
+    inner=`<div class="mc-opts">${inner}</div>`;
+  }
+  else if(type==='vf'){
+    const tOk=a==='t';const tSel=done&&answers[qi]?.chosen==='t';const tCls='vf-btn t'+(done?(tSel?(tOk?' sel-correct':' sel-wrong'):(tOk?' show-correct':'')):'');
+    const fOk=a==='f';const fSel=done&&answers[qi]?.chosen==='f';const fCls='vf-btn f'+(done?(fSel?(fOk?' sel-correct':' sel-wrong'):(fOk?' show-correct':'')):'');
+    inner=`<div class="vf-opts">
+      <button class="${tCls}" onclick="answerVF(${qi},'t','${a}')" ${done?'disabled':''}>✅ True</button>
+      <button class="${fCls}" onclick="answerVF(${qi},'f','${a}')" ${done?'disabled':''}>❌ False</button>
+    </div>`;
+  }
+  else if(type==='fill'){
+    const blank=done?`<span class="fill-blank" style="color:${answers[qi]?.correct?'var(--good)':'var(--bad)'}">${chips[answers[qi]?.chosen]}</span>`:'<span class="fill-blank" id="blank${qi}">___</span>';
+    const stemWithBlank=stem.replace('___',blank);
+    const chipBtns=chips.map((c,ci)=>{
+      let cls='fill-chip';
+      if(done){if(ci===a)cls+=' chip-ok';else if(answers[qi]?.chosen===ci&&ci!==a)cls+=' chip-err';else cls+=' used';}
+      return `<button class="${cls}" onclick="answerFill(${qi},${ci},${a})" ${done?'disabled':''}>${c}</button>`;
+    }).join('');
+    inner=`<div style="font-size:1rem;font-weight:600;line-height:1.9;margin-bottom:10px">${stemWithBlank}</div>
+    <div class="fill-chips">${chipBtns}</div>`;
+  }
+  else if(type==='order'){
+    const state=orderState[qi]||[];
+    const pool=words.filter((_,wi)=>!state.includes(wi));
+    if(done){
+      const isOk=answers[qi]?.correct;
+      const chosenWords=(answers[qi]?.chosen||'').split(/\s+/).filter(Boolean);
+      inner=`<div class="order-answer">${chosenWords.map(w=>`<span class="order-word ${isOk?'order-ok':'order-err'}">${w}</span>`).join('')}</div>
+      <div style="font-size:.79rem;color:var(--muted);margin-top:4px">${isOk?'✓ Correct!':'✗ Correct order: <strong>'+correct+'</strong>'}</div>`;
+    } else {
+      const ansWords=state.map((wi,pos)=>`<span class="order-word in-answer" onclick="removeWord(${qi},${pos})">${words[wi]}</span>`).join('');
+      const poolWords=pool.map((_,pi)=>{
+        const realIdx=words.findIndex((w,wi)=>!state.includes(wi)&&words.indexOf(w,wi)===wi);//find actual unused
+        // simpler: track by index not value
+        return '';
+      }).join('');
+      // Rebuild properly
+      const usedIdx=new Set(state);
+      const poolBtns=words.map((w,wi)=>usedIdx.has(wi)?'':
+        `<span class="order-word" onclick="addWord(${qi},${wi})">${w}</span>`
+      ).join('');
+      inner=`<div style="font-size:.78rem;color:var(--muted2);margin-bottom:6px">Click words to build the sentence:</div>
+      <div class="order-answer" id="oa${qi}">${ansWords||'<span style="color:var(--muted2);font-size:.8rem">Your sentence here…</span>'}</div>
+      <div class="order-pool" id="op${qi}">${poolBtns}</div>
+      <button class="order-check" onclick="checkOrder(${qi})" ${state.length!==words.length?'disabled':''} id="oc${qi}">Check ✓</button>`;
+    }
+  }
+
+  const fbEl=`<div class="q-fb${done?' show':''}" id="qfb${qi}">${done?(isOk?'✓ ':'✗ ')+fb:''}</div>`;
+  const stemDisplay=type==='fill'?'':type==='order'?`<div class="q-stem" style="display:none">${stem||''}</div>`:`<div class="q-stem">${stem}</div>`;
+
+  return `<div class="q-card${cardCls}" id="qcard${qi}">
+    <span class="q-num">Q${qi+1} ${typeBadgeEl}</span>
+    ${type!=='fill'?`<div class="q-stem">${stem}</div>`:''}
+    ${inner}
+    ${fbEl}
+  </div>`;
+}
+
+/* ── ANSWER HANDLERS ──────────────────────────────── */
+function answerMC(qi,chosen,correct){
+  if(answers[qi])return;
+  const isOk=chosen===correct;
+  answers[qi]={correct:isOk,chosen};
+  refreshQ(qi);afterAnswer(Q[qi].s);
+}
+function answerVF(qi,chosen,correct){
+  if(answers[qi])return;
+  const isOk=chosen===correct;
+  answers[qi]={correct:isOk,chosen};
+  refreshQ(qi);afterAnswer(Q[qi].s);
+}
+function answerFill(qi,chosen,correct){
+  if(answers[qi])return;
+  const isOk=chosen===correct;
+  answers[qi]={correct:isOk,chosen};
+  refreshQ(qi);afterAnswer(Q[qi].s);
+}
+function addWord(qi,wi){
+  if(answers[qi])return;
+  if(!orderState[qi])orderState[qi]=[];
+  orderState[qi].push(wi);
+  refreshOrderUI(qi);
+}
+function removeWord(qi,pos){
+  if(answers[qi])return;
+  orderState[qi].splice(pos,1);
+  refreshOrderUI(qi);
+}
+function refreshOrderUI(qi){
+  const q=Q[qi];const state=orderState[qi]||[];
+  const usedIdx=new Set(state);
+  const ansEl=document.getElementById('oa'+qi);
+  const poolEl=document.getElementById('op'+qi);
+  const checkEl=document.getElementById('oc'+qi);
+  if(ansEl)ansEl.innerHTML=state.length?state.map((wi,pos)=>`<span class="order-word in-answer" onclick="removeWord(${qi},${pos})">${q.words[wi]}</span>`).join(''):'<span style="color:var(--muted2);font-size:.8rem">Your sentence here…</span>';
+  if(poolEl)poolEl.innerHTML=q.words.map((w,wi)=>usedIdx.has(wi)?'':
+    `<span class="order-word" onclick="addWord(${qi},${wi})">${w}</span>`).join('');
+  if(checkEl)checkEl.disabled=state.length!==q.words.length;
+}
+function checkOrder(qi){
+  if(answers[qi])return;
+  const q=Q[qi];const state=orderState[qi]||[];
+  if(state.length!==q.words.length)return;
+  const built=state.map(wi=>q.words[wi]).join(' ');
+  const isOk=built===q.correct||built.replace(/\.$/, '')===q.correct.replace(/\.$/,'');
+  answers[qi]={correct:isOk,chosen:built};
+  refreshQ(qi);afterAnswer(q.s);
+}
+
+function refreshQ(qi){
+  const card=document.getElementById('qcard'+qi);
+  if(!card)return;
+  const si=Q[qi].s;
+  const qs=Q.map((q,i)=>({...q,qi:i})).filter(q=>q.s===si);
+  card.outerHTML=renderQ({...Q[qi],qi});
+  updateSecProgress(si);
+  updateProgress();
+}
+function updateSecProgress(si){
+  const qs=Q.filter(q=>q.s===si);
+  const done=Q.filter((q,i)=>q.s===si&&answers[i]!==undefined).length;
+  const el=document.getElementById('secProg'+si);
+  if(el)el.style.width=Math.round(done/qs.length*100)+'%';
+}
+function afterAnswer(si){
+  const qs=Q.filter(q=>q.s===si);
+  const done=Q.filter((q,i)=>q.s===si&&answers[i]!==undefined).length;
+  if(done<qs.length)return;
+  // All answered in this section — show the section result
+  const res=document.getElementById('secResult'+si);
+  if(res&&!res.classList.contains('show')){
+    res.innerHTML=buildSecResult(si);
+    res.classList.add('show');
+    setTimeout(()=>res.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
+  }
+}
+function nextSection(){
+  if(curSection<SECTIONS.length-1){renderSection(curSection+1);window.scrollTo({top:0,behavior:'smooth'});}
+}
+
+function buildSecResult(si){
+  const qs=Q.filter((q,i)=>q.s===si);
+  const ok=Q.filter((q,i)=>q.s===si&&answers[i]?.correct).length;
+  const tot=qs.length;
+  const pct=Math.round(ok/tot*100);
+  const col=pct>=80?'var(--good)':pct>=60?'var(--warn)':'var(--bad)';
+  const msg=pct>=80?'Excellent work! 🎉':pct>=60?'Good effort — review the feedback above.':'Keep practicing — check each explanation above.';
+  return `<div class="sec-result show" style="background:rgba(255,255,255,.03);border:1.5px solid ${col};border-radius:14px;padding:16px 20px;text-align:center">
+    <div class="sec-score-big" style="color:${col}">${ok}/${tot}</div>
+    <div class="sec-score-label">${pct}% correct</div>
+    <div class="sec-feedback" style="background:rgba(255,255,255,.04);border-left:4px solid ${col};margin-top:10px">${msg}</div>
+  </div>`;
+}
+
+/* ══════════════════════════════════
+   FINAL RESULTS
+══════════════════════════════════ */
+function showFinal(){
+  document.getElementById('sectionContainer').innerHTML='';
+  const fin=document.getElementById('finalContainer');
+  fin.classList.remove('final-hidden');
+
+  const totalOk=Q.filter((_,i)=>answers[i]?.correct).length;
+  const pctTotal=Math.round(totalOk/TOTAL_Q*100);
+  const overallCol=pctTotal>=80?'#22c55e':pctTotal>=60?'#f59e0b':'#ef4444';
+  const overallMsg=pctTotal>=80?'Outstanding! You have a solid A1 foundation.':
+    pctTotal>=70?'Very good! A few areas to review.':
+    pctTotal>=55?'Good start — keep practicing the weak areas below.':
+    'Keep going — review the explanations and try again!';
+
+  // Section score cards
+  const secCards=SECTIONS.map((s,si)=>{
+    const qs=Q.filter((q,i)=>q.s===si);
+    const ok=Q.filter((q,i)=>q.s===si&&answers[i]?.correct).length;
+    const tot=qs.length;
+    const pct=Math.round(ok/tot*100);
+    const col=pct>=80?'#22c55e':pct>=60?'#f59e0b':'#ef4444';
+    return `<div class="sec-score-card" style="border-color:${col}30;background:${col}0a">
+      <div class="sec-score-name" style="color:${col}">${s.icon} ${s.title}</div>
+      <div class="sec-score-num" style="color:${col}">${ok}/${tot} <span style="font-size:1rem;font-weight:400;color:var(--muted)">(${pct}%)</span></div>
+      <div class="sec-score-bar"><div class="sec-score-bar-fill" style="width:${pct}%;background:${col}"></div></div>
+    </div>`;
+  }).join('');
+
+  // Diagnosis per section
+  const diag=SECTIONS.map((s,si)=>{
+    const qs=Q.filter((q,i)=>q.s===si);
+    const ok=Q.filter((q,i)=>q.s===si&&answers[i]?.correct).length;
+    const pct=Math.round(ok/qs.length*100);
+    const diagnoses=[
+      {// Section 0: Greetings
+        strong:'You know your greetings and basic introductions well.',
+        weak:'Review: SER vs ESTAR for introductions, and expressions like "mucho gusto," "por favor," "gracias."',
+      },{// Section 1: Numbers
+        strong:'Great number recognition! You can count and use numbers in context.',
+        weak:'Review: numbers 11–19 (tricky spellings), tens (30–90), and how to form compound numbers (31–99 use "y").',
+      },{// Section 2: Family
+        strong:'You know the core family vocabulary well.',
+        weak:'Review: gender changes (-o/-a), plural forms of family words, and using TENER for family members.',
+      },{// Section 3: Colors & Objects
+        strong:'Solid color and object vocabulary.',
+        weak:'Review: adjective-noun gender agreement (rojo/roja), common classroom/home objects, and articles.',
+      },{// Section 4: Food
+        strong:'Good food and drink vocabulary.',
+        weak:'Review: TENER for hunger/thirst, GUSTAR structure, and common meal vocabulary (desayuno/almuerzo/cena).',
+      },{// Section 5: Articles & Gender
+        strong:'Good understanding of Spanish gender and articles.',
+        weak:'Review: masculine exceptions such as problema, mapa, and día; nouns ending in -ción and -dad, which are generally feminine; and plural formation for words ending in -ión (canción → canciones).',
+      },{// Section 6: Present
+        strong:'You conjugate regular present tense verbs correctly.',
+        weak:'Review: -AR/-ER/-IR endings for each pronoun, and the difference between the three verb families.',
+      },{// Section 7: Past/Future/Progressive
+        strong:'Great grasp of multiple tenses.',
+        weak:'Review: pretérito endings for -AR/-ER/-IR, simple future (infinitive + endings), and gerunds (-ando/-iendo) for present progressive.',
+      },
+    ];
+    const d=diagnoses[si];
+    const col=pct>=80?'var(--good)':pct>=60?'var(--warn)':'var(--bad)';
+    const icon=pct>=80?'✅':pct>=60?'⚠️':'❌';
+    return `<div class="diag-section" style="border-color:${col}25">
+      <div class="diag-title" style="color:${col}">${icon} ${s.icon} ${s.title} — ${pct}%</div>
+      <div class="diag-body">${pct>=80?d.strong:'<strong>What to review:</strong> '+d.weak}</div>
+    </div>`;
+  }).join('');
+
+  // Overall recommendation
+  const recommendation=pctTotal>=80?
+    '<strong>✅ You are ready for A2!</strong> Your Spanish foundation is solid. Move on to A2 content: irregular verbs, more complex sentences, and daily conversation topics.':
+    pctTotal>=60?
+    '<strong>⚠️ Your A1 foundation is developing.</strong> You have a good base but need to strengthen a few areas. Review the sections marked in yellow or red and practice the specific topics highlighted above.':
+    '<strong>❌ Keep building your A1 base.</strong> Focus on the fundamentals: greetings, numbers, family vocabulary, articles, and regular present tense verbs. Take it section by section!';
+
+  fin.innerHTML=`<div class="final-card">
+    <div class="final-title">Your A1 Test Results</div>
+    <div class="ring-wrap">
+      <svg class="ring-svg" viewBox="0 0 160 160">
+        <circle cx="80" cy="80" r="60" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="14"/>
+        <circle cx="80" cy="80" r="60" fill="none" stroke="${overallCol}" stroke-width="14"
+          stroke-dasharray="${Math.round(2*3.14159*60*pctTotal/100)} ${Math.round(2*3.14159*60)}"
+          stroke-dashoffset="${Math.round(2*3.14159*60*0.25)}"
+          stroke-linecap="round" style="transition:stroke-dasharray 1s"/>
+        <text x="80" y="75" text-anchor="middle" fill="${overallCol}" font-family="Syne,sans-serif" font-size="28" font-weight="900">${pctTotal}%</text>
+        <text x="80" y="98" text-anchor="middle" fill="#a8abce" font-family="DM Sans,sans-serif" font-size="13">${totalOk}/${TOTAL_Q}</text>
+      </svg>
+    </div>
+    <div style="text-align:center;font-size:1rem;font-weight:700;color:${overallCol};margin-bottom:20px">${overallMsg}</div>
+    <div class="sec-scores">${secCards}</div>
+    <div style="font-family:var(--display);font-size:.9rem;font-weight:900;margin-bottom:12px;color:var(--cyan)">📊 Detailed Feedback</div>
+    ${diag}
+    <div style="background:rgba(255,255,255,.04);border:1.5px solid rgba(37,217,255,.2);border-radius:13px;padding:14px 16px;margin-top:16px;font-size:.88rem;line-height:1.7">
+      ${recommendation}
+    </div>
+    <div class="actions" style="justify-content:center;margin-top:20px">
+      <button class="btn btn-magenta" onclick="restartTest()">↺ Restart Test</button>
+      <button class="btn btn-ghost" onclick="window.print()">🖨️ Print Results</button>
+    </div>
+  </div>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function restartTest(){
+  Object.keys(answers).forEach(k=>delete answers[k]);
+  Object.keys(orderState).forEach(k=>delete orderState[k]);
+  curSection=0;
+  document.getElementById('finalContainer').classList.add('final-hidden');
+  renderSection(0);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── INIT ──────────────────────────────────────── */
+(function init(){
+  renderDots();
+  renderSection(0);
+})();
+</script>
+</body>
+</html>

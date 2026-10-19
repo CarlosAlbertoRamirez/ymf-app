@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiempos del Indicativo | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --t0:#34d399; --t1:#25d9ff; --t2:#a78bfa; --t3:#f472b6; --t4:#fb923c;
+  --font:'DM Sans',system-ui,sans-serif;
+  --display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 10% 10%,rgba(255,43,191,.13),transparent 28%),radial-gradient(ellipse at 90% 15%,rgba(37,217,255,.09),transparent 28%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(1020px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+
+/* HERO */
+.hero{border-radius:22px;padding:20px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo-box{width:58px;height:58px;flex-shrink:0;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);box-shadow:0 0 18px rgba(255,43,191,.22);font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--magenta);text-shadow:1px 1px 0 var(--cyan)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,2.3rem);font-weight:900;line-height:.95;background:linear-gradient(90deg,#fff 20%,var(--cyan) 55%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.85rem;line-height:1.5;margin-top:4px}
+.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.badge{border-radius:999px;padding:3px 10px;font-size:.68rem;font-weight:700;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:var(--muted)}
+
+/* PAGE TABS */
+.page-tabs{display:flex;gap:6px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:8px;box-shadow:var(--shadow);overflow-x:auto;scrollbar-width:none}
+.page-tabs::-webkit-scrollbar{display:none}
+.ptab{flex:1;min-width:120px;border:0;border-radius:11px;padding:10px 8px;font-weight:800;font-family:var(--font);font-size:.78rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.ptab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.ptab.active{color:white;box-shadow:0 3px 0 rgba(0,0,0,.2);transform:translateY(-1px)}
+.ptab-title{font-family:var(--display);font-size:.85rem;font-weight:900}
+.ptab-sub{font-size:.62rem;opacity:.8;text-align:center;line-height:1.3}
+.ptab-score{font-size:.65rem;font-weight:800;margin-top:2px;opacity:.9}
+
+/* PANEL */
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:22px 26px;box-shadow:var(--shadow)}
+
+/* PAGE HEADER */
+.page-hdr{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.page-badge{width:52px;height:52px;border-radius:13px;display:grid;place-items:center;font-family:var(--display);font-size:1rem;font-weight:900;flex-shrink:0;border:2px solid transparent}
+.page-info h2{font-family:var(--display);font-size:1.25rem;font-weight:900}
+.page-info p{font-size:.82rem;color:var(--muted);margin-top:3px;line-height:1.5}
+.page-formula{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:7px 13px;font-size:.83rem;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+.page-formula strong{color:var(--text)}
+.page-formula code{background:rgba(37,217,255,.12);color:var(--cyan);border-radius:5px;padding:2px 7px;font-family:var(--font);font-weight:800;font-size:.8rem}
+
+/* SECTION HEADER */
+.sec-hdr{display:flex;align-items:center;gap:8px;margin:18px 0 10px}
+.sec-pill{border-radius:999px;padding:4px 13px;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em}
+.sec-line{flex:1;height:1px;background:rgba(255,255,255,.07)}
+
+/* SCORE BAR */
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:120px}
+.prog-l{font-size:.64rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;transition:width .4s}
+
+/* EXERCISE CARD */
+.ex-list{display:flex;flex-direction:column;gap:10px}
+.ex-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px;transition:border-color .15s}
+.ex-card:hover{border-color:rgba(37,217,255,.15)}
+.ex-card.answered-ok{border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.04)}
+.ex-card.answered-err{border-color:rgba(239,68,68,.22);background:rgba(239,68,68,.04)}
+.ex-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.ex-num{font-size:.65rem;font-weight:900;color:var(--muted2);background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0;margin-top:2px}
+.ex-sent{font-size:.98rem;line-height:1.65;color:var(--text);flex:1}
+.ex-sent .verb-hint{color:var(--cyan);font-weight:700;background:rgba(37,217,255,.1);border-radius:5px;padding:1px 6px;font-size:.88rem}
+.ex-sent .blank{display:inline-block;min-width:110px;border-bottom:2px solid rgba(37,217,255,.35);padding:0 6px;text-align:center;font-weight:700;color:var(--cyan);cursor:text}
+.ex-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding-left:28px}
+/* answer input */
+.ex-input-row{display:flex;align-items:center;gap:8px;padding-left:28px;flex-wrap:wrap}
+.ex-input{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);border-radius:9px;padding:8px 13px;font-family:var(--font);font-size:.95rem;font-weight:700;color:var(--text);outline:none;transition:.15s;min-width:140px;max-width:220px}
+.ex-input:focus{border-color:var(--cyan);background:rgba(37,217,255,.08);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.ex-input:disabled{opacity:.6;cursor:not-allowed}
+.ex-input.ok{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.ex-input.err{border-color:var(--bad);background:rgba(239,68,68,.08);color:#fca5a5}
+.ex-input::placeholder{color:var(--muted2);font-weight:400}
+.ex-fb{font-size:.8rem;font-weight:600;display:none;align-items:center;gap:5px;margin-top:6px;padding-left:28px;line-height:1.5}
+.ex-fb.show{display:flex}
+.ex-fb.ok{color:#86efac}.ex-fb.err{color:#fca5a5}
+.ex-check-btn{border:0;border-radius:8px;padding:7px 14px;font-weight:800;font-family:var(--font);font-size:.78rem;cursor:pointer;transition:.14s;background:rgba(37,217,255,.12);color:var(--cyan);border:1px solid rgba(37,217,255,.25);flex-shrink:0}
+.ex-check-btn:hover{background:rgba(37,217,255,.22)}
+.ex-check-btn:disabled{opacity:.35;cursor:not-allowed}
+
+/* FEEDBACK GLOBAL */
+.global-fb{display:none;margin-top:14px;padding:12px 16px;border-radius:12px;font-size:.9rem;font-weight:500;line-height:1.6}
+.global-fb.show{display:block}
+.global-fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 12px 12px 0}
+.global-fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 12px 12px 0}
+.global-fb.bad{background:rgba(239,68,68,.11);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 12px 12px 0}
+
+/* ACTIONS */
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.btn-dark{background:#0b0220;color:var(--muted);border:1px solid rgba(255,255,255,.08)}
+
+/* PAGE NAV */
+.page-nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:8px}
+
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:640px){.panel{padding:16px 12px}.ptab-sub{display:none}.ex-sent{font-size:.92rem}.ptab{min-width:90px}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Tiempos del Indicativo</h1>
+      <p>5 tiempos · 40 oraciones por página · 20 verbos regulares + 20 irregulares. Escribe la forma correcta del verbo entre paréntesis.</p>
+      <div class="badges">
+        <span class="badge" style="border-color:rgba(52,211,153,.3);color:var(--t0)">Presente</span>
+        <span class="badge" style="border-color:rgba(37,217,255,.3);color:var(--t1)">Indefinido</span>
+        <span class="badge" style="border-color:rgba(167,139,250,.3);color:var(--t2)">Imperfecto</span>
+        <span class="badge" style="border-color:rgba(244,114,182,.3);color:var(--t3)">Pret. Perfecto</span>
+        <span class="badge" style="border-color:rgba(251,146,60,.3);color:var(--t4)">Futuro</span>
+        <span class="badge">A2–B1 · By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-tabs" id="pageTabs"></div>
+<div id="pageContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · Your Mexican Friend</p>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   DATA — 5 TENSES × 40 SENTENCES
+   Format: { sp, en, answer, also[] }
+   sp     = Spanish sentence — (infinitivo) marks the blank
+   en     = English translation of the full sentence
+   answer = correct conjugated form (canonical)
+   also   = other accepted spellings/variants
+═══════════════════════════════════════════════════════════ */
+
+const PAGES = [
+
+/* ══════════════ PAGE 0 — PRESENTE ══════════════ */
+{
+  id:0, title:'Presente', sub:'Simple present', color:'#34d399',
+  formula:'Subject + <strong>verb (present)</strong>',
+  example:'Ella (caminar) → Ella <strong>camina</strong> a la escuela.',
+  exampleEn:'She walks to school.',
+  note:'Use the present tense to describe habits, routines, and current facts.',
+  items:[
+    /* REGULAR */
+    {sp:'Ella (hablar) con su jefa todos los días.',         en:'She talks to her boss every day.',               answer:'habla',      also:[]},
+    {sp:'Nosotros (comer) en casa normalmente.',             en:'We normally eat at home.',                       answer:'comemos',    also:[]},
+    {sp:'Tú (vivir) cerca del centro.',                     en:'You live near the center.',                      answer:'vives',      also:[]},
+    {sp:'Ellos (trabajar) de lunes a viernes.',             en:'They work Monday to Friday.',                    answer:'trabajan',   also:[]},
+    {sp:'Yo (escuchar) música mientras estudio.',           en:'I listen to music while I study.',               answer:'escucho',    also:[]},
+    {sp:'Él (beber) café todas las mañanas.',               en:'He drinks coffee every morning.',                answer:'bebe',       also:[]},
+    {sp:'Ustedes (escribir) muchos correos.',               en:'You all write many emails.',                     answer:'escriben',   also:[]},
+    {sp:'Ana (caminar) al trabajo.',                        en:'Ana walks to work.',                             answer:'camina',     also:[]},
+    {sp:'Nosotros (aprender) español juntos.',              en:'We learn Spanish together.',                     answer:'aprendemos', also:[]},
+    {sp:'Tú (leer) el periódico por la mañana.',           en:'You read the newspaper in the morning.',         answer:'lees',       also:[]},
+    {sp:'Ellas (vender) artesanías en el mercado.',        en:'They sell crafts at the market.',                answer:'venden',     also:[]},
+    {sp:'Yo (abrir) la tienda a las nueve.',               en:'I open the store at nine.',                      answer:'abro',       also:[]},
+    {sp:'Él (comprar) fruta fresca cada semana.',          en:'He buys fresh fruit every week.',                answer:'compra',     also:[]},
+    {sp:'Ustedes (recibir) muchas visitas.',                en:'You all receive many visitors.',                 answer:'reciben',    also:[]},
+    {sp:'Nosotros (vivir) en Guadalajara.',                 en:'We live in Guadalajara.',                       answer:'vivimos',    also:[]},
+    {sp:'Tú (preparar) el desayuno todos los días.',       en:'You prepare breakfast every day.',               answer:'preparas',   also:[]},
+    {sp:'Ella (correr) en el parque por las tardes.',      en:'She runs in the park in the afternoons.',        answer:'corre',      also:[]},
+    {sp:'Ellos (usar) el transporte público.',             en:'They use public transport.',                     answer:'usan',       also:[]},
+    {sp:'Yo (necesitar) más tiempo.',                      en:'I need more time.',                              answer:'necesito',   also:[]},
+    {sp:'Él (subir) las escaleras a pie.',                 en:'He takes the stairs on foot.',                   answer:'sube',       also:[]},
+    /* IRREGULAR */
+    {sp:'Yo (tener) mucho trabajo esta semana.',           en:'I have a lot of work this week.',                answer:'tengo',      also:[]},
+    {sp:'Ella (ir) al gimnasio los martes.',               en:'She goes to the gym on Tuesdays.',               answer:'va',         also:[]},
+    {sp:'Tú (ser) muy amable con todos.',                  en:'You are very kind to everyone.',                 answer:'eres',       also:[]},
+    {sp:'Nosotros (estar) en la oficina ahora.',           en:'We are in the office now.',                      answer:'estamos',    also:[]},
+    {sp:'Él (poder) ayudarte mañana.',                     en:'He can help you tomorrow.',                      answer:'puede',      also:[]},
+    {sp:'Yo (hacer) ejercicio por la mañana.',             en:'I exercise in the morning.',                     answer:'hago',       also:[]},
+    {sp:'Ellos (querer) viajar a Europa.',                 en:'They want to travel to Europe.',                 answer:'quieren',    also:[]},
+    {sp:'Tú (venir) con nosotros al concierto.',          en:'You are coming with us to the concert.',         answer:'vienes',     also:[]},
+    {sp:'Ella (saber) hablar tres idiomas.',               en:'She knows how to speak three languages.',        answer:'sabe',       also:[]},
+    {sp:'Yo (salir) a las ocho de la mañana.',            en:'I leave at eight in the morning.',               answer:'salgo',      also:[]},
+    {sp:'Él (decir) siempre la verdad.',                   en:'He always tells the truth.',                     answer:'dice',       also:[]},
+    {sp:'Nosotros (conocer) bien la ciudad.',              en:'We know the city well.',                         answer:'conocemos',  also:[]},
+    {sp:'Tú (poner) la mesa antes de cenar.',             en:'You set the table before dinner.',               answer:'pones',      also:[]},
+    {sp:'Ellas (dormir) ocho horas cada noche.',          en:'They sleep eight hours every night.',            answer:'duermen',    also:[]},
+    {sp:'Yo (traer) el desayuno para todos.',             en:'I bring breakfast for everyone.',                answer:'traigo',     also:[]},
+    {sp:'Él (jugar) fútbol los fines de semana.',        en:'He plays soccer on weekends.',                   answer:'juega',      also:[]},
+    {sp:'Ustedes (seguir) las instrucciones.',            en:'You all follow the instructions.',               answer:'siguen',     also:[]},
+    {sp:'Tú (dar) clases de inglés.',                     en:'You teach English classes.',                     answer:'das',        also:[]},
+    {sp:'Ella (ver) películas los viernes.',              en:'She watches movies on Fridays.',                 answer:'ve',         also:[]},
+    {sp:'Nosotros (oír) el noticiero cada mañana.',      en:'We listen to the news every morning.',           answer:'oímos',      also:['oimos']},
+  ]
+},
+
+/* ══════════════ PAGE 1 — INDEFINIDO ══════════════ */
+{
+  id:1, title:'Indefinido', sub:'Simple past', color:'#25d9ff',
+  formula:'Subject + <strong>verb (preterite)</strong>',
+  example:'Ella (caminar) → Ella <strong>caminó</strong> a la escuela.',
+  exampleEn:'She walked to school.',
+  note:'Use the preterite for completed actions at a specific past moment.',
+  items:[
+    /* REGULAR */
+    {sp:'Ayer ella (hablar) con su jefa.',                 en:'Yesterday she talked to her boss.',              answer:'habló',      also:[]},
+    {sp:'Nosotros (comer) tacos anoche.',                  en:'We ate tacos last night.',                       answer:'comimos',    also:[]},
+    {sp:'Tú (vivir) en España dos años.',                  en:'You lived in Spain for two years.',              answer:'viviste',    also:[]},
+    {sp:'Ellos (trabajar) hasta las diez.',                en:'They worked until ten.',                         answer:'trabajaron', also:[]},
+    {sp:'Yo (escuchar) su mensaje.',                       en:'I listened to his message.',                     answer:'escuché',    also:['escuche']},
+    {sp:'Él (beber) demasiado café ayer.',                 en:'He drank too much coffee yesterday.',            answer:'bebió',      also:[]},
+    {sp:'Ustedes (escribir) el informe.',                  en:'You all wrote the report.',                      answer:'escribieron',also:[]},
+    {sp:'Ana (caminar) cinco kilómetros.',                 en:'Ana walked five kilometers.',                    answer:'caminó',     also:[]},
+    {sp:'Nosotros (aprender) mucho en ese curso.',         en:'We learned a lot in that course.',               answer:'aprendimos', also:[]},
+    {sp:'Tú (leer) el libro en un día.',                  en:'You read the book in one day.',                  answer:'leíste',     also:['leiste']},
+    {sp:'Ellas (vender) su coche.',                       en:'They sold their car.',                           answer:'vendieron',  also:[]},
+    {sp:'Yo (abrir) la carta esta mañana.',               en:'I opened the letter this morning.',              answer:'abrí',       also:['abri']},
+    {sp:'Él (comprar) una casa el año pasado.',           en:'He bought a house last year.',                   answer:'compró',     also:[]},
+    {sp:'Ustedes (recibir) el paquete ayer.',             en:'You all received the package yesterday.',        answer:'recibieron', also:[]},
+    {sp:'Nosotros (vivir) en México tres años.',          en:'We lived in Mexico for three years.',            answer:'vivimos',    also:[]},
+    {sp:'Tú (preparar) una cena especial.',               en:'You prepared a special dinner.',                 answer:'preparaste', also:[]},
+    {sp:'Ella (correr) una maratón.',                     en:'She ran a marathon.',                            answer:'corrió',     also:[]},
+    {sp:'Ellos (usar) mi coche sin permiso.',             en:'They used my car without permission.',           answer:'usaron',     also:[]},
+    {sp:'Yo (necesitar) su ayuda ese día.',               en:'I needed his help that day.',                    answer:'necesité',   also:['necesite']},
+    {sp:'Él (subir) las escaleras corriendo.',            en:'He ran up the stairs.',                          answer:'subió',      also:[]},
+    /* IRREGULAR */
+    {sp:'Yo (tener) que trabajar el fin de semana.',      en:'I had to work on the weekend.',                  answer:'tuve',       also:[]},
+    {sp:'Ella (ir) al médico ayer.',                      en:'She went to the doctor yesterday.',              answer:'fue',        also:[]},
+    {sp:'Tú (ser) el mejor de la clase.',                 en:'You were the best in the class.',                answer:'fuiste',     also:[]},
+    {sp:'Nosotros (estar) en la playa todo el día.',      en:'We were at the beach all day.',                  answer:'estuvimos',  also:[]},
+    {sp:'Él (poder) terminar a tiempo.',                  en:'He was able to finish on time.',                 answer:'pudo',       also:[]},
+    {sp:'Yo (hacer) la tarea anoche.',                    en:'I did the homework last night.',                 answer:'hice',       also:[]},
+    {sp:'Ellos (querer) cancelar la reunión.',            en:'They tried to cancel the meeting.',              answer:'quisieron',  also:[]},
+    {sp:'Tú (venir) tarde a la reunión.',                 en:'You came late to the meeting.',                  answer:'viniste',    also:[]},
+    {sp:'Ella (saber) la verdad demasiado tarde.',        en:'She found out the truth too late.',              answer:'supo',       also:[]},
+    {sp:'Yo (salir) temprano del trabajo.',               en:'I left work early.',                             answer:'salí',       also:['sali']},
+    {sp:'Él (decir) algo importante.',                    en:'He said something important.',                   answer:'dijo',       also:[]},
+    {sp:'Nosotros (poner) las maletas en el coche.',     en:'We put the suitcases in the car.',               answer:'pusimos',    also:[]},
+    {sp:'Tú (traer) comida para todos.',                  en:'You brought food for everyone.',                 answer:'trajiste',   also:[]},
+    {sp:'Ellas (dormir) mal toda la semana.',             en:'They slept badly all week.',                     answer:'durmieron',  also:[]},
+    {sp:'Yo (dar) una presentación.',                     en:'I gave a presentation.',                         answer:'di',         also:[]},
+    {sp:'Él (andar) por toda la ciudad.',                 en:'He walked all over the city.',                   answer:'anduvo',     also:[]},
+    {sp:'Ustedes (conducir) hasta Oaxaca.',               en:'You all drove to Oaxaca.',                       answer:'condujeron', also:[]},
+    {sp:'Tú (leer) la carta en voz alta.',               en:'You read the letter aloud.',                     answer:'leíste',     also:['leiste']},
+    {sp:'Ella (ver) a su familia en Navidad.',            en:'She saw her family at Christmas.',               answer:'vio',        also:[]},
+    {sp:'Nosotros (ir) al concierto juntos.',             en:'We went to the concert together.',               answer:'fuimos',     also:[]},
+  ]
+},
+
+/* ══════════════ PAGE 2 — IMPERFECTO ══════════════ */
+{
+  id:2, title:'Imperfecto', sub:'Past imperfect', color:'#a78bfa',
+  formula:'Subject + <strong>verb (-aba / -ía)</strong>',
+  example:'Ella (caminar) → Ella <strong>caminaba</strong> a la escuela.',
+  exampleEn:'She used to walk / was walking to school.',
+  note:'Use the imperfect for past habits, ongoing states, or background descriptions.',
+  items:[
+    /* REGULAR */
+    {sp:'De niña, ella (hablar) con su abuela todos los días.',  en:'As a child, she talked to her grandmother every day.',  answer:'hablaba',    also:[]},
+    {sp:'Nosotros (comer) juntos cada domingo.',                 en:'We used to eat together every Sunday.',                answer:'comíamos',   also:['comiamos']},
+    {sp:'Tú (vivir) en una casa grande cuando eras pequeño.',   en:'You lived in a big house when you were little.',       answer:'vivías',     also:['vivias']},
+    {sp:'Ellos (trabajar) de noche en esa época.',              en:'They used to work at night back then.',                answer:'trabajaban', also:[]},
+    {sp:'Yo (escuchar) la radio mientras desayunaba.',          en:'I listened to the radio while I had breakfast.',       answer:'escuchaba',  also:[]},
+    {sp:'Él (beber) leche antes de dormir.',                    en:'He used to drink milk before sleeping.',               answer:'bebía',      also:['bebia']},
+    {sp:'Ustedes (escribir) cartas a mano.',                    en:'You all used to write letters by hand.',               answer:'escribían',  also:['escribian']},
+    {sp:'Ana (caminar) a la escuela todos los días.',           en:'Ana used to walk to school every day.',                answer:'caminaba',   also:[]},
+    {sp:'Nosotros (aprender) mucho con esa maestra.',           en:'We used to learn a lot with that teacher.',            answer:'aprendíamos',also:['aprendiamos']},
+    {sp:'Tú (leer) antes de acostarte.',                       en:'You used to read before going to bed.',                answer:'leías',      also:['leias']},
+    {sp:'Ellas (vender) tamales en el mercado.',               en:'They used to sell tamales at the market.',             answer:'vendían',    also:['vendian']},
+    {sp:'Yo (abrir) la ventana cada mañana.',                  en:'I used to open the window every morning.',             answer:'abría',      also:['abria']},
+    {sp:'Él (comprar) el pan en la misma panadería.',          en:'He used to buy bread at the same bakery.',             answer:'compraba',   also:[]},
+    {sp:'Ustedes (recibir) visitas cada fin de semana.',       en:'You all used to have visitors every weekend.',         answer:'recibían',   also:['recibían','recibían']},
+    {sp:'Nosotros (vivir) cerca del parque.',                  en:'We used to live near the park.',                       answer:'vivíamos',   also:['viviamos']},
+    {sp:'Tú (preparar) el café para todos.',                   en:'You used to make coffee for everyone.',                answer:'preparabas', also:[]},
+    {sp:'Ella (correr) por las mañanas cuando era joven.',     en:'She used to run in the mornings when she was young.',  answer:'corría',     also:['corria']},
+    {sp:'Ellos (usar) bicicleta para ir al trabajo.',          en:'They used to ride bikes to work.',                     answer:'usaban',     also:[]},
+    {sp:'Yo (necesitar) más ayuda en esa época.',              en:'I needed more help back then.',                        answer:'necesitaba', also:[]},
+    {sp:'Él (subir) a la azotea a ver las estrellas.',        en:'He used to go up to the rooftop to see the stars.',    answer:'subía',      also:['subia']},
+    /* IRREGULAR */
+    {sp:'Yo (tener) mucho tiempo libre de niño.',              en:'I had a lot of free time as a child.',                 answer:'tenía',      also:['tenia']},
+    {sp:'Ella (ir) al parque cada tarde.',                     en:'She used to go to the park every afternoon.',          answer:'iba',        also:[]},
+    {sp:'Tú (ser) muy tímido de pequeño.',                    en:'You used to be very shy as a child.',                  answer:'eras',       also:[]},
+    {sp:'Nosotros (estar) contentos en ese trabajo.',          en:'We were happy at that job.',                           answer:'estábamos',  also:['estabamos']},
+    {sp:'Él (poder) correr muy rápido.',                      en:'He used to be able to run very fast.',                 answer:'podía',      also:['podia']},
+    {sp:'Yo (hacer) los deberes en la biblioteca.',           en:'I used to do homework in the library.',                answer:'hacía',      also:['hacia']},
+    {sp:'Ellos (querer) tener un perro.',                     en:'They wanted to have a dog.',                           answer:'querían',    also:['querian']},
+    {sp:'Tú (venir) a comer a casa todos los viernes.',      en:'You used to come home for lunch every Friday.',        answer:'venías',     also:['venias']},
+    {sp:'Ella (saber) tocar el piano.',                       en:'She used to know how to play the piano.',              answer:'sabía',      also:['sabia']},
+    {sp:'Nosotros (salir) a bailar los sábados.',            en:'We used to go dancing on Saturdays.',                  answer:'salíamos',   also:['saliamos']},
+    {sp:'Él (decir) que todo iba a salir bien.',             en:'He used to say that everything would be fine.',        answer:'decía',      also:['decia']},
+    {sp:'Yo (ver) muchas películas de niño.',                en:'I used to watch many movies as a child.',              answer:'veía',       also:['veia']},
+    {sp:'Tú (poner) siempre música mientras cocinabas.',     en:'You always played music while you cooked.',            answer:'ponías',     also:['ponias']},
+    {sp:'Ellas (dormir) la siesta después de comer.',        en:'They used to take a nap after lunch.',                 answer:'dormían',    also:['dormian']},
+    {sp:'Nosotros (jugar) en la calle hasta que oscurecía.',en:'We used to play in the street until dark.',            answer:'jugábamos',  also:['jugabamos']},
+    {sp:'Yo (dar) clases particulares los fines de semana.',en:'I used to give private lessons on weekends.',          answer:'daba',       also:[]},
+    {sp:'Él (traer) flores a su madre cada semana.',        en:'He used to bring flowers to his mother every week.',   answer:'traía',      also:['traia']},
+    {sp:'Ustedes (seguir) el mismo camino siempre.',        en:'You all always followed the same route.',              answer:'seguían',    also:['seguian']},
+    {sp:'Tú (oír) música clásica por las noches.',         en:'You used to listen to classical music at night.',      answer:'oías',       also:['oias']},
+    {sp:'Ella (conducir) al trabajo cuando vivía en Monterrey.',en:'She used to drive to work when she lived in Monterrey.',answer:'conducía',also:['conducia']},
+  ]
+},
+
+/* ══════════════ PAGE 3 — PRETÉRITO PERFECTO ══════════════ */
+{
+  id:3, title:'Pret. Perfecto', sub:'Present perfect', color:'#f472b6',
+  formula:'Subject + <code>haber</code> + <strong>participio</strong>',
+  example:'Ella (caminar) → Ella <strong>ha caminado</strong> a la escuela.',
+  exampleEn:'She has walked to school.',
+  note:'Use the present perfect for past actions with relevance to the present. Type the full form: "ha hablado", "he comido"…',
+  items:[
+    /* REGULAR */
+    {sp:'Ella (hablar) con el director esta mañana.',           en:'She has talked to the director this morning.',        answer:'ha hablado',      also:[]},
+    {sp:'Nosotros (comer) en ese restaurante varias veces.',   en:'We have eaten at that restaurant several times.',     answer:'hemos comido',    also:[]},
+    {sp:'Tú (vivir) en tres países diferentes.',               en:'You have lived in three different countries.',        answer:'has vivido',      also:[]},
+    {sp:'Ellos (trabajar) mucho este mes.',                    en:'They have worked a lot this month.',                  answer:'han trabajado',   also:[]},
+    {sp:'Yo (escuchar) esa canción cien veces.',               en:'I have listened to that song a hundred times.',       answer:'he escuchado',    also:[]},
+    {sp:'Él (beber) demasiado esta noche.',                    en:'He has drunk too much tonight.',                      answer:'ha bebido',       also:[]},
+    {sp:'Ana (caminar) diez kilómetros hoy.',                  en:'Ana has walked ten kilometers today.',                answer:'ha caminado',     also:[]},
+    {sp:'Nosotros (aprender) mucho este semestre.',            en:'We have learned a lot this semester.',                answer:'hemos aprendido', also:[]},
+    {sp:'Ellas (vender) todos los productos.',                 en:'They have sold all the products.',                    answer:'han vendido',     also:[]},
+    {sp:'Él (comprar) un coche nuevo.',                        en:'He has bought a new car.',                            answer:'ha comprado',     also:[]},
+    {sp:'Ustedes (recibir) el mensaje.',                       en:'You all have received the message.',                  answer:'han recibido',    also:[]},
+    {sp:'Nosotros (preparar) todo para la reunión.',          en:'We have prepared everything for the meeting.',        answer:'hemos preparado', also:[]},
+    {sp:'Tú (correr) media maratón este año.',                en:'You have run a half marathon this year.',             answer:'has corrido',     also:[]},
+    {sp:'Ella (usar) mi ordenador sin permiso.',              en:'She has used my computer without permission.',        answer:'ha usado',        also:[]},
+    {sp:'Yo (subir) el documento al sistema.',                en:'I have uploaded the document to the system.',        answer:'he subido',       also:[]},
+    {sp:'Él (trabajar) sin descanso toda la semana.',        en:'He has worked nonstop all week.',                     answer:'ha trabajado',    also:[]},
+    {sp:'Tú (leer) ese artículo ya.',                        en:'You have already read that article.',                 answer:'has leído',       also:['has leido']},
+    {sp:'Nosotros (vivir) experiencias increíbles.',         en:'We have lived incredible experiences.',               answer:'hemos vivido',    also:[]},
+    {sp:'Yo (necesitar) mucha paciencia este año.',          en:'I have needed a lot of patience this year.',          answer:'he necesitado',   also:[]},
+    {sp:'Ella (comprar) entradas para el concierto.',        en:'She has bought tickets for the concert.',             answer:'ha comprado',     also:[]},
+    /* IRREGULAR */
+    {sp:'Yo (hacer) todo lo posible.',                        en:'I have done everything possible.',                    answer:'he hecho',        also:[]},
+    {sp:'Ella (ir) a París este año.',                        en:'She has gone to Paris this year.',                    answer:'ha ido',          also:[]},
+    {sp:'Tú (ver) esa película ya.',                          en:'You have already seen that movie.',                   answer:'has visto',       also:[]},
+    {sp:'Nosotros (estar) muy ocupados.',                     en:'We have been very busy.',                             answer:'hemos estado',    also:[]},
+    {sp:'Él (tener) muchos problemas este mes.',             en:'He has had many problems this month.',                answer:'ha tenido',       also:[]},
+    {sp:'Yo (decir) la verdad siempre.',                     en:'I have always told the truth.',                       answer:'he dicho',        also:[]},
+    {sp:'Ellos (volver) del viaje esta mañana.',             en:'They have returned from the trip this morning.',      answer:'han vuelto',      also:[]},
+    {sp:'Tú (poner) la mesa.',                               en:'You have set the table.',                             answer:'has puesto',      also:[]},
+    {sp:'Ella (romper) el vaso sin querer.',                 en:'She has broken the glass by accident.',               answer:'ha roto',         also:[]},
+    {sp:'Nosotros (abrir) una cuenta nueva.',                en:'We have opened a new account.',                       answer:'hemos abierto',   also:[]},
+    {sp:'Yo (escribir) una propuesta para el cliente.',     en:'I have written a proposal for the client.',           answer:'he escrito',      also:[]},
+    {sp:'Él (descubrir) algo interesante.',                  en:'He has discovered something interesting.',            answer:'ha descubierto',  also:[]},
+    {sp:'Tú (resolver) el problema.',                        en:'You have solved the problem.',                        answer:'has resuelto',    also:[]},
+    {sp:'Ellas (devolver) el libro a la biblioteca.',       en:'They have returned the book to the library.',         answer:'han devuelto',    also:[]},
+    {sp:'Nosotros (ver) muchos cambios este año.',          en:'We have seen many changes this year.',                answer:'hemos visto',     also:[]},
+    {sp:'Yo (cubrir) todos los gastos.',                    en:'I have covered all the expenses.',                    answer:'he cubierto',     also:[]},
+    {sp:'Él (imprimir) los documentos.',                    en:'He has printed the documents.',                       answer:'ha impreso',      also:['ha imprimido']},
+    {sp:'Tú (freír) los tacos para la cena.',              en:'You have fried the tacos for dinner.',                answer:'has frito',       also:['has freído','has freido']},
+    {sp:'Ellas (descubrir) un restaurante increíble.',     en:'They have discovered an incredible restaurant.',      answer:'han descubierto', also:[]},
+    {sp:'Nosotros (hacer) grandes progresos.',             en:'We have made great progress.',                         answer:'hemos hecho',     also:[]},
+  ]
+},
+
+/* ══════════════ PAGE 4 — FUTURO SIMPLE ══════════════ */
+{
+  id:4, title:'Futuro', sub:'Simple future', color:'#fb923c',
+  formula:'Subject + <strong>infinitivo + ending</strong> (-é/-ás/-á/-emos/-án)',
+  example:'Ella (caminar) → Ella <strong>caminará</strong> a la escuela.',
+  exampleEn:'She will walk to school.',
+  note:'Regular futures add endings to the full infinitive. Irregular futures change the stem.',
+  items:[
+    /* REGULAR */
+    {sp:'Mañana ella (hablar) con su jefa.',                   en:'Tomorrow she will talk to her boss.',                 answer:'hablará',     also:[]},
+    {sp:'Nosotros (comer) juntos el viernes.',                 en:'We will eat together on Friday.',                    answer:'comeremos',   also:[]},
+    {sp:'Tú (vivir) en Madrid el próximo año.',                en:'You will live in Madrid next year.',                 answer:'vivirás',     also:[]},
+    {sp:'Ellos (trabajar) desde casa la semana que viene.',   en:'They will work from home next week.',                answer:'trabajarán',  also:[]},
+    {sp:'Yo (escuchar) tu consejo.',                          en:'I will listen to your advice.',                      answer:'escucharé',   also:['escuchare']},
+    {sp:'Él (beber) menos café desde ahora.',                 en:'He will drink less coffee from now on.',             answer:'beberá',      also:[]},
+    {sp:'Ustedes (escribir) el informe mañana.',              en:'You all will write the report tomorrow.',            answer:'escribirán',  also:[]},
+    {sp:'Ana (caminar) al trabajo cuando se mude.',          en:'Ana will walk to work when she moves.',              answer:'caminará',    also:[]},
+    {sp:'Nosotros (aprender) a cocinar este verano.',        en:'We will learn to cook this summer.',                 answer:'aprenderemos',also:[]},
+    {sp:'Tú (leer) ese libro en vacaciones.',                en:'You will read that book on vacation.',               answer:'leerás',      also:[]},
+    {sp:'Ellas (vender) la casa el próximo mes.',           en:'They will sell the house next month.',               answer:'venderán',    also:[]},
+    {sp:'Yo (abrir) mi propio negocio algún día.',          en:'I will open my own business someday.',               answer:'abriré',      also:['abrire']},
+    {sp:'Él (comprar) un apartamento en cuanto pueda.',    en:'He will buy an apartment as soon as he can.',         answer:'comprará',    also:[]},
+    {sp:'Ustedes (recibir) el contrato por correo.',       en:'You all will receive the contract by email.',         answer:'recibirán',   also:[]},
+    {sp:'Nosotros (preparar) todo para la fiesta.',        en:'We will prepare everything for the party.',           answer:'prepararemos',also:[]},
+    {sp:'Tú (correr) la maratón en noviembre.',           en:'You will run the marathon in November.',              answer:'correrás',    also:[]},
+    {sp:'Ella (usar) el coche de su madre este fin de semana.',en:'She will use her mother\'s car this weekend.',   answer:'usará',       also:[]},
+    {sp:'Ellos (necesitar) más tiempo para terminar.',    en:'They will need more time to finish.',                  answer:'necesitarán', also:[]},
+    {sp:'Yo (subir) las fotos mañana.',                   en:'I will upload the photos tomorrow.',                   answer:'subiré',      also:['subire']},
+    {sp:'Él (trabajar) en ese proyecto el mes que viene.',en:'He will work on that project next month.',            answer:'trabajará',   also:[]},
+    /* IRREGULAR */
+    {sp:'Yo (tener) que estudiar más.',                   en:'I will have to study more.',                           answer:'tendré',      also:['tendre']},
+    {sp:'Ella (venir) a la fiesta el sábado.',           en:'She will come to the party on Saturday.',              answer:'vendrá',      also:[]},
+    {sp:'Tú (poner) más esfuerzo en tu trabajo.',        en:'You will put more effort into your work.',             answer:'pondrás',     also:[]},
+    {sp:'Nosotros (salir) de viaje el próximo mes.',     en:'We will go on a trip next month.',                     answer:'saldremos',   also:[]},
+    {sp:'Él (poder) resolver el problema.',              en:'He will be able to solve the problem.',                answer:'podrá',       also:[]},
+    {sp:'Yo (hacer) todo lo posible.',                   en:'I will do everything possible.',                       answer:'haré',        also:['hare']},
+    {sp:'Ellos (querer) hablar contigo.',                en:'They will want to talk to you.',                       answer:'querrán',     also:['querran']},
+    {sp:'Tú (saber) la verdad pronto.',                  en:'You will know the truth soon.',                        answer:'sabrás',      also:[]},
+    {sp:'Ella (decir) algo importante en la reunión.',  en:'She will say something important in the meeting.',     answer:'dirá',        also:[]},
+    {sp:'Nosotros (venir) a visitarte el próximo verano.',en:'We will come to visit you next summer.',             answer:'vendremos',   also:[]},
+    {sp:'Él (tener) que tomar una decisión.',           en:'He will have to make a decision.',                     answer:'tendrá',      also:[]},
+    {sp:'Yo (salir) antes si termino pronto.',          en:'I will leave early if I finish soon.',                  answer:'saldré',      also:['saldré','saldré']},
+    {sp:'Tú (hacer) un buen trabajo, estoy seguro.',   en:'You will do a good job, I am sure.',                   answer:'harás',       also:[]},
+    {sp:'Ellas (poner) las reglas del juego.',         en:'They will set the rules of the game.',                  answer:'pondrán',     also:[]},
+    {sp:'Nosotros (poder) hablar después de la reunión.',en:'We will be able to talk after the meeting.',         answer:'podremos',    also:[]},
+    {sp:'Yo (valer) más con este título.',             en:'I will be worth more with this degree.',               answer:'valdré',      also:['valdre']},
+    {sp:'Él (caber) en el asiento del medio.',        en:'He will fit in the middle seat.',                       answer:'cabrá',       also:[]},
+    {sp:'Tú (venir) con nosotros, ¿no?',             en:'You will come with us, right?',                         answer:'vendrás',     also:[]},
+    {sp:'Ellos (hacer) lo correcto.',                 en:'They will do the right thing.',                          answer:'harán',       also:[]},
+    {sp:'Nosotros (tener) noticias pronto.',          en:'We will have news soon.',                                answer:'tendremos',   also:[]},
+  ]
+},
+
+];
+
+/* ═══════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════ */
+let currentPage = 0;
+// per-page state: { answers:{idx:string}, checked:bool, score:int }
+const pageState = PAGES.map(() => ({ answers:{}, checked:false, score:0 }));
+
+/* ═══════════════════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════════════════ */
+function norm(s){
+  return (s||'').trim().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/\s+/g,' ').trim();
+}
+function checkAnswer(page, idx, typed){
+  const item = PAGES[page].items[idx];
+  const nt = norm(typed);
+  if(!nt) return false;
+  if(nt === norm(item.answer)) return true;
+  return item.also.some(a => nt === norm(a));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BUILD TABS
+═══════════════════════════════════════════════════════════ */
+function buildTabs(){
+  const wrap = document.getElementById('pageTabs');
+  wrap.innerHTML = PAGES.map((p,i) => `
+    <button class="ptab${i===0?' active':''}" id="ptab-${i}" onclick="goPage(${i})">
+      <span class="ptab-title" style="color:${p.color}">${p.title}</span>
+      <span class="ptab-sub">${p.sub}</span>
+      <span class="ptab-score" id="tabscore-${i}" style="color:${p.color}"></span>
+    </button>`).join('');
+}
+
+function goPage(idx){
+  currentPage = idx;
+  PAGES.forEach((_,i) => {
+    const btn = document.getElementById('ptab-'+i);
+    btn.classList.toggle('active', i===idx);
+    btn.style.background = i===idx ? PAGES[i].color+'22' : '';
+    btn.style.border = i===idx ? `1px solid ${PAGES[i].color}55` : '';
+  });
+  renderPage(idx);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RENDER PAGE
+═══════════════════════════════════════════════════════════ */
+function renderPage(idx){
+  const page = PAGES[idx];
+  const state = pageState[idx];
+  const col = page.color;
+  const total = page.items.length;
+  const answered = Object.keys(state.answers).length;
+  const pct = Math.round(answered/total*100);
+
+  // Split into regular (0-19) and irregular (20-39)
+  const reg = page.items.slice(0,20);
+  const irr = page.items.slice(20,40);
+
+  let html = `<div class="panel">
+  <div class="page-hdr">
+    <div class="page-badge" style="background:${col}18;border-color:${col}55;color:${col};font-size:.9rem">${page.title.slice(0,4)}</div>
+    <div class="page-info">
+      <h2 style="color:${col}">${page.title} — ${page.sub}</h2>
+      <p>${page.note}</p>
+      <div class="page-formula">
+        <span>Fórmula:</span><span>${page.formula}</span>
+        <span style="color:var(--muted2)">·</span>
+        <span><strong>${page.example}</strong></span>
+        <span style="color:var(--muted2);font-style:italic">${page.exampleEn}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${total}</span></div>
+    <div class="sc"><span class="l">Correctas</span><span class="v g" id="pg-ok-${idx}">${state.checked?state.score:'—'}</span></div>
+    <div class="sc"><span class="l">Errores</span><span class="v b" id="pg-err-${idx}">${state.checked?(total-state.score):'—'}</span></div>
+    <div class="prog-w">
+      <div class="prog-l">Respondidas: <span id="pg-pct-${idx}">${pct}%</span></div>
+      <div class="prog-t"><div class="prog-f" id="pg-prog-${idx}" style="width:${pct}%;background:${col}"></div></div>
+    </div>
+  </div>`;
+
+  // REGULAR section
+  html += `<div class="sec-hdr">
+    <span class="sec-pill" style="background:${col}18;color:${col};border:1px solid ${col}44">Verbos regulares</span>
+    <div class="sec-line"></div>
+  </div>
+  <div class="ex-list">`;
+  html += renderItems(idx, reg, 0, col, state);
+  html += `</div>`;
+
+  // IRREGULAR section
+  html += `<div class="sec-hdr" style="margin-top:22px">
+    <span class="sec-pill" style="background:var(--magenta)18;color:var(--magenta2);border:1px solid rgba(255,43,191,.3)">Verbos irregulares</span>
+    <div class="sec-line"></div>
+  </div>
+  <div class="ex-list">`;
+  html += renderItems(idx, irr, 20, col, state);
+  html += `</div>`;
+
+  // global feedback
+  html += `<div class="global-fb" id="gfb-${idx}"></div>`;
+
+  // actions
+  html += `<div class="actions">
+    <button class="btn btn-cyan" id="checkall-${idx}" onclick="checkAll(${idx})" ${state.checked?'disabled':''}>Revisar todo</button>
+    <button class="btn btn-dark" onclick="hintPage(${idx})">💡 Pista</button>
+    <button class="btn btn-ghost" onclick="resetPage(${idx})">↺ Reiniciar</button>
+  </div>`;
+
+  // page nav
+  html += `<div class="page-nav">`;
+  if(idx>0) html += `<button class="btn btn-ghost" onclick="goPage(${idx-1})">← ${PAGES[idx-1].title}</button>`;
+  else html += `<span></span>`;
+  if(idx<PAGES.length-1) html += `<button class="btn btn-cyan" onclick="goPage(${idx+1})">${PAGES[idx+1].title} →</button>`;
+  html += `</div></div>`;
+
+  document.getElementById('pageContainer').innerHTML = html;
+
+  // attach enter-key listeners
+  page.items.forEach((_,i)=>{
+    const inp = document.getElementById(`inp-${idx}-${i}`);
+    if(inp) inp.addEventListener('keydown', e=>{ if(e.key==='Enter') checkSingle(idx,i); });
+  });
+}
+
+function renderItems(pageIdx, items, offset, col, state){
+  return items.map((item, localI) => {
+    const i = localI + offset;
+    const typed = state.answers[i] || '';
+    const isAnswered = typed !== '';
+    const isOk = isAnswered && checkAnswer(pageIdx, i, typed);
+    const checked = state.checked;
+
+    // parse sentence: replace (infinitivo) with input
+    const verbMatch = item.sp.match(/\(([^)]+)\)/);
+    const verbHint = verbMatch ? verbMatch[1] : '';
+    const sentParts = item.sp.split(/\([^)]+\)/);
+    const sentHTML = sentParts[0] +
+      `<span class="verb-hint">(${verbHint})</span>` +
+      (sentParts[1]||'');
+
+    let inputHTML;
+    if(checked){
+      inputHTML = `<input class="ex-input ${isOk?'ok':'err'}" value="${typed||'—'}" disabled>`;
+    } else {
+      inputHTML = `<input class="ex-input" id="inp-${pageIdx}-${i}" type="text"
+        value="${typed}" placeholder="conjugar…"
+        autocomplete="off" autocorrect="off" spellcheck="false"
+        oninput="storeAnswer(${pageIdx},${i},this.value)"
+        onkeydown="if(event.key==='Enter')checkSingle(${pageIdx},${i})">
+      <button class="ex-check-btn" onclick="checkSingle(${pageIdx},${i})">→</button>`;
+    }
+
+    let fbHTML = '';
+    if(checked){
+      fbHTML = isOk
+        ? `<div class="ex-fb ok show">✓ <strong>${item.answer}</strong> — correcto.</div>`
+        : `<div class="ex-fb err show">✗ Respuesta correcta: <strong>${item.answer}</strong></div>`;
+    } else if(isAnswered){
+      // show inline feedback even before "Revisar todo"
+      const ok2 = checkAnswer(pageIdx, i, typed);
+      fbHTML = ok2
+        ? `<div class="ex-fb ok show">✓</div>`
+        : `<div class="ex-fb err show" id="fb-${pageIdx}-${i}">Sigue intentando…</div>`;
+    }
+
+    return `<div class="ex-card${checked?(isOk?' answered-ok':' answered-err'):''}" id="card-${pageIdx}-${i}">
+      <div class="ex-top">
+        <span class="ex-num">${i+1}</span>
+        <span class="ex-sent">${sentHTML}</span>
+      </div>
+      <div class="ex-en">${item.en}</div>
+      <div class="ex-input-row">${inputHTML}</div>
+      ${fbHTML}
+    </div>`;
+  }).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INTERACTION
+═══════════════════════════════════════════════════════════ */
+function storeAnswer(pageIdx, itemIdx, val){
+  pageState[pageIdx].answers[itemIdx] = val;
+  updateProgress(pageIdx);
+}
+
+function updateProgress(pageIdx){
+  const state = pageState[pageIdx];
+  const total = PAGES[pageIdx].items.length;
+  const answered = Object.keys(state.answers).filter(k=>state.answers[k].trim()!=='').length;
+  const pct = Math.round(answered/total*100);
+  const col = PAGES[pageIdx].color;
+  const el = document.getElementById(`pg-pct-${pageIdx}`);
+  const pg = document.getElementById(`pg-prog-${pageIdx}`);
+  if(el) el.textContent = pct+'%';
+  if(pg) pg.style.width = pct+'%';
+}
+
+function checkSingle(pageIdx, itemIdx){
+  const state = pageState[pageIdx];
+  if(state.checked) return;
+  const inp = document.getElementById(`inp-${pageIdx}-${itemIdx}`);
+  if(!inp) return;
+  const typed = inp.value.trim();
+  if(!typed) return;
+  state.answers[itemIdx] = typed;
+  const isOk = checkAnswer(pageIdx, itemIdx, typed);
+  inp.classList.toggle('ok', isOk);
+  inp.classList.toggle('err', !isOk);
+  // show inline fb
+  let fb = document.getElementById(`fb-${pageIdx}-${itemIdx}`);
+  if(!fb){
+    fb = document.createElement('div');
+    fb.id = `fb-${pageIdx}-${itemIdx}`;
+    inp.closest('.ex-card').appendChild(fb);
+  }
+  fb.className = `ex-fb ${isOk?'ok':'err'} show`;
+  fb.innerHTML = isOk
+    ? `✓ <strong>${PAGES[pageIdx].items[itemIdx].answer}</strong> — correcto.`
+    : `✗ Respuesta correcta: <strong>${PAGES[pageIdx].items[itemIdx].answer}</strong>`;
+  updateProgress(pageIdx);
+}
+
+function checkAll(pageIdx){
+  const page = PAGES[pageIdx];
+  const state = pageState[pageIdx];
+  state.checked = true;
+  let ok = 0;
+  page.items.forEach((item,i)=>{
+    const typed = state.answers[i]||'';
+    if(checkAnswer(pageIdx, i, typed)) ok++;
+  });
+  state.score = ok;
+  const pct = Math.round(ok/page.items.length*100);
+  // update tab score
+  const ts = document.getElementById(`tabscore-${pageIdx}`);
+  if(ts) ts.textContent = `${ok}/40`;
+  // re-render
+  renderPage(pageIdx);
+  // global fb
+  const gfb = document.getElementById(`gfb-${pageIdx}`);
+  if(gfb){
+    const col = page.color;
+    if(pct===100){ gfb.className='global-fb show ok'; gfb.innerHTML=`🏆 <strong>¡Perfecto! 40/40.</strong> Dominas el ${page.title}.`; }
+    else if(pct>=75){ gfb.className='global-fb show ok'; gfb.innerHTML=`👍 <strong>${ok}/40 (${pct}%).</strong> Muy bien. Revisa los errores marcados en rojo.`; }
+    else if(pct>=50){ gfb.className='global-fb show partial'; gfb.innerHTML=`📖 <strong>${ok}/40 (${pct}%).</strong> Buen intento. Presta atención a los verbos irregulares.`; }
+    else { gfb.className='global-fb show bad'; gfb.innerHTML=`💪 <strong>${ok}/40 (${pct}%).</strong> Repasa la conjugación y vuelve a intentarlo.`; }
+  }
+}
+
+function resetPage(pageIdx){
+  pageState[pageIdx] = { answers:{}, checked:false, score:0 };
+  const ts = document.getElementById(`tabscore-${pageIdx}`);
+  if(ts) ts.textContent = '';
+  renderPage(pageIdx);
+}
+
+function hintPage(pageIdx){
+  if(pageState[pageIdx].checked) return;
+  const page = PAGES[pageIdx];
+  const state = pageState[pageIdx];
+  // find first unanswered
+  const empty = page.items.map((_,i)=>i).find(i=>!state.answers[i]||!state.answers[i].trim());
+  if(empty===undefined) return;
+  const inp = document.getElementById(`inp-${pageIdx}-${empty}`);
+  if(!inp) return;
+  const answer = page.items[empty].answer;
+  inp.value = answer;
+  inp.style.borderColor = 'rgba(245,158,11,.6)';
+  inp.style.color = '#fcd34d';
+  state.answers[empty] = answer;
+  inp.scrollIntoView({behavior:'smooth',block:'center'});
+  updateProgress(pageIdx);
+}
+
+/* INIT */
+buildTabs();
+goPage(0);
+</script>
+</body>
+</html>

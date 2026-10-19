@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demostrativos | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --near:#22c55e;--near2:#86efac;
+  --mid:#f59e0b;--mid2:#fcd34d;
+  --far:#a78bfa;--far2:#c4b5fd;
+  --font:'DM Sans',system-ui,sans-serif;
+  --display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 10% 10%,rgba(255,43,191,.13),transparent 28%),radial-gradient(ellipse at 90% 15%,rgba(37,217,255,.09),transparent 28%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(980px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+
+/* HERO */
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);box-shadow:0 0 18px rgba(255,43,191,.22);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta);text-shadow:1px 1px 0 var(--cyan)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,2.4rem);font-weight:900;line-height:.95;background:linear-gradient(90deg,var(--near2) 0%,#fff 35%,var(--mid2) 65%,var(--far2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.86rem;line-height:1.5;margin-top:4px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.pill-near{background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.35);border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:800;color:var(--near2)}
+.pill-mid{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:800;color:var(--mid2)}
+.pill-far{background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3);border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:800;color:var(--far2)}
+
+/* TABS */
+.ex-tabs{display:flex;gap:6px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:8px;box-shadow:var(--shadow);overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:9px 12px;font-weight:800;font-family:var(--font);font-size:.78rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;box-shadow:0 3px 0 rgba(0,0,0,.2);transform:translateY(-1px)}
+.etab-icon{font-size:1.2rem;line-height:1}
+.etab-label{font-size:.65rem;text-align:center;line-height:1.2;opacity:.9}
+
+/* PANEL */
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:24px 28px;box-shadow:var(--shadow)}
+.ex-header{margin-bottom:16px}
+.ex-title{font-family:var(--display);font-size:1.2rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.86rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+
+/* SCORE */
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:100px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--near),var(--mid),var(--far));transition:width .35s}
+
+/* BUTTONS */
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+
+/* FEEDBACK */
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;font-weight:500;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.err{background:rgba(239,68,68,.11);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+
+/* ══ EX 1: SEÑALA — emoji + pointing hand ══ */
+.signal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.signal-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;padding:16px;transition:border-color .15s;display:flex;flex-direction:column;gap:10px}
+.signal-card:hover{border-color:rgba(37,217,255,.18)}
+.signal-header{display:flex;align-items:center;gap:8px}
+.signal-num{font-size:.62rem;font-weight:900;color:var(--muted2);background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0}
+.signal-noun{font-size:1rem;font-weight:700;color:var(--text);flex:1}
+.signal-noun .gender{font-size:.65rem;color:var(--muted2);font-weight:500;margin-left:4px}
+.signal-visual{display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,.04);border-radius:12px;padding:14px 10px;position:relative}
+.signal-emoji{font-size:3.2rem;line-height:1}
+.signal-arrow-group{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;max-width:80px}
+.signal-arrow-line{display:flex;align-items:center;width:100%;gap:0}
+.arrow-dash{flex:1;height:2px;border-radius:999px}
+.arrow-head{font-size:1rem}
+.signal-dist-label{font-size:.62rem;font-weight:800;margin-top:2px;white-space:nowrap}
+.signal-speaker{font-size:2rem;line-height:1}
+.dist-badge{font-size:.7rem;font-weight:800;border-radius:999px;padding:3px 10px;display:inline-flex;align-items:center;gap:4px;align-self:flex-start}
+.signal-opts{display:flex;flex-wrap:wrap;gap:6px}
+.sig-opt{border:0;border-radius:9px;padding:7px 16px;font-weight:800;font-family:var(--display);font-size:.95rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.sig-opt:hover:not(:disabled){background:rgba(37,217,255,.1);border-color:var(--cyan);transform:translateY(-1px)}
+.sig-opt:disabled{cursor:default;transform:none}
+.sig-opt.s-ok{background:rgba(34,197,94,.16);border-color:var(--good);color:#86efac}
+.sig-opt.s-err{background:rgba(239,68,68,.12);border-color:var(--bad);color:#fca5a5}
+.sig-opt.s-show{background:rgba(34,197,94,.1);border-color:var(--good);color:#86efac}
+.sig-expl{display:none;font-size:.75rem;color:var(--muted);line-height:1.5;padding:7px 10px;background:rgba(255,255,255,.04);border-radius:8px}
+.sig-expl.show{display:block}
+
+/* ══ EX 2: MC ══ */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:15px 17px}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px}
+.mc-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0;margin-top:2px}
+.mc-sent{font-size:1rem;line-height:1.65;flex:1}
+.mc-blank{display:inline-block;min-width:70px;border-bottom:2.5px solid rgba(37,217,255,.4);padding:0 4px;text-align:center;font-weight:800;color:var(--cyan)}
+.mc-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding-left:28px}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px;margin-bottom:3px}
+.mc-opt{border:0;border-radius:10px;padding:8px 16px;font-weight:800;font-family:var(--display);font-size:.95rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt:hover:not(:disabled){transform:translateY(-1px);border-color:rgba(37,217,255,.4);background:rgba(37,217,255,.09)}
+.mc-opt:disabled{cursor:default;transform:none}
+.mc-opt.mc-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.mc-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mc-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-expl{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:7px;padding:8px 12px 8px 28px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-expl.show{display:block}
+.dist-tag{font-size:.65rem;font-weight:800;border-radius:999px;padding:2px 8px;margin-right:4px;display:inline-block}
+.near-tag{background:rgba(34,197,94,.15);color:var(--near2)}
+.mid-tag{background:rgba(245,158,11,.14);color:var(--mid2)}
+.far-tag{background:rgba(167,139,250,.14);color:var(--far2)}
+
+/* ══ ERROR HUNT ══ */
+.eh-list{display:flex;flex-direction:column;gap:9px}
+.eh-item{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:13px 15px;display:flex;align-items:flex-start;gap:11px}
+.eh-item.correct-sentence{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.05)}
+.eh-item.wrong-sentence{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.05)}
+.eh-num{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:var(--muted2);flex-shrink:0;margin-top:1px}
+.eh-body{flex:1}.eh-sent{font-size:.97rem;line-height:1.6}
+.wrong-word{color:var(--bad);text-decoration:underline wavy var(--bad);font-weight:700}
+.eh-correction{font-size:.82rem;font-weight:700;color:var(--good);margin-left:5px}
+.eh-judge-row{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+.eh-judge-btn{border:0;border-radius:9px;padding:7px 15px;font-weight:800;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.eh-correct-btn:hover:not(:disabled){border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.1);color:#86efac}
+.eh-error-btn:hover:not(:disabled){border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);color:#fca5a5}
+.eh-judge-btn:disabled{cursor:default;opacity:.5}
+.judge-chosen-ok{border-color:var(--good)!important;background:rgba(34,197,94,.18)!important;color:#86efac!important;opacity:1!important}
+.judge-chosen-err{border-color:var(--bad)!important;background:rgba(239,68,68,.14)!important;color:#fca5a5!important;opacity:1!important}
+.eh-exp{display:none;font-size:.79rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);line-height:1.55}
+.revealed .eh-exp{display:block}
+
+/* ══ SORT ══ */
+.sort-pile{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;min-height:52px;margin-bottom:12px}
+.sort-bucket{border-radius:14px;padding:13px;min-height:100px;display:flex;flex-direction:column;gap:7px;transition:background .2s}
+.sort-bucket.drag-over{box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.bucket-title{font-family:var(--display);font-size:.9rem;font-weight:900;text-align:center}
+.bucket-sub{font-size:.65rem;color:var(--muted2);text-align:center;line-height:1.4}
+.sort-card{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:9px;padding:7px 12px;font-size:.85rem;font-weight:600;cursor:grab;user-select:none;transition:.15s;line-height:1.4}
+.sort-card:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sort-card:active{cursor:grabbing}
+.sort-card.drag-ghost{opacity:.35}
+.sort-card.card-correct{background:rgba(34,197,94,.14);border-color:var(--good);color:#86efac;cursor:default}
+.sort-card.card-wrong{background:rgba(239,68,68,.1);border-color:var(--bad);color:#fca5a5;font-size:.78rem}
+
+/* ══ SPEED ══ */
+.speed-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.speed-stats{display:flex;gap:9px}
+.spstat{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spstat .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.spstat .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spstat .sv.g{color:var(--good)}.spstat .sv.b{color:var(--bad)}.spstat .sv.w{color:var(--warn)}
+.speed-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:20px;text-align:center;width:100%;max-width:520px}
+.speed-sent{font-size:1.05rem;line-height:1.7;margin-bottom:4px}
+.speed-sent em{font-style:normal;font-weight:900;color:var(--warn);background:rgba(245,158,11,.12);border-radius:5px;padding:0 5px}
+.speed-hint{font-size:.77rem;color:var(--muted2);font-style:italic}
+.speed-input-row{display:flex;gap:8px;justify-content:center;width:100%;max-width:520px}
+.speed-inp{flex:1;max-width:220px;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.3);border-radius:11px;padding:10px 14px;font-family:var(--font);font-size:1rem;font-weight:700;color:var(--text);outline:none;transition:.15s}
+.speed-inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.speed-inp::placeholder{color:var(--muted2);font-weight:400}
+.speed-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:520px}
+.speed-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.speed-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.timer-row{display:flex;align-items:center;gap:9px;width:100%;max-width:520px}
+.timer-track{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.timer-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--near),var(--mid),var(--far));transition:width 1s linear}
+.timer-num{font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--muted2);min-width:18px;text-align:right}
+.streak-badge{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak-badge.show{display:inline-flex;align-items:center;gap:4px}
+.speed-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.speed-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.speed-start p{color:var(--muted);font-size:.87rem;max-width:400px;line-height:1.6}
+.combo-flash{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999;text-shadow:0 0 20px rgba(245,158,11,.5)}
+.combo-flash.anim{animation:cf .7s ease forwards}
+@keyframes cf{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+
+/* ══ REFERENCE ══ */
+.ref-distance-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:16px}
+.ref-distance-table th{padding:10px 14px;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08)}
+.ref-distance-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.4;vertical-align:middle}
+.ref-distance-table tr:last-child td{border-bottom:none}
+.td-dist{font-weight:800;white-space:nowrap}
+.td-form{font-family:var(--display);font-size:.95rem;font-weight:900}
+.td-ex{font-size:.8rem;color:var(--muted)}
+.note-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:15px 17px;margin-bottom:14px}
+.note-box h3{font-family:var(--display);font-size:.95rem;font-weight:800;margin-bottom:10px;color:var(--warn)}
+
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:16px 13px}.signal-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="combo-flash" id="comboFlash"></div>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Adjetivos Demostrativos</h1>
+      <p>Six exercises to master este/ese/aquel and all their gender and number forms. Spanish has a 3-way distance system — not just "this" and "that" like in English.</p>
+      <div class="badges">
+        <span class="badge">A2–B1</span>
+        <span class="badge" style="border-color:rgba(34,197,94,.35);color:var(--near2)">👆 este/esta — aquí</span>
+        <span class="badge" style="border-color:rgba(245,158,11,.35);color:var(--mid2)">👉 ese/esa — ahí</span>
+        <span class="badge" style="border-color:rgba(167,139,250,.35);color:var(--far2)">🫵 aquel/aquella — allí</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">👈</span><span class="etab-label">Point &<br>choose</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">📝</span><span class="etab-label">Multiple<br>choice</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">🔍</span><span class="etab-label">Error<br>hunter</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">🗂️</span><span class="etab-label">Drag &<br>sort</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">⚡</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">📚</span><span class="etab-label">Reference</span></button>
+</div>
+
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · Your Mexican Friend</p>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   EX 1 — SEÑALA EL OBJETO
+   Noun + pointing hand emoji indicating distance
+   Student picks the correct demonstrative form
+   dist: 'near'|'mid'|'far'
+   gender: 'm'|'f'   number: 'sing'|'plur'
+═══════════════════════════════════════════════════ */
+const SIGNAL_ITEMS = [
+  /* NEAR */
+  {noun:'coche',      emoji:'🚗', gender:'m', number:'sing', dist:'near', ans:'este',    opts:['este','ese','aquel','esta'],        exp:'Masculino singular + aquí → <strong>este</strong>.'},
+  {noun:'bicicleta',  emoji:'🚲', gender:'f', number:'sing', dist:'near', ans:'esta',    opts:['este','esta','esa','aquella'],       exp:'Femenino singular + aquí → <strong>esta</strong>.'},
+  {noun:'lápices',    emoji:'✏️', gender:'m', number:'plur', dist:'near', ans:'estos',   opts:['estos','esos','aquellos','estas'],   exp:'Masculino plural + aquí → <strong>estos</strong>.'},
+  {noun:'flores',     emoji:'🌸', gender:'f', number:'plur', dist:'near', ans:'estas',   opts:['estos','estas','esas','aquellas'],   exp:'Femenino plural + aquí → <strong>estas</strong>.'},
+  /* MID */
+  {noun:'pelota',     emoji:'🎾', gender:'f', number:'sing', dist:'mid',  ans:'esa',     opts:['esta','esa','aquella','ese'],        exp:'Femenino singular + ahí → <strong>esa</strong>.'},
+  {noun:'libro',      emoji:'📖', gender:'m', number:'sing', dist:'mid',  ans:'ese',     opts:['este','ese','aquel','esa'],          exp:'Masculino singular + ahí → <strong>ese</strong>.'},
+  {noun:'zapatos',    emoji:'👟', gender:'m', number:'plur', dist:'mid',  ans:'esos',    opts:['estos','esos','aquellos','esas'],    exp:'Masculino plural + ahí → <strong>esos</strong>.'},
+  {noun:'ventanas',   emoji:'🪟', gender:'f', number:'plur', dist:'mid',  ans:'esas',    opts:['estas','esas','aquellas','esos'],    exp:'Femenino plural + ahí → <strong>esas</strong>.'},
+  /* FAR */
+  {noun:'ratón',      emoji:'🐭', gender:'m', number:'sing', dist:'far',  ans:'aquel',   opts:['este','ese','aquel','aquella'],      exp:'Masculino singular + allí → <strong>aquel</strong>.'},
+  {noun:'montaña',    emoji:'⛰️', gender:'f', number:'sing', dist:'far',  ans:'aquella', opts:['esa','esta','aquella','aquel'],      exp:'Femenino singular + allí → <strong>aquella</strong>.'},
+  {noun:'árboles',    emoji:'🌲', gender:'m', number:'plur', dist:'far',  ans:'aquellos',opts:['esos','estos','aquellos','aquellas'],exp:'Masculino plural + allí → <strong>aquellos</strong>.'},
+  {noun:'serpientes', emoji:'🐍', gender:'f', number:'plur', dist:'far',  ans:'aquellas',opts:['esas','estas','aquellos','aquellas'],exp:'Femenino plural + allí → <strong>aquellas</strong>.'},
+  /* MIX */
+  {noun:'gato',       emoji:'🐱', gender:'m', number:'sing', dist:'mid',  ans:'ese',     opts:['este','ese','aquel','esa'],          exp:'Masculino singular + ahí → <strong>ese</strong>.'},
+  {noun:'manzanas',   emoji:'🍎', gender:'f', number:'plur', dist:'near', ans:'estas',   opts:['estas','esas','aquellas','estos'],   exp:'Femenino plural + aquí → <strong>estas</strong>.'},
+  {noun:'plátano',    emoji:'🍌', gender:'m', number:'sing', dist:'far',  ans:'aquel',   opts:['ese','este','aquel','aquella'],      exp:'Masculino singular + allí → <strong>aquel</strong>.'},
+  {noun:'pájaro',     emoji:'🐦', gender:'m', number:'sing', dist:'near', ans:'este',    opts:['este','ese','aquel','esta'],         exp:'Masculino singular + aquí → <strong>este</strong>.'},
+  {noun:'sillas',     emoji:'🪑', gender:'f', number:'plur', dist:'mid',  ans:'esas',    opts:['estas','esas','aquellas','esos'],    exp:'Femenino plural + ahí → <strong>esas</strong>.'},
+  {noun:'edificios',  emoji:'🏢', gender:'m', number:'plur', dist:'far',  ans:'aquellos',opts:['estos','esos','aquellos','aquellas'],exp:'Masculino plural + allí → <strong>aquellos</strong>.'},
+];
+
+/* ═══════════════════════════════════════════════════
+   EX 2 — MULTIPLE CHOICE (50 questions in context)
+═══════════════════════════════════════════════════ */
+const MC = [
+  {sent:'___ libro que estás leyendo parece interesante.',     en:'That book you\'re reading looks interesting.',        opts:['Este','Ese','Aquel','Esta'],       ans:1, dist:'mid', exp:'El libro está en manos del interlocutor (distancia media) → <strong>Ese</strong>.'},
+  {sent:'Mira, ___ niños de allá están jugando fútbol.',       en:'Look, those children over there are playing soccer.',  opts:['estos','esos','aquellos','estas'],  ans:2, dist:'far', exp:'Allá = lejos → <strong>aquellos</strong> (masc. plural).'},
+  {sent:'Me encanta ___ café que tengo aquí.',                 en:'I love this coffee I have right here.',                opts:['este','ese','aquel','esta'],         ans:0, dist:'near',exp:'Aquí = cercano → <strong>este</strong> (masc. sing.).'},
+  {sent:'¿Ves ___ montaña que está al fondo?',                 en:'Do you see that mountain at the back?',               opts:['esta','esa','aquella','este'],       ans:2, dist:'far', exp:'Al fondo = muy lejos → <strong>aquella</strong> (fem. sing.).'},
+  {sent:'___ flores que tienes en la mano son preciosas.',     en:'Those flowers you have in your hand are beautiful.',   opts:['Estas','Esas','Aquellas','Estos'],  ans:1, dist:'mid', exp:'Las flores están en mano del interlocutor → <strong>Esas</strong> (fem. plural).'},
+  {sent:'___ días de verano eran los mejores de mi infancia.', en:'Those summer days were the best of my childhood.',     opts:['Estos','Esos','Aquellos','Estas'],  ans:2, dist:'far', exp:'Pasado lejano = distancia temporal → <strong>Aquellos</strong>.'},
+  {sent:'¿Puedes pasarme ___ sal que está ahí?',               en:'Can you pass me that salt over there?',               opts:['esta','esa','aquella','este'],       ans:1, dist:'mid', exp:'Ahí = distancia media → <strong>esa</strong> (fem. sing.).'},
+  {sent:'___ zapatos que llevo puestos son nuevos.',           en:'These shoes I\'m wearing are new.',                   opts:['Estos','Esos','Aquellos','Estas'],   ans:0, dist:'near',exp:'Los zapatos son del hablante, aquí → <strong>Estos</strong>.'},
+  {sent:'___ problema que mencionaste antes es grave.',        en:'That problem you mentioned before is serious.',        opts:['Este','Ese','Aquel','Esta'],        ans:1, dist:'mid', exp:'Referencia reciente del interlocutor → <strong>Ese</strong>.'},
+  {sent:'Recuerdo ___ época con mucho cariño.',                en:'I remember that era with great fondness.',             opts:['esta','esa','aquella','aquel'],      ans:2, dist:'far', exp:'Pasado lejano, nostalgia → <strong>aquella</strong> época.'},
+  {sent:'___ mochila de aquí es la mía.',                     en:'This backpack right here is mine.',                    opts:['Esta','Esa','Aquella','Este'],       ans:0, dist:'near',exp:'De aquí = cercana al hablante → <strong>Esta</strong>.'},
+  {sent:'___ señor de allá está esperando hace mucho.',        en:'That man over there has been waiting a long time.',   opts:['Este','Ese','Aquel','Esta'],        ans:2, dist:'far', exp:'De allá = lejos → <strong>Aquel</strong> señor.'},
+  {sent:'¿Cómo se llama ___ canción que estás escuchando?',   en:'What\'s the name of that song you\'re listening to?', opts:['esta','esa','aquella','este'],       ans:1, dist:'mid', exp:'Tú la escuchas, no yo → <strong>esa</strong>.'},
+  {sent:'___ chicas del equipo son campeonas.',                en:'These girls on the team are champions.',              opts:['Estas','Esas','Aquellas','Estos'],   ans:0, dist:'near',exp:'Contexto presente e inmediato → <strong>Estas</strong> chicas.'},
+  {sent:'¿Es ___ tu paraguas o el mío?',                      en:'Is that umbrella yours or mine?',                     opts:['este','ese','aquel','esta'],         ans:1, dist:'mid', exp:'Distancia media, señalando el paraguas del otro → <strong>ese</strong>.'},
+  {sent:'___ ciudad que ves al fondo es Puebla.',              en:'That city you can see in the background is Puebla.',  opts:['Esta','Esa','Aquella','Este'],       ans:2, dist:'far', exp:'Al fondo = muy lejos → <strong>Aquella</strong> ciudad.'},
+  {sent:'No me gustan ___ ideas que propusiste.',              en:'I don\'t like those ideas you proposed.',             opts:['estas','esas','aquellas','estos'],   ans:1, dist:'mid', exp:'El interlocutor las propuso → distancia media → <strong>esas</strong>.'},
+  {sent:'___ recuerdos de la infancia ya no los tengo.',       en:'Those childhood memories — I no longer have them.',  opts:['Estos','Esos','Aquellos','Estas'],   ans:2, dist:'far', exp:'Pasado lejano → <strong>Aquellos</strong> recuerdos.'},
+  {sent:'¿Me prestas ___ bolígrafo que tienes ahí?',           en:'Can you lend me that pen you have there?',            opts:['este','ese','aquel','esta'],         ans:1, dist:'mid', exp:'Ahí = el interlocutor lo tiene → <strong>ese</strong>.'},
+  {sent:'Prefiero vivir en ___ época que en cualquier otra.',  en:'I prefer living in this era over any other.',         opts:['esta','esa','aquella','este'],       ans:0, dist:'near',exp:'"Esta época" = el presente, cercano al hablante.'},
+  /* more */
+  {sent:'___ café está demasiado caliente.',                   en:'This coffee is too hot.',                             opts:['Este','Ese','Aquel','Esta'],        ans:0, dist:'near',exp:'El café está en mano del hablante → <strong>Este</strong>.'},
+  {sent:'___ película de la que te hablé es increíble.',       en:'That movie I told you about is incredible.',          opts:['Esta','Esa','Aquella','Este'],       ans:1, dist:'mid', exp:'Referencia ya mencionada → <strong>Esa</strong> película.'},
+  {sent:'¿Ves ___ estrella al fondo del cielo?',               en:'Do you see that star in the back of the sky?',        opts:['esta','esa','aquella','este'],       ans:2, dist:'far', exp:'Muy lejos en el cielo → <strong>aquella</strong> estrella.'},
+  {sent:'___ niña que está aquí es mi sobrina.',               en:'This little girl right here is my niece.',            opts:['Esta','Esa','Aquella','Este'],       ans:0, dist:'near',exp:'Aquí = cerca → <strong>Esta</strong> niña.'},
+  {sent:'___ edificios que se ven a lo lejos son modernos.',   en:'Those buildings you can see in the distance are modern.',opts:['Estos','Esos','Aquellos','Estas'],ans:2, dist:'far', exp:'A lo lejos → <strong>Aquellos</strong> edificios.'},
+  {sent:'Me gustó mucho ___ presentación que hiciste.',        en:'I really liked that presentation you gave.',          opts:['esta','esa','aquella','este'],       ans:1, dist:'mid', exp:'Tú la hiciste → distancia media → <strong>esa</strong> presentación.'},
+  {sent:'___ chico de aquí es mi primo.',                      en:'This boy right here is my cousin.',                   opts:['Este','Ese','Aquel','Esta'],        ans:0, dist:'near',exp:'De aquí → <strong>Este</strong> chico.'},
+  {sent:'¿Cuánto cuesta ___ coche que está en el escaparate?',en:'How much does that car in the shop window cost?',     opts:['este','ese','aquel','esta'],         ans:1, dist:'mid', exp:'En el escaparate = distancia media → <strong>ese</strong> coche.'},
+  {sent:'___ historias que mi abuela contaba eran mágicas.',   en:'Those stories my grandmother used to tell were magical.',opts:['Estas','Esas','Aquellas','Estos'],ans:2, dist:'far', exp:'Pasado lejano → <strong>Aquellas</strong> historias.'},
+  {sent:'¿Puedo probarme ___ vestido que está ahí colgado?',  en:'Can I try on that dress hanging there?',              opts:['este','ese','aquel','esta'],         ans:1, dist:'mid', exp:'Ahí colgado = distancia media → <strong>ese</strong> vestido.'},
+  /* continuing */
+  {sent:'___ problema que tengo ahora es muy difícil.',        en:'This problem I have right now is very hard.',         opts:['Este','Ese','Aquel','Esta'],        ans:0, dist:'near',exp:'Ahora = presente y cercano → <strong>Este</strong> problema.'},
+  {sent:'___ años que pasé en España fueron increíbles.',      en:'Those years I spent in Spain were incredible.',       opts:['Estos','Esos','Aquellos','Estas'],   ans:2, dist:'far', exp:'Pasado lejano → <strong>Aquellos</strong> años.'},
+  {sent:'¿De quién es ___ paraguas que está aquí?',            en:'Whose umbrella is this one here?',                   opts:['este','ese','aquel','esta'],         ans:0, dist:'near',exp:'Aquí = cerca del hablante → <strong>este</strong> paraguas.'},
+  {sent:'___ señora que está sentada allá es la directora.',   en:'That lady sitting over there is the principal.',      opts:['Esta','Esa','Aquella','Este'],       ans:2, dist:'far', exp:'Allá = lejos → <strong>Aquella</strong> señora.'},
+  {sent:'No entiendo ___ regla que acabas de explicar.',       en:'I don\'t understand that rule you just explained.',   opts:['esta','esa','aquella','este'],       ans:1, dist:'mid', exp:'Acabas de explicar = referencia del interlocutor → <strong>esa</strong>.'},
+  {sent:'___ canciones que escucho me dan mucha energía.',     en:'These songs I listen to give me a lot of energy.',    opts:['Estas','Esas','Aquellas','Estos'],   ans:0, dist:'near',exp:'Las canciones del hablante, presentes → <strong>Estas</strong>.'},
+  {sent:'¿Es ___ la calle por la que tenemos que ir?',         en:'Is that the street we need to take?',                opts:['esta','esa','aquella','este'],       ans:1, dist:'mid', exp:'Señalando una calle cercana pero no aquí mismo → <strong>esa</strong>.'},
+  {sent:'___ montañas que ves al horizonte son los Alpes.',    en:'Those mountains you can see on the horizon are the Alps.',opts:['Estas','Esas','Aquellas','Estos'],ans:2, dist:'far', exp:'Al horizonte = muy lejos → <strong>Aquellas</strong>.'},
+  {sent:'Dame ___ manzana que tienes en la mano.',             en:'Give me that apple you have in your hand.',           opts:['esta','esa','aquella','este'],       ans:1, dist:'mid', exp:'La tienes tú, no yo → <strong>esa</strong> manzana.'},
+  {sent:'___ momentos con familia son los mejores.',           en:'These moments with family are the best.',             opts:['Estos','Esos','Aquellos','Estas'],   ans:0, dist:'near',exp:'Presentes, vividos ahora → <strong>Estos</strong> momentos.'},
+  {sent:'___ verano fue el más caluroso que recuerdo.',        en:'That summer was the hottest I can remember.',         opts:['Este','Ese','Aquel','Esta'],        ans:2, dist:'far', exp:'Pasado lejano → <strong>Aquel</strong> verano.'},
+  {sent:'¿Cuál es ___ ruido tan fuerte de ahí?',               en:'What is that loud noise over there?',                opts:['este','ese','aquel','esta'],         ans:1, dist:'mid', exp:'Ahí = distancia media → <strong>ese</strong> ruido.'},
+  {sent:'___ libro que me regalaste me encantó.',              en:'That book you gave me, I loved it.',                 opts:['Este','Ese','Aquel','Esta'],        ans:1, dist:'mid', exp:'Me lo diste tú → distancia media → <strong>Ese</strong>.'},
+  {sent:'___ días soy yo el encargado de la tienda.',          en:'These days I\'m the one in charge of the store.',    opts:['Estos','Esos','Aquellos','Estas'],   ans:0, dist:'near',exp:'"Estos días" = ahora, tiempo presente.'},
+  {sent:'___ árbol tan grande que ves allá es un ahuehuete.',  en:'That huge tree you can see over there is an ahuehuete.',opts:['Este','Ese','Aquel','Esta'],     ans:2, dist:'far', exp:'Allá = lejos → <strong>Aquel</strong> árbol.'},
+  {sent:'¿Recuerdas ___ viaje que hicimos juntos?',            en:'Do you remember that trip we took together?',        opts:['este','ese','aquel','esta'],         ans:2, dist:'far', exp:'Pasado lejano compartido → <strong>aquel</strong> viaje.'},
+  {sent:'___ decisión que tomaste fue muy valiente.',          en:'That decision you made was very brave.',             opts:['Esta','Esa','Aquella','Este'],       ans:1, dist:'mid', exp:'Tú la tomaste → distancia media → <strong>Esa</strong>.'},
+  {sent:'Me gustaría visitar ___ países que están tan lejos.', en:'I\'d like to visit those countries so far away.',    opts:['estos','esos','aquellos','estas'],   ans:2, dist:'far', exp:'Tan lejos → <strong>aquellos</strong> países.'},
+  {sent:'¿Te acuerdas de ___ maestra que tuvimos en primaria?',en:'Do you remember that teacher we had in elementary school?',opts:['esta','esa','aquella','este'],  ans:2, dist:'far', exp:'Pasado lejano → <strong>aquella</strong> maestra.'},
+  {sent:'___ ejercicio que estamos haciendo es muy útil.',     en:'This exercise we\'re doing is very useful.',         opts:['Este','Ese','Aquel','Esta'],        ans:0, dist:'near',exp:'Lo estamos haciendo ahora → <strong>Este</strong> ejercicio.'},
+];
+
+function seededShuffle(arr,seed){
+  const a=[...arr];let s=seed;
+  for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+const MC_ORDER=MC.map((_,i)=>seededShuffle([0,1,2,3],i*11+7));
+
+/* ═══════════════════════════════════════════════════
+   EX 3 — ERROR HUNT (15 sentences)
+═══════════════════════════════════════════════════ */
+const ERRORS = [
+  ['Este libro es muy aburrido.',                               false, null,       'CORRECTO: Masculino singular, cercano → "este". ✓'],
+  ['Esa casas son muy antiguas.',                               true,  'Esas',     'ERROR: "Casas" es femenino plural → <strong>Esas</strong> casas (no "Esa").'],
+  ['¿Ves aquel edificio que está a lo lejos?',                  false, null,       'CORRECTO: Masculino singular, lejos → "aquel". ✓'],
+  ['Estos flores son para mi madre.',                           true,  'Estas',    'ERROR: "Flores" es femenino plural → <strong>Estas</strong> flores.'],
+  ['No me gustan esas películas de terror.',                    false, null,       'CORRECTO: Femenino plural, distancia media → "esas". ✓'],
+  ['Aquella días de verano eran perfectos.',                    true,  'Aquellos', 'ERROR: "Días" es masculino plural → <strong>Aquellos</strong> días.'],
+  ['Dame ese bolígrafo que tienes ahí.',                        false, null,       'CORRECTO: Masculino singular, ahí = distancia media → "ese". ✓'],
+  ['Esta chico de aquí es mi hermano.',                         true,  'Este',     'ERROR: "Chico" es masculino → <strong>Este</strong> chico.'],
+  ['Aquellas montañas son impresionantes.',                     false, null,       'CORRECTO: Femenino plural, lejos → "aquellas". ✓'],
+  ['Eso problema que tienes es muy difícil.',                   true,  'Ese',      'ERROR: "Problema" es masculino → <strong>Ese</strong> problema.'],
+  ['Me encanta este café que acabo de preparar.',               false, null,       'CORRECTO: Masculino singular, presente/cercano → "este". ✓'],
+  ['Aquellos tiempos ya no volverán.',                          false, null,       'CORRECTO: Masculino plural, pasado lejano → "aquellos". ✓'],
+  ['Esas años fueron muy difíciles para todos.',                true,  'Esos',     'ERROR: "Años" es masculino plural → <strong>Esos</strong> años.'],
+  ['¿Cuánto cuesta ese coche del escaparate?',                  false, null,       'CORRECTO: Masculino singular, distancia media → "ese". ✓'],
+  ['Esta decisión que tomaste fue muy valiente.',               true,  'Esa',      'ERROR: La decisión la tomó el interlocutor → distancia media → <strong>Esa</strong> decisión.'],
+];
+
+/* ═══════════════════════════════════════════════════
+   EX 4 — DRAG & SORT (6 specific buckets)
+═══════════════════════════════════════════════════ */
+const SORT_BUCKETS_DATA = [
+  {id:'este',     label:'este / esta',       icon:'👆', sub:'Masc./Fem. singular — HERE',     col:'#86efac', bg:'rgba(34,197,94,.07)',   bdr:'rgba(34,197,94,.25)'},
+  {id:'estos',    label:'estos / estas',     icon:'👆', sub:'Masc./Fem. plural — HERE',       col:'#4ade80', bg:'rgba(34,197,94,.05)',   bdr:'rgba(34,197,94,.2)'},
+  {id:'ese',      label:'ese / esa',         icon:'👉', sub:'Masc./Fem. singular — THERE',      col:'#fcd34d', bg:'rgba(245,158,11,.07)', bdr:'rgba(245,158,11,.25)'},
+  {id:'esos',     label:'esos / esas',       icon:'👉', sub:'Masc./Fem. plural — THERE',        col:'#fbbf24', bg:'rgba(245,158,11,.05)', bdr:'rgba(245,158,11,.2)'},
+  {id:'aquel',    label:'aquel / aquella',   icon:'🫵', sub:'Masc./Fem. singular — WAY OVER',     col:'#c4b5fd', bg:'rgba(167,139,250,.07)',bdr:'rgba(167,139,250,.25)'},
+  {id:'aquellos', label:'aquellos/aquellas', icon:'🫵', sub:'Masc./Fem. plural — WAY OVER',       col:'#a78bfa', bg:'rgba(167,139,250,.05)',bdr:'rgba(167,139,250,.2)'},
+];
+const SORT_ITEMS = [
+  {id:'s1',  text:'___ libro (aquí, m. sing.)',         correct:'este',     exp:'"Este libro" → masculino singular + aquí.'},
+  {id:'s2',  text:'___ casa (aquí, f. sing.)',          correct:'este',     exp:'"Esta casa" → femenino singular + aquí. Cubo: este/esta.'},
+  {id:'s3',  text:'___ chicos (aquí, m. plur.)',        correct:'estos',    exp:'"Estos chicos" → masculino plural + aquí.'},
+  {id:'s4',  text:'___ flores (aquí, f. plur.)',        correct:'estos',    exp:'"Estas flores" → femenino plural + aquí. Cubo: estos/estas.'},
+  {id:'s5',  text:'___ coche (ahí, m. sing.)',          correct:'ese',      exp:'"Ese coche" → masculino singular + ahí.'},
+  {id:'s6',  text:'___ silla (ahí, f. sing.)',          correct:'ese',      exp:'"Esa silla" → femenino singular + ahí. Cubo: ese/esa.'},
+  {id:'s7',  text:'___ perros (ahí, m. plur.)',         correct:'esos',     exp:'"Esos perros" → masculino plural + ahí.'},
+  {id:'s8',  text:'___ ventanas (ahí, f. plur.)',       correct:'esos',     exp:'"Esas ventanas" → femenino plural + ahí. Cubo: esos/esas.'},
+  {id:'s9',  text:'___ edificio (allí, m. sing.)',      correct:'aquel',    exp:'"Aquel edificio" → masculino singular + allí.'},
+  {id:'s10', text:'___ montaña (allí, f. sing.)',       correct:'aquel',    exp:'"Aquella montaña" → femenino singular + allí. Cubo: aquel/aquella.'},
+  {id:'s11', text:'___ días (allí/pasado, m. plur.)',   correct:'aquellos', exp:'"Aquellos días" → masculino plural + allí/pasado.'},
+  {id:'s12', text:'___ historias (pasado, f. plur.)',   correct:'aquellos', exp:'"Aquellas historias" → femenino plural + pasado lejano. Cubo: aquellos/aquellas.'},
+  {id:'s13', text:'___ café que tengo aquí',            correct:'este',     exp:'"Este café" → cercano al hablante, masc. sing.'},
+  {id:'s14', text:'___ película que me recomendaste',   correct:'ese',      exp:'"Esa película" → del interlocutor, distancia media, fem. sing.'},
+  {id:'s15', text:'___ años de mi infancia',            correct:'aquellos', exp:'"Aquellos años" → pasado lejano, masc. plural.'},
+  {id:'s16', text:'___ señor que está allá',            correct:'aquel',    exp:'"Aquel señor" → lejos, masc. sing.'},
+  {id:'s17', text:'___ chicas del equipo (aquí)',       correct:'estos',    exp:'"Estas chicas" → fem. plural + aquí.'},
+  {id:'s18', text:'___ canciones que escuchas ahí',     correct:'esos',     exp:'"Esas canciones" → del interlocutor, distancia media, fem. plural.'},
+];
+
+/* ═══════════════════════════════════════════════════
+   EX 5 — SPEED ROUND (type the correct form)
+═══════════════════════════════════════════════════ */
+const SPEED = [
+  {q:'___ libro (masc. sing., aquí)',              hint:'cerca · masc. sing.',          ans:'este',     also:[]},
+  {q:'___ casa (fem. sing., aquí)',                hint:'cerca · fem. sing.',           ans:'esta',     also:[]},
+  {q:'___ niños (masc. plur., aquí)',              hint:'cerca · masc. plur.',          ans:'estos',    also:[]},
+  {q:'___ flores (fem. plur., aquí)',              hint:'cerca · fem. plur.',           ans:'estas',    also:[]},
+  {q:'___ coche (masc. sing., ahí)',               hint:'medio · masc. sing.',          ans:'ese',      also:[]},
+  {q:'___ silla (fem. sing., ahí)',                hint:'medio · fem. sing.',           ans:'esa',      also:[]},
+  {q:'___ perros (masc. plur., ahí)',              hint:'medio · masc. plur.',          ans:'esos',     also:[]},
+  {q:'___ ventanas (fem. plur., ahí)',             hint:'medio · fem. plur.',           ans:'esas',     also:[]},
+  {q:'___ edificio (masc. sing., allí)',           hint:'lejos · masc. sing.',          ans:'aquel',    also:[]},
+  {q:'___ montaña (fem. sing., allí)',             hint:'lejos · fem. sing.',           ans:'aquella',  also:[]},
+  {q:'___ días (masc. plur., pasado lejano)',      hint:'lejos · masc. plur.',          ans:'aquellos', also:[]},
+  {q:'___ historias (fem. plur., pasado lejano)',  hint:'lejos · fem. plur.',           ans:'aquellas', also:[]},
+  {q:'Dame ___ manzana que tienes ahí.',           hint:'medio · fem. sing.',           ans:'esa',      also:[]},
+  {q:'___ café está muy caliente.',                hint:'cerca · masc. sing.',          ans:'Este',     also:['este']},
+  {q:'¿Ves ___ estrella tan lejos?',               hint:'lejos · fem. sing.',           ans:'aquella',  also:[]},
+  {q:'___ chicos de aquí son mis amigos.',         hint:'cerca · masc. plur.',          ans:'Estos',    also:['estos']},
+  {q:'No me gustan ___ películas de terror.',      hint:'medio · fem. plur.',           ans:'esas',     also:[]},
+  {q:'___ señor de allá es el director.',          hint:'lejos · masc. sing.',          ans:'Aquel',    also:['aquel']},
+  {q:'¿Es ___ tu bolígrafo?',                      hint:'medio · masc. sing.',          ans:'ese',      also:[]},
+  {q:'___ momentos son los mejores.',              hint:'cerca · masc. plur.',          ans:'Estos',    also:['estos']},
+  {q:'___ verano fue increíble.',                  hint:'lejos · masc. sing.',          ans:'Aquel',    also:['aquel']},
+  {q:'¿De quién son ___ llaves de aquí?',          hint:'cerca · fem. plur.',           ans:'estas',    also:[]},
+  {q:'___ montañas al horizonte son los Alpes.',   hint:'lejos · fem. plur.',           ans:'Aquellas', also:['aquellas']},
+  {q:'___ problema que tienes parece difícil.',    hint:'medio · masc. sing.',          ans:'ese',      also:[]},
+  {q:'___ recuerdos ya no los tengo.',             hint:'lejos · masc. plur.',          ans:'Aquellos', also:['aquellos']},
+  {q:'Prefiero ___ época que cualquier otra.',     hint:'cerca · fem. sing.',           ans:'esta',     also:[]},
+  {q:'Dame ___ libros que están ahí.',             hint:'medio · masc. plur.',          ans:'esos',     also:[]},
+  {q:'___ ciudad al fondo es muy antigua.',        hint:'lejos · fem. sing.',           ans:'aquella',  also:[]},
+  {q:'___ niña de aquí es mi sobrina.',            hint:'cerca · fem. sing.',           ans:'Esta',     also:['esta']},
+  {q:'¿Recuerdas ___ viaje que hicimos?',          hint:'lejos · masc. sing.',          ans:'aquel',    also:[]},
+];
+
+/* ═══════════════════════════════════════════════════ STATE ═══ */
+let currentEx=0;
+let sig_answers={}, sig_checked=false;
+let mc_answers={}, mc_checked=false;
+let eh_answered={};
+let dragItem=null,sortPlaced={},sortChecked=false,tapSelected=null;
+let speedIdx=0,speedOk=0,speedErr=0,speedStreak=0,speedTimer=null,speedTimeLeft=0,speedAnswered=false;
+
+// Shuffle SIGNAL_ITEMS order randomly every time the page loads
+(function shuffleSignal(){
+  for(let i=SIGNAL_ITEMS.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [SIGNAL_ITEMS[i],SIGNAL_ITEMS[j]]=[SIGNAL_ITEMS[j],SIGNAL_ITEMS[i]];
+  }
+})();
+
+function goEx(idx){
+  currentEx=idx;
+  [0,1,2,3,4,5].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===idx));
+  [renderSignal,renderMC,renderErrorHunt,renderSort,renderSpeed,renderReference][idx]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ══ EX 1: SEÑALA ══ */
+const DIST_LABEL = {
+  near:{icon:'👆', label:'HERE',  col:'var(--near2)', lineCol:'rgba(34,197,94,.6)',  dashes:'',        tip:'Close to the speaker'},
+  mid: {icon:'👉', label:'THERE',   col:'var(--mid2)',  lineCol:'rgba(245,158,11,.6)', dashes:'- - -',   tip:'Medium distance'},
+  far: {icon:'🫵', label:'WAY OVER',  col:'var(--far2)',  lineCol:'rgba(167,139,250,.6)',dashes:'- - - - -',tip:'Far away / distant past'},
+};
+const GENDER_LABEL={m:'masc.',f:'fem.'};
+
+function renderSignal(){
+  const answered=Object.keys(sig_answers).length;
+  const pct=Math.round(answered/SIGNAL_ITEMS.length*100);
+
+  const cardsHTML=SIGNAL_ITEMS.map((item,i)=>{
+    const dl=DIST_LABEL[item.dist];
+    const order=seededShuffle([0,1,2,3],i*13+5);
+    const optHTML=order.map(origIdx=>{
+      const o=item.opts[origIdx];
+      let cls='sig-opt';
+      if(sig_checked){
+        if(origIdx===item.opts.indexOf(item.ans)) cls+=' s-show';
+        else if(sig_answers[i]===origIdx&&item.opts[origIdx]!==item.ans) cls+=' s-err';
+      } else if(sig_answers[i]===origIdx) cls+=item.opts[origIdx]===item.ans?' s-ok':' s-err';
+      return `<button class="${cls}" id="sgo_${i}_${origIdx}" onclick="answerSignal(${i},${origIdx})" ${sig_checked?'disabled':''}>${o}</button>`;
+    }).join('');
+
+    // Distance visual: 🧍 -> 📦 (near)  🧍 --> 📦 (mid)  🧍 ---> 📦 (far)
+    const arrowMap = {near:'—▶', mid:'——▶', far:'———▶'};
+    const arrow = arrowMap[item.dist];
+    const nearVis = `<div class="signal-speaker">🧍</div>
+      <div class="signal-arrow-group">
+        <div style="font-size:${item.dist==='near'?'1rem':item.dist==='mid'?'1.3rem':'1.7rem'};color:${dl.lineCol};font-weight:900;letter-spacing:-2px;line-height:1">${arrow}</div>
+        <div class="signal-dist-label" style="color:${dl.col}">${dl.icon} ${dl.label}</div>
+      </div>
+      <div class="signal-emoji">${item.emoji}</div>`;
+
+    return `<div class="signal-card" id="sgcard_${i}">
+      <div class="signal-header">
+        <span class="signal-num">${i+1}</span>
+        <span class="signal-noun">${item.noun} <span class="gender">(${GENDER_LABEL[item.gender]} ${item.number==='sing'?'sing.':'plur.'})</span></span>
+        <span class="dist-badge" style="background:${dl.lineCol.replace('.6','.15')};color:${dl.col};border:1px solid ${dl.lineCol}">${dl.icon} ${dl.label}</span>
+      </div>
+      <div class="signal-visual">${nearVis}</div>
+      <div class="signal-opts">${optHTML}</div>
+      <div class="sig-expl ${(sig_checked||(sig_answers[i]!==undefined))?'show':''}" id="sgexp_${i}">${item.exp}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header">
+    <div class="ex-title">👈 Point & choose</div>
+    <div class="ex-instr">Each card shows a noun and an arrow indicating distance. Choose the correct demonstrative. The arrow tells you: <span class="pill-near">👆 HERE = este/esta</span> <span class="pill-mid">👉 THERE = ese/esa</span> <span class="pill-far">🫵 WAY OVER = aquel/aquella</span></div>
+  </div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${SIGNAL_ITEMS.length}</span></div>
+    <div class="sc"><span class="l">Correct</span><span class="v g" id="sg_ok">—</span></div>
+    <div class="sc"><span class="l">Wrong</span><span class="v b" id="sg_err">—</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="sg_pct">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="sg_prog" style="width:${pct}%"></div></div></div>
+  </div>
+  <div class="signal-grid">${cardsHTML}</div>
+  <div class="fb" id="sg_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="sg_check" onclick="checkSignal()" ${sig_checked?'disabled':''}>Check all</button>
+    <button class="btn btn-ghost" onclick="sig_answers={};sig_checked=false;renderSignal()">↺ Reset</button>
+  </div></div>`;
+}
+
+function answerSignal(qi,origIdx){
+  if(sig_checked)return;
+  if(sig_answers[qi]!==undefined){const p=document.getElementById(`sgo_${qi}_${sig_answers[qi]}`);if(p)p.classList.remove('s-ok','s-err');}
+  sig_answers[qi]=origIdx;
+  const item=SIGNAL_ITEMS[qi];
+  const isOk=item.opts[origIdx]===item.ans;
+  const btn=document.getElementById(`sgo_${qi}_${origIdx}`);
+  if(btn)btn.classList.add(isOk?'s-ok':'s-err');
+  const exp=document.getElementById(`sgexp_${qi}`);if(exp)exp.classList.add('show');
+  const pct=Math.round(Object.keys(sig_answers).length/SIGNAL_ITEMS.length*100);
+  const el=document.getElementById('sg_pct');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('sg_prog');if(pg)pg.style.width=pct+'%';
+}
+
+function checkSignal(){
+  sig_checked=true;let ok=0;
+  SIGNAL_ITEMS.forEach((item,i)=>{
+    const chosen=sig_answers[i];
+    const isOk=chosen!==undefined&&item.opts[chosen]===item.ans;
+    if(isOk)ok++;
+    item.opts.forEach((_,oi)=>{
+      const btn=document.getElementById(`sgo_${i}_${oi}`);if(!btn)return;
+      btn.disabled=true;
+      if(item.opts[oi]===item.ans)btn.classList.add('s-show');
+      else if(sig_answers[i]===oi&&!isOk)btn.classList.add('s-err');
+    });
+    const exp=document.getElementById(`sgexp_${i}`);if(exp)exp.classList.add('show');
+  });
+  const pct=Math.round(ok/SIGNAL_ITEMS.length*100);
+  document.getElementById('sg_ok').textContent=ok;
+  document.getElementById('sg_err').textContent=SIGNAL_ITEMS.length-ok;
+  document.getElementById('sg_prog').style.width='100%';
+  document.getElementById('sg_pct').textContent='100%';
+  const fb=document.getElementById('sg_fb');
+  if(pct===100){fb.className='fb show ok';fb.innerHTML='🏆 <strong>Perfect score!</strong>';}
+  else if(pct>=75){fb.className='fb show ok';fb.innerHTML=`👍 <strong>${ok}/${SIGNAL_ITEMS.length}.</strong> Great job!`;}
+  else{fb.className='fb show partial';fb.innerHTML=`📖 <strong>${ok}/${SIGNAL_ITEMS.length}.</strong> Review: 👆este/esta · 👉ese/esa · 🫵aquel/aquella.`;}
+  document.getElementById('sg_check').disabled=true;
+}
+
+/* ══ EX 2: MC ══ */
+function renderMC(){
+  const pct=Math.round(Object.keys(mc_answers).length/MC.length*100);
+  const distTag=(d)=>d==='near'?'<span class="dist-tag near-tag">👆 cerca</span>':d==='mid'?'<span class="dist-tag mid-tag">👉 medio</span>':'<span class="dist-tag far-tag">🫵 lejos</span>';
+  const qHTML=MC.map((item,i)=>{
+    const order=MC_ORDER[i];
+    const optHTML=order.map(origIdx=>{
+      const o=item.opts[origIdx];
+      let cls='mc-opt';
+      if(mc_checked){
+        if(origIdx===item.ans)cls+=' mc-show';
+        else if(mc_answers[i]===origIdx&&origIdx!==item.ans)cls+=' mc-err';
+      } else if(mc_answers[i]===origIdx)cls+=origIdx===item.ans?' mc-ok':' mc-err';
+      return `<button class="${cls}" id="mco_${i}_${origIdx}" onclick="answerMC(${i},${origIdx})" ${mc_checked?'disabled':''}>${o}</button>`;
+    }).join('');
+    const explShow=mc_checked||(mc_answers[i]!==undefined);
+    const dl=DIST_LABEL[item.dist];
+    return `<div class="mc-card">
+      <div class="mc-top"><span class="mc-num" style="color:${dl.col}">${i+1}</span><span class="mc-sent">${item.sent.replace('___','<span class="mc-blank">___</span>')}</span></div>
+      <div class="mc-en">${item.en}</div>
+      <div class="mc-opts">${optHTML}</div>
+      <div class="mc-expl ${explShow?'show':''}" id="mcexp_${i}">${distTag(item.dist)} ${item.exp}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">📝 Multiple choice</div>
+  <div class="ex-instr">Choose the correct demonstrative for each sentence. The number color hints the distance: <span class="pill-near">🟢 near</span> <span class="pill-mid">🟡 medium</span> <span class="pill-far">🟣 far</span>. 50 sentences total.</div></div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${MC.length}</span></div>
+    <div class="sc"><span class="l">Correct</span><span class="v g" id="mc_ok">—</span></div>
+    <div class="sc"><span class="l">Wrong</span><span class="v b" id="mc_err">—</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="mc_pct">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="mc_prog" style="width:${pct}%"></div></div></div>
+  </div>
+  <div class="mc-list">${qHTML}</div>
+  <div class="fb" id="mc_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="mc_check" onclick="checkMC()" ${mc_checked?'disabled':''}>Check all</button>
+    <button class="btn btn-ghost" onclick="mc_answers={};mc_checked=false;renderMC()">↺ Reset</button>
+  </div></div>`;
+}
+function answerMC(qi,origIdx){
+  if(mc_checked)return;
+  if(mc_answers[qi]!==undefined){const p=document.getElementById(`mco_${qi}_${mc_answers[qi]}`);if(p)p.classList.remove('mc-ok','mc-err');}
+  mc_answers[qi]=origIdx;
+  const isOk=origIdx===MC[qi].ans;
+  const btn=document.getElementById(`mco_${qi}_${origIdx}`);if(btn)btn.classList.add(isOk?'mc-ok':'mc-err');
+  const exp=document.getElementById(`mcexp_${qi}`);if(exp)exp.classList.add('show');
+  const pct=Math.round(Object.keys(mc_answers).length/MC.length*100);
+  const el=document.getElementById('mc_pct');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('mc_prog');if(pg)pg.style.width=pct+'%';
+}
+function checkMC(){
+  mc_checked=true;let ok=0;
+  MC.forEach((item,i)=>{if(mc_answers[i]===item.ans)ok++;});
+  const pct=Math.round(ok/MC.length*100);
+  document.getElementById('mc_ok').textContent=ok;
+  document.getElementById('mc_err').textContent=MC.length-ok;
+  document.getElementById('mc_prog').style.width='100%';document.getElementById('mc_pct').textContent='100%';
+  const fb=document.getElementById('mc_fb');
+  if(pct===100){fb.className='fb show ok';fb.innerHTML='🏆 <strong>Perfect! 50/50.</strong>';}
+  else if(pct>=75){fb.className='fb show ok';fb.innerHTML=`👍 <strong>${ok}/50.</strong> Great job!`;}
+  else if(pct>=50){fb.className='fb show partial';fb.innerHTML=`📖 <strong>${ok}/50.</strong> Remember: match gender, number, and distance.`;}
+  else{fb.className='fb show err';fb.innerHTML=`💪 <strong>${ok}/50.</strong> Check the reference card and try again.`;}
+  document.getElementById('mc_check').disabled=true;renderMC();
+}
+
+/* ══ ERROR HUNT ══ */
+function renderErrorHunt(){
+  eh_answered={};
+  let html=`<div class="panel"><div class="ex-header"><div class="ex-title">🔍 Error hunter</div>
+  <div class="ex-instr">Is the demonstrative used correctly? Decide before seeing the explanation.</div></div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${ERRORS.length}</span></div>
+    <div class="sc"><span class="l">Correct</span><span class="v g" id="eh_ok">0</span></div>
+    <div class="sc"><span class="l">Wrong</span><span class="v b" id="eh_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Progress: <span id="eh_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="eh_prog" style="width:0%"></div></div></div>
+  </div><div class="eh-list">`;
+  ERRORS.forEach(([sent,,,exp],idx)=>{
+    html+=`<div class="eh-item" id="ehi_${idx}"><div class="eh-num">${idx+1}</div>
+      <div class="eh-body">
+        <div class="eh-sent" id="ehsent_${idx}">${sent}</div>
+        <div class="eh-judge-row">
+          <button class="eh-judge-btn eh-correct-btn" onclick="judgeEh(${idx},false)">✅ Correct</button>
+          <button class="eh-judge-btn eh-error-btn" onclick="judgeEh(${idx},true)">❌ Has an error</button>
+        </div>
+        <div class="eh-exp" id="ehexp_${idx}">${exp}</div>
+      </div></div>`;
+  });
+  html+=`</div><div class="fb" id="eh_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="eh_answered={};renderErrorHunt()">↺ Reset</button></div></div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+function judgeEh(idx,studentSaysError){
+  if(eh_answered[idx]!==undefined)return;
+  const [sent,hasErr,correction,exp]=ERRORS[idx];
+  const correct=studentSaysError===hasErr;
+  eh_answered[idx]=correct;
+  const item=document.getElementById('ehi_'+idx);
+  item.classList.add('revealed',correct?'correct-sentence':'wrong-sentence');
+  item.querySelectorAll('.eh-judge-btn').forEach(b=>b.disabled=true);
+  const chosen=item.querySelector(studentSaysError?'.eh-error-btn':'.eh-correct-btn');
+  if(chosen)chosen.classList.add(correct?'judge-chosen-ok':'judge-chosen-err');
+  if(hasErr&&correction){
+    const sentEl=document.getElementById('ehsent_'+idx);
+    const dems=['Este','Esta','Estos','Estas','Ese','Esa','Esos','Esas','Aquel','Aquella','Aquellos','Aquellas','este','esta','estos','estas','ese','esa','esos','esas','aquel','aquella','aquellos','aquellas','Eso','Aquel'];
+    let h=sent;
+    dems.filter(d=>d!==correction&&d.toLowerCase()!==correction.toLowerCase()).forEach(d=>{
+      h=h.replace(new RegExp(`\\b${d}\\b`,'g'),`<span class="wrong-word">${d}</span>`);
+    });
+    sentEl.innerHTML=h+` <span class="eh-correction">→ <strong>${correction}</strong></span>`;
+  }
+  document.getElementById('ehexp_'+idx).classList.add('show');
+  const total=Object.keys(eh_answered).length;
+  const totalOk=Object.values(eh_answered).filter(v=>v).length;
+  document.getElementById('eh_ok').textContent=totalOk;
+  document.getElementById('eh_err').textContent=total-totalOk;
+  document.getElementById('eh_pct').textContent=Math.round(total/ERRORS.length*100)+'%';
+  document.getElementById('eh_prog').style.width=Math.round(total/ERRORS.length*100)+'%';
+  if(total===ERRORS.length){
+    const pct=Math.round(totalOk/ERRORS.length*100);
+    const fb=document.getElementById('eh_fb');
+    fb.className='fb show '+(pct>=80?'ok':'partial');
+    fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${totalOk}/${ERRORS.length}.</strong> ${pct>=80?'Excellent!':'Remember: the demonstrative must agree with the noun in gender and number.'}`;
+  }
+}
+
+/* ══ SORT ══ */
+function renderSort(){
+  sortPlaced={};sortChecked=false;tapSelected=null;
+  const shuffled=[...SORT_ITEMS].sort(()=>Math.random()-.5);
+  const pile=shuffled.map(item=>`<div class="sort-card" id="sc_${item.id}" draggable="true"
+    ondragstart="dragStart(event,'${item.id}')" ondragend="dragEnd(event)"
+    onclick="tapCard('${item.id}')">${item.text}</div>`).join('');
+  const buckHTML=SORT_BUCKETS_DATA.map(b=>`<div class="sort-bucket" id="bucket-${b.id}"
+    style="background:${b.bg};border:2px dashed ${b.bdr};min-height:90px"
+    ondragover="event.preventDefault();this.classList.add('drag-over')"
+    ondragleave="this.classList.remove('drag-over')"
+    ondrop="dropInto(event,'${b.id}')" onclick="bucketTap('${b.id}')">
+    <div class="bucket-title" style="color:${b.col}">${b.icon} ${b.label}</div>
+    <div class="bucket-sub">${b.sub}</div>
+  </div>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">🗂️ Drag & sort</div>
+  <div class="ex-instr">Drag each item to the correct bucket — the exact demonstrative form it needs. Tap a card, then tap a bucket on mobile.</div></div>
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);margin-bottom:8px">Cards — drag or tap → then tap a bucket</div>
+  <div class="sort-pile" id="sortPile">${pile}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;margin-bottom:12px">${buckHTML}</div>
+  <div class="fb" id="sort_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="sort_check" onclick="checkSort()" disabled>Check</button>
+    <button class="btn btn-ghost" onclick="renderSort()">↺ Reset</button>
+  </div></div>`;
+}
+function dragStart(e,id){dragItem=id;setTimeout(()=>{const c=document.getElementById('sc_'+id);if(c)c.classList.add('drag-ghost');},0);}
+function dragEnd(){if(dragItem){const c=document.getElementById('sc_'+dragItem);if(c)c.classList.remove('drag-ghost');}dragItem=null;}
+function dropInto(e,bucket){e.preventDefault();const id=e.dataTransfer?e.dataTransfer.getData('text'):dragItem;document.getElementById('bucket-'+bucket).classList.remove('drag-over');if(!id||sortPlaced[id])return;placeCard(id,bucket);}
+function tapCard(id){if(sortPlaced[id])return;const card=document.getElementById('sc_'+id);if(!card)return;if(tapSelected===id){card.style.boxShadow='';tapSelected=null;return;}if(tapSelected){const p=document.getElementById('sc_'+tapSelected);if(p)p.style.boxShadow='';}tapSelected=id;card.style.boxShadow='0 0 0 3px var(--cyan)';}
+function bucketTap(bucket){if(!tapSelected)return;placeCard(tapSelected,bucket);tapSelected=null;}
+function placeCard(id,bucket){sortPlaced[id]=bucket;const card=document.getElementById('sc_'+id);const bEl=document.getElementById('bucket-'+bucket);if(!card||!bEl)return;card.style.boxShadow='';card.classList.remove('drag-ghost');card.draggable=false;const b=SORT_BUCKETS_DATA.find(x=>x.id===bucket);card.style.borderColor=b?b.col:'rgba(255,255,255,.3)';card.onclick=()=>returnCard(id);bEl.appendChild(card);if(Object.keys(sortPlaced).length===SORT_ITEMS.length){const btn=document.getElementById('sort_check');if(btn)btn.disabled=false;}}
+function returnCard(id){if(sortChecked)return;delete sortPlaced[id];const card=document.getElementById('sc_'+id);const pile=document.getElementById('sortPile');if(!card||!pile)return;card.style.borderColor='';card.style.boxShadow='';card.draggable=true;card.onclick=()=>tapCard(id);pile.appendChild(card);const btn=document.getElementById('sort_check');if(btn)btn.disabled=true;}
+function checkSort(){
+  sortChecked=true;let ok=0;
+  SORT_ITEMS.forEach(item=>{const card=document.getElementById('sc_'+item.id);if(!card)return;const isOk=sortPlaced[item.id]===item.correct;if(isOk)ok++;card.className='sort-card '+(isOk?'card-correct':'card-wrong');card.draggable=false;card.onclick=null;if(!isOk){const b=SORT_BUCKETS_DATA.find(x=>x.id===item.correct);card.innerHTML=`${item.text}<span style="font-size:.7rem;display:block;margin-top:3px">→ ${b?b.icon+' '+b.label:item.correct}</span>`;}card.title=item.exp;});
+  const pct=Math.round(ok/SORT_ITEMS.length*100);
+  const fb=document.getElementById('sort_fb');fb.className='fb show '+(pct>=80?'ok':pct>=55?'partial':'err');
+  fb.innerHTML=`<strong>${ok}/${SORT_ITEMS.length} (${pct}%).</strong> Red cards show the correct bucket.`;
+  document.getElementById('sort_check').disabled=true;
+}
+
+/* ══ SPEED ══ */
+function renderSpeed(){
+  if(speedTimer){clearInterval(speedTimer);speedTimer=null;}
+  speedIdx=0;speedOk=0;speedErr=0;speedStreak=0;speedAnswered=false;
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">⚡ Speed round</div>
+  <div class="ex-instr">Type the correct demonstrative. Use the distance and gender/number clues. 7 seconds per question. Press Enter to confirm.</div></div>
+  <div class="speed-wrap" id="speedWrap">
+    <div class="speed-start"><div style="font-size:2.8rem">⚡</div><h2>Type the demonstrative</h2>
+    <p>Type the exact demonstrative form. 30 sentences — build a streak of 3+!</p>
+    <button class="btn btn-cyan" onclick="startSpeed()">Let's go!</button></div>
+  </div></div>`;
+}
+function startSpeed(){speedIdx=0;speedOk=0;speedErr=0;speedStreak=0;nextSpeedQ();}
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+function nextSpeedQ(){
+  if(speedIdx>=SPEED.length){endSpeed();return;}
+  speedAnswered=false;const item=SPEED[speedIdx];speedTimeLeft=7;
+  document.getElementById('speedWrap').innerHTML=`
+    <div class="speed-stats">
+      <div class="spstat"><div class="sl">Question</div><div class="sv w">${speedIdx+1}/${SPEED.length}</div></div>
+      <div class="spstat"><div class="sl">Correct</div><div class="sv g">${speedOk}</div></div>
+      <div class="spstat"><div class="sl">Wrong</div><div class="sv b">${speedErr}</div></div>
+    </div>
+    <div class="streak-badge ${speedStreak>=3?'show':''}" id="streakB">🔥 Streak: ${speedStreak}</div>
+    <div class="speed-card">
+      <div class="speed-sent">${item.q.replace('___','<em>___</em>')}</div>
+      <div class="speed-hint">💡 ${item.hint}</div>
+    </div>
+    <div class="timer-row">
+      <div class="timer-track"><div class="timer-fill" id="tFill" style="width:100%;transition:width 1s linear"></div></div>
+      <div class="timer-num" id="tNum">7</div>
+    </div>
+    <div class="speed-input-row">
+      <input id="sInp" class="speed-inp" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="escribe aquí…" onkeydown="if(event.key==='Enter')submitSpeed()">
+      <button class="btn btn-cyan" onclick="submitSpeed()" style="flex-shrink:0">→</button>
+    </div>
+    <div class="speed-fb" id="sFb" style="opacity:0"></div>`;
+  setTimeout(()=>{const i=document.getElementById('sInp');if(i)i.focus();},50);
+  if(speedTimer)clearInterval(speedTimer);
+  speedTimer=setInterval(()=>{
+    speedTimeLeft--;
+    const f=document.getElementById('tFill'),n=document.getElementById('tNum');
+    if(f)f.style.width=Math.max(0,(speedTimeLeft/7)*100)+'%';
+    if(n){n.textContent=speedTimeLeft;n.style.color=speedTimeLeft<=2?'var(--bad)':speedTimeLeft<=4?'var(--warn)':'var(--muted2)';}
+    if(speedTimeLeft<=0){clearInterval(speedTimer);speedTimer=null;if(!speedAnswered)submitSpeed();}
+  },1000);
+}
+function submitSpeed(){
+  const inp=document.getElementById('sInp');if(!inp||speedAnswered)return;
+  speedAnswered=true;if(speedTimer){clearInterval(speedTimer);speedTimer=null;}inp.disabled=true;
+  const item=SPEED[speedIdx];const nt=normS(inp.value);const na=normS(item.ans);
+  const isOk=nt===na||item.also.map(normS).includes(nt);
+  if(isOk){speedOk++;speedStreak++;}else{speedErr++;speedStreak=0;}
+  const fb=document.getElementById('sFb');
+  if(fb){fb.style.opacity='1';
+    if(!inp.value.trim()){fb.className='speed-fb err';fb.innerHTML=`⏱ Time's up! → <strong>${item.ans}</strong>`;}
+    else if(isOk){fb.className='speed-fb ok';fb.innerHTML=`✓ <strong>Correct!</strong>${speedStreak>=3?' 🔥 x'+speedStreak:''}`;}
+    else{fb.className='speed-fb err';fb.innerHTML=`✗ <strong>${inp.value}</strong> → correct: <strong>${item.ans}</strong>`;}}
+  if(speedStreak>=3){const cf=document.getElementById('comboFlash');cf.textContent='🔥 x'+speedStreak;cf.classList.remove('anim');void cf.offsetWidth;cf.classList.add('anim');}
+  speedIdx++;setTimeout(nextSpeedQ,isOk?700:1400);
+}
+function endSpeed(){
+  const pct=Math.round(speedOk/SPEED.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('speedWrap').innerHTML=`<div class="speed-start"><div style="font-size:3rem">${emo}</div><h2>${speedOk}/${SPEED.length} correct</h2>
+    <p style="color:var(--muted)">${pct>=90?'Excellent! You know all the demonstratives!':pct>=70?'Great job! A few errors to review.':pct>=50?'Remember: here=este, there=ese, way over=aquel.':'Check the reference card and try again.'}</p>
+    <button class="btn btn-cyan" onclick="startSpeed()">↺ Try again</button></div>`;
+}
+
+/* ══ REFERENCE ══ */
+function renderReference(){
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">📚 Reference card</div>
+  <div class="ex-instr">Demonstratives must always agree in <em>gender and number</em> with the noun they describe.</div></div>
+
+  <div class="note-box" style="background:rgba(255,255,255,.03);border-color:rgba(37,217,255,.15);margin-bottom:16px">
+    <h3 style="color:var(--cyan)">El sistema de tres distancias</h3>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:.88rem">
+      <div><span style="color:var(--near2);font-weight:800">👆 AQUÍ</span> → este/esta/estos/estas<br><span style="color:var(--muted2);font-size:.8rem">Cerca del hablante</span></div>
+      <div><span style="color:var(--mid2);font-weight:800">👉 AHÍ</span> → ese/esa/esos/esas<br><span style="color:var(--muted2);font-size:.8rem">Cerca del interlocutor / distancia media</span></div>
+      <div><span style="color:var(--far2);font-weight:800">🫵 ALLÍ</span> → aquel/aquella/aquellos/aquellas<br><span style="color:var(--muted2);font-size:.8rem">Lejos de ambos / pasado lejano</span></div>
+    </div>
+  </div>
+
+  <table class="ref-distance-table">
+    <tr><th>Distance</th><th>Masc. sing.</th><th>Fem. sing.</th><th>Masc. plur.</th><th>Fem. plur.</th><th>English equiv.</th></tr>
+    <tr>
+      <td class="td-dist" style="color:var(--near2)">👆 AQUÍ<br><span style="font-size:.7rem;font-weight:400;color:var(--muted2)">this / these</span></td>
+      <td><span class="td-form" style="color:var(--near2)">este</span><br><span class="td-ex">este libro</span></td>
+      <td><span class="td-form" style="color:var(--near2)">esta</span><br><span class="td-ex">esta casa</span></td>
+      <td><span class="td-form" style="color:var(--near2)">estos</span><br><span class="td-ex">estos niños</span></td>
+      <td><span class="td-form" style="color:var(--near2)">estas</span><br><span class="td-ex">estas flores</span></td>
+      <td class="td-ex">this / these</td>
+    </tr>
+    <tr>
+      <td class="td-dist" style="color:var(--mid2)">👉 AHÍ<br><span style="font-size:.7rem;font-weight:400;color:var(--muted2)">that / those</span></td>
+      <td><span class="td-form" style="color:var(--mid2)">ese</span><br><span class="td-ex">ese coche</span></td>
+      <td><span class="td-form" style="color:var(--mid2)">esa</span><br><span class="td-ex">esa silla</span></td>
+      <td><span class="td-form" style="color:var(--mid2)">esos</span><br><span class="td-ex">esos perros</span></td>
+      <td><span class="td-form" style="color:var(--mid2)">esas</span><br><span class="td-ex">esas ventanas</span></td>
+      <td class="td-ex">that / those (nearby)</td>
+    </tr>
+    <tr>
+      <td class="td-dist" style="color:var(--far2)">🫵 ALLÍ<br><span style="font-size:.7rem;font-weight:400;color:var(--muted2)">that / those (far)</span></td>
+      <td><span class="td-form" style="color:var(--far2)">aquel</span><br><span class="td-ex">aquel edificio</span></td>
+      <td><span class="td-form" style="color:var(--far2)">aquella</span><br><span class="td-ex">aquella montaña</span></td>
+      <td><span class="td-form" style="color:var(--far2)">aquellos</span><br><span class="td-ex">aquellos días</span></td>
+      <td><span class="td-form" style="color:var(--far2)">aquellas</span><br><span class="td-ex">aquellas historias</span></td>
+      <td class="td-ex">that / those (far / long ago)</td>
+    </tr>
+  </table>
+
+  <div class="note-box">
+    <h3>⚠️ Key rules</h3>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:.84rem;line-height:1.6">
+      <div><strong style="color:var(--near2)">Mandatory agreement:</strong> the demonstrative agrees with the noun in gender AND number. <em>Este libro · Esta mesa · Estos libros · Estas mesas.</em></div>
+      <div><strong style="color:var(--mid2)">Listener's distance:</strong> "ese/esa" is used when the object is near the person you're speaking to. <em>"¿Me pasas ese bolígrafo?"</em></div>
+      <div><strong style="color:var(--far2)">Distant past:</strong> "aquel/aquella/aquellos/aquellas" also refers to times, moments, or people from the distant past. <em>"Aquellos tiempos eran mejores."</em></div>
+      <div><strong style="color:var(--warn)">Watch out!</strong> English has two distances (this/that). Spanish has three: este / ese / aquel.</div>
+    </div>
+  </div>
+  </div>`;
+}
+
+goEx(0);
+</script>
+</body>
+</html>

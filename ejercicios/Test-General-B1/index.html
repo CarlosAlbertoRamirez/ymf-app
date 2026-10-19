@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test B1 de Español | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --s1:#f97316;--s2:#f472b6;--s3:#a78bfa;--s4:#34d399;
+  --s5:#60a5fa;--s6:#fbbf24;--s7:#e879f9;--s8:#2dd4bf;--s9:#fb7185;--s10:#a3e635;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(37,217,255,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 20% 10%,rgba(167,139,250,.12),transparent 35%),radial-gradient(ellipse at 80% 15%,rgba(34,197,94,.07),transparent 35%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(920px,96%);margin:14px auto 60px;display:flex;flex-direction:column;gap:14px}
+.hero{border-radius:22px;padding:26px 30px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.hero-in{position:relative;z-index:1}
+.hero-top{display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.logo-box{width:56px;height:56px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--magenta)}
+.hero h1{font-family:var(--display);font-size:clamp(1.3rem,3vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--s3),#fff 40%,var(--s4));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.88rem;margin-top:4px;line-height:1.55}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 11px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.test-progress{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:16px;padding:14px 18px}
+.prog-sections{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}
+.prog-dot{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:900;transition:.3s;cursor:pointer;flex-shrink:0;border:2px solid transparent;user-select:none}
+.prog-dot.done{background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.4);color:#86efac}
+.prog-dot.active{background:rgba(37,217,255,.15);border-color:var(--cyan);color:var(--cyan)}
+.prog-dot.locked{background:rgba(255,255,255,.04);color:var(--muted2)}
+.prog-dot:hover{filter:brightness(1.2)}
+.prog-bar-wrap{height:6px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden}
+.prog-bar-fill{height:100%;border-radius:999px;transition:width .5s;background:linear-gradient(90deg,var(--s3),var(--s4))}
+.prog-label{display:flex;justify-content:space-between;margin-top:6px;font-size:.72rem;color:var(--muted2);font-weight:700}
+.section-card{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:24px 28px;box-shadow:var(--shadow)}
+.sec-header{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.sec-icon{font-size:1.8rem;line-height:1}
+.sec-title{font-family:var(--display);font-size:1.2rem;font-weight:900}
+.sec-sub{font-size:.83rem;color:var(--muted);margin-bottom:16px;line-height:1.5}
+.sec-progress{display:flex;align-items:center;gap:8px;margin-bottom:18px;font-size:.72rem;color:var(--muted2);font-weight:700}
+.sec-prog-bar{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden}
+.sec-prog-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--s3));transition:width .3s}
+.q-wrap{display:flex;flex-direction:column;gap:14px}
+.q-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 18px;transition:.2s}
+.q-card.answered.correct{border-color:var(--good);background:rgba(34,197,94,.05)}
+.q-card.answered.wrong{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.q-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.08);border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:8px;color:var(--muted)}
+.q-type-badge{display:inline-block;border-radius:999px;padding:2px 9px;font-size:.62rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-left:6px;background:rgba(255,255,255,.07);color:var(--muted2)}
+.q-stem{font-size:.97rem;line-height:1.7;font-weight:600;margin-bottom:10px}
+.q-ctx{font-size:.84rem;color:var(--muted2);font-style:italic;padding:9px 13px;background:rgba(255,255,255,.04);border-radius:8px;margin-bottom:10px;line-height:1.6;border-left:3px solid rgba(37,217,255,.3)}
+.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.mc-opt{border:0;border-radius:10px;padding:9px 14px;font-weight:700;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);border-color:rgba(37,217,255,.4)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.sel-correct{border-color:var(--good);background:rgba(34,197,94,.15);color:#86efac}
+.mc-opt.sel-wrong{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.show-correct{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.vf-opts{display:flex;gap:10px}
+.vf-btn{border:0;border-radius:11px;padding:10px 28px;font-weight:900;font-family:var(--display);font-size:1rem;cursor:pointer;transition:.14s;border:2px solid}
+.vf-btn.t{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#86efac}
+.vf-btn.f{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#fca5a5}
+.vf-btn:hover:not([disabled]){transform:translateY(-2px);filter:brightness(1.2)}
+.vf-btn[disabled]{cursor:default;transform:none}
+.vf-btn.sel-correct{filter:brightness(1.3);border-width:2.5px}
+.vf-btn.sel-wrong{filter:brightness(.7);border-color:var(--bad)}
+.fill-chips{display:flex;flex-wrap:wrap;gap:7px}
+.fill-chip{border:0;border-radius:9px;padding:8px 16px;font-weight:800;font-family:var(--display);font-size:.93rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.fill-chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.fill-chip.used{opacity:.2;cursor:not-allowed}
+.fill-chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.fill-chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.fill-blank{display:inline-block;border-bottom:2.5px solid var(--cyan);min-width:90px;text-align:center;padding:0 6px;color:var(--cyan);font-weight:800;font-family:var(--display);font-size:1rem}
+.order-pool{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px;min-height:44px;padding:8px;background:rgba(255,255,255,.03);border-radius:10px;border:1.5px dashed rgba(255,255,255,.12)}
+.order-answer{display:flex;flex-wrap:wrap;gap:7px;min-height:44px;padding:8px;background:rgba(37,217,255,.04);border-radius:10px;border:1.5px dashed rgba(37,217,255,.2);margin-bottom:8px}
+.order-word{border:0;border-radius:8px;padding:7px 13px;font-weight:700;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.09);border:1.5px solid rgba(255,255,255,.14);color:var(--text)}
+.order-word:hover:not([disabled]){transform:translateY(-2px)}
+.order-word.in-answer{background:rgba(37,217,255,.1);border-color:rgba(37,217,255,.3);color:var(--cyan)}
+.order-word.order-ok{background:rgba(34,197,94,.15);border-color:var(--good);color:#86efac;cursor:default}
+.order-word.order-err{background:rgba(239,68,68,.12);border-color:var(--bad);color:#fca5a5;cursor:default}
+.order-check{border:0;border-radius:10px;padding:8px 20px;font-weight:800;font-family:var(--font);font-size:.85rem;cursor:pointer;background:rgba(37,217,255,.12);border:1.5px solid rgba(37,217,255,.3);color:var(--cyan);transition:.14s}
+.order-check:hover:not([disabled]){background:rgba(37,217,255,.2)}
+.order-check[disabled]{opacity:.4;cursor:default}
+.dial-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.dial-line{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start}
+.dial-who{font-size:.68rem;font-weight:900;text-transform:uppercase;color:var(--muted2);min-width:56px;padding-top:3px;flex-shrink:0}
+.dial-text{font-size:.92rem;line-height:1.65;color:var(--text)}
+.dial-hl{color:var(--cyan);font-weight:900}
+.reading-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:16px 18px;margin-bottom:16px;font-size:.92rem;line-height:1.85;color:var(--text)}
+.reading-title{font-family:var(--display);font-size:.82rem;font-weight:900;color:var(--muted2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+.transform-box{background:rgba(167,139,250,.07);border:1.5px solid rgba(167,139,250,.25);border-radius:12px;padding:12px 16px;margin-bottom:10px}
+.transform-label{font-size:.65rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:#c4b5fd;margin-bottom:6px}
+.transform-sent{font-family:var(--display);font-size:1rem;font-weight:700}
+.error-box{background:rgba(239,68,68,.07);border:1.5px solid rgba(239,68,68,.25);border-radius:12px;padding:12px 16px;margin-bottom:10px;font-size:1rem;font-weight:600;line-height:1.7}
+.q-fb{display:none;font-size:.8rem;color:var(--muted);margin-top:8px;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,.04);line-height:1.6}
+.q-fb.show{display:block}
+.sec-result{display:none;margin-top:20px;padding:18px 20px;border-radius:14px;text-align:center}
+.sec-result.show{display:block}
+.final-hidden{display:none}
+.final-card{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:28px;box-shadow:var(--shadow)}
+.final-title{font-family:var(--display);font-size:1.5rem;font-weight:900;text-align:center;margin-bottom:20px;background:linear-gradient(90deg,var(--s3),#fff 40%,var(--s4));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:24px}
+.sec-score-card{border-radius:13px;padding:13px 15px;border:1.5px solid}
+.sec-score-name{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.sec-score-num{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.sec-score-bar{height:5px;border-radius:999px;margin-top:8px;background:rgba(255,255,255,.08);overflow:hidden}
+.sec-score-bar-fill{height:100%;border-radius:999px}
+.diag-section{margin-bottom:12px;padding:13px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.diag-title{font-weight:800;font-size:.88rem;margin-bottom:5px}
+.diag-body{font-size:.82rem;color:var(--muted);line-height:1.65}
+.ring-wrap{display:flex;justify-content:center;margin-bottom:24px}
+.ring-svg{width:160px;height:160px}
+.btn{border:0;border-radius:12px;padding:11px 24px;font-weight:800;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),#00bfff);color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.btn-magenta{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:#fff}
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:4px}
+.creator span{color:var(--magenta2)}
+@media(max-width:560px){.mc-opts{grid-template-columns:1fr}.vf-opts{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-top">
+      <div class="logo-box">YMF</div>
+      <div>
+        <h1>Test de Español B1</h1>
+        <p>10 secciones · ~130 preguntas · Subjuntivo, tiempos de pasado, perfectos, HABER, pronombres avanzados y más</p>
+        <p style="font-size:.78rem;color:var(--muted2);margin-top:4px">💡 Las instrucciones están en español — ¡tú ya las entiendes!</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge">🆕 Nivel B1</span>
+      <span class="badge" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">🌀 Subjuntivo</span>
+      <span class="badge" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">🕐 Imp. vs Indef.</span>
+      <span class="badge" style="border-color:rgba(251,191,36,.4);color:#fde68a">✅ Perfectos</span>
+      <span class="badge" style="border-color:rgba(249,115,22,.4);color:#fb923c">🔄 HABER</span>
+      <span class="badge">By Carlos &amp; Denisse</span>
+    </div>
+  </div>
+</header>
+<div class="test-progress" id="testProgress">
+  <div class="prog-sections" id="progDots"></div>
+  <div class="prog-bar-wrap"><div class="prog-bar-fill" id="progFill" style="width:0%"></div></div>
+  <div class="prog-label"><span id="progLeft">Sección 1 de 10</span><span id="progRight">0 / 130 respondidas</span></div>
+</div>
+<div id="sectionContainer"></div>
+<div id="finalContainer" class="final-hidden"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · yourmexicanfriend.com</p>
+</div>
+<script>
+const Q=[
+// ── S0: SUBJUNTIVO — conjugación y triggers (13 q) ──────────────────────────
+{s:0,type:'mc',stem:'¿Cuál es la conjugación correcta de <em>hablar</em> en subjuntivo para "nosotros"?',opts:['hablemos','hablamos','habláramos','hablaremos'],a:0,fb:'Presente de subjuntivo: que yo hable, que tú hables, que él hable, que <strong>nosotros hablemos</strong>.'},
+{s:0,type:'fill',stem:'Ojalá que ellos ___ (llegar) a tiempo.',chips:['lleguen','llegaron','llegan','llegarán'],a:'lleguen',fb:'<em>Ojalá que</em> es un disparador de subjuntivo: <strong>ojalá que lleguen</strong>.'},
+{s:0,type:'mc',stem:'¿Qué expresión <u>no</u> dispara el subjuntivo?',opts:['Espero que...','Quiero que...','Sé que...','Es importante que...'],a:2,fb:'<em>Sé que</em> introduce certeza → indicativo. Las demás disparan subjuntivo.'},
+{s:0,type:'vf',stem:'"Ella quiere que <u>vayas</u> con ella." — El subjuntivo está bien usado.',a:'t',fb:'Dos sujetos diferentes + <em>querer que</em> → subjuntivo: <strong>vayas</strong>.'},
+{s:0,type:'fill',stem:'Es bueno que tú ___ (practicar) todos los días.',chips:['practiques','practicas','practicaste','practicarás'],a:'practiques',fb:'<em>Es bueno que</em> es expresión impersonal → subjuntivo: <strong>practiques</strong>.'},
+{s:0,type:'mc',stem:'¿Cuál es el subjuntivo de <em>ser</em> para "ella"?',opts:['es','era','sea','sido'],a:2,fb:'Subjuntivo de <em>ser</em>: sea, seas, sea, seamos, sean.'},
+{s:0,type:'order',stem:'Ordena: espero / que / llegues / pronto',pool:['espero','que','llegues','pronto'],a:['espero','que','llegues','pronto'],fb:'Estructura básica: verbo de deseo + <em>que</em> + subjuntivo.'},
+{s:0,type:'vf',stem:'"Ojalá mañana <u>llueve</u>." — Esta oración es correcta.',a:'f',fb:'Cuando <em>ojalá</em> introduce una oración con verbo conjugado, se usa el subjuntivo: <strong>ojalá llueva</strong>.'},
+{s:0,type:'fill',stem:'Mis papás no quieren que yo ___ (salir) tarde.',chips:['salga','salgo','salí','saldré'],a:'salga',fb:'<em>No quieren que</em> + subjuntivo: <strong>salga</strong>. El presente de subjuntivo suele formarse a partir de la forma <em>yo</em> del presente: <em>salgo</em> → <em>salga</em>.'},
+{s:0,type:'mc',stem:'¿Qué tipo de expresión usa el subjuntivo?',opts:['Hechos objetivos','Deseos, dudas y emociones','Acciones pasadas completadas','Definiciones'],a:1,fb:'El subjuntivo expresa subjetividad: deseos, dudas, emociones, juicios de valor.'},
+{s:0,type:'fill',stem:'Ojalá que nosotros ___ (poder) ir al concierto.',chips:['podamos','podemos','pudimos','podremos'],a:'podamos',fb:'<em>Ojalá que</em> + subjuntivo: <strong>podamos</strong>.'},
+{s:0,type:'vf',stem:'"Dudo que él <u>tenga</u> razón." — El subjuntivo está bien usado.',a:'t',fb:'<em>Dudar que</em> expresa duda → subjuntivo: <strong>tenga</strong>.'},
+{s:0,type:'mc',stem:'¿Cuál de estas oraciones usa el subjuntivo correctamente?',opts:['Quiero que me ayudas.','Espero que lleguen pronto.','Sé que tengan hambre.','Creo que vengan mañana.'],a:1,fb:'<em>Espero que lleguen</em> es correcto. Con <em>sé que</em> y <em>creo que</em> (afirmativo) se usa indicativo.'},
+// ── S1: SUBJ vs IND vs INFINITIVO (13 q) ────────────────────────────────────
+{s:1,type:'mc',stem:'"Quiero ___ más." — ¿Qué forma va?',opts:['que estudio','estudiar','estudie','que estudie'],a:1,fb:'Mismo sujeto → infinitivo: <em>quiero estudiar</em>. Con <em>que</em> + otro sujeto → subjuntivo.'},
+{s:1,type:'fill',stem:'Mi maestra prefiere que nosotros ___ (leer) en voz alta.',chips:['leamos','leemos','leeamos','leyamos'],a:'leamos',fb:'Dos sujetos + <em>preferir que</em> → subjuntivo: <strong>leamos</strong>.'},
+{s:1,type:'vf',stem:'"Creo que el examen <u>sea</u> fácil." — La oración es correcta.',a:'f',fb:'<em>Creer que</em> en afirmativo normalmente presenta la información como cierta y usa indicativo: <strong>creo que el examen es fácil</strong>.'},
+{s:1,type:'mc',stem:'En construcciones con verbos como <em>querer, preferir</em> o <em>necesitar</em>, ¿cuándo se usa el infinitivo en lugar de <em>que</em> + subjuntivo?',opts:['Cuando hay dos sujetos diferentes','Cuando el sujeto de ambas acciones es el mismo','Cuando la acción ya ocurrió','Siempre después de "que"'],a:1,fb:'Con el mismo sujeto se usa normalmente el infinitivo: <em>quiero estudiar</em>. Con sujetos diferentes: <em>quiero que tú estudies</em>.'},
+{s:1,type:'fill',stem:'No creo que ella ___ (saber) la respuesta.',chips:['sepa','sabe','supo','sabrá'],a:'sepa',fb:'<em>No creer que</em> (negativo) expresa duda → subjuntivo: <strong>sepa</strong>.'},
+{s:1,type:'mc',stem:'"Ella quiere ___ al gimnasio." vs "Ella quiere que yo ___ al gimnasio." — ¿Qué va en cada espacio?',opts:['ir / vaya','vaya / ir','ir / voy','va / vaya'],a:0,fb:'Mismo sujeto → infinitivo (<em>ir</em>); sujeto diferente → subjuntivo (<em>vaya</em>).'},
+{s:1,type:'vf',stem:'"Es obvio que <u>tenga</u> mucho dinero." — La oración es correcta.',a:'f',fb:'<em>Es obvio que</em> presenta la información como evidente, por lo que normalmente se usa indicativo: <strong>tiene</strong>, no <em>tenga</em>.'},
+{s:1,type:'fill',stem:'Me alegra ___ (ver) a todos mis amigos aquí.',chips:['ver','vea','que vean','que ve'],a:'ver',fb:'Cuando no se introduce otro sujeto mediante <em>que</em>, puede usarse el infinitivo: <strong>me alegra ver a todos mis amigos</strong>.'},
+{s:1,type:'mc',stem:'"Necesitamos ___ una reservación." — ¿Qué forma va?',opts:['hacer','hagamos','que hacemos','que hagamos'],a:0,fb:'Mismo sujeto (nosotros) → infinitivo: <em>necesitamos hacer</em>.'},
+{s:1,type:'order',stem:'Ordena: no / creo / que / él / sea / honesto',pool:['no','creo','que','él','sea','honesto'],a:['no','creo','que','él','sea','honesto'],fb:'<em>No creer que</em> + subjuntivo: <strong>no creo que él sea honesto</strong>.'},
+{s:1,type:'vf',stem:'"Ojalá <u>poder</u> ir contigo." — Esta oración es correcta en el español estándar.',a:'f',fb:'Después de <em>ojalá</em> se usa normalmente el subjuntivo: <strong>ojalá pueda ir contigo</strong>.'},
+{s:1,type:'mc',stem:'"Dicen que el presidente ___ la reunión ayer." — ¿Qué forma completa mejor la oración?',opts:['canceló','cancele','cancelara','haya cancelado'],a:0,fb:'<em>Decir que</em> con sentido informativo no exige subjuntivo, y <em>ayer</em> sitúa la acción en un pasado terminado: <strong>canceló</strong>.'},
+{s:1,type:'fill',stem:'Te pido que me ___ (decir) la verdad.',chips:['digas','dices','dijeras','decir'],a:'digas',fb:'<em>Pedir que</em> + subjuntivo: <strong>digas</strong>.'},
+// ── S2: PRETÉRITO IMPERFECTO (13 q) ─────────────────────────────────────────
+{s:2,type:'mc',stem:'¿Cuál es el imperfecto de <em>comer</em> para "yo"?',opts:['comí','comía','comiera','comería'],a:1,fb:'Imperfecto de -er: comía, comías, comía, comíamos, comían.'},
+{s:2,type:'fill',stem:'Cuando era niña, mi abuela me ___ (contar) cuentos todas las noches.',chips:['contaba','contó','cuenta','ha contado'],a:'contaba',fb:'Hábito en el pasado → <strong>imperfecto</strong>: <em>contaba</em>.'},
+{s:2,type:'vf',stem:'El imperfecto se usa para acciones completadas en un momento específico del pasado.',a:'f',fb:'Eso describe el <em>pretérito indefinido</em>. El imperfecto describe estados, hábitos o acciones en progreso en el pasado.'},
+{s:2,type:'mc',stem:'¿Cuál de estas oraciones usa el imperfecto correctamente?',opts:['Ayer comí tacos.','De niño, vivía en Guadalajara.','Ella llegó tarde a la fiesta.','El lunes fui al doctor.'],a:1,fb:'<em>Vivía</em> = estado / situación prolongada en el pasado → imperfecto.'},
+{s:2,type:'fill',stem:'Todos los veranos, nosotros ___ (ir) a la playa.',chips:['íbamos','fuimos','vamos','iríamos'],a:'íbamos',fb:'Hábito repetido → imperfecto: <strong>íbamos</strong>. El irregular de <em>ir</em> es iba/ibas/iba/íbamos/iban.'},
+{s:2,type:'mc',stem:'¿Cuál es el imperfecto irregular de <em>ser</em> para "tú"?',opts:['eras','eres','fuiste','serías'],a:0,fb:'<em>Ser</em> es irregular en imperfecto: era, eras, era, éramos, eran.'},
+{s:2,type:'order',stem:'Ordena: cuando / era / joven / corría / todos / los / días',pool:['cuando','era','joven','corría','todos','los','días'],a:['cuando','era','joven','corría','todos','los','días'],fb:'Dos imperfectos: <em>era</em> (estado de edad) + <em>corría</em> (hábito).'},
+{s:2,type:'vf',stem:'"Yo <u>tenía</u> 10 años cuando <u>vivíamos</u> en Monterrey." — Ambos verbos están bien conjugados.',a:'t',fb:'<em>Tenía</em> (edad pasada) y <em>vivíamos</em> (situación pasada) son correctos en imperfecto.'},
+{s:2,type:'fill',stem:'Antes, mis papás ___ (trabajar) en la misma empresa.',chips:['trabajaban','trabajaron','trabajan','trabajarían'],a:'trabajaban',fb:'Situación habitual en el pasado → <strong>imperfecto</strong>: <em>trabajaban</em>.'},
+{s:2,type:'mc',stem:'¿Para qué <u>no</u> se usa el imperfecto?',opts:['Describir el pasado','Hablar de hábitos pasados','Narrar una acción puntual y completa','Hablar de la hora en el pasado'],a:2,fb:'Una acción puntual y terminada suele expresarse con el <em>indefinido</em>. El imperfecto se usa principalmente para describir el contexto, los hábitos y las acciones en desarrollo.'},
+{s:2,type:'fill',stem:'Siempre que ___ (llover), nos quedábamos en casa.',chips:['llovía','llovió','llueve','ha llovido'],a:'llovía',fb:'Condición habitual en el pasado → imperfecto: <strong>llovía</strong>.'},
+{s:2,type:'vf',stem:'"La película <u>fue</u> muy aburrida." — Aquí se usa correctamente el imperfecto.',a:'f',fb:'<em>Fue</em> es pretérito indefinido, no imperfecto (<em>era</em>). Para valorar algo del pasado puedes usar ambos, pero <em>fue</em> no es imperfecto.'},
+{s:2,type:'mc',stem:'"Mi hermano ___ muy alto cuando éramos adolescentes." — ¿Qué va?',opts:['era','fue','es','sería'],a:0,fb:'Descripción física en el pasado → <strong>imperfecto</strong>: <em>era</em>.'},
+// ── S3: INDEFINIDO vs IMPERFECTO (13 q) ─────────────────────────────────────
+{s:3,type:'mc',stem:'"De repente, ___ (empezar) a llover mientras yo ___ (manejar)." — ¿Cuál combinación es correcta?',opts:['empezó / manejaba','empezaba / manejé','empezó / manejé','empezaba / manejaba'],a:0,fb:'<em>De repente</em> introduce el evento puntual <strong>empezó</strong>; <strong>manejaba</strong> aporta el contexto que estaba en desarrollo.'},
+{s:3,type:'vf',stem:'"El martes <u>conocí</u> a tu primo." — Esta oración usa correctamente el indefinido.',a:'t',fb:'Con una persona, <em>conocer</em> en indefinido suele significar «conocer por primera vez»: <strong>conocí a tu primo</strong>.'},
+{s:3,type:'mc',stem:'Una acción puntual interrumpe otra que estaba en progreso: Cuando ___ (entrar / yo) a la sala, todos ___ (hablar).',opts:['entré / hablaban','entraba / hablaron','entré / hablaron','entraba / hablaban'],a:0,fb:'<em>Entré</em> presenta el evento principal y <em>hablaban</em> describe la acción que estaba en desarrollo en ese momento: indefinido + imperfecto.'},
+{s:3,type:'mc',stem:'¿Para qué se usa el <em>pretérito indefinido</em>?',opts:['Describir el ambiente del pasado','Expresar hábitos pasados','Narrar eventos completos en el pasado','Hablar de edades en el pasado'],a:2,fb:'El indefinido narra: eventos completados, sucesiones de hechos, con marcadores como <em>ayer, el lunes, de repente</em>.'},
+{s:3,type:'mc',stem:'De repente, se ___ (apagar) la luz y todos ___ (gritar).',opts:['apagó / gritaron','apagaba / gritaban','apagó / gritaban','apagaba / gritaron'],a:0,fb:'<em>De repente</em> señala dos eventos puntuales en sucesión: <strong>se apagó</strong> y <strong>gritaron</strong>.'},
+{s:3,type:'vf',stem:'"Siempre <u>comía</u> cereal en las mañanas." — Esta oración usa el tiempo correcto.',a:'t',fb:'<em>Siempre</em> + hábito pasado → imperfecto: <em>comía</em>. Correcto.'},
+{s:3,type:'mc',stem:'¿Qué marcador temporal suele introducir un cambio repentino narrado en <em>indefinido</em>?',opts:['siempre','todos los días','de repente','antes'],a:2,fb:'<em>De repente</em> suele introducir un evento puntual en una narración. Los demás marcadores pueden aparecer con distintos tiempos según el contexto, aunque <em>siempre</em> y <em>todos los días</em> suelen acompañar hábitos en imperfecto.'},
+{s:3,type:'order',stem:'Ordena: mientras / estudiaba / sonó / el / teléfono',pool:['mientras','estudiaba','sonó','el','teléfono'],a:['mientras','estudiaba','sonó','el','teléfono'],fb:'Imperfecto (acción en progreso) + indefinido (evento que interrumpe).'},
+{s:3,type:'mc',stem:'Ayer por la mañana, María ___ (despertarse) tarde y ___ (perder) el autobús.',opts:['se despertó / perdió','se despertaba / perdía','se despertó / perdía','se despertaba / perdió'],a:0,fb:'La oración presenta una secuencia de eventos pasados completos: <strong>se despertó</strong> y <strong>perdió</strong>.'},
+{s:3,type:'mc',stem:'"Cuando era niño, ___." — ¿Qué oración termina bien?',opts:['fui al parque ayer.','vivía cerca de aquí.','llegué tarde una vez.','llamé a mi abuela el domingo.'],a:1,fb:'<em>Cuando era niño</em> es contexto imperfecto → habitual: <strong>vivía cerca de aquí</strong>.'},
+{s:3,type:'vf',stem:'"Anoche <u>llovía</u> cuando salí." — La oración usa mal el imperfecto.',a:'f',fb:'La oración está bien. <em>Llovía</em> = condición en progreso; <em>salí</em> = evento. Combinación correcta.'},
+{s:3,type:'fill',stem:'Antes ___ (haber) muchos árboles en este parque.',chips:['había','hubo','ha habido','hay'],a:'había',fb:'<em>Antes</em> + situación pasada extendida → imperfecto: <strong>había</strong>.'},
+{s:3,type:'mc',stem:'"Cuando trabajaba muchas horas frente a la computadora, me ___ (doler) la cabeza con frecuencia." — ¿Qué va?',opts:['dolió','dolía','doliera','ha dolido'],a:1,fb:'Una molestia habitual en el pasado se expresa con imperfecto: <strong>me dolía</strong>.'},// ── S4: FUE / ERA / ESTABA / ESTUVO (13 q) ──────────────────────────────────
+{s:4,type:'mc',stem:'¿Cuál es la diferencia entre <em>era</em> y <em>fue</em>?',opts:['No hay diferencia','Era = imperfecto (descripción o contexto); fue = indefinido (valoración o identificación en un periodo terminado)','Fue = imperfecto; era = indefinido','Era es más formal'],a:1,fb:'<em>Era</em> presenta una característica como parte del contexto pasado. <em>Fue</em> presenta una valoración, identificación o periodo como terminado.'},
+{s:4,type:'fill',stem:'La fiesta ___ (ser) buenísima. Nos divertimos mucho.',chips:['fue','era','es','sería'],a:'fue',fb:'Evento completo y valorado → indefinido: <strong>fue</strong>.'},
+{s:4,type:'vf',stem:'"El restaurante <u>estaba</u> muy lleno cuando llegamos." — El verbo está bien usado.',a:'t',fb:'<em>Estaba lleno</em> = estado en progreso cuando ocurrió otro evento → imperfecto. Correcto.'},
+{s:4,type:'mc',stem:'"La reunión ___ muy tensa de principio a fin." — ¿Qué va?',opts:['estuvo','estaba','fue','era'],a:0,fb:'Se presenta un estado dentro de un evento ya terminado y con límites claros: <strong>estuvo muy tensa</strong>.'},
+{s:4,type:'fill',stem:'Cuando yo era niño, mi abuelo ___ (ser) maestro.',chips:['era','fue','estuvo','estaba'],a:'era',fb:'La profesión forma parte de la descripción del contexto pasado: <strong>era maestro</strong>.'},
+{s:4,type:'mc',stem:'¿Cuál es la diferencia entre <em>estuvo</em> y <em>estaba</em>?',opts:['No hay diferencia','Estuvo = estado con límite/completo; estaba = estado en progreso/sin límite claro','Estaba = más formal','Estuvo = presente'],a:1,fb:'<em>Estuvo</em> (indefinido): el estado terminó. <em>Estaba</em> (imperfecto): el estado estaba en curso.'},
+{s:4,type:'vf',stem:'"Ayer mi hermana <u>fue</u> enferma todo el día." — La oración es correcta.',a:'f',fb:'Para un estado de salud se usa <em>estar</em>, no <em>ser</em>. Según el enfoque, pueden decirse <strong>estuvo enferma todo el día</strong> o <strong>estaba enferma todo el día</strong>.'},
+{s:4,type:'fill',stem:'Completa con el pretérito indefinido de <em>estar</em>: ¿Dónde ___ tú anoche?',chips:['estuviste','estabas','eras','fuiste'],a:'estuviste',fb:'El pretérito indefinido de <em>estar</em> para <em>tú</em> es <strong>estuviste</strong>.'},
+{s:4,type:'mc',stem:'Usa <em>ser</em> para describir una característica de la ciudad: "Cuando era niño, la ciudad ___ más tranquila que ahora."',opts:['estuvo','fue','era','estaba'],a:2,fb:'Con <em>ser</em>, la forma del imperfecto es <strong>era</strong>: <em>la ciudad era más tranquila que ahora</em>.'},
+{s:4,type:'order',stem:'Ordena: la / película / fue / muy / larga / pero / estuvo / buena',pool:['la','película','fue','muy','larga','pero','estuvo','buena'],a:['la','película','fue','muy','larga','pero','estuvo','buena'],fb:'<em>Fue muy larga</em> describe la película considerada como un todo; <em>estuvo buena</em> expresa una valoración de cómo resultó. Ambas formas son naturales en español mexicano.'},
+{s:4,type:'vf',stem:'"Einstein <u>era</u> muy inteligente." — Esta oración usa bien el imperfecto.',a:'t',fb:'Característica atribuida a una persona en el pasado → <strong>era</strong>. Correcto.'},
+{s:4,type:'fill',stem:'Cuando llegamos, el museo ___ (estar) cerrado.',chips:['estuvo','estaba','fue','era'],a:'estaba',fb:'El cierre era el estado de fondo cuando ocurrió otra acción: <strong>estaba cerrado</strong>.'},
+{s:4,type:'mc',stem:'"La comida ___ riquísima." — Dependiendo del contexto, ¿qué formas son correctas?',opts:['Solo fue','Solo estuvo','Tanto fue como estuvo son posibles','Solo era'],a:2,fb:'<em>Fue riquísima</em> (evento pasado valorado) y <em>estuvo riquísima</em> (estado/calidad en ese momento) son ambos válidos.'},
+// ── S5: TIEMPOS PERFECTOS (13 q) ────────────────────────────────────────────
+{s:5,type:'mc',stem:'¿Qué tiempo verbal es "había comido"?',opts:['Pretérito perfecto compuesto','Pretérito pluscuamperfecto','Futuro perfecto','Condicional perfecto'],a:1,fb:'<em>Había comido</em> = pluscuamperfecto: acción anterior a otro punto en el pasado.'},
+{s:5,type:'fill',stem:'Cuando llegué, ellos ya ___ (salir).',chips:['habían salido','han salido','habrán salido','habían saliendo'],a:'habían salido',fb:'Acción anterior al evento pasado → <strong>pluscuamperfecto</strong>: <em>habían salido</em>.'},
+{s:5,type:'vf',stem:'"He comido tacos hoy." — Esta oración usa el pretérito perfecto compuesto.',a:'t',fb:'<em>He + participio</em> forma el pretérito perfecto compuesto. La oración es correcta; en México también es muy común decir <em>comí tacos hoy</em> cuando la acción se considera terminada.'},
+{s:5,type:'mc',stem:'¿Cuál es el participio de <em>abrir</em>?',opts:['abrido','abierto','abriendo','abertura'],a:1,fb:'<em>Abrir</em> tiene participio irregular: <strong>abierto</strong>.'},
+{s:5,type:'fill',stem:'Para las 5 de la tarde, ya ___ (terminar / yo) el proyecto.',chips:['habré terminado','he terminado','había terminado','habría terminado'],a:'habré terminado',fb:'Acción que se completará antes de un momento futuro → <strong>futuro perfecto</strong>: <em>habré terminado</em>.'},
+{s:5,type:'mc',stem:'¿Para qué se usa el <em>condicional perfecto</em>?',opts:['Acciones que ya ocurrieron','Acciones que ocurrirán','Acciones que habrían ocurrido bajo otra condición','Acciones en progreso'],a:2,fb:'<em>Habría + participio</em> = condicional perfecto: hipótesis en el pasado ("si hubiera sabido, habría ido").'},
+{s:5,type:'vf',stem:'"Si hubiera estudiado más, <u>habría pasado</u> el examen." — El condicional perfecto está bien usado.',a:'t',fb:'Hipótesis en el pasado (irreal): si + pluscuamperfecto de subjuntivo → condicional perfecto. Correcto.'},
+{s:5,type:'fill',stem:'Hasta ahora, nunca ___ (ver / yo) una película tan triste.',chips:['he visto','había visto','habré visto','hube visto'],a:'he visto',fb:'<em>Hasta ahora</em> conecta la experiencia con el presente, por eso se usa el perfecto compuesto: <strong>he visto</strong>.'},
+{s:5,type:'mc',stem:'Completa con el pretérito perfecto compuesto: "¿___ alguna vez a México?"',opts:['Habías ido','Has ido','Habías ido tú','Fuiste'],a:1,fb:'El pretérito perfecto compuesto de <em>ir</em> para <em>tú</em> es <strong>has ido</strong>: <em>¿Has ido alguna vez a México?</em>'},
+{s:5,type:'order',stem:'Ordena: ya / había / desayunado / cuando / me / llamaste',pool:['ya','había','desayunado','cuando','me','llamaste'],a:['ya','había','desayunado','cuando','me','llamaste'],fb:'<em>Ya + pluscuamperfecto</em> = acción anterior; <em>llamaste</em> = evento pasado.'},
+{s:5,type:'vf',stem:'"El año que viene habré aprendido chino." — Esta oración usa el futuro perfecto.',a:'t',fb:'<em>Habré + participio</em> = futuro perfecto. Proyección de algo completado en el futuro.'},
+{s:5,type:'fill',stem:'Si no ___ (llover), habríamos salido a caminar.',chips:['hubiera llovido','habría llovido','haya llovido','había llovido'],a:'hubiera llovido',fb:'Hipótesis irreal pasada: <em>si</em> + pluscuamperfecto de subjuntivo: <strong>hubiera llovido</strong>.'},
+{s:5,type:'mc',stem:'"Los documentos se ___ (perder)." — ¿Qué tiempo indica acción reciente con impacto presente?',opts:['habían perdido','perdieron','han perdido','perderían'],a:2,fb:'El perfecto compuesto puede presentar una acción pasada con resultado vigente: <strong>se han perdido</strong>. En México también es frecuente <em>se perdieron</em>, según cómo se enfoque la acción.'},
+// ── S6: FORMAS DE HABER (13 q) ───────────────────────────────────────────────
+{s:6,type:'mc',stem:'¿Cuál es la forma correcta de <em>haber</em> para existencia en presente?',opts:['han','ha','hay','haya'],a:2,fb:'<em>Hay</em> es la forma impersonal de <em>haber</em> para existencia en presente. Nunca varía: hay una / hay muchas.'},
+{s:6,type:'fill',stem:'Cuando yo era niño, ___ (haber) una panadería en esa esquina.',chips:['había','hubo','hay','haya'],a:'había',fb:'La oración describe una existencia que formaba parte del contexto pasado, por eso se usa <strong>había</strong>.'},
+{s:6,type:'vf',stem:'"Hubieron muchos problemas ayer." — Esta oración es correcta.',a:'f',fb:'En el uso impersonal de existencia, <em>haber</em> permanece en singular: <strong>hubo muchos problemas</strong>, no <em>hubieron muchos problemas</em>.'},
+{s:6,type:'mc',stem:'¿Cuándo se usa <em>hubo</em>?',opts:['Existencia presente','Existencia futura','Existencia pasada puntual (indefinido)','Existencia en subjuntivo'],a:2,fb:'<em>Hubo</em> es el indefinido de <em>haber</em>: evento o existencia pasada puntual.'},
+{s:6,type:'fill',stem:'En el futuro ___ (haber) más tecnología en las escuelas.',chips:['habrá','habría','haya','hubiera'],a:'habrá',fb:'Existencia futura → <strong>habrá</strong>.'},
+{s:6,type:'mc',stem:'¿Qué forma de <em>haber</em> se usa en esta oración? "No creo que ___ nadie en casa."',opts:['hay','haya','había','hubo'],a:1,fb:'<em>No creer que</em> → subjuntivo: <strong>haya</strong>.'},
+{s:6,type:'vf',stem:'"Si hubiera más tiempo, terminaríamos el proyecto." — La forma <em>hubiera</em> está bien usada.',a:'t',fb:'<em>Hubiera</em> = imperfecto de subjuntivo de <em>haber</em> → condición hipotética. Correcto.'},
+{s:6,type:'fill',stem:'Ayer, a las ocho de la mañana, ___ (haber) un accidente en la autopista.',chips:['hubo','había','hay','haya'],a:'hubo',fb:'La hora concreta presenta el accidente como un hecho puntual y terminado: <strong>hubo</strong>.'},
+{s:6,type:'mc',stem:'¿Cuál es la forma de <em>haber</em> en condicional (hipótesis presente)?',opts:['habrá','haya','habría','hubiera'],a:2,fb:'Condicional de <em>haber</em> (impersonal): <strong>habría</strong>. Ej: "habría más tiempo si...".'},
+{s:6,type:'order',stem:'Ordena: ojalá / que / haya / buena / comida / en / la / fiesta',pool:['ojalá','que','haya','buena','comida','en','la','fiesta'],a:['ojalá','que','haya','buena','comida','en','la','fiesta'],fb:'<em>Ojalá que</em> + subjuntivo: <strong>haya</strong>.'},
+{s:6,type:'vf',stem:'"Habría más opciones si el presupuesto fuera mayor." — Esta oración es correcta.',a:'t',fb:'Condición hipotética presente: <em>si</em> + imperfecto de subjuntivo + condicional. Correcto.'},
+{s:6,type:'fill',stem:'Espero que no ___ (haber) tráfico mañana.',chips:['haya','hay','habrá','hubiera'],a:'haya',fb:'<em>Esperar que</em> → subjuntivo: <strong>haya</strong>.'},
+{s:6,type:'mc',stem:'¿Cuál de estas formas NO existe como forma impersonal de <em>haber</em>?',opts:['hay','habrán','hubiera','haya'],a:1,fb:'<em>Habrán</em> existe como auxiliar en frases como <em>ellos habrán llegado</em>, pero no se usa para expresar existencia impersonal. En ese uso se dice <strong>habrá muchas personas</strong>.'},
+// ── S7: PRONOMBRES AVANZADOS (13 q) ─────────────────────────────────────────
+{s:7,type:'mc',stem:'¿Qué pronombre relativo va en "La ciudad ___ vivo es hermosa"?',opts:['que','quien','donde','lo que'],a:2,fb:'<em>Donde</em> = pronombre relativo de lugar. La ciudad <strong>donde</strong> vivo.'},
+{s:7,type:'fill',stem:'La persona ___ (pronombre) me llamó no dejó mensaje.',chips:['que','quien','donde','lo que'],a:'que',fb:'En esta cláusula especificativa sin preposición se usa normalmente <strong>que</strong>: <em>la persona que me llamó</em>.'},
+{s:7,type:'vf',stem:'"Lo que dices es muy interesante." — <em>Lo que</em> es un pronombre relativo correcto.',a:'t',fb:'<em>Lo que</em> = pronombre neutro que refiere a una idea o concepto no específico.'},
+{s:7,type:'mc',stem:'"¿___ es ese coche rojo?" — ¿Qué expresión pregunta por el propietario?',opts:['De quién','Cuyo','Cuál','Quién'],a:0,fb:'Para preguntar por la persona propietaria se usa <strong>¿de quién?</strong>: <em>¿De quién es ese coche rojo?</em>'},
+{s:7,type:'fill',stem:'No me gustan tus ideas, prefiero ___. (las de mí / mías / las mías)',chips:['las mías','las de mí','mías','la mía'],a:'las mías',fb:'Posesivo tónico plural → <strong>las mías</strong>. El posesivo tónico va sin sustantivo.'},
+{s:7,type:'mc',stem:'"A mí ___ gustan los tacos." — ¿Qué pronombre va en el espacio?',opts:['me','te','le','se'],a:0,fb:'Redundancia pronominal: <em>a mí</em> + <em>me</em>. Obligatoria con pronombre tónico.'},
+{s:7,type:'vf',stem:'"El libro <em>que</em> leí estaba en la mesa." — Se puede omitir el pronombre relativo.',a:'f',fb:'En español el pronombre relativo <em>que</em> no puede omitirse como en inglés ("the book I read").'},
+{s:7,type:'fill',stem:'¿___ (pronombre) es el tuyo, el negro o el azul?',chips:['Cuál','Quién','Lo que','Cuyo'],a:'Cuál',fb:'Pregunta de selección entre cosas → <strong>¿cuál?</strong>'},
+{s:7,type:'mc',stem:'"Se lo di." — ¿Qué significa este pronombre doble?',opts:['Te lo di','Lo di sin destinatario','Lo di a él, ella, usted, ellos, ellas o ustedes','Me lo diste'],a:2,fb:'<em>Se</em> reemplaza a <em>le/les</em> delante de <em>lo/la/los/las</em>: <em>se lo di</em> puede significar que lo di a él, ella, usted, ellos, ellas o ustedes.'},
+{s:7,type:'order',stem:'Ordena: la / película / que / vimos / estuvo / increíble',pool:['la','película','que','vimos','estuvo','increíble'],a:['la','película','que','vimos','estuvo','increíble'],fb:'Cláusula relativa: <em>que vimos</em> modifica <em>película</em>.'},
+{s:7,type:'vf',stem:'"A ellos les encanta la música." — La redundancia pronominal es correcta.',a:'t',fb:'<em>A ellos</em> + <em>les</em> = redundancia pronominal. Obligatoria y correcta.'},
+{s:7,type:'fill',stem:'El trabajo ___ que me hablaste suena muy bien.',chips:['del','que','de que','al que'],a:'del',fb:'<em>El trabajo del que me hablaste</em>: preposición <em>de</em> + artículo <em>el</em> + <em>que</em> → <strong>del que</strong>.'},
+{s:7,type:'mc',stem:'Estos libros son míos. Al hablar con varias personas, ¿cómo preguntas cuáles les pertenecen?',opts:['¿Cuáles son los suyos?','¿Cuáles son los tuyos?','¿Cuáles son los míos?','¿Cuáles son los nuestros?'],a:0,fb:'Al dirigirse a <em>ustedes</em>, el posesivo tónico correspondiente es <strong>suyos</strong>: <em>¿Cuáles son los suyos?</em>'},
+// ── S8: CONDICIONAL + OPINIÓN Y DISCURSO (13 q) ─────────────────────────────
+{s:8,type:'mc',stem:'¿Cuál es la forma correcta del condicional de <em>hablar</em> para "yo"?',opts:['hablo','hablaré','hablaría','hablara'],a:2,fb:'Condicional: hablaría, hablarías, hablaría, hablaríamos, hablarían.'},
+{s:8,type:'fill',stem:'Si tuviera más dinero, ___ (viajar / yo) por todo el mundo.',chips:['viajaría','viajaré','viajo','viajara'],a:'viajaría',fb:'Hipótesis presente: <em>si</em> + imperfecto de subj. → <strong>condicional</strong>: <em>viajaría</em>.'},
+{s:8,type:'vf',stem:'"¿Podrías ayudarme?" — Esta es una forma de cortesía en español.',a:'t',fb:'El condicional se usa para hacer peticiones corteses. <em>¿Podrías...?</em> es más educado que <em>¿Puedes...?</em>'},
+{s:8,type:'mc',stem:'¿Qué conector expresa <u>contraste</u>?',opts:['por lo tanto','sin embargo','además','es decir'],a:1,fb:'<em>Sin embargo</em> = contraste/concesión. <em>Por lo tanto</em> = consecuencia. <em>Además</em> = adición.'},
+{s:8,type:'fill',stem:'Creo que este problema ___ (tener) solución.',chips:['tiene','tenga','tendría','tenía'],a:'tiene',fb:'<em>Creer que</em> afirmativo → indicativo: <strong>tiene</strong>.'},
+{s:8,type:'mc',stem:'"A mí me parece que el sistema ___ mejor." — ¿Qué va?',opts:['funcione','funcionara','funciona','funcionaría'],a:2,fb:'<em>Me parece que</em> (afirmativo) → indicativo: <strong>funciona</strong>.'},
+{s:8,type:'fill',stem:'El proyecto estuvo bien; ___ (sin embargo), hay cosas que mejorar.',chips:['sin embargo','por lo tanto','además','es decir'],a:'sin embargo',fb:'Contraste con lo anterior → <strong>sin embargo</strong>.'},
+{s:8,type:'vf',stem:'"Yo que tú, hablaría con tu jefe." — Esta expresión usa bien el condicional.',a:'t',fb:'<em>Yo que tú</em> = consejo hipotético → condicional. Correcto y muy común en español.'},
+{s:8,type:'mc',stem:'"___ no estudié, reprobé." — ¿Qué conector de causa va?',opts:['Sin embargo','Por lo tanto','Como','Aunque'],a:2,fb:'<em>Como</em> al inicio = causa: <em>como no estudié, reprobé</em>. (También funciona <em>porque</em> en medio.)'},
+{s:8,type:'fill',stem:'Me gustaría ___ (saber) más sobre ese tema.',chips:['saber','sepa','supe','sabría'],a:'saber',fb:'<em>Me gustaría</em> + infinitivo (mismo sujeto): <strong>saber</strong>.'},
+{s:8,type:'vf',stem:'"Aunque llueva, iré al trabajo." — La oración usa bien el subjuntivo.',a:'t',fb:'<em>Aunque</em> + subjuntivo = concesiva de futuro incierto. Correcto.'},
+{s:8,type:'mc',stem:'¿Qué expresión tiene un significado semejante a <em>a pesar de que</em>?',opts:['porque','aunque','para que','sin que'],a:1,fb:'<em>A pesar de que</em> y <em>aunque</em> son expresiones concesivas: presentan una dificultad que no impide el resultado.'},
+{s:8,type:'fill',stem:'Tiene fiebre; ___ (por lo tanto), no va a ir a la escuela.',chips:['por lo tanto','sin embargo','aunque','como'],a:'por lo tanto',fb:'Consecuencia → <strong>por lo tanto</strong>.'},
+// ── S9: LECTURA Y MEZCLA (13 q) ─────────────────────────────────────────────
+{s:9,type:'reading',text:'<div class="reading-title">📖 Lee el siguiente texto</div>Cuando <span class="dial-hl">era</span> pequeña, mi familia y yo <span class="dial-hl">vivíamos</span> en un pueblo pequeño. Todos los domingos, mi abuela nos <span class="dial-hl">preparaba</span> un desayuno enorme. Un día, cuando yo <span class="dial-hl">tenía</span> ocho años, <span class="dial-hl">llegó</span> a nuestra puerta un perrito perdido. Desde ese momento, el perro <span class="dial-hl">se quedó</span> con nosotros para siempre. Hoy en día, ya no <span class="dial-hl">vivimos</span> en ese pueblo, pero todavía <span class="dial-hl">recordamos</span> esos domingos con mucho cariño.',stem:'¿Por qué se usa <em>era, vivíamos, preparaba</em> (imperfecto)?',opts:['Acciones puntuales completadas','Estados y hábitos del pasado','Acciones del futuro','Planes pasados'],a:1,fb:'El imperfecto describe el contexto, estados y hábitos de la infancia.'},
+{s:9,type:'reading',text:'<div class="reading-title">📖 Mismo texto</div>Cuando <span class="dial-hl">era</span> pequeña, mi familia y yo <span class="dial-hl">vivíamos</span> en un pueblo pequeño. Todos los domingos, mi abuela nos <span class="dial-hl">preparaba</span> un desayuno enorme. Un día, cuando yo <span class="dial-hl">tenía</span> ocho años, <span class="dial-hl">llegó</span> a nuestra puerta un perrito perdido. Desde ese momento, el perro <span class="dial-hl">se quedó</span> con nosotros para siempre.',stem:'¿Por qué se usa <em>llegó, se quedó</em> (indefinido)?',opts:['Son hábitos del pasado','Son estados prolongados','Son eventos puntuales que cambian la historia','Son acciones en progreso'],a:2,fb:'<em>Llegó</em> y <em>se quedó</em> son los eventos clave de la narración → indefinido.'},
+{s:9,type:'mc',stem:'"Ojalá que ___ buen tiempo este fin de semana." — ¿Qué forma va?',opts:['hace','haga','hacía','hará'],a:1,fb:'<em>Ojalá que</em> → subjuntivo: <strong>haga</strong>.'},
+{s:9,type:'vf',stem:'"Había muchos estudiantes en la clase." — Aquí <em>había</em> es el imperfecto de <em>haber</em>.',a:'t',fb:'<em>Había</em> = imperfecto de <em>haber</em> impersonal. Correcto.'},
+{s:9,type:'fill',stem:'Cuando llegué al aeropuerto, mi vuelo ya ___ (salir).',chips:['había salido','ha salido','habrá salido','salió'],a:'había salido',fb:'Acción anterior a otro evento pasado → <strong>pluscuamperfecto</strong>.'},
+{s:9,type:'mc',stem:'"Si ___ más tiempo, estudiaría otro idioma." — ¿Qué va?',opts:['tengo','tendría','tuviera','tuve'],a:2,fb:'Hipótesis presente irreal: <em>si</em> + imperfecto de subjuntivo: <strong>tuviera</strong>.'},
+{s:9,type:'vf',stem:'"Hay que haber muchas personas en el evento." — Esta oración es correcta.',a:'f',fb:'En esta oración, <em>hay que</em> no expresa existencia. Para indicar probabilidad se dice <strong>debe de haber muchas personas</strong> o <strong>debe haber muchas personas</strong>.'},
+{s:9,type:'fill',stem:'Completa con <em>deber de</em> + infinitivo compuesto para expresar una deducción: Mis vecinos no están en casa; ___ salido.',chips:['Deben de haber','Debe de haber','Hay que haber','Debieron de'],a:'Deben de haber',fb:'Para expresar probabilidad o deducción, la construcción recomendada es <strong>deben de haber salido</strong>: <em>deber de</em> conjugado + <em>haber</em> + participio.'},
+{s:9,type:'mc',stem:'¿Cuál de estas oraciones tiene un error?',opts:['"Quiero que vengas."','"Es importante estudiar."','"Creo que sea verdad."','"Dudo que llegue."'],a:2,fb:'<em>Creer que</em> en afirmativo normalmente usa indicativo: <strong>creo que es verdad</strong>, no <em>creo que sea verdad</em> en este contexto.'},
+{s:9,type:'transform',label:'Cambia al pluscuamperfecto',sent:'Cuando llegué, ella salió.',stem:'Cuando llegué, ella ya ___ .',chips:['había salido','ha salido','salía','habrá salido'],a:'había salido',fb:'Acción anterior al evento pasado → <strong>pluscuamperfecto</strong>: <em>había salido</em>.'},
+{s:9,type:'mc',stem:'"La persona ___ me explicó el tema es mi profesora." — ¿Qué pronombre relativo va?',opts:['quien','que','donde','lo que'],a:1,fb:'En una cláusula relativa especificativa sin preposición, la forma normal es <strong>que</strong>. <em>Quien</em> aparece sobre todo después de una preposición o en cláusulas explicativas.'},
+{s:9,type:'fill',stem:'Me gustaría ___ (poder) vivir cerca del mar.',chips:['poder','pueda','podría','puede'],a:'poder',fb:'<em>Me gustaría</em> + infinitivo: <strong>poder</strong>.'},
+{s:9,type:'vf',stem:'"Sin embargo, decidí quedarme." — <em>Sin embargo</em> indica contraste con lo anterior.',a:'t',fb:'<em>Sin embargo</em> = marcador de contraste/concesión. Correcto.'},
+];
+const TOTAL_Q=Q.length;
+const SECTIONS=[
+  {id:0,icon:'🌀',title:'Subjuntivo: conjugación y usos',color:'var(--s3)',sub:'Forma el presente de subjuntivo e identifica sus disparadores.'},
+  {id:1,icon:'🔀',title:'Subj. vs Indicativo vs Infinitivo',color:'var(--s2)',sub:'Elige la forma correcta según el contexto y el número de sujetos.'},
+  {id:2,icon:'🕐',title:'Pretérito imperfecto',color:'var(--s4)',sub:'Describe estados, hábitos y situaciones en el pasado.'},
+  {id:3,icon:'📖',title:'Indefinido vs imperfecto',color:'var(--s9)',sub:'Narra eventos vs describe contexto.'},
+  {id:4,icon:'🧩',title:'Fue / era / estaba / estuvo',color:'var(--s5)',sub:'Las cuatro formas de pasado que más confunden.'},
+  {id:5,icon:'✅',title:'Tiempos perfectos',color:'var(--s6)',sub:'He comido / había comido / habré comido / habría comido.'},
+  {id:6,icon:'🔄',title:'Las formas de HABER',color:'var(--s7)',sub:'Hay / hubo / había / habrá / habría / haya / hubiera.'},
+  {id:7,icon:'🎯',title:'Pronombres avanzados',color:'var(--s8)',sub:'Relativos, posesivos tónicos y redundancia pronominal.'},
+  {id:8,icon:'💭',title:'Condicional + opinión y discurso',color:'var(--s1)',sub:'Hablaría, cortesía, conectores: sin embargo, por lo tanto, aunque.'},
+  {id:9,icon:'📚',title:'Lectura y mezcla',color:'var(--s10)',sub:'Texto corto + transformaciones + todo junto.'},
+];
+const SEC_COUNT=10;
+const state={cur:0,answers:{},selections:{},done:new Set()};
+
+function qsForSec(s){return Q.filter(q=>q.s===s);}
+function secDone(s){const qs=qsForSec(s);return qs.length>0&&qs.every((q,i)=>state.answers[globalIdx(s,i)]!==undefined);}
+function globalIdx(s,i){let idx=0;for(let ss=0;ss<s;ss++)idx+=qsForSec(ss).length;return idx+i;}
+
+function updateProgress(){
+  const dots=document.getElementById('progDots');
+  dots.innerHTML='';
+  let totalDone=0;
+  SECTIONS.forEach((sec,i)=>{
+    const qs=qsForSec(i);
+    const doneCount=qs.filter((q,qi)=>state.answers[globalIdx(i,qi)]!==undefined).length;
+    totalDone+=doneCount;
+    const div=document.createElement('div');
+    div.className='prog-dot '+(i===state.cur?'active':doneCount===qs.length&&qs.length>0?'done':'locked');
+    div.textContent=i+1;
+    div.title=sec.title;
+    div.onclick=()=>goSec(i);
+    dots.appendChild(div);
+  });
+  const pct=Math.round(totalDone/TOTAL_Q*100);
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progLeft').textContent='Sección '+(state.cur+1)+' de '+SEC_COUNT;
+  document.getElementById('progRight').textContent=totalDone+' / '+TOTAL_Q+' respondidas';
+}
+
+function goSec(i){
+  state.cur=i;
+  renderSection();
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderSection(){
+  const sec=SECTIONS[state.cur];
+  const qs=qsForSec(state.cur);
+  const c=document.getElementById('sectionContainer');
+  const allAnswered=qs.every((q,qi)=>state.answers[globalIdx(state.cur,qi)]!==undefined);
+  let html=`<div class="section-card">
+  <div class="sec-header">
+    <div class="sec-icon">${sec.icon}</div>
+    <div class="sec-title" style="color:${sec.color}">${sec.title}</div>
+  </div>
+  <div class="sec-sub">${sec.sub}</div>
+  <div class="sec-progress">
+    <div class="sec-prog-bar"><div class="sec-prog-fill" style="width:${Math.round(qs.filter((q,qi)=>state.answers[globalIdx(state.cur,qi)]!==undefined).length/qs.length*100)}%" id="secProgFill"></div></div>
+    <span id="secProgTxt">${qs.filter((q,qi)=>state.answers[globalIdx(state.cur,qi)]!==undefined).length}/${qs.length}</span>
+  </div>
+  <div class="q-wrap" id="qWrap">`;
+  qs.forEach((q,qi)=>{
+    const gi=globalIdx(state.cur,qi);
+    const ans=state.answers[gi];
+    html+=renderQ(q,gi,qi,ans);
+  });
+  html+=`</div>`;
+  if(allAnswered){html+=buildSecResult(state.cur);}
+  html+=`<div class="actions">`;
+  if(state.cur>0) html+=`<button class="btn btn-ghost" onclick="goSec(${state.cur-1})">← Anterior</button>`;
+  if(state.cur<SEC_COUNT-1) html+=`<button class="btn btn-cyan" onclick="goSec(${state.cur+1})">Siguiente →</button>`;
+  if(state.cur===SEC_COUNT-1&&Q.every((q,i)=>state.answers[i]!==undefined)&&!document.getElementById('finalContainer').innerHTML.trim()) html+=`<button class="btn btn-magenta" onclick="showFinal()">Ver resultados 🎉</button>`;
+  html+=`</div></div>`;
+  c.innerHTML=html;
+}
+
+function renderQ(q,gi,qi,savedAns){
+  const done=savedAns!==undefined;
+  const correct=done&&savedAns===true;
+  const selected=state.selections[gi];
+  const cls='q-card'+(done?(correct?' answered correct':' answered wrong'):'');
+  const typeLabel={mc:'opción múltiple',vf:'verdadero/falso',fill:'completa',order:'ordena',transform:'transforma',reading:'lectura',dial:'diálogo'}[q.type]||q.type;
+  let inner=`<div class="${cls}" id="qcard${gi}">
+  <span class="q-num">Pregunta ${qi+1}</span><span class="q-type-badge">${typeLabel}</span>`;
+
+  if(q.type==='reading'){
+    inner+=`<div class="reading-box">${q.text}</div>`;
+  }
+  if(q.type==='dial'){
+    inner+=`<div class="dial-box">${(q.lines||[]).map(l=>`<div class="dial-line"><span class="dial-who">${l.who}</span><span class="dial-text">${l.text}</span></div>`).join('')}</div>`;
+  }
+  if(q.type==='transform'){
+    inner+=`<div class="transform-box"><div class="transform-label">${q.label||'Transforma'}</div><div class="transform-sent">${q.sent}</div></div>`;
+  }
+
+  if(q.type==='fill'||q.type==='transform'){
+    const parts=q.stem.split('___');
+    const shown=done?(selected??q.a):'';
+    inner+=`<div class="q-stem">${parts[0]}<span class="fill-blank" id="blank${gi}"${done?` style="color:${correct?'var(--good)':'var(--bad)'}"`:''}>${shown}</span>${parts.slice(1).join('___')}</div>`;
+  }else{
+    inner+=`<div class="q-stem">${q.stem}</div>`;
+  }
+
+  if(q.type==='mc'||q.type==='reading'){
+    inner+=`<div class="mc-opts">`;
+    q.opts.forEach((o,oi)=>{
+      let cls2='mc-opt';
+      if(done){
+        if(oi===q.a) cls2+=' show-correct';
+        if(oi===selected&&oi!==q.a) cls2+=' sel-wrong';
+      }
+      inner+=`<button type="button" class="${cls2}" ${done?'disabled':''} onclick="answerMC(${gi},${oi})">${o}</button>`;
+    });
+    inner+=`</div>`;
+  }else if(q.type==='vf'){
+    const tCls='vf-btn t'+(done&&q.a==='t'?' sel-correct':'')+(done&&selected==='t'&&q.a!=='t'?' sel-wrong':'');
+    const fCls='vf-btn f'+(done&&q.a==='f'?' sel-correct':'')+(done&&selected==='f'&&q.a!=='f'?' sel-wrong':'');
+    inner+=`<div class="vf-opts">
+      <button type="button" class="${tCls}" ${done?'disabled':''} onclick="answerVF(${gi},'t')">✅ Verdadero</button>
+      <button type="button" class="${fCls}" ${done?'disabled':''} onclick="answerVF(${gi},'f')">❌ Falso</button>
+    </div>`;
+  }else if(q.type==='fill'||q.type==='transform'){
+    inner+=`<div class="fill-chips" id="chips${gi}">`;
+    q.chips.forEach((ch,ci)=>{
+      let chipCls='fill-chip';
+      if(done){
+        if(ch===q.a) chipCls+=' chip-ok';
+        else if(ch===selected) chipCls+=' chip-err';
+        else chipCls+=' used';
+      }
+      inner+=`<button type="button" class="${chipCls}" ${done?'disabled':''} onclick="answerFill(${gi},${ci})">${ch}</button>`;
+    });
+    inner+=`</div>`;
+  }else if(q.type==='order'){
+    if(done){
+      const chosenWords=Array.isArray(selected)?selected:[];
+      inner+=`<div class="order-answer">${chosenWords.map(w=>`<span class="order-word ${correct?'order-ok':'order-err'}">${w}</span>`).join('')}</div>`;
+      if(!correct) inner+=`<div style="font-size:.79rem;color:var(--muted);margin-top:4px">Orden correcto: <strong>${q.a.join(' ')}</strong></div>`;
+    }else{
+      const placed=orderState[gi]||[];
+      const used=new Set(placed);
+      inner+=`<p style="font-size:.75rem;color:var(--muted2);margin-bottom:6px">Toca las palabras para ordenar la oración:</p>`;
+      inner+=`<div class="order-answer" id="ans${gi}">${placed.map((wi,pos)=>`<button type="button" class="order-word in-answer" onclick="removeOrderWord(${gi},${pos})">${q.pool[wi]}</button>`).join('')}</div>`;
+      inner+=`<div class="order-pool" id="pool${gi}">${q.pool.map((w,wi)=>used.has(wi)?'':`<button type="button" class="order-word" onclick="addOrderWord(${gi},${wi})">${w}</button>`).join('')}</div>`;
+      inner+=`<button type="button" class="order-check" id="chk${gi}" onclick="checkOrder(${gi})" ${placed.length===q.pool.length?'':'disabled'}>Verificar</button>`;
+    }
+  }
+
+  if(done&&q.fb){
+    inner+=`<div class="q-fb show">${correct?'✅':'❌'} ${q.fb}</div>`;
+  }else{
+    inner+=`<div class="q-fb" id="fb${gi}"></div>`;
+  }
+  inner+=`</div>`;
+  return inner;
+}
+
+function answerMC(gi,chosen){
+  if(state.answers[gi]!==undefined) return;
+  const q=getQbyGi(gi);
+  if(!q||!Number.isInteger(q.a)) return;
+  const correct=q.a;
+  const ok=chosen===correct;
+  state.answers[gi]=ok;
+  state.selections[gi]=chosen;
+  const opts=document.querySelectorAll(`#qcard${gi} .mc-opt`);
+  opts.forEach((btn,i)=>{
+    btn.disabled=true;
+    if(i===correct) btn.classList.add('show-correct');
+    if(i===chosen&&i!==correct) btn.classList.add('sel-wrong');
+  });
+  showFb(gi,ok);
+  afterAnswer(gi);
+}
+
+function answerVF(gi,chosen){
+  if(state.answers[gi]!==undefined) return;
+  const q=getQbyGi(gi);
+  if(!q||(q.a!=='t'&&q.a!=='f')) return;
+  const correct=q.a;
+  const ok=chosen===correct;
+  state.answers[gi]=ok;
+  state.selections[gi]=chosen;
+  const tBtn=document.querySelector(`#qcard${gi} .vf-btn.t`);
+  const fBtn=document.querySelector(`#qcard${gi} .vf-btn.f`);
+  [tBtn,fBtn].forEach(btn=>{if(btn)btn.disabled=true;});
+  if(correct==='t') tBtn?.classList.add('sel-correct'); else fBtn?.classList.add('sel-correct');
+  if(!ok) (chosen==='t'?tBtn:fBtn)?.classList.add('sel-wrong');
+  showFb(gi,ok);
+  afterAnswer(gi);
+}
+
+function answerFill(gi,chosenIndex){
+  if(state.answers[gi]!==undefined) return;
+  const q=getQbyGi(gi);
+  if(!q||!Array.isArray(q.chips)||chosenIndex<0||chosenIndex>=q.chips.length) return;
+  const chosen=q.chips[chosenIndex];
+  const correct=q.a;
+  const ok=chosen===correct;
+  state.answers[gi]=ok;
+  state.selections[gi]=chosen;
+  const blank=document.getElementById('blank'+gi);
+  if(blank){blank.textContent=chosen;blank.style.color=ok?'var(--good)':'var(--bad)';}
+  const chips=document.querySelectorAll(`#chips${gi} .fill-chip`);
+  chips.forEach((btn,i)=>{
+    btn.disabled=true;
+    const value=q.chips[i];
+    if(value===correct) btn.classList.add('chip-ok');
+    else if(value===chosen) btn.classList.add('chip-err');
+    else btn.classList.add('used');
+  });
+  showFb(gi,ok);
+  afterAnswer(gi);
+}
+
+const orderState={};
+
+function addOrderWord(gi,wi){
+  if(state.answers[gi]!==undefined) return;
+  if(!orderState[gi]) orderState[gi]=[];
+  if(!orderState[gi].includes(wi)) orderState[gi].push(wi);
+  refreshOrderUI(gi);
+}
+
+function removeOrderWord(gi,pos){
+  if(state.answers[gi]!==undefined||!orderState[gi]) return;
+  orderState[gi].splice(pos,1);
+  refreshOrderUI(gi);
+}
+
+function refreshOrderUI(gi){
+  const q=getQbyGi(gi);
+  if(!q||q.type!=='order') return;
+  const placed=orderState[gi]||[];
+  const used=new Set(placed);
+  const ans=document.getElementById('ans'+gi);
+  const pool=document.getElementById('pool'+gi);
+  const chk=document.getElementById('chk'+gi);
+  if(ans) ans.innerHTML=placed.map((wi,pos)=>`<button type="button" class="order-word in-answer" onclick="removeOrderWord(${gi},${pos})">${q.pool[wi]}</button>`).join('');
+  if(pool) pool.innerHTML=q.pool.map((w,wi)=>used.has(wi)?'':`<button type="button" class="order-word" onclick="addOrderWord(${gi},${wi})">${w}</button>`).join('');
+  if(chk) chk.disabled=placed.length!==q.pool.length;
+}
+
+function checkOrder(gi){
+  if(state.answers[gi]!==undefined) return;
+  const q=getQbyGi(gi);
+  if(!q||q.type!=='order') return;
+  const placed=orderState[gi]||[];
+  if(placed.length!==q.pool.length) return;
+  const words=placed.map(wi=>q.pool[wi]);
+  const ok=JSON.stringify(words)===JSON.stringify(q.a);
+  state.answers[gi]=ok;
+  state.selections[gi]=words;
+  const card=document.getElementById('qcard'+gi);
+  if(card) card.outerHTML=renderQ(q,gi,getLocalQuestionIndex(gi),ok);
+  afterAnswer(gi);
+}
+
+function getLocalQuestionIndex(gi){
+  let offset=0;
+  for(let si=0;si<SEC_COUNT;si++){
+    const count=qsForSec(si).length;
+    if(gi<offset+count) return gi-offset;
+    offset+=count;
+  }
+  return 0;
+}
+
+function showFb(gi,ok){
+  const q=getQbyGi(gi);
+  const fb=document.getElementById('fb'+gi);
+  if(fb&&q&&q.fb){fb.innerHTML=(ok?'✅ ':'❌ ')+q.fb;fb.classList.add('show');}
+  const card=document.getElementById('qcard'+gi);
+  if(card){card.classList.add('answered',ok?'correct':'wrong');}
+}
+
+function getQbyGi(gi){
+  for(let si=0;si<SEC_COUNT;si++){
+    const qs=qsForSec(si);
+    for(let qi=0;qi<qs.length;qi++){if(globalIdx(si,qi)===gi) return qs[qi];}
+  }
+  return null;
+}
+
+function afterAnswer(gi){
+  updateProgress();
+  updateSecProgress();
+  const qs=qsForSec(state.cur);
+  const allDone=qs.every((q,qi)=>state.answers[globalIdx(state.cur,qi)]!==undefined);
+  if(allDone){
+    const wrap=document.getElementById('qWrap');
+    if(wrap){
+      const existing=document.querySelector('.sec-result');
+      if(!existing){
+        const div=document.createElement('div');
+        div.innerHTML=buildSecResult(state.cur);
+        wrap.parentElement.insertBefore(div.firstChild,wrap.nextSibling);
+      }
+    }
+    const allTestDone=Q.every((q,i)=>state.answers[i]!==undefined);
+    if(allTestDone){
+      const btn=document.querySelector('.btn-magenta');
+      if(!btn){
+        const actions=document.querySelector('.actions');
+        if(actions){const b=document.createElement('button');b.className='btn btn-magenta';b.textContent='Ver resultados 🎉';b.onclick=showFinal;actions.appendChild(b);}
+      }
+    }
+  }
+}
+
+function updateSecProgress(){
+  const qs=qsForSec(state.cur);
+  const done=qs.filter((q,qi)=>state.answers[globalIdx(state.cur,qi)]!==undefined).length;
+  const fill=document.getElementById('secProgFill');
+  const txt=document.getElementById('secProgTxt');
+  if(fill) fill.style.width=Math.round(done/qs.length*100)+'%';
+  if(txt) txt.textContent=done+'/'+qs.length;
+}
+
+function buildSecResult(si){
+  const qs=qsForSec(si);
+  const total=qs.length;
+  const correct=qs.filter((q,qi)=>state.answers[globalIdx(si,qi)]===true).length;
+  const pct=Math.round(correct/total*100);
+  const color=pct>=80?'var(--good)':pct>=60?'var(--warn)':'var(--bad)';
+  return `<div class="sec-result show" style="background:rgba(255,255,255,.03);border:1.5px solid ${color};border-radius:14px;padding:16px 20px;margin-top:16px">
+  <div style="font-family:var(--display);font-size:1.1rem;font-weight:900;color:${color}">${pct>=80?'¡Excelente!':pct>=60?'Bien, pero revisa algunos puntos':'Necesitas repasar esta sección'}</div>
+  <div style="font-size:2rem;font-family:var(--display);font-weight:900;margin:8px 0;color:${color}">${correct}/${total} <span style="font-size:1rem;opacity:.7">(${pct}%)</span></div>
+  <div style="font-size:.82rem;color:var(--muted)">${pct>=80?'Dominas este tema.':pct>=60?'Repasa los ítems marcados en rojo.':'Revisa el material y vuelve a intentarlo.'}</div>
+</div>`;
+}
+function showFinal(){
+  if(!Q.every((q,i)=>state.answers[i]!==undefined)){
+    alert('Responde todas las preguntas antes de ver los resultados.');
+    return;
+  }
+  const scores=SECTIONS.map((sec,si)=>{
+    const qs=qsForSec(si);
+    const c=qs.filter((q,qi)=>state.answers[globalIdx(si,qi)]===true).length;
+    return{c,t:qs.length,pct:Math.round(c/qs.length*100)};
+  });
+  const totalC=scores.reduce((a,s)=>a+s.c,0);
+  const totalT=scores.reduce((a,s)=>a+s.t,0);
+  const totalPct=Math.round(totalC/totalT*100);
+  const ring=totalPct;
+  const rColor=ring>=80?'#22c55e':ring>=60?'#f59e0b':'#ef4444';
+  const diagTexts=[
+    {strong:'Conjugas el subjuntivo y reconoces sus disparadores.',weak:'Practica los irregulares (hacer→haga, tener→tenga, ir→vaya) y los disparadores de emoción/duda.'},
+    {strong:'Distingues bien cuándo usar subjuntivo, indicativo o infinitivo.',weak:'Recuerda: mismo sujeto → infinitivo; dos sujetos → que + subjuntivo; certeza → indicativo.'},
+    {strong:'Usas bien el imperfecto para describir el pasado.',weak:'El imperfecto es para estados, hábitos y descripciones. No para eventos puntuales.'},
+    {strong:'Narras bien la combinación de eventos e imperfecto.',weak:'Practica la diferencia: indefinido = evento; imperfecto = contexto/hábito.'},
+    {strong:'Distingues fue/era/estuvo/estaba con precisión.',weak:'Recuerda: era/estaba = descripción continua; fue/estuvo = evento con límite.'},
+    {strong:'Usas los cuatro tiempos perfectos correctamente.',weak:'Repasa: he comido (presente→pasado), había comido (anterior al pasado), habré (futuro completo), habría (hipótesis pasada).'},
+    {strong:'Dominas las formas impersonales de haber.',weak:'Clave: haber impersonal es SIEMPRE singular. Nunca "hubieron". Formas: hay/había/hubo/habrá/habría/haya/hubiera.'},
+    {strong:'Manejas pronombres relativos, posesivos tónicos y redundancia.',weak:'Practica: que/quien/donde/lo que + el mío/el tuyo/el suyo + a mí me / a ellos les.'},
+    {strong:'Usas el condicional y los conectores del discurso.',weak:'Repasa: -ría para hipótesis y cortesía; sin embargo=contraste; por lo tanto=consecuencia; aunque=concesión.'},
+    {strong:'Combinas todos los temas y comprendes textos B1.',weak:'Practica la lectura activa y la identificación del tiempo verbal por contexto.'},
+  ];
+  const level=totalPct>=80?'¡Listo para B2!':totalPct>=60?'Nivel B1 en proceso':'Consolida tu B1';
+  const levelSub=totalPct>=80?'Tu nivel de español B1 está sólido. Puedes avanzar a temas B2.':totalPct>=60?'Vas bien, pero hay secciones que necesitan más práctica.':'Revisa las secciones en rojo y vuelve a intentarlo.';
+  const circumference=2*Math.PI*60;
+  const dash=circumference*(totalPct/100);
+  let html=`<div class="final-card">
+<div class="final-title">🎉 Resultados del Test B1</div>
+<div class="ring-wrap">
+  <svg class="ring-svg" viewBox="0 0 140 140">
+    <circle cx="70" cy="70" r="60" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="12"/>
+    <circle cx="70" cy="70" r="60" fill="none" stroke="${rColor}" stroke-width="12"
+      stroke-dasharray="${dash.toFixed(1)} ${circumference.toFixed(1)}"
+      stroke-dashoffset="${(circumference/4).toFixed(1)}" stroke-linecap="round"/>
+    <text x="70" y="66" text-anchor="middle" font-family="Syne,sans-serif" font-size="26" font-weight="900" fill="${rColor}">${totalPct}%</text>
+    <text x="70" y="86" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#a8abce">${totalC}/${totalT}</text>
+  </svg>
+</div>
+<div style="text-align:center;margin-bottom:20px">
+  <div style="font-family:var(--display);font-size:1.3rem;font-weight:900;color:${rColor}">${level}</div>
+  <div style="font-size:.85rem;color:var(--muted);margin-top:4px">${levelSub}</div>
+</div>
+<div class="sec-scores">`;
+  SECTIONS.forEach((sec,si)=>{
+    const s=scores[si];
+    const c2=s.pct>=80?'#22c55e':s.pct>=60?'#f59e0b':'#ef4444';
+    html+=`<div class="sec-score-card" style="border-color:${c2}20;background:${c2}08">
+      <div class="sec-score-name" style="color:${c2}">${sec.icon} ${sec.title}</div>
+      <div class="sec-score-num" style="color:${c2}">${s.c}/${s.t}</div>
+      <div class="sec-score-bar"><div class="sec-score-bar-fill" style="width:${s.pct}%;background:${c2}"></div></div>
+    </div>`;
+  });
+  html+=`</div><div style="font-family:var(--display);font-size:1rem;font-weight:900;margin-bottom:14px;color:var(--muted2)">📋 Diagnóstico por sección</div>`;
+  scores.forEach((s,si)=>{
+    const dt=diagTexts[si];
+    const c2=s.pct>=80?'#22c55e':s.pct>=60?'#f59e0b':'#ef4444';
+    const msg=s.pct>=80?`✅ ${dt.strong}`:`⚠️ ${s.pct>=60?'Bien, pero revisa: ':'Necesitas repasar: '}${dt.weak}`;
+    html+=`<div class="diag-section"><div class="diag-title" style="color:${c2}">${SECTIONS[si].icon} ${SECTIONS[si].title} — ${s.pct}%</div><div class="diag-body">${msg}</div></div>`;
+  });
+  html+=`<div class="actions" style="justify-content:center">
+    <button class="btn btn-magenta" onclick="restartTest()">🔄 Repetir test</button>
+    <a class="btn btn-ghost" href="https://yourmexicanfriend.com" target="_blank">Ir a YMF →</a>
+  </div></div>`;
+  const fc=document.getElementById('finalContainer');
+  fc.innerHTML=html;
+  fc.classList.remove('final-hidden');
+  fc.scrollIntoView({behavior:'smooth'});
+}
+
+function restartTest(){
+  state.cur=0;
+  state.answers={};
+  state.selections={};
+  state.done=new Set();
+  for(const k in orderState) delete orderState[k];
+  document.getElementById('finalContainer').innerHTML='';
+  document.getElementById('finalContainer').classList.add('final-hidden');
+  renderSection();
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+renderSection();
+updateProgress();
+</script>
+</body>
+</html>

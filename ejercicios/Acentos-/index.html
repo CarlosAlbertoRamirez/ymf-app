@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los Acentos en Español | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --ag:#f97316;--agb:rgba(249,115,22,.12);--agd:rgba(249,115,22,.32);
+  --gr:#60a5fa;--grb:rgba(96,165,250,.12);--grd:rgba(96,165,250,.32);
+  --es:#a78bfa;--esb:rgba(167,139,250,.12);--esd:rgba(167,139,250,.32);
+  --so:#34d399;--sob:rgba(52,211,153,.12);--sod:rgba(52,211,153,.32);
+  --di:#f472b6;--dib:rgba(244,114,182,.12);--did:rgba(244,114,182,.32);
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(37,217,255,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 15% 8%,rgba(167,139,250,.14),transparent 30%),radial-gradient(ellipse at 85% 10%,rgba(249,115,22,.1),transparent 30%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(1040px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--ag),#fff 40%,var(--es));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.85rem;margin-top:4px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ex-tabs{display:flex;gap:4px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:7px;overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:7px 10px;font-weight:800;font-family:var(--font);font-size:.72rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:56px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;transform:translateY(-1px)}
+.etab-icon{font-size:1.1rem;line-height:1}.etab-label{font-size:.58rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:22px 26px;box-shadow:var(--shadow)}
+.ex-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.85rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:16px}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:90px}.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;transition:width .35s;background:linear-gradient(90deg,var(--ag),var(--es))}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:0 11px 11px 0;font-size:.88rem;line-height:1.6;border-left:4px solid}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-color:var(--good);color:#bbf7d0}
+.fb.partial{background:rgba(245,158,11,.1);border-color:var(--warn);color:#fde68a}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}.btn:disabled{opacity:.38;cursor:not-allowed;transform:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),#00bfff);color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.btn-audio{background:rgba(37,217,255,.12);border:1.5px solid rgba(37,217,255,.28);color:var(--cyan);border-radius:8px;padding:4px 10px;font-size:.74rem;font-weight:800;cursor:pointer;transition:.13s;font-family:var(--font);display:inline-flex;align-items:center;gap:4px}
+.btn-audio:hover{background:rgba(37,217,255,.22)}
+/* TYPE PILLS */
+.pill-ag{display:inline-block;background:var(--agb);border:1px solid var(--agd);color:#fb923c;border-radius:6px;padding:1px 8px;font-weight:900;font-size:.82rem}
+.pill-gr{display:inline-block;background:var(--grb);border:1px solid var(--grd);color:#93c5fd;border-radius:6px;padding:1px 8px;font-weight:900;font-size:.82rem}
+.pill-es{display:inline-block;background:var(--esb);border:1px solid var(--esd);color:#c4b5fd;border-radius:6px;padding:1px 8px;font-weight:900;font-size:.82rem}
+.pill-so{display:inline-block;background:var(--sob);border:1px solid var(--sod);color:#6ee7b7;border-radius:6px;padding:1px 8px;font-weight:900;font-size:.82rem}
+.pill-di{display:inline-block;background:var(--dib);border:1px solid var(--did);color:#f9a8d4;border-radius:6px;padding:1px 8px;font-weight:900;font-size:.82rem}
+.tilde{color:var(--ag);font-weight:900}
+/* WORD DISPLAY */
+.word-big{font-family:var(--display);font-size:2.4rem;font-weight:900;letter-spacing:.04em;line-height:1.2}
+.syl-box{display:inline-flex;align-items:flex-end;gap:2px}
+.syl{display:inline-block;padding:2px 1px;font-size:inherit;font-weight:inherit}
+.syl.tonic{color:var(--ag);border-bottom:3px solid var(--ag);padding-bottom:0}
+/* EXPL */
+.expl-section{margin-bottom:22px}
+.expl-h{font-family:var(--display);font-size:1rem;font-weight:900;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.type-card{border-radius:16px;padding:16px 18px;margin-bottom:12px;border:1.5px solid}
+.rule-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.rule-box{border-radius:12px;padding:12px 14px;font-size:.87rem;line-height:1.7}
+.word-ex{font-family:var(--display);font-size:1rem;font-weight:800}
+.diac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.diac-card{border-radius:13px;padding:13px 16px;background:rgba(244,114,182,.07);border:1.5px solid rgba(244,114,182,.25)}
+.diac-pair{display:flex;gap:12px;align-items:flex-start;margin-bottom:6px}
+.diac-w{font-family:var(--display);font-size:1.1rem;font-weight:900}
+.diac-def{font-size:.78rem;color:var(--muted);line-height:1.5}
+/* FC */
+.fc-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.fc-prow{display:flex;align-items:center;gap:12px;width:100%;max-width:680px}
+.fc-cnt{font-size:.8rem;font-weight:800;color:var(--muted2);white-space:nowrap}
+.fc-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.fc-fil{height:100%;border-radius:999px;transition:width .4s;background:linear-gradient(90deg,var(--ag),var(--es))}
+.fc-card{width:100%;max-width:680px;min-height:240px;perspective:1000px;cursor:pointer}
+.fc-inner{position:relative;width:100%;min-height:240px;transition:transform .5s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.fc-card.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;border-radius:20px;padding:22px 26px;backface-visibility:hidden;display:flex;flex-direction:column;justify-content:center;gap:12px;min-height:240px;background:rgba(249,115,22,.07);border:1.5px solid rgba(249,115,22,.3)}
+.fc-back{transform:rotateY(180deg);background:rgba(167,139,250,.07);border-color:rgba(167,139,250,.3)}
+.fc-nav{display:flex;gap:8px;align-items:center;justify-content:center;width:100%;max-width:680px}
+/* MC */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px}
+.mc-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.mc-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.mc-q{font-size:1rem;line-height:1.7;margin-bottom:8px}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px}
+.mc-opt{border:0;border-radius:10px;padding:8px 16px;font-weight:800;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.mok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.merr{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mshow{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-exp{display:none;font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:8px;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-exp.show{display:block}
+/* TILDE OR NOT (binary) */
+.tn-list{display:flex;flex-direction:column;gap:10px}
+.tn-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:15px 18px}
+.tn-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.tn-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.tn-word{font-family:var(--display);font-size:1.8rem;font-weight:900;margin-bottom:4px}
+.tn-hint{font-size:.78rem;color:var(--muted2);margin-bottom:10px}
+.tn-choice{display:flex;gap:10px}
+.tn-btn{border:0;border-radius:11px;padding:9px 22px;font-weight:900;font-family:var(--display);font-size:1rem;cursor:pointer;transition:.14s;border:2px solid}
+.tn-btn.y{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3);color:#86efac}
+.tn-btn.n{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.25);color:#fca5a5}
+.tn-btn:hover:not([disabled]){transform:translateY(-2px);filter:brightness(1.2)}
+.tn-btn[disabled]{cursor:default;transform:none}
+.tn-btn.vok{border-color:var(--good);background:rgba(34,197,94,.2);color:#86efac}
+.tn-btn.verr{border-color:var(--bad);background:rgba(239,68,68,.16);color:#fca5a5}
+.tn-exp{display:none;font-size:.8rem;color:var(--muted);margin-top:8px;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px;line-height:1.6}
+.tn-exp.show{display:block}
+/* FILL */
+.fill-list{display:flex;flex-direction:column;gap:12px}
+.fill-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;padding:15px 17px}
+.fill-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.fill-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.fill-q{font-size:1rem;line-height:1.9;font-weight:600;margin-bottom:6px}
+.fill-hint{font-size:.76rem;color:var(--muted2);font-style:italic;margin-bottom:10px}
+.fill-blank{display:inline-block;border-bottom:2.5px solid var(--ag);min-width:80px;text-align:center;padding:0 4px;color:#fb923c;font-weight:800;font-family:var(--display);font-size:1rem}
+.fill-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:6px}
+.fill-chip{border:0;border-radius:9px;padding:7px 14px;font-weight:800;font-family:var(--display);font-size:.95rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.fill-chip:hover:not([disabled]):not(.used){transform:translateY(-2px)}
+.fill-chip.used{opacity:.22;cursor:not-allowed}
+.fill-chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.fill-chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.15);color:#fca5a5}
+.fill-exp{display:none;font-size:.8rem;color:var(--muted);margin-top:6px;padding:7px 10px;background:rgba(255,255,255,.04);border-radius:8px;line-height:1.6}
+.fill-exp.show{display:block}
+/* DIAC exercise */
+.diac-ex-list{display:flex;flex-direction:column;gap:12px}
+.diac-ex-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;padding:15px 17px}
+.diac-ex-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.diac-ex-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.diac-q{font-size:.97rem;line-height:1.85;font-weight:600;margin-bottom:10px}
+.diac-blank{display:inline-block;min-width:55px;text-align:center;border-bottom:2.5px solid var(--di);color:#f9a8d4;font-weight:900;font-family:var(--display)}
+.diac-choice{display:flex;gap:8px;flex-wrap:wrap}
+.diac-btn{border:0;border-radius:10px;padding:9px 20px;font-weight:900;font-family:var(--display);font-size:1.05rem;cursor:pointer;transition:.14s;background:var(--dib);border:2px solid var(--did);color:#f9a8d4}
+.diac-btn:hover:not([disabled]){transform:translateY(-2px);filter:brightness(1.15)}
+.diac-btn[disabled]{cursor:default;transform:none}
+.diac-btn.dok{border-color:var(--good);background:rgba(34,197,94,.2);color:#86efac}
+.diac-btn.derr{border-color:var(--bad);background:rgba(239,68,68,.15);color:#fca5a5}
+.diac-btn.dshow{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.diac-exp{display:none;font-size:.8rem;color:var(--muted);margin-top:8px;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px;line-height:1.6}
+.diac-exp.show{display:block}
+/* SPEED */
+.sp-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-stats{display:flex;gap:9px}
+.spst{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spst .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.spst .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spst .sv.g{color:var(--good)}.spst .sv.b{color:var(--bad)}.spst .sv.w{color:var(--warn)}
+.sp-card{background:rgba(255,255,255,.04);border:2px solid rgba(249,115,22,.25);border-radius:18px;padding:22px;text-align:center;width:100%;max-width:560px}
+.sp-q{font-family:var(--display);font-size:1.6rem;font-weight:900;margin-bottom:8px;letter-spacing:.03em}
+.sp-hint{font-size:.83rem;color:var(--muted2);font-style:italic;margin-top:4px}
+.sp-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:560px}
+.sp-opt{border:0;border-radius:12px;padding:10px 14px;font-weight:900;font-family:var(--display);font-size:1rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.sp-opt:hover:not([disabled]){transform:translateY(-2px);border-color:rgba(249,115,22,.5)}
+.sp-opt[disabled]{cursor:default;transform:none}
+.sp-opt.spok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.sp-opt.sperr{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.sp-opt.spshow{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.sp-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:560px}
+.sp-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.sp-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.sp-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.streak{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak.on{display:inline-flex;align-items:center;gap:4px}
+.cf{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.cf.pop{animation:cfk .7s ease forwards}
+@keyframes cfk{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+/* REF table */
+.ref-table{width:100%;border-collapse:collapse;font-size:.87rem;margin-bottom:14px}
+.ref-table th{padding:9px 12px;text-align:left;font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08)}
+.ref-table td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
+.ref-table tr:hover td{background:rgba(255,255,255,.03)}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:14px 12px}.rule-row{grid-template-columns:1fr}.sp-opts{grid-template-columns:1fr}.diac-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="cf" id="cf"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Los Acentos en Español</h1>
+      <p>Prosodic, orthographic, and diacritical accents — complete rules, accent marks, and the most important diacritical pairs. B1–B2 level.</p>
+      <div class="badges">
+        <span class="badge">B1–B2</span>
+        <span class="badge" style="border-color:rgba(249,115,22,.4);color:#fb923c">🔤 Aguda</span>
+        <span class="badge" style="border-color:rgba(96,165,250,.4);color:#93c5fd">📖 Grave</span>
+        <span class="badge" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">✨ Esdrújula</span>
+        <span class="badge" style="border-color:rgba(244,114,182,.4);color:#f9a8d4">🔀 Diacrítico</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">📖</span><span class="etab-label">Expla-<br>nation</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">🔤</span><span class="etab-label">Sylla-<br>bles</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">🏷️</span><span class="etab-label">Classi-<br>fy</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">✍️</span><span class="etab-label">Tilde<br>or not?</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">✏️</span><span class="etab-label">Fill<br>in</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">🔀</span><span class="etab-label">Diacri-<br>tics</span></button>
+  <button class="etab" id="etab-6" onclick="goEx(6)"><span class="etab-icon">⚡</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-7" onclick="goEx(7)"><span class="etab-icon">📄</span><span class="etab-label">Refer-<br>ence</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · yourmexicanfriend.com</p>
+</div>
+<script>
+let _voice=null;
+function initVoice(){if(!window.speechSynthesis)return;const pick=()=>{const vs=window.speechSynthesis.getVoices();if(!vs.length)return;const tests=[v=>v.name==='Paulina',v=>v.name.includes('Paulina'),v=>v.lang==='es-MX'&&v.localService,v=>v.lang==='es-MX',v=>v.name.includes('Google')&&v.lang.startsWith('es'),v=>v.lang.startsWith('es')&&v.localService,v=>v.lang.startsWith('es')];for(const t of tests){const f=vs.find(t);if(f){_voice=f;break;}}};pick();if(window.speechSynthesis.onvoiceschanged!==undefined)window.speechSynthesis.onvoiceschanged=pick;setTimeout(pick,800);}
+initVoice();
+function speak(txt,btn){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);if(_voice)u.voice=_voice;u.lang='es-MX';u.rate=0.82;u.pitch=1;if(btn){btn.classList.add('playing');const o=btn.textContent;btn.textContent='🔊▶';u.onend=u.onerror=()=>{btn.classList.remove('playing');btn.textContent=o;};}window.speechSynthesis.speak(u);}
+function seededShuffle(arr,seed){const a=[...arr];let s=seed;for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let fcIdx=0,fcFlipped=false;
+let classAns={},tnAns={},fillAns={},diacAns={},spAns={};
+let spIdx=0,spOk=0,spErr=0,spStreak=0;
+
+function goEx(n){[0,1,2,3,4,5,6,7].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===n));[renderExpl,renderSilabeo,renderClasifica,renderTildeNo,renderFill,renderDiac,renderSpeed,renderRef][n]();window.scrollTo({top:0,behavior:'smooth'});}
+
+/* ══════════════════════════════════
+   EX 0 — EXPLANATION
+══════════════════════════════════ */
+function renderExpl(){
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📖 Spanish Accents — Complete Guide</div>
+
+  <!-- INTRO -->
+  <div class="expl-section">
+    <div class="expl-h" style="color:var(--cyan)">🧠 What is the accent?</div>
+    <div style="background:rgba(37,217,255,.07);border:1.5px solid rgba(37,217,255,.2);border-radius:14px;padding:15px 18px;margin-bottom:12px;font-size:.91rem;line-height:1.75">
+      <p>The <strong>accent</strong> (acento) is the extra force or stress we place on one syllable when pronouncing a word — that syllable is called the <strong>stressed syllable</strong> (sílaba tónica).</p>
+      <p style="margin-top:8px;color:var(--muted)">There are three types: <strong style="color:#fb923c">prosódico</strong> (only pronounced, never written), <strong style="color:#c4b5fd">ortográfico</strong> (written as an accent mark ´, called tilde), and <strong style="color:#f9a8d4">diacrítico</strong> (distinguishes identical words with different meanings).</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:4px">
+      <div style="background:rgba(249,115,22,.08);border:1.5px solid rgba(249,115,22,.25);border-radius:12px;padding:12px 14px;font-size:.85rem">
+        <div style="font-weight:900;color:#fb923c;margin-bottom:4px">🔉 Prosódico</div>
+        <div style="color:var(--muted)">Only pronounced — not represented with a written accent mark. Most independent words have a stressed syllable, but not every stressed syllable is marked with a tilde.</div>
+        <div style="margin-top:6px;font-family:var(--display)">ca-<span style="color:#fb923c;font-weight:900">SA</span> · li-<span style="color:#fb923c;font-weight:900">BRO</span> · a-<span style="color:#fb923c;font-weight:900">MOR</span></div>
+      </div>
+      <div style="background:rgba(167,139,250,.08);border:1.5px solid rgba(167,139,250,.25);border-radius:12px;padding:12px 14px;font-size:.85rem">
+        <div style="font-weight:900;color:#c4b5fd;margin-bottom:4px">´ Ortográfico (tilde)</div>
+        <div style="color:var(--muted)">Written according to the rules. Only used when the word type and ending match the conditions below.</div>
+        <div style="margin-top:6px;font-family:var(--display)"><span style="color:#c4b5fd">caf<span style="color:#fb923c">é</span></span> · <span style="color:#c4b5fd"><span style="color:#fb923c">á</span>rbol</span> · <span style="color:#c4b5fd">m<span style="color:#fb923c">ú</span>sica</span></div>
+      </div>
+      <div style="background:rgba(244,114,182,.08);border:1.5px solid rgba(244,114,182,.25);border-radius:12px;padding:12px 14px;font-size:.85rem">
+        <div style="font-weight:900;color:#f9a8d4;margin-bottom:4px">🔀 Diacrítico</div>
+        <div style="color:var(--muted)">Distinguishes identical words with different meanings or grammatical roles. Very common with one-syllable words.</div>
+        <div style="margin-top:6px;font-family:var(--display)"><span style="color:#f9a8d4">él</span> ≠ el · <span style="color:#f9a8d4">tú</span> ≠ tu · <span style="color:#f9a8d4">sí</span> ≠ si</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 WORD CATEGORIES -->
+  <div class="expl-section">
+    <div class="expl-h" style="color:#fb923c">🔤 The 4 word categories based on stress</div>
+
+    <div class="type-card" style="background:var(--agb);border-color:var(--agd);margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <span class="pill-ag">AGUDA</span>
+        <span style="font-size:.85rem;color:var(--muted)">Stress on the <strong style="color:#fb923c">last syllable</strong></span>
+      </div>
+      <div class="rule-row">
+        <div class="rule-box" style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2)">
+          <div style="font-size:.65rem;font-weight:900;color:var(--good);text-transform:uppercase;margin-bottom:6px">✅ Gets a tilde if it ends in…</div>
+          <div style="font-family:var(--display);font-size:1.1rem;font-weight:900;color:var(--good);margin-bottom:8px">vowel · N · S</div>
+          <div style="font-size:.84rem;line-height:1.8">
+            caf<span class="tilde">é</span> · can-ci<span class="tilde">ó</span>n · pa-<span class="tilde">í</span>s<br>
+            tam-bi<span class="tilde">é</span>n · beb<span class="tilde">é</span>s · ven-dr<span class="tilde">á</span>
+          </div>
+        </div>
+        <div class="rule-box" style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18)">
+          <div style="font-size:.65rem;font-weight:900;color:var(--bad);text-transform:uppercase;margin-bottom:6px">❌ No tilde if it ends in…</div>
+          <div style="font-family:var(--display);font-size:1.1rem;font-weight:900;color:var(--bad);margin-bottom:8px">any other consonant</div>
+          <div style="font-size:.84rem;line-height:1.8">
+            a-mor · pa-pel · re-loj<br>
+            ciu-dad · ve-loz · co-mer
+          </div>
+        </div>
+      </div>
+      <div style="font-size:.76rem;color:var(--muted2);margin-top:6px">* These are the general rules. A few special cases, such as some words ending in consonant groups, follow additional conventions.</div>
+    </div>
+
+    <div class="type-card" style="background:var(--grb);border-color:var(--grd);margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <span class="pill-gr">GRAVE / LLANA</span>
+        <span style="font-size:.85rem;color:var(--muted)">Stress on the <strong style="color:#93c5fd">second-to-last syllable</strong></span>
+      </div>
+      <div class="rule-row">
+        <div class="rule-box" style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2)">
+          <div style="font-size:.65rem;font-weight:900;color:var(--good);text-transform:uppercase;margin-bottom:6px">✅ Gets a tilde if it ends in…</div>
+          <div style="font-family:var(--display);font-size:1.1rem;font-weight:900;color:var(--good);margin-bottom:8px">consonant ≠ N or S</div>
+          <div style="font-size:.84rem;line-height:1.8">
+            <span class="tilde">á</span>r-bol · l<span class="tilde">á</span>-piz · <span class="tilde">á</span>n-gel<br>
+            f<span class="tilde">á</span>-cil · a-z<span class="tilde">ú</span>-car · c<span class="tilde">á</span>r-cel
+          </div>
+        </div>
+        <div class="rule-box" style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18)">
+          <div style="font-size:.65rem;font-weight:900;color:var(--bad);text-transform:uppercase;margin-bottom:6px">❌ No tilde if it ends in…</div>
+          <div style="font-family:var(--display);font-size:1.1rem;font-weight:900;color:var(--bad);margin-bottom:8px">vowel · N · S</div>
+          <div style="font-size:.84rem;line-height:1.8">
+            ca-sa · li-bro · co-men<br>
+            ha-blas · ma-dre · e-xa-men
+          </div>
+        </div>
+      </div>
+      <div style="font-size:.76rem;color:var(--muted2);margin-top:6px">* Most Spanish words are <em>grave</em> — they are the most common type.</div>
+    </div>
+
+    <div class="type-card" style="background:var(--esb);border-color:var(--esd);margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span class="pill-es">ESDRÚJULA</span>
+        <span style="font-size:.85rem;color:var(--muted)">Stress on the <strong style="color:#c4b5fd">third-to-last syllable</strong></span>
+      </div>
+      <div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:10px 14px;font-size:.87rem;margin-bottom:8px">
+        <strong style="color:var(--good)">✅ ALWAYS gets a tilde — no exceptions</strong>
+      </div>
+      <div style="font-size:.9rem;font-family:var(--display);line-height:1.9">
+        m<span class="tilde">ú</span>-si-ca · M<span class="tilde">é</span>-xi-co · tel<span class="tilde">é</span>-fo-no<br>
+        m<span class="tilde">é</span>-di-co · s<span class="tilde">í</span>-la-ba · r<span class="tilde">á</span>-pi-do · pr<span class="tilde">á</span>c-ti-co
+      </div>
+    </div>
+
+    <div class="type-card" style="background:var(--sob);border-color:var(--sod)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span class="pill-so">SOBRESDRÚJULA</span>
+        <span style="font-size:.85rem;color:var(--muted)">Stress <strong style="color:#6ee7b7">before the third-to-last syllable</strong></span>
+      </div>
+      <div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:10px 14px;font-size:.87rem;margin-bottom:8px">
+        <strong style="color:var(--good)">✅ ALWAYS gets a tilde — often appears in verb forms with enclitic pronouns</strong>
+      </div>
+      <div style="font-size:.9rem;font-family:var(--display);line-height:1.9">
+        c<span class="tilde">ó</span>m-pra-te-lo · d<span class="tilde">í</span>-ga-me-lo<br>
+        ex-pl<span class="tilde">í</span>-ca-se-lo · e-nv<span class="tilde">í</span>a-nos-lo
+      </div>
+      <div style="font-size:.76rem;color:var(--muted2);margin-top:8px">💡 Attaching enclitic pronouns can create esdrújula or sobresdrújula forms. Classify the resulting word by where the stress actually falls.</div>
+    </div>
+  </div>
+
+  <!-- SPECIAL CASES -->
+  <div class="expl-section">
+    <div class="expl-h" style="color:var(--warn)">⚠️ Special cases — Hiatos, question words, and more</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px">
+      <div style="background:rgba(245,158,11,.08);border:1.5px solid rgba(245,158,11,.25);border-radius:13px;padding:13px 16px">
+        <div style="font-weight:900;color:var(--warn);margin-bottom:8px">Hiato with tilde</div>
+        <div style="font-size:.84rem;color:var(--muted);line-height:1.7;margin-bottom:8px">A weak vowel (i, u) that is stressed AND next to a strong vowel (a, e, o) gets a mandatory tilde to show it does NOT form a diphthong.</div>
+        <div style="font-family:var(--display);font-size:.95rem;line-height:1.9">
+          pa<span class="tilde">í</span>s · ba<span class="tilde">ú</span>l · ma<span class="tilde">í</span>z<br>
+          ra<span class="tilde">í</span>z · d<span class="tilde">í</span>a · r<span class="tilde">í</span>o
+        </div>
+      </div>
+      <div style="background:rgba(245,158,11,.08);border:1.5px solid rgba(245,158,11,.25);border-radius:13px;padding:13px 16px">
+        <div style="font-weight:900;color:var(--warn);margin-bottom:8px">Question and exclamation words</div>
+        <div style="font-size:.84rem;color:var(--muted);line-height:1.7;margin-bottom:8px">Qué, cómo, cuándo, dónde, quién, cuál, cuánto get a tilde when they have interrogative or exclamative meaning, in both direct and indirect questions or exclamations.</div>
+        <div style="font-family:var(--display);font-size:.95rem;line-height:1.9">
+          ¿<span class="tilde">qué</span> haces? · ¡<span class="tilde">qué</span> bonito!<br>
+          ¿<span class="tilde">có</span>mo te llamas? · ¿<span class="tilde">dó</span>nde vas?
+        </div>
+      </div>
+      <div style="background:rgba(245,158,11,.08);border:1.5px solid rgba(245,158,11,.25);border-radius:13px;padding:13px 16px">
+        <div style="font-weight:900;color:var(--warn);margin-bottom:8px">Adverbs ending in -mente</div>
+        <div style="font-size:.84rem;color:var(--muted);line-height:1.7;margin-bottom:8px">If the base adjective has a tilde, the -mente adverb keeps it.</div>
+        <div style="font-family:var(--display);font-size:.95rem;line-height:1.9">
+          r<span class="tilde">á</span>pido → r<span class="tilde">á</span>pidamente<br>
+          f<span class="tilde">á</span>cil → f<span class="tilde">á</span>cilmente
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIACRÍTICOS -->
+  <div class="expl-section">
+    <div class="expl-h" style="color:#f9a8d4">🔀 Diacritical accent — most important pairs</div>
+    <div class="diac-grid">
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">el <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">él</span></div><div class="diac-def"><strong>el</strong> = definite article (el libro = the book)<br><strong style="color:#f9a8d4">él</strong> = personal pronoun subject (él habla = he speaks)</div></div></div></div>
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">tu <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">tú</span></div><div class="diac-def"><strong>tu</strong> = possessive adjective (tu casa = your house)<br><strong style="color:#f9a8d4">tú</strong> = subject pronoun (tú hablas = you speak)</div></div></div></div>
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">mi <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">mí</span></div><div class="diac-def"><strong>mi</strong> = possessive adjective (mi libro = my book)<br><strong style="color:#f9a8d4">mí</strong> = tonic pronoun after preposition (para mí = for me)</div></div></div></div>
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">si <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">sí</span></div><div class="diac-def"><strong>si</strong> = conditional conjunction (si quieres = if you want)<br><strong style="color:#f9a8d4">sí</strong> = yes / reflexive pronoun (sí, claro · vive para sí)</div></div></div></div>
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">te <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">té</span></div><div class="diac-def"><strong>te</strong> = pronoun (te llamo = I call you)<br><strong style="color:#f9a8d4">té</strong> = tea (un té de manzanilla = a chamomile tea)</div></div></div></div>
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">se <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">sé</span></div><div class="diac-def"><strong>se</strong> = pronoun (se lava = he/she washes)<br><strong style="color:#f9a8d4">sé</strong> = I know (yo sé) / imperative of ser (be good!)</div></div></div></div>
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">de <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">dé</span></div><div class="diac-def"><strong>de</strong> = preposition (casa de madera = wooden house)<br><strong style="color:#f9a8d4">dé</strong> = subjunctive / imperative of dar (to give)</div></div></div></div>
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">mas <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">más</span></div><div class="diac-def"><strong>mas</strong> = but / yet (literary / formal register)<br><strong style="color:#f9a8d4">más</strong> = more / comparative adverb (quiero más = I want more)</div></div></div></div>
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">aun <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">aún</span></div><div class="diac-def"><strong>aun</strong> = even / including (aun así = even so)<br><strong style="color:#f9a8d4">aún</strong> = still / yet (aún no llega = he still has not arrived)</div></div></div></div>
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">que <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">qué</span></div><div class="diac-def"><strong>que</strong> = relative pronoun / conjunction (creo que viene = I think he is coming)<br><strong style="color:#f9a8d4">qué</strong> = question word / exclamation (¿qué haces? · ¡qué bonito!)</div></div></div></div>
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">como <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">cómo</span></div><div class="diac-def"><strong>como</strong> = like / as / I eat (como tú · como tacos)<br><strong style="color:#f9a8d4">cómo</strong> = how (question word) (¿cómo te llamas? = what is your name?)</div></div></div></div>
+      <div class="diac-card"><div class="diac-pair"><div><div class="diac-w">solo <span style="color:var(--muted2)">vs</span> <span style="color:#f9a8d4">sólo*</span></div><div class="diac-def"><strong>solo</strong> = alone / only (normally written without a tilde)<br><strong style="color:#f9a8d4">sólo</strong> = optional spelling when the writer considers the tilde useful to avoid ambiguity</div></div></div></div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-cyan" onclick="goEx(2)">→ Start exercises</button>
+    <button class="btn btn-ghost" onclick="goEx(5)">→ Practice diacritics</button>
+  </div>
+</div>`;
+}
+
+const typeLabels={
+  ag:'<span class="pill-ag">AGUDA</span>',
+  gr:'<span class="pill-gr">GRAVE / LLANA</span>',
+  es:'<span class="pill-es">ESDRÚJULA</span>',
+  so:'<span class="pill-so">SOBRESDRÚJULA</span>'
+};
+const FC=[
+  {word:'canción',syls:['can','ción'],tonic:1,type:'ag',audio:'canción',note:'Aguda: stress on the last syllable. Ends in N, so it takes a tilde.'},
+  {word:'café',syls:['ca','fé'],tonic:1,type:'ag',audio:'café',note:'Aguda: stress on the last syllable. Ends in a vowel, so it takes a tilde.'},
+  {word:'amor',syls:['a','mor'],tonic:1,type:'ag',audio:'amor',note:'Aguda ending in R, so it does not take a tilde.'},
+  {word:'papel',syls:['pa','pel'],tonic:1,type:'ag',audio:'papel',note:'Aguda ending in L, so it does not take a tilde.'},
+  {word:'también',syls:['tam','bién'],tonic:1,type:'ag',audio:'también',note:'Aguda ending in N, so it takes a tilde.'},
+  {word:'reloj',syls:['re','loj'],tonic:1,type:'ag',audio:'reloj',note:'Aguda ending in J, so it does not take a tilde.'},
+  {word:'árbol',syls:['ár','bol'],tonic:0,type:'gr',audio:'árbol',note:'Grave ending in L, so it takes a tilde.'},
+  {word:'lápiz',syls:['lá','piz'],tonic:0,type:'gr',audio:'lápiz',note:'Grave ending in Z, so it takes a tilde.'},
+  {word:'libro',syls:['li','bro'],tonic:0,type:'gr',audio:'libro',note:'Grave ending in a vowel, so it does not take a tilde.'},
+  {word:'examen',syls:['e','xa','men'],tonic:1,type:'gr',audio:'examen',note:'Grave ending in N, so it does not take a tilde.'},
+  {word:'azúcar',syls:['a','zú','car'],tonic:1,type:'gr',audio:'azúcar',note:'Grave ending in R, so it takes a tilde.'},
+  {word:'cárcel',syls:['cár','cel'],tonic:0,type:'gr',audio:'cárcel',note:'Grave ending in L, so it takes a tilde.'},
+  {word:'música',syls:['mú','si','ca'],tonic:0,type:'es',audio:'música',note:'Esdrújula: stress on the third-to-last syllable. It always takes a tilde.'},
+  {word:'México',syls:['Mé','xi','co'],tonic:0,type:'es',audio:'México',note:'Esdrújula: stress on the third-to-last syllable. It always takes a tilde.'},
+  {word:'teléfono',syls:['te','lé','fo','no'],tonic:1,type:'es',audio:'teléfono',note:'Esdrújula: stress on the third-to-last syllable. It always takes a tilde.'},
+  {word:'rápido',syls:['rá','pi','do'],tonic:0,type:'es',audio:'rápido',note:'Esdrújula: stress on the third-to-last syllable. It always takes a tilde.'},
+  {word:'tráelo',syls:['trá','e','lo'],tonic:0,type:'es',audio:'tráelo',note:'Esdrújula: trá-e-lo. One attached pronoun does not automatically make a word sobresdrújula.'},
+  {word:'traérmelo',syls:['tra','ér','me','lo'],tonic:1,type:'es',audio:'traérmelo',note:'Esdrújula: tra-ér-me-lo. The written accent follows the stress of the resulting word.'},
+  {word:'cómpratelo',syls:['cóm','pra','te','lo'],tonic:0,type:'so',audio:'cómpratelo',note:'Sobresdrújula: the stress falls before the third-to-last syllable.'},
+  {word:'dígamelo',syls:['dí','ga','me','lo'],tonic:0,type:'so',audio:'dígamelo',note:'Sobresdrújula: the stress falls before the third-to-last syllable.'},
+  {word:'explícaselo',syls:['ex','plí','ca','se','lo'],tonic:1,type:'so',audio:'explícaselo',note:'Sobresdrújula: the stress falls before the third-to-last syllable.'},
+  {word:'envíanoslo',syls:['en','ví','a','nos','lo'],tonic:1,type:'so',audio:'envíanoslo',note:'Sobresdrújula: the stressed Í also forms a hiatus with A.'},
+  {word:'país',syls:['pa','ís'],tonic:1,type:'ag',audio:'país',note:'The stressed weak vowel Í forms a hiatus with A, so it takes a tilde.'},
+  {word:'baúl',syls:['ba','úl'],tonic:1,type:'ag',audio:'baúl',note:'The stressed weak vowel Ú forms a hiatus with A, so it takes a tilde.'}
+];
+
+function renderSilabeo(){
+  if(fcIdx>=FC.length)fcIdx=0;fcFlipped=false;renderFC();
+}
+function renderFC(){
+  const item=FC[fcIdx];const pct=Math.round((fcIdx+1)/FC.length*100);
+  const sylHTML=item.syls.map((s,i)=>`<span class="syl${i===item.tonic?' tonic':''}">${s}</span>`).join('<span style="color:var(--muted2);font-size:1.5rem">-</span>');
+  const hasAudio=!!window.speechSynthesis;
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🔤 Syllables — ${FC.length} flashcards</div>
+  <div class="ex-instr">Front: the complete word. Flip to see how it divides into syllables and which one is the <span style="color:#fb923c;font-weight:800">stressed syllable</span> (marked in orange).</div>
+  <div class="fc-wrap">
+    <div class="fc-prow">
+      <span class="fc-cnt">${fcIdx+1}/${FC.length}</span>
+      <div class="fc-trk"><div class="fc-fil" style="width:${pct}%"></div></div>
+      <span class="fc-cnt">${typeLabels[item.type]}</span>
+    </div>
+    <div class="fc-card${fcFlipped?' flipped':''}" id="fcCard" onclick="flipFC()">
+      <div class="fc-inner">
+        <div class="fc-front" style="align-items:center;justify-content:center">
+          <div style="font-size:.65rem;font-weight:900;color:rgba(249,115,22,.7);text-transform:uppercase;letter-spacing:.1em">How does it divide?</div>
+          <div class="word-big" style="color:#fb923c">${item.word}</div>
+          <div style="font-size:.72rem;color:var(--muted2);margin-top:auto">👆 Click to flip</div>
+        </div>
+        <div class="fc-back" style="align-items:center;justify-content:center">
+          <div>${typeLabels[item.type]}</div>
+          <div class="word-big syl-box">${sylHTML}</div>
+          <div style="font-size:.76rem;color:var(--muted2);text-align:center">🔴 stressed syllable</div>
+          ${hasAudio?`<button class="btn-audio" onclick="event.stopPropagation();speak('${item.audio}',this)">🔊 Listen</button>`:''}
+          <div style="font-size:.8rem;color:var(--muted);padding:8px 12px;background:rgba(255,255,255,.05);border-radius:9px;text-align:center;line-height:1.6">💡 ${item.note}</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="btn btn-ghost" onclick="prevFC()" ${fcIdx===0?'disabled':''}>← Prev</button>
+      <button class="btn btn-ghost" onclick="flipFC()">↺ Flip</button>
+      <button class="btn btn-cyan" onclick="nextFC()" ${fcIdx===FC.length-1?'disabled':''}>Next →</button>
+    </div>
+  </div></div>`;
+}
+function flipFC(){fcFlipped=!fcFlipped;document.getElementById('fcCard')?.classList.toggle('flipped',fcFlipped);}
+function nextFC(){fcIdx=Math.min(FC.length-1,fcIdx+1);fcFlipped=false;renderSilabeo();}
+function prevFC(){fcIdx=Math.max(0,fcIdx-1);fcFlipped=false;renderSilabeo();}
+
+/* ══════════════════════════════════
+   EX 2 — CLASIFICA (36 MC)
+   Word shown WITHOUT tilde — student classifies type
+   Answers: aguda / grave / esdrújula / sobresdrújula
+   No pattern: ag,gr,es,gr,ag,es,so,ag,gr,es...
+══════════════════════════════════ */
+const CLASS=[
+  {word:'cancion',ans:'ag',x:'Aguda. Stress en última sílaba "ción." Termina en N → lleva tilde: canción.'},
+  {word:'arbol',ans:'gr',x:'Grave. Stress en penúltima "ár." Termina en L (consonante ≠ N/S) → lleva tilde: árbol.'},
+  {word:'musica',ans:'es',x:'Esdrújula. Stress en antepenúltima "mú." Siempre lleva tilde: música.'},
+  {word:'cafe',ans:'ag',x:'Aguda. Stress en última "fé." Termina en vocal → lleva tilde: café.'},
+  {word:'libro',ans:'gr',x:'Grave. Stress en penúltima "li." Termina en vocal O → NO lleva tilde.'},
+  {word:'telefono',ans:'es',x:'Esdrújula. Stress en antepenúltima "lé." Siempre lleva tilde: teléfono.'},
+  {word:'compratelo',ans:'so',x:'Sobresdrújula. Stress antes de la antepenúltima. Siempre lleva tilde: cómpratelo.'},
+  {word:'amor',ans:'ag',x:'Aguda. Stress en última "mor." Termina en R (consonante ≠ N/S) → NO lleva tilde.'},
+  {word:'facil',ans:'gr',x:'Grave. Stress en penúltima "fá." Termina en L (consonante ≠ N/S) → lleva tilde: fácil.'},
+  {word:'Mexico',ans:'es',x:'Esdrújula. Stress en antepenúltima "Mé." Siempre lleva tilde: México.'},
+  {word:'papel',ans:'ag',x:'Aguda. Stress en última "pel." Termina en L (consonante ≠ N/S) → NO lleva tilde.'},
+  {word:'angel',ans:'gr',x:'Grave. Stress en penúltima "án." Termina en L (consonante ≠ N/S) → lleva tilde: ángel.'},
+  {word:'medico',ans:'es',x:'Esdrújula. Stress en antepenúltima "mé." Siempre lleva tilde: médico.'},
+  {word:'ciudad',ans:'ag',x:'Aguda. Stress en última "dad." Termina en D (consonante ≠ N/S) → NO lleva tilde.'},
+  {word:'lapiz',ans:'gr',x:'Grave. Stress en penúltima "lá." Termina en Z (consonante ≠ N/S) → lleva tilde: lápiz.'},
+  {word:'silaba',ans:'es',x:'Esdrújula. Stress en antepenúltima "sí." Siempre lleva tilde: sílaba.'},
+  {word:'digamelo',ans:'so',x:'Sobresdrújula. Stress antes de la antepenúltima. Siempre lleva tilde: dígamelo.'},
+  {word:'jamas',ans:'ag',x:'Aguda. Stress en última "más." Termina en S → lleva tilde: jamás.'},
+  {word:'examen',ans:'gr',x:'Grave. Stress en penúltima "xa." Termina en N → NO lleva tilde.'},
+  {word:'practico',ans:'es',x:'Esdrújula. Stress en antepenúltima "prác." Siempre lleva tilde: práctico.'},
+  {word:'tambien',ans:'ag',x:'Aguda. Stress en última "bién." Termina en N → lleva tilde: también.'},
+  {word:'carcel',ans:'gr',x:'Grave. Stress en penúltima "cár." Termina en L (consonante ≠ N/S) → lleva tilde: cárcel.'},
+  {word:'rapido',ans:'es',x:'Esdrújula. Stress en antepenúltima "rá." Siempre lleva tilde: rápido.'},
+  {word:'reloj',ans:'ag',x:'Aguda. Stress en última "loj." Termina en J (consonante ≠ N/S) → NO lleva tilde.'},
+  {word:'azucar',ans:'gr',x:'Grave. Stress en penúltima "zú." Termina en R (consonante ≠ N/S) → lleva tilde: azúcar.'},
+  {word:'parabola',ans:'es',x:'Esdrújula. Stress en antepenúltima "pá." Siempre lleva tilde: parábola.'},
+  {word:'salon',ans:'ag',x:'Aguda. Stress en última "lón." Termina en N → lleva tilde: salón.'},
+  {word:'crisis',ans:'gr',x:'Grave. Stress en penúltima "cri." Termina en S → NO lleva tilde.'},
+  {word:'matematica',ans:'es',x:'Esdrújula. Stress en antepenúltima "má." Siempre lleva tilde: matemática.'},
+  {word:'vendras',ans:'ag',x:'Aguda. Stress en última "drás." Termina en S → lleva tilde: vendrás.'},
+  {word:'orden',ans:'gr',x:'Grave. Stress en penúltima "or." Termina en N → NO lleva tilde.'},
+  {word:'camara',ans:'es',x:'Esdrújula. Stress en antepenúltima "cá." Siempre lleva tilde: cámara.'},
+  {word:'traelo',ans:'es',x:'Esdrújula. Stress en antepenúltima "trá." Siempre lleva tilde: tráelo.'},
+  {word:'cafe',ans:'ag',x:'Aguda. Stress en última "fé." Termina en vocal → lleva tilde: café.'},
+  {word:'virgen',ans:'gr',x:'Grave. Stress en penúltima "vir." Termina en N → NO lleva tilde.'},
+  {word:'numero',ans:'es',x:'Esdrújula. Stress en antepenúltima "nú." Siempre lleva tilde: número.'},
+];
+
+function renderClasifica(){
+  classAns={};
+  const opts=['aguda','grave','esdrújula','sobresdrújula'];
+  const html=CLASS.map((item,i)=>{
+    const done=classAns[i]!==undefined;
+    const btns=opts.map(o=>{
+      let cls='mc-opt';
+      if(done){if(o===item.ans)cls+=' mshow';else if(classAns[i]===o&&o!==item.ans)cls+=' merr';}
+      return `<button class="${cls}" onclick="answerClass(${i},'${o}')" ${done?'disabled':''}>${o}</button>`;
+    }).join('');
+    return `<div class="mc-card${done?(classAns[i]===item.ans?' ok':' err'):''}" id="clc${i}">
+      <div class="mc-q"><span style="font-family:var(--display);font-size:1.6rem;font-weight:900;color:var(--ag)">${item.word}</span></div>
+      <div class="mc-opts">${btns}</div>
+      <div class="mc-exp${done?' show':''}" id="cle${i}">${done?(classAns[i]===item.ans?'✓ ':'✗ ')+item.x:''}</div>
+    </div>`;
+  }).join('');
+  const done=Object.keys(classAns).length;const ok=CLASS.filter((_,i)=>classAns[i]===CLASS[i].ans).length;
+  const tot=CLASS.length;
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🏷️ Classify — ${tot} words</div>
+  <div class="ex-instr">The word is shown <em>without any accent mark</em>. Identify the type based on where the stress falls when you say it aloud: <span class="pill-ag">aguda</span> <span class="pill-gr">grave</span> <span class="pill-es">esdrújula</span> <span class="pill-so">sobresdrújula</span></div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="cl_ok">${ok}</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="cl_err">${done-ok}</span></div><div class="prog-w"><div class="prog-l"><span id="cl_pct">${Math.round(done/tot*100)}%</span></div><div class="prog-t"><div class="prog-f" id="cl_pg" style="width:${Math.round(done/tot*100)}%"></div></div></div></div>
+  <div class="mc-list">${html}</div>
+  <div class="fb" id="cl_fb"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="classAns={};renderClasifica()">↺ Reset</button></div></div>`;
+}
+function answerClass(qi,chosen){
+  if(classAns[qi]!==undefined)return;
+  const item=CLASS[qi];const isOk=chosen===item.ans;classAns[qi]=chosen;
+  document.getElementById('clc'+qi).classList.add(isOk?'ok':'err');
+  document.querySelectorAll(`#clc${qi} .mc-opt`).forEach(b=>{b.disabled=true;if(b.textContent===item.ans)b.classList.add('mshow');else if(b.textContent===chosen&&!isOk)b.classList.add('merr');});
+  const e=document.getElementById('cle'+qi);if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+item.x;}
+  const done=Object.keys(classAns).length;const ok=CLASS.filter((_,i)=>classAns[i]===CLASS[i].ans).length;
+  document.getElementById('cl_ok').textContent=ok;document.getElementById('cl_err').textContent=done-ok;
+  document.getElementById('cl_pct').textContent=Math.round(done/CLASS.length*100)+'%';
+  document.getElementById('cl_pg').style.width=Math.round(done/CLASS.length*100)+'%';
+  if(done===CLASS.length){const pct=Math.round(ok/done*100);const fb=document.getElementById('cl_fb');fb.className='fb show '+(pct>=80?'ok':'partial');fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${ok}/${done}.</strong> ${pct>=80?'Excellent! You correctly identify word stress types.':'Review the 4 categories and remember: most Spanish words are grave.'}`;}
+}
+
+/* ══════════════════════════════════
+   EX 3 — TILDE O NO (binary, 38)
+   Word shown as plain text — student picks sí/no
+   Mix: ~19 yes, ~19 no — no pattern
+══════════════════════════════════ */
+const TN=[
+  {word:'cancion',display:'cancion',ans:'si',correct:'canción',x:'Aguda terminada en N → sí lleva tilde: canción.'},
+  {word:'libro',display:'libro',ans:'no',correct:'libro',x:'Grave terminada en vocal O → no lleva tilde.'},
+  {word:'musica',display:'musica',ans:'si',correct:'música',x:'Esdrújula → siempre lleva tilde: música.'},
+  {word:'amor',display:'amor',ans:'no',correct:'amor',x:'Aguda terminada en R (≠ vocal, N, S) → no lleva tilde.'},
+  {word:'cafe',display:'cafe',ans:'si',correct:'café',x:'Aguda terminada en vocal E → sí lleva tilde: café.'},
+  {word:'casa',display:'casa',ans:'no',correct:'casa',x:'Grave terminada en vocal A → no lleva tilde.'},
+  {word:'arbol',display:'arbol',ans:'si',correct:'árbol',x:'Grave terminada en L (≠ N/S) → sí lleva tilde: árbol.'},
+  {word:'jamas',display:'jamas',ans:'si',correct:'jamás',x:'Aguda terminada en S → sí lleva tilde: jamás.'},
+  {word:'papel',display:'papel',ans:'no',correct:'papel',x:'Aguda terminada en L (≠ N/S) → no lleva tilde.'},
+  {word:'medico',display:'medico',ans:'si',correct:'médico',x:'Esdrújula → siempre lleva tilde: médico.'},
+  {word:'examen',display:'examen',ans:'no',correct:'examen',x:'Grave terminada en N → no lleva tilde.'},
+  {word:'facil',display:'facil',ans:'si',correct:'fácil',x:'Grave terminada en L (≠ N/S) → sí lleva tilde: fácil.'},
+  {word:'ciudad',display:'ciudad',ans:'no',correct:'ciudad',x:'Aguda terminada en D (≠ N/S) → no lleva tilde.'},
+  {word:'rapido',display:'rapido',ans:'si',correct:'rápido',x:'Esdrújula → siempre lleva tilde: rápido.'},
+  {word:'tambien',display:'tambien',ans:'si',correct:'también',x:'Aguda terminada en N → sí lleva tilde: también.'},
+  {word:'hablan',display:'hablan',ans:'no',correct:'hablan',x:'Grave terminada en N → no lleva tilde.'},
+  {word:'lapiz',display:'lapiz',ans:'si',correct:'lápiz',x:'Grave terminada en Z (≠ N/S) → sí lleva tilde: lápiz.'},
+  {word:'reloj',display:'reloj',ans:'no',correct:'reloj',x:'Aguda terminada en J (≠ N/S) → no lleva tilde.'},
+  {word:'azucar',display:'azucar',ans:'si',correct:'azúcar',x:'Grave terminada en R (≠ N/S) → sí lleva tilde: azúcar.'},
+  {word:'comen',display:'comen',ans:'no',correct:'comen',x:'Grave terminada en N → no lleva tilde.'},
+  {word:'matematica',display:'matematica',ans:'si',correct:'matemática',x:'Esdrújula → siempre lleva tilde: matemática.'},
+  {word:'salon',display:'salon',ans:'si',correct:'salón',x:'Aguda terminada en N → sí lleva tilde: salón.'},
+  {word:'crisis',display:'crisis',ans:'no',correct:'crisis',x:'Grave terminada en S → no lleva tilde.'},
+  {word:'parabola',display:'parabola',ans:'si',correct:'parábola',x:'Esdrújula → siempre lleva tilde: parábola.'},
+  {word:'vendras',display:'vendras',ans:'si',correct:'vendrás',x:'Aguda terminada en S → sí lleva tilde: vendrás.'},
+  {word:'virgen',display:'virgen',ans:'no',correct:'virgen',x:'Grave terminada en N → no lleva tilde.'},
+  {word:'camara',display:'camara',ans:'si',correct:'cámara',x:'Esdrújula → siempre lleva tilde: cámara.'},
+  {word:'pais',display:'pais',ans:'si',correct:'país',x:'Hiato: vocal débil I tónica junto a vocal fuerte A → tilde obligatoria: país.'},
+  {word:'orden',display:'orden',ans:'no',correct:'orden',x:'Grave terminada en N → no lleva tilde.'},
+  {word:'numero',display:'numero',ans:'si',correct:'número',x:'Esdrújula → siempre lleva tilde: número.'},
+  {word:'compratelo',display:'compratelo',ans:'si',correct:'cómpratelo',x:'Sobresdrújula → siempre lleva tilde: cómpratelo.'},
+  {word:'hablas',display:'hablas',ans:'no',correct:'hablas',x:'Grave terminada en S → no lleva tilde.'},
+  {word:'silaba',display:'silaba',ans:'si',correct:'sílaba',x:'Esdrújula → siempre lleva tilde: sílaba.'},
+  {word:'angel',display:'angel',ans:'si',correct:'ángel',x:'Grave terminada en L (≠ N/S) → sí lleva tilde: ángel.'},
+  {word:'carcel',display:'carcel',ans:'si',correct:'cárcel',x:'Grave terminada en L (≠ N/S) → sí lleva tilde: cárcel.'},
+  {word:'volumen',display:'volumen',ans:'no',correct:'volumen',x:'Grave terminada en N → no lleva tilde.'},
+  {word:'baul',display:'baul',ans:'si',correct:'baúl',x:'Hiato: vocal débil U tónica junto a vocal fuerte A → tilde obligatoria: baúl.'},
+  {word:'virgen',display:'virgen',ans:'no',correct:'virgen',x:'Grave terminada en N → no lleva tilde.'},
+];
+
+function renderTildeNo(){
+  tnAns={};
+  const html=TN.map((item,i)=>{
+    const done=tnAns[i]!==undefined;const isOk=done&&tnAns[i]===item.ans;
+    return `<div class="tn-card${done?(isOk?' ok':' err'):''}" id="tnc${i}">
+      <div class="tn-word" style="color:var(--ag)">${item.display}</div>
+      <div class="tn-hint">Does this word need an accent mark?</div>
+      <div class="tn-choice">
+        <button class="tn-btn y${done?(' '+(item.ans==='si'?'vok':tnAns[i]==='si'?'verr':'')):''}" onclick="answerTN(${i},'si',this)" ${done?'disabled':''}>✅ Sí</button>
+        <button class="tn-btn n${done?(' '+(item.ans==='no'?'vok':tnAns[i]==='no'?'verr':'')):''}" onclick="answerTN(${i},'no',this)" ${done?'disabled':''}>❌ No</button>
+      </div>
+      <div class="tn-exp${done?' show':''}" id="tne${i}">${done?(isOk?'✓ ':'✗ Correcto: <strong>'+item.correct+'</strong> — ')+item.x:''}</div>
+    </div>`;
+  }).join('');
+  const done=Object.keys(tnAns).length;const ok=TN.filter((_,i)=>tnAns[i]===TN[i].ans).length;const tot=TN.length;
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">✍️ Tilde or not? — ${tot} words</div>
+  <div class="ex-instr">The word is shown <em>without any accent mark</em>. Does it need one when written correctly? Think about the word type and how it ends.</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="tn_ok">${ok}</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="tn_err">${done-ok}</span></div><div class="prog-w"><div class="prog-l"><span id="tn_pct">${Math.round(done/tot*100)}%</span></div><div class="prog-t"><div class="prog-f" id="tn_pg" style="width:${Math.round(done/tot*100)}%"></div></div></div></div>
+  <div class="tn-list">${html}</div>
+  <div class="fb" id="tn_fb"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="tnAns={};renderTildeNo()">↺ Reset</button></div></div>`;
+}
+function answerTN(qi,chosen,btn){
+  if(tnAns[qi]!==undefined)return;
+  const item=TN[qi];const isOk=chosen===item.ans;tnAns[qi]=chosen;
+  document.getElementById('tnc'+qi).classList.add(isOk?'ok':'err');
+  const [yb,nb]=document.getElementById('tnc'+qi).querySelectorAll('.tn-btn');
+  [yb,nb].forEach(b=>b.disabled=true);
+  if(item.ans==='si'){yb.classList.add('vok');if(!isOk)nb.classList.add('verr');}
+  else{nb.classList.add('vok');if(!isOk)yb.classList.add('verr');}
+  const e=document.getElementById('tne'+qi);if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ Correcto: <strong>'+item.correct+'</strong> — ')+item.x;}
+  const done=Object.keys(tnAns).length;const ok=TN.filter((_,i)=>tnAns[i]===TN[i].ans).length;
+  document.getElementById('tn_ok').textContent=ok;document.getElementById('tn_err').textContent=done-ok;
+  document.getElementById('tn_pct').textContent=Math.round(done/TN.length*100)+'%';
+  document.getElementById('tn_pg').style.width=Math.round(done/TN.length*100)+'%';
+  if(done===TN.length){const pct=Math.round(ok/done*100);const fb=document.getElementById('tn_fb');fb.className='fb show '+(pct>=80?'ok':'partial');fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${ok}/${done}.</strong> ${pct>=80?'Excellent! You apply the accent rules correctly.':'Remember: aguda+vowel/N/S → tilde · grave+≠N/S → tilde · esdrújula → always tilde.'}`;}
+}
+
+/* ══════════════════════════════════
+   EX 4 — COMPLETA (24)
+   Choose correct spelled version of a word
+   (with or without tilde, in context)
+══════════════════════════════════ */
+const FILLS=[
+  {q:'Voy a tomar un ___ de manzanilla.',hint:'infusión',opts:['te','té','te´','tè'],a:1,x:'"Té" = la infusión. Aguda terminada en vocal → lleva tilde. "Te" (sin tilde) = pronombre (te llamo).'},
+  {q:'___ llegó tarde a la reunión.',hint:'pronombre sujeto masculino',opts:['El','Él','EL','el'],a:1,x:'"Él" (con tilde) = pronombre personal sujeto. "El" (sin tilde) = artículo determinado.'},
+  {q:'No sé si ___ viene o no.',hint:'conjunción condicional',opts:['si','sí','si,','si;'],a:0,x:'"Si" (sin tilde) = conjunción condicional (if). "Sí" (con tilde) = afirmación o pronombre reflexivo.'},
+  {q:'¿___ te llamas?',hint:'interrogativo',opts:['Como','Cómo','como','Còmo'],a:1,x:'"Cómo" (con tilde) = interrogativo. "Como" (sin tilde) = comparativo o verbo comer.'},
+  {q:'___ quiero ir al cine.',hint:'adverbio de cantidad',opts:['Mas','Más','Mas,','MÁS'],a:1,x:'"Más" (con tilde) = adverbio de cantidad (more). "Mas" (sin tilde) = conjunción adversativa equivalente a "pero" — literario/formal.'},
+  {q:'Eso es ___ mío, no lo toques.',hint:'posesivo',opts:['mio','mío','mio´','mi-o'],a:1,x:'"Mío" (con tilde) = posesivo tónico. Grave terminada en vocal O → normalmente no lleva tilde, pero mío sí porque es un pronombre posesivo tónico con hiato.'},
+  {q:'El médico me dijo que ___ más agua.',hint:'subjuntivo/imperativo de beber',opts:['beba','béba','bebá','bébà'],a:0,x:'"Beba" (sin tilde) = subjuntivo de beber. Grave terminada en vocal A → no lleva tilde.'},
+  {q:'___ no has terminado el trabajo.',hint:'todavía',opts:['Aun','Aún','Àun','aun'],a:1,x:'"Aún" (con tilde) = todavía. "Aun" (sin tilde) = incluso / hasta (even).'},
+  {q:'¿___ hay tacos en la taquería?',hint:'interrogativo de lugar',opts:['Donde','Dónde','donde','Dondé'],a:1,x:'"Dónde" (con tilde) = interrogativo de lugar. "Donde" (sin tilde) = relativo.'},
+  {q:'___ libro es muy interesante.',hint:'artículo masculino',opts:['El','Él','el´','EL'],a:0,x:'"El" (sin tilde) = artículo determinado masculino. "Él" (con tilde) = pronombre personal.'},
+  {q:'Llegaron a ___ con rapidez.',hint:'el país',opts:['Mexico','México','Mexíco','Mèxico'],a:1,x:'"México" (con tilde) = esdrújula, siempre lleva tilde. Stress en la antepenúltima sílaba "Mé."'},
+  {q:'¡Qué ___ está el día hoy!',hint:'adjective for a beautiful day',opts:['bonito','bónito','bonîto','boníto'],a:0,x:'"Bonito" (sin tilde) = grave terminada en vocal O → no lleva tilde.'},
+  {q:'¿Puedes ___, por favor?',hint:'traer ese libro para mí',opts:['traermelo','traérmelo','tráermelo','traermélo'],a:1,x:'"Traérmelo" es esdrújula: tra-ér-me-lo. Los pronombres enclíticos se escriben unidos al verbo y la tilde se coloca según las reglas generales de acentuación.'},
+  {q:'___ vino a la fiesta, nadie lo esperaba.',hint:'ella',opts:['Ella','Élla','ella´','ELLA'],a:0,x:'"Ella" (sin tilde) = grave terminada en vocal A → no lleva tilde. Solo "él" (masculino singular) lleva tilde diacrítica.'},
+  {q:'¿___ estás haciendo ahora mismo?',hint:'interrogativo de acción',opts:['Que','Qué','qué','que'],a:1,x:'"Qué" (con tilde) = interrogativo. "Que" (sin tilde) = relativo o conjunción.'},
+  {q:'Estudia para que ___ mejor el examen.',hint:'aprobar mejor',opts:['apruebes','apruébes','apruèbes','apruebes´'],a:0,x:'"Apruebes" (sin tilde) = grave terminada en S → no lleva tilde.'},
+  {q:'¡___ hermosa es la ciudad de noche!',hint:'exclamativo',opts:['Que','Qué','que´','QUÉ'],a:1,x:'"Qué" (con tilde) en exclamativas = siempre con tilde.'},
+  {q:'La clase de ___ es muy difícil.',hint:'cálculo matemático',opts:['matematicas','matemáticas','Matemáticas','MATEMATICAS'],a:1,x:'"Matemáticas" = esdrújula → siempre lleva tilde. Stress en "má" (antepenúltima).'},
+  {q:'El tren llegará al ___ a las 8.',hint:'la terminal ferroviaria',opts:['andén','anden','ánden','andèn'],a:0,x:'"Andén" = aguda terminada en N → lleva tilde.'},
+  {q:'Necesito un ___ de agua, por favor.',hint:'container for water',opts:['vaso','váso','vasó','vàso'],a:0,x:'"Vaso" (sin tilde) = grave terminada en vocal O → no lleva tilde.'},
+  {q:'Ella es ___ inteligente que él.',hint:'comparativo',opts:['mas','más','Más','MÁS'],a:1,x:'"Más" (con tilde) = adverbio comparativo (more). "Mas" (sin tilde) = pero (literario/formal).'},
+  {q:'El doctor es muy ___ en su área.',hint:'known specialist',opts:['experto','expérto','experto´','èxperto'],a:0,x:'"Experto" (sin tilde) = grave terminada en vocal O → no lleva tilde.'},
+  {q:'¿___ vas a hacer este fin de semana?',hint:'interrogativo de acción',opts:['Que','Qué','que','Qúe'],a:1,x:'"Qué" (con tilde) = interrogativo (what). "Que" (sin tilde) = relativo o conjunción.'},
+  {q:'Llegaron en ___ a la fiesta.',hint:'a taxi',opts:['taxi','táxi','taxí','tàxi'],a:0,x:'"Taxi" (sin tilde) = grave terminada en vocal I → no lleva tilde.'},
+];
+
+function renderFill(){
+  fillAns={};
+  const html=FILLS.map((f,i)=>{
+    const chips=f.opts.map((o,oi)=>`<button class="fill-chip" id="fch${i}_${oi}" onclick="answerFill(${i},${oi})">${o}</button>`).join('');
+    return `<div class="fill-card" id="fcard${i}">
+      <div class="fill-q">${f.q.replace('___','<span class="fill-blank" id="fbl${i}">___</span>')}</div>
+      <div class="fill-hint">${f.hint}</div>
+      <div class="fill-chips">${chips}</div>
+      <div class="fill-exp" id="fexp${i}"></div>
+    </div>`;
+  }).join('');
+  const tot=FILLS.length;
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">✏️ Fill in — ${tot} sentences</div>
+  <div class="ex-instr">Choose the correctly written form to complete the sentence. Pay attention to context to know whether the word needs an accent mark — watch out for diacritical pairs!</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="fi_ok">0</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="fi_err">0</span></div><div class="prog-w"><div class="prog-l"><span id="fi_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="fi_pg" style="width:0%"></div></div></div></div>
+  <div class="fill-list">${html}</div>
+  <div class="fb" id="fi_fb"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="fillAns={};renderFill()">↺ Reset</button></div></div>`;
+}
+function answerFill(qi,oi){
+  if(fillAns[qi]!==undefined)return;
+  const f=FILLS[qi];const isOk=oi===f.a;fillAns[qi]=isOk;
+  document.getElementById('fcard'+qi).classList.add(isOk?'ok':'err');
+  const bl=document.getElementById('fbl'+qi);if(bl)bl.innerHTML=`<span class="fill-chip ${isOk?'chip-ok':'chip-err'}" style="cursor:default">${f.opts[oi]}</span>${!isOk?` <span class="fill-chip chip-ok" style="cursor:default">${f.opts[f.a]}</span>`:''}`;
+  document.querySelectorAll(`[id^="fch${qi}_"]`).forEach(c=>{c.disabled=true;c.classList.add('used');});
+  const e=document.getElementById('fexp'+qi);if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+f.x;}
+  const done=Object.keys(fillAns).length;const ok=FILLS.filter((_,i)=>fillAns[i]).length;
+  document.getElementById('fi_ok').textContent=ok;document.getElementById('fi_err').textContent=done-ok;
+  document.getElementById('fi_pct').textContent=Math.round(done/FILLS.length*100)+'%';
+  document.getElementById('fi_pg').style.width=Math.round(done/FILLS.length*100)+'%';
+  if(done===FILLS.length){const pct=Math.round(ok/done*100);const fb=document.getElementById('fi_fb');fb.className='fb show '+(pct>=80?'ok':'partial');fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${ok}/${done}.</strong> ${pct>=80?'Excellent! You correctly apply accent marks in context.':'Review the diacritical pairs and accent rules.'}`;}
+}
+
+/* ══════════════════════════════════
+   EX 5 — DIACRÍTICOS (32)
+   Fill in the blank: el/él, tu/tú, mi/mí, si/sí,
+   te/té, se/sé, de/dé, mas/más, aun/aún,
+   que/qué, como/cómo, donde/dónde
+   No pattern: varied pair types throughout
+══════════════════════════════════ */
+const DIAC=[
+  {q:'¿___ te llamas?',blankopts:['Cómo','Como'],correct:'Cómo',pair:'cómo/como',x:'"Cómo" (tilde) = interrogativo. "Como" (sin tilde) = comparativo o verbo.'},
+  {q:'___ libro es muy aburrido.',blankopts:['El','Él'],correct:'El',pair:'el/él',x:'"El" (sin tilde) = artículo determinado. "Él" (tilde) = pronombre personal sujeto.'},
+  {q:'Quiero ___ de canela, por favor.',blankopts:['te','té'],correct:'té',pair:'te/té',x:'"Té" (tilde) = la infusión. Aguda terminada en vocal → tilde. "Te" = pronombre.'},
+  {q:'___ vas a estudiar esta tarde?',blankopts:['Que','Qué'],correct:'Qué',pair:'qué/que',x:'"Qué" (tilde) = interrogativo. "Que" (sin tilde) = conjunción o relativo.'},
+  {q:'___ casa es preciosa.',blankopts:['Tu','Tú'],correct:'Tu',pair:'tu/tú',x:'"Tu" (sin tilde) = posesivo. "Tú" (tilde) = pronombre sujeto.'},
+  {q:'Llega a la fiesta ___ quieres.',blankopts:['como','cómo'],correct:'como',pair:'cómo/como',x:'"Como" (sin tilde) = comparativo / de la manera que. "Cómo" (tilde) = interrogativo.'},
+  {q:'___ que no vas a venir.',blankopts:['Se','Sé'],correct:'Sé',pair:'se/sé',x:'"Sé" (tilde) = primera persona de "saber" (yo sé) o imperativo de "ser." "Se" = pronombre reflexivo.'},
+  {q:'Ese regalo es para ___.',blankopts:['mi','mí'],correct:'mí',pair:'mi/mí',x:'"Mí" (tilde) = pronombre tónico (after preposición). "Mi" (sin tilde) = posesivo.'},
+  {q:'¿___ vives ahora?',blankopts:['Donde','Dónde'],correct:'Dónde',pair:'dónde/donde',x:'"Dónde" (tilde) = interrogativo de lugar. "Donde" (sin tilde) = relativo.'},
+  {q:'___ llegó primero al trabajo.',blankopts:['El','Él'],correct:'Él',pair:'el/él',x:'"Él" (tilde) = pronombre personal sujeto. "El" (sin tilde) = artículo.'},
+  {q:'___ tienes que estudiar para pasar.',blankopts:['Si','Sí'],correct:'Si',pair:'si/sí',x:'"Si" (sin tilde) = condicional (if). "Sí" (tilde) = afirmación o pronombre reflexivo.'},
+  {q:'Tiene ___ más habilidades que nosotros.',blankopts:['aun','aún'],correct:'aun',pair:'aun/aún',x:'"Aun" (sin tilde) = incluso/hasta. "Aún" (tilde) = todavía.'},
+  {q:'Quiero ___ por favor.',blankopts:['mas','más'],correct:'más',pair:'mas/más',x:'"Más" (tilde) = adverbio de cantidad. "Mas" (sin tilde) = pero (literario/formal).'},
+  {q:'___ fue lo que dijo exactamente.',blankopts:['Eso','Ése'],correct:'Eso',pair:'eso/ése*',x:'"Eso" (sin tilde) = pronombre neutro. Los demostrativos neutros (eso, esto, aquello) nunca llevan tilde.'},
+  {q:'¿___ quieres que hagamos hoy?',blankopts:['Que','Qué'],correct:'Qué',pair:'qué/que',x:'"Qué" (tilde) = interrogativo (what). "Que" (sin tilde) = conjunción.'},
+  {q:'Por favor, ___ ese libro a María.',blankopts:['de','dé'],correct:'dé',pair:'de/dé',x:'"Dé" (tilde) = imperativo/subjuntivo de "dar." "De" (sin tilde) = preposición.'},
+  {q:'___ no sé qué pensar de eso.',blankopts:['La','Lá'],correct:'La',pair:'otros (no diacrítico)',x:'"La" = artículo o pronombre. Los artículos nunca llevan tilde.'},
+  {q:'___ ha terminado todavía.',blankopts:['Aun','Aún'],correct:'Aún',pair:'aun/aún',x:'"Aún" (tilde) = todavía. "Aun" (sin tilde) = incluso/hasta (even if).'},
+  {q:'___ eres de México?',blankopts:['Tu','Tú'],correct:'Tú',pair:'tu/tú',x:'"Tú" (tilde) = pronombre sujeto, sujeto de la oración. "Tu" (sin tilde) = posesivo.'},
+  {q:'Habla ___ lo hace un nativo.',blankopts:['como','cómo'],correct:'como',pair:'cómo/como',x:'"Como" (sin tilde) = comparativo. "Cómo" (tilde) = interrogativo o exclamativo.'},
+  {q:'No ___ nada sobre ese tema.',blankopts:['se','sé'],correct:'sé',pair:'se/sé',x:'"Sé" (tilde) = yo sé (verbo saber). "Se" (sin tilde) = pronombre reflexivo.'},
+  {q:'Esto es para ___, no para ti.',blankopts:['mi','mí'],correct:'mí',pair:'mi/mí',x:'"Mí" (tilde) = pronombre tónico después de preposición (para mí). "Mi" (sin tilde) = posesivo.'},
+  {q:'Creo ___ tienes razón.',blankopts:['que','qué'],correct:'que',pair:'qué/que',x:'"Que" (sin tilde) = conjunción. "Qué" (tilde) = interrogativo/exclamativo.'},
+  {q:'¡___ bien que llegaste!',blankopts:['Que','Qué'],correct:'Qué',pair:'qué/que',x:'"Qué" (tilde) en exclamativas. "¡Qué bien!" = how good! Siempre tilde en exclamaciones.'},
+  {q:'___ libro es tuyo?',blankopts:['Que','Qué'],correct:'Qué',pair:'qué/que',x:'"Qué" (tilde) = interrogativo (which). Aunque parece un relativo, en una pregunta directa lleva tilde.'},
+  {q:'Vivía ___ nadie lo conocía.',blankopts:['donde','dónde'],correct:'donde',pair:'dónde/donde',x:'"Donde" (sin tilde) = relativo de lugar. "Dónde" (tilde) = interrogativo.'},
+  {q:'___ quieres, puedes quedarte.',blankopts:['Si','Sí'],correct:'Si',pair:'si/sí',x:'"Si" (sin tilde) = condicional (if you want). "Sí" (tilde) = yes / pronombre reflexivo.'},
+  {q:'Respondió que ___, que vendría.',blankopts:['si','sí'],correct:'sí',pair:'si/sí',x:'"Sí" (tilde) = afirmación (yes). "Si" (sin tilde) = condicional.'},
+  {q:'Vengo ___ México.',blankopts:['de','dé'],correct:'de',pair:'de/dé',x:'"De" (sin tilde) = preposición. "Dé" (con tilde) es una forma del verbo dar.'},
+  {q:'¿___ dónde eres?',blankopts:['De','Dé'],correct:'De',pair:'de/dé',x:'"De" (sin tilde) = preposición. "¿De dónde eres?" = where are you from? La preposición nunca lleva tilde.'},
+  {q:'No quiero ___, gracias.',blankopts:['te','té'],correct:'té',pair:'te/té',x:'En contexto de rechazar una bebida, "té" (tilde) = la infusión. "Te" (sin tilde) = pronombre.'},
+  {q:'___ pidió que esperara.',blankopts:['el','él'],correct:'él',pair:'el/él',x:'"Él" (tilde) = pronombre sujeto (he asked). "El" (sin tilde) = artículo determinado.'},
+];
+
+function renderDiac(){
+  diacAns={};
+  const html=DIAC.map((item,i)=>{
+    const done=diacAns[i]!==undefined;const isOk=done&&diacAns[i]===item.correct;
+    const btns=item.blankopts.map(o=>{
+      let cls='diac-btn';
+      if(done){if(o===item.correct)cls+=' dshow';else if(diacAns[i]===o&&o!==item.correct)cls+=' derr';}
+      return `<button class="${cls}" onclick="answerDiac(${i},'${o.replace(/'/g,"\\'")}',this)" ${done?'disabled':''}>${o}</button>`;
+    }).join('');
+    return `<div class="diac-ex-card${done?(isOk?' ok':' err'):''}" id="diac${i}">
+      <div class="diac-q">${item.q.replace('___','<span class="diac-blank" id="dbl${i}">___</span>')}</div>
+      <div class="diac-choice">${btns}</div>
+      <div class="diac-exp${done?' show':''}" id="dexp${i}">${done?(isOk?'✓ ':'✗ ')+item.x:''}</div>
+    </div>`;
+  }).join('');
+  const done=Object.keys(diacAns).length;const ok=DIAC.filter((_,i)=>diacAns[i]===DIAC[i].correct).length;const tot=DIAC.length;
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🔀 Diacritics — ${tot} sentences</div>
+  <div class="ex-instr">Choose the correct form based on context. Diacritical pairs are spelled the same except for the accent mark, but have different grammatical roles. <span class="pill-di">Read the context carefully</span> — it is the only clue.</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="di_ok">${ok}</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="di_err">${done-ok}</span></div><div class="prog-w"><div class="prog-l"><span id="di_pct">${Math.round(done/tot*100)}%</span></div><div class="prog-t"><div class="prog-f" id="di_pg" style="width:${Math.round(done/tot*100)}%"></div></div></div></div>
+  <div class="diac-ex-list">${html}</div>
+  <div class="fb" id="di_fb"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="diacAns={};renderDiac()">↺ Reset</button></div></div>`;
+}
+function answerDiac(qi,chosen,btn){
+  if(diacAns[qi]!==undefined)return;
+  const item=DIAC[qi];const isOk=chosen===item.correct;diacAns[qi]=chosen;
+  document.getElementById('diac'+qi).classList.add(isOk?'ok':'err');
+  const bl=document.getElementById('dbl'+qi);if(bl)bl.textContent=chosen;
+  btn.parentElement.querySelectorAll('.diac-btn').forEach(b=>{b.disabled=true;if(b.textContent===item.correct)b.classList.add('dshow');else if(b===btn&&!isOk)b.classList.add('derr');});
+  const e=document.getElementById('dexp'+qi);if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+item.x;}
+  const done=Object.keys(diacAns).length;const ok=DIAC.filter((_,i)=>diacAns[i]===DIAC[i].correct).length;
+  document.getElementById('di_ok').textContent=ok;document.getElementById('di_err').textContent=done-ok;
+  document.getElementById('di_pct').textContent=Math.round(done/DIAC.length*100)+'%';
+  document.getElementById('di_pg').style.width=Math.round(done/DIAC.length*100)+'%';
+  if(done===DIAC.length){const pct=Math.round(ok/done*100);const fb=document.getElementById('di_fb');fb.className='fb show '+(pct>=80?'ok':'partial');fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${ok}/${done}.</strong> ${pct>=80?'You have mastered the diacritical accents!':'Remember: context is everything — is it an article or pronoun? A question word or a relative?'}`;}
+}
+
+/* ══════════════════════════════════
+   EX 6 — SPEED ROUND (40)
+   Mixed: clasifica / tilde or not / diacrítico
+   Word shown big, choose correct from 4 options
+══════════════════════════════════ */
+const SP=[
+  {q:'canción',hint:'¿Qué tipo de palabra es?',a:'aguda',opts:['aguda','grave','esdrújula','sobresdrújula']},
+  {q:'él llegó',hint:'¿Cuál es correcto?',a:'él',opts:['el','él','él´','El']},
+  {q:'árbol',hint:'¿Lleva tilde?',a:'Sí — árbol',opts:['Sí — árbol','No — arbol','Sí — arbol','No — árbol']},
+  {q:'café',hint:'¿Qué tipo de palabra es?',a:'aguda',opts:['aguda','grave','esdrújula','sobresdrújula']},
+  {q:'tu casa vs ___ vienes',hint:'posesivo vs pronombre',a:'tú vienes',opts:['tu vienes','tú vienes','Tu vienes','TÚ vienes']},
+  {q:'música',hint:'¿Lleva tilde?',a:'Sí — siempre',opts:['No','Sí — siempre','Solo si termina en vocal','Solo en algunas formas']},
+  {q:'amor',hint:'¿Lleva tilde?',a:'No — aguda en R',opts:['Sí — es aguda','No — aguda en R','Sí — es grave','No — es grave']},
+  {q:'si quieres vs responde que ___',hint:'condicional vs afirmación',a:'sí (afirmación)',opts:['si (afirmación)','sí (afirmación)','Si (afirmación)','Sí´ (afirmación)']},
+  {q:'médico',hint:'¿Qué tipo de palabra es?',a:'esdrújula',opts:['aguda','grave','esdrújula','sobresdrújula']},
+  {q:'papel',hint:'¿Lleva tilde?',a:'No — aguda en L',opts:['Sí — es aguda','No — aguda en L','Sí — termina en L','No — es grave']},
+  {q:'¿___ haces?',hint:'interrogativo de acción',a:'Qué',opts:['Que','Qué','que','QUE']},
+  {q:'lápiz',hint:'¿Qué tipo de palabra es?',a:'grave',opts:['aguda','grave','esdrújula','sobresdrújula']},
+  {q:'___ libro de Juan',hint:'artículo vs pronombre',a:'El libro',opts:['El libro','Él libro','EL libro','el libro*']},
+  {q:'cómpratelo',hint:'¿Qué tipo de palabra es?',a:'sobresdrújula',opts:['aguda','grave','esdrújula','sobresdrújula']},
+  {q:'también',hint:'¿Lleva tilde?',a:'Sí — aguda en N',opts:['No','Sí — aguda en N','Sí — es esdrújula','No — termina en N']},
+  {q:'¿___ vives?',hint:'interrogativo de lugar',a:'Dónde',opts:['Donde','Dónde','donde','DÓNDE']},
+  {q:'azúcar',hint:'¿Lleva tilde?',a:'Sí — grave en R',opts:['No','Sí — grave en R','Sí — es esdrújula','No — es aguda']},
+  {q:'___ no sé qué pensar',hint:'yo saber vs pronombre',a:'Sé (yo saber)',opts:['Se (yo saber)','Sé (yo saber)','SE (yo saber)','se (yo saber)']},
+  {q:'examen',hint:'¿Lleva tilde?',a:'No — grave en N',opts:['Sí — termina en N','No — grave en N','Sí — es aguda','No — es esdrújula']},
+  {q:'quiero ___ manzanilla',hint:'infusión vs pronombre',a:'té',opts:['te','té','Te','Té']},
+  {q:'rápido',hint:'¿Qué tipo de palabra es?',a:'esdrújula',opts:['aguda','grave','esdrújula','sobresdrújula']},
+  {q:'país',hint:'¿Por qué lleva tilde?',a:'Hiato: vocal débil tónica',opts:['Es aguda en S','Es esdrújula','Hiato: vocal débil tónica','Es grave en S']},
+  {q:'___ llegó tarde',hint:'he/she arrived',a:'Él llegó',opts:['El llegó','Él llegó','el Llegó','El Llegó']},
+  {q:'hablas',hint:'¿Lleva tilde?',a:'No — grave en S',opts:['Sí — termina en S','No — grave en S','Sí — es aguda','No — es esdrújula']},
+  {q:'aún no llegó',hint:'todavía vs incluso',a:'aún (todavía)',opts:['aun (todavía)','aún (todavía)','Aún (todavía)','Aun (todavía)']},
+  {q:'sílaba',hint:'¿Qué tipo de palabra es?',a:'esdrújula',opts:['aguda','grave','esdrújula','sobresdrújula']},
+  {q:'¡___ bonito!',hint:'exclamativo',a:'Qué',opts:['Que','Qué','que','QUE']},
+  {q:'baúl',hint:'¿Por qué lleva tilde?',a:'Hiato: vocal débil tónica',opts:['Es aguda en L','Es grave en L','Hiato: vocal débil tónica','Es esdrújula']},
+  {q:'cárcel',hint:'¿Lleva tilde?',a:'Sí — grave en L',opts:['No','Sí — grave en L','Sí — es esdrújula','No — es aguda']},
+  {q:'para ___',hint:'pronombre tónico tras preposición',a:'mí',opts:['mi','mí','Mi','Mí']},
+  {q:'cancion',hint:'¿Debe llevar tilde?',a:'Sí — canción',opts:['No','Sí — canción','Solo en plural','No cambia']},
+  {q:'dígamelo',hint:'¿Qué tipo de palabra es?',a:'sobresdrújula',opts:['aguda','grave','esdrújula','sobresdrújula']},
+  {q:'___ quieres, te ayudo.',hint:'condicional',a:'Si',opts:['Si','Sí','SI','si´']},
+  {q:'número',hint:'¿Qué tipo de palabra es?',a:'esdrújula',opts:['aguda','grave','esdrújula','sobresdrújula']},
+  {q:'reloj',hint:'¿Lleva tilde?',a:'No — aguda en J',opts:['Sí — es aguda','No — aguda en J','Sí — termina en J','No — es grave']},
+  {q:'¿___ te llamas?',hint:'interrogativo de modo',a:'Cómo',opts:['Como','Cómo','como','CÓMO']},
+  {q:'ángel',hint:'¿Lleva tilde?',a:'Sí — grave en L',opts:['No','Sí — grave en L','Sí — es esdrújula','No — es aguda']},
+  {q:'matemática',hint:'¿Qué tipo?',a:'esdrújula',opts:['aguda','grave','esdrújula','sobresdrújula']},
+  {q:'___ por favor',hint:'dale — imperativo de dar',a:'dé',opts:['de','dé','De','Dé']},
+  {q:'quiero ___ más',hint:'adverbio de cantidad',a:'más',opts:['mas','más','Mas','Más']},
+];
+
+function renderSpeed(){
+  const arr=seededShuffle([...SP],99);window.__sp=arr;
+  spIdx=0;spOk=0;spErr=0;spStreak=0;spAns={};
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">⚡ Speed round — ${SP.length} preguntas</div>
+  <div class="ex-instr">Mix of <span class="pill-ag">classify</span>, <span class="pill-gr">tilde or not?</span> and <span class="pill-di">diacritics</span>. Read the hint and choose fast.</div>
+  <div class="sp-wrap" id="spWrap"><div class="sp-start"><div style="font-size:2.8rem">⚡</div><h2>Fast accents</h2><p style="color:var(--muted);max-width:420px">40 mixed questions — classify words, decide if they need an accent mark, and solve diacritical pairs.</p><button class="btn btn-cyan" onclick="startSp()">Let's go!</button></div></div></div>`;
+}
+function startSp(){spIdx=0;spOk=0;spErr=0;spStreak=0;nextSp();}
+function nextSp(){
+  const arr=window.__sp;if(spIdx>=arr.length){endSp();return;}
+  const item=arr[spIdx];
+  const opts=seededShuffle([...item.opts],spIdx*17+7);
+  const btns=opts.map(o=>`<button class="sp-opt" onclick="answerSp('${o.replace(/'/g,"\\'")}','${item.a.replace(/'/g,"\\'")}',this)">${o}</button>`).join('');
+  document.getElementById('spWrap').innerHTML=`
+    <div class="sp-stats"><div class="spst"><div class="sl">Q</div><div class="sv w">${spIdx+1}/${arr.length}</div></div><div class="spst"><div class="sl">OK</div><div class="sv g">${spOk}</div></div><div class="spst"><div class="sl">Miss</div><div class="sv b">${spErr}</div></div></div>
+    <div class="streak${spStreak>=3?' on':''}">🔥 x${spStreak}</div>
+    <div class="sp-card">
+      <div class="sp-q">${item.q}</div>
+      ${item.hint?`<div class="sp-hint">${item.hint}</div>`:''}
+    </div>
+    <div class="sp-opts">${btns}</div>
+    <div class="sp-fb" id="sFb" style="opacity:0"></div>`;
+}
+function answerSp(chosen,correct,btn){
+  if(spAns[spIdx])return;spAns[spIdx]=true;
+  const isOk=chosen===correct;if(isOk){spOk++;spStreak++;}else{spErr++;spStreak=0;}
+  document.querySelectorAll('.sp-opt').forEach(b=>{b.disabled=true;if(b.textContent===correct)b.classList.add('spshow');else if(b===btn&&!isOk)b.classList.add('sperr');});
+  const fb=document.getElementById('sFb');if(fb){fb.style.opacity='1';fb.className=`sp-fb ${isOk?'ok':'err'}`;fb.innerHTML=isOk?`✓ ${correct}!${spStreak>=3?' 🔥 x'+spStreak:''}`:`✗ → ${correct}`;}
+  if(spStreak>=3){const cf=document.getElementById('cf');cf.textContent='🔥 x'+spStreak;cf.classList.remove('pop');void cf.offsetWidth;cf.classList.add('pop');}
+  spIdx++;setTimeout(nextSp,isOk?800:1800);
+}
+function endSp(){
+  const pct=Math.round(spOk/SP.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('spWrap').innerHTML=`<div class="sp-start"><div style="font-size:3rem">${emo}</div><h2>${spOk}/${SP.length}</h2><p style="color:var(--muted)">${pct>=90?'Excellent! You have mastered Spanish accents.':pct>=70?'Very good! Almost perfect.':pct>=50?'Good attempt — keep practicing.':'Review the explanation and try again.'}</p><button class="btn btn-cyan" onclick="startSp()">↺ Try again</button></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 7 — REFERENCE
+══════════════════════════════════ */
+function renderRef(){
+  const rows=[
+    ['AGUDA','Last syllable','vocal, N, S','canción, café, jamás','amor, papel, ciudad'],
+    ['GRAVE','Second-to-last syllable','consonant ≠ N or S','árbol, lápiz, fácil','casa, libro, examen'],
+    ['ESDRÚJULA','Third-to-last syllable','SIEMPRE','música, médico, México','—'],
+    ['SOBRESDRÚJULA','Antes de antepenúltima','SIEMPRE','cómpratelo, dígamelo','—'],
+  ];
+  const diacRows=[
+    ['el / él','artículo / pronombre sujeto','El libro · Él habla'],
+    ['tu / tú','posesivo / pronombre sujeto','Tu casa · Tú hablas'],
+    ['mi / mí','posesivo / pronombre tónico','Mi libro · Para mí'],
+    ['si / sí','condicional / afirmación o reflexivo','Si quieres · Dijo que sí · Vive para sí'],
+    ['te / té','pronombre / infusión','Te llamo · Quiero un té'],
+    ['se / sé','pronombre / yo saber, imperativo ser','Se lava · Yo sé · Sé bueno'],
+    ['de / dé','preposición / subjuntivo de dar','Casa de madera · Espero que dé'],
+    ['mas / más','pero (literario) / cantidad','Lo quiero mas no puedo · Quiero más'],
+    ['aun / aún','incluso / todavía','Aun así · Aún no llega'],
+    ['que / qué','relativo-conjunción / interrogativo-exclamativo','Creo que viene · ¿Qué haces? ¡Qué bonito!'],
+    ['como / cómo','comparativo-verbo / interrogativo','Como tú · Como tacos · ¿Cómo te llamas?'],
+    ['donde / dónde','relativo / interrogativo','El lugar donde vivo · ¿Dónde vives?'],
+  ];
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📄 Referencia rápida — Los Acentos</div>
+
+  <div style="font-family:var(--display);font-size:.9rem;font-weight:900;color:#fb923c;margin-bottom:12px">📊 Accent rules</div>
+  <div style="overflow-x:auto;margin-bottom:24px">
+  <table class="ref-table">
+    <tr><th>Tipo</th><th>Stressed syllable</th><th>Gets tilde if…</th><th>With tilde</th><th>Without tilde</th></tr>
+    ${rows.map(r=>`<tr><td><span class="pill-${r[0]==='AGUDA'?'ag':r[0]==='GRAVE'?'gr':r[0]==='ESDRÚJULA'?'es':'so'}">${r[0]}</span></td><td style="color:var(--muted)">${r[1]}</td><td style="color:var(--good);font-weight:700">${r[2]}</td><td style="font-family:var(--display)">${r[3]}</td><td style="color:var(--muted2);font-family:var(--display)">${r[4]}</td></tr>`).join('')}
+  </table>
+  </div>
+
+  <div style="font-family:var(--display);font-size:.9rem;font-weight:900;color:#f9a8d4;margin-bottom:12px">🔀 Diacritical pairs</div>
+  <div style="overflow-x:auto;margin-bottom:24px">
+  <table class="ref-table">
+    <tr><th>Par</th><th>Difference</th><th>Example</th></tr>
+    ${diacRows.map(r=>`<tr><td style="font-family:var(--display);font-weight:900;color:#f9a8d4">${r[0]}</td><td style="color:var(--muted);font-size:.82rem">${r[1]}</td><td style="font-size:.82rem;color:var(--muted2)">${r[2]}</td></tr>`).join('')}
+  </table>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px">
+    <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:12px 15px;font-size:.84rem;line-height:1.75">
+      <div style="font-weight:900;color:var(--warn);margin-bottom:6px">⚠️ Hiatos with tilde</div>
+      Stressed weak vowel (I, U) + strong vowel (A, E, O) → tilde required to break the diphthong.<br>
+      <span style="font-family:var(--display)">pa<span class="tilde">í</span>s · ba<span class="tilde">ú</span>l · ma<span class="tilde">í</span>z · ra<span class="tilde">í</span>z · r<span class="tilde">í</span>o</span>
+    </div>
+    <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:12px 15px;font-size:.84rem;line-height:1.75">
+      <div style="font-weight:900;color:var(--warn);margin-bottom:6px">❓ Question and exclamation words</div>
+      With tilde when they have interrogative or exclamative meaning: <span style="font-family:var(--display)">qué · cómo · cuándo · dónde · quién · cuál · cuánto</span><br>
+      This also applies in indirect questions and exclamations.
+    </div>
+    <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:12px 15px;font-size:.84rem;line-height:1.75">
+      <div style="font-weight:900;color:var(--warn);margin-bottom:6px">📝 Adverbs ending in -mente</div>
+      They keep the tilde of the base adjective:<br>
+      <span style="font-family:var(--display)">rápido → rápidamente · fácil → fácilmente · difícil → difícilmente</span>
+    </div>
+  </div>
+  </div>`;
+}
+
+goEx(0);
+</script>
+</body>
+</html>

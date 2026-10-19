@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tener & Hacer | YMF A2</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --tener:#f97316;--hacer:#25d9ff;--ser:#a78bfa;--estar:#34d399;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(37,217,255,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 20% 10%,rgba(167,139,250,.12),transparent 35%),radial-gradient(ellipse at 80% 15%,rgba(34,211,153,.07),transparent 35%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(900px,96%);margin:14px auto 60px;display:flex;flex-direction:column;gap:14px}
+.hero{border-radius:22px;padding:26px 30px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.hero-in{position:relative;z-index:1}
+.hero-top{display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.logo-box{width:54px;height:54px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.8rem;font-weight:900;color:var(--magenta)}
+.hero h1{font-family:var(--display);font-size:clamp(1.2rem,3vw,1.9rem);font-weight:900;background:linear-gradient(90deg,var(--tener),#fff 45%,var(--estar));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.86rem;margin-top:3px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 11px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.tabs-wrap{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.tabs-bar{display:flex;overflow-x:auto;border-bottom:1px solid rgba(255,255,255,.07);scrollbar-width:none}
+.tabs-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;border:0;background:transparent;color:var(--muted2);font-family:var(--font);font-size:.82rem;font-weight:700;padding:14px 18px;cursor:pointer;transition:.2s;border-bottom:2.5px solid transparent;white-space:nowrap}
+.tab-btn:hover{color:var(--text)}.tab-btn.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+.tab-content{display:none;padding:26px 28px}.tab-content.active{display:block}
+.verb-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-bottom:24px}
+.verb-card{border-radius:14px;padding:16px;border:1.5px solid}
+.verb-card-title{font-family:var(--display);font-size:1.1rem;font-weight:900;margin-bottom:4px}
+.verb-card-sub{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.6;margin-bottom:12px}
+.verb-chips{display:flex;flex-wrap:wrap;gap:5px}
+.verb-chip{border-radius:999px;padding:3px 10px;font-size:.75rem;font-weight:700;border:1.5px solid;opacity:.85}
+.exp-note{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px;font-size:.85rem;line-height:1.75;color:var(--muted)}
+.exp-note strong{color:var(--text)}
+.exp-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:.84rem}
+.exp-table th{text-align:left;padding:8px 12px;color:var(--muted2);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;border-bottom:1px solid rgba(255,255,255,.08)}
+.exp-table td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5}
+.exp-table tr:last-child td{border-bottom:0}
+.exp-table .verb{font-family:var(--display);font-weight:900;font-size:.9rem}
+.exp-table .eng{color:var(--muted);font-style:italic;font-size:.8rem}
+.fc-scene{perspective:800px;width:100%;max-width:420px;margin:0 auto;height:200px;cursor:pointer}
+.fc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.fc-card.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:24px;text-align:center;border:1.5px solid}
+.fc-front{background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-color:rgba(255,255,255,.12)}
+.fc-back{transform:rotateY(180deg);background:linear-gradient(135deg,rgba(37,217,255,.08),rgba(37,217,255,.02));border-color:rgba(37,217,255,.3)}
+.fc-label{font-size:.65rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);margin-bottom:10px}
+.fc-word{font-family:var(--display);font-size:1.5rem;font-weight:900}
+.fc-hint{font-size:.75rem;color:var(--muted2);margin-top:8px}
+.fc-eng{font-size:1rem;font-weight:700;color:var(--cyan)}
+.fc-dots{display:flex;gap:5px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.fc-dot{width:7px;height:7px;border-radius:999px;background:rgba(255,255,255,.15);cursor:pointer;transition:.2s;flex-shrink:0}
+.fc-dot.active{background:var(--cyan);transform:scale(1.3)}.fc-dot.seen{background:rgba(34,197,94,.5)}
+.fc-nav{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:14px}
+.fc-counter{font-size:.8rem;color:var(--muted2);font-weight:700}
+.btn{border:0;border-radius:10px;padding:9px 20px;font-weight:800;font-family:var(--font);font-size:.85rem;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{transform:translateY(-1px)}.btn:active{transform:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),#00bfff);color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.btn-sm{padding:6px 14px;font-size:.78rem}
+.q-wrap{display:flex;flex-direction:column;gap:12px}
+.q-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:13px;padding:15px 17px;transition:.2s}
+.q-card.correct{border-color:var(--good);background:rgba(34,197,94,.05)}
+.q-card.wrong{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.q-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.08);border-radius:5px;padding:2px 7px;display:inline-block;margin-bottom:7px;color:var(--muted)}
+.q-stem{font-size:.95rem;line-height:1.65;font-weight:600;margin-bottom:6px}
+.q-transl{font-size:.78rem;color:var(--muted2);font-style:italic;padding:5px 10px;background:rgba(255,255,255,.03);border-left:2.5px solid rgba(37,217,255,.25);border-radius:0 6px 6px 0;margin-bottom:10px;line-height:1.5}
+.q-blank{display:inline-block;border-bottom:2.5px solid var(--cyan);min-width:90px;text-align:center;padding:0 5px;color:var(--cyan);font-weight:800;font-family:var(--display);font-size:.97rem}
+.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.mc-opt{border:0;border-radius:9px;padding:9px 13px;font-weight:700;font-family:var(--font);font-size:.86rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);border-color:rgba(37,217,255,.4)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.show-correct{border-color:var(--good);background:rgba(34,197,94,.15);color:#86efac}
+.mc-opt.sel-wrong{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.chips-row{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:0;border-radius:9px;padding:8px 15px;font-weight:800;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.chip.used{opacity:.2;cursor:not-allowed}
+.chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.vf-opts{display:flex;gap:10px}
+.vf-btn{border:0;border-radius:10px;padding:9px 26px;font-weight:900;font-family:var(--display);font-size:.95rem;cursor:pointer;transition:.13s;border:2px solid}
+.vf-btn.t{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#86efac}
+.vf-btn.f{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#fca5a5}
+.vf-btn:hover:not([disabled]){transform:translateY(-2px);filter:brightness(1.2)}
+.vf-btn[disabled]{cursor:default;transform:none}
+.vf-btn.sel-correct{filter:brightness(1.3);border-width:2.5px}
+.vf-btn.sel-wrong{filter:brightness(.7)}
+.q-fb{display:none;font-size:.79rem;color:var(--muted);margin-top:8px;padding:8px 11px;border-radius:7px;background:rgba(255,255,255,.04);line-height:1.6}
+.q-fb.show{display:block}
+.score-bar{margin-bottom:14px}
+.score-pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:4px 14px;font-size:.78rem;font-weight:800;color:var(--muted)}
+.speed-info{font-size:.83rem;color:var(--muted);margin-bottom:16px;line-height:1.6}
+.speed-card{background:rgba(255,255,255,.04);border:1.5px solid rgba(37,217,255,.2);border-radius:16px;padding:22px 24px;margin-bottom:14px}
+.speed-timer-bar{height:5px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden;margin-bottom:14px}
+.speed-timer-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--estar));transition:width .1s linear}
+.speed-prompt{font-family:var(--display);font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:6px;color:#fff}
+.speed-transl{font-size:.78rem;color:var(--muted2);font-style:italic;text-align:center;margin-bottom:16px}
+.speed-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.speed-opt{border:0;border-radius:10px;padding:11px 14px;font-weight:800;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.12s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.speed-opt:hover:not([disabled]){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.speed-result{text-align:center;padding:20px}
+.speed-big{font-family:var(--display);font-size:2.5rem;font-weight:900}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:4px}
+.result-box{margin-top:20px;border-radius:14px;padding:18px 22px;text-align:center;border:1.5px solid}
+.result-box-title{font-family:var(--display);font-size:1.1rem;font-weight:900;margin-bottom:6px}
+.result-box-score{font-family:var(--display);font-size:2rem;font-weight:900;margin:8px 0}
+.result-box-msg{font-size:.83rem;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.btn-restart{border:0;border-radius:10px;padding:9px 22px;font-weight:800;font-family:var(--font);font-size:.85rem;cursor:pointer;background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:#fff;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-restart:hover{transform:translateY(-2px)}.btn-restart:active{transform:none}
+.vf-sentence{font-size:1.05rem;font-weight:800;font-family:var(--display);padding:14px 16px;background:rgba(37,217,255,.06);border:1.5px solid rgba(37,217,255,.2);border-radius:10px;margin-bottom:10px;line-height:1.6;color:var(--text)}
+.vf-translation{font-size:.76rem;color:var(--muted2);font-style:italic;margin-top:-6px;margin-bottom:8px;padding:0 2px;line-height:1.5}
+.vf-question{font-size:.78rem;color:var(--muted2);margin-bottom:10px;font-style:italic}
+.creator span{color:var(--magenta2)}
+@media(max-width:540px){.mc-opts,.speed-opts{grid-template-columns:1fr}.verb-cards{grid-template-columns:1fr 1fr}.tab-content{padding:18px 16px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-top">
+      <div class="logo-box">YMF</div>
+      <div>
+        <h1>Tener · Hacer · Ser · Estar</h1>
+        <p>Sensations, weather, emotions &amp; needs in Mexican Spanish · Level A2</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge">🟠 TENER</span>
+      <span class="badge" style="border-color:rgba(37,217,255,.4);color:var(--cyan)">🔵 HACER</span>
+      <span class="badge" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">🟣 SER</span>
+      <span class="badge" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">🟢 ESTAR</span>
+      <span class="badge">A2 · English instructions</span>
+      <span class="badge">By Carlos &amp; Denisse</span>
+    </div>
+  </div>
+</header>
+<div class="tabs-wrap">
+  <div class="tabs-bar">
+    <button class="tab-btn active" onclick="switchTab(0)">📖 Explanation</button>
+    <button class="tab-btn" onclick="switchTab(1)">🃏 Flashcards</button>
+    <button class="tab-btn" onclick="switchTab(2)">✅ Choose the Verb</button>
+    <button class="tab-btn" onclick="switchTab(3)">💬 Fill in the Blank</button>
+    <button class="tab-btn" onclick="switchTab(4)">🔀 True or False</button>
+    <button class="tab-btn" onclick="switchTab(5)">⚡ Speed Round</button>
+  </div>
+  <!-- TAB 0 -->
+  <div class="tab-content active" id="tab0">
+    <div class="verb-cards">
+      <div class="verb-card" style="border-color:rgba(249,115,22,.35);background:rgba(249,115,22,.05)">
+        <div class="verb-card-title" style="color:var(--tener)">TENER</div>
+        <div class="verb-card-sub" style="color:var(--tener)">noun / infinitive</div>
+        <div class="verb-chips">
+          <span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">frío</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">calor</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">hambre</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">sed</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">sueño</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">miedo</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">prisa</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">razón</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">suerte</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">vergüenza</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">ganas de</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">éxito</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">cuidado</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">años</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">dolor</span><span class="verb-chip" style="border-color:rgba(249,115,22,.4);color:#fdba74">fiebre</span>
+        </div>
+      </div>
+      <div class="verb-card" style="border-color:rgba(37,217,255,.3);background:rgba(37,217,255,.04)">
+        <div class="verb-card-title" style="color:var(--hacer)">HACER</div>
+        <div class="verb-card-sub" style="color:var(--hacer)">weather / actions</div>
+        <div class="verb-chips">
+          <span class="verb-chip" style="border-color:rgba(37,217,255,.35);color:#7de8ff">calor</span><span class="verb-chip" style="border-color:rgba(37,217,255,.35);color:#7de8ff">frío</span><span class="verb-chip" style="border-color:rgba(37,217,255,.35);color:#7de8ff">sol</span><span class="verb-chip" style="border-color:rgba(37,217,255,.35);color:#7de8ff">viento</span><span class="verb-chip" style="border-color:rgba(37,217,255,.35);color:#7de8ff">buen tiempo</span><span class="verb-chip" style="border-color:rgba(37,217,255,.35);color:#7de8ff">mal tiempo</span><span class="verb-chip" style="border-color:rgba(37,217,255,.35);color:#7de8ff">ejercicio</span><span class="verb-chip" style="border-color:rgba(37,217,255,.35);color:#7de8ff">una pregunta</span><span class="verb-chip" style="border-color:rgba(37,217,255,.35);color:#7de8ff">caso</span><span class="verb-chip" style="border-color:rgba(37,217,255,.35);color:#7de8ff">fila</span><span class="verb-chip" style="border-color:rgba(37,217,255,.35);color:#7de8ff">tarea</span>
+        </div>
+      </div>
+      <div class="verb-card" style="border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.05)">
+        <div class="verb-card-title" style="color:var(--ser)">SER</div>
+        <div class="verb-card-sub" style="color:var(--ser)">permanent traits</div>
+        <div class="verb-chips">
+          <span class="verb-chip" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">importante</span><span class="verb-chip" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">interesante</span><span class="verb-chip" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">aburrido*</span><span class="verb-chip" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">difícil</span><span class="verb-chip" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">fácil</span><span class="verb-chip" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">inteligente</span><span class="verb-chip" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">simpático</span><span class="verb-chip" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">bueno*</span>
+        </div>
+      </div>
+      <div class="verb-card" style="border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.05)">
+        <div class="verb-card-title" style="color:var(--estar)">ESTAR</div>
+        <div class="verb-card-sub" style="color:var(--estar)">temporary states</div>
+        <div class="verb-chips">
+          <span class="verb-chip" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">cansado/a</span><span class="verb-chip" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">emocionado/a</span><span class="verb-chip" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">nervioso/a</span><span class="verb-chip" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">contento/a</span><span class="verb-chip" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">triste</span><span class="verb-chip" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">enfermo/a</span><span class="verb-chip" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">ocupado/a</span><span class="verb-chip" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">aburrido/a*</span><span class="verb-chip" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">bueno/a*</span><span class="verb-chip" style="border-color:rgba(52,211,153,.4);color:#6ee7b7">lleno/a</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-note">
+      <strong>⚠️ Key contrasts:</strong><br>
+      <strong style="color:var(--tener)">Tengo calor</strong> = I feel hot (my body) &nbsp;·&nbsp; <strong style="color:var(--hacer)">Hace calor</strong> = It is hot (weather)<br>
+      <strong style="color:var(--tener)">Tengo frío</strong> = I feel cold (my body) &nbsp;·&nbsp; <strong style="color:var(--hacer)">Hace frío</strong> = It is cold (weather)<br>
+      <strong style="color:var(--ser)">Es aburrido</strong> = He is a boring person (always) &nbsp;·&nbsp; <strong style="color:var(--estar)">Está aburrido</strong> = He is bored (right now)<br>
+      <strong style="color:var(--ser)">Es bueno</strong> = He is a good person &nbsp;·&nbsp; <strong style="color:var(--estar)">Está bueno</strong> = It tastes good / he looks good<br>
+      <strong style="color:var(--ser)">Es difícil</strong> = It is difficult (always) &nbsp;·&nbsp; <strong>El café <span style="color:var(--estar)">está</span> caliente</strong> = The coffee is hot (right now)
+    </div>
+    <table class="exp-table">
+      <thead><tr><th>Spanish</th><th>English</th><th>Verb</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tengo hambre</strong></td><td class="eng">I am hungry</td><td><span class="verb" style="color:var(--tener)">TENER</span></td></tr>
+        <tr><td><strong>Tengo sed</strong></td><td class="eng">I am thirsty</td><td><span class="verb" style="color:var(--tener)">TENER</span></td></tr>
+        <tr><td><strong>Tengo sueño</strong></td><td class="eng">I am sleepy</td><td><span class="verb" style="color:var(--tener)">TENER</span></td></tr>
+        <tr><td><strong>Tengo miedo</strong></td><td class="eng">I am scared / afraid</td><td><span class="verb" style="color:var(--tener)">TENER</span></td></tr>
+        <tr><td><strong>Tengo prisa</strong></td><td class="eng">I am in a hurry</td><td><span class="verb" style="color:var(--tener)">TENER</span></td></tr>
+        <tr><td><strong>Tengo razón</strong></td><td class="eng">I am right</td><td><span class="verb" style="color:var(--tener)">TENER</span></td></tr>
+        <tr><td><strong>Tengo suerte</strong></td><td class="eng">I am lucky</td><td><span class="verb" style="color:var(--tener)">TENER</span></td></tr>
+        <tr><td><strong>Tengo vergüenza</strong></td><td class="eng">I am embarrassed</td><td><span class="verb" style="color:var(--tener)">TENER</span></td></tr>
+        <tr><td><strong>Tengo ganas de...</strong></td><td class="eng">I feel like... / I want to...</td><td><span class="verb" style="color:var(--tener)">TENER</span></td></tr>
+        <tr><td><strong>Tengo dolor de cabeza</strong></td><td class="eng">I have a headache</td><td><span class="verb" style="color:var(--tener)">TENER</span></td></tr>
+        <tr><td><strong>Tengo fiebre</strong></td><td class="eng">I have a fever</td><td><span class="verb" style="color:var(--tener)">TENER</span></td></tr>
+        <tr><td><strong>Hace calor / frío</strong></td><td class="eng">It is hot / cold (weather)</td><td><span class="verb" style="color:var(--hacer)">HACER</span></td></tr>
+        <tr><td><strong>Hace sol</strong></td><td class="eng">It is sunny</td><td><span class="verb" style="color:var(--hacer)">HACER</span></td></tr>
+        <tr><td><strong>Hace viento</strong></td><td class="eng">It is windy</td><td><span class="verb" style="color:var(--hacer)">HACER</span></td></tr>
+        <tr><td><strong>Hace buen / mal tiempo</strong></td><td class="eng">The weather is nice / bad</td><td><span class="verb" style="color:var(--hacer)">HACER</span></td></tr>
+        <tr><td><strong>Hacer fila</strong></td><td class="eng">To wait in line</td><td><span class="verb" style="color:var(--hacer)">HACER</span></td></tr>
+        <tr><td><strong>Está cansado/a</strong></td><td class="eng">He/she is tired (right now)</td><td><span class="verb" style="color:var(--estar)">ESTAR</span></td></tr>
+        <tr><td><strong>Está lleno/a</strong></td><td class="eng">It is full / he is stuffed</td><td><span class="verb" style="color:var(--estar)">ESTAR</span></td></tr>
+        <tr><td><strong>Es difícil / fácil</strong></td><td class="eng">It is difficult / easy (always)</td><td><span class="verb" style="color:var(--ser)">SER</span></td></tr>
+        <tr><td><strong>Es importante</strong></td><td class="eng">It is important (always)</td><td><span class="verb" style="color:var(--ser)">SER</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- TAB 1 FLASHCARDS -->
+  <div class="tab-content" id="tab1">
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:16px">Click the card to flip it. Use the arrows or dots to navigate.</p>
+    <div class="fc-scene" onclick="flipFC()">
+      <div class="fc-card" id="fcCard">
+        <div class="fc-face fc-front">
+          <div class="fc-label">Spanish expression</div>
+          <div class="fc-word" id="fcWord">tener hambre</div>
+          <div class="fc-hint">Click to reveal →</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-label">English meaning</div>
+          <div class="fc-eng" id="fcEng">to be hungry</div>
+          <div class="fc-hint" id="fcVerb" style="margin-top:10px;font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-dots" id="fcDots"></div>
+    <div class="fc-nav">
+      <button class="btn btn-ghost btn-sm" onclick="navFC(-1)">← Prev</button>
+      <span class="fc-counter" id="fcCounter">1 / 35</span>
+      <button class="btn btn-ghost btn-sm" onclick="navFC(1)">Next →</button>
+    </div>
+    <div style="margin-top:14px;text-align:center">
+      <button class="btn btn-cyan btn-sm" onclick="shuffleFC()">🔀 Shuffle</button>
+    </div>
+  </div>
+  <!-- TAB 2 -->
+  <div class="tab-content" id="tab2">
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:4px">Choose the correct verb. All options are already conjugated correctly.</p>
+    <div class="score-bar"><span class="score-pill" id="score2">0 / 38 answered</span>
+    <button class="btn-restart" style="margin-left:8px" onclick="restartTab('q2','qwrap2')">🔄 Restart</button></div>
+    <div class="q-wrap" id="qwrap2"></div>
+  </div>
+  <!-- TAB 3 -->
+  <div class="tab-content" id="tab3">
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:4px">Click the correct expression to complete each sentence. The Spanish translation is shown below each sentence.</p>
+    <div class="score-bar"><span class="score-pill" id="score3">0 / 32 answered</span>
+    <button class="btn-restart" style="margin-left:8px" onclick="restartTab('q3','qwrap3')">🔄 Restart</button></div>
+    <div class="q-wrap" id="qwrap3"></div>
+  </div>
+  <!-- TAB 4 -->
+  <div class="tab-content" id="tab4">
+    <p style="font-size:.84rem;color:var(--muted);margin-bottom:4px">Read each Spanish sentence and decide: is it grammatically correct, or does it have an error?</p>
+    <div class="score-bar"><span class="score-pill" id="score4">0 / 25 answered</span>
+    <button class="btn-restart" style="margin-left:8px" onclick="restartTab('q4','qwrap4')">🔄 Restart</button></div>
+    <div class="q-wrap" id="qwrap4"></div>
+  </div>
+  <!-- TAB 5 -->
+  <div class="tab-content" id="tab5">
+    <div class="speed-info">You have <strong>15 seconds</strong> per question. The Spanish translation is shown below the English prompt.</div>
+    <div id="speedArea"></div>
+  </div>
+</div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · yourmexicanfriend.com</p>
+</div>
+
+<script>
+function switchTab(i){
+  document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  document.querySelectorAll('.tab-content').forEach((c,j)=>c.classList.toggle('active',i===j));
+  if(i===1&&!fcReady)initFC();
+  if(i===2&&!q2Ready)initQ2();
+  if(i===3&&!q3Ready)initQ3();
+  if(i===4&&!q4Ready)initQ4();
+  if(i===5&&!speedReady)initSpeed();
+}
+
+// ── FLASHCARDS ────────────────────────────────────────────────────────────────
+const FC=[
+  {es:'tener hambre',en:'to be hungry',v:'TENER'},
+  {es:'tener sed',en:'to be thirsty',v:'TENER'},
+  {es:'tener sueño',en:'to be sleepy',v:'TENER'},
+  {es:'tener frío',en:'to feel cold (body)',v:'TENER'},
+  {es:'tener calor',en:'to feel hot (body)',v:'TENER'},
+  {es:'tener miedo',en:'to be scared / afraid',v:'TENER'},
+  {es:'tener prisa',en:'to be in a hurry',v:'TENER'},
+  {es:'tener razón',en:'to be right',v:'TENER'},
+  {es:'tener suerte',en:'to be lucky',v:'TENER'},
+  {es:'tener vergüenza',en:'to be embarrassed',v:'TENER'},
+  {es:'tener ganas de...',en:'to feel like... / to want to...',v:'TENER'},
+  {es:'tener éxito',en:'to be successful',v:'TENER'},
+  {es:'tener cuidado',en:'to be careful',v:'TENER'},
+  {es:'tener... años',en:'to be ... years old',v:'TENER'},
+  {es:'tener dolor de cabeza',en:'to have a headache',v:'TENER'},
+  {es:'tener fiebre',en:'to have a fever',v:'TENER'},
+  {es:'tener la culpa',en:'to be at fault / to be to blame',v:'TENER'},
+  {es:'hacer calor',en:'to be hot (weather)',v:'HACER'},
+  {es:'hacer frío',en:'to be cold (weather)',v:'HACER'},
+  {es:'hacer sol',en:'to be sunny',v:'HACER'},
+  {es:'hacer viento',en:'to be windy',v:'HACER'},
+  {es:'hacer buen tiempo',en:'the weather is nice',v:'HACER'},
+  {es:'hacer mal tiempo',en:'the weather is bad',v:'HACER'},
+  {es:'hacer ejercicio',en:'to exercise / to work out',v:'HACER'},
+  {es:'hacer una pregunta',en:'to ask a question',v:'HACER'},
+  {es:'hacer fila',en:'to wait in line',v:'HACER'},
+  {es:'hacer caso',en:'to pay attention / to listen',v:'HACER'},
+  {es:'hacer tarea',en:'to do homework',v:'HACER'},
+  {es:'estar cansado/a',en:'to be tired (right now)',v:'ESTAR'},
+  {es:'estar nervioso/a',en:'to be nervous (right now)',v:'ESTAR'},
+  {es:'estar contento/a',en:'to be happy / pleased (right now)',v:'ESTAR'},
+  {es:'estar enfermo/a',en:'to be sick',v:'ESTAR'},
+  {es:'estar lleno/a',en:'to be full (food) / packed (place)',v:'ESTAR'},
+  {es:'ser difícil / fácil',en:'to be difficult / easy (characteristic)',v:'SER'},
+  {es:'ser importante',en:'to be important (characteristic)',v:'SER'},
+];
+const vColors={TENER:'var(--tener)',HACER:'var(--hacer)',SER:'var(--ser)',ESTAR:'var(--estar)'};
+let fcIdx=0,fcOrder=[...Array(FC.length).keys()],fcSeen=new Set(),fcReady=false;
+function initFC(){fcReady=true;buildFCDots();renderFC();}
+function buildFCDots(){
+  const d=document.getElementById('fcDots');d.innerHTML='';
+  fcOrder.forEach((oi,i)=>{
+    const dot=document.createElement('span');
+    dot.className='fc-dot'+(i===fcIdx?' active':'')+(fcSeen.has(i)?' seen':'');
+    dot.onclick=()=>{fcIdx=i;showFC();};d.appendChild(dot);
+  });
+}
+function showFC(){
+  const f=FC[fcOrder[fcIdx]];
+  document.getElementById('fcWord').textContent=f.es;
+  document.getElementById('fcEng').textContent=f.en;
+  const vb=document.getElementById('fcVerb');vb.textContent=f.v;vb.style.color=vColors[f.v];
+  document.getElementById('fcCard').classList.remove('flipped');
+  document.getElementById('fcCounter').textContent=(fcIdx+1)+' / '+FC.length;
+  fcSeen.add(fcIdx);buildFCDots();
+}
+function renderFC(){showFC();}
+function flipFC(){document.getElementById('fcCard').classList.toggle('flipped');}
+function navFC(d){fcIdx=(fcIdx+d+FC.length)%FC.length;showFC();}
+function shuffleFC(){
+  for(let i=fcOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fcOrder[i],fcOrder[j]]=[fcOrder[j],fcOrder[i]];}
+  fcIdx=0;fcSeen.clear();showFC();
+}
+
+// ── Q2: CHOOSE THE VERB (38 q) ───────────────────────────────────────────────
+const Q2=[
+  {stem:'Yo ___ mucha hambre. Quiero comer algo ya.',opts:['tengo','hago','soy','estoy'],a:0,fb:'<strong>Tengo hambre</strong> = I am hungry. Physical need → TENER.',tr:'I\'m very hungry. I want to eat something.'},
+  {stem:'Hoy ___ mucho calor afuera. ¡Son casi 40 grados!',opts:['tengo','hace','es','está'],a:1,fb:'<strong>Hace calor</strong> = It is hot (weather) → HACER.',tr:'It is very hot outside today. Almost 40 degrees!'},
+  {stem:'Ella ___ muy inteligente. Siempre saca buenas notas.',opts:['tiene','hace','es','está'],a:2,fb:'<strong>Es inteligente</strong> = permanent personality trait → SER.',tr:'She is very intelligent. She always gets good grades.'},
+  {stem:'Nosotros ___ sed después de correr.',opts:['tenemos','hacemos','somos','estamos'],a:0,fb:'<strong>Tenemos sed</strong> = We are thirsty. Physical state → TENER.',tr:'We are thirsty after running.'},
+  {stem:'¿___ sol hoy? Quiero ir a la playa.',opts:['Tienes','Hace','Es','Está'],a:1,fb:'<strong>Hace sol</strong> = It is sunny. Weather → HACER.',tr:'Is it sunny today? I want to go to the beach.'},
+  {stem:'Mis papás ___ muy cansados después del trabajo.',opts:['tienen','hacen','son','están'],a:3,fb:'<strong>Están cansados</strong> = tired right now → temporary state → ESTAR.',tr:'My parents are very tired after work.'},
+  {stem:'Tú siempre ___ razón en las discusiones.',opts:['tienes','haces','eres','estás'],a:0,fb:'<strong>Tener razón</strong> = to be right. Fixed expression → TENER.',tr:'You are always right in arguments.'},
+  {stem:'El examen de mañana ___ muy difícil.',opts:['tiene','hace','es','está'],a:2,fb:'<strong>Es difícil</strong> = characteristic (always true) → SER.',tr:'Tomorrow\'s exam is very difficult.'},
+  {stem:'Ella ___ nerviosa porque tiene una entrevista hoy.',opts:['tiene','hace','es','está'],a:3,fb:'<strong>Está nerviosa</strong> = nervous right now → temporary state → ESTAR.',tr:'She is nervous because she has an interview today.'},
+  {stem:'Hoy ___ mucho viento. Lleva tu chamarra.',opts:['tengo','hace','es','está'],a:1,fb:'<strong>Hace viento</strong> = It is windy. Weather → HACER.',tr:'It is very windy today. Wear your jacket.'},
+  {stem:'Yo ___ miedo de las arañas.',opts:['tengo','hago','soy','estoy'],a:0,fb:'<strong>Tener miedo</strong> = to be afraid. Fixed expression → TENER.',tr:'I am afraid of spiders.'},
+  {stem:'¿Cuántos años ___ tú?',opts:['tienes','haces','eres','estás'],a:0,fb:'<strong>¿Cuántos años tienes?</strong> = How old are you? Age → TENER.',tr:'How old are you?'},
+  {stem:'Este libro ___ muy interesante. Te lo recomiendo.',opts:['tiene','hace','es','está'],a:2,fb:'<strong>Es interesante</strong> = permanent characteristic → SER.',tr:'This book is very interesting. I recommend it.'},
+  {stem:'Nosotros ___ ejercicio en el parque todos los sábados.',opts:['tenemos','hacemos','somos','estamos'],a:1,fb:'<strong>Hacer ejercicio</strong> = to exercise. Fixed expression → HACER.',tr:'We work out at the park every Saturday.'},
+  {stem:'Él ___ mucha vergüenza cuando se equivoca enfrente de todos.',opts:['tiene','hace','es','está'],a:0,fb:'<strong>Tener vergüenza</strong> = to be embarrassed. Fixed expression → TENER.',tr:'He is very embarrassed when he makes mistakes in front of everyone.'},
+  {stem:'Ayer ___ muy mal tiempo. Llovió todo el día.',opts:['tuve','hizo','fue','estuvo'],a:1,fb:'<strong>Hizo mal tiempo</strong> = The weather was bad. HACER in past.',tr:'Yesterday the weather was very bad. It rained all day.'},
+  {stem:'Yo ___ ganas de comer tacos de canasta.',opts:['tengo','hago','soy','estoy'],a:0,fb:'<strong>Tener ganas de</strong> = to feel like. Fixed expression → TENER.',tr:'I feel like eating tacos de canasta.'},
+  {stem:'¿Por qué ___ tan triste hoy? ¿Qué pasó?',opts:['tienes','haces','eres','estás'],a:3,fb:'<strong>Estás triste</strong> = sad right now → temporary → ESTAR.',tr:'Why are you so sad today? What happened?'},
+  {stem:'En la Ciudad de México siempre ___ mucho tráfico.',opts:['tiene','hace','hay','está'],a:2,fb:'<strong>Hay tráfico</strong> = there is traffic. Existence → HAY (haber).',tr:'In Mexico City there is always a lot of traffic.'},
+  {stem:'¡___ cuidado con ese escalón!',opts:['Ten','Haz','Sé','Está'],a:0,fb:'<strong>Ten cuidado</strong> = Be careful! Imperative of TENER.',tr:'Be careful with that step!'},
+  {stem:'El café ___ muy caliente. Espera un poco antes de tomarlo.',opts:['tiene','hace','es','está'],a:3,fb:'<strong>Está caliente</strong> = hot right now (temperature) → temporary state → ESTAR.',tr:'The coffee is very hot. Wait a bit before drinking it.'},
+  {stem:'Ellos ___ mucha suerte en todo lo que hacen.',opts:['tienen','hacen','son','están'],a:0,fb:'<strong>Tener suerte</strong> = to be lucky. Fixed expression → TENER.',tr:'They are very lucky in everything they do.'},
+  {stem:'Esta tarea ___ muy fácil para mí.',opts:['tiene','hace','es','está'],a:2,fb:'<strong>Es fácil</strong> = characteristic (always) → SER.',tr:'This homework is very easy for me.'},
+  {stem:'Yo ___ muy emocionada por el viaje a Oaxaca.',opts:['tengo','hago','soy','estoy'],a:3,fb:'<strong>Estoy emocionada</strong> = excited right now → ESTAR.',tr:'I am very excited about the trip to Oaxaca.'},
+  {stem:'En invierno, siempre ___ mucho frío en las mañanas.',opts:['tengo','hace','es','estoy'],a:1,fb:'<strong>Hace frío</strong> = cold weather → HACER.',tr:'In winter, it is always very cold in the mornings.'},
+  {stem:'¿Tú ___ prisa? Podemos hablar más tarde si quieres.',opts:['tienes','haces','eres','estás'],a:0,fb:'<strong>Tener prisa</strong> = to be in a hurry → TENER.',tr:'Are you in a hurry? We can talk later if you want.'},
+  {stem:'Mi abuela siempre ___ simpática con todos los vecinos.',opts:['tiene','hace','es','está'],a:2,fb:'<strong>Es simpática</strong> = personality trait (always) → SER.',tr:'My grandmother is always friendly with all the neighbors.'},
+  {stem:'Ella ___ una pregunta importante para el maestro.',opts:['tiene','hace','es','está'],a:1,fb:'<strong>Hacer una pregunta</strong> = to ask a question → HACER.',tr:'She has an important question for the teacher.'},
+  {stem:'Yo ___ sueño. Me quiero ir a dormir ya.',opts:['tengo','hago','soy','estoy'],a:0,fb:'<strong>Tener sueño</strong> = to be sleepy → TENER.',tr:'I am sleepy. I want to go to sleep.'},
+  {stem:'El proyecto final ___ muy exitoso. ¡Felicidades al equipo!',opts:['tuvo','hizo','fue','estuvo'],a:2,fb:'<strong>Fue exitoso</strong> = outcome/event → SER in past (fue).',tr:'The final project was very successful. Congratulations to the team!'},
+  {stem:'Siempre ___ fila muy larga en esa taquería.',opts:['tiene','hace','hay','está'],a:2,fb:'<strong>Hay fila</strong> = there is a line → existence → HAY.',tr:'There is always a very long line at that taco stand.'},
+  {stem:'Ella ___ dolor de cabeza desde esta mañana.',opts:['tiene','hace','es','está'],a:0,fb:'<strong>Tener dolor de cabeza</strong> = to have a headache → TENER.',tr:'She has had a headache since this morning.'},
+  {stem:'No le ___ caso a lo que dicen. Sigue adelante.',opts:['tengas','hagas','seas','estés'],a:1,fb:'<strong>Hacer caso</strong> = to pay attention / to listen → HACER.',tr:'Don\'t pay attention to what they say. Keep going.'},
+  {stem:'El restaurante ___ lleno. Vamos a esperar afuera.',opts:['tiene','hace','es','está'],a:3,fb:'<strong>Está lleno</strong> = full right now → temporary state → ESTAR.',tr:'The restaurant is full. Let\'s wait outside.'},
+  {stem:'Ella ___ fiebre. Necesita descansar y tomar agua.',opts:['tiene','hace','es','está'],a:0,fb:'<strong>Tener fiebre</strong> = to have a fever → TENER.',tr:'She has a fever. She needs to rest and drink water.'},
+  {stem:'¿Quién ___ la culpa de lo que pasó?',opts:['tiene','hace','es','está'],a:0,fb:'<strong>Tener la culpa</strong> = to be to blame → TENER.',tr:'Who is to blame for what happened?'},
+  {stem:'¿___ buen tiempo en Cancún en diciembre?',opts:['Tienes','Hace','Es','Hay'],a:1,fb:'<strong>Hace buen tiempo</strong> = nice weather → HACER.',tr:'Is the weather nice in Cancun in December?'},
+  {stem:'Mi hermano ___ su tarea todas las noches antes de dormir.',opts:['tiene','hace','es','está'],a:1,fb:'<strong>Hacer la tarea</strong> = to do homework → HACER.',tr:'My brother does his homework every night before sleeping.'},
+];
+let ans2={},q2Ready=false;
+function initQ2(){
+  q2Ready=true;
+  document.getElementById('qwrap2').innerHTML=Q2.map((q,i)=>
+    `<div class="q-card" id="qc2_${i}">
+    <span class="q-num">Q${i+1}</span>
+    <div class="q-stem">${q.stem}</div>
+    ${q.tr?`<div class="q-transl">${q.tr}</div>`:''}
+    <div class="mc-opts">${q.opts.map((o,oi)=>`<button class="mc-opt" onclick="ansQ2(${i},${oi})">${o}</button>`).join('')}</div>
+    <div class="q-fb" id="fb2_${i}"></div>
+    </div>`
+  ).join('');
+}
+function ansQ2(qi,chosen){
+  if(ans2[qi]!==undefined)return;
+  const q=Q2[qi];const ok=chosen===q.a;ans2[qi]=ok;
+  document.getElementById('qc2_'+qi).classList.add(ok?'correct':'wrong');
+  document.querySelectorAll('#qc2_'+qi+' .mc-opt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===q.a)b.classList.add('show-correct');
+    else if(i===chosen)b.classList.add('sel-wrong');
+  });
+  const fb=document.getElementById('fb2_'+qi);
+  fb.innerHTML=(ok?'✅ ':'❌ ')+q.fb;fb.classList.add('show');
+  const done=Object.keys(ans2).length,correct=Object.values(ans2).filter(Boolean).length;
+  document.getElementById('score2').textContent=done+' / '+Q2.length+' answered — '+correct+' correct';
+  if(done===Q2.length) showResult('qwrap2',correct,Q2.length,'q2');
+}
+
+// ── Q3: FILL IN THE BLANK (32 q, with Spanish translation) ───────────────────
+const Q3=[
+  {stem:'Después de correr 10 km, yo ___ mucho.',tr:'After running 10 km, I am very ___.',chips:['tengo sed','hace calor','estoy cansada','tengo sueño'],a:'tengo sed',fb:'After running → thirsty → <strong>tengo sed</strong> (TENER).'},
+  {stem:'Hoy no salgo sin chamarra porque ___ mucho.',tr:'Today I am not leaving without a jacket because it is very ___.',chips:['tengo frío','hace frío','estoy frío','soy frío'],a:'hace frío',fb:'Cold weather → <strong>hace frío</strong>. (<em>Tengo frío</em> = I personally feel cold.)'},
+  {stem:'Ella no puede concentrarse porque ___ de su examen.',tr:'She cannot focus because she is ___ of her exam.',chips:['tiene miedo','hace miedo','está miedo','es miedo'],a:'tiene miedo',fb:'To be afraid → <strong>tiene miedo</strong> (TENER + noun).'},
+  {stem:'¿Cuándo ___ en el gimnasio?',tr:'When do you work out at the gym?',chips:['haces ejercicio','tienes ejercicio','estás ejercicio','eres ejercicio'],a:'haces ejercicio',fb:'To exercise → <strong>hacer ejercicio</strong> (HACER).'},
+  {stem:'No comas tan rápido. ___ de atragantarte.',tr:'Don\'t eat so fast. Be careful or you will choke.',chips:['Ten cuidado','Haz cuidado','Sé cuidado','Está cuidado'],a:'Ten cuidado',fb:'Be careful! → <strong>Ten cuidado</strong> (imperative of TENER).'},
+  {stem:'Hoy ___ en la ciudad. Es perfecta para ir al parque.',tr:'Today the weather is nice in the city. Perfect for going to the park.',chips:['hace buen tiempo','tiene buen tiempo','es buen tiempo','está buen tiempo'],a:'hace buen tiempo',fb:'Nice weather → <strong>hace buen tiempo</strong> (HACER).'},
+  {stem:'Mi abuelo ___ 82 años y todavía camina todos los días.',tr:'My grandfather is 82 years old and still walks every day.',chips:['tiene','hace','es','está'],a:'tiene',fb:'Age → <strong>tiene... años</strong> (TENER).'},
+  {stem:'Yo siempre ___ cuando hablo enfrente de mucha gente.',tr:'I am always embarrassed when I speak in front of a lot of people.',chips:['tengo vergüenza','hago vergüenza','soy vergüenza','estoy vergüenza'],a:'tengo vergüenza',fb:'To be embarrassed → <strong>tengo vergüenza</strong> (TENER).'},
+  {stem:'¿Puedo ___ sobre la tarea de hoy?',tr:'Can I ask a question about today\'s homework?',chips:['hacer una pregunta','tener una pregunta','ser una pregunta','estar una pregunta'],a:'hacer una pregunta',fb:'To ask a question → <strong>hacer una pregunta</strong> (HACER).'},
+  {stem:'Ella ___ de ir a la playa este fin de semana.',tr:'She feels like going to the beach this weekend.',chips:['tiene ganas','hace ganas','es ganas','está ganas'],a:'tiene ganas',fb:'To feel like → <strong>tener ganas de...</strong> (TENER).'},
+  {stem:'En verano, siempre ___ en Cancún. Es muy húmedo.',tr:'In summer, it is always very hot in Cancun. It is very humid.',chips:['hace mucho calor','tengo mucho calor','es mucho calor','hay mucho calor'],a:'hace mucho calor',fb:'Hot weather → <strong>hace mucho calor</strong> (HACER).'},
+  {stem:'Nosotros ___ antes del partido de fútbol.',tr:'We are nervous before the soccer game.',chips:['estamos nerviosos','tenemos nerviosos','hacemos nerviosos','somos nerviosos'],a:'estamos nerviosos',fb:'Nervous right now → <strong>estamos nerviosos</strong> (ESTAR).'},
+  {stem:'Ella ___ en todo lo que dice. Es muy lista.',tr:'She is always right in what she says. She is very clever.',chips:['tiene razón','hace razón','es razón','está razón'],a:'tiene razón',fb:'To be right → <strong>tiene razón</strong> (TENER).'},
+  {stem:'¿Tú ___ o podemos hablar un rato?',tr:'Are you in a hurry or can we talk for a bit?',chips:['tienes prisa','haces prisa','eres prisa','estás prisa'],a:'tienes prisa',fb:'In a hurry → <strong>¿tienes prisa?</strong> (TENER).'},
+  {stem:'Hoy ___ mucho. Mejor lleva un paraguas.',tr:'It is very windy today. Better take an umbrella.',chips:['hace viento','tiene viento','es viento','hay viento'],a:'hace viento',fb:'Windy weather → <strong>hace viento</strong> (HACER).'},
+  {stem:'El agua de esa olla ___ muy caliente. Ten cuidado.',tr:'The water in that pot is very hot right now. Be careful.',chips:['está','es','tiene','hace'],a:'está',fb:'Temperature right now → temporary → <strong>está caliente</strong> (ESTAR).'},
+  {stem:'¿Por qué ___ tan triste hoy?',tr:'Why are you so sad today?',chips:['estás','tienes','eres','haces'],a:'estás',fb:'Sad right now → temporary emotion → <strong>estás triste</strong> (ESTAR).'},
+  {stem:'Ellas ___ mucho éxito con su negocio nuevo.',tr:'They are very successful with their new business.',chips:['tienen','hacen','son','están'],a:'tienen',fb:'To be successful → <strong>tener éxito</strong> (TENER).'},
+  {stem:'Yo ___ ganas de comer unos tacos al pastor ahorita.',tr:'I really feel like eating tacos al pastor right now.',chips:['tengo','hago','soy','estoy'],a:'tengo',fb:'<strong>Tengo ganas de</strong> = I feel like. TENER.'},
+  {stem:'Yo ___ ocupado esta tarde. ¿Nos vemos mañana?',tr:'I am busy this afternoon. Shall we meet tomorrow?',chips:['estoy','tengo','soy','hago'],a:'estoy',fb:'Busy right now → <strong>estoy ocupado</strong> (ESTAR).'},
+  {stem:'El español ___ difícil al principio, pero mejoras rápido.',tr:'Spanish is difficult at first, but you improve quickly.',chips:['es','está','tiene','hace'],a:'es',fb:'Characteristic → <strong>es difícil</strong> (SER).'},
+  {stem:'¿___ sol hoy? Quiero salir a caminar un rato.',tr:'Is it sunny today? I want to go out for a walk.',chips:['Hace','Tiene','Es','Está'],a:'Hace',fb:'Sunny weather → <strong>Hace sol</strong> (HACER).'},
+  {stem:'Ella ___ dolor de cabeza desde esta mañana.',tr:'She has had a headache since this morning.',chips:['tiene','hace','es','está'],a:'tiene',fb:'<strong>Tener dolor de cabeza</strong> = to have a headache (TENER).'},
+  {stem:'El restaurante ___ lleno. Vamos a esperar afuera.',tr:'The restaurant is packed. Let\'s wait outside.',chips:['está','es','tiene','hace'],a:'está',fb:'Full right now → temporary → <strong>está lleno</strong> (ESTAR).'},
+  {stem:'Mi hermano siempre ___ su tarea antes de cenar.',tr:'My brother always does his homework before dinner.',chips:['hace','tiene','es','está'],a:'hace',fb:'<strong>Hacer la tarea</strong> = to do homework (HACER).'},
+  {stem:'Yo ___ fiebre. Creo que mejor me quedo en casa.',tr:'I have a fever. I think I\'d better stay home.',chips:['tengo','hago','soy','estoy'],a:'tengo',fb:'<strong>Tener fiebre</strong> = to have a fever (TENER).'},
+  {stem:'Siempre ___ fila muy larga en esa taquería. Vale la pena.',tr:'There is always a very long line at that taco stand. It is worth it.',chips:['hay','hace','tiene','está'],a:'hay',fb:'Existence → <strong>hay fila</strong> (HAY from haber).'},
+  {stem:'No le ___ caso a los comentarios negativos.',tr:'Don\'t pay attention to negative comments.',chips:['hagas','tengas','seas','estés'],a:'hagas',fb:'<strong>Hacer caso</strong> = to pay attention / listen (HACER). Subjunctive here after no + imperative sense.'},
+  {stem:'Después de la fiesta, todos ___ muy contentos.',tr:'After the party, everyone was very happy.',chips:['estaban','tenían','eran','hacían'],a:'estaban',fb:'Happy (temporary emotion, past) → <strong>estaban contentos</strong> (ESTAR).'},
+  {stem:'¿Quién ___ la culpa de lo que pasó?',tr:'Who is to blame for what happened?',chips:['tiene','hace','es','está'],a:'tiene',fb:'<strong>Tener la culpa</strong> = to be to blame (TENER).'},
+  {stem:'Hoy ___ buen tiempo. Perfecta para una caminata.',tr:'The weather is nice today. Perfect for a walk.',chips:['hace','tiene','es','hay'],a:'hace',fb:'Nice weather → <strong>hace buen tiempo</strong> (HACER).'},
+  {stem:'Mis vecinos ___ muy simpáticos. Siempre saludan.',tr:'My neighbors are very friendly. They always say hello.',chips:['son','están','tienen','hacen'],a:'son',fb:'Personality trait → <strong>son simpáticos</strong> (SER).'},
+];
+let ans3={},q3Ready=false;
+function initQ3(){
+  q3Ready=true;
+  document.getElementById('qwrap3').innerHTML=Q3.map((q,i)=>{
+    const parts=q.stem.split('___');
+    const stemHTML=parts.length>=2
+      ?`${parts[0]}<span class="q-blank" id="blank3_${i}"></span>${parts[1]}`
+      :q.stem;
+    return`<div class="q-card" id="qc3_${i}">
+    <span class="q-num">Q${i+1}</span>
+    <div class="q-stem">${stemHTML}</div>
+    <div class="q-transl">${q.tr}</div>
+    <div class="chips-row" id="chips3_${i}">${q.chips.map(c=>`<button class="chip" onclick="ansQ3(${i},this.textContent)">${c}</button>`).join('')}</div>
+    <div class="q-fb" id="fb3_${i}"></div>
+    </div>`;
+  }).join('');
+}
+function ansQ3(qi,chosen){
+  if(ans3[qi]!==undefined)return;
+  const q=Q3[qi];const ok=chosen===q.a;ans3[qi]=ok;
+  const blank=document.getElementById('blank3_'+qi);
+  if(blank){blank.textContent=chosen;blank.style.color=ok?'var(--good)':'var(--bad)';}
+  document.getElementById('qc3_'+qi).classList.add(ok?'correct':'wrong');
+  document.querySelectorAll('#chips3_'+qi+' .chip').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===chosen)b.classList.add(ok?'chip-ok':'chip-err');
+    else b.classList.add('used');
+  });
+  const fb=document.getElementById('fb3_'+qi);
+  fb.innerHTML=(ok?'✅ ':'❌ ')+q.fb;fb.classList.add('show');
+  const done=Object.keys(ans3).length,correct=Object.values(ans3).filter(Boolean).length;
+  document.getElementById('score3').textContent=done+' / '+Q3.length+' answered — '+correct+' correct';
+  if(done===Q3.length) showResult('qwrap3',correct,Q3.length,'q3');
+}
+
+// ── Q4: TRUE OR FALSE (25 q, with Spanish translation) ───────────────────────
+const Q4=[
+  {sent:'Hace hambre cuando no comes.',tr:'You get hungry when you don&#39;t eat.',a:'f',fb:'<strong>False.</strong> Hunger is a body sensation → <strong>tienes hambre</strong> (TENER), not <em>hace</em>.'},
+  {sent:'Tengo frío hoy — necesito una chamarra.',tr:'I&#39;m cold today — I need a jacket.',a:'t',fb:'<strong>True.</strong> <em>Tengo frío</em> = I feel cold. Body sensation → TENER. ✅'},
+  {sent:'Ella es muy cansada después de trabajar todo el día.',tr:'She&#39;s very tired after working all day.',a:'f',fb:'<strong>False.</strong> Tiredness is temporary → <strong>está cansada</strong> (ESTAR), not <em>es</em>.'},
+  {sent:'Hoy hace mucho sol. ¡Vamos a la playa!',tr:'It&#39;s really sunny today. Let&#39;s go to the beach!',a:'t',fb:'<strong>True.</strong> <em>Hace sol</em> = It is sunny. Weather → HACER. ✅'},
+  {sent:'Tengo 25 años.',tr:'I&#39;m 25 years old.',a:'t',fb:'<strong>True.</strong> Age → TENER: <em>tengo 25 años</em>. ✅'},
+  {sent:'Estoy razón — eso no está bien.',tr:'I&#39;m right — that&#39;s not okay.',a:'f',fb:'<strong>False.</strong> <em>Tener razón</em> = to be right. Correct form: <strong>tengo razón</strong>.'},
+  {sent:'Hace ejercicio todos los días para estar sano.',tr:'He works out every day to stay healthy.',a:'t',fb:'<strong>True.</strong> <em>Hacer ejercicio</em> = to exercise. Fixed expression → HACER. ✅'},
+  {sent:'Son muy mal tiempo hoy. Mejor quédate en casa.',tr:'The weather is really bad today. Better stay home.',a:'f',fb:'<strong>False.</strong> Weather → HACER: <strong>hace muy mal tiempo</strong>, not <em>son</em>.'},
+  {sent:'Tengo vergüenza cuando me equivoco enfrente de todos.',tr:'I get embarrassed when I make mistakes in front of everyone.',a:'t',fb:'<strong>True.</strong> <em>Tener vergüenza</em> = to be embarrassed → TENER. ✅'},
+  {sent:'El café está muy caliente, espera antes de tomarlo.',tr:'The coffee is really hot.',a:'t',fb:'<strong>True.</strong> Temperature right now → temporary state → <em>está caliente</em> (ESTAR). ✅'},
+  {sent:'Soy muy nerviosa antes de los exámenes.',tr:'I get very nervous before exams.',a:'f',fb:'<strong>False.</strong> Nervous = temporary emotional state → <strong>estoy nerviosa</strong> (ESTAR).'},
+  {sent:'Hace mucho viento hoy. Mejor cierra la ventana.',tr:'It&#39;s really windy today. Better close the window.',a:'t',fb:'<strong>True.</strong> <em>Hace viento</em> = It is windy. Weather → HACER. ✅'},
+  {sent:'Tengo suerte — siempre me pasan cosas buenas.',tr:'I&#39;m lucky — good things always happen to me.',a:'t',fb:'<strong>True.</strong> <em>Tener suerte</em> = to be lucky → TENER. ✅'},
+  {sent:'Estoy difícil este ejercicio para mí.',tr:'This exercise is hard for me.',a:'f',fb:'<strong>False.</strong> Difficulty is a characteristic → <strong>es difícil</strong> (SER), not <em>estoy</em>.'},
+  {sent:'¿Tienes ganas de salir esta noche?',tr:'Do you feel like going out tonight?',a:'t',fb:'<strong>True.</strong> <em>Tener ganas de</em> + infinitive = to feel like doing something. ✅'},
+  {sent:'Hago sed después de comer tacos con mucha salsa.',tr:'I get thirsty after eating tacos with a lot of salsa.',a:'f',fb:'<strong>False.</strong> Thirst → TENER: <strong>tengo sed</strong>, not <em>hago sed</em>.'},
+  {sent:'Ten cuidado con ese escalón.',tr:'Watch out for that step.',a:'t',fb:'<strong>True.</strong> <em>Tener cuidado</em> imperative → <em>ten cuidado</em>. ✅'},
+  {sent:'Están mucho tráfico en el centro hoy.',tr:'There&#39;s a lot of traffic downtown today.',a:'f',fb:'<strong>False.</strong> Existence → <strong>hay</strong>: <em>hay mucho tráfico</em>, not <em>están</em>.'},
+  {sent:'Ella es contenta hoy porque le fue bien en el examen.',tr:'She&#39;s happy today because she did well on her exam.',a:'f',fb:'<strong>False.</strong> Happy right now → temporary → <strong>está contenta</strong> (ESTAR).'},
+  {sent:'Tienes razón — eso no tiene sentido.',tr:'You&#39;re right — that doesn&#39;t make sense.',a:'t',fb:'<strong>True.</strong> <em>Tener razón</em> = to be right. TENER. ✅'},
+  {sent:'Tiene fiebre y dolor de cabeza. Necesita descansar.',tr:'She has a fever and a headache. She needs to rest.',a:'t',fb:'<strong>True.</strong> <em>Tener fiebre / dolor de cabeza</em> = to have a fever / headache → TENER. ✅'},
+  {sent:'Hace fila muy larga en la farmacia hoy.',tr:'There&#39;s a really long line at the pharmacy today.',a:'f',fb:'<strong>False.</strong> For a line existing → <strong>hay fila</strong> (HAY). <em>Hacer fila</em> = the action of waiting in line, not the existence of one.'},
+  {sent:'El restaurante está lleno. No hay mesa disponible.',tr:'The restaurant is packed. There&#39;s no table available.',a:'t',fb:'<strong>True.</strong> Full right now → <em>está lleno</em> (ESTAR). And <em>no hay</em> = there is no... (HAY). ✅'},
+  {sent:'Es aburrida esa clase. El maestro habla muy despacio.',tr:'That class is boring. The teacher speaks really slowly.',a:'t',fb:'<strong>True.</strong> <em>Es aburrida</em> = the class is boring (characteristic of the class) → SER. ✅'},
+  {sent:'Estoy mucho sueño. Ya quiero dormir.',tr:'I&#39;m really sleepy. I want to go to sleep already.',a:'f',fb:'<strong>False.</strong> Sleepiness → TENER: <strong>tengo mucho sueño</strong>, not <em>estoy</em>.'}
+]
+let ans4={},q4Ready=false;
+function initQ4(){
+  q4Ready=true;
+  document.getElementById('qwrap4').innerHTML=Q4.map((q,i)=>
+    `<div class="q-card" id="qc4_${i}">
+    <span class="q-num">Q${i+1}</span>
+    <div class="vf-sentence">${q.sent}</div>
+    ${q.tr?`<div class="vf-translation">${q.tr}</div>`:''}
+    <div class="vf-question">¿Es correcta esta oración? &nbsp;·&nbsp; Is this sentence correct?</div>
+    <div class="vf-opts">
+      <button class="vf-btn t" onclick="ansQ4(${i},'t')">✅ Verdadero / True</button>
+      <button class="vf-btn f" onclick="ansQ4(${i},'f')">❌ Falso / False</button>
+    </div>
+    <div class="q-fb" id="fb4_${i}"></div>
+    </div>`
+  ).join('');
+}
+function ansQ4(qi,chosen){
+  if(ans4[qi]!==undefined)return;
+  const q=Q4[qi];const ok=chosen===q.a;ans4[qi]=ok;
+  document.getElementById('qc4_'+qi).classList.add(ok?'correct':'wrong');
+  const btns=document.querySelectorAll('#qc4_'+qi+' .vf-btn');
+  btns.forEach(b=>b.disabled=true);
+  const tBtn=document.querySelector('#qc4_'+qi+' .vf-btn.t');
+  const fBtn=document.querySelector('#qc4_'+qi+' .vf-btn.f');
+  if(q.a==='t')tBtn.classList.add('sel-correct');else fBtn.classList.add('sel-correct');
+  if(!ok)(chosen==='t'?tBtn:fBtn).classList.add('sel-wrong');
+  const fb=document.getElementById('fb4_'+qi);
+  fb.innerHTML=(ok?'✅ ':'❌ ')+q.fb;fb.classList.add('show');
+  const done=Object.keys(ans4).length,correct=Object.values(ans4).filter(Boolean).length;
+  document.getElementById('score4').textContent=done+' / '+Q4.length+' answered — '+correct+' correct';
+  if(done===Q4.length) showResult('qwrap4',correct,Q4.length,'q4');
+}
+
+// ── SPEED ROUND (30 q, with Spanish translation) ─────────────────────────────
+const SP=[
+  {en:'I am hungry',tr:'Tengo ___',opts:['Tengo hambre','Hago hambre','Estoy hambre','Soy hambre'],a:0},
+  {en:'It is sunny today',tr:'Hoy ___ sol',opts:['Tengo sol','Hace sol','Es sol','Hay sol'],a:1},
+  {en:'She is tired',tr:'Ella ___ cansada',opts:['tiene','hace','es','está'],a:3},
+  {en:'I am in a hurry',tr:'Tengo ___',opts:['prisa','sueño','suerte','vergüenza'],a:0},
+  {en:'The weather is bad today',tr:'Hoy ___ mal tiempo',opts:['tengo','hace','es','hay'],a:1},
+  {en:'He is right',tr:'Él ___ razón',opts:['hace','tiene','es','está'],a:1},
+  {en:'It is windy',tr:'___ viento',opts:['Tengo','Hace','Es','Hay'],a:1},
+  {en:'I am sleepy',tr:'Tengo ___',opts:['sueño','sed','miedo','prisa'],a:0},
+  {en:'She is nervous',tr:'Ella ___ nerviosa',opts:['tiene','hace','es','está'],a:3},
+  {en:'I am lucky',tr:'Tengo ___',opts:['suerte','razón','prisa','sueño'],a:0},
+  {en:'It is cold (weather)',tr:'___ frío',opts:['Tengo','Hace','Estoy','Es'],a:1},
+  {en:'I feel like going out',tr:'Tengo ___ de salir',opts:['ganas','suerte','razón','miedo'],a:0},
+  {en:'They are happy',tr:'Ellos ___ contentos',opts:['tienen','hacen','son','están'],a:3},
+  {en:'Be careful!',tr:'¡___ cuidado!',opts:['Haz','Ten','Sé','Está'],a:1},
+  {en:'It is hot (weather)',tr:'___ calor',opts:['Tengo','Hace','Es','Estoy'],a:1},
+  {en:'I am thirsty',tr:'Tengo ___',opts:['sed','sueño','miedo','razón'],a:0},
+  {en:'He does homework every night',tr:'Él ___ tarea todas las noches',opts:['tiene','hace','es','está'],a:1},
+  {en:'She is sick',tr:'Ella ___ enferma',opts:['tiene','hace','es','está'],a:3},
+  {en:'I am embarrassed',tr:'Tengo ___',opts:['vergüenza','suerte','prisa','sueño'],a:0},
+  {en:'It is sunny and hot',tr:'___ sol y calor',opts:['Tengo','Hace','Es','Hay'],a:1},
+  {en:'She asks a question',tr:'Ella ___ una pregunta',opts:['tiene','hace','es','está'],a:1},
+  {en:'I am scared',tr:'Tengo ___',opts:['miedo','sed','hambre','suerte'],a:0},
+  {en:'It is a difficult exam',tr:'Es un examen ___',opts:['difícil','cansado','lleno','nervioso'],a:0},
+  {en:'How old are you?',tr:'¿Cuántos años ___?',opts:['haces','tienes','eres','estás'],a:1},
+  {en:'I am excited about the trip',tr:'___ emocionada por el viaje',opts:['Tengo','Hago','Soy','Estoy'],a:3},
+  {en:'There is a long line',tr:'___ mucha fila',opts:['Hace','Tiene','Hay','Está'],a:2},
+  {en:'I have a headache',tr:'___ dolor de cabeza',opts:['Tengo','Hago','Soy','Estoy'],a:0},
+  {en:'He is to blame',tr:'Él ___ la culpa',opts:['hace','tiene','es','está'],a:1},
+  {en:'The restaurant is full',tr:'El restaurante ___ lleno',opts:['tiene','hace','es','está'],a:3},
+  {en:'I have a fever',tr:'___ fiebre',opts:['Hago','Tengo','Soy','Estoy'],a:1},
+];
+const SP_TIME=15;
+let spIdx=0,spScore=0,spOrder=[...Array(SP.length).keys()],spTimer=null,spReady=false;
+function initSpeed(){
+  spReady=true;
+  for(let i=spOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[spOrder[i],spOrder[j]]=[spOrder[j],spOrder[i]];}
+  renderSpeedQ();
+}
+function renderSpeedQ(){
+  if(spIdx>=SP.length){showSpeedResult();return;}
+  const q=SP[spOrder[spIdx]];
+  let t=SP_TIME;clearInterval(spTimer);
+  document.getElementById('speedArea').innerHTML=`
+  <div style="font-size:.8rem;color:var(--muted2);font-weight:700;margin-bottom:8px">Question ${spIdx+1} of ${SP.length} · Score: ${spScore}</div>
+  <div class="speed-card">
+    <div class="speed-timer-bar"><div class="speed-timer-fill" id="spBar" style="width:100%"></div></div>
+    <div class="speed-prompt">${q.en}</div>
+    <div class="speed-transl">${q.tr}</div>
+    <div class="speed-opts">${q.opts.map((o,oi)=>`<button class="speed-opt" onclick="ansSpeed(${oi})">${o}</button>`).join('')}</div>
+  </div>`;
+  spTimer=setInterval(()=>{
+    t--;
+    const bar=document.getElementById('spBar');
+    if(bar)bar.style.width=(t/SP_TIME*100)+'%';
+    if(t<=0){clearInterval(spTimer);timeoutSpeed();}
+  },1000);
+}
+function ansSpeed(chosen){
+  clearInterval(spTimer);
+  const q=SP[spOrder[spIdx]];const ok=chosen===q.a;
+  if(ok)spScore++;
+  document.querySelectorAll('.speed-opt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===q.a)b.style.borderColor='var(--good)';
+    else if(i===chosen&&!ok)b.style.borderColor='var(--bad)';
+  });
+  setTimeout(()=>{spIdx++;renderSpeedQ();},900);
+}
+function timeoutSpeed(){
+  document.querySelectorAll('.speed-opt').forEach((b,i)=>{
+    b.disabled=true;if(i===SP[spOrder[spIdx]].a)b.style.borderColor='var(--good)';
+  });
+  setTimeout(()=>{spIdx++;renderSpeedQ();},900);
+}
+function showSpeedResult(){
+  const pct=Math.round(spScore/SP.length*100);
+  const color=pct>=80?'var(--good)':pct>=60?'var(--warn)':'var(--bad)';
+  document.getElementById('speedArea').innerHTML=`<div class="speed-result">
+  <div style="font-size:.85rem;color:var(--muted);margin-bottom:12px">Speed Round Complete!</div>
+  <div class="speed-big" style="color:${color}">${spScore}/${SP.length}</div>
+  <div style="font-family:var(--display);font-size:1rem;margin-top:6px;color:${color}">${pct}% — ${pct>=80?'Excellent! 🔥':pct>=60?'Good job! 👍':'Keep practicing! 💪'}</div>
+  <button class="btn btn-cyan" style="margin-top:18px" onclick="restartSpeed()">🔄 Try again</button>
+  </div>`;
+}
+function restartSpeed(){
+  spIdx=0;spScore=0;
+  for(let i=spOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[spOrder[i],spOrder[j]]=[spOrder[j],spOrder[i]];}
+  renderSpeedQ();
+}
+
+function showResult(wrapId,correct,total,key){
+  const existing=document.getElementById('result_'+key);
+  if(existing)return;
+  const pct=Math.round(correct/total*100);
+  const color=pct>=80?'var(--good)':pct>=60?'var(--warn)':'var(--bad)';
+  const msg=pct>=80?'Excellent! You have a strong grasp of this topic. 🔥'
+    :pct>=60?'Good job! Review the red ones and try again. 👍'
+    :'Keep practicing! Go back to the Explanation tab and try again. 💪';
+  const div=document.createElement('div');
+  div.id='result_'+key;
+  div.className='result-box';
+  const bgMap={'var(--good)':'rgba(34,197,94,.06)','var(--warn)':'rgba(245,158,11,.06)','var(--bad)':'rgba(239,68,68,.05)'};
+  div.style.cssText='border-color:'+color+';background:'+(bgMap[color]||'rgba(255,255,255,.03)');
+  div.innerHTML=`
+    <div class="result-box-title" style="color:${color}">
+      ${pct>=80?'🎉 ¡Excelente!':pct>=60?'👍 ¡Bien hecho!':'💪 ¡Sigue practicando!'}
+    </div>
+    <div class="result-box-score" style="color:${color}">${correct} / ${total}</div>
+    <div style="font-size:1rem;color:${color};margin-bottom:4px">${pct}%</div>
+    <div class="result-box-msg">${msg}</div>
+    <button class="btn-restart" onclick="restartTab('${key}','${wrapId}')">🔄 Restart this section</button>`;
+  const wrap=document.getElementById(wrapId);
+  if(wrap)wrap.parentElement.insertBefore(div,wrap.nextSibling);
+}
+
+function restartTab(key,wrapId){
+  if(key==='q2'){for(const k in ans2)delete ans2[k];q2Ready=false;initQ2();document.getElementById('score2').textContent='0 / '+Q2.length+' answered';}
+  if(key==='q3'){for(const k in ans3)delete ans3[k];q3Ready=false;initQ3();document.getElementById('score3').textContent='0 / '+Q3.length+' answered';}
+  if(key==='q4'){for(const k in ans4)delete ans4[k];q4Ready=false;initQ4();document.getElementById('score4').textContent='0 / '+Q4.length+' answered';}
+  const box=document.getElementById('result_'+key);
+  if(box)box.remove();
+  window.scrollTo({top:document.getElementById(wrapId).getBoundingClientRect().top+window.scrollY-120,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

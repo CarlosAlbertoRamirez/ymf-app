@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecturas A1–A2 | YMF</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --b1:#a78bfa;--b1l:#c4b5fd;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(37,217,255,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 20% 10%,rgba(167,139,250,.12),transparent 35%),radial-gradient(ellipse at 80% 15%,rgba(34,211,153,.07),transparent 35%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(940px,96%);margin:14px auto 60px;display:flex;flex-direction:column;gap:14px}
+.hero{border-radius:22px;padding:26px 30px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.hero-in{position:relative;z-index:1}
+.hero-top{display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.logo-box{width:54px;height:54px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.8rem;font-weight:900;color:var(--magenta)}
+.hero h1{font-family:var(--display);font-size:clamp(1.2rem,3vw,1.9rem);font-weight:900;background:linear-gradient(90deg,var(--a1),#fff 45%,var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.86rem;margin-top:3px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 11px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.tts-notice{background:rgba(37,217,255,.06);border:1px solid rgba(37,217,255,.2);border-radius:10px;padding:10px 14px;font-size:.78rem;color:#7de8ff;line-height:1.6}
+.tabs-wrap{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.tabs-bar{display:flex;overflow-x:auto;border-bottom:1px solid rgba(255,255,255,.07);scrollbar-width:none}
+.tabs-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;border:0;background:transparent;color:var(--muted2);font-family:var(--font);font-size:.78rem;font-weight:700;padding:12px 15px;cursor:pointer;transition:.2s;border-bottom:2.5px solid transparent;white-space:nowrap}
+.tab-btn:hover{color:var(--text)}.tab-btn.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+.reading-panel{padding:26px 28px;display:none}.reading-panel.visible{display:block}
+/* HEADER */
+.reading-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.reading-icon{font-size:2rem;line-height:1;flex-shrink:0;margin-top:2px}
+.reading-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:4px}
+.reading-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.rtag{border-radius:999px;padding:2px 10px;font-size:.68rem;font-weight:900;border:1.5px solid}
+.level-b1{border-color:rgba(167,139,250,.5);color:var(--b1);background:rgba(167,139,250,.08)}
+
+.type-tag{border-color:rgba(255,255,255,.15);color:var(--muted);background:rgba(255,255,255,.04)}
+/* TTS BAR */
+.tts-bar{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:11px}
+.tts-btn{border:0;border-radius:8px;padding:7px 14px;font-weight:800;font-family:var(--font);font-size:.8rem;cursor:pointer;transition:.13s;display:inline-flex;align-items:center;gap:5px}
+.tts-play{background:linear-gradient(135deg,var(--a1),#16a34a);color:#fff}
+.tts-stop{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+.tts-btn:hover{transform:translateY(-1px)}.tts-btn:active{transform:none}
+.tts-speed{display:flex;align-items:center;gap:5px;margin-left:auto}
+.tts-speed label{font-size:.72rem;color:var(--muted2);font-weight:700}
+.tts-speed select{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:var(--text);font-family:var(--font);font-size:.78rem;padding:5px 8px;cursor:pointer}
+.tts-status{font-size:.72rem;color:var(--muted2);font-weight:700}
+/* TEXT */
+.text-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 24px;margin-bottom:18px;font-size:.96rem;line-height:1.95;color:var(--text)}
+.text-box p{margin-bottom:.9em}.text-box p:last-child{margin-bottom:0}
+/* DIALOGUE */
+.dial-wrap{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.dial-bubble{display:flex;gap:10px;align-items:flex-start}
+.dial-bubble.right{flex-direction:row-reverse}
+.dial-avatar{width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;border:2px solid rgba(255,255,255,.12)}
+.dial-body{max-width:75%}
+.dial-name{font-size:.65rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;color:var(--muted2)}
+.dial-bubble.right .dial-name{text-align:right}
+.dial-msg{border-radius:14px;padding:10px 14px;font-size:.9rem;line-height:1.6;position:relative}
+.dial-bubble.left .dial-msg{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-top-left-radius:4px}
+.dial-bubble.right .dial-msg{background:rgba(37,217,255,.09);border:1px solid rgba(37,217,255,.2);border-top-right-radius:4px}
+/* GLOSSARY */
+.glossary{margin-bottom:20px}
+.section-label{font-family:var(--display);font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);margin-bottom:10px}
+.glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:7px}
+.gloss-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px 12px}
+.gloss-word{font-family:var(--display);font-size:.88rem;font-weight:900;color:var(--cyan)}
+.gloss-en{font-size:.75rem;color:var(--muted);margin-top:2px}
+.gloss-es{font-size:.72rem;color:var(--muted2);font-style:italic;margin-top:1px}
+/* QUESTIONS */
+.q-wrap{display:flex;flex-direction:column;gap:11px}
+.q-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;transition:.2s}
+.q-card.correct{border-color:var(--good);background:rgba(34,197,94,.05)}
+.q-card.wrong{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.q-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.08);border-radius:5px;padding:2px 7px;display:inline-block;margin-bottom:7px;color:var(--muted)}
+.q-type-badge{font-size:.62rem;font-weight:900;border-radius:999px;padding:2px 8px;margin-left:5px;background:rgba(255,255,255,.06);color:var(--muted2)}
+.q-stem{font-size:.93rem;line-height:1.6;font-weight:600;margin-bottom:9px}
+.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.mc-opt{border:0;border-radius:8px;padding:8px 12px;font-weight:700;font-family:var(--font);font-size:.84rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);border-color:rgba(37,217,255,.4)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.show-correct{border-color:var(--good);background:rgba(34,197,94,.15);color:#86efac}
+.mc-opt.sel-wrong{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.vf-opts{display:flex;gap:9px}
+.vf-btn{border:0;border-radius:9px;padding:8px 22px;font-weight:900;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.13s;border:2px solid}
+.vf-btn.t{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#86efac}
+.vf-btn.f{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#fca5a5}
+.vf-btn:hover:not([disabled]){transform:translateY(-2px);filter:brightness(1.2)}
+.vf-btn[disabled]{cursor:default;transform:none}
+.vf-btn.sel-correct{filter:brightness(1.3);border-width:2.5px}
+.vf-btn.sel-wrong{filter:brightness(.7)}
+.chips-row{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:0;border-radius:8px;padding:7px 14px;font-weight:800;font-family:var(--display);font-size:.88rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.chip.used{opacity:.2;cursor:not-allowed}
+.chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.q-blank{display:inline-block;border-bottom:2.5px solid var(--cyan);min-width:80px;text-align:center;padding:0 4px;color:var(--cyan);font-weight:800;font-family:var(--display);font-size:.95rem}
+.q-fb{display:none;font-size:.78rem;color:var(--muted);margin-top:8px;padding:7px 11px;border-radius:7px;background:rgba(255,255,255,.04);line-height:1.6}
+.q-fb.show{display:block}
+.score-row{margin-bottom:12px}
+.score-pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:3px 12px;font-size:.76rem;font-weight:800;color:var(--muted)}
+.open-answer{width:100%;background:rgba(255,255,255,.04);border:1.5px solid rgba(37,217,255,.2);border-radius:10px;padding:12px 14px;color:var(--text);font-family:var(--font);font-size:.9rem;line-height:1.6;resize:vertical;margin-bottom:8px;outline:none}
+.open-answer:focus{border-color:rgba(37,217,255,.5);background:rgba(37,217,255,.04)}
+.open-answer:disabled{opacity:.7;cursor:default}
+.open-btn{border:0;border-radius:9px;padding:8px 20px;font-weight:800;font-family:var(--font);font-size:.84rem;cursor:pointer;background:linear-gradient(135deg,var(--cyan),#00bfff);color:#07111f;transition:.14s}
+.open-btn:hover{transform:translateY(-1px)}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:4px}
+.creator span{color:var(--magenta2)}
+@media(max-width:560px){.mc-opts{grid-template-columns:1fr}.reading-panel{padding:18px 14px}.glossary-grid{grid-template-columns:1fr 1fr}.dial-body{max-width:88%}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-top">
+      <div class="logo-box">YMF</div>
+      <div>
+        <h1>Lecturas de Comprensión B1</h1>
+        <p>Textos auténticos en español mexicano · Nivel B1 · Con audio de voz natural 🔊</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge" style="border-color:rgba(167,139,250,.4);color:#c4b5fd">🟣 B1</span>
+      <span class="badge" style="border-color:rgba(37,217,255,.4);color:var(--cyan)">🔊 Audio natural</span>
+      <span class="badge" style="border-color:rgba(251,191,36,.4);color:#fde68a">📖 Glosario incluido</span>
+      <span class="badge" style="border-color:rgba(249,115,22,.4);color:#fb923c">💬 Diálogo</span>
+      <span class="badge">By Carlos &amp; Denisse</span>
+    </div>
+  </div>
+</header>
+<div class="tts-notice">🔊 <strong>Audio:</strong> Usa el motor de voz de Google Translate — mucho más natural que el TTS del navegador. Requiere internet. Funciona en todos los navegadores. Haz clic en ▶ Reproducir para escuchar cualquier lectura.</div>
+<div class="tabs-wrap">
+  <div class="tabs-bar" id="tabsBar"></div>
+  <div id="tabContents"></div>
+</div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · yourmexicanfriend.com</p>
+</div>
+<script>
+const READINGS=[
+// ─── 1: Correo formal ────────────────────────────────────────────────────────
+{
+  level:'B1',type:'Cotidiano',icon:'📧',
+  title:'Una solicitud de empleo',
+  subtitle:'Lee este correo formal y responde las preguntas.',
+  isDial:false,
+  paragraphs:[
+    'Estimado señor Ramírez:',
+    'Me dirijo a usted con el fin de postularme para el puesto de asistente administrativo que se publicó en el portal de empleos de su empresa la semana pasada. Mi nombre es Gabriela Torres y soy egresada de la Licenciatura en Administración de Empresas por la Universidad Autónoma de Nuevo León, generación 2020.',
+    'Cuento con tres años de experiencia en el área de recursos humanos, donde me encargué de la coordinación de procesos de reclutamiento, la elaboración de contratos laborales y la gestión de expedientes del personal. Durante ese tiempo, también participé en la implementación de un nuevo sistema de nómina que redujo los errores administrativos en un cuarenta por ciento. Asimismo, tengo dominio avanzado de Microsoft Office y manejo básico de SAP.',
+    'Considero que mi perfil se adapta perfectamente a las necesidades del puesto, ya que soy una persona organizada, proactiva y con facilidad para trabajar en equipo bajo presión. He liderado proyectos de mejora en los procesos de incorporación de nuevos empleados y tengo experiencia en la atención tanto a directivos como a personal operativo. Además, cuento con disponibilidad inmediata para iniciar labores y estoy dispuesta a realizar una entrevista en el horario que más les convenga.',
+    'Adjunto a este correo mi currículum vitae actualizado, cartas de recomendación de mis empleadores anteriores y una copia de mi título universitario. Quedo a sus órdenes para cualquier información adicional que requieran y espero con gusto tener la oportunidad de presentarme personalmente.',
+    'Sin otro particular, le envío un cordial saludo.',
+    'Gabriela Torres\ngabriela.torres@email.com\nTel: 81-2345-6789\nLinkedIn: linkedin.com/in/gabrielatorres',
+  ],
+  ttsText:'Estimado señor Ramírez. Me dirijo a usted con el fin de postularme para el puesto de asistente administrativo que se publicó en el portal de empleos de su empresa la semana pasada. Mi nombre es Gabriela Torres y soy egresada de la Licenciatura en Administración de Empresas por la Universidad Autónoma de Nuevo León. Cuento con tres años de experiencia en el área de recursos humanos, donde me encargué de la coordinación de procesos de reclutamiento, la elaboración de contratos laborales y la gestión de expedientes del personal. Durante ese tiempo, también participé en la implementación de un nuevo sistema de nómina que redujo los errores administrativos en un cuarenta por ciento. Asimismo, tengo dominio avanzado de Microsoft Office y manejo básico de SAP. Considero que mi perfil se adapta perfectamente a las necesidades del puesto, ya que soy una persona organizada, proactiva y con facilidad para trabajar en equipo bajo presión. He liderado proyectos de mejora en los procesos de incorporación de nuevos empleados y tengo experiencia en la atención tanto a directivos como a personal operativo. Además, cuento con disponibilidad inmediata para iniciar labores y estoy dispuesta a realizar una entrevista en el horario que más les convenga. Adjunto a este correo mi currículum vitae actualizado, cartas de recomendación de mis empleadores anteriores y una copia de mi título universitario. Quedo a sus órdenes para cualquier información adicional que requieran. Sin otro particular, le envío un cordial saludo. Gabriela Torres.',
+  glossary:[
+    {w:'postularse',es:'aplicar a un trabajo, presentar tu candidatura'},
+    {w:'egresada',es:'persona que terminó sus estudios universitarios'},
+    {w:'reclutamiento',es:'proceso de buscar y seleccionar candidatos para un trabajo'},
+    {w:'nómina',es:'lista de empleados y sus salarios; el proceso de pago de sueldos'},
+    {w:'proactiva',es:'persona que actúa antes de que se lo pidan; toma iniciativa'},
+    {w:'disponibilidad inmediata',es:'puede empezar a trabajar en cualquier momento'},
+    {w:'sin otro particular',es:'fórmula formal para terminar una carta; significa "no tengo más que decir"'},
+    {w:'expedientes',es:'carpetas o archivos con documentos de una persona'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿Para qué puesto aplica Gabriela?',opts:['Gerente de ventas','Asistente administrativo','Coordinadora de proyectos','Analista de sistemas'],a:1,fb:'El correo dice: "postularme para el puesto de asistente administrativo".'},
+    {type:'vf',stem:'"Gabriela tiene cinco años de experiencia laboral."',a:'f',fb:'Falso. El correo dice: "Cuento con tres años de experiencia".'},
+    {type:'mc',stem:'¿Qué logro específico menciona Gabriela de su trabajo anterior?',opts:['Contrató a 50 empleados nuevos','Redujo errores administrativos en un 40%','Implementó SAP completo','Abrió una nueva sucursal'],a:1,fb:'El correo dice: "un nuevo sistema de nómina que redujo los errores administrativos en un cuarenta por ciento".'},
+    {type:'fill',stem:'Gabriela menciona que tiene dominio avanzado de ___ y manejo básico de SAP.',chips:['Microsoft Office','Adobe Suite','Google Workspace','AutoCAD'],a:'Microsoft Office',fb:'El correo dice: "tengo dominio avanzado de Microsoft Office y manejo básico de SAP".'},
+    {type:'vf',stem:'"Gabriela adjunta solo su currículum al correo."',a:'f',fb:'Falso. Adjunta también cartas de recomendación y una copia de su título universitario.'},
+    {type:'mc',stem:'¿En qué universidad estudió Gabriela?',opts:['UNAM','IPN','Universidad Autónoma de Nuevo León','Universidad Iberoamericana'],a:2,fb:'El correo dice: "egresada de la Licenciatura en Administración de Empresas por la Universidad Autónoma de Nuevo León".'},
+    {type:'open',stem:'¿Crees que este correo es efectivo para conseguir el trabajo? ¿Qué cambiarías o mejorarías? Justifica tu respuesta con ejemplos del texto.',fb:'Respuesta de análisis. El alumno debe evaluar el tono formal, la estructura, los logros mencionados y los documentos adjuntos.'},
+  ]
+},
+// ─── 2: Noticia ──────────────────────────────────────────────────────────────
+{
+  level:'B1',type:'Noticia',icon:'🗞️',
+  title:'El metro de la CDMX: retos y futuro',
+  subtitle:'Lee este artículo periodístico y responde las preguntas.',
+  isDial:false,
+  paragraphs:[
+    'El Sistema de Transporte Colectivo Metro de la Ciudad de México es uno de los más grandes y concurridos de América Latina. Con más de doce líneas y casi doscientas estaciones, transporta a millones de usuarios cada día. Sin embargo, en los últimos años ha enfrentado una serie de problemas que han puesto en duda su eficiencia y seguridad.',
+    'El incidente más grave ocurrió en mayo de 2021, cuando un tramo elevado de la Línea 12 colapsó mientras un tren pasaba sobre él. El accidente dejó veintiséis personas muertas y más de cien heridas. La tragedia generó una profunda crisis institucional y reabrió el debate sobre el mantenimiento de la infraestructura del metro, que según varios expertos había sido descuidado durante años por falta de inversión y por decisiones políticas cuestionables.',
+    'Más allá de los accidentes, el metro sufre problemas cotidianos que afectan a millones de usuarios: retrasos frecuentes, trenes con décadas de antigüedad, falta de aire acondicionado en la mayoría de las líneas y estaciones saturadas en horas pico. En algunas líneas, los trenes tienen más de cuarenta años de operación continua, muy por encima de su vida útil recomendada. Muchos usuarios se quejan de que el servicio se ha deteriorado con el tiempo, aunque reconocen que el precio del boleto sigue siendo uno de los más bajos del mundo — actualmente cuesta cinco pesos.',
+    'Las autoridades capitalinas han anunciado un plan de modernización que incluye la renovación de la flota de trenes, la reparación de vías y la digitalización del sistema de control de trenes. Se espera que en los próximos cinco años se incorporen nuevas unidades en las líneas más saturadas. No obstante, los críticos señalan que estos planes ya se han prometido antes sin cumplirse del todo, y que la falta de transparencia en el manejo de los recursos dificulta evaluar el avance real.',
+    'A pesar de sus problemas, el metro sigue siendo el medio de transporte más usado por millones de capitalinos, quienes dependen de él para llegar a sus trabajos, escuelas y actividades cotidianas. Para muchos, no hay alternativa viable dado el costo del transporte privado en una ciudad tan grande y congestionada. Expertos en movilidad urbana coinciden en que la solución no pasa solo por modernizar el metro, sino por crear un sistema integrado de transporte que incluya más ciclovías, metrobús y opciones de micromovilidad.',
+  ],
+  ttsText:'El Sistema de Transporte Colectivo Metro de la Ciudad de México es uno de los más grandes y concurridos de América Latina. Con más de doce líneas y casi doscientas estaciones, transporta a millones de usuarios cada día. Sin embargo, en los últimos años ha enfrentado una serie de problemas que han puesto en duda su eficiencia y seguridad. El incidente más grave ocurrió en mayo de dos mil veintiuno, cuando un tramo elevado de la Línea doce colapsó mientras un tren pasaba sobre él. El accidente dejó veintiséis personas muertas y más de cien heridas. La tragedia generó una profunda crisis institucional y reabrió el debate sobre el mantenimiento de la infraestructura del metro, que según varios expertos había sido descuidado durante años. Más allá de los accidentes, el metro sufre problemas cotidianos: retrasos frecuentes, trenes con décadas de antigüedad, falta de aire acondicionado en la mayoría de las líneas y estaciones saturadas en horas pico. En algunas líneas, los trenes tienen más de cuarenta años de operación continua. Muchos usuarios se quejan de que el servicio se ha deteriorado, aunque reconocen que el boleto cuesta solo cinco pesos, uno de los más baratos del mundo. Las autoridades han anunciado un plan de modernización que incluye renovación de trenes, reparación de vías y digitalización del sistema de control. No obstante, los críticos señalan que estos planes ya se han prometido antes sin cumplirse del todo. A pesar de sus problemas, el metro sigue siendo el medio de transporte más usado por millones de capitalinos. Expertos coinciden en que la solución pasa por crear un sistema integrado de transporte.',
+  glossary:[
+    {w:'concurrido',es:'con mucha gente, muy visitado o utilizado'},
+    {w:'tramo elevado',es:'parte del metro que va por encima del nivel del suelo'},
+    {w:'colapsó',es:'se cayó, se derrumbó de repente'},
+    {w:'vida útil',es:'tiempo durante el cual un objeto o máquina puede funcionar correctamente'},
+    {w:'saturadas',es:'llenas de gente, con capacidad excedida'},
+    {w:'flota',es:'conjunto de vehículos de un servicio de transporte'},
+    {w:'no obstante',es:'sin embargo, pero — conector de contraste formal'},
+    {w:'micromovilidad',es:'medios de transporte pequeños como bicicletas, patinetes o scooters eléctricos'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿En qué año ocurrió el colapso de la Línea 12?',opts:['2018','2019','2021','2023'],a:2,fb:'El texto dice: "ocurrió en mayo de 2021".'},
+    {type:'vf',stem:'"El boleto del metro de la CDMX cuesta cinco pesos actualmente."',a:'t',fb:'Verdadero. El texto dice: "actualmente cuesta cinco pesos".'},
+    {type:'mc',stem:'¿Qué incluye el plan de modernización anunciado?',opts:['Solo nuevos trenes','Renovación de trenes, vías y digitalización','Construcción de nuevas líneas','Reducción del precio del boleto'],a:1,fb:'El texto menciona "renovación de la flota de trenes, la reparación de vías y la digitalización del sistema de control".'},
+    {type:'fill',stem:'Según el texto, el metro sufre problemas ___ como retrasos y trenes viejos.',chips:['cotidianos','extraordinarios','eventuales','técnicos'],a:'cotidianos',fb:'El texto dice: "el metro sufre problemas cotidianos: retrasos frecuentes, trenes con décadas de antigüedad..."'},
+    {type:'vf',stem:'"Los críticos confían plenamente en que el plan de modernización se cumplirá."',a:'f',fb:'Falso. El texto dice que "estos planes ya se han prometido antes sin cumplirse del todo".'},
+    {type:'mc',stem:'Según los expertos en movilidad, ¿cuál es la solución real al problema?',opts:['Bajar el precio del boleto','Cerrar líneas problemáticas','Crear un sistema integrado de transporte','Privatizar el metro'],a:2,fb:'El texto dice: "la solución no pasa solo por modernizar el metro, sino por crear un sistema integrado de transporte".'},
+    {type:'open',stem:'¿Crees que los problemas del metro de la CDMX son exclusivos de México? ¿Has visto situaciones similares en el transporte público de otras ciudades? ¿Qué soluciones propondrías?',fb:'Respuesta comparativa y propositiva. El alumno debe usar conectores de contraste y opinión.'},
+  ]
+},
+// ─── 3: Leyenda cultural ─────────────────────────────────────────────────────
+{
+  level:'B1',type:'Cultural',icon:'👻',
+  title:'La Llorona',
+  subtitle:'Lee esta leyenda mexicana y responde las preguntas.',
+  isDial:false,
+  paragraphs:[
+    'La Llorona es una de las leyendas más conocidas y aterradoras de México y de gran parte de América Latina. Su historia ha sido contada de generación en generación durante siglos, y aunque existen varias versiones, todas comparten los mismos elementos esenciales: una mujer, sus hijos, el agua y un llanto que hiela la sangre.',
+    'Según la versión más común, la historia ocurre en la época colonial, probablemente en alguna ciudad novohispana. Una mujer mestiza, hermosa y joven, se enamora de un hombre noble y adinerado con quien tiene varios hijos. Sin embargo, cuando el hombre decide abandonarla para casarse con una mujer de su misma clase social, ella cae en una desesperación profunda. Incapaz de soportar el dolor y la humillación, en un acto de locura, la mujer ahoga a sus propios hijos en un río.',
+    'Inmediatamente después, invadida por el remordimiento y el horror de lo que ha hecho, la mujer corre hacia el río buscando a sus hijos, pero ya es demasiado tarde. Muere poco después, consumida por el dolor y la culpa. Su alma, sin embargo, no puede descansar. Condenada a vagar por la eternidad, camina por ríos, calles y campos oscuros llorando y gritando con una voz desgarradora: "¡Ay, mis hijos!"',
+    'Desde entonces, según la leyenda, quienes la escuchan de noche deben tener mucho cuidado. Algunos dicen que si el llanto se escucha lejos, el peligro está cerca; si se escucha cerca, el peligro está lejos. Otras versiones advierten que la Llorona aparece especialmente cerca de cuerpos de agua — ríos, lagos o canales — y que su aparición anuncia desgracias o la muerte de algún familiar. Los niños son los más vulnerables: se dice que la Llorona los confunde con sus propios hijos y los lleva consigo.',
+    'Los historiadores y antropólogos han interpretado la leyenda de diferentes formas. Algunos la relacionan con divinidades prehispánicas como Cihuacóatl, una diosa azteca asociada con el parto y la muerte, quien según los cronistas coloniales también lloraba por las noches. Otros la ven como una metáfora del dolor de las mujeres indígenas durante la conquista española, quienes perdieron a sus hijos en las guerras o vieron cómo eran arrebatados de su cultura. Sea cual sea su origen, la Llorona sigue siendo una figura central de la identidad cultural mexicana, presente en canciones, películas, obras de teatro y el imaginario popular.',
+  ],
+  ttsText:'La Llorona es una de las leyendas más conocidas y aterradoras de México y de gran parte de América Latina. Su historia ha sido contada de generación en generación durante siglos. Según la versión más común, la historia ocurre en la época colonial. Una mujer mestiza, hermosa y joven, se enamora de un hombre noble y adinerado con quien tiene varios hijos. Sin embargo, cuando el hombre decide abandonarla para casarse con una mujer de su misma clase social, ella cae en una desesperación profunda. En un acto de locura, la mujer ahoga a sus propios hijos en un río. Inmediatamente después, invadida por el remordimiento y el horror de lo que ha hecho, la mujer corre hacia el río buscando a sus hijos, pero ya es demasiado tarde. Muere poco después. Su alma no puede descansar. Condenada a vagar por la eternidad, camina por ríos, calles y campos oscuros llorando y gritando: ay, mis hijos. Desde entonces, quienes la escuchan de noche deben tener mucho cuidado. Si el llanto se escucha lejos, el peligro está cerca; si se escucha cerca, el peligro está lejos. Los niños son los más vulnerables: se dice que la Llorona los confunde con sus propios hijos y los lleva consigo. Los historiadores la relacionan con Cihuacóatl, una diosa azteca asociada con el parto y la muerte. Otros la ven como una metáfora del dolor de las mujeres indígenas durante la conquista española.',
+  glossary:[
+    {w:'hiela la sangre',es:'expresión: que da mucho miedo, que aterra'},
+    {w:'novohispana',es:'relacionado con la Nueva España, nombre del territorio mexicano durante la colonia española'},
+    {w:'remordimiento',es:'sentimiento de culpa y arrepentimiento después de hacer algo malo'},
+    {w:'desgarradora',es:'que causa mucho dolor emocional; muy intensa y triste'},
+    {w:'condenada a vagar',es:'obligada a caminar sin rumbo para siempre, sin poder descansar'},
+    {w:'arrebatados',es:'quitados por la fuerza, separados violentamente'},
+    {w:'imaginario popular',es:'conjunto de ideas, mitos y símbolos que comparte una cultura'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿Por qué la mujer cae en desesperación según la leyenda?',opts:['Porque sus hijos se enfermaron','Porque perdió su trabajo','Porque el hombre la abandona para casarse con otra','Porque se perdió en el bosque'],a:2,fb:'El texto dice: "cuando el hombre decide abandonarla para casarse con una mujer de su misma clase social, ella cae en una desesperación profunda".'},
+    {type:'vf',stem:'"Según la leyenda, si el llanto de la Llorona se escucha muy cerca, el peligro está lejos."',a:'t',fb:'Verdadero. El texto dice: "si se escucha cerca, el peligro está lejos".'},
+    {type:'mc',stem:'¿Con qué diosa prehispánica relacionan algunos historiadores a la Llorona?',opts:['Coatlicue','Xochiquetzal','Cihuacóatl','Tlazolteotl'],a:2,fb:'El texto menciona a "Cihuacóatl, una diosa azteca asociada con el parto y la muerte".'},
+    {type:'fill',stem:'El alma de la Llorona está ___ a vagar por la eternidad sin poder descansar.',chips:['condenada','obligada','destinada','forzada'],a:'condenada',fb:'El texto dice: "Condenada a vagar por la eternidad".'},
+    {type:'vf',stem:'"La Llorona es una leyenda exclusiva de México."',a:'f',fb:'Falso. El texto dice que es conocida "en México y de gran parte de América Latina".'},
+    {type:'mc',stem:'¿Cuál es una de las interpretaciones históricas de la leyenda?',opts:['Representa el miedo a los ríos','Es una metáfora del dolor de las mujeres indígenas en la conquista','Es una advertencia sobre los peligros de la noche','Fue inventada por los españoles para asustar a los niños'],a:1,fb:'El texto dice: "Otros la ven como una metáfora del dolor de las mujeres indígenas durante la conquista española".'},
+    {type:'open',stem:'¿Existe una leyenda similar en tu país o cultura? Descríbela brevemente y compárala con la de la Llorona. ¿Qué temas tienen en común?',fb:'Respuesta comparativa. El alumno puede mencionar leyendas de su país y conectarlas con temas universales como la culpa, el amor y la muerte.'},
+  ]
+},
+// ─── 4: Anécdota narrativa ───────────────────────────────────────────────────
+{
+  level:'B1',type:'Narrativo',icon:'😤',
+  title:'Los vecinos del 4B',
+  subtitle:'Lee esta anécdota y responde las preguntas.',
+  isDial:false,
+  paragraphs:[
+    'Cuando Andrés se mudó al departamento 4B del edificio Cervantes, pensó que había encontrado el lugar perfecto. El precio era razonable, la ubicación conveniente — a quince minutos del metro Insurgentes — y el edificio parecía tranquilo. Lo que no sabía es que su vecino de enfrente, el señor Fuentes, tenía una opinión muy particular sobre el uso de los espacios comunes y los derechos de los vecinos.',
+    'El primer conflicto llegó a las dos semanas de que Andrés se instaló. Una noche, después de una larga jornada de trabajo, Andrés dejó su bicicleta en el pasillo mientras subía sus compras al cuarto piso. Tardó apenas diez minutos, pero cuando bajó, encontró una nota pegada en el manubrio con letra apretada y mayúsculas: "Prohibido dejar objetos en áreas comunes. Atentamente, un vecino preocupado." Sin firma, claro.',
+    'Andrés pensó que era una exageración, pero decidió no hacer caso. Sin embargo, los incidentes continuaron. El señor Fuentes —que eventualmente se identificó al tercer encuentro en el elevador— le llamó la atención por escuchar música a las nueve de la noche, por tener una pequeña planta en el pasillo frente a su puerta y por recibir paquetes de mensajería que, según él, "obstruían la entrada principal del edificio".',
+    'El punto de quiebre llegó un domingo por la mañana. Andrés estaba desayunando tranquilamente cuando escuchó tres golpes fuertes en su puerta. Era el señor Fuentes, con cara roja y voz tensa, porque la lavadora de Andrés había estado en ciclo de centrifugado a las diez de la mañana. "¡El reglamento del edificio dice claramente que no se pueden usar aparatos ruidosos antes de las once!" gritó. Andrés, sorprendido pero decidido a no perder la calma, le respondió: "Señor Fuentes, son las diez de la mañana un domingo, no las tres de la madrugada. Creo que podemos llegar a un acuerdo sin necesidad de gritar."',
+    'Esa conversación, aunque comenzó como una confrontación, fue un punto de inflexión. El señor Fuentes, al ver que Andrés no se iba a intimidar pero tampoco a agredir, bajó la guardia. Terminaron tomando café en el pasillo durante cuarenta minutos. Resulta que el señor Fuentes había tenido malas experiencias con tres inquilinos anteriores que dejaban basura en el pasillo, hacían fiestas ruidosas de madrugada y una vez incluso le robaron el tapete de la puerta. Andrés, por su parte, entendió que vivir en un edificio implica ceder un poco de comodidad individual por el bien del grupo. No se hicieron mejores amigos, pero sí aprendieron a respetarse — y el señor Fuentes incluso le avisó una vez cuando llegó un paquete importante para Andrés mientras él no estaba.',
+  ],
+  ttsText:'Cuando Andrés se mudó al departamento cuatro B del edificio Cervantes, pensó que había encontrado el lugar perfecto. El precio era razonable, la ubicación conveniente, a quince minutos del metro Insurgentes, y el edificio parecía tranquilo. Lo que no sabía es que su vecino de enfrente, el señor Fuentes, tenía una opinión muy particular sobre el uso de los espacios comunes. El primer conflicto llegó a las dos semanas. Una noche, Andrés dejó su bicicleta en el pasillo mientras subía sus compras. Tardó apenas diez minutos, pero cuando bajó, encontró una nota pegada en el manubrio: Prohibido dejar objetos en áreas comunes, atentamente, un vecino preocupado. Sin firma. Los incidentes continuaron. El señor Fuentes le llamó la atención por escuchar música a las nueve de la noche, por tener una planta en el pasillo y por recibir paquetes de mensajería. El punto de quiebre llegó un domingo por la mañana. Andrés estaba desayunando cuando escuchó tres golpes en su puerta. Era el señor Fuentes, furioso porque la lavadora había estado en ciclo de centrifugado a las diez de la mañana. Andrés le respondió con calma: señor Fuentes, son las diez de la mañana un domingo, no las tres de la madrugada, creo que podemos llegar a un acuerdo sin necesidad de gritar. Esa conversación fue un punto de inflexión. Terminaron tomando café en el pasillo durante cuarenta minutos. Resulta que el señor Fuentes había tenido malas experiencias con inquilinos anteriores. Andrés entendió que vivir en un edificio implica ceder un poco de comodidad individual. No se hicieron mejores amigos, pero sí aprendieron a respetarse.',
+  glossary:[
+    {w:'jornada',es:'día o período de trabajo'},
+    {w:'manubrio',es:'manillar de la bicicleta; la parte que se agarra para manejar'},
+    {w:'llamar la atención',es:'regañar a alguien por un comportamiento incorrecto'},
+    {w:'punto de quiebre',es:'momento en que una situación llega a su límite máximo de tensión'},
+    {w:'centrifugado',es:'ciclo de la lavadora que gira rápido para quitar el agua de la ropa'},
+    {w:'punto de inflexión',es:'momento en que algo cambia de dirección; momento decisivo'},
+    {w:'bajar la guardia',es:'relajarse, dejar de estar a la defensiva'},
+    {w:'convivencia',es:'acción de vivir y relacionarse con otras personas de forma armoniosa'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿Por qué el señor Fuentes desconfiaba de los nuevos vecinos?',opts:['Porque Andrés era muy ruidoso desde el principio','Porque había tenido malas experiencias con inquilinos anteriores','Porque no le gustaba compartir espacios','Porque el edificio tenía reglas muy estrictas'],a:1,fb:'El texto dice: "el señor Fuentes había tenido malas experiencias con tres inquilinos anteriores".'},
+    {type:'vf',stem:'"Andrés respondió al señor Fuentes de manera agresiva el domingo por la mañana."',a:'f',fb:'Falso. El texto dice que Andrés "le respondió con calma" y "decidido a no perder la calma".'},
+    {type:'mc',stem:'¿Qué fue el "punto de quiebre" en la historia?',opts:['La nota en la bicicleta','La queja sobre la música','La discusión por la lavadora el domingo','El paquete de mensajería'],a:2,fb:'El texto dice: "El punto de quiebre llegó un domingo por la mañana" cuando el señor Fuentes fue a quejarse por la lavadora.'},
+    {type:'fill',stem:'Al final, la conversación tensa terminó con los dos vecinos tomando ___ en el pasillo.',chips:['café','agua','cerveza','jugo'],a:'café',fb:'El texto dice: "Terminaron tomando café en el pasillo durante cuarenta minutos."'},
+    {type:'vf',stem:'"Al final de la historia, el señor Fuentes nunca volvió a hablarle a Andrés."',a:'f',fb:'Falso. El texto dice que el señor Fuentes incluso "le avisó una vez cuando llegó un paquete importante para Andrés".'},
+    {type:'mc',stem:'¿Qué aprendió Andrés de esta experiencia?',opts:['Que es mejor ignorar a los vecinos problemáticos','Que vivir en departamento es imposible','Que vivir en edificio implica ceder comodidad individual por el bien del grupo','Que debe buscar un departamento sin vecinos'],a:2,fb:'El texto dice: "Andrés entendió que vivir en un edificio implica ceder un poco de comodidad individual por el bien del grupo".'},
+    {type:'open',stem:'¿Has tenido alguna vez un conflicto con un vecino, compañero o colega? ¿Cómo lo resolviste? ¿Qué harías diferente ahora?',fb:'Respuesta personal. El alumno debe usar el pasado (indefinido/imperfecto) para narrar su experiencia y el condicional para reflexionar.'},
+  ]
+},
+// ─── 5: Artículo cultural ─────────────────────────────────────────────────────
+{
+  level:'B1',type:'Cultural',icon:'🌽',
+  title:'El maíz: el corazón de México',
+  subtitle:'Lee este texto sobre la importancia del maíz en la cultura mexicana.',
+  isDial:false,
+  paragraphs:[
+    'Si hay un ingrediente que define la cocina y la identidad de México, ese es el maíz. No es una exageración afirmar que la civilización mesoamericana se construyó sobre este grano. Para los pueblos prehispánicos, el maíz no era solo alimento: era sagrado, símbolo de vida y de la relación entre los seres humanos y los dioses. En la cosmogonía maya, según el Popol Vuh, el ser humano fue creado a partir de la masa de maíz, después de que los dioses fallaron en sus intentos de modelar a la humanidad con barro y madera.',
+    'México es el centro de origen del maíz. Se estima que las primeras variedades fueron domesticadas hace aproximadamente nueve mil años en la región del Balsas, en lo que hoy es el estado de Guerrero. Desde allí, el cultivo se expandió por todo el continente americano y eventualmente llegó a Europa, África y Asia después de la conquista española, transformando la alimentación global de manera irreversible. Hoy, el maíz es uno de los tres cereales más producidos en el mundo, junto con el trigo y el arroz.',
+    'En la actualidad, México cuenta con más de sesenta variedades nativas de maíz, cada una con características distintas de sabor, color, textura y uso. El maíz azul, el rojo, el amarillo, el blanco, el morado y el negro no son solo una postal colorida; cada uno tiene usos culinarios específicos y propiedades nutricionales distintas. El maíz cacahuazintle, por ejemplo, se usa principalmente para el pozole, mientras que el olotillo es ideal para las tortillas del Istmo de Tehuantepec.',
+    'La tortilla es, sin duda, la expresión más universal del maíz en México. Se come en el desayuno, el almuerzo y la cena; sirve de cubierto, de plato y de alimento al mismo tiempo. El proceso de nixtamalización — que consiste en cocer el maíz en agua con cal viva — no solo mejora el sabor y la textura de la masa, sino que también libera aminoácidos esenciales como la niacina, haciendo el maíz mucho más nutritivo. Este proceso fue descubierto hace miles de años por los pueblos mesoamericanos y es considerado uno de los grandes aportes de América al mundo.',
+    'Sin embargo, el maíz nativo enfrenta hoy serias amenazas. La entrada masiva de maíz transgénico importado, principalmente de Estados Unidos, ha desplazado el cultivo de variedades nativas en muchas regiones, poniendo en riesgo la biodiversidad genética acumulada durante milenios. Organizaciones indígenas, agricultores y científicos han lanzado campañas para defender el maíz nativo bajo el lema "Sin maíz no hay país". El debate entre tecnología agrícola moderna y soberanía alimentaria está lejos de resolverse, y en él se juega no solo el futuro de un cultivo, sino el de una civilización.',
+  ],
+  ttsText:'Si hay un ingrediente que define la cocina y la identidad de México, ese es el maíz. Para los pueblos prehispánicos, el maíz no era solo alimento: era sagrado. En la cosmogonía maya, según el Popol Vuh, el ser humano fue creado a partir de la masa de maíz. México es el centro de origen del maíz. Se estima que las primeras variedades fueron domesticadas hace aproximadamente nueve mil años en la región del Balsas, en el estado de Guerrero. Desde allí, el cultivo se expandió por todo el continente americano y llegó a Europa, África y Asia. Hoy, el maíz es uno de los tres cereales más producidos en el mundo, junto con el trigo y el arroz. En la actualidad, México cuenta con más de sesenta variedades nativas de maíz. El maíz cacahuazintle se usa principalmente para el pozole, mientras que el olotillo es ideal para las tortillas del Istmo de Tehuantepec. La tortilla es la expresión más universal del maíz en México. El proceso de nixtamalización consiste en cocer el maíz en agua con cal viva, lo que libera aminoácidos esenciales como la niacina. Este proceso fue descubierto hace miles de años y es considerado uno de los grandes aportes de América al mundo. Sin embargo, el maíz nativo enfrenta hoy serias amenazas. La entrada masiva de maíz transgénico ha desplazado el cultivo de variedades nativas en muchas regiones. Organizaciones indígenas han lanzado campañas bajo el lema: sin maíz no hay país.',
+  glossary:[
+    {w:'cosmogonía',es:'conjunto de creencias sobre el origen del universo y de la vida'},
+    {w:'domesticadas',es:'adaptadas para el cultivo o la crianza por el ser humano'},
+    {w:'nixtamalización',es:'proceso de cocer el maíz en agua con cal para mejorar su valor nutricional y sabor'},
+    {w:'niacina',es:'vitamina del complejo B, esencial para el metabolismo y la salud nerviosa'},
+    {w:'transgénico',es:'organismo al que se le han modificado los genes artificialmente'},
+    {w:'biodiversidad genética',es:'variedad de genes y características dentro de una especie'},
+    {w:'soberanía alimentaria',es:'derecho de los pueblos a decidir qué producir y comer sin depender del exterior'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿En qué región de México se domesticó el maíz por primera vez?',opts:['Oaxaca','El Bajío','La región del Balsas, Guerrero','La península de Yucatán'],a:2,fb:'El texto dice: "las primeras variedades fueron domesticadas... en la región del Balsas, en lo que hoy es el estado de Guerrero".'},
+    {type:'vf',stem:'"México tiene más de sesenta variedades nativas de maíz."',a:'t',fb:'Verdadero. El texto dice: "México cuenta con más de sesenta variedades nativas de maíz".'},
+    {type:'mc',stem:'¿Qué hace la nixtamalización al maíz?',opts:['Lo convierte en transgénico','Mejora sabor, textura y libera aminoácidos esenciales','Lo seca para conservarlo más tiempo','Lo hace más fácil de cultivar'],a:1,fb:'El texto dice que la nixtamalización "mejora el sabor y la textura... y también libera aminoácidos esenciales como la niacina".'},
+    {type:'fill',stem:'El maíz cacahuazintle se usa principalmente para el ___.',chips:['pozole','tamal','atole','tlayuda'],a:'pozole',fb:'El texto dice: "El maíz cacahuazintle... se usa principalmente para el pozole".'},
+    {type:'vf',stem:'"El debate sobre el maíz transgénico ya está resuelto en México."',a:'f',fb:'Falso. El texto dice: "El debate... está lejos de resolverse".'},
+    {type:'mc',stem:'¿Cuál de estos cereales NO se menciona en el texto como uno de los más producidos del mundo?',opts:['El maíz','El trigo','El arroz','La avena'],a:3,fb:'El texto menciona "el maíz, el trigo y el arroz" como los tres más producidos. La avena no aparece.'},
+    {type:'open',stem:'¿Qué alimento tiene en tu país una importancia similar al maíz en México? ¿Tiene también significado cultural, histórico o espiritual? Explica y compara.',fb:'Respuesta comparativa. El alumno puede hablar del arroz, el trigo, la papa, el café, etc., y conectarlo con su identidad cultural.'},
+  ]
+},
+// ─── 6: Diálogo — entrevista de trabajo ──────────────────────────────────────
+{
+  level:'B1',type:'Diálogo',icon:'💼',
+  title:'La entrevista de trabajo',
+  subtitle:'Lee esta conversación en una entrevista de trabajo y responde las preguntas.',
+  isDial:true,
+  speakers:{
+    'Entrevistadora':{side:'left',avatar:'👩‍💼',color:'#a78bfa'},
+    'Candidato':{side:'right',avatar:'👨',color:'#25d9ff'},
+  },
+  dialogue:[
+    {who:'Entrevistadora',msg:'Buenos días, pase usted. Tome asiento, por favor. ¿Le ofrezco algo de tomar — agua, café?'},
+    {who:'Candidato',msg:'Buenos días, muchas gracias. Un vaso de agua estaría perfecto, gracias. Soy Daniel Morales, es un placer.'},
+    {who:'Entrevistadora',msg:'El placer es mío. Soy la licenciada Vega, directora de Recursos Humanos. Bueno, Daniel, para empezar, cuénteme un poco sobre usted. ¿Cuál es su formación y experiencia previa?'},
+    {who:'Candidato',msg:'Con gusto. Estudié Ingeniería en Sistemas en el Tecnológico de Monterrey y me gradué hace tres años, con especialidad en desarrollo de software. Desde entonces he trabajado en dos empresas: primero en una startup donde estuve dos años como desarrollador junior, liderando el desarrollo de una aplicación de logística. Y actualmente llevo un año en mi empresa como desarrollador senior en proyectos de aplicaciones móviles para el sector financiero.'},
+    {who:'Entrevistadora',msg:'Interesante trayectoria. ¿Y por qué le interesa dejar su trabajo actual para venir con nosotros?'},
+    {who:'Candidato',msg:'En mi trabajo actual he aprendido mucho y valoro lo que me han dado, pero siento que he llegado a un techo. No hay muchas oportunidades de crecimiento a corto plazo dado el tamaño de la empresa. Me gustaría asumir más responsabilidades y trabajar en proyectos de mayor escala e impacto. Su empresa tiene una reputación muy sólida en innovación tecnológica y los proyectos que desarrollan me parecen un reto muy atractivo.'},
+    {who:'Entrevistadora',msg:'Me alegra escuchar que investigó sobre nosotros. Ahora bien, ¿cuáles diría que son sus principales fortalezas? ¿Y alguna área de oportunidad que esté trabajando activamente?'},
+    {who:'Candidato',msg:'Como fortalezas, soy muy analítico, me adapto rápido a nuevas tecnologías y trabajo bien bajo presión. También tengo buenas habilidades de comunicación con equipos multidisciplinarios, lo que creo que es clave en proyectos complejos. En cuanto a áreas de oportunidad, estoy trabajando en desarrollar mis habilidades de liderazgo formal. A veces me cuesta delegar tareas porque tiendo a querer revisar todos los detalles yo mismo, pero lo estoy trabajando con un curso que estoy tomando actualmente.'},
+    {who:'Entrevistadora',msg:'Eso es muy honesto y maduro de su parte. Por cierto, ¿tiene experiencia con metodologías ágiles, como Scrum o Kanban?'},
+    {who:'Candidato',msg:'Sí, en mi trabajo actual usamos Scrum. Llevo dos años trabajando con sprints de dos semanas, y participé en la certificación del equipo como Scrum Team. No tengo certificación personal aún, pero es algo que planeo obtener en los próximos meses.'},
+    {who:'Entrevistadora',msg:'Perfecto. Una última pregunta: ¿cuáles son sus expectativas salariales para este puesto?'},
+    {who:'Candidato',msg:'Basándome en mi experiencia y en el rango del mercado para este perfil en el sector tecnológico, estaría esperando una remuneración de entre cuarenta y cinco y cincuenta mil pesos mensuales. Sin embargo, estoy abierto a discutirlo dependiendo del paquete completo de beneficios — prestaciones, home office, bonos de desempeño.'},
+    {who:'Entrevistadora',msg:'Muy bien. Muchas gracias, Daniel. La entrevista ha sido muy productiva. En los próximos tres días hábiles nos comunicamos con usted para informarle sobre los siguientes pasos del proceso de selección.'},
+    {who:'Candidato',msg:'Gracias a usted, licenciada Vega. Ha sido un placer conocerla. Quedo pendiente de su llamada y cualquier información adicional que necesiten con gusto la envío.'},
+  ],
+  ttsText:'Buenos días, pase usted. Tome asiento por favor. ¿Le ofrezco algo de tomar? Buenos días, muchas gracias. Un vaso de agua estaría perfecto. Soy Daniel Morales, es un placer. El placer es mío. Soy la licenciada Vega, directora de Recursos Humanos. Daniel, para empezar, cuénteme un poco sobre usted. Con gusto. Estudié Ingeniería en Sistemas en el Tecnológico de Monterrey y me gradué hace tres años. Desde entonces he trabajado en dos empresas: primero en una startup como desarrollador junior, y actualmente llevo un año como desarrollador senior en proyectos de aplicaciones móviles para el sector financiero. Interesante trayectoria. ¿Y por qué le interesa dejar su trabajo actual? En mi trabajo actual he aprendido mucho, pero siento que he llegado a un techo. Me gustaría asumir más responsabilidades y trabajar en proyectos de mayor escala. Su empresa tiene una reputación muy sólida en innovación tecnológica. Me alegra escuchar que investigó sobre nosotros. ¿Cuáles son sus principales fortalezas? Como fortalezas, soy muy analítico, me adapto rápido a nuevas tecnologías y trabajo bien bajo presión. En cuanto a áreas de oportunidad, estoy trabajando en desarrollar mis habilidades de liderazgo. A veces me cuesta delegar tareas, pero lo estoy trabajando con un curso. ¿Tiene experiencia con metodologías ágiles? Sí, en mi trabajo actual usamos Scrum hace dos años. ¿Cuáles son sus expectativas salariales? Entre cuarenta y cinco y cincuenta mil pesos mensuales, aunque estoy abierto a discutirlo dependiendo del paquete de beneficios. Muchas gracias Daniel. En los próximos tres días nos comunicamos. Gracias a usted, licenciada. Quedo pendiente de su llamada.',
+  glossary:[
+    {w:'trayectoria',es:'camino profesional o académico recorrido por una persona'},
+    {w:'he llegado a un techo',es:'expresión: ya no hay más posibilidades de crecer en ese lugar'},
+    {w:'fortalezas',es:'puntos fuertes, cualidades positivas de una persona'},
+    {w:'área de oportunidad',es:'eufemismo formal para "debilidad"; aspecto que se puede mejorar'},
+    {w:'multidisciplinario',es:'que incluye personas de diferentes especialidades'},
+    {w:'metodologías ágiles',es:'formas de organizar proyectos en ciclos cortos y flexibles; muy usadas en tecnología'},
+    {w:'remuneración',es:'salario, pago por el trabajo'},
+    {w:'quedo pendiente',es:'expresión: estaré esperando, estoy atento a su comunicación'},
+  ],
+  qs:[
+    {type:'mc',stem:'¿Dónde estudió Daniel y cuál fue su especialidad?',opts:['UNAM, Informática','Tec de Monterrey, Ingeniería en Sistemas','IPN, Ingeniería Industrial','ITAM, Economía'],a:1,fb:'Daniel dice: "Estudié Ingeniería en Sistemas en el Tecnológico de Monterrey".'},
+    {type:'vf',stem:'"Daniel quiere cambiar de trabajo porque en su empresa actual lo tratan mal."',a:'f',fb:'Falso. Daniel quiere cambiar porque "ha llegado a un techo" y no hay oportunidades de crecimiento.'},
+    {type:'mc',stem:'¿Qué metodología ágil usa Daniel en su trabajo actual?',opts:['Kanban','XP (Extreme Programming)','Scrum','Waterfall'],a:2,fb:'Daniel dice: "en mi trabajo actual usamos Scrum".'},
+    {type:'fill',stem:'Daniel menciona que trabaja bien bajo ___ y tiene habilidades de comunicación.',chips:['presión','estrés','supervisión','control'],a:'presión',fb:'Daniel dice: "trabajo bien bajo presión y tengo buenas habilidades de comunicación".'},
+    {type:'vf',stem:'"Daniel ya tiene una certificación oficial de Scrum."',a:'f',fb:'Falso. Daniel dice: "No tengo certificación personal aún, pero es algo que planeo obtener en los próximos meses".'},
+    {type:'mc',stem:'¿Cuál es el área de oportunidad que menciona Daniel?',opts:['Trabajar bajo presión','Comunicarse con el equipo','Desarrollar habilidades de liderazgo y delegar','Adaptarse a nuevas tecnologías'],a:2,fb:'Daniel dice: "estoy trabajando en desarrollar mis habilidades de liderazgo formal. A veces me cuesta delegar tareas".'},
+    {type:'open',stem:'¿Crees que Daniel se desempeñó bien en la entrevista? ¿Qué respuesta te pareció más efectiva y cuál mejorarías? Usa ejemplos del diálogo para justificar.',fb:'Respuesta de evaluación crítica. El alumno debe analizar las respuestas de Daniel y argumentar con ejemplos concretos del texto.'},
+  ]
+},
+];
+</script>
+
+<script>
+// ── TTS — Web Speech API ─────────────────────────────────────────────────────
+let ttsPlaying=false,ttsTabIdx=-1;
+
+function getBestVoice(){
+  const voices=speechSynthesis.getVoices();
+  return voices.find(v=>v.lang==='es-MX')
+    ||voices.find(v=>v.lang==='es-US')
+    ||voices.find(v=>v.lang.startsWith('es-'))
+    ||voices.find(v=>v.lang.startsWith('es'))
+    ||null;
+}
+
+function playTTS(tabIdx){
+  stopTTS();
+  const r=READINGS[tabIdx];
+  if(!r||!r.ttsText){return;}
+  const speed=parseFloat(document.getElementById('speed'+tabIdx).value)||1;
+  if(!('speechSynthesis' in window)){setStatus(tabIdx,'⚠ No soportado');return;}
+  ttsPlaying=true;ttsTabIdx=tabIdx;
+  setStatus(tabIdx,'▶ Reproduciendo...');
+  document.getElementById('playbtn'+tabIdx).textContent='⏸ Reproduciendo...';
+  const chunks=splitChunks(r.ttsText,200);
+  let i=0;
+  function playNext(){
+    if(!ttsPlaying||ttsTabIdx!==tabIdx||i>=chunks.length){
+      if(ttsPlaying&&ttsTabIdx===tabIdx){
+        setStatus(tabIdx,'✓ Listo');
+        document.getElementById('playbtn'+tabIdx).textContent='▶ Reproducir de nuevo';
+        ttsPlaying=false;
+      }
+      return;
+    }
+    const u=new SpeechSynthesisUtterance(chunks[i]);
+    u.lang='es-MX';u.rate=speed;u.pitch=1;
+    const v=getBestVoice();if(v)u.voice=v;
+    u.onend=()=>{i++;setStatus(tabIdx,'▶ '+i+'/'+chunks.length);playNext();};
+    u.onerror=()=>{i++;playNext();};
+    speechSynthesis.speak(u);
+  }
+  function start(){playNext();}
+  if(speechSynthesis.getVoices().length===0){
+    speechSynthesis.onvoiceschanged=()=>{speechSynthesis.onvoiceschanged=null;start();};
+  } else {start();}
+}
+
+function splitChunks(text,maxLen){
+  const chunks=[];
+  const sentences=text.match(/[^.!?]+[.!?]*/g)||[text];
+  let cur='';
+  sentences.forEach(s=>{
+    if((cur+s).length>maxLen&&cur.length>0){chunks.push(cur.trim());cur=s;}
+    else cur+=s;
+  });
+  if(cur.trim())chunks.push(cur.trim());
+  return chunks.length?chunks:[text];
+}
+
+function stopTTS(){
+  ttsPlaying=false;ttsTabIdx=-1;
+  if('speechSynthesis' in window)speechSynthesis.cancel();
+  document.querySelectorAll('[id^="ttsstatus"]').forEach(el=>el.textContent='');
+  document.querySelectorAll('[id^="playbtn"]').forEach(el=>el.textContent='▶ Reproducir');
+}
+
+function setStatus(tabIdx,msg){
+  const el=document.getElementById('ttsstatus'+tabIdx);if(el)el.textContent=msg;
+}
+
+// ── TABS & RENDER ─────────────────────────────────────────────────────────────
+const renderedTabs=new Set();
+const answers={};
+
+function switchTab(i){
+  document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  if(!renderedTabs.has(i)){renderReading(i);renderedTabs.add(i);}
+  document.querySelectorAll('.reading-panel').forEach(p=>p.classList.remove('visible'));
+  const active=document.getElementById('panel'+i);
+  if(active)active.classList.add('visible');
+  stopTTS();
+}
+
+function buildTabsBar(){
+  const bar=document.getElementById('tabsBar');
+  READINGS.forEach((r,i)=>{
+    const btn=document.createElement('button');
+    btn.className='tab-btn'+(i===0?' active':'');
+    btn.textContent=r.icon+' '+r.title;
+    btn.onclick=()=>switchTab(i);
+    bar.appendChild(btn);
+  });
+}
+
+function renderReading(i){
+  const r=READINGS[i];
+  const container=document.getElementById('tabContents');
+  const panel=document.createElement('div');
+  panel.className='reading-panel'+(i===0?' visible':'');
+  panel.id='panel'+i;
+  const levelCls='level-b1';
+  let html=`<div class="reading-header">
+    <div class="reading-icon">${r.icon}</div>
+    <div>
+      <div class="reading-title">${r.title}</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:2px">${r.subtitle}</div>
+      <div class="reading-tags">
+        <span class="rtag ${levelCls}">${r.level}</span>
+        <span class="rtag type-tag">${r.type}</span>
+      </div>
+    </div>
+  </div>`;
+  html+=`<div class="tts-bar">
+    <button class="tts-btn tts-play" id="playbtn${i}" onclick="playTTS(${i})">▶ Reproducir</button>
+    <button class="tts-btn tts-stop" onclick="stopTTS()">⏹ Parar</button>
+    <span class="tts-status" id="ttsstatus${i}"></span>
+    <div class="tts-speed">
+      <label>Velocidad:</label>
+      <select id="speed${i}">
+        <option value="0.75">🐢 Lento</option>
+        <option value="1" selected>🚶 Normal</option>
+        <option value="1.25">🏃 Rápido</option>
+      </select>
+    </div>
+  </div>`;
+  if(r.isDial){
+    html+=`<div class="dial-wrap">`;
+    r.dialogue.forEach(line=>{
+      const spk=r.speakers[line.who];
+      const side=spk?spk.side:'left';
+      const avatar=spk?spk.avatar:'👤';
+      const color=spk?spk.color:'var(--muted)';
+      html+=`<div class="dial-bubble ${side}">
+        <div class="dial-avatar" style="background:${color}22;border-color:${color}44">${avatar}</div>
+        <div class="dial-body">
+          <div class="dial-name" style="color:${color}">${line.who}</div>
+          <div class="dial-msg">${line.msg}</div>
+        </div>
+      </div>`;
+    });
+    html+=`</div>`;
+  } else {
+    html+=`<div class="text-box">`;
+    r.paragraphs.forEach(p=>{html+=`<p>${p.replace(/\n/g,'<br>')}</p>`;});
+    html+=`</div>`;
+  }
+  html+=`<div class="glossary">
+    <div class="section-label">📚 Glosario</div>
+    <div class="glossary-grid">`;
+  r.glossary.forEach(g=>{
+    html+=`<div class="gloss-item">
+      <div class="gloss-word">${g.w}</div>
+      <div class="gloss-es">🇲🇽 ${g.es}</div>
+    </div>`;
+  });
+  html+=`</div></div>`;
+  html+=`<div class="section-label" style="margin-bottom:12px">❓ Preguntas</div>`;
+  html+=`<div class="score-row"><span class="score-pill" id="score${i}">0 / ${r.qs.length} respondidas</span></div>`;
+  html+=`<div class="q-wrap">`;
+  r.qs.forEach((q,qi)=>{
+    const typeLabel={mc:'opción múltiple',vf:'verdadero/falso',fill:'completa',open:'respuesta abierta'}[q.type]||q.type;
+    let stemDisplay=q.stem;
+    if(q.type==='fill'){
+      const parts=q.stem.split('___');
+      stemDisplay=parts.length>=2?`${parts[0]}<span class="q-blank" id="blank${i}_${qi}"></span>${parts[1]}`:q.stem;
+    }
+    html+=`<div class="q-card" id="qcard${i}_${qi}">
+      <span class="q-num">P${qi+1}</span><span class="q-type-badge">${typeLabel}</span>
+      <div class="q-stem">${stemDisplay}</div>`;
+    if(q.type==='mc'){
+      html+=`<div class="mc-opts">`;
+      q.opts.forEach((o,oi)=>html+=`<button class="mc-opt" onclick="ansQ(${i},${qi},'mc',${oi})">${o}</button>`);
+      html+=`</div>`;
+    } else if(q.type==='vf'){
+      html+=`<div class="vf-opts">
+        <button class="vf-btn t" onclick="ansQ(${i},${qi},'vf','t')">✅ Verdadero</button>
+        <button class="vf-btn f" onclick="ansQ(${i},${qi},'vf','f')">❌ Falso</button>
+      </div>`;
+    } else if(q.type==='fill'){
+      html+=`<div class="chips-row" id="chips${i}_${qi}">`;
+      q.chips.forEach(c=>html+=`<button class="chip" onclick="ansQ(${i},${qi},'fill',this.textContent)">${c}</button>`);
+      html+=`</div>`;
+    } else if(q.type==='open'){
+      html+=`<textarea class="open-answer" id="open${i}_${qi}" rows="4" placeholder="Escribe tu respuesta aquí..."></textarea>
+      <button class="open-btn" onclick="submitOpen(${i},${qi})">✓ Enviar respuesta</button>`;
+    }
+    html+=`<div class="q-fb" id="fb${i}_${qi}"></div></div>`;
+  });
+  html+=`</div>`;
+  panel.innerHTML=html;
+  container.appendChild(panel);
+}
+
+function submitOpen(ri,qi){
+  const key=ri+'_'+qi;
+  if(answers[key]!==undefined)return;
+  const textarea=document.getElementById('open'+ri+'_'+qi);
+  if(!textarea||!textarea.value.trim()){alert('Por favor escribe tu respuesta antes de enviar.');return;}
+  answers[key]=true;
+  textarea.disabled=true;
+  const q=READINGS[ri].qs[qi];
+  const card=document.getElementById('qcard'+ri+'_'+qi);
+  card.classList.add('correct');
+  const fb=document.getElementById('fb'+ri+'_'+qi);
+  if(fb){fb.innerHTML='💬 <strong>Respuesta de referencia:</strong> '+q.fb;fb.classList.add('show');}
+  updateScore(ri);
+}
+
+function ansQ(ri,qi,type,chosen){
+  const key=ri+'_'+qi;
+  if(answers[key]!==undefined)return;
+  const q=READINGS[ri].qs[qi];
+  const ok=type==='mc'?chosen===q.a:type==='vf'?chosen===q.a:chosen===q.a;
+  answers[key]=ok;
+  const card=document.getElementById('qcard'+ri+'_'+qi);
+  card.classList.add(ok?'correct':'wrong');
+  if(type==='mc'){
+    card.querySelectorAll('.mc-opt').forEach((b,i)=>{
+      b.disabled=true;
+      if(i===q.a)b.classList.add('show-correct');
+      else if(i===chosen)b.classList.add('sel-wrong');
+    });
+  } else if(type==='vf'){
+    card.querySelectorAll('.vf-btn').forEach(b=>b.disabled=true);
+    const tBtn=card.querySelector('.vf-btn.t'),fBtn=card.querySelector('.vf-btn.f');
+    if(q.a==='t')tBtn.classList.add('sel-correct');else fBtn.classList.add('sel-correct');
+    if(!ok)(chosen==='t'?tBtn:fBtn).classList.add('sel-wrong');
+  } else if(type==='fill'){
+    const blank=document.getElementById('blank'+ri+'_'+qi);
+    if(blank){blank.textContent=chosen;blank.style.color=ok?'var(--good)':'var(--bad)';}
+    document.querySelectorAll('#chips'+ri+'_'+qi+' .chip').forEach(b=>{
+      b.disabled=true;
+      if(b.textContent===chosen)b.classList.add(ok?'chip-ok':'chip-err');
+      else b.classList.add('used');
+    });
+  }
+  const fb=document.getElementById('fb'+ri+'_'+qi);
+  if(fb){fb.innerHTML=(ok?'✅ ':'❌ ')+q.fb;fb.classList.add('show');}
+  updateScore(ri);
+}
+
+function updateScore(ri){
+  const done=READINGS[ri].qs.filter((_,j)=>answers[ri+'_'+j]!==undefined).length;
+  const correct=READINGS[ri].qs.filter((_,j)=>answers[ri+'_'+j]===true).length;
+  const sc=document.getElementById('score'+ri);
+  if(sc)sc.textContent=done+' / '+READINGS[ri].qs.length+' respondidas — '+correct+' correctas';
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+if('speechSynthesis' in window){speechSynthesis.getVoices();}
+buildTabsBar();
+renderReading(0);
+renderedTabs.add(0);
+</script>
+</body>
+</html>

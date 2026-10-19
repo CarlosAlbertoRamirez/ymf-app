@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verbos Irregulares en Pasado B1 | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 10% 10%,rgba(255,43,191,.13),transparent 28%),radial-gradient(ellipse at 90% 15%,rgba(37,217,255,.09),transparent 28%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(960px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);box-shadow:0 0 18px rgba(255,43,191,.22);font-family:var(--display);font-size:1rem;font-weight:900;color:var(--magenta);text-shadow:1px 1px 0 var(--cyan)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.5rem,2.8vw,2.5rem);font-weight:900;line-height:.95;background:linear-gradient(90deg,#fff 25%,var(--cyan) 65%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.86rem;line-height:1.5;margin-top:4px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.badge.c{border-color:rgba(37,217,255,.3);color:var(--cyan)}
+.badge.m{border-color:rgba(255,43,191,.3);color:var(--magenta2)}
+.tabs{display:flex;gap:8px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:10px;box-shadow:var(--shadow)}
+.tab-btn{flex:1;border:0;border-radius:11px;padding:11px 14px;font-weight:800;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.18s;color:var(--muted);background:transparent;display:flex;align-items:center;justify-content:center;gap:7px}
+.tab-btn:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.tab-btn.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;box-shadow:0 3px 0 rgba(0,0,0,.2);transform:translateY(-1px)}
+.tab-badge{background:rgba(255,255,255,.2);border-radius:999px;padding:1px 7px;font-size:.7rem;font-weight:900}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:26px 30px;box-shadow:var(--shadow)}
+.hidden{display:none!important}
+.fill-title{font-family:var(--display);font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.fill-instr{font-size:.87rem;color:var(--muted);line-height:1.55;padding:10px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:18px}
+.fill-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.sc{display:flex;flex-direction:column;align-items:center;gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:12px;padding:8px 14px}
+.sc .l{font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:120px}
+.prog-l{font-size:.68rem;color:var(--muted2);font-weight:700;margin-bottom:4px}
+.prog-t{height:6px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--magenta));transition:width .4s}
+.prose{font-size:1rem;line-height:2.2;color:var(--text)}
+.prose p{margin-bottom:1.1rem}
+.vg{display:inline-flex;align-items:center;gap:4px;position:relative;margin:0 3px;vertical-align:middle;background:rgba(37,217,255,.05);border-radius:9px;padding:2px 6px 2px 4px;border:1px solid rgba(37,217,255,.12)}
+.vg select{font-family:var(--font);font-size:.93rem;font-weight:700;height:32px;padding:0 26px 0 8px;border-radius:6px;border:1.5px solid rgba(180,180,240,.25);background:rgba(255,255,255,.07);color:var(--text);cursor:pointer;appearance:none;-webkit-appearance:none;min-width:130px;max-width:190px;transition:.15s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23a8abce' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 7px center}
+.vg select option{background:#0f0230;color:var(--text)}
+.vg select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.12)}
+.vg select:hover:not([disabled]){border-color:rgba(37,217,255,.55);background:rgba(37,217,255,.09)}
+.vg .hint-lbl{font-size:.63rem;color:var(--cyan);font-weight:800;white-space:nowrap;letter-spacing:.01em;opacity:.8}
+.verb-result{display:none;align-items:center;gap:4px;font-weight:700;font-size:.95rem}
+.verb-result.show{display:inline-flex}
+.vr-wrong{color:#f87171;text-decoration:underline wavy #ef4444}
+.vr-right{color:#4ade80}
+.vr-info{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:rgba(37,217,255,.18);border:1px solid rgba(37,217,255,.35);color:var(--cyan);font-size:.68rem;font-weight:900;cursor:pointer;margin-left:2px;position:relative}
+.vr-tip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#0d1a3a;border:1px solid rgba(37,217,255,.3);color:var(--text);font-size:.76rem;font-weight:400;line-height:1.5;padding:8px 11px;border-radius:9px;z-index:50;width:240px;white-space:normal;text-align:left;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.vr-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#0d1a3a}
+.vr-info.open .vr-tip{display:block}
+.fill-fb{display:none;margin-top:18px;padding:13px 18px;border-radius:12px;font-size:.9rem;line-height:1.65;font-weight:500}
+.fill-fb.show{display:block}
+.fill-fb.good{background:rgba(34,197,94,.13);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 12px 12px 0}
+.fill-fb.partial{background:rgba(245,158,11,.11);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 12px 12px 0}
+.fill-fb.bad{background:rgba(239,68,68,.12);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 12px 12px 0}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.btn{border:0;border-radius:11px;padding:10px 18px;font-weight:800;font-family:var(--font);font-size:.85rem;cursor:pointer;transition:.16s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-magenta{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.btn-dark{background:#0b0220;color:var(--muted);border:1px solid rgba(255,255,255,.08)}
+.vchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
+.vchip{background:rgba(37,217,255,.09);border:1px solid rgba(37,217,255,.18);border-radius:999px;padding:3px 10px;font-size:.71rem;color:var(--cyan);font-weight:700}
+.vchip.m{background:rgba(255,43,191,.08);border-color:rgba(255,43,191,.18);color:var(--magenta2)}
+/* SPEED */
+.speed-layout{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start}
+.speed-left{display:flex;flex-direction:column;gap:14px}
+.timer-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+.timer-ring{position:relative;width:120px;height:120px}
+.timer-ring svg{transform:rotate(-90deg)}
+.timer-ring circle{fill:none;stroke-width:8}
+.timer-track{stroke:rgba(255,255,255,.08)}
+.timer-progress{stroke:var(--cyan);stroke-linecap:round;transition:stroke-dashoffset .9s linear,stroke .3s}
+.timer-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:2.2rem;font-weight:900;color:var(--cyan)}
+.timer-num.warn{color:var(--warn)}.timer-num.danger{color:var(--bad);animation:tpulse .5s ease-in-out infinite}
+@keyframes tpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.speed-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.sstat{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:12px;padding:10px;text-align:center}
+.sstat .sl{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.sstat .sv{font-family:var(--display);font-size:1.5rem;font-weight:900;color:var(--cyan);margin-top:2px}
+.sstat .sv.g{color:var(--good)}.sstat .sv.b{color:var(--bad)}.sstat .sv.w{color:var(--warn)}
+.speed-card{background:rgba(255,255,255,.04);border:2px solid rgba(37,217,255,.2);border-radius:18px;padding:28px 24px;text-align:center;min-height:280px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.speed-verb-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);margin-bottom:4px}
+.speed-pronoun{font-size:1.5rem;font-weight:700;color:var(--magenta2)}
+.speed-infinitive{font-family:var(--display);font-size:2.4rem;font-weight:900;color:var(--cyan);line-height:1}
+.speed-eng{font-size:.82rem;color:var(--muted2)}
+.speed-tiles{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-top:14px;min-height:38px}
+.speed-tile{width:30px;height:36px;border-radius:7px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.95rem;font-weight:800;color:var(--muted2);transition:.2s}
+.speed-input-wrap{margin-top:12px;display:flex;flex-direction:column;align-items:center;gap:9px}
+.speed-input{font-family:var(--display);font-size:1.55rem;font-weight:800;text-align:center;width:100%;max-width:260px;padding:11px 14px;border-radius:12px;border:2px solid rgba(37,217,255,.35);background:rgba(37,217,255,.07);color:var(--text);outline:none;transition:.15s;letter-spacing:.04em}
+.speed-input::placeholder{color:rgba(255,255,255,.2);font-size:1rem;font-family:var(--font);font-weight:400}
+.speed-input:focus{border-color:var(--cyan);background:rgba(37,217,255,.12);box-shadow:0 0 0 4px rgba(37,217,255,.1)}
+.speed-input.correct{border-color:var(--good)!important;background:rgba(34,197,94,.14)!important;color:#86efac!important;pointer-events:none}
+.speed-input.wrong{border-color:var(--bad)!important;background:rgba(239,68,68,.13)!important;color:#fca5a5!important;pointer-events:none;animation:shk .3s ease}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.speed-submit{border:0;border-radius:10px;padding:10px 26px;font-weight:800;font-family:var(--font);font-size:.92rem;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.18)}
+.speed-submit:hover{transform:translateY(-2px)}.speed-submit:active{transform:translateY(0)}
+.speed-submit:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.speed-mini-fb{height:30px;display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:700;margin-top:6px;border-radius:8px;transition:.2s}
+.speed-mini-fb.ok{color:#4ade80;background:rgba(34,197,94,.1)}
+.speed-mini-fb.no{color:#f87171;background:rgba(239,68,68,.1)}
+.streak-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.78rem;font-weight:800;color:#fcd34d;margin-top:4px}
+.streak-badge.hidden{display:none}
+.speed-start{text-align:center;padding:20px 0;display:flex;flex-direction:column;align-items:center;gap:14px}
+.speed-start h2{font-family:var(--display);font-size:1.6rem;font-weight:900}
+.speed-start p{color:var(--muted);max-width:420px;line-height:1.6;font-size:.92rem}
+.speed-end{text-align:center;padding:20px 0}
+.speed-end .big{font-family:var(--display);font-size:3rem;font-weight:900;color:var(--cyan)}
+.speed-end .grade{font-size:1rem;color:var(--muted);margin-top:10px;line-height:1.65}
+.combo-flash{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2.2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999;text-shadow:0 0 20px rgba(245,158,11,.5)}
+.combo-flash.show{animation:cfAnim .7s ease forwards}
+@keyframes cfAnim{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:680px){.speed-layout{grid-template-columns:1fr}.prose{font-size:.93rem;line-height:2.0}.panel{padding:18px 16px}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="combo-flash" id="comboFlash"></div>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box" aria-hidden="true">YMF</div>
+    <div class="hero-text">
+      <h1>Verbos Irregulares en Pasado</h1>
+      <p>Pretérito indefinido — verbos con raíz irregular, cambios vocálicos e irregulares totales. Practica con el texto y luego escribe a toda velocidad.</p>
+      <div class="badges">
+        <span class="badge c">Nivel B1</span>
+        <span class="badge m">Pretérito indefinido</span>
+        <span class="badge">Fill-in · Speed Round (escribir)</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="tabs" role="tablist">
+  <button class="tab-btn active" id="tab-fill" onclick="showMode('fill')" role="tab">
+    📝 Texto con huecos <span class="tab-badge" id="fillBadge">30</span>
+  </button>
+  <button class="tab-btn" id="tab-speed" onclick="showMode('speed')" role="tab">
+    ⚡ Speed Round <span class="tab-badge">Escribe</span>
+  </button>
+</div>
+
+<!-- FILL -->
+<div class="panel" id="mode-fill">
+  <div class="fill-title">El viaje de Lucía: una semana en México</div>
+  <div class="fill-instr">Elige la forma correcta del verbo en <em>pretérito indefinido</em>. El sujeto está indicado entre paréntesis: <em>yo, él/ella, nosotros o ellos/ellas</em>. ¡Cuidado con los radicales irregulares!</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v" id="fTotal">30</span></div>
+    <div class="sc"><span class="l">Correctas</span><span class="v g" id="fOk">—</span></div>
+    <div class="sc"><span class="l">Errores</span><span class="v b" id="fErr">—</span></div>
+    <div class="prog-w">
+      <div class="prog-l">Progreso: <span id="fPct">0%</span></div>
+      <div class="prog-t"><div class="prog-f" id="fProg" style="width:0%"></div></div>
+    </div>
+  </div>
+  <div class="prose" id="prose"></div>
+  <div class="fill-fb" id="fillFb" role="alert"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="checkFillBtn" onclick="checkFill()">Revisar todo</button>
+    <button class="btn btn-ghost" onclick="resetFill()">&#x21BA; Reiniciar</button>
+    <button class="btn btn-dark" onclick="hintFill()">&#x1F4A1; Pista</button>
+  </div>
+  <div style="margin-top:16px">
+    <div style="font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--muted2);margin-bottom:7px">Verbos en este texto</div>
+    <div class="vchips" id="verbChips"></div>
+  </div>
+</div>
+
+<!-- SPEED -->
+<div class="panel hidden" id="mode-speed">
+  <div id="speedStart" class="speed-start">
+    <div style="font-size:3.5rem">&#x26A1;</div>
+    <h2>Speed Round</h2>
+    <p><strong>Escribe</strong> la conjugación correcta en pretérito indefinido antes de que se acabe el tiempo. Las tildes son opcionales. Confirma con Enter o el botón. Las rachas dan puntos extra.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <button class="btn btn-magenta" onclick="startSpeed(60)">60 segundos</button>
+      <button class="btn btn-cyan" onclick="startSpeed(90)">90 segundos</button>
+      <button class="btn btn-ghost" onclick="startSpeed(120)">2 minutos</button>
+    </div>
+  </div>
+
+  <div id="speedGame" class="hidden">
+    <div class="speed-layout">
+      <div class="speed-left">
+        <div class="timer-wrap">
+          <div class="timer-ring">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle class="timer-track" cx="60" cy="60" r="52"/>
+              <circle class="timer-progress" id="timerCircle" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="0"/>
+            </svg>
+            <div class="timer-num" id="timerNum">60</div>
+          </div>
+          <div class="streak-badge hidden" id="streakBadge">Racha: <span id="streakNum">0</span></div>
+        </div>
+        <div class="speed-stats">
+          <div class="sstat"><div class="sl">Puntos</div><div class="sv w" id="sPoints">0</div></div>
+          <div class="sstat"><div class="sl">Correctas</div><div class="sv g" id="sOk">0</div></div>
+          <div class="sstat"><div class="sl">Errores</div><div class="sv b" id="sErr">0</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="speed-card">
+          <div class="speed-verb-label">Conjuga en pretérito indefinido</div>
+          <div class="speed-pronoun" id="sPronoun"></div>
+          <div class="speed-infinitive" id="sInfinitive"></div>
+          <div class="speed-eng" id="sEng"></div>
+          <div class="speed-tiles" id="sTiles"></div>
+          <div class="speed-input-wrap">
+            <input class="speed-input" id="sInput" type="text"
+              placeholder="escribe aquí…"
+              autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+              aria-label="Escribe la conjugación en pretérito indefinido">
+            <button class="speed-submit" id="sSubmit" onclick="submitSpeed()">Confirmar →</button>
+          </div>
+          <div class="speed-mini-fb" id="sMiniFb"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="speedEnd" class="hidden speed-end">
+    <div style="font-size:3rem;margin-bottom:8px">&#x1F3C1;</div>
+    <div class="big" id="endPoints">0</div>
+    <div style="font-size:.85rem;color:var(--muted2);margin-top:2px">puntos</div>
+    <div class="grade" id="endGrade"></div>
+    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-magenta" onclick="restartSpeed()">Jugar de nuevo</button>
+      <button class="btn btn-ghost" onclick="showMode('fill')">Ir al texto</button>
+    </div>
+  </div>
+</div>
+
+<p class="creator">By <span>Carlos &amp; Denisse</span> · Your Mexican Friend</p>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   VERBOS — pretérito indefinido, radicales irregulares
+   Sujetos: yo | tu | el | nos | ellos
+   FUENTE DE VERDAD: cada forma verificada sujeto a sujeto
+══════════════════════════════════════════════════════ */
+const VERBS = {
+  // ── IRREGULARES TOTALES (raíz completamente nueva) ──
+  ser:    {eng:'to be',          type:'total',
+           conj:{yo:'fui',      tu:'fuiste',  el:'fue',      nos:'fuimos',   ellos:'fueron'}},
+  ir:     {eng:'to go',         type:'total',
+           conj:{yo:'fui',      tu:'fuiste',  el:'fue',      nos:'fuimos',   ellos:'fueron'}},
+  dar:    {eng:'to give',       type:'total',
+           conj:{yo:'di',       tu:'diste',   el:'dio',      nos:'dimos',    ellos:'dieron'}},
+  ver:    {eng:'to see',        type:'total',
+           conj:{yo:'vi',       tu:'viste',   el:'vio',      nos:'vimos',    ellos:'vieron'}},
+  hacer:  {eng:'to do / make',  type:'hiz-',
+           conj:{yo:'hice',     tu:'hiciste', el:'hizo',     nos:'hicimos',  ellos:'hicieron'}},
+  querer: {eng:'to want',       type:'quis-',
+           conj:{yo:'quise',    tu:'quisiste',el:'quiso',    nos:'quisimos', ellos:'quisieron'}},
+  saber:  {eng:'to know',       type:'sup-',
+           conj:{yo:'supe',     tu:'supiste', el:'supo',     nos:'supimos',  ellos:'supieron'}},
+  poder:  {eng:'can / to be able',type:'pud-',
+           conj:{yo:'pude',     tu:'pudiste', el:'pudo',     nos:'pudimos',  ellos:'pudieron'}},
+  poner:  {eng:'to put',        type:'pus-',
+           conj:{yo:'puse',     tu:'pusiste', el:'puso',     nos:'pusimos',  ellos:'pusieron'}},
+  tener:  {eng:'to have',       type:'tuv-',
+           conj:{yo:'tuve',     tu:'tuviste', el:'tuvo',     nos:'tuvimos',  ellos:'tuvieron'}},
+  estar:  {eng:'to be (state)', type:'estuv-',
+           conj:{yo:'estuve',   tu:'estuviste',el:'estuvo',  nos:'estuvimos',ellos:'estuvieron'}},
+  venir:  {eng:'to come',       type:'vin-',
+           conj:{yo:'vine',     tu:'viniste', el:'vino',     nos:'vinimos',  ellos:'vinieron'}},
+  traer:  {eng:'to bring',      type:'traj-',
+           conj:{yo:'traje',    tu:'trajiste',el:'trajo',    nos:'trajimos', ellos:'trajeron'}},
+  decir:  {eng:'to say',        type:'dij-',
+           conj:{yo:'dije',     tu:'dijiste', el:'dijo',     nos:'dijimos',  ellos:'dijeron'}},
+  // ── CAMBIO VOCÁLICO e→i (3ª persona) ──
+  pedir:  {eng:'to ask for',    type:'e→i (3ª)',
+           conj:{yo:'pedí',     tu:'pediste', el:'pidió',    nos:'pedimos',  ellos:'pidieron'}},
+  servir: {eng:'to serve',      type:'e→i (3ª)',
+           conj:{yo:'serví',    tu:'serviste',el:'sirvió',   nos:'servimos', ellos:'sirvieron'}},
+  seguir: {eng:'to follow',     type:'e→i (3ª)',
+           conj:{yo:'seguí',    tu:'seguiste',el:'siguió',   nos:'seguimos', ellos:'siguieron'}},
+  repetir:{eng:'to repeat',     type:'e→i (3ª)',
+           conj:{yo:'repetí',   tu:'repetiste',el:'repitió', nos:'repetimos',ellos:'repitieron'}},
+  preferir:{eng:'to prefer',    type:'e→i (3ª)',
+           conj:{yo:'preferí',  tu:'preferiste',el:'prefirió',nos:'preferimos',ellos:'prefirieron'}},
+  // ── CAMBIO VOCÁLICO o→u (3ª persona) ──
+  dormir: {eng:'to sleep',      type:'o→u (3ª)',
+           conj:{yo:'dormí',    tu:'dormiste',el:'durmió',   nos:'dormimos', ellos:'durmieron'}},
+  morir:  {eng:'to die',        type:'o→u (3ª)',
+           conj:{yo:'morí',     tu:'moriste', el:'murió',    nos:'morimos',  ellos:'murieron'}},
+  // ── ORTOGRÁFICOS ──
+  llegar: {eng:'to arrive',     type:'ortog. g→gu',
+           conj:{yo:'llegué',   tu:'llegaste',el:'llegó',    nos:'llegamos', ellos:'llegaron'}},
+  buscar: {eng:'to look for',   type:'ortog. c→qu',
+           conj:{yo:'busqué',   tu:'buscaste',el:'buscó',    nos:'buscamos', ellos:'buscaron'}},
+  empezar:{eng:'to start',      type:'ortog. z→c',
+           conj:{yo:'empecé',   tu:'empezaste',el:'empezó',  nos:'empezamos',ellos:'empezaron'}},
+  // ── CON -Y- EN 3ª PERSONA ──
+  leer:   {eng:'to read',       type:'-y- (3ª)',
+           conj:{yo:'leí',      tu:'leíste',  el:'leyó',     nos:'leímos',   ellos:'leyeron'}},
+  oír:    {eng:'to hear',       type:'-y- (3ª)',
+           conj:{yo:'oí',       tu:'oíste',   el:'oyó',      nos:'oímos',    ellos:'oyeron'}},
+};
+
+const SUBJ_DISPLAY = {yo:'yo',tu:'tú',el:'él/ella',nos:'nosotros',ellos:'ellos/ellas'};
+
+/* ══════════════════════════════════════════════════════
+   BLANKS — [verbo, sujeto, [distractor1, distractor2, distractor3]]
+   ⚠ VERIFICADO: respuesta = VERBS[verbo].conj[sujeto]
+   Distractores son formas reales del MISMO verbo con sujeto incorrecto
+══════════════════════════════════════════════════════ */
+const BLANKS = [
+  // 1: ir/yo → fui   | distractores: mismo verbo, mismo sujeto, distintos tiempos/modos
+  ['ir',      'yo',    ['iba','voy','fuera']],
+  // 2: llegar/el → llegó   | llegaba(imp), llega(pres), llegara(subj imp)
+  ['llegar',  'el',    ['llegaba','llega','llegara']],
+  // 3: ser/nos → fuimos   | éramos(imp), somos(pres), fuéramos(subj imp)
+  ['ser',     'nos',   ['éramos','somos','fuéramos']],
+  // 4: hacer/yo → hice   | hacía(imp), hago(pres), hiciera(subj imp)
+  ['hacer',   'yo',    ['hacía','hago','hiciera']],
+  // 5: estar/el → estuvo   | estaba(imp), está(pres), estuviera(subj imp)
+  ['estar',   'el',    ['estaba','está','estuviera']],
+  // 6: poder/nos → pudimos   | podíamos(imp), podemos(pres), pudiéramos(subj imp)
+  ['poder',   'nos',   ['podíamos','podemos','pudiéramos']],
+  // 7: ver/yo → vi   | veía(imp), veo(pres), viera(subj imp)
+  ['ver',     'yo',    ['veía','veo','viera']],
+  // 8: querer/el → quiso   | quería(imp), quiere(pres), quisiera(subj imp)
+  ['querer',  'el',    ['quería','quiere','quisiera']],
+  // 9: tener/yo → tuve   | tenía(imp), tengo(pres), tuviera(subj imp)
+  ['tener',   'yo',    ['tenía','tengo','tuviera']],
+  // 10: decir/ellos → dijeron   | decían(imp), dicen(pres), dijeran(subj imp)
+  ['decir',   'ellos', ['decían','dicen','dijeran']],
+  // 11: venir/el → vino   | venía(imp), viene(pres), viniera(subj imp)
+  ['venir',   'el',    ['venía','viene','viniera']],
+  // 12: poner/yo → puse   | ponía(imp), pongo(pres), pusiera(subj imp)
+  ['poner',   'yo',    ['ponía','pongo','pusiera']],
+  // 13: dar/nos → dimos   | dábamos(imp), damos(pres), diéramos(subj imp)
+  ['dar',     'nos',   ['dábamos','damos','diéramos']],
+  // 14: pedir/el → pidió   | pedía(imp), pide(pres), pidiera(subj imp)
+  ['pedir',   'el',    ['pedía','pide','pidiera']],
+  // 15: saber/yo → supe   | sabía(imp), sé(pres), supiera(subj imp)
+  ['saber',   'yo',    ['sabía','sé','supiera']],
+  // 16: dormir/ellos → durmieron   | dormían(imp), duermen(pres), durmieran(subj imp)
+  ['dormir',  'ellos', ['dormían','duermen','durmieran']],
+  // 17: traer/el → trajo   | traía(imp), trae(pres), trajera(subj imp)
+  ['traer',   'el',    ['traía','trae','trajera']],
+  // 18: leer/yo → leí   | leía(imp), leo(pres), leyera(subj imp)
+  ['leer',    'yo',    ['leía','leo','leyera']],
+  // 19: seguir/nos → seguimos   | seguíamos(imp), seguimos(pres)*, siguiéramos(subj imp)
+  // ⚠ seguimos = pres e indef son iguales — el contexto narrativo aclara cuál es
+  ['seguir',  'nos',   ['seguíamos','seguiríamos','siguiéramos']],
+  // 20: buscar/yo → busqué   | buscaba(imp), busco(pres), buscara(subj imp)
+  ['buscar',  'yo',    ['buscaba','busco','buscara']],
+  // 21: preferir/el → prefirió   | prefería(imp), prefiere(pres), prefiriera(subj imp)
+  ['preferir','el',    ['prefería','prefiere','prefiriera']],
+  // 22: empezar/nos → empezamos   | empezábamos(imp), empezaríamos(cond), empezáramos(subj imp)
+  ['empezar', 'nos',   ['empezábamos','empezaríamos','empezáramos']],
+  // 23: oír/ellos → oyeron   | oían(imp), oyen(pres), oyeran(subj imp)
+  ['oír',     'ellos', ['oían','oyen','oyeran']],
+  // 24: servir/el → sirvió   | servía(imp), sirve(pres), sirviera(subj imp)
+  ['servir',  'el',    ['servía','sirve','sirviera']],
+  // 25: hacer/ellos → hicieron   | hacían(imp), hacen(pres), hicieran(subj imp)
+  ['hacer',   'ellos', ['hacían','hacen','hicieran']],
+  // 26: ver/nos → vimos   | veíamos(imp), vemos(pres), viéramos(subj imp)
+  ['ver',     'nos',   ['veíamos','vemos','viéramos']],
+  // 27: repetir/yo → repetí   | repetía(imp), repito(pres), repitiera(subj imp)
+  ['repetir', 'yo',    ['repetía','repito','repitiera']],
+  // 28: estar/ellos → estuvieron   | estaban(imp), están(pres), estuvieran(subj imp)
+  ['estar',   'ellos', ['estaban','están','estuvieran']],
+  // 29: poder/yo → pude   | podía(imp), puedo(pres), pudiera(subj imp)
+  ['poder',   'yo',    ['podía','puedo','pudiera']],
+  // 30: venir/nos → vinimos   | veníamos(imp), venimos(pres)*, viniéramos(subj imp)
+  ['venir',   'nos',   ['veníamos','vendríamos','viniéramos']],
+];
+
+const RULES = {
+  'total':       'Irregular total — la raíz cambia completamente. <em>Truco:</em> si ves <b>-aba/-ía</b> es imperfecto; si hay acento en la raíz es indefinido.',
+  'hiz-':        '<b>hice / hizo / hicimos / hicieron.</b> La raíz es <em>hic-/hiz-</em>. No confundir con <em>hacía</em> (imperfecto) ni <em>haga</em> (subjuntivo presente).',
+  'quis-':       '<b>quise / quiso / quisimos / quisieron.</b> Raíz <em>quis-</em>. No confundir con <em>quería</em> (imperfecto) ni <em>quisiera</em> (subj. imperfecto).',
+  'sup-':        '<b>supe / supo / supimos / supieron.</b> Raíz <em>sup-</em>. No confundir con <em>sabía</em> (imperfecto) ni <em>supiera</em> (subj. imperfecto).',
+  'pud-':        '<b>pude / pudo / pudimos / pudieron.</b> Raíz <em>pud-</em>. No confundir con <em>podía</em> (imperfecto), <em>puedo</em> (presente) ni <em>pudiera</em> (subj. imperfecto).',
+  'pus-':        '<b>puse / puso / pusimos / pusieron.</b> Raíz <em>pus-</em>. No confundir con <em>ponía</em> (imperfecto) ni <em>pusiera</em> (subj. imperfecto).',
+  'tuv-':        '<b>tuve / tuvo / tuvimos / tuvieron.</b> Raíz <em>tuv-</em>. No confundir con <em>tenía</em> (imperfecto), <em>tengo</em> (presente) ni <em>tuviera</em> (subj. imperfecto).',
+  'estuv-':      '<b>estuve / estuvo / estuvimos / estuvieron.</b> Raíz <em>estuv-</em>. No confundir con <em>estaba</em> (imperfecto), <em>está</em> (presente) ni <em>estuviera</em> (subj. imperfecto).',
+  'vin-':        '<b>vine / vino / vinimos / vinieron.</b> Raíz <em>vin-</em>. No confundir con <em>venía</em> (imperfecto), <em>viene</em> (presente) ni <em>viniera</em> (subj. imperfecto).',
+  'traj-':       '<b>traje / trajo / trajimos / trajeron.</b> Raíz <em>traj-</em>. ⚠ <em>ellos = trajeron</em> (sin -i- extra). No confundir con <em>traía</em> (imperfecto) ni <em>trajera</em> (subj. imperfecto).',
+  'dij-':        '<b>dije / dijo / dijimos / dijeron.</b> Raíz <em>dij-</em>. ⚠ <em>ellos = dijeron</em> (sin -i- extra). No confundir con <em>decía</em> (imperfecto) ni <em>dijeran</em> (subj. imperfecto).',
+  'e→i (3ª)':   'Cambio <b>e→i</b> solo en 3ª persona (él/ella, ellos). Ej: <em>pedí</em> ✓ pero <em>pidió / pidieron</em>. No confundir con <em>pedía / pide / pidiera</em>.',
+  'o→u (3ª)':   'Cambio <b>o→u</b> solo en 3ª persona. Ej: <em>dormí</em> (yo) ✓ pero <em>durmió / durmieron</em>. No confundir con <em>dormía / duerme / durmiera</em>.',
+  'ortog. g→gu':'Cambio ortográfico en <b>yo</b>: <em>llegué</em> (g→gu para mantener /g/ ante -e). El resto es regular: llegó, llegamos…',
+  'ortog. c→qu':'Cambio ortográfico en <b>yo</b>: <em>busqué</em> (c→qu para mantener /k/ ante -e). El resto es regular: buscó, buscamos…',
+  'ortog. z→c': 'Cambio ortográfico en <b>yo</b>: <em>empecé</em> (z→c antes de -e). El resto es regular: empezó, empezamos…',
+  '-y- (3ª)':   'Los verbos <b>-eer/-oír</b> añaden -y- en 3ª persona: <em>leyó, leyeron, oyó, oyeron</em>. No confundir con <em>leía</em> (imperfecto), <em>leo</em> (presente) ni <em>leyera</em> (subj. imperfecto).',
+};
+
+/* ══════════════════════════════════════════════════════
+   TEXTO — narrador = Lucía (yo)
+   Sujeto de cada hueco VERIFICADO contra el texto
+   Formato: {N|verbo,sujeto}
+══════════════════════════════════════════════════════ */
+const PARAGRAPHS = [
+  // 1:ir/yo=fui  2:llegar/el=llegó  3:ser/nos=fuimos  4:hacer/yo=hice  5:estar/el=estuvo
+  'El lunes pasado yo {1|ir,yo} a México por primera vez en mi vida. Mi vuelo {2|llegar,el} tarde, así que mi amiga Sara y yo {3|ser,nos} las últimas en salir del aeropuerto. Antes de dormir, yo {4|hacer,yo} una lista de todo lo que quería ver. La habitación del hotel {5|estar,el} perfecta: grande, limpia y con vista al Zócalo.',
+
+  // 6:poder/nos=pudimos  7:ver/yo=vi  8:querer/el=quiso  9:tener/yo=tuve  10:decir/ellos=dijeron
+  'El martes, Sara y yo {6|poder,nos} visitar el Museo Nacional de Antropología desde que abrió. Yo {7|ver,yo} las piezas aztecas con mucha atención. El guía {8|querer,el} explicar todo en inglés, pero yo {9|tener,yo} que pedirle en español. Los otros turistas {10|decir,ellos} que era el mejor museo que habían visitado en su vida.',
+
+  // 11:venir/el=vino  12:poner/yo=puse  13:dar/nos=dimos  14:pedir/el=pidió  15:saber/yo=supe
+  'El miércoles, el chef del restaurante {11|venir,el} a nuestra mesa para saludarnos personalmente. Yo {12|poner,yo} mi teléfono sobre la mesa para sacar fotos de la comida. Sara y yo {13|dar,nos} una propina muy generosa porque el servicio fue excelente. El mesero {14|pedir,el} nuestra opinión sobre los tacos y yo {15|saber,yo} exactamente qué responder: ¡los mejores de mi vida!',
+
+  // 16:dormir/ellos=durmieron  17:traer/el=trajo  18:leer/yo=leí  19:seguir/nos=seguimos  20:buscar/yo=busqué
+  'El jueves visitamos Teotihuacán. Mis compañeros de tour {16|dormir,ellos} en el autobús durante todo el camino. El guía {17|traer,el} mapas detallados del sitio arqueológico para todos. Yo {18|leer,yo} la información de cada pirámide con mucho interés. Sara y yo {19|seguir,nos} el camino marcado sin desviarnos. Cuando terminé, yo {20|buscar,yo} el autobús durante veinte minutos porque no recordaba dónde lo habíamos dejado.',
+
+  // 21:preferir/el=prefirió  22:empezar/nos=empezamos  23:oír/ellos=oyeron  24:servir/el=sirvió  25:hacer/ellos=hicieron
+  'El viernes fuimos al mercado de artesanías. Un vendedor {21|preferir,el} hablar con Sara porque ella regateba mejor que yo. Sara y yo {22|empezar,nos} a regatear juntas y al final conseguimos buenos precios. Los músicos de la plaza {23|oír,ellos} aplausos de todo el mercado cuando terminaron su actuación. El cocinero del puesto {24|servir,el} tamales directamente de la olla. Los niños del mercado {25|hacer,ellos} pequeñas figuras de barro delante de nosotras.',
+
+  // 26:ver/nos=vimos  27:repetir/yo=repetí  28:estar/ellos=estuvieron  29:poder/yo=pude  30:venir/nos=vinimos
+  'El sábado, Sara y yo {26|ver,nos} el espectáculo de Lucha Libre en la Arena México. Yo {27|repetir,yo} varias veces el nombre de mi luchador favorito hasta que lo pronuncié bien. Los fans {28|estar,ellos} de pie durante casi toda la función gritando. Yo no {29|poder,yo} creer la energía del lugar. Al final Sara y yo {30|venir,nos} al hotel cansadas pero con una sonrisa enorme. Fue el mejor viaje de mi vida.',
+];
+
+/* ══════════════════════════════════════════════════════
+   SPEED CARDS — todas las combinaciones verbo×sujeto
+   answer = VERBS[verb].conj[subj]  (verificado)
+══════════════════════════════════════════════════════ */
+const SPEED_CARDS = [];
+['yo','el','nos','ellos'].forEach(subj=>{
+  Object.entries(VERBS).forEach(([verb,data])=>{
+    SPEED_CARDS.push({verb, subj, eng:data.eng, answer:data.conj[subj], type:data.type});
+  });
+});
+
+/* ══════════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════════ */
+let fillChecked=false, openTip=null;
+let speedTimer=null, speedTimeLeft=60, speedTotalTime=60;
+let speedPoints=0, speedOk=0, speedErr=0, speedStreak=0;
+let speedAnswered=false, speedCard=null, speedUsed=[];
+
+/* ══════════════════════════════════════════════════════
+   MODE TOGGLE
+══════════════════════════════════════════════════════ */
+function showMode(m){
+  ['fill','speed'].forEach(x=>{
+    document.getElementById('mode-'+x).classList.toggle('hidden',x!==m);
+    document.getElementById('tab-'+x).classList.toggle('active',x===m);
+  });
+  if(m==='speed'&&!speedTimer) showSpeedStart();
+}
+
+/* ══════════════════════════════════════════════════════
+   BUILD FILL
+══════════════════════════════════════════════════════ */
+function getAnswer(i){ const [v,s]=BLANKS[i]; return VERBS[v].conj[s]; }
+function getRule(i){
+  const [v,s]=BLANKS[i], vd=VERBS[v];
+  return '<strong>'+v+' → '+vd.conj[s]+'</strong> ('+SUBJ_DISPLAY[s]+'): '+(RULES[vd.type]||'');
+}
+
+function seededOptions(opts, seed){
+  const arr=[...new Set(opts)];
+  let x=(seed*9301+49297)%233280;
+  for(let i=arr.length-1;i>0;i--){
+    x=(x*9301+49297)%233280;
+    const j=Math.floor((x/233280)*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
+function buildFill(){
+  const prose=document.getElementById('prose'); prose.innerHTML='';
+  PARAGRAPHS.forEach(para=>{
+    const p=document.createElement('p');
+    para.split(/(\{\d+\|[^}]+\})/).forEach(part=>{
+      const m=part.match(/^\{(\d+)\|([^,]+),([^}]+)\}$/);
+      if(!m){p.appendChild(document.createTextNode(part));return;}
+      const n=parseInt(m[1]), verb=m[2], subj=m[3], bIdx=n-1;
+      const answer=getAnswer(bIdx);
+      const [,,distractors]=BLANKS[bIdx];
+      const opts=seededOptions([answer,...distractors],n*31+7);
+
+      const wrap=document.createElement('span'); wrap.className='vg'; wrap.id='vg_'+n;
+      const sel=document.createElement('select');
+      sel.id='vs_'+n; sel.dataset.answer=answer; sel.dataset.n=n;
+      sel.setAttribute('aria-label','hueco '+n+': '+verb+' ('+SUBJ_DISPLAY[subj]+')');
+      const dflt=document.createElement('option'); dflt.value=''; dflt.textContent='▾ elige'; sel.appendChild(dflt);
+      opts.forEach(o=>{const op=document.createElement('option');op.value=o;op.textContent=o;sel.appendChild(op);});
+      sel.addEventListener('change',()=>{if(!fillChecked)updateProgress();});
+
+      const hl=document.createElement('span'); hl.className='hint-lbl';
+      hl.textContent='('+verb+', '+SUBJ_DISPLAY[subj]+')';
+
+      const result=document.createElement('span'); result.className='verb-result'; result.id='vr_'+n;
+      wrap.appendChild(sel); wrap.appendChild(hl); wrap.appendChild(result);
+      p.appendChild(wrap);
+    });
+    prose.appendChild(p);
+  });
+  buildChips();
+}
+
+function buildChips(){
+  const wrap=document.getElementById('verbChips'); wrap.innerHTML='';
+  const seen=new Set();
+  BLANKS.forEach(([v])=>{
+    if(seen.has(v))return; seen.add(v);
+    const chip=document.createElement('span');
+    chip.className='vchip'+(VERBS[v].type.includes('→')||VERBS[v].type.includes('-y-')?'':' m');
+    chip.textContent=v; wrap.appendChild(chip);
+  });
+}
+
+function updateProgress(){
+  let ans=0,ok=0;
+  BLANKS.forEach((_,i)=>{const s=document.getElementById('vs_'+(i+1));if(s&&s.value!==''){ans++;if(s.value===s.dataset.answer)ok++;}});
+  const pct=Math.round(ans/BLANKS.length*100);
+  document.getElementById('fPct').textContent=pct+'%';
+  document.getElementById('fProg').style.width=pct+'%';
+}
+
+function checkFill(){
+  fillChecked=true; let ok=0; openTip=null;
+  BLANKS.forEach((_,i)=>{
+    const n=i+1, sel=document.getElementById('vs_'+n), result=document.getElementById('vr_'+n);
+    if(!sel||!result)return;
+    const answer=sel.dataset.answer, given=sel.value, isOk=given===answer;
+    if(isOk)ok++;
+    sel.style.display='none';
+    const vg=document.getElementById('vg_'+n);
+    vg.querySelectorAll('.hint-lbl').forEach(e=>e.remove());
+    vg.style.background=isOk?'rgba(34,197,94,.08)':'rgba(239,68,68,.08)';
+    vg.style.borderColor=isOk?'rgba(34,197,94,.3)':'rgba(239,68,68,.3)';
+    result.innerHTML=''; result.classList.add('show');
+    if(isOk){
+      result.innerHTML='<span class="vr-right">'+answer+'</span><span style="color:#4ade80"> ✓</span>';
+    } else {
+      result.innerHTML='<span class="vr-wrong">'+(given||'—')+'</span><span style="color:#f87171"> ✗</span><span class="vr-right"> '+answer+'</span>';
+    }
+    const info=document.createElement('span'); info.className='vr-info'; info.textContent='i';
+    const tip=document.createElement('span'); tip.className='vr-tip';
+    tip.innerHTML=getRule(i);
+    info.appendChild(tip);
+    info.addEventListener('click',e=>{
+      e.stopPropagation();
+      if(openTip&&openTip!==info)openTip.classList.remove('open');
+      info.classList.toggle('open');
+      openTip=info.classList.contains('open')?info:null;
+    });
+    result.appendChild(document.createTextNode(' ')); result.appendChild(info);
+  });
+  document.addEventListener('click',()=>{if(openTip){openTip.classList.remove('open');openTip=null;}});
+  const total=BLANKS.length, pct=Math.round(ok/total*100);
+  document.getElementById('fOk').textContent=ok;
+  document.getElementById('fErr').textContent=total-ok;
+  document.getElementById('fProg').style.width='100%'; document.getElementById('fPct').textContent='100%';
+  const fb=document.getElementById('fillFb'); fb.classList.add('show');
+  if(pct===100){fb.className='fill-fb show good';fb.innerHTML='🏆 <strong>¡Perfecto! '+ok+'/'+total+'.</strong> Dominas los verbos irregulares en pretérito indefinido. ¡Impresionante!';}
+  else if(pct>=70){fb.className='fill-fb show partial';fb.innerHTML='👍 <strong>'+ok+'/'+total+' ('+pct+'%).</strong> Muy bien. Haz clic en <strong>i</strong> para ver la explicación de cada error.';}
+  else if(pct>=45){fb.className='fill-fb show partial';fb.innerHTML='📖 <strong>'+ok+'/'+total+' ('+pct+'%).</strong> Repasa los radicales: tuv-, estuv-, vin-, pus-, pud-… y los cambios e→i en 3ª persona.';}
+  else{fb.className='fill-fb show bad';fb.innerHTML='💪 <strong>'+ok+'/'+total+' ('+pct+'%).</strong> Empieza memorizando los más comunes: ser/ir (fui/fue/fuimos), hacer (hice/hizo), tener (tuve/tuvo).';}
+  document.getElementById('checkFillBtn').disabled=true;
+}
+
+function resetFill(){
+  fillChecked=false; buildFill();
+  document.getElementById('fillFb').className='fill-fb';
+  document.getElementById('checkFillBtn').disabled=false;
+  ['fOk','fErr'].forEach(id=>document.getElementById(id).textContent='—');
+  document.getElementById('fProg').style.width='0%'; document.getElementById('fPct').textContent='0%';
+}
+
+function hintFill(){
+  if(fillChecked)return;
+  const empty=BLANKS.map((_,i)=>i).filter(i=>{const s=document.getElementById('vs_'+(i+1));return s&&s.value==='';});
+  if(!empty.length)return;
+  const i=empty[0], sel=document.getElementById('vs_'+(i+1));
+  sel.value=getAnswer(i); sel.style.borderColor='rgba(245,158,11,.6)'; sel.style.color='#fcd34d';
+  sel.scrollIntoView({behavior:'smooth',block:'center'}); updateProgress();
+}
+
+/* ══════════════════════════════════════════════════════
+   SPEED ROUND
+══════════════════════════════════════════════════════ */
+function showSpeedStart(){
+  document.getElementById('speedStart').classList.remove('hidden');
+  document.getElementById('speedGame').classList.add('hidden');
+  document.getElementById('speedEnd').classList.add('hidden');
+}
+
+function startSpeed(secs){
+  speedTimeLeft=secs; speedTotalTime=secs;
+  speedPoints=0; speedOk=0; speedErr=0; speedStreak=0; speedUsed=[];
+  ['sPoints','sOk','sErr'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('streakBadge').classList.add('hidden');
+  document.getElementById('speedStart').classList.add('hidden');
+  document.getElementById('speedEnd').classList.add('hidden');
+  document.getElementById('speedGame').classList.remove('hidden');
+  updateTimer();
+  speedTimer=setInterval(()=>{
+    speedTimeLeft--;
+    updateTimer();
+    if(speedTimeLeft<=0){clearInterval(speedTimer);speedTimer=null;endSpeed();}
+  },1000);
+  nextCard();
+}
+
+function updateTimer(){
+  const el=document.getElementById('timerNum');
+  el.textContent=speedTimeLeft;
+  el.className='timer-num'+(speedTimeLeft<=10?' danger':speedTimeLeft<=20?' warn':'');
+  const circ=document.getElementById('timerCircle');
+  const pct=speedTimeLeft/speedTotalTime;
+  circ.style.strokeDashoffset=326.7*(1-pct);
+  circ.style.stroke=speedTimeLeft<=10?'var(--bad)':speedTimeLeft<=20?'var(--warn)':'var(--cyan)';
+}
+
+function nextCard(){
+  speedAnswered=false;
+  const avail=SPEED_CARDS.filter(c=>!speedUsed.includes(c.verb+'_'+c.subj));
+  const pool=avail.length>0?avail:SPEED_CARDS;
+  const card=pool[Math.floor(Math.random()*pool.length)];
+  speedUsed.push(card.verb+'_'+card.subj);
+  if(speedUsed.length>40) speedUsed.shift();
+  speedCard=card;
+  document.getElementById('sPronoun').textContent=SUBJ_DISPLAY[card.subj]||card.subj;
+  document.getElementById('sInfinitive').textContent=card.verb;
+  document.getElementById('sEng').textContent=card.eng;
+  document.getElementById('sMiniFb').className='speed-mini-fb';
+  document.getElementById('sMiniFb').textContent='';
+  const tilesWrap=document.getElementById('sTiles'); tilesWrap.innerHTML='';
+  [...card.answer].forEach(()=>{
+    const tile=document.createElement('div'); tile.className='speed-tile'; tile.textContent='_';
+    tilesWrap.appendChild(tile);
+  });
+  const inp=document.getElementById('sInput');
+  inp.value=''; inp.className='speed-input'; inp.disabled=false;
+  document.getElementById('sSubmit').disabled=false;
+  setTimeout(()=>inp.focus(),80);
+}
+
+function normalizeStr(s){
+  return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z]/g,'');
+}
+
+function submitSpeed(){
+  if(speedAnswered||!speedTimer)return;
+  const inp=document.getElementById('sInput'), typed=inp.value.trim();
+  if(!typed)return;
+  speedAnswered=true;
+  const correct=speedCard.answer;
+  const isOk=normalizeStr(typed)===normalizeStr(correct);
+  inp.disabled=true; document.getElementById('sSubmit').disabled=true;
+  inp.classList.add(isOk?'correct':'wrong');
+  if(isOk) inp.value=correct;
+  const tiles=document.getElementById('sTiles').children;
+  [...correct].forEach((ch,i)=>{if(tiles[i])tiles[i].textContent=ch;});
+  const fb=document.getElementById('sMiniFb');
+  if(isOk){
+    speedOk++; speedStreak++;
+    const bonus=speedStreak>=3?speedStreak-2:0, pts=10+bonus*5;
+    speedPoints+=pts;
+    fb.className='speed-mini-fb ok';
+    fb.textContent=pts>10?'+'+pts+' (racha x'+speedStreak+')':'+'+pts;
+    if(speedStreak>=3){
+      const el=document.getElementById('comboFlash');
+      el.textContent='Combo x'+speedStreak+'!';
+      el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+    }
+  } else {
+    speedErr++; speedStreak=0;
+    fb.className='speed-mini-fb no';
+    fb.innerHTML='&#x2717; &nbsp;<strong>'+correct+'</strong>';
+  }
+  document.getElementById('sPoints').textContent=speedPoints;
+  document.getElementById('sOk').textContent=speedOk;
+  document.getElementById('sErr').textContent=speedErr;
+  const sb=document.getElementById('streakBadge');
+  if(speedStreak>=3){sb.classList.remove('hidden');document.getElementById('streakNum').textContent=speedStreak;}
+  else sb.classList.add('hidden');
+  setTimeout(()=>{if(speedTimer)nextCard();},isOk?550:1100);
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    const inp=document.getElementById('sInput');
+    if(inp&&!inp.disabled&&document.activeElement===inp){e.preventDefault();submitSpeed();}
+  }
+});
+
+function endSpeed(){
+  document.getElementById('speedGame').classList.add('hidden');
+  document.getElementById('speedEnd').classList.remove('hidden');
+  document.getElementById('endPoints').textContent=speedPoints;
+  const total=speedOk+speedErr, acc=total>0?Math.round(speedOk/total*100):0;
+  const msgs=[
+    [90,'¡Conjugas el indefinido con fluidez total! Radicales, cambios vocálicos y ortográficos: todo bajo control.'],
+    [70,'Muy bien. Tienes buena base — sigue practicando los radicales tuv-, vin-, estuv- para automatizarlos.'],
+    [50,'Bien encaminado/a. Repasa los cambios vocálicos e→i en 3ª persona (pidió, sirvió, siguió…).'],
+    [0,'Sigue practicando. Empieza con los 5 más comunes: ser/ir, hacer, tener, estar y venir.'],
+  ];
+  const msg=msgs.find(([t])=>acc>=t)[1];
+  document.getElementById('endGrade').innerHTML='<strong>'+speedOk+' correctas</strong> de '+total+' ('+acc+'% precisión)<br><br>'+msg;
+}
+
+function restartSpeed(){
+  if(speedTimer){clearInterval(speedTimer);speedTimer=null;}
+  showSpeedStart();
+}
+
+/* INIT */
+document.getElementById('fillBadge').textContent=BLANKS.length;
+buildFill();
+</script>
+</body>
+</html>

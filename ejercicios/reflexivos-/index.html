@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verbos Reflexivos | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --refl:#f472b6;--refl2:#ff91cd;
+  --norefl:#25d9ff;--norefl2:#7ee8ff;
+  --recip:#a78bfa;--recip2:#c4b5fd;
+  --change:#34d399;--change2:#6ee7b7;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 12% 8%,rgba(255,43,191,.15),transparent 30%),radial-gradient(ellipse at 88% 12%,rgba(37,217,255,.1),transparent 30%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(1020px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--refl),#fff 40%,var(--norefl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.85rem;margin-top:4px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ex-tabs{display:flex;gap:5px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:7px;overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:8px 11px;font-weight:800;font-family:var(--font);font-size:.74rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;transform:translateY(-1px)}
+.etab-icon{font-size:1.15rem;line-height:1}
+.etab-label{font-size:.6rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:22px 26px;box-shadow:var(--shadow)}
+.ex-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.85rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:16px}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:90px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;transition:width .35s;background:linear-gradient(90deg,var(--refl),var(--norefl))}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.err{background:rgba(239,68,68,.11);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+
+/* ── TAGS ── */
+.tag{font-size:.6rem;font-weight:900;text-transform:uppercase;border-radius:999px;padding:2px 8px;vertical-align:middle;margin-left:4px}
+.tag-refl{background:rgba(244,114,182,.2);color:var(--refl2)}
+.tag-norefl{background:rgba(37,217,255,.15);color:var(--norefl2)}
+.tag-recip{background:rgba(167,139,250,.15);color:var(--recip2)}
+.tag-change{background:rgba(52,211,153,.15);color:var(--change2)}
+.tag-pos{background:rgba(251,191,36,.15);color:#fde68a}
+
+/* ── VERB CARDS (EX 0) ── */
+.verb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.verb-card{border-radius:18px;overflow:hidden;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+.verb-top{padding:14px 16px 10px;display:flex;align-items:flex-start;gap:10px}
+.verb-emoji{font-size:1.8rem;flex-shrink:0;width:38px;text-align:center}
+.verb-info{flex:1}
+.verb-name{font-family:var(--display);font-size:1.1rem;font-weight:900}
+.verb-en{font-size:.76rem;color:var(--muted2);font-style:italic;margin-top:1px}
+.verb-conj{background:rgba(0,0,0,.25);padding:9px 16px;font-size:.8rem;color:var(--muted);font-family:monospace;line-height:1.7}
+.verb-conj .pr{color:var(--refl2);font-weight:700;font-family:var(--font)}
+.verb-examples{padding:11px 16px;display:flex;flex-direction:column;gap:5px;background:rgba(255,255,255,.02);border-top:1px solid rgba(255,255,255,.05)}
+.verb-ex{font-size:.82rem;line-height:1.5}
+.verb-ex .es{font-weight:600}
+.verb-ex .en{font-size:.72rem;color:var(--muted2);font-style:italic;display:block}
+.meaning-shift{margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.06);font-size:.74rem;color:var(--muted2);line-height:1.5}
+.meaning-shift strong{color:var(--change2)}
+
+/* ── PICTURE CARDS (EX 1) ── */
+.pic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.pic-card{border-radius:18px;overflow:hidden;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);transition:transform .15s}
+.pic-card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.4)}
+.pic-card.ok{border-color:var(--good);box-shadow:0 0 0 2px rgba(34,197,94,.3)}
+.pic-card.err{border-color:var(--bad);box-shadow:0 0 0 2px rgba(239,68,68,.25)}
+.pic-q{padding:14px 16px;font-size:.95rem;font-weight:700;background:rgba(0,0,0,.18);line-height:1.55}
+.pic-sub{font-size:.7rem;color:var(--muted2);display:block;margin-top:3px;font-weight:400}
+.pic-blank{display:inline-block;min-width:54px;border-bottom:2.5px solid var(--cyan);color:var(--cyan);font-weight:900;padding:0 3px;text-align:center}
+.pic-btns{display:grid;grid-template-columns:1fr 1fr}
+.pic-btn{border:0;padding:11px 8px 11px 22px;font-weight:800;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.12s;color:white;text-align:left;position:relative}
+.pic-btn:hover:not([disabled]){filter:brightness(1.15)}
+.pic-btn[disabled]{cursor:default}
+.pic-btn::before{content:attr(data-l);position:absolute;left:7px;top:50%;transform:translateY(-50%);font-size:.68rem;opacity:.65;font-weight:900}
+.pic-btn.c1{background:#c0392b}.pic-btn.c2{background:#2980b9}
+.pic-btn.c3{background:#d35400}.pic-btn.c4{background:#27ae60}
+.pic-btn.revealed{box-shadow:inset 0 0 0 3px white}
+.pic-btn.revealed::after{content:"✓";position:absolute;right:8px;top:50%;transform:translateY(-50%)}
+.pic-btn.dim{opacity:.28}
+.pic-exp{font-size:.76rem;padding:9px 13px;background:rgba(0,0,0,.3);color:var(--muted);line-height:1.5;display:none}
+.pic-exp.show{display:block}
+
+/* ── MC ── */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px}
+.mc-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0;margin-top:2px}
+.mc-sent{font-size:1rem;line-height:1.65;flex:1}
+.mc-blank{display:inline-block;min-width:78px;border-bottom:2.5px solid rgba(37,217,255,.4);padding:0 4px;text-align:center;font-weight:800;color:var(--cyan)}
+.mc-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding-left:28px}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px}
+.mc-opt{border:0;border-radius:10px;padding:7px 14px;font-weight:700;font-family:var(--display);font-size:.92rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);background:rgba(37,217,255,.09);border-color:rgba(37,217,255,.35)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.mc-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.mc-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mc-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-expl{display:none;font-size:.79rem;color:var(--muted);line-height:1.55;margin-top:7px;padding:7px 12px 7px 28px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-expl.show{display:block}
+
+/* ── ERROR HUNT ── */
+.eh-list{display:flex;flex-direction:column;gap:9px}
+.eh-item{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:13px 15px;display:flex;align-items:flex-start;gap:11px}
+.eh-item.eh-ok{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.05)}
+.eh-item.eh-bad{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.05)}
+.eh-n{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:var(--muted2);flex-shrink:0;margin-top:1px}
+.eh-body{flex:1}.eh-sent{font-size:.97rem;line-height:1.6}
+.eh-fix{font-size:.82rem;font-weight:700;color:var(--good);margin-left:6px}
+.eh-btns{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+.eh-btn{border:0;border-radius:9px;padding:7px 14px;font-weight:800;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.eh-yes:hover:not([disabled]){border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.1);color:#86efac}
+.eh-no:hover:not([disabled]){border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);color:#fca5a5}
+.eh-btn[disabled]{cursor:default;opacity:.5}
+.cho-ok{border-color:var(--good)!important;background:rgba(34,197,94,.18)!important;color:#86efac!important;opacity:1!important}
+.cho-err{border-color:var(--bad)!important;background:rgba(239,68,68,.14)!important;color:#fca5a5!important;opacity:1!important}
+.eh-exp{display:none;font-size:.79rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);line-height:1.55}
+.revealed .eh-exp{display:block}
+
+/* ── DRAG & SORT ── */
+.sort-pile{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;min-height:52px;margin-bottom:12px}
+.sort-bucket{border-radius:14px;padding:12px;min-height:80px;display:flex;flex-direction:column;gap:6px;transition:.2s}
+.sort-bucket.drag-over{box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.bucket-title{font-family:var(--display);font-size:.76rem;font-weight:900;text-align:center}
+.bucket-sub{font-size:.62rem;color:var(--muted2);text-align:center;line-height:1.35}
+.sort-card{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:9px;padding:7px 12px;font-size:.84rem;font-weight:600;cursor:grab;user-select:none;transition:.15s}
+.sort-card:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sort-card.ghost{opacity:.35}
+.sort-card.c-ok{background:rgba(34,197,94,.14);border-color:var(--good);color:#86efac;cursor:default}
+.sort-card.c-err{background:rgba(239,68,68,.1);border-color:var(--bad);color:#fca5a5;font-size:.78rem}
+
+/* ── SPEED ── */
+.sp-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-stats{display:flex;gap:9px}
+.spst{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spst .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.spst .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spst .sv.g{color:var(--good)}.spst .sv.b{color:var(--bad)}.spst .sv.w{color:var(--warn)}
+.sp-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:18px;text-align:center;width:100%;max-width:540px}
+.sp-q{font-size:.97rem;line-height:1.7;margin-bottom:4px}
+.sp-hint{font-size:.77rem;color:var(--muted2);font-style:italic}
+.sp-row{display:flex;gap:8px;justify-content:center;width:100%;max-width:540px}
+.sp-inp{flex:1;max-width:260px;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.3);border-radius:11px;padding:10px 14px;font-family:var(--display);font-size:1.05rem;font-weight:800;color:var(--text);outline:none;transition:.15s}
+.sp-inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.sp-inp::placeholder{color:var(--muted2);font-weight:400;font-family:var(--font);font-size:.9rem}
+.sp-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:540px}
+.sp-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.sp-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.tmr-row{display:flex;align-items:center;gap:9px;width:100%;max-width:540px}
+.tmr-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.tmr-fil{height:100%;border-radius:999px;transition:width 1s linear;background:linear-gradient(90deg,var(--refl),var(--norefl))}
+.tmr-n{font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--muted2);min-width:22px;text-align:right}
+.sp-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.streak{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak.on{display:inline-flex;align-items:center;gap:4px}
+.cf{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.cf.pop{animation:cfk .7s ease forwards}
+@keyframes cfk{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+
+/* ── REFERENCE ── */
+.ref-section{margin-bottom:18px}
+.ref-h3{font-family:var(--display);font-size:.92rem;font-weight:800;padding:6px 14px;border-radius:9px;display:inline-flex;align-items:center;gap:6px;margin-bottom:10px}
+.ref-table{width:100%;border-collapse:collapse;font-size:.83rem;margin-bottom:10px}
+.ref-table th{padding:6px 12px;font-size:.6rem;font-weight:800;text-transform:uppercase;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+.ref-table td{padding:6px 12px;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-table tr:hover td{background:rgba(255,255,255,.02)}
+.ref-tip{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:10px 14px;font-size:.83rem;color:#bbf7d0;line-height:1.6;margin-bottom:12px}
+.ref-alert{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.18);border-radius:12px;padding:10px 14px;font-size:.83rem;color:#fecaca;line-height:1.6;margin-bottom:12px}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:14px 12px}.pic-grid{grid-template-columns:1fr}.verb-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="cf" id="cf"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Verbos Reflexivos</h1>
+      <p>Master verbos reflexivos: pronouns, daily routines, reciprocal actions, and verbs that change meaning entirely.</p>
+      <div class="badges">
+        <span class="badge">A2&#8211;B1</span>
+        <span class="badge" style="border-color:rgba(244,114,182,.4);color:var(--refl2)">&#129489; me/te/se/nos/se</span>
+        <span class="badge" style="border-color:rgba(167,139,250,.4);color:var(--recip2)">&#129309; reciproco</span>
+        <span class="badge" style="border-color:rgba(52,211,153,.4);color:var(--change2)">&#128260; cambio de significado</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">&#128218;</span><span class="etab-label">Verb<br>cards</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">&#9201;&#65039;</span><span class="etab-label">Rutina<br>diaria</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">&#128221;</span><span class="etab-label">Multiple<br>choice</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">&#128269;</span><span class="etab-label">Error<br>hunter</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">&#128202;</span><span class="etab-label">Drag &amp;<br>sort</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">&#9889;</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-6" onclick="goEx(6)"><span class="etab-icon">&#128196;</span><span class="etab-label">Refer-<br>encia</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> &middot; Your Mexican Friend</p>
+</div>
+<script>
+function seededShuffle(arr,seed){const a=[...arr];let s=seed;for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+
+let picAnswers={}, mcAnswers={}, mcChecked=false, ehAnswered={};
+let dragItem=null, sortPlaced={}, sortChecked=false, tapSel=null;
+let spIdx=0,spOk=0,spErr=0,spStreak=0,spTimer=null,spTimeLeft=0,spAnswered=false;
+
+function goEx(idx){
+  [0,1,2,3,4,5,6].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===idx));
+  [renderVerbCards,renderPicCards,renderMC,renderErrorHunt,renderSort,renderSpeed,renderReference][idx]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ══════════════════════════════════
+   VERB DATA — 16 verbs with conjugation + meaning shift
+══════════════════════════════════ */
+const VERBS=[
+  {emoji:'🛏️',name:'levantarse',en:'to get up',
+   conj:[['me','levanto'],['te','levantas'],['se','levanta'],['nos','levantamos'],['se','levantan']],
+   ex:[{es:'Me levanto a las siete.',en:'I get up at seven.'},{es:'¿A qué hora te levantas?',en:'What time do you get up?'}],
+   shift:null},
+  {emoji:'🚿',name:'ducharse',en:'to shower',
+   conj:[['me','ducho'],['te','duchas'],['se','ducha'],['nos','duchamos'],['se','duchan']],
+   ex:[{es:'Me ducho por la mañana.',en:'I shower in the morning.'},{es:'Ella se ducha rápido.',en:'She showers quickly.'}],
+   shift:null},
+  {emoji:'👕',name:'vestirse',en:'to get dressed',
+   conj:[['me','visto'],['te','vistes'],['se','viste'],['nos','vestimos'],['se','visten']],
+   ex:[{es:'Me visto antes de desayunar.',en:'I get dressed before breakfast.'},{es:'Se viste muy elegante.',en:'He dresses very elegantly.'}],
+   shift:'vestir (sin se) = to dress SOMEONE ELSE. "Viste a su hijo." = She dresses her son.'},
+  {emoji:'😴',name:'acostarse',en:'to go to bed',
+   conj:[['me','acuesto'],['te','acuestas'],['se','acuesta'],['nos','acostamos'],['se','acuestan']],
+   ex:[{es:'Me acuesto a las once.',en:'I go to bed at eleven.'},{es:'Los niños se acuestan temprano.',en:'The kids go to bed early.'}],
+   shift:'acostar (sin se) = to put SOMEONE ELSE to bed. "Acuesto al bebé." = I put the baby to bed.'},
+  {emoji:'⏰',name:'despertarse',en:'to wake up',
+   conj:[['me','despierto'],['te','despiertas'],['se','despierta'],['nos','despertamos'],['se','despiertan']],
+   ex:[{es:'Me despierto con el ruido.',en:'I wake up with the noise.'},{es:'¿Te despiertas tarde los domingos?',en:'Do you wake up late on Sundays?'}],
+   shift:'despertar (sin se) = to wake SOMEONE ELSE up. "Lo despierto a las 6." = I wake him up at 6.'},
+  {emoji:'💇',name:'peinarse',en:'to comb/style one\'s hair',
+   conj:[['me','peino'],['te','peinas'],['se','peina'],['nos','peinamos'],['se','peinan']],
+   ex:[{es:'Me peino antes de salir.',en:'I comb my hair before leaving.'},{es:'Se peina con gel.',en:'He styles his hair with gel.'}],
+   shift:null},
+  {emoji:'💄',name:'maquillarse',en:'to put on makeup',
+   conj:[['me','maquillo'],['te','maquillas'],['se','maquilla'],['nos','maquillamos'],['se','maquillan']],
+   ex:[{es:'Me maquillo para la fiesta.',en:'I put on makeup for the party.'},{es:'No se maquilla mucho.',en:'She doesn\'t wear much makeup.'}],
+   shift:null},
+  {emoji:'🪒',name:'afeitarse',en:'to shave',
+   conj:[['me','afeito'],['te','afeitas'],['se','afeita'],['nos','afeitamos'],['se','afeitan']],
+   ex:[{es:'Me afeito todos los días.',en:'I shave every day.'},{es:'Se afeitó la barba.',en:'He shaved off his beard.'}],
+   shift:null},
+  {emoji:'🦷',name:'cepillarse',en:'to brush (teeth/hair)',
+   conj:[['me','cepillo'],['te','cepillas'],['se','cepilla'],['nos','cepillamos'],['se','cepillan']],
+   ex:[{es:'Me cepillo los dientes después de comer.',en:'I brush my teeth after eating.'},{es:'Se cepilla el pelo cada noche.',en:'She brushes her hair every night.'}],
+   shift:null},
+  {emoji:'🪑',name:'sentarse',en:'to sit down',
+   conj:[['me','siento'],['te','sientas'],['se','sienta'],['nos','sentamos'],['se','sientan']],
+   ex:[{es:'Me siento aquí.',en:'I\'ll sit here.'},{es:'Siéntate, por favor.',en:'Sit down, please.'}],
+   shift:'sentar (sin se) = to seat SOMEONE ELSE. "Sienta al niño en la silla." = She seats the child in the chair.'},
+  {emoji:'💤',name:'dormirse',en:'to fall asleep',
+   conj:[['me','duermo'],['te','duermes'],['se','duerme'],['nos','dormimos'],['se','duermen']],
+   ex:[{es:'Me duermo viendo la tele.',en:'I fall asleep watching TV.'},{es:'Se durmió en clase.',en:'He fell asleep in class.'}],
+   shift:'dormir (sin se) = to sleep (the act in general). "Dormí ocho horas." = I slept eight hours. Vs. "Me dormí" = I fell asleep (at a moment).'},
+  {emoji:'🧦',name:'ponerse',en:'to put on (clothing)',
+   conj:[['me','pongo'],['te','pones'],['se','pone'],['nos','ponemos'],['se','ponen']],
+   ex:[{es:'Me pongo el abrigo.',en:'I put on my coat.'},{es:'Se pone nervioso fácilmente.',en:'He gets nervous easily.'}],
+   shift:'poner (sin se) = to PUT/PLACE something. "Pongo el libro en la mesa." = I put the book on the table.'},
+  {emoji:'🧥',name:'quitarse',en:'to take off (clothing)',
+   conj:[['me','quito'],['te','quitas'],['se','quita'],['nos','quitamos'],['se','quitan']],
+   ex:[{es:'Me quito los zapatos en casa.',en:'I take off my shoes at home.'},{es:'Se quitó la chamarra.',en:'He took off his jacket.'}],
+   shift:'quitar (sin se) = to REMOVE something (from someone/something else). "Le quito el plato." = I take the plate from him.'},
+  {emoji:'🧼',name:'lavarse',en:'to wash oneself',
+   conj:[['me','lavo'],['te','lavas'],['se','lava'],['nos','lavamos'],['se','lavan']],
+   ex:[{es:'Me lavo las manos antes de comer.',en:'I wash my hands before eating.'},{es:'Se lava la cara con agua fría.',en:'She washes her face with cold water.'}],
+   shift:'lavar (sin se) = to wash SOMETHING ELSE. "Lavo los platos." = I wash the dishes.'},
+  {emoji:'😡',name:'enojarse',en:'to get angry',
+   conj:[['me','enojo'],['te','enojas'],['se','enoja'],['nos','enojamos'],['se','enojan']],
+   ex:[{es:'Me enojo cuando llega tarde.',en:'I get angry when he arrives late.'},{es:'No te enojes conmigo.',en:'Don\'t get mad at me.'}],
+   shift:null},
+  {emoji:'😢',name:'preocuparse',en:'to worry',
+   conj:[['me','preocupo'],['te','preocupas'],['se','preocupa'],['nos','preocupamos'],['se','preocupan']],
+   ex:[{es:'Me preocupo por mi familia.',en:'I worry about my family.'},{es:'No te preocupes, todo está bien.',en:'Don\'t worry, everything is fine.'}],
+   shift:null},
+];
+
+function renderVerbCards(){
+  const cards=VERBS.map((v)=>{
+    const conjRows=v.conj.map(([pr,form])=>`<span class="pr">${pr}</span> ${form}`).join(' &middot; ');
+    const exRows=v.ex.map(e=>`<div class="verb-ex"><span class="es">${e.es}</span><span class="en">${e.en}</span></div>`).join('');
+    return `<div class="verb-card">
+      <div class="verb-top">
+        <div class="verb-emoji">${v.emoji}</div>
+        <div class="verb-info"><div class="verb-name">${v.name}</div><div class="verb-en">${v.en}</div></div>
+      </div>
+      <div class="verb-conj">${conjRows}</div>
+      <div class="verb-examples">
+        ${exRows}
+        ${v.shift?`<div class="meaning-shift">⚡ <strong>Sin "se":</strong> ${v.shift}</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📚 Verb cards — 16 verbos reflexivos comunes</div>
+  <div class="ex-instr">Reflexive verbs use <em>me/te/se/nos/se</em> when the subject does the action TO ITSELF. Several verbs change meaning entirely without "se" — marked with ⚡.</div>
+  <div class="verb-grid">${cards}</div></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 1 — PICTURE CARDS (daily routine, 12 scenarios)
+   Now text-based (no SVG) per user preference
+══════════════════════════════════ */
+const PIC_ITEMS=[
+  /* ══ NIVEL 1 — Solo el pronombre (verbo ya conjugado) ══ */
+  {level:1,q:'Todos los días yo ___ levanto a las siete.',sub:'levantarse — yo (solo pronombre)',opts:['me','te','se','nos'],ans:0,
+   exp:'"Me" — yo form of the reflexive pronoun. The verb "levanto" is already conjugated; you only choose the pronoun.'},
+  {level:1,q:'Ana ___ ducha con agua fría todas las mañanas.',sub:'ducharse — ella (solo pronombre)',opts:['me','te','se','nos'],ans:2,
+   exp:'"Se" — pronoun for él/ella/usted. "Ana se ducha..."'},
+  {level:1,q:'Nosotros ___ vestimos rápido porque llegamos tarde.',sub:'vestirse — nosotros (solo pronombre)',opts:['se','les','nos','os'],ans:2,
+   exp:'"Nos" — pronoun for nosotros. "Nosotros nos vestimos..."'},
+  {level:1,q:'¿A qué hora ___ acuestas tú normalmente?',sub:'acostarse — tú (solo pronombre)',opts:['me','te','se','nos'],ans:1,
+   exp:'"Te" — pronoun for tú. "¿A qué hora te acuestas?"'},
+  {level:1,q:'Los niños ___ despiertan cuando suena la alarma.',sub:'despertarse — ellos (solo pronombre)',opts:['se','les','nos','los'],ans:0,
+   exp:'"Se" — pronoun for ellos/ellas/ustedes (plural). "Los niños se despiertan..."'},
+  {level:1,q:'Yo siempre ___ cepillo los dientes después de comer.',sub:'cepillarse — yo (solo pronombre)',opts:['te','se','me','nos'],ans:2,
+   exp:'"Me" — pronoun for yo. "Yo me cepillo los dientes."'},
+  {level:1,q:'Mi mamá ___ pone el abrigo porque hace frío.',sub:'ponerse — ella (solo pronombre)',opts:['me','te','se','le'],ans:2,
+   exp:'"Se" — pronoun for él/ella/usted. "Mi mamá se pone el abrigo."'},
+  {level:1,q:'Carlos ___ enoja mucho cuando hay tráfico.',sub:'enojarse — él (solo pronombre)',opts:['me','te','se','lo'],ans:2,
+   exp:'"Se" — pronoun for él. "Carlos se enoja..."'},
+  /* ══ NIVEL 2 — Pronombre + conjugación juntos ══ */
+  {level:2,q:'Yo ___ las manos antes de cocinar.',sub:'lavarse — yo (pronombre + conjugación)',opts:['lavo','me lavo','lava','se lava'],ans:1,
+   exp:'"Me lavo" — reflexive, yo form. Need BOTH the pronoun and the correctly conjugated verb. "Me lavo las manos."'},
+  {level:2,q:'Mis papás ___ por mi futuro.',sub:'preocuparse — ellos (pronombre + conjugación)',opts:['preocupan','se preocupan','preocupa','se preocupa'],ans:1,
+   exp:'"Se preocupan" — reflexive, ellos form (plural subject needs plural verb).'},
+  {level:2,q:'¿Tú ___ por la mañana o por la noche?',sub:'ducharse — tú (pronombre + conjugación)',opts:['duchas','te duchas','ducha','se ducha'],ans:1,
+   exp:'"Te duchas" — reflexive, tú form. Note the conjugated verb matches the subject.'},
+  {level:2,q:'Mi hermano ___ muy rápido cada mañana.',sub:'vestirse — él (pronombre + conjugación, stem-changing)',opts:['viste','se viste','vesto','me visto'],ans:1,
+   exp:'"Se viste" — reflexive, él form. Note: vestirse is e→i stem-changing (visto, vistes, viste, vestimos, visten).'},
+  {level:2,q:'Antes de salir, voy a ___ los zapatos nuevos.',sub:'ponerse — yo, attached to infinitive (pronombre + verbo)',opts:['ponerme','meponer','ponerse','seponer'],ans:0,
+   exp:'"Ponerme" — yo form attached to infinitive (one word, no space). "Voy a ponerme los zapatos." Also OK: "Me voy a poner los zapatos."'},
+  /* ══ NIVEL 3 — Reordenar palabras (unscramble) ══ */
+  {level:3,q:'Ordena: levanto / temprano / me / hoy',sub:'Unscramble into a correct sentence',opts:['Me levanto temprano hoy','Levanto me temprano hoy','Temprano me levanto hoy','Hoy levanto temprano me'],ans:0,
+   exp:'"Me levanto temprano hoy" — reflexive pronoun goes BEFORE the conjugated verb, then the rest follows naturally.'},
+  {level:3,q:'Ordena: pelo / cepíllate / el',sub:'Unscramble into an affirmative imperative',opts:['Cepíllate el pelo','El cepíllate pelo','Pelo el cepíllate','El pelo cepíllate'],ans:0,
+   exp:'"Cepíllate el pelo" — the imperative form "cepíllate" (pronoun already attached) comes first, followed by the object "el pelo". This is the only natural order.'},
+  {level:3,q:'Ordena: preocupes / no / tanto / te',sub:'Unscramble into a negative imperative',opts:['No te preocupes tanto','Te no preocupes tanto','No preocupes te tanto','Tanto no te preocupes'],ans:0,
+   exp:'"No te preocupes tanto" — in negative imperatives, the pronoun "te" goes immediately BEFORE the conjugated verb, right after "no".'},
+  {level:3,q:'Ordena: estoy / duchando / me',sub:'Unscramble — pronoun before the conjugated "estar"',opts:['Me estoy duchando','Estoy me duchando','Duchando me estoy','Estoy duchando me'],ans:0,
+   exp:'"Me estoy duchando" — when the pronoun is NOT attached to the gerund, it goes before the conjugated verb "estoy". (The alternate form "Estoy duchándome" attaches the pronoun directly to the gerund instead — both are correct, but here we are ordering separate word blocks.)'},
+];
+
+function renderPicCards(){
+  const ok=Object.values(picAnswers).filter(v=>v).length;
+  const ans=Object.keys(picAnswers).length;
+  const total=PIC_ITEMS.length;
+  const pct=Math.round(ans/total*100);
+  const colors=['c1','c2','c3','c4'];
+  const letters=['A','B','C','D'];
+  const LEVELS={1:{label:'Nivel 1 — Solo el pronombre',icon:'①',desc:'El verbo ya está conjugado. Solo elige el pronombre correcto (me/te/se/nos).',col:'var(--norefl2)'},
+                2:{label:'Nivel 2 — Pronombre + conjugación',icon:'②',desc:'Elige la opción que tenga AMBOS: el pronombre correcto Y el verbo bien conjugado.',col:'var(--refl2)'},
+                3:{label:'Nivel 3 — Ordena las palabras',icon:'③',desc:'Con las palabras dadas, elige el orden correcto de la oración.',col:'var(--recip2)'}};
+  function cardHTML(item,idx){
+    const done=picAnswers[idx]!==undefined;
+    const isOk=picAnswers[idx]===true;
+    const btns=item.opts.map((o,oi)=>{
+      let cls=`pic-btn ${colors[oi]}`;
+      if(done)cls+=oi===item.ans?' revealed':' dim';
+      return `<button class="${cls}" data-l="${letters[oi]}" onclick="answerPic(${idx},${oi})" ${done?'disabled':''}>${o}</button>`;
+    }).join('');
+    return `<div class="pic-card${done?(isOk?' ok':' err'):''}" id="pc${idx}">
+      <div class="pic-q">${item.q.replace('___','<span class="pic-blank">___</span>')}<span class="pic-sub">${item.sub}</span></div>
+      <div class="pic-btns">${btns}</div>
+      <div class="pic-exp${done?' show':''}">${done?(isOk?'✓ ':'✗ ')+item.exp:''}</div>
+    </div>`;
+  }
+  let body='';
+  [1,2,3].forEach(lvl=>{
+    const items=PIC_ITEMS.map((it,idx)=>({...it,idx})).filter(it=>it.level===lvl);
+    if(!items.length)return;
+    const meta=LEVELS[lvl];
+    body+=`<div style="margin-bottom:22px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <span style="font-family:var(--display);font-weight:900;font-size:1rem;color:${meta.col}">${meta.icon} ${meta.label}</span>
+      </div>
+      <div style="font-size:.78rem;color:var(--muted2);margin-bottom:12px;line-height:1.5">${meta.desc}</div>
+      <div class="pic-grid">${items.map(it=>cardHTML(it,it.idx)).join('')}</div>
+    </div>`;
+  });
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">⏰ Rutina diaria — Solo verbos reflexivos</div>
+  <div class="ex-instr">Practice progresses through three levels: <em>solo pronombre</em> → <em>pronombre + conjugación</em> → <em>ordenar palabras</em>.</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Cards</span><span class="v">${total}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="pOk">${ok}</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="pErr">${ans-ok}</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: ${pct}%</div><div class="prog-t"><div class="prog-f" id="pPg" style="width:${pct}%"></div></div></div>
+  </div>
+  ${body}
+  <div class="actions"><button class="btn btn-ghost" onclick="picAnswers={};renderPicCards()">↺ Reset</button></div></div>`;
+}
+function answerPic(idx,oi){
+  if(picAnswers[idx]!==undefined)return;
+  const item=PIC_ITEMS[idx];const isOk=oi===item.ans;
+  picAnswers[idx]=isOk;
+  const card=document.getElementById('pc'+idx);
+  if(card){
+    card.classList.add(isOk?'ok':'err');
+    card.querySelectorAll('.pic-btn').forEach((b,bi)=>{
+      b.disabled=true;b.classList.remove('revealed','dim');
+      b.classList.add(bi===item.ans?'revealed':'dim');
+    });
+    const e=card.querySelector('.pic-exp');
+    if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+item.exp;}
+  }
+  const ok=Object.values(picAnswers).filter(v=>v).length;
+  const a=Object.keys(picAnswers).length;
+  const pct=Math.round(a/PIC_ITEMS.length*100);
+  const e1=document.getElementById('pOk');if(e1)e1.textContent=ok;
+  const e2=document.getElementById('pErr');if(e2)e2.textContent=a-ok;
+  const pg=document.getElementById('pPg');if(pg)pg.style.width=pct+'%';
+}
+
+/* ══════════════════════════════════
+   EX 2 — MULTIPLE CHOICE (50)
+   Sections: basic conjugation | reflexive vs non-reflexive | reciprocal | position | special
+══════════════════════════════════ */
+const MC=[
+  /* ── BASIC CONJUGATION (12) ── */
+  {s:'Yo ___ a las 6 todos los días. (levantarse)',e:'I get up at 6 every day.',o:['levanto','me levanto','levantas','te levantas'],a:1,tag:'tag-refl',x:'"Me levanto" — reflexive pronoun "me" + conjugated verb for yo.'},
+  {s:'¿Tú ___ por la mañana o por la noche? (ducharse)',e:'Do you shower in the morning or at night?',o:['duchas','te duchas','ducha','se ducha'],a:1,tag:'tag-refl',x:'"Te duchas" — reflexive, tú form.'},
+  {s:'Mi hermano ___ muy rápido. (vestirse)',e:'My brother gets dressed very fast.',o:['viste','se viste','vesto','me visto'],a:1,tag:'tag-refl',x:'"Se viste" — reflexive, él form. Note: vestirse is e→i stem-changing.'},
+  {s:'Nosotros ___ tarde los domingos. (despertarse)',e:'We wake up late on Sundays.',o:['despertamos','nos despertamos','despierta','se despierta'],a:1,tag:'tag-refl',x:'"Nos despertamos" — reflexive, nosotros form.'},
+  {s:'Los estudiantes ___ antes del examen. (preocuparse)',e:'The students worry before the exam.',o:['preocupan','se preocupan','preocupa','se preocupa'],a:1,tag:'tag-refl',x:'"Se preocupan" — reflexive, ellos form (plural subject).'},
+  {s:'Yo ___ los dientes tres veces al día. (cepillarse)',e:'I brush my teeth three times a day.',o:['cepillo','me cepillo','cepilla','se cepilla'],a:1,tag:'tag-refl',x:'"Me cepillo" — reflexive, yo form.'},
+  {s:'¿Por qué ___ tanto cuando hay tráfico? (enojarse, tú)',e:'Why do you get so angry when there\'s traffic?',o:['enojas','te enojas','enoja','se enoja'],a:1,tag:'tag-refl',x:'"Te enojas" — reflexive, tú form.'},
+  {s:'Ella ___ con maquillaje natural. (maquillarse)',e:'She does her makeup naturally.',o:['maquilla','se maquilla','maquillo','me maquillo'],a:1,tag:'tag-refl',x:'"Se maquilla" — reflexive, ella form.'},
+  {s:'Mis abuelos ___ temprano todos los días. (acostarse)',e:'My grandparents go to bed early every day.',o:['acuestan','se acuestan','acuesta','se acuesta'],a:1,tag:'tag-refl',x:'"Se acuestan" — reflexive, ellos form (plural).'},
+  {s:'Yo ___ viendo la tele casi siempre. (dormirse)',e:'I fall asleep watching TV almost always.',o:['duermo','me duermo','duerme','se duerme'],a:1,tag:'tag-refl',x:'"Me duermo" — reflexive, yo form. Note: "dormirse" = to fall asleep (vs "dormir" = to sleep).'},
+  {s:'¿Ustedes ___ las manos antes de comer? (lavarse)',e:'Do you all wash your hands before eating?',o:['lavan','se lavan','lava','se lava'],a:1,tag:'tag-refl',x:'"Se lavan" — reflexive, ustedes form.'},
+  {s:'Mi papá ___ la barba cada tres días. (afeitarse)',e:'My dad shaves his beard every three days.',o:['afeita','se afeita','afeito','me afeito'],a:1,tag:'tag-refl',x:'"Se afeita" — reflexive, él form.'},
+  /* ── REFLEXIVE vs NON-REFLEXIVE meaning shift (12) ── */
+  {s:'___ el libro en la mesa. (poner, sin reflexivo)',e:'I put the book on the table.',o:['Me pongo','Pongo','Se pone','Te pones'],a:1,tag:'tag-norefl',x:'"Pongo" (sin se) = to PUT/PLACE something. Different from "ponerse" (to put on clothing).'},
+  {s:'___ el abrigo porque hace frío. (ponerse, reflexivo)',e:'I put on my coat because it\'s cold.',o:['Pongo','Me pongo','Pone','Se pone'],a:1,tag:'tag-refl',x:'"Me pongo" (reflexive) = to put clothing ON oneself. Different meaning from "poner".'},
+  {s:'Voy a ___ los platos después de cenar. (lavar, sin reflexivo)',e:'I\'m going to wash the dishes after dinner.',o:['lavarme','lavar','lavarse','lavarte'],a:1,tag:'tag-norefl',x:'"Lavar" (sin se) = to wash something/someone else. "Voy a lavar los platos."'},
+  {s:'Voy a ___ las manos antes de comer. (lavarse, reflexivo)',e:'I\'m going to wash my hands before eating.',o:['lavar','lavarme','lavarte','lavarse'],a:1,tag:'tag-refl',x:'"Lavarme" (reflexive) = to wash oneself. "Voy a lavarme las manos."'},
+  {s:'La maestra ___ a los niños en la fila. (sentar, sin reflexivo)',e:'The teacher seats the children in line.',o:['se sienta','sienta','se sientan','sientan'],a:1,tag:'tag-norefl',x:'"Sienta" (sin se) = to SEAT someone else. "La maestra sienta a los niños."'},
+  {s:'Yo ___ aquí porque hay buena vista. (sentarse, reflexivo)',e:'I sit here because there\'s a good view.',o:['siento','me siento','sienta','se sienta'],a:1,tag:'tag-refl',x:'"Me siento" (reflexive) = to sit oneself down.'},
+  {s:'Mi mamá ___ al bebé a las 8. (acostar, sin reflexivo)',e:'My mom puts the baby to bed at 8.',o:['se acuesta','acuesta','se acuestan','acuestan'],a:1,tag:'tag-norefl',x:'"Acuesta" (sin se) = to put someone ELSE to bed. "Mi mamá acuesta al bebé."'},
+  {s:'Yo ___ a las 11 de la noche. (acostarse, reflexivo)',e:'I go to bed at 11pm.',o:['acuesto','me acuesto','acuesta','se acuesta'],a:1,tag:'tag-refl',x:'"Me acuesto" (reflexive) = to put oneself to bed / go to bed.'},
+  {s:'El despertador ___ a Carlos cada mañana. (despertar, sin reflexivo)',e:'The alarm wakes Carlos up every morning.',o:['se despierta','despierta','se despiertan','despiertan'],a:1,tag:'tag-norefl',x:'"Despierta" (sin se) = to wake someone ELSE up. The alarm clock wakes Carlos up (Carlos is OD here, not subject).'},
+  {s:'Yo ___ muy temprano sin alarma. (despertarse, reflexivo)',e:'I wake up very early without an alarm.',o:['despierto','me despierto','despierta','se despierta'],a:1,tag:'tag-refl',x:'"Me despierto" (reflexive) = to wake oneself up.'},
+  {s:'Anoche ___ ocho horas, me sentí descansado. (dormir, sin reflexivo)',e:'Last night I slept eight hours, I felt rested.',o:['me dormí','dormí','se durmió','durmió'],a:1,tag:'tag-norefl',x:'"Dormí" (sin se) = to sleep, talking about duration/quality. "Dormí ocho horas."'},
+  /* ── RECIPROCAL (8) ── */
+  {s:'Mis amigos y yo ___ todos los fines de semana. (verse)',e:'My friends and I see each other every weekend.',o:['vemos','nos vemos','ven','se ven'],a:1,tag:'tag-recip',x:'"Nos vemos" (reciprocal) = we see EACH OTHER. Reciprocal actions use the same pronouns as reflexive but mean "each other".'},
+  {s:'Los hermanos ___ mucho, casi nunca pelean. (quererse)',e:'The siblings love each other a lot, they almost never fight.',o:['quiere','se quiere','quieren','se quieren'],a:3,tag:'tag-recip',x:'"Se quieren" (reciprocal, plural) = they love EACH OTHER.'},
+  {s:'Ana y Luis ___ hace cinco años. (conocerse)',e:'Ana and Luis met each other five years ago.',o:['conoce','se conoce','conocen','se conocen'],a:3,tag:'tag-recip',x:'"Se conocen" (reciprocal) = they know/met each other.'},
+  {s:'Cuando llegamos, ___ con un fuerte abrazo. (abrazarse)',e:'When we arrived, we hugged each other tightly.',o:['abrazamos','nos abrazamos','abraza','se abraza'],a:1,tag:'tag-recip',x:'"Nos abrazamos" (reciprocal) = we hugged each other.'},
+  {s:'Los políticos ___ durante el debate. (gritarse)',e:'The politicians yelled at each other during the debate.',o:['grita','se grita','gritan','se gritan'],a:3,tag:'tag-recip',x:'"Se gritan" (reciprocal, plural) = they yell at each other.'},
+  {s:'Tú y yo ___ desde la secundaria. (conocerse)',e:'You and I have known each other since middle school.',o:['conocemos','nos conocemos','conoces','te conoces'],a:1,tag:'tag-recip',x:'"Nos conocemos" (reciprocal) = we know each other.'},
+  {s:'Las dos empresas ___ por el contrato. (pelearse)',e:'The two companies fought each other over the contract.',o:['pelea','se pelea','pelean','se pelean'],a:3,tag:'tag-recip',x:'"Se pelean" (reciprocal, plural) = they fight each other.'},
+  {s:'¿Ustedes ___ por correo o por teléfono? (comunicarse)',e:'Do you all communicate by email or phone?',o:['comunican','se comunican','comunica','se comunica'],a:1,tag:'tag-recip',x:'"Se comunican" (reciprocal/reflexive plural) = you communicate with each other.'},
+  /* ── POSITION (10) ── */
+  {s:'¡___ ahora mismo! (levantarse, imperativo afirmativo, tú)',e:'Get up right now!',o:['Te levantas','Levántate','Levantas','Te levanta'],a:1,tag:'tag-pos',x:'"Levántate" — affirmative imperative, pronoun ATTACHED. Note accent: levanta+te = levántate.'},
+  {s:'¡No ___ tan tarde! (acostarse, imperativo negativo, tú)',e:'Don\'t go to bed so late!',o:['te acuestes','acuéstate','acuestes te','acostarte'],a:0,tag:'tag-pos',x:'"Te acuestes" — negative imperative, pronoun goes BEFORE. "¡No te acuestes tan tarde!"'},
+  {s:'Voy a ___ antes de salir. (ducharse, infinitivo)',e:'I\'m going to shower before going out.',o:['duchar','ducharme','me duchar','duchome'],a:1,tag:'tag-pos',x:'"Ducharme" — pronoun attached to infinitive. Also OK: "Me voy a duchar."'},
+  {s:'Está ___ en el sillón. (dormirse, gerundio)',e:'He\'s falling asleep on the couch.',o:['durmiendo','durmiéndose','se durmiendo','dormiendose'],a:1,tag:'tag-pos',x:'"Durmiéndose" — pronoun attached to gerund, note the accent. Also OK: "Se está durmiendo."'},
+  {s:'___ a dormir, tienes clase mañana. (irse, imperativo afirmativo, tú)',e:'Go to sleep, you have class tomorrow.',o:['Te vas','Vete','Vas','Te ve'],a:1,tag:'tag-pos',x:'"Vete" — irregular affirmative imperative of irse. "¡Vete a dormir!"'},
+  {s:'¿Vas a ___ los zapatos nuevos? (ponerse, infinitivo)',e:'Are you going to put on the new shoes?',o:['poner','ponerte','te poner','ponete'],a:1,tag:'tag-pos',x:'"Ponerte" — pronoun attached to infinitive (tú form: te).'},
+  {s:'Estoy ___ porque hace calor. (quitarse, gerundio)',e:'I\'m taking off (clothes) because it\'s hot.',o:['quitando','quitándome','me quitando','quitarme'],a:1,tag:'tag-pos',x:'"Quitándome" — pronoun attached to gerund. Also OK: "Me estoy quitando..."'},
+  {s:'¡No ___ tanto, todo va a estar bien! (preocuparse, imperativo negativo)',e:'Don\'t worry so much, everything is going to be fine!',o:['te preocupes','preocúpate','preocupes te','preocuparte'],a:0,tag:'tag-pos',x:'"Te preocupes" — negative imperative, pronoun goes BEFORE the verb.'},
+  {s:'¡___, hace mucho calor aquí! (quitarse, imperativo afirmativo, tú + el saco)',e:'Take it off, it\'s very hot here!',o:['Quítate lo','Quítatelo','Te lo quitas','Quitatelo'],a:1,tag:'tag-pos',x:'"Quítatelo" — affirmative imperative + reflexive te + OD lo, both attached AND written as ONE word with accent on "quí". "Quítate lo" (separated) and "Quitatelo" (no accent) are both incorrect spelling.'},
+  {s:'Voy a ___ pronto porque tengo sueño. (acostarse, infinitivo)',e:'I\'m going to go to bed soon because I\'m sleepy.',o:['acostar','acostarme','me acostar','acostarte'],a:1,tag:'tag-pos',x:'"Acostarme" — pronoun attached to infinitive (yo form: me).'},
+  /* ── SPECIAL CASES (8) ── */
+  {s:'Mi sobrino ___ mucho a su papá, tienen los mismos ojos.',e:'My nephew looks a lot like his dad, they have the same eyes.',o:['parece','se parece','parecemos','nos parecemos'],a:1,tag:'tag-change',x:'"Se parece" (reflexive/idiomatic) = to resemble/look like. "Parece" alone (sin se) would mean "it seems" — different meaning. "Se parece a su papá" needs the reflexive pronoun.'},
+  {s:'Mi hermana ___ mucho a mi mamá. (parecerse)',e:'My sister looks a lot like my mom.',o:['parece','se parece','parecen','se parecen'],a:1,tag:'tag-change',x:'"Se parece" (reflexive/idiomatic) = to resemble/look like. Totally different meaning from "parecer" alone.'},
+  {s:'___ en el pueblo desde que se jubiló. (quedarse)',e:'He has stayed in the town since he retired.',o:['queda','se queda','quedo','me quedo'],a:1,tag:'tag-change',x:'"Se queda" (reflexive) = to stay/remain. Different from "quedar" (to be left over, to fit, to arrange to meet).'},
+  {s:'No me ___ ese vestido, es muy grande. (quedar — sin pronombre reflexivo de "quedarse")',e:'That dress doesn\'t fit me, it\'s too big.',o:['queda','se queda','quedo','me quedo'],a:0,tag:'tag-change',x:'"Queda" — this is NOT the reflexive "quedarse" (to stay). Here "queda" is the idiomatic verb meaning "to fit", and the "me" you see in the sentence is an Indirect Object pronoun (to/for me), not a reflexive marker. Compare: "Se queda en casa" (reflexive: he stays home) vs. "Me queda bien" (idiomatic: it fits me well).'},
+  {s:'Los niños ___ mucho con ese programa. (aburrirse)',e:'The kids get very bored with that show.',o:['aburre','se aburre','aburren','se aburren'],a:3,tag:'tag-change',x:'"Se aburren" (reflexive) = to get bored. Different from "aburrir" (to bore someone): "El programa los aburre."'},
+  {s:'Ese programa ___ a los niños. (aburrir, sin reflexivo)',e:'That show bores the kids.',o:['se aburre','aburre','se aburren','aburren'],a:1,tag:'tag-change',x:'"Aburre" (sin se) = to bore someone. The show is the subject; los niños is the OD.'},
+  {s:'Mi hermano y su novia ___ el próximo año. (casarse)',e:'My brother and his girlfriend are getting married next year.',o:['casan','se casan','casa','se casa'],a:1,tag:'tag-change',x:'"Se casan" (reflexive/reciprocal) = to get married. "Casar" (sin se) = to marry off / to officiate a wedding.'},
+  {s:'El cura ___ a la pareja en la iglesia. (casar, sin reflexivo)',e:'The priest marries the couple in the church.',o:['se casa','casa','se casan','casan'],a:1,tag:'tag-change',x:'"Casa" (sin se) = to perform a marriage (the priest marries them). Totally different role from "casarse" (to get married oneself).'},
+];
+const MCO=MC.map((_,i)=>seededShuffle([0,1,2,3],i*13+5));
+
+function renderMC(){
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const qHTML=MC.map((item,i)=>{
+    const ord=MCO[i];
+    const opts=ord.map(oi=>{
+      const o=item.o[oi];let cls='mc-opt';
+      if(mcChecked){if(oi===item.a)cls+=' mc-show';else if(mcAnswers[i]===oi&&oi!==item.a)cls+=' mc-err';}
+      else if(mcAnswers[i]===oi)cls+=oi===item.a?' mc-ok':' mc-err';
+      return `<button class="${cls}" id="mco${i}_${oi}" onclick="answerMC(${i},${oi})" ${mcChecked?'disabled':''}>${o}</button>`;
+    }).join('');
+    const showExp=mcChecked||(mcAnswers[i]!==undefined);
+    const tagLbl={'tag-refl':'REFLEXIVO','tag-norefl':'NO REFLEXIVO','tag-recip':'RECÍPROCO','tag-pos':'POSICIÓN','tag-change':'CAMBIA SIGNIFICADO'}[item.tag]||'';
+    return `<div class="mc-card"><div class="mc-top"><span class="mc-num">${i+1}</span><span class="mc-sent">${item.s.replace('___','<span class="mc-blank">___</span>')}<span class="tag ${item.tag}">${tagLbl}</span></span></div><div class="mc-en">${item.e}</div><div class="mc-opts">${opts}</div><div class="mc-expl${showExp?' show':''}" id="mce${i}">${item.x}</div></div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">📝 Multiple choice</div>
+  <div class="ex-instr">Choose the correct conjugation. Tags: <em>REFLEXIVO</em> · <em>NO REFLEXIVO</em> (different meaning!) · <em>RECÍPROCO</em> (each other) · <em>POSICIÓN</em> · <em>CAMBIA SIGNIFICADO</em>.</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${MC.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="mc_ok">—</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="mc_err">—</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="mc_p">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="mc_pg" style="width:${pct}%"></div></div></div></div>
+  <div class="mc-list">${qHTML}</div>
+  <div class="fb" id="mc_fb"></div>
+  <div class="actions"><button class="btn btn-cyan" id="mc_chk" onclick="checkMC()" ${mcChecked?'disabled':''}>Check all</button><button class="btn btn-ghost" onclick="mcAnswers={};mcChecked=false;renderMC()">↺ Reset</button></div></div>`;
+}
+function answerMC(qi,oi){
+  if(mcChecked)return;
+  if(mcAnswers[qi]!==undefined){const p=document.getElementById(`mco${qi}_${mcAnswers[qi]}`);if(p)p.classList.remove('mc-ok','mc-err');}
+  mcAnswers[qi]=oi;
+  const b=document.getElementById(`mco${qi}_${oi}`);if(b)b.classList.add(oi===MC[qi].a?'mc-ok':'mc-err');
+  const e=document.getElementById('mce'+qi);if(e)e.classList.add('show');
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const el=document.getElementById('mc_p');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('mc_pg');if(pg)pg.style.width=pct+'%';
+}
+function checkMC(){
+  mcChecked=true;let ok=0;MC.forEach((item,i)=>{if(mcAnswers[i]===item.a)ok++;});
+  const pct=Math.round(ok/MC.length*100);
+  document.getElementById('mc_ok').textContent=ok;document.getElementById('mc_err').textContent=MC.length-ok;
+  document.getElementById('mc_pg').style.width='100%';document.getElementById('mc_p').textContent='100%';
+  const fb=document.getElementById('mc_fb');
+  fb.className='fb show '+(pct>=85?'ok':'partial');
+  fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${MC.length}.</strong> ${pct>=85?'Excellent!':'Review the verb cards and try again.'}`;
+  document.getElementById('mc_chk').disabled=true;renderMC();
+}
+
+/* ══════════════════════════════════
+   EX 3 — ERROR HUNT (15)
+══════════════════════════════════ */
+const ERRORS=[
+  ['Me levanto a las siete todos los días.',false,null,'CORRECT ✓ — "Me levanto" — reflexive, yo form correctly conjugated. ✓'],
+  ['Mi mamá lava los platos después de cenar.',false,null,'CORRECT ✓ — "Lava" (sin se) is correct here — washing the dishes (something else), not herself. ✓'],
+  ['Me lavo los platos después de cenar.',true,'Lavo los platos','ERROR — Use "lavar" (sin reflexivo) for washing dishes. "Me lavo" would mean washing YOURSELF, not the dishes. Correct: "Lavo los platos."'],
+  ['Ella se parece mucho a su hermana.',false,null,'CORRECT ✓ — "Parecerse" = to resemble. Reflexive/idiomatic verb, correctly used here. ✓'],
+  ['Mi mamá se acuesta al bebé a las 8.',true,'Mi mamá acuesta al bebé','ERROR — When the subject puts ANOTHER person to bed (not themselves), use "acostar" WITHOUT "se". Correct: "Mi mamá acuesta al bebé." Adding "se" would mean she puts HERSELF to bed, which contradicts "al bebé".'],
+  ['Mis amigos y yo nos vemos cada sábado.',false,null,'CORRECT ✓ — "Nos vemos" (reciprocal) = we see each other. Correctly conjugated. ✓'],
+  ['Voy a ponerme la chamarra porque hace frío.',false,null,'CORRECT ✓ — "Ponerme" (reflexive, attached to infinitive) = to put clothing on oneself. ✓'],
+  ['Pongo la chamarra porque hace frío.',true,'Me pongo la chamarra','ERROR — To put clothing ON YOURSELF, use the reflexive "ponerse": "Me pongo la chamarra." Without "me", "pongo" just means "I place/put" (something somewhere), which is incomplete here.'],
+  ['¡Levántate ahora mismo!',false,null,'CORRECT ✓ — Affirmative imperative with pronoun attached: levanta+te = levántate. Note the accent. ✓'],
+  ['¡No levántate tan tarde!',true,'No te levantes','ERROR — In negative imperatives, the pronoun goes BEFORE the verb as a separate word, never attached. Correct: "¡No te levantes!"'],
+  ['Los hermanos se quieren mucho.',false,null,'CORRECT ✓ — "Se quieren" (reciprocal) = they love each other. ✓'],
+  ['El programa se aburre a los niños.',true,'El programa aburre a los niños','ERROR — "Aburrir" (sin se) means to bore someone else; the program is the SUBJECT doing the boring, not reflexive. Correct: "El programa aburre a los niños." Reflexive "se aburren" would describe the children\'s state: "Los niños se aburren."'],
+  ['Mi hermano y su novia se casan el próximo año.',false,null,'CORRECT ✓ — "Casarse" (reflexive/reciprocal) = to get married. Correctly conjugated for plural subject. ✓'],
+  ['Quiero ducharse antes de salir.',true,'ducharme','ERROR — The pronoun must match the SUBJECT (yo). "Quiero" is yo, so the attached pronoun on the infinitive must be "me", not "se". Correct: "Quiero ducharme antes de salir."'],
+  ['¡Siéntate aquí, hay buena vista!',false,null,'CORRECT ✓ — Affirmative imperative with pronoun correctly attached: sienta+te = siéntate. ✓'],
+  ['Mi hermano mayor se viste a su hermanito todas las mañanas.',true,'Mi hermano mayor viste a su hermanito','ERROR — When the subject dresses someone ELSE (not themselves), use "vestir" WITHOUT "se". "Se viste" would mean he dresses himself, which contradicts "a su hermanito". Correct: "Mi hermano mayor viste a su hermanito."'],
+];
+
+function renderErrorHunt(){
+  ehAnswered={};
+  let html=`<div class="panel"><div class="ex-title">🔍 Error hunter</div>
+  <div class="ex-instr">Is the reflexive verb used correctly? Pay attention to <em>meaning shifts</em> (with/without "se") and <em>pronoun position</em> in imperatives.</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${ERRORS.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="eh_ok">0</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="eh_err">0</span></div><div class="prog-w"><div class="prog-l">Progress: <span id="eh_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="eh_pg" style="width:0%"></div></div></div></div>
+  <div class="eh-list">`;
+  ERRORS.forEach(([s,hasErr,,exp],i)=>{
+    html+=`<div class="eh-item" id="ehi${i}"><div class="eh-n">${i+1}</div>
+    <div class="eh-body"><div class="eh-sent" id="ehs${i}">${s}</div>
+    <div class="eh-btns"><button class="eh-btn eh-yes" onclick="judgeEh(${i},false)">✅ Correct</button><button class="eh-btn eh-no" onclick="judgeEh(${i},true)">❌ Has an error</button></div>
+    <div class="eh-exp" id="ehe${i}">${exp}</div></div></div>`;
+  });
+  html+=`</div><div class="fb" id="eh_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="ehAnswered={};renderErrorHunt()">↺ Reset</button></div></div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+function judgeEh(idx,saysErr){
+  if(ehAnswered[idx]!==undefined)return;
+  const [s,hasErr,fix,exp]=ERRORS[idx];
+  const correct=saysErr===hasErr;
+  ehAnswered[idx]=correct;
+  const item=document.getElementById('ehi'+idx);
+  item.classList.add('revealed',correct?'eh-ok':'eh-bad');
+  item.querySelectorAll('.eh-btn').forEach(b=>b.disabled=true);
+  const chosen=item.querySelector(saysErr?'.eh-no':'.eh-yes');
+  if(chosen)chosen.classList.add(correct?'cho-ok':'cho-err');
+  if(hasErr&&fix){const se=document.getElementById('ehs'+idx);se.innerHTML=s+` <span class="eh-fix">→ <strong>${fix}</strong></span>`;}
+  document.getElementById('ehe'+idx).classList.add('show');
+  const total=Object.keys(ehAnswered).length;
+  const ok=Object.values(ehAnswered).filter(v=>v).length;
+  document.getElementById('eh_ok').textContent=ok;document.getElementById('eh_err').textContent=total-ok;
+  document.getElementById('eh_pct').textContent=Math.round(total/ERRORS.length*100)+'%';
+  document.getElementById('eh_pg').style.width=Math.round(total/ERRORS.length*100)+'%';
+  if(total===ERRORS.length){
+    const pct=Math.round(ok/ERRORS.length*100);
+    const fb=document.getElementById('eh_fb');
+    fb.className='fb show '+(pct>=80?'ok':'partial');
+    fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${ok}/${ERRORS.length}.</strong> ${pct>=80?'Excellent!':'Review meaning shifts and imperative position rules.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 4 — DRAG & SORT
+   5 buckets: Rutina diaria | Emociones | Reciproco | Cambia significado | Imperativo
+══════════════════════════════════ */
+const BUCKETS=[
+  {id:'rut',label:'Rutina diaria',icon:'⏰',sub:'levantarse, ducharse, vestirse...',col:'var(--refl2)',bg:'rgba(244,114,182,.06)',bd:'rgba(244,114,182,.22)'},
+  {id:'emo',label:'Emociones',icon:'😡',sub:'enojarse, preocuparse, aburrirse...',col:'#fde68a',bg:'rgba(251,191,36,.06)',bd:'rgba(251,191,36,.22)'},
+  {id:'recip',label:'Recíproco',icon:'🤝',sub:'verse, quererse, conocerse...',col:'var(--recip2)',bg:'rgba(167,139,250,.06)',bd:'rgba(167,139,250,.22)'},
+  {id:'change',label:'Cambia significado',icon:'🔄',sub:'parecerse, quedarse, casarse...',col:'var(--change2)',bg:'rgba(52,211,153,.06)',bd:'rgba(52,211,153,.22)'},
+  {id:'pos',label:'Imperativo',icon:'❗',sub:'levántate, siéntate, ponte...',col:'var(--norefl2)',bg:'rgba(37,217,255,.06)',bd:'rgba(37,217,255,.22)'},
+];
+const CARDS=[
+  {id:'c1',t:'levantarse',b:'rut',x:'Rutina diaria — to get up.'},
+  {id:'c2',t:'ducharse',b:'rut',x:'Rutina diaria — to shower.'},
+  {id:'c3',t:'vestirse',b:'rut',x:'Rutina diaria — to get dressed.'},
+  {id:'c4',t:'cepillarse',b:'rut',x:'Rutina diaria — to brush teeth/hair.'},
+  {id:'c5',t:'enojarse',b:'emo',x:'Emoción — to get angry.'},
+  {id:'c6',t:'preocuparse',b:'emo',x:'Emoción — to worry.'},
+  {id:'c7',t:'aburrirse',b:'emo',x:'Emoción — to get bored.'},
+  {id:'c8',t:'sentirse',b:'emo',x:'Emoción — to feel (a certain way).'},
+  {id:'c9',t:'verse',b:'recip',x:'Recíproco — to see each other.'},
+  {id:'c10',t:'quererse',b:'recip',x:'Recíproco — to love each other.'},
+  {id:'c11',t:'conocerse',b:'recip',x:'Recíproco — to know/meet each other.'},
+  {id:'c12',t:'abrazarse',b:'recip',x:'Recíproco — to hug each other.'},
+  {id:'c13',t:'parecerse',b:'change',x:'Cambia significado — to resemble (vs. parecer = to seem).'},
+  {id:'c14',t:'quedarse',b:'change',x:'Cambia significado — to stay (vs. quedar = to fit/be left over).'},
+  {id:'c15',t:'casarse',b:'change',x:'Cambia significado — to get married (vs. casar = to marry off).'},
+  {id:'c16',t:'irse',b:'change',x:'Cambia significado — to leave/go away (vs. ir = to go).'},
+  {id:'c17',t:'¡Levántate!',b:'pos',x:'Imperativo afirmativo — pronoun attached.'},
+  {id:'c18',t:'¡Siéntate!',b:'pos',x:'Imperativo afirmativo — pronoun attached.'},
+  {id:'c19',t:'¡Quítatelo!',b:'pos',x:'Imperativo afirmativo — pronoun (te) + OD (lo) both attached.'},
+  {id:'c20',t:'¡No te preocupes!',b:'pos',x:'Imperativo negativo — pronoun before verb.'},
+];
+function renderSort(){
+  sortPlaced={};sortChecked=false;tapSel=null;
+  const shuffled=[...CARDS].sort(()=>Math.random()-.5);
+  const pile=shuffled.map(c=>`<div class="sort-card" id="sc_${c.id}" draggable="true" ondragstart="ds(event,'${c.id}')" ondragend="de(event)" onclick="tapCard('${c.id}')">${c.t}</div>`).join('');
+  const bucks=BUCKETS.map(b=>`<div class="sort-bucket" id="bk_${b.id}" style="background:${b.bg};border:2px dashed ${b.bd}" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="drop(event,'${b.id}')" onclick="tapBucket('${b.id}')"><div class="bucket-title" style="color:${b.col}">${b.icon} ${b.label}</div><div class="bucket-sub">${b.sub}</div></div>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">📊 Drag &amp; sort</div>
+  <div class="ex-instr">Sort each verb/phrase into the correct category. Tap a card then tap a bucket on mobile.</div>
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;color:var(--muted2);margin-bottom:8px">Cards</div>
+  <div class="sort-pile" id="sPile">${pile}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;margin-bottom:12px">${bucks}</div>
+  <div class="fb" id="srtFb"></div>
+  <div class="actions"><button class="btn btn-cyan" id="srtChk" onclick="checkSort()" disabled>Check</button><button class="btn btn-ghost" onclick="renderSort()">↺ Reset</button></div></div>`;
+}
+function ds(e,id){dragItem=id;setTimeout(()=>{const c=document.getElementById('sc_'+id);if(c)c.classList.add('ghost');},0);}
+function de(){if(dragItem){const c=document.getElementById('sc_'+dragItem);if(c)c.classList.remove('ghost');}dragItem=null;}
+function drop(e,bId){e.preventDefault();const id=e.dataTransfer?e.dataTransfer.getData('text'):dragItem;document.getElementById('bk_'+bId).classList.remove('drag-over');if(!id||sortPlaced[id])return;placeCard(id,bId);}
+function tapCard(id){if(sortPlaced[id])return;const c=document.getElementById('sc_'+id);if(!c)return;if(tapSel===id){c.style.boxShadow='';tapSel=null;return;}if(tapSel){const p=document.getElementById('sc_'+tapSel);if(p)p.style.boxShadow='';}tapSel=id;c.style.boxShadow='0 0 0 3px var(--cyan)';}
+function tapBucket(bId){if(!tapSel)return;placeCard(tapSel,bId);tapSel=null;}
+function placeCard(id,bId){
+  sortPlaced[id]=bId;const card=document.getElementById('sc_'+id);const bk=document.getElementById('bk_'+bId);
+  if(!card||!bk)return;card.style.boxShadow='';card.classList.remove('ghost');card.draggable=false;
+  const b=BUCKETS.find(x=>x.id===bId);if(b)card.style.borderColor=b.col;
+  card.onclick=()=>returnCard(id);bk.appendChild(card);
+  if(Object.keys(sortPlaced).length===CARDS.length){const btn=document.getElementById('srtChk');if(btn)btn.disabled=false;}
+}
+function returnCard(id){if(sortChecked)return;delete sortPlaced[id];const c=document.getElementById('sc_'+id);const pile=document.getElementById('sPile');if(!c||!pile)return;c.style.borderColor='';c.style.boxShadow='';c.draggable=true;c.onclick=()=>tapCard(id);pile.appendChild(c);const btn=document.getElementById('srtChk');if(btn)btn.disabled=true;}
+function checkSort(){
+  sortChecked=true;let ok=0;
+  CARDS.forEach(item=>{const c=document.getElementById('sc_'+item.id);if(!c)return;const isOk=sortPlaced[item.id]===item.b;if(isOk)ok++;c.className='sort-card '+(isOk?'c-ok':'c-err');c.draggable=false;c.onclick=null;if(!isOk){const b=BUCKETS.find(x=>x.id===item.b);c.innerHTML=`${item.t}<span style="font-size:.7rem;display:block;margin-top:2px">→ ${b?b.icon+' '+b.label:item.b}</span>`;}c.title=item.x;});
+  const pct=Math.round(ok/CARDS.length*100);
+  const fb=document.getElementById('srtFb');fb.className='fb show '+(pct>=80?'ok':'partial');
+  fb.innerHTML=`<strong>${ok}/${CARDS.length} (${pct}%).</strong> Red cards show the correct bucket.`;
+  document.getElementById('srtChk').disabled=true;
+}
+
+/* ══════════════════════════════════
+   EX 5 — SPEED ROUND (30)
+══════════════════════════════════ */
+const SPEED=[
+  {q:'Reflexive pronoun for "yo"',hint:'me',a:'me',also:[]},
+  {q:'Reflexive pronoun for "tú"',hint:'te',a:'te',also:[]},
+  {q:'Reflexive pronoun for "él/ella/usted"',hint:'se',a:'se',also:[]},
+  {q:'Reflexive pronoun for "nosotros"',hint:'nos',a:'nos',also:[]},
+  {q:'Reflexive pronoun for "ellos/ellas/ustedes"',hint:'se',a:'se',also:[]},
+  {q:'Levantarse — yo form',hint:'me levanto',a:'me levanto',also:['levanto']},
+  {q:'Ducharse — tú form',hint:'te duchas',a:'te duchas',also:['duchas']},
+  {q:'Vestirse — él form',hint:'se viste',a:'se viste',also:['viste']},
+  {q:'Acostarse — nosotros form',hint:'nos acostamos',a:'nos acostamos',also:['acostamos']},
+  {q:'Despertarse — ellos form',hint:'se despiertan',a:'se despiertan',also:['despiertan']},
+  {q:'Sentarse — yo form',hint:'me siento',a:'me siento',also:['siento']},
+  {q:'Dormirse — ella form',hint:'se duerme',a:'se duerme',also:['duerme']},
+  {q:'Ponerse — tú form',hint:'te pones',a:'te pones',also:['pones']},
+  {q:'Quitarse — nosotros form',hint:'nos quitamos',a:'nos quitamos',also:['quitamos']},
+  {q:'Preocuparse — yo form',hint:'me preocupo',a:'me preocupo',also:['preocupo']},
+  {q:'Enojarse — ellos form',hint:'se enojan',a:'se enojan',also:['enojan']},
+  {q:'"Poner el libro en la mesa" — verbo SIN reflexivo',hint:'poner',a:'poner',also:[]},
+  {q:'"___ el abrigo porque hace frío" — yo, CON reflexivo (ponerse)',hint:'me pongo',a:'me pongo',also:['pongo']},
+  {q:'"___ los platos" — yo, SIN reflexivo (lavar)',hint:'lavo',a:'lavo',also:[]},
+  {q:'"___ las manos" — yo, CON reflexivo (lavarse)',hint:'me lavo',a:'me lavo',also:[]},
+  {q:'Reciprocal: "Nos vemos cada sábado" — what does this mean in English?',hint:'we see each other',a:'we see each other',also:['see each other']},
+  {q:'Reciprocal: "Se quieren mucho" — what does this mean in English?',hint:'they love each other',a:'they love each other',also:['love each other']},
+  {q:'Affirmative imperative tú: levantarse → "¡___!"',hint:'Levántate',a:'levantate',also:['levántate']},
+  {q:'Negative imperative tú: levantarse → "¡No ___!"',hint:'te levantes',a:'te levantes',also:[]},
+  {q:'Affirmative imperative tú: sentarse → "¡___!"',hint:'Siéntate',a:'sientate',also:['siéntate']},
+  {q:'Pronoun position with infinitive: voy a + ducharse → "voy a ___"',hint:'ducharme',a:'ducharme',also:[]},
+  {q:'Pronoun position with gerund: estoy + dormirse → "estoy ___"',hint:'durmiéndome',a:'durmiendome',also:['durmiéndome']},
+  {q:'"Se parece a su papá" — uses parecer or parecerse?',hint:'parecerse',a:'parecerse',also:[]},
+  {q:'"El bebé se queda con su abuela" — uses quedar or quedarse?',hint:'quedarse',a:'quedarse',also:[]},
+  {q:'Casarse — ellos form',hint:'se casan',a:'se casan',also:['casan']},
+];
+
+function renderSpeed(){
+  if(spTimer){clearInterval(spTimer);spTimer=null;}
+  spIdx=0;spOk=0;spErr=0;spStreak=0;spAnswered=false;
+  for(let i=SPEED.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[SPEED[i],SPEED[j]]=[SPEED[j],SPEED[i]];}
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">⚡ Speed round</div>
+  <div class="ex-instr">Type the correct form or answer. 12 seconds per question. Press Enter to confirm. Synonyms accepted!</div>
+  <div class="sp-wrap" id="spWrap"><div class="sp-start"><div style="font-size:2.8rem">⚡</div><h2>Verbos reflexivos</h2><p style="color:var(--muted);max-width:420px">30 items — pronouns, conjugations, meaning shifts, reciprocal use, and imperatives.</p><button class="btn btn-cyan" onclick="startSpeed()">Let's go!</button></div></div></div>`;
+}
+function startSpeed(){spIdx=0;spOk=0;spErr=0;spStreak=0;nextQ();}
+function nextQ(){
+  if(spIdx>=SPEED.length){endSpeed();return;}
+  spAnswered=false;const item=SPEED[spIdx];spTimeLeft=12;
+  document.getElementById('spWrap').innerHTML=`
+    <div class="sp-stats"><div class="spst"><div class="sl">Q</div><div class="sv w">${spIdx+1}/${SPEED.length}</div></div><div class="spst"><div class="sl">OK</div><div class="sv g">${spOk}</div></div><div class="spst"><div class="sl">Miss</div><div class="sv b">${spErr}</div></div></div>
+    <div class="streak${spStreak>=3?' on':''}" id="stk">🔥 x${spStreak}</div>
+    <div class="sp-card"><div class="sp-q">${item.q}</div><div class="sp-hint">💡 ${item.hint}</div></div>
+    <div class="tmr-row"><div class="tmr-trk"><div class="tmr-fil" id="tF" style="width:100%;transition:width 1s linear"></div></div><div class="tmr-n" id="tN">12</div></div>
+    <div class="sp-row"><input id="sInp" class="sp-inp" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="type answer…" onkeydown="if(event.key==='Enter')submitQ()"><button class="btn btn-cyan" onclick="submitQ()" style="flex-shrink:0">→</button></div>
+    <div class="sp-fb" id="sFb" style="opacity:0"></div>`;
+  setTimeout(()=>{const i=document.getElementById('sInp');if(i)i.focus();},50);
+  if(spTimer)clearInterval(spTimer);
+  spTimer=setInterval(()=>{
+    spTimeLeft--;
+    const f=document.getElementById('tF'),n=document.getElementById('tN');
+    if(f)f.style.width=Math.max(0,(spTimeLeft/12)*100)+'%';
+    if(n){n.textContent=spTimeLeft;n.style.color=spTimeLeft<=3?'var(--bad)':spTimeLeft<=6?'var(--warn)':'var(--muted2)';}
+    if(spTimeLeft<=0){clearInterval(spTimer);spTimer=null;if(!spAnswered)submitQ();}
+  },1000);
+}
+function submitQ(){
+  const inp=document.getElementById('sInp');if(!inp||spAnswered)return;
+  spAnswered=true;if(spTimer){clearInterval(spTimer);spTimer=null;}inp.disabled=true;
+  const item=SPEED[spIdx];const nt=normS(inp.value);const na=normS(item.a);
+  const isOk=nt===na||item.also.map(normS).includes(nt)||(nt.length>2&&na.includes(nt));
+  if(isOk){spOk++;spStreak++;}else{spErr++;spStreak=0;}
+  const fb=document.getElementById('sFb');
+  if(fb){fb.style.opacity='1';
+    if(!inp.value.trim()){fb.className='sp-fb err';fb.innerHTML=`⏱ Time's up! → <strong>${item.hint}</strong>`;}
+    else if(isOk){fb.className='sp-fb ok';fb.innerHTML=`✓ <strong>Correct!</strong>${spStreak>=3?' 🔥 x'+spStreak:''}`;}
+    else{fb.className='sp-fb err';fb.innerHTML=`✗ <strong>${inp.value}</strong> → <strong>${item.hint}</strong>`;}}
+  if(spStreak>=3){const cf=document.getElementById('cf');cf.textContent='🔥 x'+spStreak;cf.classList.remove('pop');void cf.offsetWidth;cf.classList.add('pop');}
+  spIdx++;setTimeout(nextQ,isOk?700:1500);
+}
+function endSpeed(){
+  const pct=Math.round(spOk/SPEED.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('spWrap').innerHTML=`<div class="sp-start"><div style="font-size:3rem">${emo}</div><h2>${spOk}/${SPEED.length}</h2><p style="color:var(--muted)">${pct>=90?'Excellent! You have mastered reflexive verbs!':pct>=70?'Great job!':pct>=50?'Keep practicing!':'Review the verb cards.'}</p><button class="btn btn-cyan" onclick="startSpeed()">↺ Try again</button></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 6 — REFERENCE CARD
+══════════════════════════════════ */
+function renderReference(){
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📄 Reference card — Verbos Reflexivos</div>
+  <div class="ex-instr">Complete guide to reflexive pronouns, meaning shifts, reciprocal use, and position rules.</div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--refl2);background:rgba(244,114,182,.1)">🪞 Pronombres reflexivos</div>
+    <table class="ref-table"><tr><th>Persona</th><th>Pronombre</th><th>Ejemplo</th></tr>
+    <tr><td>yo</td><td style="font-weight:800;color:var(--refl2)">me</td><td style="color:var(--muted)">Me levanto temprano.</td></tr>
+    <tr><td>tú</td><td style="font-weight:800;color:var(--refl2)">te</td><td style="color:var(--muted)">Te duchas rápido.</td></tr>
+    <tr><td>él/ella/usted</td><td style="font-weight:800;color:var(--refl2)">se</td><td style="color:var(--muted)">Se viste solo.</td></tr>
+    <tr><td>nosotros</td><td style="font-weight:800;color:var(--refl2)">nos</td><td style="color:var(--muted)">Nos acostamos tarde.</td></tr>
+    <tr><td>ellos/ellas/ustedes</td><td style="font-weight:800;color:var(--refl2)">se</td><td style="color:var(--muted)">Se despiertan a las 6.</td></tr>
+    </table>
+    <div class="ref-tip">💡 <strong>Test:</strong> if the subject does the action TO ITSELF (me lavo = I wash myself), it's reflexive. If the action goes to someone/something else, no reflexive pronoun is needed.</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--change2);background:rgba(52,211,153,.08)">🔄 Verbos que cambian de significado</div>
+    <table class="ref-table"><tr><th>Sin "se"</th><th>Significado</th><th>Con "se"</th><th>Significado</th></tr>
+    <tr><td style="font-weight:700">poner</td><td style="color:var(--muted)">to put/place</td><td style="font-weight:700;color:var(--refl2)">ponerse</td><td style="color:var(--muted)">to put on (clothing)</td></tr>
+    <tr><td style="font-weight:700">lavar</td><td style="color:var(--muted)">to wash (something)</td><td style="font-weight:700;color:var(--refl2)">lavarse</td><td style="color:var(--muted)">to wash oneself</td></tr>
+    <tr><td style="font-weight:700">sentar</td><td style="color:var(--muted)">to seat someone</td><td style="font-weight:700;color:var(--refl2)">sentarse</td><td style="color:var(--muted)">to sit down</td></tr>
+    <tr><td style="font-weight:700">acostar</td><td style="color:var(--muted)">to put someone to bed</td><td style="font-weight:700;color:var(--refl2)">acostarse</td><td style="color:var(--muted)">to go to bed</td></tr>
+    <tr><td style="font-weight:700">despertar</td><td style="color:var(--muted)">to wake someone up</td><td style="font-weight:700;color:var(--refl2)">despertarse</td><td style="color:var(--muted)">to wake (oneself) up</td></tr>
+    <tr><td style="font-weight:700">dormir</td><td style="color:var(--muted)">to sleep (duration)</td><td style="font-weight:700;color:var(--refl2)">dormirse</td><td style="color:var(--muted)">to fall asleep (moment)</td></tr>
+    <tr><td style="font-weight:700">quitar</td><td style="color:var(--muted)">to remove (from someone)</td><td style="font-weight:700;color:var(--refl2)">quitarse</td><td style="color:var(--muted)">to take off (clothing)</td></tr>
+    <tr><td style="font-weight:700">parecer</td><td style="color:var(--muted)">to seem</td><td style="font-weight:700;color:var(--refl2)">parecerse</td><td style="color:var(--muted)">to resemble/look alike</td></tr>
+    <tr><td style="font-weight:700">quedar</td><td style="color:var(--muted)">to fit / be left over</td><td style="font-weight:700;color:var(--refl2)">quedarse</td><td style="color:var(--muted)">to stay/remain</td></tr>
+    <tr><td style="font-weight:700">aburrir</td><td style="color:var(--muted)">to bore (someone)</td><td style="font-weight:700;color:var(--refl2)">aburrirse</td><td style="color:var(--muted)">to get bored</td></tr>
+    <tr><td style="font-weight:700">casar</td><td style="color:var(--muted)">to marry off / officiate</td><td style="font-weight:700;color:var(--refl2)">casarse</td><td style="color:var(--muted)">to get married</td></tr>
+    </table>
+    <div class="ref-alert">⚠️ These pairs LOOK similar but mean very different things — always check if the action is reflexive (to oneself) or transitive (to someone/something else).</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--recip2);background:rgba(167,139,250,.08)">🤝 Uso recíproco — "each other"</div>
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:8px">The SAME pronouns (nos/se) can also mean "each other" when the subject is plural and the action is mutual.</p>
+    <table class="ref-table"><tr><th>Verbo</th><th>Ejemplo</th><th>English</th></tr>
+    <tr><td style="font-weight:700">verse</td><td style="color:var(--muted)">Nos vemos cada sábado.</td><td style="color:var(--muted2);font-style:italic">We see each other every Saturday.</td></tr>
+    <tr><td style="font-weight:700">quererse</td><td style="color:var(--muted)">Se quieren mucho.</td><td style="color:var(--muted2);font-style:italic">They love each other a lot.</td></tr>
+    <tr><td style="font-weight:700">conocerse</td><td style="color:var(--muted)">Nos conocemos desde la prepa.</td><td style="color:var(--muted2);font-style:italic">We've known each other since high school.</td></tr>
+    <tr><td style="font-weight:700">abrazarse</td><td style="color:var(--muted)">Se abrazaron al llegar.</td><td style="color:var(--muted2);font-style:italic">They hugged each other on arrival.</td></tr>
+    </table>
+    <div class="ref-tip">💡 Context tells you if it's reflexive ("se lava" = she washes herself) or reciprocal ("se abrazan" = they hug each other) — reciprocal needs a plural subject.</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:#fde68a;background:rgba(251,191,36,.08)">📍 Posición del pronombre</div>
+    <table class="ref-table"><tr><th>Caso</th><th>Posición</th><th>Ejemplo</th></tr>
+    <tr><td>Verbo conjugado</td><td style="color:#fde68a;font-weight:700">ANTES</td><td style="color:var(--muted)">Me levanto. / Se ducha.</td></tr>
+    <tr><td>Infinitivo</td><td style="color:#fde68a;font-weight:700">antes O unido</td><td style="color:var(--muted)">Me voy a duchar. = Voy a ducharme.</td></tr>
+    <tr><td>Gerundio</td><td style="color:#fde68a;font-weight:700">antes O unido</td><td style="color:var(--muted)">Se está durmiendo. = Está durmiéndose.</td></tr>
+    <tr><td>Imperativo afirmativo</td><td style="color:#fde68a;font-weight:700">UNIDO (después)</td><td style="color:var(--muted)">¡Levántate! / ¡Siéntate! / ¡Quítatelo!</td></tr>
+    <tr><td>Imperativo negativo</td><td style="color:#fde68a;font-weight:700">ANTES</td><td style="color:var(--muted)">¡No te levantes! / ¡No te preocupes!</td></tr>
+    </table>
+    <div class="ref-tip">💡 Watch the accent when attaching pronouns: levanta→levántate, sienta→siéntate, durmiendo→durmiéndose. The stress must stay in the same place.</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--cyan);background:rgba(37,217,255,.06)">📋 Lista de verbos reflexivos comunes</div>
+    <table class="ref-table"><tr><th>Verbo</th><th>English</th></tr>
+    <tr><td>levantarse</td><td style="color:var(--muted)">to get up</td></tr>
+    <tr><td>ducharse / bañarse</td><td style="color:var(--muted)">to shower / to bathe</td></tr>
+    <tr><td>vestirse</td><td style="color:var(--muted)">to get dressed</td></tr>
+    <tr><td>peinarse</td><td style="color:var(--muted)">to comb/style one's hair</td></tr>
+    <tr><td>maquillarse</td><td style="color:var(--muted)">to put on makeup</td></tr>
+    <tr><td>afeitarse</td><td style="color:var(--muted)">to shave</td></tr>
+    <tr><td>cepillarse (los dientes)</td><td style="color:var(--muted)">to brush (teeth)</td></tr>
+    <tr><td>acostarse</td><td style="color:var(--muted)">to go to bed</td></tr>
+    <tr><td>despertarse</td><td style="color:var(--muted)">to wake up</td></tr>
+    <tr><td>dormirse</td><td style="color:var(--muted)">to fall asleep</td></tr>
+    <tr><td>sentarse</td><td style="color:var(--muted)">to sit down</td></tr>
+    <tr><td>enojarse</td><td style="color:var(--muted)">to get angry</td></tr>
+    <tr><td>preocuparse</td><td style="color:var(--muted)">to worry</td></tr>
+    <tr><td>divertirse</td><td style="color:var(--muted)">to have fun</td></tr>
+    <tr><td>mudarse</td><td style="color:var(--muted)">to move (residence)</td></tr>
+    <tr><td>irse</td><td style="color:var(--muted)">to leave/go away</td></tr>
+    </table>
+  </div>
+  </div>`;
+}
+
+goEx(0);
+</script>
+</body>
+</html>

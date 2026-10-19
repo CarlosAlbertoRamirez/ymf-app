@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Situaciones Cotidianas | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --rest:#f97316;--rest2:#fdba74;--restbg:rgba(249,115,22,.1);--restbd:rgba(249,115,22,.3);
+  --shop:#34d399;--shop2:#6ee7b7;--shopbg:rgba(52,211,153,.1);--shopbd:rgba(52,211,153,.3);
+  --str:#60a5fa;--str2:#93c5fd;--strbg:rgba(96,165,250,.1);--strbd:rgba(96,165,250,.3);
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 10% 8%,rgba(249,115,22,.12),transparent 30%),radial-gradient(ellipse at 90% 10%,rgba(96,165,250,.1),transparent 30%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(1020px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--rest),#fff 45%,var(--str));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.85rem;margin-top:4px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ex-tabs{display:flex;gap:4px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:7px;overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:7px 11px;font-weight:800;font-family:var(--font);font-size:.72rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:60px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;transform:translateY(-1px)}
+.etab-icon{font-size:1.2rem;line-height:1}
+.etab-label{font-size:.59rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:22px 26px;box-shadow:var(--shadow)}
+.ex-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.85rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:18px}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+/* PHRASE CARDS */
+.sit-section{margin-bottom:28px}
+.sit-h{font-family:var(--display);font-size:1rem;font-weight:900;padding:8px 16px;border-radius:12px;display:inline-flex;align-items:center;gap:8px;margin-bottom:14px}
+.phrase-grid{display:flex;flex-direction:column;gap:8px}
+.phrase-card{border-radius:14px;padding:14px 18px;border:1.5px solid;display:flex;align-items:center;gap:12px;flex-wrap:wrap;transition:.14s}
+.phrase-card:hover{transform:translateX(3px)}
+.phrase-es{font-family:var(--display);font-size:1rem;font-weight:900;flex:1;min-width:180px}
+.phrase-en{font-size:.84rem;color:var(--muted);flex:1;min-width:160px;font-style:italic}
+.phrase-note{font-size:.72rem;color:var(--muted2);width:100%;padding-top:4px;line-height:1.5;border-top:1px solid rgba(255,255,255,.06);margin-top:4px}
+.btn-audio{background:rgba(37,217,255,.12);border:1.5px solid rgba(37,217,255,.28);color:var(--cyan);border-radius:8px;padding:5px 11px;font-size:.74rem;font-weight:800;cursor:pointer;transition:.13s;font-family:var(--font);display:inline-flex;align-items:center;gap:4px;flex-shrink:0}
+.btn-audio:hover{background:rgba(37,217,255,.22)}.btn-audio.playing{animation:ablink .8s infinite}
+@keyframes ablink{0%,100%{opacity:1}50%{opacity:.5}}
+/* DIALOGUE */
+.dial-scene{font-size:.76rem;color:var(--muted2);font-style:italic;padding:8px 14px;background:rgba(255,255,255,.03);border-radius:9px;margin-bottom:10px;border-left:3px solid rgba(255,255,255,.08)}
+.chat-body{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.chat-row{display:flex;align-items:flex-end;gap:8px}
+.chat-row.right{flex-direction:row-reverse}
+.chat-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;background:rgba(255,255,255,.07)}
+.chat-bub{max-width:80%;padding:10px 14px;border-radius:17px;font-size:.92rem;line-height:1.55}
+.chat-row.left .chat-bub{background:rgba(255,255,255,.09);border-radius:4px 17px 17px 17px}
+.chat-row.right .chat-bub{background:rgba(52,211,153,.16);border:1px solid rgba(52,211,153,.22);border-radius:17px 4px 17px 17px}
+.chat-who{font-size:.6rem;font-weight:900;text-transform:uppercase;color:var(--muted2);margin-bottom:3px}
+.chat-en{font-size:.74rem;color:var(--muted2);font-style:italic;margin-top:3px}
+.chat-audio{background:none;border:0;cursor:pointer;font-size:.9rem;padding:2px 4px;border-radius:5px;opacity:.55;transition:.13s;vertical-align:middle}
+.chat-audio:hover{opacity:1;background:rgba(255,255,255,.1)}
+/* SCORE BAR */
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:90px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;transition:width .35s;background:linear-gradient(90deg,var(--rest),var(--str))}
+/* MC */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px}
+.mc-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.mc-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}
+.mc-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.07);border-radius:6px;padding:3px 8px;flex-shrink:0;margin-top:2px}
+.mc-q{font-size:.98rem;line-height:1.65;flex:1}
+.mc-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding-left:28px}
+.mc-sit{font-size:.68rem;font-weight:800;border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:6px;margin-left:28px}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px}
+.mc-opt{border:0;border-radius:10px;padding:8px 15px;font-weight:700;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);border-color:rgba(37,217,255,.35)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-exp{display:none;font-size:.79rem;color:var(--muted);line-height:1.6;margin-top:7px;padding:7px 12px 7px 28px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-exp.show{display:block}
+/* FILL-IN */
+.fill-list{display:flex;flex-direction:column;gap:12px}
+.fill-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;padding:15px 17px}
+.fill-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.fill-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.fill-ctx{font-size:.72rem;color:var(--muted2);font-style:italic;margin-bottom:6px}
+.fill-q{font-size:1rem;line-height:1.85;font-weight:600;margin-bottom:4px}
+.fill-en{font-size:.76rem;color:var(--muted2);font-style:italic;margin-bottom:10px}
+.fill-blank{display:inline-block;border-bottom:2.5px solid var(--cyan);min-width:100px;text-align:center;padding:0 4px;color:var(--cyan);font-weight:800;font-family:var(--display);font-size:1rem}
+.fill-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:6px}
+.fill-chip{border:0;border-radius:9px;padding:7px 14px;font-weight:700;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.fill-chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.fill-chip.used{opacity:.22;cursor:not-allowed}
+.fill-chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.fill-chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.15);color:#fca5a5}
+.fill-exp{display:none;font-size:.8rem;color:var(--muted);margin-top:6px;padding:7px 10px;background:rgba(255,255,255,.04);border-radius:8px;line-height:1.55}
+.fill-exp.show{display:block}
+/* CHAT BUILD */
+.build-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;padding:18px;margin-bottom:14px}
+.build-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.build-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.build-ctx{font-size:.74rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding:7px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.build-drop{min-height:52px;background:rgba(37,217,255,.04);border:1.5px dashed rgba(37,217,255,.22);border-radius:11px;padding:10px;display:flex;flex-direction:column;gap:7px;margin-bottom:10px;transition:.15s}
+.build-drop.drag-over{border-color:var(--cyan);background:rgba(37,217,255,.1)}
+.build-pile{display:flex;flex-wrap:wrap;gap:7px;padding:10px;background:rgba(255,255,255,.03);border-radius:11px;margin-bottom:10px;min-height:46px}
+.build-chip{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.14);border-radius:9px;padding:8px 14px;font-size:.88rem;font-weight:600;cursor:grab;user-select:none;transition:.13s}
+.build-chip:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.build-chip.ghost{opacity:.3}
+.build-chip.b-ok{background:rgba(34,197,94,.14);border-color:var(--good);color:#86efac;cursor:default}
+.build-chip.b-err{background:rgba(239,68,68,.1);border-color:var(--bad);color:#fca5a5;font-size:.78rem}
+.build-placed{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 13px;font-size:.88rem;cursor:pointer;transition:.12s}
+.build-placed:hover{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07)}
+.build-exp{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.build-exp.show{display:block}
+/* SPEED */
+.sp-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-stats{display:flex;gap:9px}
+.spst{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spst .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.spst .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spst .sv.g{color:var(--good)}.spst .sv.b{color:var(--bad)}.spst .sv.w{color:var(--warn)}
+.sp-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:22px;text-align:center;width:100%;max-width:540px}
+.sp-sit{font-size:.7rem;font-weight:900;border-radius:999px;padding:4px 12px;display:inline-block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+.sp-q{font-size:1rem;line-height:1.65;margin-bottom:4px}
+.sp-en{font-size:.82rem;color:var(--muted2);font-style:italic}
+.sp-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:540px}
+.sp-opt{border:0;border-radius:12px;padding:11px 14px;font-weight:700;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:var(--text);text-align:left}
+.sp-opt:hover:not([disabled]){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sp-opt[disabled]{cursor:default;transform:none}
+.sp-opt.sp-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.sp-opt.sp-err{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.sp-opt.sp-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.sp-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:540px}
+.sp-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.sp-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.sp-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.streak{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak.on{display:inline-flex;align-items:center;gap:4px}
+.cf{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.cf.pop{animation:cfk .7s ease forwards}
+@keyframes cfk{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+/* REF */
+.ref-search{width:100%;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.25);color:var(--text);border-radius:11px;padding:10px 16px;font-family:var(--font);font-size:.95rem;outline:none;transition:.15s;margin-bottom:12px}
+.ref-search:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.ref-search::placeholder{color:var(--muted2)}
+.ref-row{display:flex;gap:10px;align-items:center;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04);flex-wrap:wrap;transition:.12s}
+.ref-row:hover{background:rgba(255,255,255,.03)}
+.rr-es{font-family:var(--display);font-weight:900;font-size:.95rem;min-width:200px;cursor:pointer}
+.rr-en{font-style:italic;color:var(--muted2);font-size:.82rem;flex:1}
+.rr-ctx{font-size:.68rem;color:var(--muted2);border-radius:6px;padding:2px 7px;border:1px solid rgba(255,255,255,.08);flex-shrink:0}
+.hl{background:rgba(37,217,255,.2);border-radius:3px;padding:0 2px}
+.fb{display:none;margin-top:12px;padding:10px 15px;border-radius:10px;font-size:.88rem;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}.btn:disabled{opacity:.38;cursor:not-allowed}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),#00bfff);color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:14px 12px}.sp-opts{grid-template-columns:1fr}.phrase-es,.phrase-en{min-width:100%}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="cf" id="cf"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Situaciones Cotidianas 🇲🇽</h1>
+      <p>Survival Spanish for real life in Mexico — restaurants, supermarkets, and getting around the city. Essential phrases + interactive exercises.</p>
+      <div class="badges">
+        <span class="badge">🆕 A1–A2</span>
+        <span class="badge" style="border-color:var(--restbd);color:var(--rest2)">🍽️ Restaurante</span>
+        <span class="badge" style="border-color:var(--shopbd);color:var(--shop2)">🛒 Supermercado</span>
+        <span class="badge" style="border-color:var(--strbd);color:var(--str2)">🗺️ Calle</span>
+        <span class="badge" style="border-color:rgba(37,217,255,.4);color:var(--cyan)">🔊 Audio</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">📖</span><span class="etab-label">Frases<br>útiles</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">💬</span><span class="etab-label">Diá-<br>logos</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">📝</span><span class="etab-label">¿Qué<br>dices?</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">✏️</span><span class="etab-label">Com-<br>pleta</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">🔤</span><span class="etab-label">Ordena<br>el diálogo</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">⚡</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-6" onclick="goEx(6)"><span class="etab-icon">📄</span><span class="etab-label">Refer-<br>encia</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · Your Mexican Friend</p>
+</div>
+<script>
+/* ── Smart audio ── */
+let _voice=null;
+function initVoice(){if(!window.speechSynthesis)return;const pick=()=>{const vs=window.speechSynthesis.getVoices();if(!vs.length)return;const tests=[v=>v.name==='Paulina',v=>v.name.includes('Paulina'),v=>v.lang==='es-MX'&&v.localService,v=>v.lang==='es-MX',v=>v.name.includes('Google')&&v.lang.startsWith('es'),v=>v.lang.startsWith('es')&&v.localService,v=>v.lang.startsWith('es')];for(const t of tests){const f=vs.find(t);if(f){_voice=f;break;}}};pick();if(window.speechSynthesis.onvoiceschanged!==undefined)window.speechSynthesis.onvoiceschanged=pick;setTimeout(pick,800);}
+initVoice();
+function speak(text,btn){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();document.querySelectorAll('.btn-audio,.chat-audio').forEach(b=>{b.classList.remove('playing');if(b.textContent.includes('▶'))b.textContent='🔊';});const u=new SpeechSynthesisUtterance(text);if(_voice)u.voice=_voice;u.lang=_voice?_voice.lang:'es-MX';u.rate=0.82;u.pitch=1.0;if(btn){btn.classList.add('playing');const orig=btn.textContent;btn.textContent='🔊▶';u.onend=u.onerror=()=>{btn.classList.remove('playing');btn.textContent=orig;};}window.speechSynthesis.speak(u);}
+
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+function seededShuffle(arr,seed){const a=[...arr];let s=seed;for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let mcAnswers={},fillAnswers={},buildState={},spAnswered2={};
+let spIdx=0,spOk=0,spErr=0,spStreak=0;
+
+function goEx(n){[0,1,2,3,4,5,6].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===n));[renderPhrases,renderDial,renderMC,renderFill,renderBuild,renderSpeed,renderRef][n]();window.scrollTo({top:0,behavior:'smooth'});}
+
+const SITS={
+  rest:{label:'🍽️ En el restaurante',col:'var(--rest)',bg:'var(--restbg)',bd:'var(--restbd)',col2:'var(--rest2)'},
+  shop:{label:'🛒 En el supermercado',col:'var(--shop)',bg:'var(--shopbg)',bd:'var(--shopbd)',col2:'var(--shop2)'},
+  str: {label:'🗺️ En la calle',       col:'var(--str)', bg:'var(--strbg)', bd:'var(--strbd)', col2:'var(--str2)'},
+};
+
+/* ══════════════════════════════════
+   PHRASE DATA
+   Fields: sit, es, en, note
+══════════════════════════════════ */
+const PHRASES=[
+  /* RESTAURANTE (20) */
+  {sit:'rest',es:'Una mesa para dos, por favor.',      en:'A table for two, please.',           note:'The first thing you say when entering a restaurant.'},
+  {sit:'rest',es:'¿Tienen mesa disponible?',           en:'Do you have a table available?',     note:'Ask this if you\'re not sure they have space, especially busy hours.'},
+  {sit:'rest',es:'¿Me trae el menú, por favor?',       en:'Can you bring me the menu, please?', note:'"Carta" also means menu. "¿Me trae la carta?" works too.'},
+  {sit:'rest',es:'¿Qué me recomienda?',                en:'What do you recommend?',             note:'Great way to get the waiter\'s honest pick. Add "del día" for the daily special.'},
+  {sit:'rest',es:'¿Cuál es el platillo del día?',      en:'What is the dish of the day?',       note:'"Platillo" = dish/plate. "El especial" or "la especialidad" also common.'},
+  {sit:'rest',es:'Para mí, el pollo, por favor.',      en:'For me, the chicken, please.',       note:'Natural way to order. "Para mí" avoids "I want" which sounds demanding.'},
+  {sit:'rest',es:'¿Lleva gluten / mariscos?',          en:'Does it contain gluten / seafood?',  note:'"¿Lleva...?" = does it have/contain? Essential for food allergies.'},
+  {sit:'rest',es:'Sin cebolla, por favor.',            en:'Without onion, please.',             note:'"Sin" = without. "Sin cebolla / sin picante / sin cilantro" — works for any ingredient.'},
+  {sit:'rest',es:'¿Me puede poner más salsa?',         en:'Can you bring more salsa?',          note:'"¿Me puede poner...?" = can you add/bring...? Very polite and common.'},
+  {sit:'rest',es:'Está muy rico.',                     en:'This is very delicious.',            note:'"Rico" = delicious (food). "Está buenísimo" = it\'s amazing. Common compliment to the cook.'},
+  {sit:'rest',es:'¿Me trae la cuenta, por favor?',     en:'Can you bring the bill, please?',   note:'La cuenta = the bill. "¿Nos cobra?" also works — "can you charge us?"'},
+  {sit:'rest',es:'¿Está incluido el servicio?',        en:'Is the service charge included?',   note:'Service (tip) is NOT usually included in Mexico. 10-15% tip is customary.'},
+  {sit:'rest',es:'¿Aceptan tarjeta?',                  en:'Do you accept card?',               note:'Always ask — many small restaurants are cash only. "¿Solo efectivo?" = cash only?'},
+  {sit:'rest',es:'¿Me da una bolsa para llevar?',      en:'Can I get a bag to take it away?',  note:'"Para llevar" = to go. "¿Me lo envuelve?" = can you wrap it up?'},
+  {sit:'rest',es:'Disculpe, esto no es lo que pedí.',  en:'Excuse me, this is not what I ordered.',note:'Stay polite. "Creo que hay un error" = I think there\'s a mistake.'},
+  {sit:'rest',es:'¿Tienen opciones vegetarianas?',     en:'Do you have vegetarian options?',   note:'Mexico is becoming more vegetarian-friendly. "Vegano/a" = vegan.'},
+  {sit:'rest',es:'¿Puede traerme agua, por favor?',    en:'Can you bring me water, please?',   note:'"Agua natural" = still water. "Agua mineral" = sparkling. "Agua del grifo" = tap water.'},
+  {sit:'rest',es:'¿Me cobra por separado?',            en:'Can you charge us separately?',     note:'Splitting the bill. "¿Lo dividimos?" = can we split it? Not always possible.'},
+  {sit:'rest',es:'Estuvo muy bien, gracias.',          en:'Everything was very good, thanks.',  note:'Say this when leaving — good for complimenting staff and building rapport.'},
+  {sit:'rest',es:'¿A qué hora cierran?',               en:'What time do you close?',           note:'Useful for planning. "¿A qué hora abren?" = what time do you open?'},
+  /* SUPERMERCADO (18) */
+  {sit:'shop',es:'¿Dónde están las frutas y verduras?',en:'Where are the fruits and vegetables?',note:'Most useful question in any supermarket. "¿Dónde está el...?" for any section.'},
+  {sit:'shop',es:'¿Cuánto cuesta esto?',               en:'How much does this cost?',          note:'"¿Cuánto vale?" and "¿A cómo está?" also work. "¿A cómo el kilo?" for produce.'},
+  {sit:'shop',es:'¿Tiene algo más barato?',            en:'Do you have something cheaper?',    note:'Asking for a cheaper alternative. "Algo más económico" is another way to say it.'},
+  {sit:'shop',es:'¿A cómo está el kilo?',              en:'How much is it per kilo?',          note:'Standard way to ask price for produce sold by weight at tianguis or the deli counter.'},
+  {sit:'shop',es:'Me da un kilo de jitomate.',         en:'Give me a kilo of tomatoes.',       note:'"Jitomate" = red tomato in Mexico. "Tomate" usually means the green tomatillo!'},
+  {sit:'shop',es:'¿Tiene fecha de caducidad?',         en:'What is the expiration date?',      note:'"Fecha de caducidad" = expiration date. "Fecha de vencimiento" also used.'},
+  {sit:'shop',es:'¿Dónde está la caja?',               en:'Where is the checkout / cashier?',  note:'"La caja" = the cash register/checkout. "La cajera/el cajero" = the cashier.'},
+  {sit:'shop',es:'¿Tiene bolsa?',                      en:'Do you have a bag?',               note:'In Mexico you often need to ask for a bag — some stores charge for them. "¿Me da una bolsa?"'},
+  {sit:'shop',es:'¿Me da el ticket, por favor?',       en:'Can I have the receipt, please?',  note:'"El ticket" or "el recibo" = receipt. Important for returns ("devoluciones").'},
+  {sit:'shop',es:'¿Puedo pagar con tarjeta?',          en:'Can I pay by card?',               note:'Many small markets are cash only. Good to confirm before checkout.'},
+  {sit:'shop',es:'¿Tiene algo sin azúcar?',            en:'Do you have anything without sugar?',note:'"Sin azúcar" = sugar-free. "Bajo en calorías" = low calorie. "Dietético" = diet.'},
+  {sit:'shop',es:'¿Está en oferta?',                   en:'Is it on sale?',                   note:'"Oferta" = sale/discount. "¿Tiene descuento?" same idea. "La promoción" = the promotion.'},
+  {sit:'shop',es:'Me falta cambio.',                   en:'I\'m short on change.',             note:'"Cambio" = change (coins/small bills). "¿Me puede dar cambio de 200?" = can you break a 200?'},
+  {sit:'shop',es:'¿Dónde están los lácteos?',          en:'Where are the dairy products?',    note:'"Lácteos" = dairy. "¿Y los congelados?" = and the frozen section? "El pasillo" = the aisle.'},
+  {sit:'shop',es:'Quiero devolver esto.',               en:'I want to return this.',            note:'"Devolver" = to return. "Tiene defecto" = it has a defect. "No me funcionó" = it didn\'t work.'},
+  {sit:'shop',es:'¿Hacen envíos a domicilio?',         en:'Do you do home delivery?',         note:'"Envío a domicilio" = home delivery. "A domicilio" = to your home. Common question post-COVID.'},
+  {sit:'shop',es:'¿Dónde puedo pagar el agua / la luz?',en:'Where can I pay the water / electricity bill?',note:'Oxxo and supermarkets accept utility payments. "Pagar servicios" = pay utility bills.'},
+  {sit:'shop',es:'¿Tienen productos orgánicos?',       en:'Do you have organic products?',    note:'"Orgánico/a" = organic. Usually in a special section ("sección orgánica").'},
+  /* CALLE Y TRANSPORTE (20) */
+  {sit:'str',es:'¿Cómo llego al centro?',              en:'How do I get to downtown?',         note:'"¿Cómo llego a...?" = how do I get to...? The most useful direction question.'},
+  {sit:'str',es:'¿A cuántas cuadras está?',            en:'How many blocks is it?',            note:'"Cuadra" = city block. Mexicans always give distances in blocks. "A dos cuadras" = 2 blocks.'},
+  {sit:'str',es:'¿En qué dirección queda?',            en:'Which direction is it in?',         note:'"¿Queda por aquí?" = is it around here? "Queda lejos" = it\'s far. "Queda cerca" = it\'s close.'},
+  {sit:'str',es:'Siga derecho.',                       en:'Go straight.',                      note:'"Siga derecho" = go straight (formal). "Sigue derecho" = informal version.'},
+  {sit:'str',es:'Doble a la derecha / izquierda.',     en:'Turn right / left.',               note:'"Doblar" = to turn. "A la derecha" = to the right. "A la izquierda" = to the left.'},
+  {sit:'str',es:'En el semáforo, doble a la izquierda.',en:'At the traffic light, turn left.',note:'Landmarks and "semáforos" are key in Mexican directions. No one uses compass points.'},
+  {sit:'str',es:'¿Cuánto tarda en camión?',            en:'How long does it take by bus?',    note:'"¿Cuánto tarda?" = how long does it take? "En camión" = by bus. "En metro" = by metro.'},
+  {sit:'str',es:'¿Dónde para el camión para el centro?',en:'Where does the bus to downtown stop?',note:'"¿Dónde para...?" = where does...stop? "La parada" = the bus stop.'},
+  {sit:'str',es:'¿Este camión va al metro?',           en:'Does this bus go to the metro?',   note:'Ask the driver or passengers. "¿Pasa por...?" = does it go through/past...?'},
+  {sit:'str',es:'¿Dónde me bajo para...?',             en:'Where do I get off for...?',       note:'"Bajarse" = to get off (bus/metro). "Me avisa cuando lleguemos" = tell me when we arrive.'},
+  {sit:'str',es:'Me perdí. ¿Me puede ayudar?',         en:'I got lost. Can you help me?',     note:'"Estoy perdido/a" = I\'m lost. Never be afraid to ask — Mexicans are very helpful.'},
+  {sit:'str',es:'Busco la calle Insurgentes.',         en:'I\'m looking for Insurgentes street.',note:'"Busco" = I\'m looking for. "¿Sabe dónde está...?" = do you know where...is?'},
+  {sit:'str',es:'¿Hay un Oxxo cerca?',                 en:'Is there an Oxxo nearby?',         note:'"¿Hay...cerca?" = is there...nearby? Use for pharmacy, ATM, metro, restaurant — anything.'},
+  {sit:'str',es:'¿Cuánto me cobra al aeropuerto?',     en:'How much do you charge to the airport?',note:'Ask BEFORE getting in a taxi. Negotiate if needed. Always agree on price first.'},
+  {sit:'str',es:'¿Me puede dejar aquí, por favor?',    en:'Can you drop me off here, please?',note:'"Dejar" = to drop off. "Aquí está bien" = here is fine. Standard taxi/Uber phrase.'},
+  {sit:'str',es:'¿Este camino va a Xochimilco?',       en:'Does this road go to Xochimilco?', note:'Confirming direction when driving or walking. "¿Voy bien para...?" = am I going the right way?'},
+  {sit:'str',es:'¿Dónde puedo tomar un taxi?',         en:'Where can I get a taxi?',          note:'"Tomar un taxi" = to take a taxi. "Parar un taxi" = to hail a taxi. Uber is very popular in CDMX.'},
+  {sit:'str',es:'¿Cuánto cuesta el boleto del metro?', en:'How much is the metro ticket?',    note:'The CDMX metro is one of the cheapest in the world. Single ride cards and passes available.'},
+  {sit:'str',es:'Disculpe, ¿me puede decir la hora?',  en:'Excuse me, can you tell me the time?',note:'Polite way to ask the time on the street. "¿Qué horas son?" is more casual.'},
+  {sit:'str',es:'¿Es peligroso caminar por aquí de noche?',en:'Is it dangerous to walk here at night?',note:'Important safety question. "¿Es zona segura?" = is it a safe area?'},
+];
+
+/* ══════════════════════════════════
+   EX 0 — USEFUL PHRASES (grouped by situation)
+══════════════════════════════════ */
+function renderPhrases(){
+  const grouped={rest:[],shop:[],str:[]};
+  PHRASES.forEach(p=>grouped[p.sit].push(p));
+  const sections=Object.entries(grouped).map(([sit,phrases])=>{
+    const s=SITS[sit];
+    const cards=phrases.map(p=>`<div class="phrase-card" style="background:${s.bg};border-color:${s.bd}">
+      <div class="phrase-es" style="color:${s.col2}">${p.es}</div>
+      <div class="phrase-en">${p.en}</div>
+      <button class="btn-audio" onclick="speak('${p.es.replace(/'/g,"\\'")}',this)">🔊</button>
+      ${p.note?`<div class="phrase-note">💡 ${p.note}</div>`:''}
+    </div>`).join('');
+    return `<div class="sit-section">
+      <div class="sit-h" style="background:${s.bg};color:${s.col2};border:1.5px solid ${s.bd}">${s.label} — ${phrases.length} frases</div>
+      <div class="phrase-grid">${cards}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📖 Frases útiles — ${PHRASES.length} expressions</div>
+  <div class="ex-instr">Essential phrases for 3 real situations in Mexico. Click <em>🔊</em> to hear any phrase. Study these before the exercises!</div>
+  ${sections}</div>`;
+}
+
+/* ══════════════════════════════════
+   EX 1 — DIÁLOGOS (9 complete chat conversations)
+   3 per situation, progressive complexity
+══════════════════════════════════ */
+const DIALS=[
+  /* RESTAURANTE */
+  {sit:'rest',title:'Arriving and ordering 🍽️',
+   chat:[
+     {side:'left',av:'🤵',who:'Mesero',es:'Buenas noches. ¿Para cuántas personas?',en:'Good evening. For how many people?'},
+     {side:'right',av:'🙋',who:'Tú',es:'Somos dos, por favor.',en:'There are two of us, please.'},
+     {side:'left',av:'🤵',who:'Mesero',es:'Por aquí, por favor. ¿Les traigo el menú?',en:'This way please. Shall I bring you the menu?'},
+     {side:'right',av:'🙋',who:'Tú',es:'Sí, y también dos aguas naturales.',en:'Yes, and also two still waters.'},
+     {side:'left',av:'🤵',who:'Mesero',es:'Enseguida.',en:'Right away.'},
+   ],
+   q:'What does "enseguida" mean?',
+   opts:['See you later','Right away / Just a moment','You\'re welcome','I don\'t know'],a:1,
+   exp:'"Enseguida" = right away / just a moment. One of the most common words in Mexican service industry. You\'ll hear it constantly in restaurants, shops and taxis.'},
+  {sit:'rest',title:'Asking about the food 🌮',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'Disculpe, ¿qué me recomienda?',en:'Excuse me, what do you recommend?'},
+     {side:'left',av:'🤵',who:'Mesero',es:'El mole negro está muy bueno hoy.',en:'The black mole is very good today.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Lleva mariscos el mole?',en:'Does the mole contain seafood?'},
+     {side:'left',av:'🤵',who:'Mesero',es:'No, lleva pollo y chile. Es la receta de la casa.',en:'No, it has chicken and chili. It\'s the house recipe.'},
+     {side:'right',av:'🙋',who:'Tú',es:'Perfecto. Me lo pone, por favor.',en:'Perfect. I\'ll have it, please.'},
+   ],
+   q:'"¿Lleva mariscos?" is asking...',
+   opts:['if the dish is expensive','if it contains seafood','if it\'s spicy','if it comes with seafood on the side'],a:1,
+   exp:'"¿Lleva...?" = does it contain/have...? Super useful for allergies and preferences. "Lleva" comes from "llevar" (to carry). The dish "carries" the ingredient.'},
+  {sit:'rest',title:'Paying the bill 💳',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'Disculpe, ¿nos trae la cuenta?',en:'Excuse me, can you bring us the bill?'},
+     {side:'left',av:'🤵',who:'Mesero',es:'Claro. ¿Van a pagar juntos o por separado?',en:'Of course. Will you pay together or separately?'},
+     {side:'right',av:'🙋',who:'Tú',es:'Juntos, por favor. ¿Aceptan tarjeta?',en:'Together, please. Do you accept card?'},
+     {side:'left',av:'🤵',who:'Mesero',es:'Sí, aceptamos Visa y Mastercard. ¿El servicio está incluido?',en:'Yes, we accept Visa and Mastercard. Is the service charge included?'},
+     {side:'right',av:'🙋',who:'Tú',es:'No, no está incluido. Les dejo la propina en efectivo.',en:'No, it\'s not included. I\'ll leave the tip in cash.'},
+   ],
+   q:'In Mexico, "la propina" is...',
+   opts:['the tax','the main course','the tip / gratuity','the receipt'],a:2,
+   exp:'"La propina" = tip/gratuity. In Mexico the standard is 10–15%, and it\'s NOT usually included in the bill automatically. Always leave it — waitstaff depend on it significantly.'},
+  /* SUPERMERCADO */
+  {sit:'shop',title:'Finding products 🛒',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'Disculpe, ¿dónde están los lácteos?',en:'Excuse me, where are the dairy products?'},
+     {side:'left',av:'👨',who:'Empleado',es:'Al fondo a la derecha, pasillo seis.',en:'At the back on the right, aisle six.'},
+     {side:'right',av:'🙋',who:'Tú',es:'Gracias. ¿Y el pan?',en:'Thank you. And the bread?'},
+     {side:'left',av:'👨',who:'Empleado',es:'La panadería está justo a la entrada.',en:'The bakery is right at the entrance.'},
+     {side:'right',av:'🙋',who:'Tú',es:'Perfecto, gracias por su ayuda.',en:'Perfect, thank you for your help.'},
+   ],
+   q:'"Al fondo a la derecha" means...',
+   opts:['at the front on the left','at the back on the right','in the middle on the right','at the top of the shelf'],a:1,
+   exp:'"Al fondo" = at the back/far end. "A la derecha" = on the right. "A la izquierda" = on the left. "En el pasillo X" = in aisle X. These 4 phrases cover most supermarket navigation.'},
+  {sit:'shop',title:'Asking about price and weight ⚖️',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'¿A cómo está el jitomate?',en:'How much is the tomato per kilo?'},
+     {side:'left',av:'👩',who:'Vendedora',es:'A veinte pesos el kilo, lleva buen precio.',en:'Twenty pesos a kilo, good price.'},
+     {side:'right',av:'🙋',who:'Tú',es:'Me da kilo y medio, por favor.',en:'Give me a kilo and a half, please.'},
+     {side:'left',av:'👩',who:'Vendedora',es:'¿Algo más? Tenemos aguacates muy buenos hoy.',en:'Anything else? We have very good avocados today.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿A cómo el aguacate?',en:'How much are the avocados?'},
+   ],
+   q:'Why does the seller say "lleva buen precio"?',
+   opts:['The tomatoes are heavy','The price is good / it\'s a deal','You should buy more','The price went up'],a:1,
+   exp:'"Lleva buen precio" = it\'s a good price / it\'s a bargain. Vendors often say this to encourage buying. "Está muy barato" = it\'s very cheap. "Está en oferta" = it\'s on sale.'},
+  {sit:'shop',title:'At the checkout 💰',
+   chat:[
+     {side:'left',av:'👩',who:'Cajera',es:'¿Encontró todo lo que buscaba?',en:'Did you find everything you were looking for?'},
+     {side:'right',av:'🙋',who:'Tú',es:'Sí, gracias. ¿Cuánto es en total?',en:'Yes, thank you. How much is the total?'},
+     {side:'left',av:'👩',who:'Cajera',es:'Son trescientos cuarenta y dos pesos.',en:'That\'s three hundred and forty-two pesos.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Puedo pagar con tarjeta?',en:'Can I pay by card?'},
+     {side:'left',av:'👩',who:'Cajera',es:'Sí. ¿Quiere bolsa?',en:'Yes. Would you like a bag?'},
+   ],
+   q:'The cashier asks "¿Quiere bolsa?" because...',
+   opts:['bags are always free','bags are included in the total','in Mexico you often need to ask/pay for bags','she forgot to add it'],a:2,
+   exp:'In many Mexican supermarkets, bags ("bolsas") are not automatic — you ask or pay a small fee. Some stores have banned plastic bags entirely. Always good to carry a reusable bag ("bolsa reutilizable").'},
+  /* CALLE */
+  {sit:'str',title:'Asking for directions 🗺️',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'Disculpe, ¿sabe cómo llegar al Zócalo?',en:'Excuse me, do you know how to get to the Zócalo?'},
+     {side:'left',av:'👨',who:'Señor',es:'Sí. Siga derecho dos cuadras y doble a la derecha.',en:'Yes. Go straight two blocks and turn right.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Y luego?',en:'And then?'},
+     {side:'left',av:'👨',who:'Señor',es:'Ahí ve el metro. Tome la línea 2 y bájese en Zócalo.',en:'You\'ll see the metro there. Take line 2 and get off at Zócalo.'},
+     {side:'right',av:'🙋',who:'Tú',es:'Muchas gracias, muy amable.',en:'Thank you very much, very kind.'},
+   ],
+   q:'"Bájese en Zócalo" means...',
+   opts:['Buy a ticket at Zócalo','Get off at the Zócalo stop','The Zócalo is down the stairs','Take the Zócalo exit'],a:1,
+   exp:'"Bajarse" = to get off (a bus/metro). "Bájese" = get off (formal command). "¿Dónde me bajo?" = where do I get off? Essential for public transport in Mexico.'},
+  {sit:'str',title:'Taking a taxi 🚕',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'Buenas tardes. ¿Me lleva al aeropuerto?',en:'Good afternoon. Can you take me to the airport?'},
+     {side:'left',av:'🚕',who:'Taxista',es:'Sí, ¿cuál terminal?',en:'Yes, which terminal?'},
+     {side:'right',av:'🙋',who:'Tú',es:'Terminal 2. ¿Cuánto me cobra?',en:'Terminal 2. How much do you charge?'},
+     {side:'left',av:'🚕',who:'Taxista',es:'Con el tráfico de ahorita, trescientos pesos.',en:'With the current traffic, three hundred pesos.'},
+     {side:'right',av:'🙋',who:'Tú',es:'Sale. Y si puede ir por la México-Xochimilco, por favor.',en:'Deal. And if you can go via Mexico-Xochimilco, please.'},
+   ],
+   q:'"¿Cuánto me cobra?" when taking a taxi means...',
+   opts:['Where are you going?','How long will it take?','How much do you charge?','Do you have change?'],a:2,
+   exp:'"¿Cuánto me cobra?" = how much do you charge? ALWAYS ask before getting in a taxi. "Cobrar" = to charge. "Me cobró de más" = he overcharged me. Agree on the price first to avoid problems.'},
+  {sit:'str',title:'Getting on the bus 🚌',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'¿Este camión va a Xochimilco?',en:'Does this bus go to Xochimilco?'},
+     {side:'left',av:'🧑',who:'Chofer',es:'No, este va a Coyoacán. El de Xochimilco para allá.',en:'No, this one goes to Coyoacán. The Xochimilco one stops over there.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Cuánto cuesta el pasaje?',en:'How much is the fare?'},
+     {side:'left',av:'🧑',who:'Chofer',es:'Seis pesos. ¿Va a bajar en la central?',en:'Six pesos. Are you getting off at the terminal?'},
+     {side:'right',av:'🙋',who:'Tú',es:'No, me avisa cuando lleguemos a la estación.',en:'No, let me know when we get to the station.'},
+   ],
+   q:'"El pasaje" in this conversation means...',
+   opts:['the passenger','the bus ticket / fare','the luggage','the aisle of the bus'],a:1,
+   exp:'"El pasaje" = the bus fare/ticket. "¿Cuánto es el pasaje?" is the classic question on Mexican buses. "El chofer" = the driver. "Me avisa" = let me know / tell me when.'},
+];
+
+let dialAns={};
+function renderDial(){
+  dialAns={};
+  const tot=DIALS.length;
+  const html=DIALS.map((d,i)=>{
+    const s=SITS[d.sit];
+    const msgs=d.chat.map(m=>`<div class="chat-row ${m.side}">
+      <div class="chat-av">${m.av}</div>
+      <div>
+        <div class="chat-who">${m.who}</div>
+        <div class="chat-bub">
+          ${m.es}
+          <button class="chat-audio" onclick="speak('${m.es.replace(/'/g,"\\'")}',this)" title="🔊">🔊</button>
+          <div class="chat-en">${m.en}</div>
+        </div>
+      </div>
+    </div>`).join('');
+    const opts=d.opts.map((o,oi)=>`<button class="dial-opt" id="do${i}_${oi}" onclick="answerDial(${i},${oi})" style="border-color:rgba(255,255,255,.1)">${o}</button>`).join('');
+    return `<div style="background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;margin-bottom:16px" id="dc${i}">
+      <div class="dial-scene"><span style="background:${s.bg};color:${s.col2};border-radius:5px;padding:2px 8px;font-size:.7rem;font-weight:800">${s.label}</span> ${d.title}</div>
+      <div class="chat-body" style="padding:14px 16px">${msgs}</div>
+      <div style="padding:12px 16px;border-top:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.12)">
+        <div style="font-size:.87rem;font-weight:700;color:var(--muted);margin-bottom:10px">👉 ${d.q}</div>
+        <div style="display:flex;flex-direction:column;gap:7px">${opts}</div>
+        <div class="dial-exp" id="de${i}" style="display:none;margin-top:8px;font-size:.8rem;color:var(--muted);padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px;line-height:1.55"></div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">💬 Diálogos reales — 9 conversations</div>
+  <div class="ex-instr">Read the full conversation with English translations below each line. Click 🔊 to hear any line. Then answer the question about what was said.</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="da_ok">0</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="da_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="da_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="da_pg" style="width:0%"></div></div></div>
+  </div>
+  ${html}
+  <div class="fb" id="da_fb"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="dialAns={};renderDial()">↺ Reset</button></div></div>`;
+}
+function answerDial(qi,oi){
+  if(dialAns[qi]!==undefined)return;
+  const d=DIALS[qi];const isOk=oi===d.a;
+  dialAns[qi]=isOk;
+  const card=document.getElementById('dc'+qi);
+  if(card){card.style.borderColor=isOk?'var(--good)':'var(--bad)';card.style.background=isOk?'rgba(34,197,94,.04)':'rgba(239,68,68,.04)';}
+  d.opts.forEach((_,x)=>{const b=document.getElementById(`do${qi}_${x}`);if(!b)return;b.disabled=true;if(x===d.a)b.style.cssText='border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac';else if(x===oi&&!isOk)b.style.cssText='border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5';});
+  const e=document.getElementById('de'+qi);if(e){e.style.display='block';e.innerHTML=(isOk?'✓ ':'✗ ')+d.exp;}
+  const tot=Object.keys(dialAns).length;
+  const ok=Object.values(dialAns).filter(v=>v).length;
+  document.getElementById('da_ok').textContent=ok;document.getElementById('da_err').textContent=tot-ok;
+  document.getElementById('da_pct').textContent=Math.round(tot/DIALS.length*100)+'%';
+  document.getElementById('da_pg').style.width=Math.round(tot/DIALS.length*100)+'%';
+  if(tot===DIALS.length){const pct=Math.round(ok/tot*100);const fb=document.getElementById('da_fb');fb.className='fb show '+(pct>=85?'ok':'partial');fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Excelente! You handle real Mexican conversations!':'Review the phrases and try again.'}`;}
+}
+
+/* ══════════════════════════════════
+   EX 2 — ¿QUÉ DICES? MC (45)
+   Situation-based: what do you say in this moment?
+   Mix of all 3 situations, no labels shown
+══════════════════════════════════ */
+const MC=[
+  /* RESTAURANTE — varied */
+  {sit:'rest',q:'You just sat down. The waiter comes over. What\'s the first thing you ask for?',
+   opts:['La cuenta, por favor.','¿Me trae el menú, por favor?','¿Tienen mesa disponible?','Está muy rico.'],a:1,
+   x:'"¿Me trae el menú?" = can you bring me the menu? "La cuenta" = the bill — too early! "¿Tienen mesa?" = table available — you\'re already seated.'},
+  {sit:'shop',q:'You can\'t find the bread section. What do you ask an employee?',
+   opts:['¿Cuánto cuesta el pan?','¿Tienen pan sin gluten?','¿Dónde está el pan?','¿Me da un kilo de pan?'],a:2,
+   x:'"¿Dónde está el pan?" = where is the bread? The classic "¿dónde está...?" question for navigating any store or place.'},
+  {sit:'str',q:'You\'re in a taxi. You want to know how much it costs before the trip starts.',
+   opts:['¿Cómo se llama usted?','¿Cuánto me cobra?','¿Cuánto tarda?','¿Tiene cambio?'],a:1,
+   x:'"¿Cuánto me cobra?" = how much do you charge? Always ask BEFORE getting in an unmetered taxi. "Tarda" = takes (time), not cost.'},
+  {sit:'rest',q:'You\'re allergic to shellfish. The waiter describes a dish. What do you ask?',
+   opts:['¿Está picante?','¿Lleva mariscos?','¿Tiene gluten?','¿Es caro?'],a:1,
+   x:'"¿Lleva mariscos?" = does it contain seafood/shellfish? "Llevar" in this context = to contain/include. Essential allergy question.'},
+  {sit:'str',q:'Someone gives you directions and says "doble a la derecha en el semáforo." What do you do?',
+   opts:['Turn left at the traffic light','Go straight past the traffic light','Turn right at the traffic light','Stop at the traffic light'],a:2,
+   x:'"Doblar" = to turn. "A la derecha" = to the right. "En el semáforo" = at the traffic light. Key direction vocabulary.'},
+  {sit:'shop',q:'You\'re at the produce stand. You want to ask the price per kilo.',
+   opts:['¿Cuántos kilos tiene?','¿A cómo está el kilo?','¿Tiene kilo y medio?','¿Es orgánico?'],a:1,
+   x:'"¿A cómo está el kilo?" = how much is it per kilo? The standard price question at markets and produce stands.'},
+  {sit:'rest',q:'You want to compliment the food. What do you say?',
+   opts:['Está muy caro.','Está muy rico.','Está muy picante.','Está muy lejos.'],a:1,
+   x:'"Está muy rico" = it\'s very delicious! "Rico" for food = tasty/delicious. "Está buenísimo" = it\'s amazing. Don\'t say "rico" about people the same way!'},
+  {sit:'str',q:'You\'re lost. You stop someone on the street. What\'s the first thing you say?',
+   opts:['Siga derecho.','Me perdí. ¿Me puede ayudar?','¿A cuántas cuadras está?','Doble a la izquierda.'],a:1,
+   x:'"Me perdí" = I got lost. "¿Me puede ayudar?" = can you help me? The polite, natural combination. Mexicans are very willing to help.'},
+  {sit:'shop',q:'The cashier asks "¿quiere bolsa?" What is she asking?',
+   opts:['Do you want a bag?','Do you want the receipt?','Do you want to pay cash?','Do you have a loyalty card?'],a:0,
+   x:'"¿Quiere bolsa?" = do you want a bag? "La bolsa" = the bag. In Mexico you often pay for bags or need to ask for them. Bring reusable bags!'},
+  {sit:'rest',q:'Dinner is over. What do you say to get the bill?',
+   opts:['¿Qué me recomienda?','¿Me trae la cuenta, por favor?','Una mesa para dos.','¿Aceptan tarjeta?'],a:1,
+   x:'"¿Me trae la cuenta?" = can you bring the bill? "La cuenta" = the bill/check. "¿Nos cobra?" = can you charge us? Both work naturally.'},
+  {sit:'str',q:'You\'re on the metro. You want to know where to get off for the Zócalo.',
+   opts:['¿Dónde para el metro?','¿Dónde me bajo para el Zócalo?','¿Este metro va al Zócalo?','¿Cuánto cuesta el boleto?'],a:1,
+   x:'"¿Dónde me bajo?" = where do I get off? "Bajarse" = to get off. You can add "para + destination" to specify where you want to go.'},
+  {sit:'shop',q:'You want to buy 1.5 kilos of tomatoes. How do you say this?',
+   opts:['Me da un kilo de jitomate.','Me da kilo y medio de jitomate.','Me da dos kilos de jitomate.','¿Cuánto cuesta el jitomate?'],a:1,
+   x:'"Kilo y medio" = a kilo and a half. "Medio" = half. "Un cuarto de kilo" = a quarter kilo (250g). In Mexico, red tomato = "jitomate," not "tomate" (which is the green tomatillo).'},
+  {sit:'rest',q:'You want to eat here but only see 4 seats and there are 5 of you. What do you say first?',
+   opts:['¿Tienen mesa disponible para cinco?','¿Cuántas personas son?','¿Tienen lugar para dos?','¿A qué hora cierran?'],a:0,
+   x:'"¿Tienen mesa disponible para cinco?" = do you have a table available for five? "¿Cuántas personas?" = how many people? — that\'s what the HOST asks you, not what you ask.'},
+  {sit:'str',q:'You\'re in a taxi and you want to be dropped off here. What do you say?',
+   opts:['¿Cuánto me cobra?','¿Puede ir más rápido?','¿Me puede dejar aquí, por favor?','Doble a la derecha.'],a:2,
+   x:'"¿Me puede dejar aquí?" = can you drop me off here? "Dejar" = to leave/drop off. "Aquí está bien" = here is fine. Standard phrase with any driver.'},
+  {sit:'shop',q:'You\'re not sure if the supermarket accepts credit card. What do you ask?',
+   opts:['¿Tiene cambio?','¿Cuánto es en total?','¿Puedo pagar con tarjeta?','¿Me da el ticket?'],a:2,
+   x:'"¿Puedo pagar con tarjeta?" = can I pay by card? "Con tarjeta" = by card. "En efectivo" = in cash. Many small markets are cash only.'},
+  {sit:'rest',q:'The waiter brings the wrong dish. What do you say politely?',
+   opts:['Está muy rico, gracias.','Disculpe, esto no es lo que pedí.','¿Me trae la cuenta?','¿Qué me recomienda?'],a:1,
+   x:'"Disculpe, esto no es lo que pedí" = excuse me, this is not what I ordered. "Disculpe" softens it. "Creo que hay un error" = I think there\'s a mistake — also very polite.'},
+  {sit:'str',q:'You want to ask how long it takes to get somewhere by bus.',
+   opts:['¿Cuánto cuesta en camión?','¿Cuánto tarda en camión?','¿Dónde para el camión?','¿Este camión va allá?'],a:1,
+   x:'"¿Cuánto tarda?" = how long does it take? "Tardar" = to take time. "En camión" = by bus. "¿Cuánto tarda en metro?" = how long by metro?'},
+  {sit:'shop',q:'You want a receipt for your purchase. What do you ask?',
+   opts:['¿Tiene bolsa?','¿Cuánto es en total?','¿Me da el ticket, por favor?','¿Está en oferta?'],a:2,
+   x:'"¿Me da el ticket?" = can I have the receipt? "El ticket" or "el recibo" = receipt. Important for returns. "¿Puede darme factura?" for an official tax receipt.'},
+  {sit:'rest',q:'You want to know if they have vegetarian options before ordering.',
+   opts:['¿Lleva carne?','¿Tienen opciones vegetarianas?','¿Es picante?','¿Hay postre?'],a:1,
+   x:'"¿Tienen opciones vegetarianas?" = do you have vegetarian options? Mexico is increasingly vegetarian-friendly. "Vegano/a" = vegan. "Sin carne" = without meat.'},
+  {sit:'str',q:'A stranger gives you directions ending with "ahí mero está." What does "ahí mero" mean?',
+   opts:['It\'s very far from there','It\'s right there / exactly there','It\'s behind there','It\'s closed'],a:1,
+   x:'"Ahí mero" = right there / exactly there. Very Mexican expression. "Mero/mera" as an intensifier means "very/exact." "Ahorita mero" = right now. "El mero mero" = the big boss.'},
+  {sit:'rest',q:'You want to order just water, not a soft drink. How do you specify?',
+   opts:['Un agua mineral, por favor.','Un refresco, por favor.','Un agua natural, por favor.','Una limonada, por favor.'],a:2,
+   x:'"Agua natural" = still/plain water. "Agua mineral" = sparkling water. "Refresco" = soda/soft drink. In Mexico, always specify which type of water!'},
+  {sit:'shop',q:'You notice a product might be expired. What do you check or ask?',
+   opts:['¿Está en oferta?','¿Es orgánico?','¿Tiene fecha de caducidad?','¿Cuánto pesa?'],a:2,
+   x:'"¿Tiene fecha de caducidad?" = what is the expiration date? "Fecha de caducidad" = expiration/best-before date. "Está vencido/a" = it\'s expired.'},
+  {sit:'str',q:'You want to go to the Zócalo. Someone tells you "tome la línea 2." What should you do?',
+   opts:['Get on line 2 of the metro','Take a bus on route 2','Call route 2 taxi service','Walk 2 blocks'],a:0,
+   x:'"Tome la línea 2" = take metro line 2. "Tomar" = to take (transport). "Tome el camión" = take the bus. "Tomar" is the standard verb for using public transport in Mexico.'},
+  {sit:'rest',q:'After a great meal, you\'re leaving the restaurant. What\'s a natural final thing to say?',
+   opts:['¿Cuánto tarda?','Estuvo muy bien, gracias.','¿Me trae el menú?','¿A qué hora abren?'],a:1,
+   x:'"Estuvo muy bien, gracias" = everything was very good, thanks. A warm closing line. Also: "Muy rico todo, gracias." Shows appreciation to the staff.'},
+  {sit:'shop',q:'You want to know if a product is on sale or discounted.',
+   opts:['¿Es orgánico?','¿Está en oferta?','¿Tiene fecha de caducidad?','¿Cuánto pesa?'],a:1,
+   x:'"¿Está en oferta?" = is it on sale? "La oferta" = the sale/deal. "¿Tiene descuento?" = is there a discount? "¿Cuánto cuesta sin el descuento?" = how much without the discount?'},
+  /* MORE MIXED */
+  {sit:'rest',q:'You want to split the bill between two people. What do you ask?',
+   opts:['¿Me cobra por separado?','¿Está incluido el servicio?','¿Cuánto es la propina?','¿Aceptan efectivo?'],a:0,
+   x:'"¿Me cobra por separado?" = can you charge us separately? Not all restaurants can do this. "Lo dividimos entre dos" = we split it two ways.'},
+  {sit:'str',q:'You want to take a bus but you\'re not sure if it stops near your destination.',
+   opts:['¿Este camión va a...?','¿Cuánto tarda en llegar?','¿Dónde me bajo?','Siga derecho.'],a:0,
+   x:'"¿Este camión va a...?" = does this bus go to...? Ask the driver or other passengers. "¿Pasa por...?" = does it go through/past...? — useful for intermediate stops.'},
+  {sit:'shop',q:'You want a half kilo of cheese at the deli counter. How do you ask?',
+   opts:['Me da un kilo de queso.','Me da medio kilo de queso.','¿Cuánto cuesta el queso?','¿Tiene queso?'],a:1,
+   x:'"Medio kilo" = half a kilo (500g). "Un cuarto de kilo" = quarter kilo (250g). "Cien gramos" = 100 grams. The deli counter is "el mostrador de carnes frías."'},
+  {sit:'rest',q:'You want to order a dish but with no onion. What do you say?',
+   opts:['Sin cebolla, por favor.','¿Lleva cebolla?','Con cebolla, por favor.','¿Tiene cebolla?'],a:0,
+   x:'"Sin cebolla" = without onion. "Sin" = without — works for anything: sin chile, sin gluten, sin lácteos. Essential word for customizing your order.'},
+  {sit:'str',q:'You\'re walking and want to ask if there\'s a pharmacy nearby.',
+   opts:['¿Dónde puedo tomar un taxi?','¿Hay una farmacia cerca?','¿Cómo llego al centro?','¿Cuántas cuadras hay?'],a:1,
+   x:'"¿Hay una farmacia cerca?" = is there a pharmacy nearby? "¿Hay...cerca?" works for anything: Oxxo, banco, metro, parada de camión. Super useful template.'},
+  {sit:'rest',q:'You want to know if the service charge is included in the bill.',
+   opts:['¿Está incluida la propina?','¿Cuánto es en total?','¿Aceptan tarjeta?','¿Tienen postre?'],a:0,
+   x:'"¿Está incluida la propina?" = is the tip included? In Mexico the answer is usually NO. Standard tip = 10–15%. "El servicio" also means the tip/service charge.'},
+  {sit:'shop',q:'You want to return a product that didn\'t work.',
+   opts:['¿Está en oferta?','Quiero devolver esto, no me funcionó.','¿Tiene fecha de caducidad?','¿Dónde está la caja?'],a:1,
+   x:'"Quiero devolver esto" = I want to return this. "No me funcionó" = it didn\'t work. "Tiene defecto" = it has a defect. Keep your receipt ("ticket") for returns.'},
+  {sit:'str',q:'You\'re on a bus and worried about missing your stop. What do you ask the driver?',
+   opts:['¿Cuánto cuesta el pasaje?','¿Me avisa cuando lleguemos a...?','¿Este camión va al centro?','¿A qué hora sale el último camión?'],a:1,
+   x:'"¿Me avisa cuando lleguemos a...?" = can you let me know when we get to...? "Avisar" = to notify/warn. Drivers and fellow passengers in Mexico are usually happy to help.'},
+  {sit:'rest',q:'You want to take the leftover food home. What do you ask?',
+   opts:['¿Tiene postre?','¿Me da una bolsa para llevar?','¿Está incluida la propina?','¿Me trae más agua?'],a:1,
+   x:'"¿Me da una bolsa para llevar?" = can I get a bag to take it? "Para llevar" = to go / takeaway. "Para comer aquí" = to eat here. The opposite of "para llevar."'},
+  {sit:'shop',q:'You want to pay a utility bill at the supermarket. What do you ask?',
+   opts:['¿Aceptan tarjeta?','¿Dónde puedo pagar el agua / la luz?','¿Tienen envíos?','¿Me da el ticket?'],a:1,
+   x:'"¿Dónde puedo pagar el agua / la luz?" Many supermarkets and Oxxos accept utility bill payments. "Pagar servicios" = pay utility bills. Very common and convenient in Mexico.'},
+  {sit:'str',q:'You need to know what time the last bus leaves. What do you ask?',
+   opts:['¿A qué hora llega el camión?','¿A qué hora sale el último camión?','¿Cuánto cuesta el pasaje?','¿Dónde me bajo?'],a:1,
+   x:'"¿A qué hora sale el último camión?" = what time does the last bus leave? "Salir" = to leave/depart. "Llegar" = to arrive. "¿A qué hora llega?" = what time does it arrive?'},
+  {sit:'rest',q:'You want to know what time the restaurant closes so you can plan.',
+   opts:['¿A qué hora abren?','¿A qué hora cierran?','¿Tienen reservaciones?','¿Está muy lleno?'],a:1,
+   x:'"¿A qué hora cierran?" = what time do you close? "Cerrar" = to close. "¿A qué hora abren?" = what time do you open? "Horario" = schedule/hours.'},
+  {sit:'shop',q:'You want to know if the store does home delivery.',
+   opts:['¿Tienen envíos a domicilio?','¿Puedo devolver esto?','¿Tienen productos orgánicos?','¿Dónde está la caja?'],a:0,
+   x:'"¿Hacen / tienen envíos a domicilio?" = do you do home delivery? "A domicilio" = to your home. "Envío gratis" = free shipping. Very common post-COVID question.'},
+  {sit:'str',q:'Someone tells you "está a dos cuadras a mano derecha." Where is the place?',
+   opts:['Two blocks away, on the left','Two blocks away, on the right','Two streets behind you','Turn right in two traffic lights'],a:1,
+   x:'"A mano derecha" = on the right-hand side. "A mano izquierda" = on the left-hand side. Very common Mexican direction expression. "A mano" literally = at hand.'},
+  {sit:'rest',q:'You want more tortillas. What do you ask?',
+   opts:['¿Me puede poner más tortillas?','¿Me trae la cuenta?','¿Está incluido el servicio?','¿Lleva gluten?'],a:0,
+   x:'"¿Me puede poner más tortillas?" = can you bring more tortillas? "¿Me puede poner más...?" = can you add/bring more...? Works for salsa, water, bread, napkins — anything.'},
+  {sit:'shop',q:'You want to know if a product is organic.',
+   opts:['¿Está en oferta?','¿Es orgánico?','¿Tiene fecha de caducidad?','¿Tiene azúcar?'],a:1,
+   x:'"¿Es orgánico/a?" = is it organic? "Orgánico" = organic. Usually in a dedicated "sección orgánica." "De temporada" = in season. "Local" = locally grown.'},
+  {sit:'str',q:'You want to confirm you\'re going the right way. What do you ask?',
+   opts:['¿Puedo tomar un taxi aquí?','¿Voy bien para el centro?','¿A qué hora cierra el metro?','¿Cuánto tarda en camión?'],a:1,
+   x:'"¿Voy bien para...?" = am I going the right way to...? Very natural confirmation question when you\'re walking. "¿Esto es el camino a...?" = is this the way to...?'},
+  {sit:'rest',q:'The waiter asks "¿algo de tomar?" What is he asking?',
+   opts:['Do you want to take it to go?','Would you like something to drink?','Are you ready to take your order?','Do you need anything else?'],a:1,
+   x:'"¿Algo de tomar?" = would you like something to drink? "Tomar" = to drink (in Mexican Spanish). "¿Qué va a tomar?" = what will you have to drink? Very common waiter question.'},
+  {sit:'shop',q:'The cashier says "son trescientos cuarenta y dos pesos." What is she telling you?',
+   opts:['The discount is 342 pesos','The total is 342 pesos','You have 342 points','The product costs 342 pesos each'],a:1,
+   x:'"Son + amount" = that\'s / the total is. "Son trescientos cuarenta y dos pesos" = that\'s 342 pesos. "¿Cuánto es en total?" = how much is the total?'},
+  {sit:'str',q:'You want to hail a taxi. Which phrase do you use?',
+   opts:['¿Cuánto me cobra?','¿Me lleva al centro?','¿Tiene cambio?','¿Por dónde va?'],a:1,
+   x:'"¿Me lleva al...?" = can you take me to...? The classic phrase to hail and direct a taxi. Also: "¿Va para el centro?" = are you going downtown? Then agree on price before getting in.'},
+  {sit:'rest',q:'You want to pay but don\'t have cash. What\'s the most important thing to check first?',
+   opts:['¿Cuánto es la propina?','¿Aceptan tarjeta?','¿Me cobra por separado?','¿Está incluido el IVA?'],a:1,
+   x:'"¿Aceptan tarjeta?" = do you accept card? Always ask before sitting down or ordering if you\'re not sure. Many small restaurants and taquerías are cash-only.'},
+];
+
+const MCO=MC.map((_,i)=>seededShuffle([0,1,2,3],i*13+7));
+
+function renderMC(){
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const html=MC.map((item,i)=>{
+    const s=SITS[item.sit];
+    const ord=MCO[i];
+    const opts=ord.map(oi=>{
+      let cls='mc-opt';
+      if(mcAnswers[i]!==undefined){if(oi===item.a)cls+=' show';else if(mcAnswers[i]===oi&&oi!==item.a)cls+=' err';}
+      return `<button class="${cls}" id="mco${i}_${oi}" onclick="answerMC(${i},${oi})" ${mcAnswers[i]!==undefined?'disabled':''}>${item.opts[oi]}</button>`;
+    }).join('');
+    const done=mcAnswers[i]!==undefined;
+    return `<div class="mc-card${done?(mcAnswers[i]?' ok':' err'):''}" id="mcc${i}">
+      <div class="mc-top"><span class="mc-num">${i+1}</span><span class="mc-q">${item.q}</span></div>
+      <div class="mc-opts">${opts}</div>
+      <div class="mc-exp${done?' show':''}" id="mce${i}">${item.x}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">📝 ¿Qué dices? — 45 situations</div>
+  <div class="ex-instr">You're in Mexico. Choose the correct Spanish phrase for each situation. Think about context, not just vocabulary!</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${MC.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="mc_ok">—</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="mc_err">—</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="mc_p">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="mc_pg" style="width:${pct}%"></div></div></div></div>
+  <div class="mc-list">${html}</div>
+  <div class="fb" id="mc_fb"></div>
+  <div class="actions"><button class="btn btn-cyan" id="mc_chk" onclick="checkMC()">Check all</button><button class="btn btn-ghost" onclick="mcAnswers={};renderMC()">↺ Reset</button></div></div>`;
+}
+function answerMC(qi,oi){
+  if(mcAnswers[qi]!==undefined)return;
+  if(mcAnswers[qi]!==undefined){const p=document.getElementById(`mco${qi}_${mcAnswers[qi]}`);if(p)p.classList.remove('ok','err','show');}
+  mcAnswers[qi]=oi===MC[qi].a;
+  const b=document.getElementById(`mco${qi}_${oi}`);if(b)b.classList.add(oi===MC[qi].a?'ok':'err');
+  const e=document.getElementById('mce'+qi);if(e)e.classList.add('show');
+  const card=document.getElementById('mcc'+qi);if(card)card.classList.add(mcAnswers[qi]?'ok':'err');
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const el=document.getElementById('mc_p');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('mc_pg');if(pg)pg.style.width=pct+'%';
+}
+function checkMC(){
+  let ok=0;MC.forEach((item,i)=>{
+    if(mcAnswers[i]===undefined)return;
+    if(mcAnswers[i])ok++;
+    MCO[i].forEach(oi=>{const b=document.getElementById(`mco${i}_${oi}`);if(!b)return;b.disabled=true;if(oi===item.a)b.classList.add('show');});
+  });
+  const tot=Object.keys(mcAnswers).length;
+  const pct=Math.round(ok/MC.length*100);
+  document.getElementById('mc_ok').textContent=ok;document.getElementById('mc_err').textContent=MC.length-ok;
+  document.getElementById('mc_pg').style.width='100%';document.getElementById('mc_p').textContent='100%';
+  const fb=document.getElementById('mc_fb');fb.className='fb show '+(pct>=80?'ok':'partial');
+  fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${ok}/${MC.length}.</strong> ${pct>=80?'¡Excelente! You know what to say in Mexico!':'Study the phrases and try again.'}`;
+}
+
+/* ══════════════════════════════════
+   EX 3 — COMPLETA (18 fill-in)
+══════════════════════════════════ */
+const FILLS=[
+  {sit:'rest',ctx:'Arriving at the restaurant',
+   q:'Una ___ para cuatro, por favor.',qe:'A ___ for four, please.',
+   opts:['cuenta','mesa','carta','orden'],a:1,
+   exp:'"Mesa" = table. "Una mesa para cuatro" = a table for four. "La cuenta" = bill, "la carta" = menu — not what you ask for when arriving.'},
+  {sit:'rest',ctx:'Asking what to order',
+   q:'¿Qué me ___? No conozco la comida mexicana.',qe:'What do you ___ ? I don\'t know Mexican food.',
+   opts:['trae','cobra','recomienda','pone'],a:2,
+   exp:'"¿Qué me recomienda?" = what do you recommend? "Recomendar" = to recommend. The best question to ask when you don\'t know what to choose.'},
+  {sit:'rest',ctx:'Checking for allergens',
+   q:'¿___ mariscos este platillo?',qe:'Does this dish ___ seafood?',
+   opts:['Tiene','Lleva','Pone','Trae'],a:1,
+   exp:'"¿Lleva...?" = does it contain/have...? "Llevar" here means to include an ingredient. "¿Lleva chile?" "¿Lleva cebolla?" — works for any ingredient check.'},
+  {sit:'rest',ctx:'Asking for the bill',
+   q:'¿Nos ___ la cuenta, por favor?',qe:'Can you bring us the bill, please?',
+   opts:['trae','da','pone','cobra'],a:0,
+   exp:'"¿Nos trae la cuenta?" = can you bring us the bill? "Traer" = to bring. "¿Nos cobra?" = can you charge us? Both are natural and common.'},
+  {sit:'rest',ctx:'Checking if card is accepted',
+   q:'¿Aceptan ___? No traigo efectivo.',qe:'Do you accept ___? I don\'t have cash.',
+   opts:['cuenta','propina','tarjeta','cambio'],a:2,
+   exp:'"¿Aceptan tarjeta?" = do you accept card? "Efectivo" = cash. Many small restaurants only take cash — always check before ordering!'},
+  {sit:'rest',ctx:'Ordering without a specific ingredient',
+   q:'Para mí el pollo, ___ cebolla por favor.',qe:'For me the chicken, ___ onion please.',
+   opts:['con','sin','más','menos'],a:1,
+   exp:'"Sin" = without. "Sin cebolla" = without onion. Works for anything: "sin picante", "sin gluten", "sin cilantro". One of the most useful words in a restaurant.'},
+  {sit:'shop',ctx:'Asking for the total at the checkout',
+   q:'¿Cuánto es en ___?',qe:'How much is the ___?',
+   opts:['todo','total','suma','cuenta'],a:1,
+   exp:'"¿Cuánto es en total?" = how much is the total? "El total" = the total. Also: "¿Cuánto es?" alone works fine too.'},
+  {sit:'shop',ctx:'Asking about price at the produce stand',
+   q:'¿___ cómo está el kilo de aguacate?',qe:'___ much is the avocado per kilo?',
+   opts:['Cuánto','A','Por','De'],a:1,
+   exp:'"¿A cómo está el kilo?" = how much is it per kilo? "A cómo" is the specifically Mexican way to ask produce prices — not "cuánto cuesta el kilo" but "¿a cómo está?"'},
+  {sit:'shop',ctx:'Asking where a section is',
+   q:'¿Dónde están los ___?',qe:'Where are the dairy ___?',
+   opts:['pasillos','lácteos','congelados','orgánicos'],a:1,
+   exp:'"¿Dónde están los lácteos?" = where are the dairy products? "Los lácteos" = dairy. "Los congelados" = frozen foods. "La panadería" = bakery. "El pasillo" = aisle.'},
+  {sit:'shop',ctx:'Requesting a specific amount',
+   q:'Me da ___ kilo de queso, por favor.',qe:'Give me ___ of a kilo of cheese, please.',
+   opts:['uno','medio','un cuarto','uno y'],a:1,
+   exp:'"Medio kilo" = half a kilo (500g). "Un cuarto de kilo" = quarter kilo (250g). "Kilo y medio" = 1.5 kg. Very common in markets and deli counters.'},
+  {sit:'shop',ctx:'Asking about expiration',
+   q:'¿Cuál es la fecha de ___?',qe:'What is the ___ date?',
+   opts:['venta','caducidad','compra','producción'],a:1,
+   exp:'"Fecha de caducidad" = expiration date. "Caducar" = to expire. "Está caducado/vencido" = it\'s expired. "Fecha de vencimiento" also used.'},
+  {sit:'shop',ctx:'Wanting to return a product',
+   q:'Quiero ___ esto. No me funcionó.',qe:'I want to ___ this. It didn\'t work.',
+   opts:['comprar','cambiar','devolver','pagar'],a:2,
+   exp:'"Quiero devolver esto" = I want to return this. "Devolver" = to return/give back. "Cambiar" = to exchange. Keep your "ticket" (receipt) for any return.'},
+  {sit:'str',ctx:'Asking how to get somewhere',
+   q:'¿Cómo ___ al metro más cercano?',qe:'How do I ___ to the nearest metro?',
+   opts:['llego','voy','tomo','sigo'],a:0,
+   exp:'"¿Cómo llego a...?" = how do I get to...? "Llegar" = to arrive/get to. The most natural question for directions in Mexican Spanish.'},
+  {sit:'str',ctx:'Asking how many blocks',
+   q:'¿A cuántas ___ está?',qe:'How many ___ away is it?',
+   opts:['metros','minutos','cuadras','kilómetros'],a:2,
+   exp:'"A cuántas cuadras" = how many blocks. In Mexico, distances are always given in "cuadras" (blocks), not meters or minutes usually.'},
+  {sit:'str',ctx:'Directions: turn right',
+   q:'En el semáforo, ___ a la derecha.',qe:'At the traffic light, ___ right.',
+   opts:['siga','tome','doble','cruce'],a:2,
+   exp:'"Doble a la derecha" = turn right. "Doblar" = to turn. "Siga derecho" = go straight. "Cruce" = cross. These are the 4 core direction verbs.'},
+  {sit:'str',ctx:'On the bus — asking where to get off',
+   q:'¿Dónde me ___ para el Zócalo?',qe:'Where do I ___ for the Zócalo?',
+   opts:['subo','quedo','bajo','paro'],a:2,
+   exp:'"¿Dónde me bajo?" = where do I get off? "Bajarse" = to get off (bus/metro). "Subirse" = to get on. "Bajar" and "subir" are the key verbs for public transport.'},
+  {sit:'str',ctx:'In a taxi — asking the price first',
+   q:'¿Cuánto me ___ al aeropuerto?',qe:'How much do you ___ to the airport?',
+   opts:['tarda','cuesta','cobra','pide'],a:2,
+   exp:'"¿Cuánto me cobra?" = how much do you charge? "Cobrar" = to charge. Always ask before getting in. "Me cobró de más" = he overcharged me.'},
+  {sit:'str',ctx:'Asking for a drop-off point',
+   q:'¿Me puede ___ aquí, por favor?',qe:'Can you ___ me off here, please?',
+   opts:['llevar','traer','dejar','poner'],a:2,
+   exp:'"¿Me puede dejar aquí?" = can you drop me off here? "Dejar" = to leave/drop off. "Aquí está bien" = here is fine. Classic phrase for taxis and Uber.'},
+];
+
+let fillAns={};
+function renderFill(){
+  fillAns={};
+  const html=FILLS.map((f,i)=>{
+    const s=SITS[f.sit];
+    const chips=f.opts.map((o,oi)=>`<button class="fill-chip" id="fc${i}_${oi}" onclick="answerFill(${i},${oi})">${o}</button>`).join('');
+    return `<div class="fill-card" id="fcard${i}">
+      <div class="fill-ctx"><span style="background:${s.bg};color:${s.col2};border-radius:5px;padding:1px 7px;font-size:.66rem;font-weight:800">${s.label}</span> ${f.ctx}</div>
+      <div class="fill-q" id="fq${i}">${f.q.replace('___','<span class="fill-blank" id="fb${i}">___</span>')}</div>
+      <div class="fill-en">${f.qe}</div>
+      <div class="fill-chips">${chips}</div>
+      <div class="fill-exp" id="fexp${i}"></div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">✏️ Completa la frase</div>
+  <div class="ex-instr">Choose the word that completes each phrase. The English translation is shown below. Think about which word fits the <em>situation</em>!</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${FILLS.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="fi_ok">0</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="fi_err">0</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="fi_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="fi_pg" style="width:0%"></div></div></div></div>
+  <div class="fill-list">${html}</div>
+  <div class="fb" id="fi_fb"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="fillAns={};renderFill()">↺ Reset</button></div></div>`;
+}
+function answerFill(qi,oi){
+  if(fillAns[qi]!==undefined)return;
+  const f=FILLS[qi];const isOk=oi===f.a;
+  fillAns[qi]=isOk;
+  document.getElementById('fcard'+qi).classList.add(isOk?'ok':'err');
+  const blank=document.getElementById('fb'+qi);
+  if(blank)blank.innerHTML=`<span class="fill-chip ${isOk?'chip-ok':'chip-err'}" style="cursor:default">${f.opts[oi]}</span>${!isOk?` <span class="fill-chip chip-ok" style="cursor:default">${f.opts[f.a]}</span>`:''}`;
+  document.querySelectorAll(`[id^="fc${qi}_"]`).forEach(c=>{c.disabled=true;c.classList.add('used');});
+  const e=document.getElementById('fexp'+qi);if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+f.exp;}
+  const tot=Object.keys(fillAns).length;
+  const ok=FILLS.filter((_,i)=>fillAns[i]===true).length;
+  document.getElementById('fi_ok').textContent=ok;document.getElementById('fi_err').textContent=tot-ok;
+  document.getElementById('fi_pct').textContent=Math.round(tot/FILLS.length*100)+'%';
+  document.getElementById('fi_pg').style.width=Math.round(tot/FILLS.length*100)+'%';
+  if(tot===FILLS.length){const pct=Math.round(ok/tot*100);const fb=document.getElementById('fi_fb');fb.className='fb show '+(pct>=85?'ok':'partial');fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Muy bien!':'Review and try again.'}`;}
+}
+
+/* ══════════════════════════════════
+   EX 4 — ORDENA EL DIÁLOGO (8 conversations to put in order)
+══════════════════════════════════ */
+const BUILD=[
+  {sit:'rest',ctx:'Ordering food at a restaurant — put these lines in the right order',
+   lines:['Para mí el pollo, sin cebolla por favor.','¿Qué va a ordenar?','¿Algo de tomar?','Un agua natural, por favor.'],
+   answer:[1,0,2,3],
+   exp:'1) Waiter asks what you\'ll order, 2) You order the food, 3) Waiter asks about drinks, 4) You order the drink.'},
+  {sit:'rest',ctx:'Getting the bill and paying',
+   lines:['¿Aceptan tarjeta?','Disculpe, ¿nos trae la cuenta?','Sí, Visa y Mastercard.','Aquí tiene, son trescientos pesos.'],
+   answer:[1,3,0,2],
+   exp:'1) Ask for the bill, 2) Waiter brings it and tells you the amount, 3) Ask if they take card, 4) Waiter confirms.'},
+  {sit:'shop',ctx:'Buying produce at the tianguis',
+   lines:['Treinta pesos, lleva buen precio.','¿A cómo está el jitomate?','Me da kilo y medio, por favor.','Aquí tiene. ¿Algo más?'],
+   answer:[1,0,2,3],
+   exp:'1) Ask the price, 2) Vendor tells you, 3) Order the amount you want, 4) Vendor gives it and asks if you need more.'},
+  {sit:'shop',ctx:'At the supermarket checkout',
+   lines:['Son doscientos ochenta pesos.','¿Encontró todo lo que buscaba?','Sí, gracias. ¿Cuánto es?','¿Quiere bolsa?'],
+   answer:[1,2,0,3],
+   exp:'1) Cashier asks if you found everything, 2) You say yes and ask the total, 3) Cashier tells you the amount, 4) Cashier asks about a bag.'},
+  {sit:'str',ctx:'Asking for directions to the metro',
+   lines:['¿A cuántas cuadras está?','Disculpe, ¿dónde está el metro?','Como a tres cuadras, siga derecho.','Muchas gracias, muy amable.'],
+   answer:[1,2,0,3],
+   exp:'Wait — let\'s check the logic: 1) Ask where the metro is, 2) Person says it\'s about 3 blocks straight, 3) Ask how many blocks, 4) Say thank you. Actually natural order is: ask → general answer → thank you. Option [1,0,2,3] works too.'},
+  {sit:'str',ctx:'Taking a taxi to the airport',
+   lines:['¿Me puede dejar en la Terminal 2?','Trescientos pesos con el tráfico.','¿Cuánto me cobra al aeropuerto?','Sale, vamos.'],
+   answer:[2,1,0,3],
+   exp:'1) Ask price to the airport, 2) Driver gives price, 3) Tell him which terminal, 4) Say "deal, let\'s go."'},
+  {sit:'str',ctx:'On the city bus — asking about a stop',
+   lines:['¿Me avisa cuando lleguemos al Zócalo?','¿Este camión va al Zócalo?','Sí, se baja en tres paradas.','Sí, va por ahí.'],
+   answer:[1,3,0,2],
+   exp:'1) Ask if this bus goes to Zócalo, 2) Driver/passenger says yes, 3) Ask to be notified when you arrive, 4) They tell you it\'s 3 stops away.'},
+  {sit:'rest',ctx:'Asking about a dish and ordering',
+   lines:['¿Lleva mariscos?','¿Qué me recomienda?','Perfecto, me lo pone.','El mole negro está muy bueno hoy. No lleva mariscos.'],
+   answer:[1,3,0,2],
+   exp:'1) Ask for recommendation, 2) Waiter recommends the mole and mentions no seafood, 3) You ask about seafood (to confirm), 4) You confirm and order.'},
+];
+
+let buildSt={};
+let buildDrag=null;
+
+function renderBuild(){
+  buildSt={};BUILD.forEach((_,i)=>{buildSt[i]={placed:[],done:false,ok:false};});
+  renderBuildBody();
+}
+function renderBuildBody(){
+  const cards=BUILD.map((item,idx)=>{
+    const st=buildSt[idx];const s=SITS[item.sit];
+    const dropZone=`<div class="build-drop" id="bdrop${idx}"
+      ondragover="event.preventDefault();this.classList.add('drag-over')"
+      ondragleave="this.classList.remove('drag-over')"
+      ondrop="dropBL(event,${idx})">
+      ${st.placed.length?st.placed.map(wi=>`<div class="build-placed" onclick="${!st.done?`removeBL(${idx},${wi})`:''}">${item.lines[wi]}</div>`).join(''):'<span style="font-size:.8rem;color:var(--muted2);font-style:italic;padding:4px">Click lines below to add them in order…</span>'}
+    </div>`;
+    const pile=item.lines.map((line,wi)=>{
+      const used=st.placed.includes(wi);
+      let cls='build-chip';
+      if(st.done){const pos=item.answer.indexOf(wi);const actual=st.placed.indexOf(wi);cls+=(pos===actual?' b-ok':' b-err');}
+      return `<div class="${cls}${used?' ghost':''}" draggable="true"
+        ondragstart="buildDrag=${wi};event.dataTransfer.setData('text','${wi}')"
+        onclick="${!st.done&&!used?`addBL(${idx},${wi})`:''}"
+        style="${used?'pointer-events:none':''}">${line}</div>`;
+    }).join('');
+    return `<div class="build-card${st.done?(st.ok?' ok':' err'):''}" id="bc${idx}">
+      <div class="build-ctx"><span style="background:${s.bg};color:${s.col2};border-radius:5px;padding:1px 7px;font-size:.66rem;font-weight:800">${s.label}</span> ${item.ctx}</div>
+      ${dropZone}
+      <div class="build-pile">${pile}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+        <button class="btn btn-cyan" style="padding:6px 14px;font-size:.78rem" onclick="checkBL(${idx})" ${st.placed.length===item.lines.length&&!st.done?'':'disabled'} id="bchk${idx}">Check ✓</button>
+        <button class="btn btn-ghost" style="padding:6px 14px;font-size:.78rem" onclick="resetBL(${idx})">↺</button>
+      </div>
+      <div class="build-exp${st.done?' show':''}" id="bexp${idx}">${st.done?(st.ok?'✓ Great order!':'✗ Correct: '+item.answer.map(wi=>'"'+item.lines[wi]+'"').join(' → ')+'<br>')+item.exp:''}</div>
+    </div>`;
+  }).join('');
+  const done=Object.values(buildSt).filter(s=>s.done).length;
+  const ok=Object.values(buildSt).filter(s=>s.ok).length;
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🔤 Ordena el diálogo</div>
+  <div class="ex-instr">Click the lines in the correct conversation order. Think about who speaks first and what logically follows. Drag & drop also works on desktop.</div>
+  <div class="score-bar"><div class="sc"><span class="l">Done</span><span class="v w">${done}/${BUILD.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g">${ok}</span></div><div class="sc"><span class="l">Miss</span><span class="v b">${done-ok}</span></div></div>
+  ${cards}
+  <div class="actions"><button class="btn btn-ghost" onclick="renderBuild()">↺ Reset all</button></div></div>`;
+}
+function addBL(idx,wi){const st=buildSt[idx];if(st.done||st.placed.includes(wi))return;st.placed.push(wi);const btn=document.getElementById('bchk'+idx);if(btn)btn.disabled=st.placed.length!==BUILD[idx].lines.length;renderBuildBody();}
+function removeBL(idx,wi){const st=buildSt[idx];if(st.done)return;st.placed=st.placed.filter(x=>x!==wi);renderBuildBody();}
+function dropBL(e,idx){e.preventDefault();document.getElementById('bdrop'+idx)?.classList.remove('drag-over');const wi=parseInt(e.dataTransfer.getData('text'));if(!isNaN(wi))addBL(idx,wi);}
+function resetBL(idx){buildSt[idx]={placed:[],done:false,ok:false};renderBuildBody();}
+function checkBL(idx){const item=BUILD[idx];const st=buildSt[idx];st.ok=JSON.stringify(st.placed)===JSON.stringify(item.answer);st.done=true;renderBuildBody();}
+
+/* ══════════════════════════════════
+   EX 5 — SPEED ROUND (click, 30 items)
+   English situation → choose correct Spanish phrase
+══════════════════════════════════ */
+const SP_ITEMS=[
+  {sit:'rest',q:'Ask for a table for 3',a:'Una mesa para tres, por favor.',opts:['Una mesa para tres, por favor.','¿Me trae el menú?','La cuenta, por favor.','¿Aceptan tarjeta?']},
+  {sit:'rest',q:'Ask for the menu',a:'¿Me trae el menú, por favor?',opts:['¿Me trae el menú, por favor?','¿Qué me recomienda?','¿Aceptan tarjeta?','La cuenta, por favor.']},
+  {sit:'rest',q:'Ask for a recommendation',a:'¿Qué me recomienda?',opts:['¿Cuánto es?','¿Qué me recomienda?','Sin picante, por favor.','¿Está incluido el servicio?']},
+  {sit:'rest',q:'Order without onion',a:'Sin cebolla, por favor.',opts:['Con cebolla, por favor.','Sin cebolla, por favor.','¿Lleva cebolla?','Más cebolla, por favor.']},
+  {sit:'rest',q:'Check if the dish contains seafood',a:'¿Lleva mariscos?',opts:['¿Está picante?','¿Es caro?','¿Lleva mariscos?','¿Tiene gluten?']},
+  {sit:'rest',q:'Say the food is delicious',a:'Está muy rico.',opts:['Está muy caro.','Está muy rico.','Está muy picante.','Está muy frío.']},
+  {sit:'rest',q:'Ask for the bill',a:'¿Me trae la cuenta, por favor?',opts:['¿Me trae la cuenta, por favor?','¿Está incluido el servicio?','¿Aceptan tarjeta?','¿Tienen postre?']},
+  {sit:'rest',q:'Ask if they accept card',a:'¿Aceptan tarjeta?',opts:['¿Tienen efectivo?','¿Aceptan tarjeta?','¿Puedo pagar mañana?','¿Está incluida la propina?']},
+  {sit:'rest',q:'Ask to charge separately',a:'¿Me cobra por separado?',opts:['¿Cuánto es en total?','¿Me cobra por separado?','¿Están juntos?','¿Hay descuento?']},
+  {sit:'rest',q:'Ask for a bag to take food home',a:'¿Me da una bolsa para llevar?',opts:['¿Me da una bolsa para llevar?','¿Tiene caja?','Para comer aquí.','¿Lo envuelve?']},
+  {sit:'shop',q:'Ask where the dairy section is',a:'¿Dónde están los lácteos?',opts:['¿Dónde está la caja?','¿Dónde están los lácteos?','¿Dónde está el pan?','¿Dónde están los congelados?']},
+  {sit:'shop',q:'Ask the price per kilo (Mexican style)',a:'¿A cómo está el kilo?',opts:['¿Cuánto pesa?','¿A cómo está el kilo?','¿Cuántos kilos?','¿Tiene descuento el kilo?']},
+  {sit:'shop',q:'Order a kilo and a half of tomatoes',a:'Me da kilo y medio de jitomate.',opts:['Me da un kilo de jitomate.','Me da kilo y medio de jitomate.','Me da dos kilos de jitomate.','¿Cuánto cuesta el jitomate?']},
+  {sit:'shop',q:'Ask if something is on sale',a:'¿Está en oferta?',opts:['¿Es orgánico?','¿Está en oferta?','¿Tiene caducidad?','¿Tiene descuento especial?']},
+  {sit:'shop',q:'Ask for the receipt',a:'¿Me da el ticket, por favor?',opts:['¿Me da el ticket, por favor?','¿Tiene factura?','¿Me da el cambio?','¿Cuánto es en total?']},
+  {sit:'shop',q:'Ask if you can pay by card',a:'¿Puedo pagar con tarjeta?',opts:['¿Tienen tarjeta?','¿Puedo pagar con tarjeta?','¿Aceptan dólares?','¿Tienen efectivo?']},
+  {sit:'shop',q:'Say you want to return a product',a:'Quiero devolver esto.',opts:['Quiero comprar esto.','Quiero devolver esto.','¿Tiene garantía?','No me gustó esto.']},
+  {sit:'shop',q:'Ask if they do home delivery',a:'¿Hacen envíos a domicilio?',opts:['¿Tienen sucursales?','¿Hacen envíos a domicilio?','¿Puedo recoger en tienda?','¿Dónde está el almacén?']},
+  {sit:'shop',q:'Ask for the total',a:'¿Cuánto es en total?',opts:['¿Cuánto cuesta esto?','¿Cuánto es en total?','¿Cuánto me quedo?','¿Cuántos productos son?']},
+  {sit:'shop',q:'Ask where the checkout is',a:'¿Dónde está la caja?',opts:['¿Dónde está la cajera?','¿Dónde está la caja?','¿Dónde está el banco?','¿Dónde está la salida?']},
+  {sit:'str',q:'Ask how to get to the metro',a:'¿Cómo llego al metro?',opts:['¿Dónde está el metro?','¿Cómo llego al metro?','¿Cuánto tarda el metro?','¿A qué hora sale el metro?']},
+  {sit:'str',q:'Ask how many blocks away something is',a:'¿A cuántas cuadras está?',opts:['¿A cuántos metros está?','¿A cuántas cuadras está?','¿A cuántos minutos está?','¿Está lejos?']},
+  {sit:'str',q:'Say "go straight" (to give directions)',a:'Siga derecho.',opts:['Doble a la derecha.','Siga derecho.','Cruce la calle.','Dé vuelta.']},
+  {sit:'str',q:'Say "turn right at the traffic light"',a:'Doble a la derecha en el semáforo.',opts:['Siga derecho en el semáforo.','Doble a la izquierda.','Doble a la derecha en el semáforo.','Pare en el semáforo.']},
+  {sit:'str',q:'Ask where to get off for the Zócalo',a:'¿Dónde me bajo para el Zócalo?',opts:['¿Dónde sube para el Zócalo?','¿Dónde me bajo para el Zócalo?','¿Cuándo llega al Zócalo?','¿Cuánto cuesta al Zócalo?']},
+  {sit:'str',q:'Ask how much the taxi charges to the airport',a:'¿Cuánto me cobra al aeropuerto?',opts:['¿Cuánto tarda al aeropuerto?','¿Cuánto me cobra al aeropuerto?','¿Va al aeropuerto?','¿Tiene taxi al aeropuerto?']},
+  {sit:'str',q:'Ask the driver to drop you off here',a:'¿Me puede dejar aquí, por favor?',opts:['¿Me puede llevar aquí?','¿Me puede dejar aquí, por favor?','Pare aquí, por favor.','¿Puede parar en la esquina?']},
+  {sit:'str',q:'Say you\'re lost and ask for help',a:'Me perdí. ¿Me puede ayudar?',opts:['No sé dónde estoy.','Me perdí. ¿Me puede ayudar?','¿Dónde estoy?','Estoy confundido.']},
+  {sit:'str',q:'Ask if there\'s a pharmacy nearby',a:'¿Hay una farmacia cerca?',opts:['¿Dónde hay una farmacia?','¿Hay una farmacia cerca?','¿Tienen farmacia?','¿Está la farmacia abierta?']},
+  {sit:'str',q:'Ask a taxi to take you to a destination',a:'¿Me lleva al centro?',opts:['¿Cuánto cobra?','¿Me lleva al centro?','¿Va para el centro?','Al centro, por favor.']},
+];
+
+function renderSpeed(){
+  const arr=seededShuffle([...SP_ITEMS],42);window.__sp=arr;
+  spIdx=0;spOk=0;spErr=0;spStreak=0;spAnswered2={};
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">⚡ Speed round</div>
+  <div class="ex-instr">Read the situation in English. Choose the correct Spanish phrase. No typing — just click!</div>
+  <div class="sp-wrap" id="spWrap"><div class="sp-start"><div style="font-size:2.8rem">⚡</div><h2>Situaciones rápidas</h2><p style="color:var(--muted);max-width:400px">30 real situations — restaurant, supermarket and street. Pick the right phrase fast!</p><button class="btn btn-cyan" onclick="startSpeed()">¡Empezamos!</button></div></div></div>`;
+}
+function startSpeed(){spIdx=0;spOk=0;spErr=0;spStreak=0;nextSp();}
+function nextSp(){
+  const arr=window.__sp;if(spIdx>=arr.length){endSpeed();return;}
+  const item=arr[spIdx];const s=SITS[item.sit];
+  const shuffled=seededShuffle([...item.opts],spIdx*17+3);
+  const opts=shuffled.map(o=>`<button class="sp-opt" onclick="answerSp('${o.replace(/'/g,"\\'")}','${item.a.replace(/'/g,"\\'")}',this)">${o}</button>`).join('');
+  document.getElementById('spWrap').innerHTML=`
+    <div class="sp-stats"><div class="spst"><div class="sl">Q</div><div class="sv w">${spIdx+1}/${arr.length}</div></div><div class="spst"><div class="sl">OK</div><div class="sv g">${spOk}</div></div><div class="spst"><div class="sl">Miss</div><div class="sv b">${spErr}</div></div></div>
+    <div class="streak${spStreak>=3?' on':''}" id="stk">🔥 x${spStreak}</div>
+    <div class="sp-card">
+      <div class="sp-sit" style="background:${s.bg};color:${s.col2}">${s.label}</div>
+      <div class="sp-q">${item.q}</div>
+    </div>
+    <div class="sp-opts">${opts}</div>
+    <div class="sp-fb" id="sFb" style="opacity:0"></div>`;
+}
+function answerSp(chosen,correct,btn){
+  if(spAnswered2[spIdx])return;spAnswered2[spIdx]=true;
+  const isOk=chosen===correct;
+  if(isOk){spOk++;spStreak++;}else{spErr++;spStreak=0;}
+  document.querySelectorAll('.sp-opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===correct)b.classList.add('sp-show');
+    else if(b===btn&&!isOk)b.classList.add('sp-err');
+  });
+  const fb=document.getElementById('sFb');
+  if(fb){fb.style.opacity='1';fb.className=`sp-fb ${isOk?'ok':'err'}`;fb.innerHTML=isOk?`✓ Correct!${spStreak>=3?' 🔥 x'+spStreak:''}`:`✗ "${correct}"`;}
+  if(spStreak>=3){const cf=document.getElementById('cf');cf.textContent='🔥 x'+spStreak;cf.classList.remove('pop');void cf.offsetWidth;cf.classList.add('pop');}
+  spIdx++;setTimeout(nextSp,isOk?800:1600);
+}
+function endSpeed(){
+  const pct=Math.round(spOk/SP_ITEMS.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('spWrap').innerHTML=`<div class="sp-start"><div style="font-size:3rem">${emo}</div><h2>${spOk}/${SP_ITEMS.length}</h2><p style="color:var(--muted)">${pct>=90?'¡Excelente! You\'re ready for Mexico!':pct>=70?'¡Muy bien! Almost there.':pct>=50?'Good start! Review the phrases.':'Study the Frases útiles tab first.'}</p><button class="btn btn-cyan" onclick="startSpeed()">↺ Play again</button></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 6 — REFERENCE (searchable)
+══════════════════════════════════ */
+function buildRefRows(q){
+  const sq=normS(q||'');
+  const filtered=sq.length<2?PHRASES:PHRASES.filter(p=>
+    normS(p.es).includes(sq)||normS(p.en).includes(sq)||normS(SITS[p.sit]?.label||'').includes(sq)||normS(p.note||'').includes(sq)
+  );
+  const hl=str=>sq.length>=2?str.replace(new RegExp('('+sq.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<span class="hl">$1</span>'):str;
+  let prev='';let html='';
+  filtered.forEach(p=>{
+    const s=SITS[p.sit];
+    if(p.sit!==prev){prev=p.sit;html+=`<div style="font-family:var(--display);font-size:.88rem;font-weight:900;padding:7px 12px;border-radius:9px;display:inline-flex;align-items:center;gap:6px;margin:14px 0 8px;background:${s.bg};color:${s.col2}">${s.label}</div>`;}
+    html+=`<div class="ref-row">
+      <div class="rr-es" style="color:${s.col2}" onclick="speak('${p.es.replace(/'/g,"\\'")}',null)">${hl(p.es)}</div>
+      <div class="rr-en">${hl(p.en)}</div>
+      ${p.note?`<div style="font-size:.7rem;color:var(--muted2);width:100%;padding-top:3px;border-top:1px solid rgba(255,255,255,.04)">💡 ${p.note}</div>`:''}
+    </div>`;
+  });
+  return {count:filtered.length,html};
+}
+function renderRef(){
+  const {count,html}=buildRefRows('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📄 Referencia — ${PHRASES.length} essential phrases</div>
+  <div class="ex-instr">Search in English or Spanish. Click any phrase to <em>hear it</em>. Use this as your cheat sheet before visiting Mexico!</div>
+  <input class="ref-search" id="refQ" placeholder="Search… e.g. 'bill', 'kilo', 'taxi', 'directions', 'recommend'" oninput="updateRef(this.value)" autocomplete="off">
+  <div style="font-size:.73rem;color:var(--muted2);font-weight:700;margin-bottom:10px" id="refCnt">Showing all ${count} phrases</div>
+  <div id="refRows">${html}</div></div>`;
+}
+function updateRef(q){
+  const {count,html}=buildRefRows(q);
+  const el=document.getElementById('refRows');if(el)el.innerHTML=html;
+  const ct=document.getElementById('refCnt');if(ct)ct.textContent=count<PHRASES.length?`Showing ${count} of ${PHRASES.length} phrases`:`Showing all ${count} phrases`;
+}
+
+goEx(0);
+</script>
+</body>
+</html>

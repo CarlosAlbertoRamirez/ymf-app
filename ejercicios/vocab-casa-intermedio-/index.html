@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vocabulario de la Casa A2–B1 | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --t1:#f97316;--t2:#34d399;--t3:#a78bfa;--t4:#25d9ff;--t5:#f472b6;
+  --t6:#fbbf24;--t7:#e879f9;--t8:#60a5fa;--t9:#2dd4bf;--t10:#a3e635;
+  --t11:#fb7185;--t12:#c084fc;--t13:#4ade80;--t14:#38bdf8;--t15:#facc15;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(37,217,255,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 20% 10%,rgba(167,139,250,.12),transparent 35%),radial-gradient(ellipse at 80% 15%,rgba(34,211,153,.07),transparent 35%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(940px,96%);margin:14px auto 60px;display:flex;flex-direction:column;gap:14px}
+/* HERO */
+.hero{border-radius:22px;padding:26px 30px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.hero-in{position:relative;z-index:1}
+.hero-top{display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.logo-box{width:56px;height:56px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--magenta)}
+.hero h1{font-family:var(--display);font-size:clamp(1.2rem,3vw,1.9rem);font-weight:900;background:linear-gradient(90deg,var(--t1),#fff 40%,var(--t2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.86rem;margin-top:3px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 11px;font-size:.7rem;font-weight:700;color:var(--muted)}
+/* TABS */
+.tabs-wrap{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.tabs-bar{display:flex;overflow-x:auto;border-bottom:1px solid rgba(255,255,255,.07);scrollbar-width:none}
+.tabs-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;border:0;background:transparent;color:var(--muted2);font-family:var(--font);font-size:.78rem;font-weight:700;padding:12px 14px;cursor:pointer;transition:.2s;border-bottom:2.5px solid transparent;white-space:nowrap}
+.tab-btn:hover{color:var(--text)}.tab-btn.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+.tab-panel{display:none;padding:26px 28px}.tab-panel.visible{display:block}
+/* VOCAB TABLE */
+.vocab-section{margin-bottom:24px}
+.vocab-title{font-family:var(--display);font-size:1rem;font-weight:900;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.vocab-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:8px}
+.vocab-table th{text-align:left;padding:7px 12px;font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08)}
+.vocab-table td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5}
+.vocab-table td:first-child{font-weight:700;color:var(--text)}
+.vocab-table td:nth-child(2){color:var(--muted)}
+.vocab-table td:last-child{font-size:.82rem;color:var(--muted2);font-style:italic}
+.vocab-table tr:last-child td{border-bottom:0}
+.vocab-table tr:hover td{background:rgba(255,255,255,.02)}
+/* PATTERNS BOX */
+.patterns-box{background:rgba(37,217,255,.05);border:1px solid rgba(37,217,255,.18);border-radius:12px;padding:13px 16px;margin-bottom:20px}
+.patterns-title{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--cyan);margin-bottom:8px}
+.pattern-row{font-size:.85rem;line-height:1.8;color:var(--muted)}
+.pattern-row strong{color:var(--text)}
+/* EXERCISE CARDS */
+.ex-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.ex-title{font-family:var(--display);font-size:.82rem;font-weight:900;color:var(--cyan);margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em}
+.score-row{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.score-pill{background:rgba(167,139,250,.15);color:#c4b5fd;border-radius:999px;padding:3px 12px;font-size:.72rem;font-weight:800;border:1px solid rgba(167,139,250,.3)}
+.btn-restart{border:1px solid rgba(249,115,22,.4);border-radius:999px;padding:4px 12px;font-weight:800;font-family:var(--font);font-size:.72rem;cursor:pointer;background:rgba(249,115,22,.1);color:var(--t1);transition:.15s}
+.btn-restart:hover{background:rgba(249,115,22,.2)}
+/* Q ITEMS */
+.q-list{display:flex;flex-direction:column;gap:12px}
+.q-item{font-size:.92rem;line-height:1.7}
+.q-num{font-size:.68rem;font-weight:900;color:var(--muted2);margin-right:4px}
+.q-stem{font-weight:600;margin-bottom:6px}
+.q-sub{font-size:.8rem;color:var(--muted2);font-style:italic;margin-bottom:6px}
+/* CHIPS */
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.chip{border:0;border-radius:9px;padding:7px 14px;font-weight:800;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.chip.used{opacity:.2;cursor:not-allowed}
+.chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+/* TEXT INPUT */
+.q-input{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:9px;padding:8px 12px;color:var(--text);font-family:var(--font);font-size:.9rem;outline:none;transition:.2s;width:100%;margin-bottom:4px}
+.q-input:focus{border-color:rgba(37,217,255,.4);background:rgba(37,217,255,.04)}
+.q-input[disabled]{opacity:.65;cursor:default}
+.q-input.inp-ok{border-color:var(--good);background:rgba(34,197,94,.06);color:#86efac}
+.q-input.inp-err{border-color:var(--bad);background:rgba(239,68,68,.05)}
+.q-textarea{width:100%;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);border-radius:9px;padding:10px 13px;color:var(--text);font-family:var(--font);font-size:.9rem;outline:none;resize:vertical;min-height:80px;transition:.2s;line-height:1.6}
+.q-textarea:focus{border-color:rgba(37,217,255,.35)}
+.q-textarea[disabled]{opacity:.65}
+/* BLANK */
+.blank{display:inline-block;border-bottom:2px solid var(--cyan);min-width:120px;text-align:center;padding:0 4px;color:var(--cyan);font-weight:800}
+/* BUTTONS */
+.btn-check{border:0;border-radius:8px;padding:7px 16px;font-weight:800;font-family:var(--font);font-size:.8rem;cursor:pointer;transition:.13s;background:rgba(37,217,255,.12);border:1.5px solid rgba(37,217,255,.3);color:var(--cyan);margin-top:6px}
+.btn-check:hover{background:rgba(37,217,255,.2)}
+.btn-open{border:0;border-radius:8px;padding:7px 16px;font-weight:800;font-family:var(--font);font-size:.8rem;cursor:pointer;transition:.13s;background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:#fff;margin-top:6px}
+/* FEEDBACK */
+.q-fb{display:none;font-size:.8rem;color:var(--muted);margin-top:6px;padding:7px 11px;border-radius:8px;background:rgba(255,255,255,.04);line-height:1.6}
+.q-fb.show{display:block}
+.q-ref{display:none;font-size:.8rem;color:var(--muted);margin-top:6px;padding:7px 11px;border-radius:8px;background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);line-height:1.6}
+.q-ref.show{display:block}
+/* SECTION RESULT */
+.sec-result{display:none;margin-top:16px;padding:14px 18px;border-radius:12px;text-align:center}
+.sec-result.show{display:block}
+/* WORD BANK DISPLAY */
+.wordbank{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:.83rem;color:var(--muted2)}
+.wordbank strong{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:4px}
+.creator span{color:var(--magenta2)}
+@media(max-width:560px){.tab-panel{padding:18px 14px}.vocab-table td:last-child{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-top">
+      <div class="logo-box">YMF</div>
+      <div>
+        <h1>Vocabulario de la Casa</h1>
+        <p>15 temas · Habitaciones, electrodomésticos, tareas, problemas y ubicación · Nivel A2–B1 · Español mexicano</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge" style="border-color:rgba(249,115,22,.4);color:var(--t1)">🏠 A2–B1</span>
+      <span class="badge" style="border-color:rgba(37,217,255,.4);color:var(--cyan)">📍 Ubicación</span>
+      <span class="badge" style="border-color:rgba(52,211,153,.4);color:var(--t2)">🧹 Tareas</span>
+      <span class="badge" style="border-color:rgba(232,121,249,.4);color:var(--t7)">🔧 Reparaciones</span>
+      <span class="badge">By Carlos &amp; Denisse</span>
+    </div>
+  </div>
+</header>
+<div class="tabs-wrap">
+  <div class="tabs-bar" id="tabsBar"></div>
+  <div id="tabContents"></div>
+</div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · yourmexicanfriend.com</p>
+</div>
+<script>
+const TABS=[
+{id:0,icon:'🚪',title:'Entrada y pasillo',color:'var(--t1)',
+vocab:[
+  {es:'el recibidor',en:'entryway / foyer',ex:'Deja tus zapatos en el recibidor.'},
+  {es:'el pasillo',en:'hallway',ex:'El baño está al final del pasillo.'},
+  {es:'el tapete de entrada',en:'doormat',ex:'Límpiate los zapatos en el tapete.'},
+  {es:'el perchero',en:'coat rack',ex:'Cuelga tu chamarra en el perchero.'},
+  {es:'el llavero de pared',en:'key holder',ex:'Las llaves están en el llavero.'},
+  {es:'el pasamanos',en:'handrail',ex:'Agárrate del pasamanos.'},
+  {es:'el barandal',en:'railing',ex:'No te recargues en el barandal.'},
+  {es:'el escalón',en:'step',ex:'Cuidado con el último escalón.'},
+  {es:'la puerta principal',en:'front door',ex:'Cierra bien la puerta principal.'},
+  {es:'la cerradura',en:'lock',ex:'La cerradura está atorada.'},
+  {es:'el timbre',en:'doorbell',ex:'Alguien tocó el timbre.'},
+  {es:'el clóset de entrada',en:'hall closet',ex:'Guarda los abrigos ahí.'},
+],
+patterns:[
+  {es:'El baño está al final del pasillo.',en:'The bathroom is at the end of the hallway.'},
+  {es:'Cuelga tu chamarra en el perchero.',en:'Hang your jacket on the coat rack.'},
+  {es:'Ten cuidado al bajar las escaleras.',en:'Be careful when going down the stairs.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Qué palabra es?',
+   wb:['timbre','pasamanos','cerradura','pasillo','perchero','tapete de entrada'],
+   qs:[
+     {stem:'Lo presionas cuando llegas a casa de alguien.',sub:'You press it when you arrive at someone\'s house.',a:'timbre'},
+     {stem:'Lo agarras para subir o bajar las escaleras.',sub:'You hold it while using the stairs.',a:'pasamanos'},
+     {stem:'Lo usas para abrir o cerrar la puerta con llave.',sub:'You use it to lock the front door.',a:'cerradura'},
+     {stem:'Es el espacio largo que conecta los cuartos.',sub:'It is the long space that connects rooms.',a:'pasillo'},
+   ]},
+  {type:'translate',title:'B. Traduce al inglés.',
+   qs:[
+     {stem:'Las llaves están en el llavero de pared.',a:'The keys are on the key holder.'},
+     {stem:'La recámara está al final del pasillo.',a:'The bedroom is at the end of the hallway.'},
+     {stem:'Cierra con llave la puerta principal.',a:'Lock the front door.'},
+   ]},
+]},
+
+{id:1,icon:'🛋️',title:'La sala',color:'var(--t2)',
+vocab:[
+  {es:'el sofá',en:'sofa',ex:'Siéntate en el sofá.'},
+  {es:'el sillón',en:'armchair',ex:'El sillón es muy cómodo.'},
+  {es:'el cojín',en:'cushion',ex:'Hay dos cojines sobre el sofá.'},
+  {es:'la mesa de centro',en:'coffee table',ex:'El control está sobre la mesa de centro.'},
+  {es:'la mesa auxiliar',en:'side table',ex:'La lámpara está en la mesa auxiliar.'},
+  {es:'el librero / la estantería',en:'bookcase / shelving',ex:'Los libros están en el librero.'},
+  {es:'el control remoto',en:'remote control',ex:'¿Dónde está el control remoto?'},
+  {es:'las persianas',en:'blinds',ex:'Baja las persianas.'},
+  {es:'las cortinas',en:'curtains',ex:'Las cortinas son azules.'},
+  {es:'el enchufe',en:'outlet / socket',ex:'Hay un enchufe detrás del sofá.'},
+  {es:'la lámpara de piso',en:'floor lamp',ex:'Prende la lámpara de piso.'},
+  {es:'el ventilador de techo',en:'ceiling fan',ex:'El ventilador de techo hace frío.'},
+],
+patterns:[
+  {es:'El control remoto está sobre la mesa de centro.',en:'The remote control is on the coffee table.'},
+  {es:'Hay un enchufe detrás del sofá.',en:'There is an outlet behind the sofa.'},
+  {es:'Baja las persianas, por favor.',en:'Lower the blinds, please.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Qué palabra es?',
+   wb:['cojín','control remoto','persianas','mesa auxiliar','lámpara de piso','ventilador de techo'],
+   qs:[
+     {stem:'Lo usas para cambiar el canal de la televisión.',sub:'You use it to change the TV channel.',a:'control remoto'},
+     {stem:'Cubre la ventana y puede subir o bajar.',sub:'It covers the window and can go up or down.',a:'persianas'},
+     {stem:'Es una mesa pequeña junto al sofá o sillón.',sub:'It is a small table next to a sofa or chair.',a:'mesa auxiliar'},
+     {stem:'Es suave y lo pones en el sofá.',sub:'It is soft and you put it on a sofa.',a:'cojín'},
+   ]},
+  {type:'translate',title:'B. Traduce.',
+   qs:[
+     {stem:'La lámpara está junto al sillón.',a:'The lamp is next to the armchair.'},
+     {stem:'Hay dos cojines sobre el sofá.',a:'There are two cushions on the sofa.'},
+     {stem:'El control remoto está sobre la mesa de centro.',a:'The remote control is on the coffee table.'},
+   ]},
+]},
+
+{id:2,icon:'🍳',title:'La cocina',color:'var(--t3)',
+vocab:[
+  {es:'la encimera / barra',en:'countertop',ex:'Pon los platos en la barra.'},
+  {es:'la campana extractora',en:'range hood',ex:'Prende la campana al cocinar.'},
+  {es:'el lavavajillas',en:'dishwasher',ex:'Mete los platos al lavavajillas.'},
+  {es:'la despensa',en:'pantry',ex:'Guardo las especias en la despensa.'},
+  {es:'la tabla de cortar',en:'cutting board',ex:'Usa la tabla para cortar.'},
+  {es:'la sartén',en:'frying pan',ex:'Calienta la sartén primero.'},
+  {es:'la olla',en:'pot',ex:'El caldo está en la olla.'},
+  {es:'la licuadora',en:'blender',ex:'Usa la licuadora para el jugo.'},
+  {es:'la cafetera',en:'coffee maker',ex:'La cafetera ya está lista.'},
+  {es:'el tostador',en:'toaster',ex:'Pon el pan en el tostador.'},
+  {es:'el colador',en:'strainer',ex:'Cuela el arroz con el colador.'},
+  {es:'el cajón',en:'drawer',ex:'Los cubiertos están en el cajón.'},
+],
+patterns:[
+  {es:'Guardo las especias en la despensa.',en:'I keep the spices in the pantry.'},
+  {es:'Pon la sartén sobre la estufa.',en:'Put the frying pan on the stove.'},
+  {es:'Los cubiertos están en el cajón.',en:'The cutlery is in the drawer.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Qué palabra es?',
+   wb:['lavavajillas','tabla de cortar','licuadora','despensa','colador','cafetera'],
+   qs:[
+     {stem:'Lava platos, vasos y cubiertos automáticamente.',sub:'It washes plates, glasses and utensils.',a:'lavavajillas'},
+     {stem:'Cortas las verduras sobre esto.',sub:'You cut vegetables on it.',a:'tabla de cortar'},
+     {stem:'La usas para hacer licuados o jugos.',sub:'You use it to make smoothies or juices.',a:'licuadora'},
+     {stem:'Aquí guardas comida seca y enlatada.',sub:'It is a place where you store dry food.',a:'despensa'},
+   ]},
+  {type:'translate',title:'B. Traduce.',
+   qs:[
+     {stem:'Guardo los platos en el gabinete.',a:'I keep the plates in the cabinet.'},
+     {stem:'I need a frying pan to cook the eggs.',a:'Necesito una sartén para cocinar los huevos.'},
+     {stem:'La licuadora está sobre la barra.',a:'The blender is on the countertop.'},
+   ]},
+]},
+
+{id:3,icon:'🍽️',title:'El comedor',color:'var(--t4)',
+vocab:[
+  {es:'el mantel',en:'tablecloth',ex:'Pon el mantel antes de comer.'},
+  {es:'el camino de mesa',en:'table runner',ex:'El camino de mesa es de tela.'},
+  {es:'el juego de cubiertos',en:'cutlery set',ex:'Falta un cubierto.'},
+  {es:'la vajilla',en:'dinnerware / dishes',ex:'La vajilla está en el gabinete.'},
+  {es:'la jarra',en:'pitcher',ex:'Pon la jarra de agua en la mesa.'},
+  {es:'la copa',en:'wine glass / goblet',ex:'Usa las copas para la cena.'},
+  {es:'el salero',en:'salt shaker',ex:'¿Me pasas el salero?'},
+  {es:'el pimentero',en:'pepper shaker',ex:'El pimentero está vacío.'},
+  {es:'el centro de mesa',en:'centerpiece',ex:'El centro de mesa es de flores.'},
+  {es:'la servilleta de tela',en:'cloth napkin',ex:'Usa la servilleta de tela.'},
+  {es:'la silla tapizada',en:'upholstered chair',ex:'Las sillas tapizadas son nuevas.'},
+  {es:'la lámpara colgante',en:'pendant light',ex:'La lámpara colgante es moderna.'},
+],
+patterns:[
+  {es:'Pon la jarra de agua en el centro de la mesa.',en:'Put the water pitcher in the center of the table.'},
+  {es:'Faltan dos cubiertos.',en:'Two pieces of cutlery are missing.'},
+  {es:'La lámpara colgante ilumina la mesa.',en:'The pendant light illuminates the table.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Qué palabra es?',
+   wb:['mantel','jarra','centro de mesa','cubiertos','copa','salero'],
+   qs:[
+     {stem:'Lo pones sobre la mesa para decorarla o protegerla.',sub:'You put it over the table to protect or decorate it.',a:'mantel'},
+     {stem:'La usas para servir agua o jugo a varias personas.',sub:'You use it to serve water or juice.',a:'jarra'},
+     {stem:'Es la decoración en el centro de la mesa.',sub:'It is the decoration in the middle of the table.',a:'centro de mesa'},
+     {stem:'Tenedores, cuchillos y cucharas se llaman así.',sub:'Forks, knives and spoons are called this.',a:'cubiertos'},
+   ]},
+  {type:'translate',title:'B. Traduce.',
+   qs:[
+     {stem:'The pitcher is in the center of the table.',a:'La jarra está en el centro de la mesa.'},
+     {stem:'Falta una servilleta.',a:'A napkin is missing.'},
+     {stem:'Los platos están sobre la mesa.',a:'The plates are on the table.'},
+   ]},
+]},
+
+{id:4,icon:'🛏️',title:'La recámara',color:'var(--t5)',
+vocab:[
+  {es:'la cabecera',en:'headboard',ex:'La cabecera es de madera.'},
+  {es:'las sábanas',en:'sheets',ex:'Tengo que cambiar las sábanas.'},
+  {es:'el edredón',en:'comforter / duvet',ex:'El edredón es muy calientito.'},
+  {es:'la funda de almohada',en:'pillowcase',ex:'La funda está sucia.'},
+  {es:'el buró',en:'nightstand',ex:'El celular está en el buró.'},
+  {es:'el cajón',en:'drawer',ex:'La ropa está en el cajón.'},
+  {es:'el perchero',en:'coat rack',ex:'Cuelga el saco en el perchero.'},
+  {es:'el clóset',en:'closet',ex:'La ropa está en el clóset.'},
+  {es:'el tocador',en:'vanity / dressing table',ex:'El tocador tiene espejo.'},
+  {es:'la persiana',en:'blind',ex:'Sube la persiana por favor.'},
+  {es:'el colchón',en:'mattress',ex:'El colchón es ortopédico.'},
+  {es:'el enchufe',en:'outlet / socket',ex:'El cargador está en el enchufe.'},
+],
+patterns:[
+  {es:'Tengo que cambiar las sábanas.',en:'I have to change the sheets.'},
+  {es:'El cargador está conectado al enchufe.',en:'The charger is plugged into the outlet.'},
+  {es:'El buró está junto a la cama.',en:'The nightstand is next to the bed.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Qué palabra es?',
+   wb:['sábanas','colchón','buró','funda de almohada','edredón','tocador'],
+   qs:[
+     {stem:'Duermes sobre él; está dentro del marco de la cama.',sub:'You sleep on it; it is inside the bed frame.',a:'colchón'},
+     {stem:'Cubren el colchón.',sub:'They cover the mattress.',a:'sábanas'},
+     {stem:'Es la mesita pequeña junto a la cama.',sub:'It is a small table next to the bed.',a:'buró'},
+     {stem:'Cubre la almohada y se puede quitar para lavar.',sub:'It covers a pillow and can be removed for washing.',a:'funda de almohada'},
+   ]},
+  {type:'translate',title:'B. Traduce.',
+   qs:[
+     {stem:'I have to make the bed.',a:'Tengo que tender / hacer la cama.'},
+     {stem:'El celular está cargando junto a la cama.',a:'The phone is charging next to the bed.'},
+     {stem:'The nightstand is next to the bed.',a:'El buró está junto a la cama.'},
+   ]},
+]},
+
+{id:5,icon:'🚿',title:'El baño',color:'var(--t6)',
+vocab:[
+  {es:'la llave / el grifo',en:'faucet / tap',ex:'La llave está goteando.'},
+  {es:'el desagüe',en:'drain',ex:'El desagüe está tapado.'},
+  {es:'el gabinete',en:'cabinet',ex:'El jabón está en el gabinete.'},
+  {es:'el botiquín',en:'medicine cabinet',ex:'El botiquín tiene pastillas.'},
+  {es:'la cortina de baño',en:'shower curtain',ex:'Cierra la cortina al bañarte.'},
+  {es:'la regadera de mano',en:'handheld shower',ex:'Usa la regadera de mano.'},
+  {es:'la báscula',en:'scale',ex:'La báscula está en el baño.'},
+  {es:'la secadora de cabello',en:'hair dryer',ex:'¿Dónde está la secadora?'},
+  {es:'el rastrillo',en:'razor',ex:'Necesito un rastrillo nuevo.'},
+  {es:'el portarrollos',en:'toilet paper holder',ex:'Cambia el rollo del portarrollos.'},
+  {es:'el tapete de baño',en:'bath mat',ex:'El tapete de baño está mojado.'},
+  {es:'el cesto de ropa',en:'laundry hamper',ex:'Pon la ropa sucia en el cesto.'},
+],
+patterns:[
+  {es:'La llave está goteando.',en:'The faucet is dripping.'},
+  {es:'El desagüe está tapado.',en:'The drain is clogged.'},
+  {es:'Pon la ropa sucia en el cesto.',en:'Put the dirty clothes in the hamper.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Qué palabra es?',
+   wb:['desagüe','botiquín','báscula','cesto de ropa','cortina de baño','rastrillo'],
+   qs:[
+     {stem:'Por aquí baja el agua.',sub:'Water goes down through this.',a:'desagüe'},
+     {stem:'Guardas medicamentos y artículos de salud aquí.',sub:'You keep medicine and small health items here.',a:'botiquín'},
+     {stem:'Te paras sobre ella para checar tu peso.',sub:'You stand on it to check your weight.',a:'báscula'},
+     {stem:'Metes la ropa sucia aquí.',sub:'You put dirty clothes in it.',a:'cesto de ropa'},
+   ]},
+  {type:'translate',title:'B. Traduce.',
+   qs:[
+     {stem:'The faucet is leaking.',a:'La llave está goteando.'},
+     {stem:'El desagüe está tapado.',a:'The drain is clogged.'},
+     {stem:'The towel is hanging next to the sink.',a:'La toalla está colgada junto al lavabo.'},
+   ]},
+]},
+
+{id:6,icon:'👕',title:'Cuarto de lavado',color:'var(--t7)',
+vocab:[
+  {es:'el suavizante',en:'fabric softener',ex:'Agrega suavizante al lavar.'},
+  {es:'el blanqueador',en:'bleach',ex:'No uses blanqueador en ropa de color.'},
+  {es:'el ciclo de lavado',en:'wash cycle',ex:'Pon el ciclo normal.'},
+  {es:'el centrifugado',en:'spin cycle',ex:'El centrifugado saca el agua.'},
+  {es:'el tendedero',en:'clothesline / drying rack',ex:'Tiende la ropa en el tendedero.'},
+  {es:'las pinzas',en:'clothespins',ex:'Usa las pinzas para colgar la ropa.'},
+  {es:'el cesto de ropa',en:'laundry basket',ex:'Lleva el cesto al cuarto de lavado.'},
+  {es:'la tabla de planchar',en:'ironing board',ex:'Saca la tabla de planchar.'},
+  {es:'la plancha',en:'iron',ex:'La plancha está muy caliente.'},
+  {es:'el gancho',en:'hanger',ex:'Cuelga la camisa en un gancho.'},
+  {es:'doblar la ropa',en:'to fold clothes',ex:'Dobla la ropa limpia.'},
+  {es:'tender la ropa',en:'to hang clothes out to dry',ex:'Tiende la ropa afuera.'},
+],
+patterns:[
+  {es:'Pon la lavadora en ciclo delicado.',en:'Set the washing machine to the delicate cycle.'},
+  {es:'Después de secarla, dobla la ropa.',en:'After drying it, fold the clothes.'},
+  {es:'Usa las pinzas para colgar la ropa en el tendedero.',en:'Use clothespins to hang clothes on the line.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Qué palabra es?',
+   wb:['suavizante','tendedero','pinzas','doblar','blanqueador','plancha'],
+   qs:[
+     {stem:'Hace que la ropa quede más suave después del lavado.',sub:'It makes clothes feel softer after washing.',a:'suavizante'},
+     {stem:'Cuelgas la ropa mojada aquí para que se seque.',sub:'You hang wet clothes on this to dry.',a:'tendedero'},
+     {stem:'Sostienen la ropa en el tendedero.',sub:'They hold clothes on a clothesline.',a:'pinzas'},
+     {stem:'Esto haces con la ropa limpia antes de guardarla.',sub:'You do this to clothes before putting them away.',a:'doblar'},
+   ]},
+  {type:'translate',title:'B. Traduce.',
+   qs:[
+     {stem:'I need to do the laundry.',a:'Necesito lavar la ropa.'},
+     {stem:'Tengo que tender la ropa.',a:'I have to hang the clothes out to dry.'},
+     {stem:'Put the clean clothes in the basket.',a:'Pon la ropa limpia en el cesto.'},
+   ]},
+]},
+
+{id:7,icon:'💻',title:'El estudio',color:'var(--t8)',
+vocab:[
+  {es:'el archivador',en:'filing cabinet',ex:'Guarda documentos en el archivador.'},
+  {es:'la impresora',en:'printer',ex:'La impresora está sin tinta.'},
+  {es:'el cargador',en:'charger',ex:'Dejé el cargador en la oficina.'},
+  {es:'el multicontacto',en:'power strip',ex:'No sobrecargues el multicontacto.'},
+  {es:'la carpeta',en:'folder / binder',ex:'Los documentos están en la carpeta.'},
+  {es:'el cajón',en:'drawer',ex:'El lápiz está en el cajón.'},
+  {es:'la repisa',en:'shelf',ex:'Los libros están en la repisa.'},
+  {es:'la lámpara de escritorio',en:'desk lamp',ex:'Prende la lámpara de escritorio.'},
+  {es:'la silla ergonómica',en:'ergonomic chair',ex:'La silla ergonómica es más cómoda.'},
+  {es:'el teclado',en:'keyboard',ex:'El teclado es inalámbrico.'},
+  {es:'el ratón / mouse',en:'mouse',ex:'El mouse no funciona.'},
+  {es:'los audífonos',en:'headphones',ex:'Usa los audífonos para la clase.'},
+],
+patterns:[
+  {es:'Guarda los documentos en el archivador.',en:'Keep the documents in the filing cabinet.'},
+  {es:'Conecta la computadora al multicontacto.',en:'Plug the computer into the power strip.'},
+  {es:'Los audífonos están en el cajón.',en:'The headphones are in the drawer.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Qué palabra es?',
+   wb:['impresora','cargador','multicontacto','archivador','audífonos','ratón'],
+   qs:[
+     {stem:'Pone documentos digitales en papel.',sub:'It puts digital documents on paper.',a:'impresora'},
+     {stem:'Lo usas para dar energía a la batería de tu celular o laptop.',sub:'You use it to charge a phone or laptop battery.',a:'cargador'},
+     {stem:'Te permite conectar varios aparatos en un solo enchufe.',sub:'It lets you plug several devices into one outlet.',a:'multicontacto'},
+     {stem:'Guardas documentos organizados aquí.',sub:'You store organized documents in it.',a:'archivador'},
+   ]},
+  {type:'translate',title:'B. Traduce.',
+   qs:[
+     {stem:'The printer is next to the computer.',a:'La impresora está junto a la computadora.'},
+     {stem:'Necesito cargar la laptop.',a:'I need to charge the laptop.'},
+     {stem:'The folders are on the shelf.',a:'Las carpetas están en la repisa.'},
+   ]},
+]},
+
+{id:8,icon:'🌿',title:'Jardín y patio',color:'var(--t9)',
+vocab:[
+  {es:'el césped / pasto',en:'lawn / grass',ex:'Hay que cortar el pasto.'},
+  {es:'la podadora',en:'lawn mower',ex:'La podadora está en el garaje.'},
+  {es:'el rastrillo de jardín',en:'garden rake',ex:'Junta las hojas con el rastrillo.'},
+  {es:'las tijeras de podar',en:'pruning shears',ex:'Corta los arbustos con las tijeras.'},
+  {es:'la regadera',en:'watering can',ex:'Llena la regadera con agua.'},
+  {es:'la manguera',en:'hose',ex:'Usa la manguera para regar.'},
+  {es:'la maceta',en:'plant pot',ex:'Las flores están en una maceta.'},
+  {es:'la jardinera',en:'planter box',ex:'La jardinera está en el balcón.'},
+  {es:'la tierra',en:'soil',ex:'Compra tierra para las macetas.'},
+  {es:'el fertilizante',en:'fertilizer',ex:'El fertilizante nutre las plantas.'},
+  {es:'la cerca',en:'fence',ex:'La cerca divide los jardines.'},
+  {es:'los muebles de exterior',en:'outdoor furniture',ex:'Los muebles están cubiertos.'},
+],
+patterns:[
+  {es:'Hay que podar los arbustos.',en:'The bushes need to be trimmed.'},
+  {es:'Riega las plantas antes de que haga mucho calor.',en:'Water the plants before it gets too hot.'},
+  {es:'Tenemos que cortar el pasto.',en:'We have to cut the grass.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Qué palabra es?',
+   wb:['podadora','tijeras de podar','fertilizante','manguera','maceta','rastrillo de jardín'],
+   qs:[
+     {stem:'La usas para cortar el pasto.',sub:'You use it to cut the grass.',a:'podadora'},
+     {stem:'Las usas para recortar ramas pequeñas.',sub:'You use them to trim small branches.',a:'tijeras de podar'},
+     {stem:'Da nutrientes extra a las plantas.',sub:'It gives plants extra nutrients.',a:'fertilizante'},
+     {stem:'El agua viaja por ella para regar el jardín.',sub:'Water travels through it to water the garden.',a:'manguera'},
+   ]},
+  {type:'translate',title:'B. Traduce.',
+   qs:[
+     {stem:'I water the plants twice a week.',a:'Riego las plantas dos veces a la semana.'},
+     {stem:'Tenemos que cortar el pasto.',a:'We have to cut the grass.'},
+     {stem:'The flower pots are on the patio.',a:'Las macetas están en el patio.'},
+   ]},
+]},
+
+{id:9,icon:'🏗️',title:'Partes de la casa',color:'var(--t10)',
+vocab:[
+  {es:'la pared',en:'wall',ex:'La foto está colgada en la pared.'},
+  {es:'el techo',en:'ceiling / roof',ex:'Hay una lámpara en el techo.'},
+  {es:'el piso',en:'floor',ex:'El piso de la cocina es de loseta.'},
+  {es:'la azotea',en:'rooftop',ex:'Subimos a la azotea.'},
+  {es:'el balcón',en:'balcony',ex:'El balcón da a la calle.'},
+  {es:'el sótano',en:'basement',ex:'Guardan cajas en el sótano.'},
+  {es:'el ático',en:'attic',ex:'El ático está arriba de la casa.'},
+  {es:'la escalera',en:'stairs / staircase',ex:'Las recámaras están subiendo la escalera.'},
+  {es:'la puerta corrediza',en:'sliding door',ex:'La puerta corrediza da al patio.'},
+  {es:'el mosquitero',en:'screen',ex:'Cierra el mosquitero.'},
+  {es:'el interruptor',en:'light switch',ex:'El interruptor está junto a la puerta.'},
+  {es:'el enchufe',en:'outlet / socket',ex:'No funciona ese enchufe.'},
+],
+patterns:[
+  {es:'La lámpara está en el techo.',en:'The lamp is on the ceiling.'},
+  {es:'La puerta corrediza da al patio.',en:'The sliding door opens onto the patio.'},
+  {es:'El interruptor está junto a la puerta.',en:'The light switch is next to the door.'},
+],
+exercises:[
+  {type:'fill',title:'A. Identifica la palabra.',
+   wb:['sótano','techo','balcón','interruptor','azotea','mosquitero'],
+   qs:[
+     {stem:'Un cuarto debajo de la casa.',sub:'A room under a house.',a:'sótano'},
+     {stem:'La superficie interior de arriba en un cuarto.',sub:'The top surface inside a room.',a:'techo'},
+     {stem:'Un espacio pequeño afuera conectado a un piso alto.',sub:'A small outside area connected to an upper floor.',a:'balcón'},
+     {stem:'Lo presionas para prender o apagar la luz.',sub:'The part you press to turn a light on or off.',a:'interruptor'},
+   ]},
+  {type:'open',title:'B. Escribe una oración.',
+   qs:[
+     {stem:'Usa "balcón".',sub:'Use "balcony" in a sentence.',ref:'Ej: El balcón de mi departamento da a la calle. / My apartment\'s balcony faces the street.'},
+     {stem:'Usa "interruptor".',sub:'Use "light switch" in a sentence.',ref:'Ej: El interruptor de la sala está junto a la puerta principal.'},
+     {stem:'Usa "puerta corrediza".',sub:'Use "sliding door" in a sentence.',ref:'Ej: La puerta corrediza da al jardín / patio.'},
+   ]},
+]},
+
+{id:10,icon:'⚡',title:'Electrodomésticos',color:'var(--t11)',
+vocab:[
+  {es:'la aspiradora',en:'vacuum cleaner',ex:'Pasa la aspiradora en la sala.'},
+  {es:'el ventilador',en:'fan',ex:'Prende el ventilador.'},
+  {es:'el aire acondicionado',en:'air conditioner',ex:'El AC está encendido.'},
+  {es:'el calentador de agua / boiler',en:'water heater',ex:'El boiler no prende.'},
+  {es:'el purificador de aire',en:'air purifier',ex:'El purificador está en la recámara.'},
+  {es:'la extensión',en:'extension cord',ex:'Necesito una extensión más larga.'},
+  {es:'el multicontacto',en:'power strip',ex:'No sobrecargues el multicontacto.'},
+  {es:'el foco',en:'light bulb',ex:'El foco del pasillo se fundió.'},
+  {es:'el interruptor',en:'switch',ex:'Apaga el interruptor.'},
+  {es:'el control remoto',en:'remote control',ex:'No encuentro el control remoto.'},
+  {es:'la batería',en:'battery',ex:'La batería está descargada.'},
+  {es:'el cargador',en:'charger',ex:'Dejé el cargador en la oficina.'},
+],
+patterns:[
+  {es:'Prende el ventilador, por favor.',en:'Turn on the fan, please.'},
+  {es:'El foco del pasillo se fundió.',en:'The hallway light bulb burned out.'},
+  {es:'No sobrecargues el multicontacto.',en:'Do not overload the power strip.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Qué necesitas?',
+   wb:['aspiradora','cargador','extensión','aire acondicionado','purificador de aire','foco'],
+   qs:[
+     {stem:'La alfombra está sucia.',sub:'The carpet is dirty.',a:'aspiradora'},
+     {stem:'La batería de tu celular está baja.',sub:'Your phone battery is low.',a:'cargador'},
+     {stem:'El enchufe está muy lejos.',sub:'The outlet is too far away.',a:'extensión'},
+     {stem:'El cuarto está muy caliente.',sub:'The room is very hot.',a:'aire acondicionado'},
+   ]},
+  {type:'translate',title:'B. Traduce.',
+   qs:[
+     {stem:'The light bulb is burned out.',a:'El foco está fundido.'},
+     {stem:'El aire acondicionado está encendido.',a:'The air conditioner is on.'},
+     {stem:'Conecta la computadora al multicontacto.',a:'Plug the computer into the power strip.'},
+   ]},
+]},
+
+{id:11,icon:'🧹',title:'Tareas domésticas',color:'var(--t12)',
+vocab:[
+  {es:'barrer',en:'to sweep',ex:'Barre la cocina después de comer.'},
+  {es:'trapear',en:'to mop',ex:'Trapea el piso del baño.'},
+  {es:'aspirar',en:'to vacuum',ex:'Aspira la alfombra.'},
+  {es:'sacudir',en:'to dust',ex:'Sacude los muebles.'},
+  {es:'hacer / tender la cama',en:'to make the bed',ex:'Haz la cama antes de salir.'},
+  {es:'lavar los platos',en:'to wash the dishes',ex:'Lava los platos después de cenar.'},
+  {es:'sacar la basura',en:'to take out the trash',ex:'Saca la basura esta noche.'},
+  {es:'separar el reciclaje',en:'to sort recycling',ex:'Separa vidrio, papel y plástico.'},
+  {es:'cambiar las sábanas',en:'to change the sheets',ex:'Cambio las sábanas cada semana.'},
+  {es:'doblar la ropa',en:'to fold clothes',ex:'Dobla la ropa limpia.'},
+  {es:'regar las plantas',en:'to water the plants',ex:'Riega las plantas por la mañana.'},
+  {es:'limpiar las ventanas',en:'to clean the windows',ex:'Limpia las ventanas con un paño.'},
+],
+patterns:[
+  {es:'Tengo que sacar la basura.',en:'I have to take out the trash.'},
+  {es:'Necesitamos trapear la cocina.',en:'We need to mop the kitchen.'},
+  {es:'¿Puedes regar las plantas?',en:'Can you water the plants?'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Qué tarea es?',
+   wb:['barrer','aspirar','doblar la ropa','regar las plantas','trapear','sacudir'],
+   qs:[
+     {stem:'Hay migajas en el piso de la cocina.',sub:'There are crumbs on the kitchen floor.',a:'barrer'},
+     {stem:'La alfombra tiene polvo y pelusa.',sub:'The carpet has dust and hair.',a:'aspirar'},
+     {stem:'La ropa limpia está en montón.',sub:'The clean clothes are in a pile.',a:'doblar la ropa'},
+     {stem:'Las plantas están muy secas.',sub:'The plants are dry.',a:'regar las plantas'},
+   ]},
+  {type:'translate',title:'B. Traduce.',
+   qs:[
+     {stem:'I have to take out the trash tonight.',a:'Tengo que sacar la basura esta noche.'},
+     {stem:'Necesitamos limpiar las ventanas este fin de semana.',a:'We need to clean the windows this weekend.'},
+     {stem:'Can you fold the clothes, please?',a:'¿Puedes doblar la ropa, por favor?'},
+   ]},
+]},
+
+{id:12,icon:'🔧',title:'Problemas y reparaciones',color:'var(--t13)',
+vocab:[
+  {es:'una fuga de agua',en:'a water leak',ex:'Hay una fuga debajo del fregadero.'},
+  {es:'una gotera',en:'a roof leak / drip',ex:'Hay una gotera en el techo.'},
+  {es:'el desagüe está tapado',en:'the drain is clogged',ex:'El agua no baja.'},
+  {es:'la llave está goteando',en:'the faucet is dripping',ex:'La llave no deja de gotear.'},
+  {es:'hay humedad',en:'there is dampness',ex:'Hay humedad en la pared.'},
+  {es:'hay moho',en:'there is mold',ex:'Hay moho cerca de la ventana.'},
+  {es:'el foco está fundido',en:'the bulb is burned out',ex:'Hay que cambiar el foco.'},
+  {es:'la cerradura está atorada',en:'the lock is stuck',ex:'No puedo abrir la puerta.'},
+  {es:'se fue la luz',en:'the power went out',ex:'Se fue la luz en toda la casa.'},
+  {es:'hay baja presión de agua',en:'there is low water pressure',ex:'La regadera casi no tiene presión.'},
+  {es:'la tubería está rota',en:'the pipe is broken',ex:'Necesitamos cerrar el agua.'},
+  {es:'una grieta',en:'a crack',ex:'Hay una grieta en la pared.'},
+],
+patterns:[
+  {es:'Hay una fuga debajo del fregadero.',en:'There is a leak under the sink.'},
+  {es:'Necesitamos llamar a un plomero.',en:'We need to call a plumber.'},
+  {es:'Se fue la luz, pero los vecinos sí tienen electricidad.',en:'The power went out, but the neighbors still have electricity.'},
+],
+exercises:[
+  {type:'fill',title:'A. ¿Cuál es el problema?',
+   wb:['fuga de agua','desagüe está tapado','hay moho','foco está fundido','gotera','cerradura está atorada'],
+   qs:[
+     {stem:'Está saliendo agua de debajo del fregadero.',sub:'Water is coming from under the sink.',a:'fuga de agua'},
+     {stem:'El agua de la regadera no baja.',sub:'The water in the shower does not go down.',a:'desagüe está tapado'},
+     {stem:'Hay manchas negras en la pared húmeda.',sub:'There are black spots on a damp wall.',a:'hay moho'},
+     {stem:'La lámpara no prende porque el foco es viejo.',sub:'The lamp does not work because the bulb is old.',a:'foco está fundido'},
+   ]},
+  {type:'open',title:'B. ¿Qué harías?',
+   qs:[
+     {stem:'La llave no deja de gotear.',sub:'The faucet is dripping.',ref:'Llamaría a un plomero. / I would call a plumber.'},
+     {stem:'Hay una tubería rota.',sub:'There is a broken pipe.',ref:'Cerraría el agua principal y llamaría a un técnico. / I would shut off the main water and call a technician.'},
+     {stem:'La cerradura está atorada.',sub:'The lock is stuck.',ref:'Llamaría a un cerrajero. / I would call a locksmith.'},
+   ]},
+]},
+
+{id:13,icon:'📍',title:'Ubicación y organización',color:'var(--t14)',
+vocab:[
+  {es:'al lado de',en:'next to',ex:'La lámpara está al lado del sofá.'},
+  {es:'entre',en:'between',ex:'La mesa está entre las dos sillas.'},
+  {es:'enfrente de',en:'in front of / opposite',ex:'El espejo está enfrente del lavabo.'},
+  {es:'detrás de',en:'behind',ex:'El enchufe está detrás del mueble.'},
+  {es:'encima de / sobre',en:'on / on top of',ex:'El libro está sobre el escritorio.'},
+  {es:'debajo de',en:'under / below',ex:'Los zapatos están debajo de la cama.'},
+  {es:'dentro de',en:'inside',ex:'Los vasos están dentro del gabinete.'},
+  {es:'fuera de',en:'outside',ex:'La bicicleta está fuera de la casa.'},
+  {es:'al final de',en:'at the end of',ex:'El baño está al final del pasillo.'},
+  {es:'en la esquina',en:'in the corner',ex:'Hay una planta en la esquina.'},
+  {es:'arriba',en:'upstairs / above',ex:'Las recámaras están arriba.'},
+  {es:'abajo',en:'downstairs / below',ex:'La sala está abajo.'},
+],
+patterns:[
+  {es:'El baño está al final del pasillo.',en:'The bathroom is at the end of the hallway.'},
+  {es:'La lámpara está entre el sofá y la ventana.',en:'The lamp is between the sofa and the window.'},
+  {es:'Las recámaras están arriba y la sala está abajo.',en:'The bedrooms are upstairs and the living room is downstairs.'},
+],
+exercises:[
+  {type:'fill',title:'A. Completa con la expresión correcta.',
+   wb:['debajo de','en la esquina','al final del','entre','encima de','al lado de'],
+   qs:[
+     {stem:'Los zapatos están ___ la cama.',sub:'The shoes are ___ the bed.',a:'debajo de'},
+     {stem:'La planta está ___ .',sub:'The plant is ___ the corner.',a:'en la esquina'},
+     {stem:'El baño está ___ pasillo.',sub:'The bathroom is ___ the hallway.',a:'al final del'},
+     {stem:'El control remoto está ___ el sofá y la lámpara.',sub:'The remote is ___ the sofa and the lamp.',a:'entre'},
+   ]},
+  {type:'open',title:'B. Describe tu casa.',
+   qs:[
+     {stem:'¿Dónde está la cocina en tu casa?',sub:'Where is the kitchen in your home?',ref:'Ej: La cocina está junto a la sala, al final del pasillo.'},
+     {stem:'¿Dónde está tu recámara?',sub:'Where is your bedroom?',ref:'Ej: Mi recámara está arriba, a la derecha de las escaleras.'},
+     {stem:'¿Dónde está el baño?',sub:'Where is the bathroom?',ref:'Ej: El baño está entre las dos recámaras, al final del pasillo.'},
+   ]},
+]},
+
+{id:14,icon:'🔄',title:'Repaso final',color:'var(--t15)',
+vocab:[],
+patterns:[],
+exercises:[
+  {type:'fill',title:'Parte A — Función',
+   wb:['aspiradora','despensa','tijeras de podar','desagüe','multicontacto','buró','jarra','cesto de ropa'],
+   qs:[
+     {stem:'La máquina que usas para limpiar la alfombra.',sub:'It is the machine you use to clean a carpet.',a:'aspiradora'},
+     {stem:'Donde guardas comida seca.',sub:'It is the place where you store dry food.',a:'despensa'},
+     {stem:'Las usas para recortar ramas pequeñas.',sub:'You use them to trim small branches.',a:'tijeras de podar'},
+     {stem:'Por donde baja el agua en el fregadero o la regadera.',sub:'It is where water goes down in a sink or shower.',a:'desagüe'},
+     {stem:'Te permite conectar varios aparatos en un enchufe.',sub:'It lets you plug several devices into one outlet.',a:'multicontacto'},
+     {stem:'Es la mesita pequeña junto a la cama.',sub:'It is a small table next to a bed.',a:'buró'},
+     {stem:'La usas para servir agua a varias personas.',sub:'It is the object you use to serve water to several people.',a:'jarra'},
+     {stem:'Metes la ropa sucia aquí.',sub:'You put dirty clothes in it.',a:'cesto de ropa'},
+   ]},
+  {type:'translate',title:'Parte B — Traducción',
+   qs:[
+     {stem:'There is a leak under the sink.',a:'Hay una fuga debajo del fregadero.'},
+     {stem:'Tengo que cambiar las sábanas.',a:'I have to change the sheets.'},
+     {stem:'The bathroom is at the end of the hallway.',a:'El baño está al final del pasillo.'},
+     {stem:'El foco del pasillo está fundido.',a:'The hallway light bulb is burned out.'},
+     {stem:'Put the frying pan on the stove.',a:'Pon la sartén sobre la estufa.'},
+     {stem:'Necesitamos sacar la basura.',a:'We need to take out the trash.'},
+   ]},
+  {type:'open',title:'Parte C — Escribe sobre tu casa',
+   qs:[
+     {stem:'El piso de la cocina está sucio. ¿Qué necesitas hacer?',sub:'The kitchen floor is dirty. What do you need to do?',ref:'Necesito barrer y trapear el piso de la cocina.'},
+     {stem:'La llave no deja de gotear. ¿Cuál es el problema?',sub:'The faucet does not stop dripping. What is the problem?',ref:'La llave está goteando — hay que llamar a un plomero.'},
+     {stem:'La batería de tu celular está casi vacía. ¿Qué objeto necesitas?',sub:'Your phone battery is almost empty. What object do you need?',ref:'Necesito el cargador.'},
+     {stem:'Describe dónde está el baño en tu casa. Escribe una oración completa.',sub:'Describe where the bathroom is. Write one sentence.',ref:'Ej: El baño está al final del pasillo, entre las dos recámaras.'},
+   ]},
+]},
+];
+</script>
+<script>
+const renderedTabs=new Set();
+const answers={};
+
+function normalize(s){
+  return s.trim().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[¿?¡!.,;:]/g,'').replace(/\s+/g,' ');
+}
+function checkAns(user,correct){
+  const u=normalize(user);
+  return correct.split('/').map(a=>normalize(a)).some(a=>u.includes(a)||a.includes(u));
+}
+
+function switchTab(i){
+  document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  if(!renderedTabs.has(i)){renderTab(i);renderedTabs.add(i);}
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('visible'));
+  const panel=document.getElementById('panel'+i);
+  if(panel)panel.classList.add('visible');
+}
+
+function buildTabsBar(){
+  const bar=document.getElementById('tabsBar');
+  TABS.forEach((t,i)=>{
+    const btn=document.createElement('button');
+    btn.className='tab-btn'+(i===0?' active':'');
+    btn.textContent=t.icon+' '+t.title;
+    btn.onclick=()=>switchTab(i);
+    bar.appendChild(btn);
+  });
+}
+
+function renderTab(i){
+  const t=TABS[i];
+  const container=document.getElementById('tabContents');
+  const panel=document.createElement('div');
+  panel.className='tab-panel'+(i===0?' visible':'');
+  panel.id='panel'+i;
+  let html='';
+
+  // Vocab table
+  if(t.vocab&&t.vocab.length>0){
+    const hasSamples=t.vocab.some(v=>v.ex);
+    html+=`<div class="vocab-section">
+    <div class="vocab-title" style="color:${t.color}">${t.icon} Vocabulario clave</div>
+    <table class="vocab-table">
+      <thead><tr><th>Español</th><th>English</th>${hasSamples?'<th>Ejemplo</th>':''}</tr></thead>
+      <tbody>`;
+    t.vocab.forEach(v=>{
+      html+=`<tr><td>${v.es}</td><td>${v.en}</td>${hasSamples?`<td>${v.ex||''}</td>`:''}</tr>`;
+    });
+    html+=`</tbody></table></div>`;
+  }
+
+  // Patterns
+  if(t.patterns&&t.patterns.length>0){
+    html+=`<div class="patterns-box">
+    <div class="patterns-title">💬 Expresiones útiles</div>`;
+    t.patterns.forEach(p=>{
+      html+=`<div class="pattern-row"><strong>${p.es}</strong> — ${p.en}</div>`;
+    });
+    html+=`</div>`;
+  }
+
+  // Exercises
+  t.exercises.forEach((ex,ei)=>{
+    html+=`<div class="ex-card">
+    <div class="ex-title">${ex.title}</div>
+    <div class="score-row">
+      <span class="score-pill" id="score${i}_${ei}">0 / ${ex.qs.length} respondidas</span>
+      <button class="btn-restart" onclick="restartEx(${i},${ei})">🔄 Reiniciar</button>
+    </div>`;
+
+    if(ex.type==='fill'){
+      // Word bank
+      const wb=ex.wb||[];
+      if(wb.length){
+        html+=`<div class="wordbank"><strong>Banco de palabras</strong>${wb.join(' · ')}</div>`;
+      }
+      html+=`<div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const key=`${i}_${ei}_${qi}`;
+        html+=`<div class="q-item" id="qitem${key}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> ${q.stem}</div>
+          ${q.sub?`<div class="q-sub">${q.sub}</div>`:''}
+          <div class="chip-row" id="chips${key}">
+            ${wb.map(w=>`<button class="chip" onclick="answerChip('${key}','${w.replace(/'/g,"\\'")}','${q.a.replace(/'/g,"\\'")}',${i},${ei})">${w}</button>`).join('')}
+          </div>
+          <div class="q-fb" id="fb${key}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+
+    } else if(ex.type==='translate'){
+      html+=`<div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const key=`${i}_${ei}_${qi}`;
+        html+=`<div class="q-item" id="qitem${key}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> ${q.stem}</div>
+          ${q.sub?`<div class="q-sub">${q.sub}</div>`:''}
+          <input type="text" class="q-input" id="inp${key}" placeholder="Escribe tu traducción..."
+            onkeydown="if(event.key==='Enter')checkTranslate('${key}','${q.a.replace(/'/g,"\\'")}',${i},${ei})">
+          <button class="btn-check" onclick="checkTranslate('${key}','${q.a.replace(/'/g,"\\'")}',${i},${ei})">Verificar ✓</button>
+          <div class="q-fb" id="fb${key}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+
+    } else if(ex.type==='open'){
+      html+=`<div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const key=`${i}_${ei}_${qi}`;
+        html+=`<div class="q-item" id="qitem${key}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> ${q.stem}</div>
+          ${q.sub?`<div class="q-sub">${q.sub}</div>`:''}
+          <textarea class="q-textarea" id="inp${key}" placeholder="Escribe tu respuesta..." rows="3"></textarea>
+          <button class="btn-open" onclick="submitOpen('${key}','${(q.ref||'').replace(/'/g,"\\'")}',${i},${ei})">Enviar →</button>
+          <div class="q-ref" id="ref${key}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+    }
+
+    html+=`</div>`; // ex-card
+  });
+
+  panel.innerHTML=html;
+  container.appendChild(panel);
+}
+
+function answerChip(key,chosen,correct,ti,ei){
+  if(answers[key]!==undefined)return;
+  const ok=normalize(chosen)===normalize(correct);
+  answers[key]=ok;
+  const chips=document.querySelectorAll(`#chips${key} .chip`);
+  chips.forEach(btn=>{
+    btn.disabled=true;
+    if(normalize(btn.textContent)===normalize(chosen))btn.classList.add(ok?'chip-ok':'chip-err');
+    else btn.classList.add('used');
+  });
+  const fb=document.getElementById('fb'+key);
+  if(fb){fb.innerHTML=(ok?'✅ ¡Correcto!':'❌ La respuesta correcta es: <strong>'+correct+'</strong>');fb.classList.add('show');}
+  updateScore(ti,ei);
+}
+
+function checkTranslate(key,correct,ti,ei){
+  if(answers[key]!==undefined)return;
+  const inp=document.getElementById('inp'+key);
+  if(!inp||!inp.value.trim()){alert('Escribe una respuesta primero.');return;}
+  const ok=checkAns(inp.value,correct);
+  answers[key]=ok;
+  inp.disabled=true;
+  inp.classList.add(ok?'inp-ok':'inp-err');
+  const fb=document.getElementById('fb'+key);
+  if(fb){
+    fb.innerHTML=ok?'✅ ¡Muy bien!':'❌ Respuesta de referencia: <strong>'+correct+'</strong>';
+    fb.classList.add('show');
+  }
+  const btn=inp.nextElementSibling;if(btn&&btn.classList.contains('btn-check'))btn.disabled=true;
+  updateScore(ti,ei);
+}
+
+function submitOpen(key,ref,ti,ei){
+  if(answers[key]!==undefined)return;
+  const inp=document.getElementById('inp'+key);
+  if(!inp||!inp.value.trim()){alert('Escribe tu respuesta primero.');return;}
+  answers[key]=true;
+  inp.disabled=true;
+  const refEl=document.getElementById('ref'+key);
+  if(refEl&&ref){refEl.innerHTML='📋 <strong>Respuesta de referencia:</strong> '+ref;refEl.classList.add('show');}
+  const btn=inp.nextElementSibling;if(btn&&btn.classList.contains('btn-open'))btn.disabled=true;
+  updateScore(ti,ei);
+}
+
+function updateScore(ti,ei){
+  const ex=TABS[ti].exercises[ei];
+  const done=ex.qs.filter((_,qi)=>answers[`${ti}_${ei}_${qi}`]!==undefined).length;
+  const sc=document.getElementById(`score${ti}_${ei}`);
+  if(sc)sc.textContent=done+' / '+ex.qs.length+' respondidas';
+}
+
+function restartEx(ti,ei){
+  const ex=TABS[ti].exercises[ei];
+  ex.qs.forEach((_,qi)=>{
+    const key=`${ti}_${ei}_${qi}`;
+    delete answers[key];
+    // Reset chips
+    document.querySelectorAll(`#chips${key} .chip`).forEach(b=>{b.disabled=false;b.className='chip';});
+    // Reset input
+    const inp=document.getElementById('inp'+key);
+    if(inp){inp.disabled=false;inp.value='';inp.className=inp.tagName==='TEXTAREA'?'q-textarea':'q-input';}
+    // Reset feedback
+    const fb=document.getElementById('fb'+key);if(fb){fb.innerHTML='';fb.className='q-fb';}
+    const ref=document.getElementById('ref'+key);if(ref){ref.innerHTML='';ref.className='q-ref';}
+    // Re-enable buttons
+    const item=document.getElementById('qitem'+key);
+    if(item){
+      const btn=item.querySelector('.btn-check,.btn-open');
+      if(btn)btn.disabled=false;
+    }
+  });
+  updateScore(ti,ei);
+}
+
+buildTabsBar();
+renderTab(0);
+renderedTabs.add(0);
+</script>
+</body>
+</html>
