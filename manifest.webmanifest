@@ -1,0 +1,23 @@
+{
+  "name": "YMF Spanish — Your Mexican Friend",
+  "short_name": "YMF Spanish",
+  "description": "Interactive Mexican Spanish exercises from A1 to B2.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d0d12",
+  "theme_color": "#0d0d12",
+  "lang": "en",
+  "categories": ["education"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Explore exercises", "url": "./#/explore" },
+    { "name": "My progress", "url": "./#/progress" }
+  ]
+}

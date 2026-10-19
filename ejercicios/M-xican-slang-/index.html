@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slang Mexicano Actual | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --bas:#34d399;--bas2:#6ee7b7;
+  --gen:#f472b6;--gen2:#ff91cd;
+  --trab:#fbbf24;--trab2:#fde68a;
+  --emo:#60a5fa;--emo2:#93c5fd;
+  --fies:#a78bfa;--fies2:#c4b5fd;
+  --fuel:#f87171;--fuel2:#fca5a5;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 10% 8%,rgba(52,211,153,.12),transparent 30%),radial-gradient(ellipse at 90% 10%,rgba(248,113,113,.1),transparent 30%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(1040px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--bas),#fff 40%,var(--fuel));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.85rem;margin-top:4px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ex-tabs{display:flex;gap:5px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:7px;overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:8px 11px;font-weight:800;font-family:var(--font);font-size:.73rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;transform:translateY(-1px)}
+.etab-icon{font-size:1.15rem;line-height:1}
+.etab-label{font-size:.6rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:22px 26px;box-shadow:var(--shadow)}
+.ex-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.85rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:16px}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:90px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;transition:width .35s;background:linear-gradient(90deg,var(--bas),var(--fuel))}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),#00bfff);color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.err{background:rgba(239,68,68,.11);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+
+/* ── FLASHCARDS ── */
+.flash-controls{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.ff-btn{border:0;border-radius:9px;padding:5px 12px;font-size:.73rem;font-weight:800;font-family:var(--font);cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);color:var(--muted);border:1.5px solid transparent}
+.ff-btn.active{color:white}
+.flash-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.flash-prow{display:flex;align-items:center;gap:12px;width:100%;max-width:680px}
+.flash-cnt{font-size:.8rem;font-weight:800;color:var(--muted2);white-space:nowrap}
+.flash-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.flash-fil{height:100%;border-radius:999px;transition:width .4s}
+.flash-card{width:100%;max-width:680px;min-height:260px;perspective:1000px;cursor:pointer}
+.flash-inner{position:relative;width:100%;min-height:260px;transition:transform .5s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.flash-card.flipped .flash-inner{transform:rotateY(180deg)}
+.flash-front,.flash-back{position:absolute;inset:0;border-radius:20px;padding:24px 26px;backface-visibility:hidden;display:flex;flex-direction:column;gap:9px;min-height:260px}
+.flash-back{transform:rotateY(180deg)}
+.flash-word{font-family:var(--display);font-size:2rem;font-weight:900;line-height:1.1}
+.flash-lit{font-size:.8rem;color:var(--muted2);font-style:italic}
+.flash-lvl{display:inline-flex;align-items:center;gap:4px;font-size:.65rem;font-weight:900;border-radius:999px;padding:3px 10px;margin-top:2px}
+.flash-reg{font-size:.7rem;color:var(--muted2)}
+.flash-eq{font-size:1.05rem;font-weight:700;line-height:1.4}
+.flash-ex{font-size:.88rem;line-height:1.65;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:10px}
+.flash-note{font-size:.76rem;color:var(--muted2);line-height:1.5;padding:7px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.flash-hint{font-size:.72rem;color:var(--muted2);text-align:center;font-style:italic;margin-top:auto}
+.flash-nav{display:flex;gap:8px;align-items:center;justify-content:center;width:100%;max-width:680px}
+
+/* ── MC ── */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px}
+.mc-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0;margin-top:2px}
+.mc-sent{font-size:1rem;line-height:1.65;flex:1}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px;margin-top:10px}
+.mc-opt{border:0;border-radius:10px;padding:8px 15px;font-weight:700;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);border-color:rgba(37,217,255,.35)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.mc-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.mc-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mc-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-expl{display:none;font-size:.79rem;color:var(--muted);line-height:1.55;margin-top:7px;padding:7px 12px 7px 28px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-expl.show{display:block}
+
+/* ── VERDADERO/FALSO ── */
+.eh-list{display:flex;flex-direction:column;gap:9px}
+.eh-item{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:13px 15px;display:flex;align-items:flex-start;gap:11px}
+.eh-item.eh-ok{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.05)}
+.eh-item.eh-bad{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.05)}
+.eh-n{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:var(--muted2);flex-shrink:0;margin-top:1px}
+.eh-body{flex:1}.eh-sent{font-size:.97rem;line-height:1.6}
+.eh-fix{font-size:.82rem;font-weight:700;color:var(--good);margin-left:6px}
+.eh-btns{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+.eh-btn{border:0;border-radius:9px;padding:7px 14px;font-weight:800;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.eh-yes:hover:not([disabled]){border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.1);color:#86efac}
+.eh-no:hover:not([disabled]){border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);color:#fca5a5}
+.eh-btn[disabled]{cursor:default;opacity:.5}
+.cho-ok{border-color:var(--good)!important;background:rgba(34,197,94,.18)!important;color:#86efac!important;opacity:1!important}
+.cho-err{border-color:var(--bad)!important;background:rgba(239,68,68,.14)!important;color:#fca5a5!important;opacity:1!important}
+.eh-exp{display:none;font-size:.79rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);line-height:1.55}
+.revealed .eh-exp{display:block}
+
+/* ── SORT ── */
+.sort-pile{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;min-height:52px;margin-bottom:12px}
+.sort-bucket{border-radius:14px;padding:12px;min-height:80px;display:flex;flex-direction:column;gap:6px;transition:.2s}
+.sort-bucket.drag-over{box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.bucket-title{font-family:var(--display);font-size:.76rem;font-weight:900;text-align:center}
+.bucket-sub{font-size:.62rem;color:var(--muted2);text-align:center;line-height:1.35}
+.sort-card{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:9px;padding:7px 12px;font-size:.84rem;font-weight:600;cursor:grab;user-select:none;transition:.15s}
+.sort-card:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sort-card.ghost{opacity:.35}
+.sort-card.c-ok{background:rgba(34,197,94,.14);border-color:var(--good);color:#86efac;cursor:default}
+.sort-card.c-err{background:rgba(239,68,68,.1);border-color:var(--bad);color:#fca5a5;font-size:.78rem}
+
+/* ── SPEED ── */
+.sp-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-stats{display:flex;gap:9px}
+.spst{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spst .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.spst .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spst .sv.g{color:var(--good)}.spst .sv.b{color:var(--bad)}.spst .sv.w{color:var(--warn)}
+.sp-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:20px;text-align:center;width:100%;max-width:540px}
+.sp-q{font-size:1rem;line-height:1.7;margin-bottom:4px}
+.sp-hint{font-size:.77rem;color:var(--muted2);font-style:italic}
+.sp-row{display:flex;gap:8px;justify-content:center;width:100%;max-width:540px}
+.sp-inp{flex:1;max-width:280px;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.3);border-radius:11px;padding:10px 14px;font-family:var(--font);font-size:1rem;font-weight:700;color:var(--text);outline:none;transition:.15s}
+.sp-inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.sp-inp::placeholder{color:var(--muted2);font-weight:400}
+.sp-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:540px}
+.sp-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.sp-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.tmr-row{display:flex;align-items:center;gap:9px;width:100%;max-width:540px}
+.tmr-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.tmr-fil{height:100%;border-radius:999px;transition:width 1s linear;background:linear-gradient(90deg,var(--bas),var(--fuel))}
+.tmr-n{font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--muted2);min-width:22px;text-align:right}
+.sp-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.streak{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak.on{display:inline-flex;align-items:center;gap:4px}
+.cf{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.cf.pop{animation:cfk .7s ease forwards}
+@keyframes cfk{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+
+/* ── REFERENCE ── */
+.ref-section{margin-bottom:18px}
+.ref-h3{font-family:var(--display);font-size:.92rem;font-weight:800;padding:6px 14px;border-radius:9px;display:inline-flex;align-items:center;gap:6px;margin-bottom:10px}
+.ref-table{width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:10px}
+.ref-table th{padding:6px 12px;font-size:.58rem;font-weight:800;text-transform:uppercase;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+.ref-table td{padding:6px 12px;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5;vertical-align:top}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-table tr:hover td{background:rgba(255,255,255,.02)}
+.ref-tip{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:10px 14px;font-size:.83rem;color:#bbf7d0;line-height:1.6;margin-bottom:12px}
+.ref-alert{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.18);border-radius:12px;padding:10px 14px;font-size:.83rem;color:#fecaca;line-height:1.6;margin-bottom:12px}
+.lvl-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:14px 12px}}
+
+/* ── AUDIO BUTTON ── */
+.btn-audio{background:rgba(37,217,255,.13);border:1.5px solid rgba(37,217,255,.3);color:var(--cyan);border-radius:8px;padding:5px 11px;font-size:.76rem;font-weight:800;cursor:pointer;transition:.13s;font-family:var(--font);display:inline-flex;align-items:center;gap:5px}
+.btn-audio:hover{background:rgba(37,217,255,.24);border-color:var(--cyan)}
+.btn-audio.playing{background:rgba(37,217,255,.28);border-color:var(--cyan);animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.btn-audio.bad{background:rgba(239,68,68,.12);border-color:var(--bad);color:var(--bad)}
+
+/* ── VOICE SELECTOR ── */
+.voice-bar{display:flex;align-items:center;gap:10px;padding:8px 14px;background:rgba(37,217,255,.06);border:1px solid rgba(37,217,255,.15);border-radius:10px;margin-bottom:14px;flex-wrap:wrap}
+.voice-bar label{font-size:.74rem;font-weight:800;color:var(--muted2)}
+.voice-select{background:rgba(255,255,255,.07);border:1px solid rgba(37,217,255,.25);color:var(--text);border-radius:8px;padding:5px 10px;font-size:.77rem;font-family:var(--font);cursor:pointer;max-width:260px}
+.voice-status{font-size:.7rem;color:var(--muted2);font-style:italic}
+
+/* ── CHAT CONVERSATIONS ── */
+.conv-list{display:flex;flex-direction:column;gap:16px}
+.conv-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden}
+.conv-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.conv-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.conv-header{padding:10px 16px;background:rgba(0,0,0,.2);font-size:.76rem;color:var(--muted2);font-style:italic;display:flex;align-items:center;gap:8px}
+.conv-header strong{color:var(--text);font-style:normal}
+.conv-body{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.chat-row{display:flex;align-items:flex-end;gap:8px}
+.chat-row.right{flex-direction:row-reverse}
+.chat-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;background:rgba(255,255,255,.08)}
+.chat-bub{max-width:78%;padding:9px 13px;border-radius:16px;font-size:.9rem;line-height:1.55;position:relative}
+.chat-row.left .chat-bub{background:rgba(255,255,255,.09);border-radius:4px 16px 16px 16px}
+.chat-row.right .chat-bub{background:rgba(52,211,153,.16);border:1px solid rgba(52,211,153,.22);border-radius:16px 4px 16px 16px}
+.chat-who{font-size:.6rem;font-weight:900;text-transform:uppercase;color:var(--muted2);margin-bottom:3px}
+.chat-audio-btn{background:none;border:0;cursor:pointer;font-size:.9rem;padding:2px 4px;border-radius:5px;opacity:.55;transition:.13s;vertical-align:middle}
+.chat-audio-btn:hover{opacity:1;background:rgba(255,255,255,.1)}
+.slang-tag{display:inline-block;background:rgba(37,217,255,.14);border:1px solid rgba(37,217,255,.3);color:var(--cyan);border-radius:5px;padding:1px 6px;font-size:.7rem;font-weight:800;margin:0 2px;cursor:help}
+.conv-q{padding:14px 16px;background:rgba(0,0,0,.15);border-top:1px solid rgba(255,255,255,.06);font-size:.88rem;font-weight:700;color:var(--muted)}
+.conv-opts{display:flex;flex-direction:column;gap:7px;padding:10px 16px 14px}
+.conv-opt{border:0;border-radius:10px;padding:10px 15px;font-weight:600;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left}
+.conv-opt:hover:not([disabled]){transform:translateX(4px);border-color:rgba(37,217,255,.35);background:rgba(37,217,255,.07)}
+.conv-opt[disabled]{cursor:default;transform:none}
+.conv-opt.co-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.conv-opt.co-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.conv-opt.co-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.conv-exp{display:none;font-size:.8rem;color:var(--muted);line-height:1.58;padding:8px 16px 14px;background:rgba(255,255,255,.03)}
+.conv-exp.show{display:block}
+.conv-exp .slang-tag{font-size:.72rem}
+
+/* ── SEARCHABLE REFERENCE ── */
+.ref-search{width:100%;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.25);color:var(--text);border-radius:11px;padding:10px 16px;font-family:var(--font);font-size:.95rem;outline:none;transition:.15s;margin-bottom:14px}
+.ref-search:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.ref-search::placeholder{color:var(--muted2)}
+.ref-count{font-size:.75rem;color:var(--muted2);font-weight:700;margin-bottom:10px}
+.ref-row{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:10px;border-bottom:1px solid rgba(255,255,255,.04);transition:.13s}
+.ref-row:hover{background:rgba(255,255,255,.03)}
+.ref-row:last-child{border-bottom:none}
+.rr-es{font-family:var(--display);font-weight:900;font-size:.98rem;min-width:140px;cursor:pointer}
+.rr-es:hover{text-decoration:underline}
+.rr-lit{font-size:.74rem;color:var(--muted2);font-style:italic;min-width:110px}
+.rr-eq{font-size:.85rem;font-weight:600;flex:1}
+.rr-meta{display:flex;flex-direction:column;gap:3px;align-items:flex-end;min-width:80px}
+.rr-lvl{font-size:.7rem;font-weight:800;white-space:nowrap}
+.rr-reg{font-size:.65rem;color:var(--muted2)}
+.rr-highlight{background:rgba(37,217,255,.2);border-radius:3px;padding:0 2px}
+@media(max-width:600px){.rr-lit{display:none}.rr-meta{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="cf" id="cf"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Slang Mexicano Actual 🇲🇽</h1>
+      <p>90+ expressions actually used in Mexico today — with literal translations, real examples, usage notes and regional variations.</p>
+      <div class="badges">
+        <span class="badge">B1&#8211;B2</span>
+        <span class="badge" style="border-color:rgba(52,211,153,.4);color:var(--bas2)">&#128077; Safe to use</span>
+        <span class="badge" style="border-color:rgba(248,113,113,.4);color:var(--fuel2)">&#9888;&#65039; Con confianza only</span>
+        <span class="badge" style="border-color:rgba(251,191,36,.4);color:var(--trab2)">&#127474;&#127485; Regional notes</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">&#128274;</span><span class="etab-label">Flash-<br>cards</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">&#128221;</span><span class="etab-label">¿Qué<br>significa?</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">&#10067;</span><span class="etab-label">¿Se usa<br>así?</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">&#128202;</span><span class="etab-label">Clasi-<br>fica</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">&#128241;</span><span class="etab-label">Chats<br>reales</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">&#9889;</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-6" onclick="goEx(6)"><span class="etab-icon">&#128196;</span><span class="etab-label">Refer-<br>encia</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> &middot; Your Mexican Friend</p>
+</div>
+<script>
+function seededShuffle(arr,seed){const a=[...arr];let s=seed;for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+
+let flashIdx=0,flashFilter='all',flashFlipped=false,flashCards=[];
+let mcAnswers={},mcChecked=false,ehAnswered={};
+let dragItem=null,sortPlaced={},sortChecked=false,tapSel=null;
+let spIdx=0,spOk=0,spErr=0,spStreak=0,spTimer=null,spTimeLeft=0,spAnswered=false;
+
+function goEx(idx){
+  [0,1,2,3,4,5,6].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===idx));
+  [renderFlash,renderMC,renderErrorHunt,renderSort,renderChats,renderSpeed,renderReference][idx]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const CATS={
+  bas:{label:'Lo básico',      icon:'✅', col:'var(--bas)',  bg:'rgba(52,211,153,.1)', bd:'rgba(52,211,153,.28)'},
+  gen:{label:'Gente',          icon:'🤙', col:'var(--gen)',  bg:'rgba(244,114,182,.1)',bd:'rgba(244,114,182,.28)'},
+  trab:{label:'Trabajo y lana',icon:'💰', col:'var(--trab)', bg:'rgba(251,191,36,.1)', bd:'rgba(251,191,36,.28)'},
+  emo:{label:'Emociones',      icon:'😤', col:'var(--emo)',  bg:'rgba(96,165,250,.1)', bd:'rgba(96,165,250,.28)'},
+  fies:{label:'Diversión',     icon:'🎉', col:'var(--fies)', bg:'rgba(167,139,250,.1)',bd:'rgba(167,139,250,.28)'},
+  fuel:{label:'Solo c/ confianza',icon:'🔥',col:'var(--fuel)', bg:'rgba(248,113,113,.1)',bd:'rgba(248,113,113,.28)'},
+};
+
+/* lvl colors */
+const LVL_COL={1:'#22c55e',2:'#84cc16',3:'#f59e0b',4:'#ef4444',5:'#9f1239'};
+const LVL_LABEL={1:'🟢 Nivel 1 – suave',2:'🟡 Nivel 2 – informal',3:'🟠 Nivel 3 – muy informal',4:'🔴 Nivel 4 – fuerte',5:'💀 Nivel 5 – vulgar'};
+
+/* ══════════════════════════════════
+   SLANG DATA — 90 entries
+   Fields: cat, es, lit (literal), eq (equivalente), lvl, reg, ex, note
+══════════════════════════════════ */
+const SLANG=[
+  /* ── LO BÁSICO (15) ── */
+  {cat:'bas',es:'qué onda',lit:'"what wave?"',eq:'What\'s up? / What\'s going on?',lvl:2,reg:'Todo México',
+   ex:'— ¿Qué onda? ¿Sí vas a la fiesta?\n— Sí, jalo.',note:'One of the most essential Mexican expressions. Works as a greeting AND a question meaning "what\'s happening?"'},
+  {cat:'bas',es:'órale',lit:'"now-le" (origin unclear)',eq:'Okay / Wow / Come on / Hurry up',lvl:2,reg:'Todo México',
+   ex:'— ¿Vamos por tacos? — ¡Órale!\n— Órale pues, nos vemos a las 8.',note:'Context-dependent: agreement ("órale" = okay), amazement ("¡Órale!" = wow!), encouragement ("órale, ya vámonos" = come on, let\'s go).'},
+  {cat:'bas',es:'sale / va / va que va',lit:'"it goes out"',eq:'Okay / Sounds good / Deal',lvl:1,reg:'Todo México',
+   ex:'— ¿Nos vemos a las 6? — Sale.\n— ¿Me ayudas? — Va que va.',note:'"Sale" is the most versatile. "Va" is also common. "Va que va" adds enthusiasm — it\'s a done deal.'},
+  {cat:'bas',es:'neta / la neta',lit:'"the clear/true one"',eq:'The truth / Honestly / For real',lvl:2,reg:'Todo México',
+   ex:'— La neta, sí estuvo difícil el examen.\n— ¿Neta que no sabías?',note:'"La neta" = the honest truth. "¿Neta?" alone = really? for real? Similar to English "for real."'},
+  {cat:'bas',es:'padre',lit:'"father"',eq:'Cool / Nice / Great',lvl:1,reg:'Todo México',
+   ex:'— Está padre tu idea.\n— ¡Qué padre lugar!',note:'Very safe to use — completely inoffensive. Can be combined: "muy padre" (very cool), "qué padre" (how cool). Level 1: even kids and grandparents use it.'},
+  {cat:'bas',es:'chido / chida',lit:'cool/nice (no literal meaning)',eq:'Cool / Awesome / Great',lvl:2,reg:'Todo México, esp. CDMX',
+   ex:'— Tu clase estuvo muy chida.\n— ¡Qué chido lugar!',note:'"Chido" (masc.), "chida" (fem.). More casual than "padre". Sounds very natural in Mexico City.'},
+  {cat:'bas',es:'no manches',lit:'"don\'t stain"',eq:'No way! / Seriously? / Come on!',lvl:2,reg:'Todo México',
+   ex:'— ¡No manches! ¿En serio costó 500 pesos?\n— No manches, ya se me hizo tarde.',note:'The safe, all-contexts version of "no mames." Great for expressing surprise or mild frustration. Works in any company.'},
+  {cat:'bas',es:'aguas',lit:'"waters!"',eq:'Watch out! / Careful! / Heads up!',lvl:2,reg:'Todo México',
+   ex:'— ¡Aguas con el escalón!\n— ¡Aguas, viene un carro!',note:'Shout this as a warning. Mexican origin — used since the colonial era when people would throw water out of windows. Ubiquitous and useful.'},
+  {cat:'bas',es:'simón / nel',lit:'corruptions of "sí" and "no"',eq:'Yep / Nope',lvl:2,reg:'Todo México',
+   ex:'— ¿Vas a ir? — Simón, jalo.\n— ¿Ya comiste? — Nel, todavía no.',note:'"Simón" = yes (casual). "Nel" = no (casual). "Nel pastel" is the rhyming version of "nel" = definitely not.'},
+  {cat:'bas',es:'de volada',lit:'"of a flight"',eq:'Right away / Quickly / In a flash',lvl:2,reg:'Todo México',
+   ex:'— ¿Puedes mandarme el archivo? — Sí, de volada.\n— Lo hice de volada.',note:'Implies speed and immediacy. "Te llamo de volada" = I\'ll call you right away.'},
+  {cat:'bas',es:'al cien / al tiro',lit:'"at one hundred" / "at the shot"',eq:'All good / Perfect / Pay attention',lvl:2,reg:'Todo México',
+   ex:'— ¿Todo bien? — Al cien, gracias.\n— Ponte al tiro con la tarea.',note:'"Al cien" = everything is 100% good. "Al tiro" = pay attention / be ready. Similar vibe but different use.'},
+  {cat:'bas',es:'me late',lit:'"it beats to me"',eq:'I like it / Sounds good / I\'m feeling it',lvl:2,reg:'Todo México',
+   ex:'— ¿Vamos al cine? — Me late.\n— No me late mucho la idea.',note:'From the heartbeat: "me late" = it resonates with me / I like it. "No me late" = I\'m not feeling it.'},
+  {cat:'bas',es:'cotorrear / cotorreo',lit:'(from cotorra = parrot)',eq:'To hang out / To chat / To chill',lvl:2,reg:'Todo México',
+   ex:'— ¿Qué hacen? — Nada, nomás cotorreando.\n— Fue un cotorreo muy padre.',note:'Light, fun socializing. "Cotorrear" = hanging out/chatting casually. "Cotorreo" = the chill hangout session.'},
+  {cat:'bas',es:'mande',lit:'"command me"',eq:'Pardon? / Yes? / At your service',lvl:1,reg:'Todo México, esp. centro/sur',
+   ex:'— Luis. — ¿Mande?\n— ¿Mande? No te escuché bien.',note:'Deeply Mexican expression. Said when you didn\'t hear something or when someone calls your name. Much more common than "¿qué?" to respond. Shows respect.'},
+  {cat:'bas',es:'arre',lit:'"giddy up"',eq:'Let\'s go / Okay / Bet',lvl:2,reg:'Norte/noroeste, esp. Sinaloa',
+   ex:'— ¿Vamos? — Arre.\n— ¡Arre, nos vemos!',note:'Common in the north, increasingly used by youth nationwide. Similar vibe to "órale" — agreement and enthusiasm.'},
+  /* ── GENTE (15) ── */
+  {cat:'gen',es:'güey / wey',lit:'"ox" (buey → güey)',eq:'Dude / Bro / Man',lvl:3,reg:'Todo México, esp. CDMX',
+   ex:'— ¿Qué onda, güey? ¿Cómo estás?\n— No manches, güey, ¿en serio?',note:'Possibly the most-used Mexican slang word. Between friends = affectionate. Beware: tone matters — with strangers it can be offensive. "Wey" is common spelling in texts.'},
+  {cat:'gen',es:'carnal',lit:'"flesh-related" (of the same flesh)',eq:'Bro / Close friend / Brother',lvl:3,reg:'Todo México',
+   ex:'— Ese es mi carnal de toda la vida.\n— ¿Qué onda, carnal?',note:'Implies a very close, brother-like friendship. Stronger bond than "cuate" or "compa." Widely used across Mexico.'},
+  {cat:'gen',es:'cuate',lit:'"twin" (from Nahuatl)',eq:'Friend / Buddy',lvl:2,reg:'Todo México',
+   ex:'— Voy con unos cuates.\n— Es un cuate del trabajo.',note:'From Nahuatl "coatl" (twin). Softer than "güey." Friendly and safe to use in most casual contexts.'},
+  {cat:'gen',es:'compa',lit:'"companion/compadre"',eq:'Buddy / Pal / Bro',lvl:2,reg:'Norte, occidente, todo México',
+   ex:'— Gracias, compa.\n— ¿Qué onda, compa?',note:'Short for "compañero" or "compadre." More common in the north and west but widely understood everywhere.'},
+  {cat:'gen',es:'banda',lit:'"band/group"',eq:'The crew / Friends / People',lvl:2,reg:'Todo México, muy usado en redes',
+   ex:'— ¿Qué dice la banda?\n— La banda ya está en el antro.',note:'Collective: refers to a group of friends or people in general. "¿Qué dice la banda?" = what\'s everyone saying? Very social media-friendly.'},
+  {cat:'gen',es:'morro / morra',lit:'"snout/face"',eq:'Kid / Young guy / Young girl',lvl:3,reg:'Norte/noroeste, entendido en todo México',
+   ex:'— Ese morro es mi vecino.\n— ¿Quién es esa morra?',note:'"Morro" = young guy/kid. "Morra" = young girl. Common in the north. In CDMX, "chamaco/a" is more common for the same concept.'},
+  {cat:'gen',es:'vato / bato',lit:'"—"',eq:'Guy / Dude',lvl:3,reg:'Norte/noroeste, frontera',
+   ex:'— Ese vato trabaja conmigo.\n— ¿Quién es ese bato?',note:'"Vato" is more center/north. "Bato" skews more noroeste/frontera. Both = guy/dude. Less common in CDMX where "güey" or "tipo" are preferred.'},
+  {cat:'gen',es:'morrita',lit:'"little snout"',eq:'Girl / Young woman',lvl:3,reg:'Norte/noroeste',
+   ex:'— La morrita de la tienda fue muy amable.\n— Esa morrita estudia conmigo.',note:'Diminutive of "morra." Can be neutral but can also sound very informal. Context and tone matter.'},
+  {cat:'gen',es:'plebe / plebes',lit:'"common people"',eq:'Kids / Young people / The crew',lvl:3,reg:'Sinaloa, Sonora, noroeste',
+   ex:'— Los plebes van a jugar fútbol.\n— ¿Qué onda, plebes?',note:'Strongly associated with Sinaloa and the northwest. Widely understood across Mexico now thanks to music/culture.'},
+  {cat:'gen',es:'fresa',lit:'"strawberry"',eq:'Preppy / Posh / Snobby',lvl:2,reg:'Todo México, urbano',
+   ex:'— Ese lugar está muy fresa.\n— Actúa bien fresa a veces.',note:'Describes someone or something upper-class/preppy/snobby. Not necessarily an insult — context-dependent. Very common in Mexico City.'},
+  {cat:'gen',es:'naco / naca',lit:'"—" (pejorative)',eq:'Tacky / Low-class / Vulgar',lvl:4,reg:'Todo México',
+   ex:'— No digas eso, suena naco.\n— Ese outfit está bien naco.',note:'Can be offensive and classist. Use with caution. Describes behavior, appearance, or attitude as low-class or tacky. Often used casually but has problematic origins.'},
+  {cat:'gen',es:'godín',lit:'(from surname Godínez)',eq:'Office worker / Corporate employee',lvl:2,reg:'Todo México, urbano',
+   ex:'— Horario godín: de 9 a 6.\n— Ya me siento muy godín.',note:'Refers humorously to the stereotypical office drone. "Horario godín" = the classic 9-to-6 schedule. Self-deprecating humor about corporate life.'},
+  {cat:'gen',es:'chilango / chilanga',lit:'"of chile-ish people?" (disputed origin)',eq:'Person from Mexico City',lvl:2,reg:'Todo México',
+   ex:'— Es chilango, vive en la CDMX.\n— Los chilangos siempre llegan tarde.',note:'Refers to people from Mexico City. Can be affectionate or mildly pejorative depending on who says it. CDMXers often use it self-referentially with pride.'},
+  {cat:'gen',es:'apapachar',lit:'(from Nahuatl "papachoa" = squeeze)',eq:'To cuddle / To pamper / To comfort',lvl:1,reg:'Todo México',
+   ex:'— Necesito que me apapachen hoy.\n— ¡Apapacha a tu abuela!',note:'Beautiful Nahuatl-origin word meaning to embrace with love, to comfort. No direct English equivalent — "apapachar" is its own feeling.'},
+  {cat:'gen',es:'la vibra',lit:'"the vibe"',eq:'The vibe / The energy',lvl:2,reg:'Urbano, jóvenes',
+   ex:'— Ese lugar tiene buena vibra.\n— No me gusta la vibra de esa persona.',note:'Direct adoption of "vibe." "Buena vibra" = good vibes. "Mala vibra" = bad vibes. Very common in youth and social media contexts.'},
+  /* ── TRABAJO Y LANA (12) ── */
+  {cat:'trab',es:'chamba',lit:'"work/job" (various origins proposed)',eq:'Work / Job',lvl:2,reg:'Todo México',
+   ex:'— Tengo mucha chamba hoy.\n— ¿Ya encontraste chamba?',note:'One of the most natural ways to say "work" or "job" in casual Mexican Spanish. Very widely used.'},
+  {cat:'trab',es:'chambear',lit:'"to work"',eq:'To work',lvl:2,reg:'Todo México',
+   ex:'— No puedo, tengo que chambear.\n— ¿Dónde chambeas?',note:'The verb form of "chamba." Completely normal to use in casual conversation about work.'},
+  {cat:'trab',es:'lana',lit:'"wool"',eq:'Money / Cash',lvl:2,reg:'Todo México',
+   ex:'— No traigo lana.\n— ¿Tienes lana para el taxi?',note:'Very common slang for money. "Sin lana" = broke. The association with wool (lana) may relate to old silver coins.'},
+  {cat:'trab',es:'feria',lit:'"fair/festival"',eq:'Money / Change / Cash',lvl:2,reg:'Norte, occidente, centro',
+   ex:'— ¿Traes feria para el camión?\n— Sí, pero poca feria.',note:'More common in the north and west for money, especially small amounts/change. "¿Traes feria?" = do you have (any) cash?'},
+  {cat:'trab',es:'varos',lit:'"—"',eq:'Bucks / Pesos',lvl:3,reg:'Todo México, juvenil',
+   ex:'— Me costó 200 varos.\n— ¿Cuántos varos tienes?',note:'Juvenile/street slang for pesos. "200 varos" = 200 pesos. More casual than "lana."'},
+  {cat:'trab',es:'codo / coda',lit:'"elbow"',eq:'Stingy / Cheap / Tight with money',lvl:2,reg:'Todo México',
+   ex:'— ¡No seas codo! Invita las chelas.\n— Es muy coda, nunca paga.',note:'Calling someone "codo" = they\'re tight with money, never pay for things. The image is of someone guarding their wallet with their elbow.'},
+  {cat:'trab',es:'dar el rol',lit:'"give the roll"',eq:'To give someone a ride',lvl:2,reg:'Todo México',
+   ex:'— ¿Me das el rol a la tienda?\n— ¿Alguien me da el rol al trabajo?',note:'Asking for a lift/ride. "¿Me das el rol?" = can you give me a ride? Common and useful in daily life.'},
+  {cat:'trab',es:'echar paro / hacer el paro',lit:'"throw a stop" / "do the favor"',eq:'To help out / To do a favor',lvl:3,reg:'Todo México',
+   ex:'— Échame el paro con esta tarea.\n— Hazme el paro, bróder.',note:'"Echar paro" and "hacer el paro" = help someone out. Very common request between friends. "Paro" alone = favor.'},
+  {cat:'trab',es:'trucha',lit:'"trout (fish)"',eq:'Sharp / Alert / Watch out / Clever',lvl:2,reg:'Todo México',
+   ex:'— Esa persona es bien trucha para los negocios.\n— ¡Ponte trucha!',note:'"Trucha" = street-smart, sharp, clever. "Ser trucha" = to be sharp. "¡Ponte trucha!" = pay attention / be careful / be sharp.'},
+  {cat:'trab',es:'fifí',lit:'"—"',eq:'Fancy / Bougie / Elitist',lvl:2,reg:'Todo México, urbano',
+   ex:'— Ese café está bien fifí.\n— Vive en una zona muy fifí.',note:'Describes something or someone overly fancy or elite. Popularized in political contexts but widely used in daily life too.'},
+  {cat:'trab',es:'en chinga',lit:'"in the fuck"',eq:'Really fast / In a rush / Quickly',lvl:4,reg:'Todo México',
+   ex:'— Necesito esto en chinga.\n— Salimos en chinga porque se hizo tarde.',note:'Vulgar but extremely common meaning to do something very fast or urgently. "En chinga" can also mean "a lot of work." Level 4 — strong language but practical.'},
+  {cat:'trab',es:'jalar',lit:'"to pull"',eq:'To work (informally) / To pitch in / I\'m in',lvl:2,reg:'Todo México',
+   ex:'— Yo jalo contigo en el proyecto.\n— ¿Jalamos al cine? — Jalo.',note:'"Jalar" has multiple uses: to work together, to be in (for a plan), or in the north to go somewhere. Very versatile.'},
+  /* ── EMOCIONES Y ACTITUDES (15) ── */
+  {cat:'emo',es:'chale',lit:'"—"',eq:'Damn / That sucks / Ugh / Really?',lvl:2,reg:'Centro/CDMX, entendido en todo México',
+   ex:'— Chale, se me olvidó la tarea.\n— ¡Chale! ¿Ya no hay boletos?',note:'Expression of mild disappointment, frustration or disbelief. Typical CDMX expression. "¡Chale!" alone conveys the feeling.'},
+  {cat:'emo',es:'sacar de onda',lit:'"take out of the wave"',eq:'To throw off / To weird out / To confuse',lvl:2,reg:'Todo México',
+   ex:'— Me sacó de onda su mensaje.\n— ¿Te sacó de onda lo que dijo?',note:'"Sacar de onda" = to throw someone off, confuse or disturb them. "Me sacó de onda" = it threw me off / weirded me out.'},
+  {cat:'emo',es:'agüitado / agüitada',lit:'"watered down"',eq:'Sad / Down / Bummed out',lvl:2,reg:'Norte/noroeste, entendido en centro',
+   ex:'— Está agüitado por el examen.\n— ¿Por qué estás tan agüitada?',note:'Feeling down, sad, deflated. More common in the north but understood everywhere. Like "bummed out" in English.'},
+  {cat:'emo',es:'hueva',lit:'"roe/eggs" (vulgar anatomy ref.)',eq:'Laziness / Drag / Too much effort',lvl:3,reg:'Todo México',
+   ex:'— Me da hueva hacer eso.\n— ¡Qué hueva ir tan lejos!',note:'"Me da hueva" = I can\'t be bothered / I\'m too lazy. "Qué hueva" = what a drag. Anatomically vulgar origin but used casually by most people.'},
+  {cat:'emo',es:'gacho / gacha',lit:'"crooked/ugly"',eq:'Mean / Ugly / Messed up / Bad',lvl:3,reg:'Todo México',
+   ex:'— Se portó bien gacho contigo.\n— Qué gacha situación.',note:'Describes something bad, ugly (behavior), or mean. "Qué gacho" = that\'s messed up. "Ser gacho" = to be mean/unkind.'},
+  {cat:'emo',es:'qué oso',lit:'"what a bear"',eq:'How embarrassing / So cringe / Awkward',lvl:2,reg:'Todo México, urbano',
+   ex:'— Qué oso, me equivoqué de chat.\n— ¡Qué oso! Me vieron bailar solo.',note:'Expressing secondhand or firsthand embarrassment. "¡Qué oso!" alone says it all. The "bear" image = being as obvious and clumsy as a bear.'},
+  {cat:'emo',es:'me dio cringe',lit:'"it gave me cringe"',eq:'It made me cringe / So embarrassing',lvl:2,reg:'Jóvenes, urbano',
+   ex:'— Me dio cringe su video.\n— Eso es muy cringe.',note:'Direct English import used naturally in Mexican youth speech. Both "cringe" (noun) and "cringeoso/a" (adj.) are used: "qué cringeoso."'},
+  {cat:'emo',es:'pasarse de lanza',lit:'"to go beyond the spear"',eq:'To go too far / To cross a line',lvl:3,reg:'Todo México',
+   ex:'— Te pasaste de lanza con ese comentario.\n— Se pasó de lanza con el precio.',note:'"Pasarse de lanza" = overstepping. "Pasarse" alone also works. The "lanza" (spear) = the line you shouldn\'t cross.'},
+  {cat:'emo',es:'equis / X',lit:'"X"',eq:'Meh / Whatever / Not special',lvl:2,reg:'Urbano, jóvenes',
+   ex:'— ¿Cómo estuvo la peli? — Estuvo equis.\n— Me cae equis esa persona.',note:'"Estar equis" = to be meh/mediocre. "Me cae equis" = I neither like nor dislike someone. From the letter X as a placeholder.'},
+  {cat:'emo',es:'al alba / estar al alba',lit:'"at the dawn"',eq:'To be alert / Heads up',lvl:3,reg:'Todo México',
+   ex:'— Estate al alba con esa persona.\n— ¡Al alba! Viene el jefe.',note:'To be watchful or alert. "Estate al alba" = be on your guard. "Al alba" as an exclamation = heads up!'},
+  {cat:'emo',es:'hacerse pato',lit:'"to make oneself duck"',eq:'To play dumb / To avoid / To ghost',lvl:3,reg:'Todo México',
+   ex:'— Se hizo pato con el trabajo.\n— No te hagas pato, ya sé que sabes.',note:'To pretend you don\'t know or aren\'t involved. Like "playing possum" in English but with a duck. Common in all contexts.'},
+  {cat:'emo',es:'traer el rollo',lit:'"to bring the scroll/story"',eq:'To have the moves / To be charming',lvl:2,reg:'Todo México',
+   ex:'— Ese güey sí trae el rollo.\n— Trae buen rollo con todos.',note:'"Tener/traer el rollo" = to be charming, smooth, know how to talk to people. "Trae buen rollo" = great energy/vibe.'},
+  {cat:'emo',es:'funar',lit:'"—"',eq:'To cancel / To call out publicly',lvl:3,reg:'Redes sociales, jóvenes',
+   ex:'— Lo funaron en redes por eso.\n— Lo cancelaron después del escándalo.',note:'From social media culture. "Funar" = to expose and cancel someone publicly online. More youth/internet usage.'},
+  {cat:'emo',es:'¿sí o qué?',lit:'"yes or what?"',eq:'Right? / You with me? / Am I right or what?',lvl:2,reg:'Todo México',
+   ex:'— Estuvo buenísima la fiesta, ¿sí o qué?\n— ¿Vamos a la playa, sí o qué?',note:'Tag question seeking agreement or confirmation. Very common in Mexican speech as a rhetorical check-in.'},
+  {cat:'emo',es:'literal',lit:'"literally"',eq:'Literally / Seriously / For real',lvl:1,reg:'Urbano, jóvenes',
+   ex:'— Literal casi me caigo.\n— Literal no entendí nada.',note:'Used exactly like English "literally" — often as an intensifier even when not literal. Very common in youth speech, increasingly across all ages.'},
+  /* ── DIVERSIÓN Y FIESTA (18) ── */
+  {cat:'fies',es:'chela',lit:'"—"',eq:'Beer',lvl:2,reg:'Todo México',
+   ex:'— Vamos por unas chelas.\n— ¿Quieres una chela?',note:'One of the most common ways to say "cerveza" casually. Completely standard in any informal setting.'},
+  {cat:'fies',es:'pistear',lit:'"to drink"',eq:'To drink alcohol / To go drinking',lvl:3,reg:'Norte/noroeste, entendido en todo México',
+   ex:'— El viernes vamos a pistear.\n— Pistamos toda la noche.',note:'More common in the north but understood everywhere. "Pisteamos" = we were drinking/partying.'},
+  {cat:'fies',es:'crudo / cruda',lit:'"raw"',eq:'Hungover',lvl:2,reg:'Todo México',
+   ex:'— Estoy muy crudo, no quiero salir.\n— Se nota que traes cruda.',note:'"Crudo/a" = hungover. The "rawness" = feeling rough the morning after. "Traer cruda" = to have a hangover.'},
+  {cat:'fies',es:'peda',lit:'"fart-like party"',eq:'Drinking party / Booze night',lvl:4,reg:'Todo México',
+   ex:'— Ayer hubo una peda en casa de Luis.\n— Se armó una peda.',note:'Refers to a drinking gathering/party. Level 4 because of its vulgar root, but widely used conversationally.'},
+  {cat:'fies',es:'antro',lit:'"den/cave"',eq:'Nightclub / Club',lvl:2,reg:'Todo México',
+   ex:'— Vamos al antro el sábado.\n— Ya no me gusta el antro.',note:'"Antro" = nightclub/bar with dancing. Not an insult — it\'s just the casual word for nightclub. "Ir al antro" = to go clubbing.'},
+  {cat:'fies',es:'botanear',lit:'"to snack" (from botana)',eq:'To snack / To eat appetizers',lvl:1,reg:'Todo México',
+   ex:'— ¿No quieren botanear mientras esperamos?\n— Vamos a botanear algo.',note:'"Botana" = snacks/appetizers. "Botanear" = to eat snacks, often while drinking or waiting. Very common and harmless.'},
+  {cat:'fies',es:'caerle',lit:'"fall to it"',eq:'To come over / To show up / To visit',lvl:2,reg:'Todo México',
+   ex:'— Cáele a mi casa más tarde.\n— ¿A qué hora caes?',note:'"Cáele" = come over / drop by. Casual invitation. "¿A qué hora caes?" = what time are you coming over?'},
+  {cat:'fies',es:'rola',lit:'"roll"',eq:'Song / Track',lvl:2,reg:'Todo México',
+   ex:'— Pon una rola buena.\n— ¿Cuál es esa rola?',note:'"Rola" = a song/track. "Rolar" = to share/send. "Rola el link" = send me the link.'},
+  {cat:'fies',es:'ligar',lit:'"to tie"',eq:'To flirt / To pick someone up',lvl:2,reg:'Todo México',
+   ex:'— Quiere ligar en la fiesta.\n— Se fueron a ligar.',note:'To actively flirt with someone with romantic intent. "Ligó a alguien" = he/she picked someone up. Common and understood everywhere.'},
+  {cat:'fies',es:'tirar la onda',lit:'"throwing the wave"',eq:'To flirt / To make a move',lvl:2,reg:'Todo México',
+   ex:'— Le está tirando la onda.\n— Me está tirando la onda, creo.',note:'More specific than "ligar" — it\'s the act of flirting/approaching someone. "Le tiré la onda" = I made a move on them.'},
+  {cat:'fies',es:'chisme',lit:'"gossip"',eq:'Gossip / Tea',lvl:1,reg:'Todo México',
+   ex:'— Cuéntame el chisme.\n— ¿Cuál es el chisme de hoy?',note:'"Chisme" = gossip. "Chismear" = to gossip. Very common and lightly used. "Chismoso/a" = gossip (person). Classic Mexican social fabric.'},
+  {cat:'fies',es:'se rayó',lit:'"got scratched"',eq:'Scored big / Got lucky / Hit the jackpot',lvl:2,reg:'Todo México',
+   ex:'— Se rayó con ese regalo.\n— Nos rayamos con las entradas.',note:'"Rayarse" = to be lucky or score something great unexpectedly. "¡Se rayó!" = they hit the jackpot / got super lucky.'},
+  {cat:'fies',es:'top',lit:'"top"',eq:'Really good / Top-tier',lvl:2,reg:'Urbano, jóvenes',
+   ex:'— Ese lugar está top.\n— La fiesta estuvo top.',note:'Direct English import. "Estar top" = to be excellent/top-tier. Very common in youth and social media Spanish.'},
+  {cat:'fies',es:'perrear',lit:'"to dog"',eq:'To dance reggaeton-style / To party hard',lvl:3,reg:'Todo México, jóvenes',
+   ex:'— Se pusieron a perrear.\n— ¡A perrear!',note:'Dancing in the reggaeton style. Level 3 — sexual connotations but widely used. You\'ll hear this in clubs constantly.'},
+  {cat:'fies',es:'echar un clavado',lit:'"to throw a dive"',eq:'To dive in / To take a deep look / To have a quickie',lvl:2,reg:'Todo México',
+   ex:'— Eché un clavado al archivo.\n— Vamos a echar un clavado al mar.',note:'Context-dependent. Literally = to dive (into water). Figuratively = to take a quick deep look at something. Sometimes has romantic connotation — read context!'},
+  {cat:'fies',es:'random',lit:'"random"',eq:'Random / Weird / Out of nowhere',lvl:2,reg:'Urbano, jóvenes',
+   ex:'— Fue un comentario bien random.\n— ¿Por qué aparece una persona random?',note:'Directly from English "random." Widely used to mean unexpected, weird, or out-of-nowhere. "Bien random" = super random.'},
+  {cat:'fies',es:'traer el mood',lit:'"to bring the mood"',eq:'To be in the mood / To have the vibe',lvl:2,reg:'Urbano, jóvenes',
+   ex:'— Hoy no traigo el mood.\n— ¿Quién trae el mood para la fiesta?',note:'Spanglish. "Traer el mood" = to be in the right headspace for something. "No traigo el mood" = I\'m not feeling it today.'},
+  {cat:'fies',es:'en su rollo',lit:'"in their roll"',eq:'In their own world / Doing their thing',lvl:2,reg:'Todo México',
+   ex:'— Está bien en su rollo.\n— No le molestes, está en su rollo.',note:'"En su rollo" = someone is focused on their own thing, in their own world. Can be positive (doing their thing) or a gentle way to say "leave them alone."'},
+  /* ── SOLO CON CONFIANZA — Nivel 4-5 (15) ── */
+  {cat:'fuel',es:'güey (ofensivo)',lit:'"ox" (pejorative use)',eq:'Idiot / Jerk (when used with strangers)',lvl:4,reg:'Todo México',
+   ex:'— (with strangers) ¡Oye, güey! — ¡Tú, güey!',note:'⚠️ The SAME word "güey" that means "bro" between friends becomes offensive with strangers or an aggressive tone. Tone, relationship, and context are everything.'},
+  {cat:'fuel',es:'qué pedo',lit:'"what fart?"',eq:'What\'s going on? / What the hell?',lvl:4,reg:'Todo México',
+   ex:'— ¿Qué pedo, ya llegaste?\n— ¿Qué pedo fue eso?',note:'Stronger version of "qué onda." Only among people you know very well. "¿Qué pedo?" as a greeting = very casual. As a challenge = confrontational.'},
+  {cat:'fuel',es:'no mames',lit:'"don\'t suckle"',eq:'No way! / You\'re kidding! / That\'s insane!',lvl:5,reg:'Todo México',
+   ex:'— ¡No mames! ¿En serio costó tanto?\n— No mames, ¿cómo te pasó eso?',note:'One of the most expressive Mexican exclamations. Despite being level 5 (vulgar), it\'s extremely common in casual adult speech. The safe version: "no manches."'},
+  {cat:'fuel',es:'chingón / chingona',lit:'"fucking awesome"',eq:'Badass / Awesome / Excellent',lvl:4,reg:'Todo México',
+   ex:'— Ese profe está chingón.\n— Esa idea está chingona.',note:'From "chingar." Despite its origin, "chingón" is often used as a genuine compliment between friends. "Es un chingón" = they\'re a total badass.'},
+  {cat:'fuel',es:'cabrón / cabrona',lit:'"bastard/goat"',eq:'Bastard / Tough / Badass / Intense (context-dependent)',lvl:4,reg:'Todo México',
+   ex:'— Ese vato es bien cabrón para negociar.\n— ¡No seas cabrón!',note:'Highly context-dependent. Can be an insult OR a compliment depending on tone: "es muy cabrón" can mean he\'s intense/skilled, not necessarily bad.'},
+  {cat:'fuel',es:'está cabrón',lit:'"it\'s bastard-ish"',eq:'It\'s hard / It\'s intense / That\'s tough',lvl:4,reg:'Todo México',
+   ex:'— El examen estuvo cabrón.\n— Está bien cabrón el tráfico hoy.',note:'Used to describe something difficult, intense or extreme. "Estuvo cabrón" = it was rough/intense. Not always negative — can be impressed admiration.'},
+  {cat:'fuel',es:'ni pedo',lit:'"not even a fart"',eq:'Oh well / It is what it is / Nothing we can do',lvl:4,reg:'Todo México',
+   ex:'— Ni pedo, ya se cerró la tienda.\n— Ya ni pedo, perdimos.',note:'Expressive acceptance of an unfortunate situation. "Ni pedo" = oh well, nothing to be done. Very common despite level 4.'},
+  {cat:'fuel',es:'no hay pedo',lit:'"there is no fart"',eq:'No problem / No worries / We\'re good',lvl:4,reg:'Todo México',
+   ex:'— Perdón por llegar tarde. — No hay pedo.\n— ¿Todo bien? — No hay pedo.',note:'The positive version: "no hay pedo" = no problem / all good. Same level 4 word, opposite emotional valence from "qué pedo."'},
+  {cat:'fuel',es:'a huevo',lit:'"to the egg"',eq:'Hell yeah! / Absolutely! / For sure!',lvl:4,reg:'Todo México',
+   ex:'— ¿Quieres ir a la fiesta? — ¡A huevo!\n— ¡A huevo que sí!',note:'Strong affirmation — enthusiastic yes. Level 4 due to the vulgar root, but used very widely. "A huevo que sí" = absolutely, 100%.'},
+  {cat:'fuel',es:'se mamó',lit:'"he/she suckled too much"',eq:'They went too far / That was insane',lvl:5,reg:'Todo México',
+   ex:'— Se mamó con ese precio.\n— Se mamó en el examen.',note:'Describes someone who outdid themselves — can be negative (went too far with something wrong) or impressed (did something incredible). Context-dependent.'},
+  {cat:'fuel',es:'me vale madre',lit:'"it\'s worth mother to me"',eq:'I don\'t give a damn / I couldn\'t care less',lvl:5,reg:'Todo México',
+   ex:'— Me vale madre lo que digan.\n— Le vale madre el horario.',note:'Very strong expression of total indifference. Level 5 — never use in formal settings. "Me vale" alone is softer but similar.'},
+  {cat:'fuel',es:'chinga tu madre',lit:'"fuck your mother"',eq:'Go to hell / F*** you',lvl:5,reg:'Todo México',
+   ex:'[Extreme situation — intentionally not exemplified]',note:'⚠️ LEVEL 5 — Extremely offensive. Only included here so you recognize it and understand severity. Never use this. Knowing it exists ≠ using it.'},
+  {cat:'fuel',es:'de poca madre',lit:'"of little mother"',eq:'Amazing / Freaking awesome',lvl:5,reg:'Todo México',
+   ex:'— La comida estuvo de poca madre.\n— Ese concierto fue de poca madre.',note:'Paradoxically, this is a COMPLIMENT despite the vulgar "madre" component. Level 5 for the word itself. Among close friends, a superlative of amazement.'},
+  {cat:'fuel',es:'qué chingón / qué chingona',lit:'"how fucking awesome"',eq:'How awesome / That\'s incredible',lvl:4,reg:'Todo México',
+   ex:'— ¡Qué chingona estuvo la película!\n— ¡Qué chingón tu carro!',note:'Exclamatory form of "chingón." Genuine admiration. Level 4 but extremely common in adult informal speech.'},
+  {cat:'fuel',es:'en chinga (ya)',lit:'"in the fuck (already)"',eq:'Right now / ASAP / Urgently',lvl:4,reg:'Todo México',
+   ex:'— Necesito eso en chinga.\n— Muévete en chinga.',note:'The urgency version. "En chinga" = extremely fast / right now. Adding "ya" intensifies it. Vulgar but practical in real emergencies.'},
+];
+
+/* ══════════════════════════════════
+   EX 0 — FLASHCARDS
+══════════════════════════════════ */
+function getFiltered(){return flashFilter==='all'?SLANG:SLANG.filter(c=>c.cat===flashFilter);}
+
+function renderFlash(){
+  flashCards=getFiltered();if(flashIdx>=flashCards.length)flashIdx=0;
+  flashFlipped=false;renderFlashCard();
+}
+function renderFlashCard(){
+  if(!flashCards.length){document.getElementById('exContainer').innerHTML='<div class="panel"><p>No cards.</p></div>';return;}
+  const item=flashCards[flashIdx];
+  const cat=CATS[item.cat];
+  const pct=Math.round((flashIdx+1)/flashCards.length*100);
+  const lvlColor=LVL_COL[item.lvl]||'#888';
+  const fbtns=[{id:'all',lbl:'All ('+SLANG.length+')'},...Object.entries(CATS).map(([k,v])=>({id:k,lbl:v.icon+' '+v.label}))].map(f=>`<button class="ff-btn${flashFilter===f.id?' active':''}" style="${flashFilter===f.id?`background:${CATS[f.id]?.bg||'rgba(255,255,255,.1)'};border-color:${CATS[f.id]?.bd||'rgba(255,255,255,.25)'};color:${CATS[f.id]?.col||'var(--text)'}`:''};" onclick="setFilter('${f.id}')">${f.lbl}</button>`).join('');
+
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🃏 Flashcards — ${SLANG.length} expresiones de slang</div>
+  <div class="ex-instr">Front: the slang + its literal (often absurd) translation. Back: the real meaning, an example, and usage notes. Filter by category!</div>
+  <div class="flash-controls">${fbtns}</div>
+  <div class="flash-wrap">
+    <div class="flash-prow">
+      <span class="flash-cnt">${flashIdx+1}/${flashCards.length}</span>
+      <div class="flash-trk"><div class="flash-fil" style="width:${pct}%;background:${cat.col}"></div></div>
+      <span class="flash-cnt" style="color:${cat.col}">${cat.icon} ${cat.label}</span>
+    </div>
+    <div class="flash-card${flashFlipped?' flipped':''}" id="flashCard" onclick="flipCard()">
+      <div class="flash-inner">
+        <div class="flash-front" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <span style="font-size:.65rem;font-weight:900;text-transform:uppercase;color:${cat.col};letter-spacing:.08em">${cat.icon} ${cat.label}</span>
+          <div class="flash-word" style="color:${cat.col}">${item.es}</div>
+          <div class="flash-lit">💡 Literal: ${item.lit}</div>
+          <div style="margin-top:auto;display:flex;align-items:center;gap:10px">
+            <span class="flash-lvl" style="background:${lvlColor}22;border:1px solid ${lvlColor}55;color:${lvlColor}">${'●'.repeat(item.lvl)+'○'.repeat(5-item.lvl)} Nivel ${item.lvl}</span>
+            <span class="flash-reg">📍 ${item.reg}</span>
+          </div>
+          <div class="flash-hint">🔊 Click to hear / flip for meaning</div>
+        </div>
+        <div class="flash-back" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <span style="font-size:.65rem;font-weight:900;text-transform:uppercase;color:${cat.col};letter-spacing:.08em">${cat.icon} ${cat.label}</span>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <div>
+              <div class="flash-word" style="color:${cat.col};font-size:1.5rem">${item.es}</div>
+              <div class="flash-eq">= ${item.eq}</div>
+            </div>
+            <span class="flash-lvl" style="margin-left:auto;background:${lvlColor}22;border:1px solid ${lvlColor}55;color:${lvlColor};white-space:nowrap">Nivel ${item.lvl}</span>
+          </div>
+          <div class="flash-ex">${item.ex.replace(/\n/g,'<br>')}</div>
+          <div class="flash-note">📌 ${item.note}</div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-nav">
+      <button class="btn btn-ghost" onclick="prevFlash()" ${flashIdx===0?'disabled':''}>← Prev</button>
+      <button class="btn btn-ghost" onclick="flipCard()">↺ Flip</button>
+      <button class="btn btn-cyan" onclick="nextFlash()" ${flashIdx===flashCards.length-1?'disabled':''}>Next →</button>
+    </div>
+  </div></div>`;
+}
+function flipCard(){flashFlipped=!flashFlipped;const c=document.getElementById('flashCard');if(c)c.classList.toggle('flipped',flashFlipped);}
+function nextFlash(){flashIdx=Math.min(flashCards.length-1,flashIdx+1);flashFlipped=false;renderFlashCard();}
+function prevFlash(){flashIdx=Math.max(0,flashIdx-1);flashFlipped=false;renderFlashCard();}
+function setFilter(f){flashFilter=f;flashIdx=0;renderFlash();}
+
+/* ══════════════════════════════════
+   EX 1 — ¿QUÉ SIGNIFICA? MC (50)
+══════════════════════════════════ */
+const MC=[
+  {s:'"¿Qué onda?" — ¿qué significa esto?',o:['¿Cómo te llamas?','¿Qué está pasando? / ¿Cómo estás?','¿Dónde estás?','¿Quién eres?'],a:1,x:'"Qué onda" = What\'s up? / What\'s going on? One of the most essential Mexican expressions.'},
+  {s:'"¡Órale!" en respuesta a "¿Vamos por tacos?"',o:['No, gracias.','¡Sí, vamos!','Tal vez.','¿Por qué?'],a:1,x:'"Órale" = Okay! / Let\'s go! When responding to a plan, it means agreement and enthusiasm.'},
+  {s:'"Sale" — ¿qué significa en una conversación?',o:['Se vende algo.','De acuerdo / Okay.','Sale de la tienda.','Hasta luego.'],a:1,x:'"Sale" = Okay / Sounds good. Agreement to a plan or request. Very safe and common.'},
+  {s:'"La neta, estuvo muy difícil." ¿Qué significa "la neta"?',o:['Normalmente','Honestamente / la verdad es que','El examen','La fecha'],a:1,x:'"La neta" = honestly / the truth is. "La neta estuvo difícil" = honestly, it was hard.'},
+  {s:'¿Cuál es la diferencia entre "padre" y "chido"?',o:['No hay diferencia, son idénticos','Padre es nivel 1 (suave), chido es nivel 2 (un poco más informal)','Chido es insultante','Padre solo se usa en el norte'],a:1,x:'"Padre" (nivel 1) is completely safe, even with strangers. "Chido" (nivel 2) is slightly more casual, especially common in CDMX.'},
+  {s:'"No manches, ¡qué caro!" ¿Cuándo usarías "no manches"?',o:['Solo cuando algo es barato','Cuando algo te sorprende negativamente o te frustra','Solo en contextos formales','Cuando alguien se va'],a:1,x:'"No manches" = No way! / Seriously? — safe version of "no mames." Use when surprised or frustrated. OK in most situations.'},
+  {s:'"¡Aguas con el escalón!" ¿Qué significa "aguas"?',o:['¡Hay agua aquí!','¡Cuidado! / ¡Ojo!','Hay escalones mojados.','¡Ven acá!'],a:1,x:'"¡Aguas!" = Watch out! / Heads up! A classic Mexican warning expression.'},
+  {s:'"Vamos de volada." ¿Qué significa?',o:['Vamos a volar en avión.','Vamos rápido / enseguida.','Vamos a la playa.','No vamos.'],a:1,x:'"De volada" = right away / quickly. "Vamos de volada" = let\'s go fast.'},
+  {s:'"Me late esa idea." ¿Qué significa?',o:['La idea me da miedo.','Me gusta esa idea / suena bien.','No entiendo esa idea.','La idea es mía.'],a:1,x:'"Me late" = I like it / sounds good to me. From the heartbeat — it resonates with me.'},
+  {s:'"¿Vienes? Simón." ¿Qué significa "simón"?',o:['Sí (casual).','No.','Tal vez.','Más tarde.'],a:0,x:'"Simón" = yes (casual). And "nel" = no (casual). Both are informal alternatives.'},
+  {s:'"Ese morro es mi vecino." ¿Qué es un "morro"?',o:['Un perro.','Un niño / chico joven.','Un señor mayor.','Un profesor.'],a:1,x:'"Morro" = kid / young guy. "Morra" = young girl. More common in northern Mexico.'},
+  {s:'"Ese vato trabaja conmigo." ¿Qué es un "vato"?',o:['Una mujer.','Un tipo / dude.','Un jefe.','Un familiar.'],a:1,x:'"Vato" = guy / dude. Common in the north and northwest. In CDMX, "güey" or "tipo" are more common.'},
+  {s:'"Esa banda ya está en el antro." ¿Qué significa "banda"?',o:['Música en vivo.','El grupo de amigos / la gente.','Una fiesta privada.','El trabajo.'],a:1,x:'"La banda" = the crew / friends / people. "¿Qué dice la banda?" = what\'s everyone saying?'},
+  {s:'"Es muy codo para pagar." ¿Qué significa "codo"?',o:['Es generoso.','Es tacaño / no le gusta gastar dinero.','Trabaja mucho.','Es inteligente.'],a:1,x:'"Codo" = stingy / tight with money. The image is of someone guarding their wallet with their elbow.'},
+  {s:'"Échame el paro con la tarea." ¿Qué significa?',o:['Dame el paro (lugar).','Ayúdame con la tarea.','Para la tarea que estoy haciendo.','¿Qué tarea tienes?'],a:1,x:'"Echar el paro" = to help out / do a favor. "Échame el paro" = help me out.'},
+  {s:'"¿Traes lana para el taxi?" ¿Qué es "lana"?',o:['Material de tejido.','Dinero / efectivo.','Un boleto.','Tiempo.'],a:1,x:'"Lana" = money / cash. Very common slang. "Sin lana" = broke.'},
+  {s:'"Tengo mucha chamba hoy." ¿Qué significa "chamba"?',o:['Tarea de la escuela.','Trabajo / job.','Una reunión importante.','Un problema.'],a:1,x:'"Chamba" = work / job. One of the most natural words for work in casual Mexican Spanish.'},
+  {s:'"¡Ponte trucha!" ¿Qué significa?',o:['Come pescado.','¡Presta atención! / ¡Sé listo!','Muévete rápido.','Cómete la trucha.'],a:1,x:'"¡Ponte trucha!" = pay attention / be sharp / be careful. "Trucha" = clever/alert.'},
+  {s:'"Me da hueva salir hoy." ¿Qué significa "me da hueva"?',o:['Me da asco.','Me da flojera / no tengo ganas.','Me da miedo.','Me da gusto.'],a:1,x:'"Me da hueva" = I can\'t be bothered / I\'m too lazy. "Hueva" = laziness/drag.'},
+  {s:'"Chale, se me olvidó la tarea." ¿Qué expresa "chale"?',o:['Alegría.','Sorpresa positiva.','Decepción / frustración leve.','Enojo fuerte.'],a:2,x:'"Chale" = ugh / damn / that sucks. Expresses mild disappointment or frustration. Common in CDMX.'},
+  {s:'"Me sacó de onda su reacción." ¿Qué significa?',o:['Me hizo bailar.','Me confundió / me desconcertó.','Me gustó mucho.','Me enojó.'],a:1,x:'"Sacar de onda" = to throw someone off / confuse or unsettle them. "Me sacó de onda" = it threw me off.'},
+  {s:'"¡Qué oso! Me equivoqué de nombre." ¿Qué expresa "qué oso"?',o:['¡Qué animal!','¡Qué vergüenza! / ¡Qué penoso!','¡Qué gracioso!','¡Qué suerte!'],a:1,x:'"Qué oso" = how embarrassing / so awkward. The "bear" image = being as clumsy as a bear.'},
+  {s:'"Está agüitado por el examen." ¿Qué significa?',o:['Está enojado.','Está emocionado.','Está triste / decaído.','Está ocupado.'],a:2,x:'"Agüitado" = bummed out / feeling down. More common in the north but understood everywhere.'},
+  {s:'"Se pasó de lanza con ese comentario." ¿Qué significa?',o:['Fue muy bueno.','Se pasó de la raya / cruzó un límite.','Habló muy bien.','Llegó tarde.'],a:1,x:'"Pasarse de lanza" = to go too far / to cross a line. The "lanza" (spear) = the limit you shouldn\'t cross.'},
+  {s:'"La película estuvo equis." ¿Qué significa "equis"?',o:['Fue increíble.','Fue equivocada.','Fue mediocre / más o menos.','Fue muy larga.'],a:2,x:'"Equis" = meh / so-so. "Estar equis" = to be mediocre or average. From the letter X as a placeholder.'},
+  {s:'"¡Qué chido cotorreo!" ¿Qué es un "cotorreo"?',o:['Un concierto.','Un rato agradable / un hangout divertido.','Una discusión.','Un trabajo.'],a:1,x:'"Cotorreo" = a chill/fun hangout. "Cotorrear" = to hang out/chat casually.'},
+  {s:'"Vamos por unas chelas." ¿Qué son "chelas"?',o:['Unas aguas.','Unas cervezas.','Unas botanas.','Unas sodas.'],a:1,x:'"Chelas" = beers. One of the most common casual words for "cervezas."'},
+  {s:'"Estoy crudo hoy." ¿Qué significa estar "crudo"?',o:['Tener hambre.','Tener resaca / cruda (hangover).','Estar enfermo de gripa.','Estar cansado de trabajar.'],a:1,x:'"Crudo" = hungover. "Tener cruda" = to have a hangover. "Traer cruda" = same thing.'},
+  {s:'"Se fue al antro con sus amigos." ¿Qué es un "antro"?',o:['Una cueva literal.','Un bar / antro = nightclub.','Una tienda de ropa.','Un parque.'],a:1,x:'"Antro" = nightclub / bar with dancing. "Ir al antro" = to go clubbing. Nothing negative about the word.'},
+  {s:'"Cáele a mi casa más tarde." ¿Qué significa "cáele"?',o:['Cae desde arriba.','Ven / visítame.','Llámame.','Recógeme.'],a:1,x:'"Cáele" = come over / drop by. "¿A qué hora caes?" = what time are you coming?'},
+  {s:'"Le está tirando la onda." ¿Qué significa?',o:['Le está lanzando una pelota.','Le está coqueteando / haciendo un movimiento.','Le está hablando de trabajo.','Le está ayudando.'],a:1,x:'"Tirar la onda" = to flirt with someone / to make a move on them.'},
+  {s:'"Pon una rola buena." ¿Qué es una "rola"?',o:['Un juego.','Una canción.','Una película.','Una broma.'],a:1,x:'"Rola" = a song / track. "Rolar el link" = to share/send the link.'},
+  {s:'"Se rayó con ese regalo." ¿Qué significa "se rayó"?',o:['Se lastimó.','Tuvo mucha suerte / sacó algo increíble.','Se enojó mucho.','Se fue rápido.'],a:1,x:'"Rayarse" = to score big / to get lucky with something great. "¡Se rayó!" = they hit the jackpot!'},
+  {s:'"Cuéntame el chisme." ¿Qué significa?',o:['Cuéntame el cuento.','Cuéntame el chismoso.','Cuéntame el chisme / el gossip.','Cuéntame lo que pasó.'],a:2,x:'"Chisme" = gossip / tea. "Chismear" = to gossip. "¿Cuál es el chisme?" = what\'s the tea?'},
+  {s:'"Ese lugar está top." ¿Qué significa "top"?',o:['Está en lo alto de un edificio.','Está al principio de la lista.','Está increíble / de primer nivel.','Es caro.'],a:2,x:'"Top" (from English) = really good / top-tier. Very common in youth Mexican Spanish.'},
+  {s:'"¿Qué pedo con ese güey?" — ¿cuándo usarías "qué pedo"?',o:['Siempre, es muy educado.','Solo entre amigos de confianza — es nivel 4.','En contextos formales.','Con personas mayores.'],a:1,x:'"Qué pedo" is a Level 4 expression — only use with close friends you know very well.'},
+  {s:'"¡No mames!" — ¿cuál es la versión más suave?',o:['¡No güey!','¡No manches!','¡No pedo!','¡No chale!'],a:1,x:'"No manches" is the safe, all-contexts version of "no mames." Same meaning, much less offensive.'},
+  {s:'"Ese profe está chingón." ¿Es un insulto?',o:['Sí, siempre es ofensivo.','No, en este contexto es un cumplido entre amigos.','Depende del país.','Solo mujeres pueden decirlo.'],a:1,x:'"Chingón" can be a genuine compliment: "está chingón" = they\'re awesome / excellent. Context and relationship matter a lot.'},
+  {s:'"Ni pedo, ya se fue el camión." ¿Qué significa?',o:['No importa, no es problema.','Ni modo, ya qué / no hay nada que hacer.','El camión se fue.','No hay autobús.'],a:1,x:'"Ni pedo" = oh well / it is what it is / nothing can be done. Expression of resigned acceptance.'},
+  {s:'"No hay pedo" — ¿qué significa?',o:['No hay problema / estamos bien.','Hay un problema serio.','No hay gas.','Está bien enojado.'],a:0,x:'"No hay pedo" = no problem / all good / we\'re fine. Opposite emotional valence from "qué pedo."'},
+  {s:'"¡A huevo que sí!" — ¿qué expresa?',o:['Desacuerdo total.','Duda.','Confirmación entusiasta / absolutamente sí.','Sorpresa negativa.'],a:2,x:'"A huevo" = hell yeah! / absolutely! Very enthusiastic affirmation. Level 4 but widely used.'},
+  {s:'"Está bien en su rollo." ¿Qué significa?',o:['Está en un buen lugar.','Está ocupado/a haciendo lo suyo / en su mundo.','Está enferma.','Trabaja mucho.'],a:1,x:'"En su rollo" = in their own world / doing their thing. Can mean focused, or leave them alone.'},
+  {s:'"Cuéntame, ¿mande?" — ¿cuándo dices "mande"?',o:['Cuando ordenas algo.','Cuando no escuchaste bien algo o alguien te llama.','Cuando llegas a algún lugar.','Cuando te vas.'],a:1,x:'"Mande" = Pardon? / Yes? — said when you didn\'t hear or someone called your name. Very Mexican.'},
+  {s:'"Ese lugar está bien fresa." ¿Qué significa?',o:['Venden fresas.','Es muy elegante / exclusivo / snob.','Es barato.','Es divertido.'],a:1,x:'"Fresa" = posh / preppy / snobby. Describes a place, person or event as upper-class or exclusive.'},
+  {s:'"Me dio cringe su presentación." ¿Qué significa?',o:['Me pareció muy buena.','Me hizo sentir vergüenza ajena.','Me aburrió.','Me confundió.'],a:1,x:'"Me dio cringe" = it made me cringe / feel secondhand embarrassment. Direct English import used naturally.'},
+  {s:'"Vamos a caer a la fiesta más tarde." ¿Qué significa "caer"?',o:['Tropezar.','Llegar / aparecer.','Irnos.','Dormirnos.'],a:1,x:'"Caer" used informally = to show up / arrive somewhere. "Caemos más tarde" = we\'ll show up later.'},
+  {s:'"Necesito eso en chinga." ¿Cuál es el significado?',o:['Lo necesito mal hecho.','Lo necesito de forma incorrecta.','Lo necesito urgente / muy rápido.','No lo necesito.'],a:2,x:'"En chinga" = extremely fast / urgently / ASAP. Level 4 — strong language but very practical.'},
+  {s:'"¿Quieres jalar con nosotros?" ¿Qué significa "jalar"?',o:['¿Quieres halar algo pesado?','¿Quieres venir / unirte a nosotros?','¿Quieres trabajar?','¿Quieres ir a otro lado?'],a:1,x:'"Jalar" = to be in / to join / to come along. "¡Jalo!" = I\'m in! Very versatile verb.'},
+  {s:'"Se la pasaron cotorreando." ¿Qué significa?',o:['Estuvieron peleando.','Estuvieron platicando y pasando el rato.','Estuvieron trabajando.','Estuvieron de viaje.'],a:1,x:'"Cotorrear" = to hang out and chat casually. "Se la pasaron cotorreando" = they spent time just chilling.'},
+  {s:'"Ese vato es bien trucha para los negocios." ¿Qué significa?',o:['Es como un pescado.','Es muy listo / hábil para hacer negocios.','Le gustan mucho los negocios.','Es un hombre de negocios formal.'],a:1,x:'"Trucha" = clever / sharp / street-smart. "Es muy trucha" = they\'re very sharp/skilled.'},
+  {s:'"Está muy godín ese horario." ¿Qué significa?',o:['Es un horario muy temprano.','Es el típico horario de oficina de 9 a 6.','Es un horario libre.','Es un horario de noche.'],a:1,x:'"Godín" = office worker stereotype. "Horario godín" = the classic 9-to-6 schedule. Humorous self-deprecation about corporate life.'},
+];
+const MCO=MC.map((_,i)=>seededShuffle([0,1,2,3],i*13+7));
+
+function renderMC(){
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const qHTML=MC.map((item,i)=>{
+    const ord=MCO[i];
+    const opts=ord.map(oi=>{
+      const o=item.o[oi];let cls='mc-opt';
+      if(mcChecked){if(oi===item.a)cls+=' mc-show';else if(mcAnswers[i]===oi&&oi!==item.a)cls+=' mc-err';}
+      else if(mcAnswers[i]===oi)cls+=oi===item.a?' mc-ok':' mc-err';
+      return `<button class="${cls}" id="mco${i}_${oi}" onclick="answerMC(${i},${oi})" ${mcChecked?'disabled':''}>${o}</button>`;
+    }).join('');
+    const showExp=mcChecked||(mcAnswers[i]!==undefined);
+    return `<div class="mc-card"><div class="mc-top"><span class="mc-num">${i+1}</span><span class="mc-sent">${item.s}</span></div><div class="mc-opts">${opts}</div><div class="mc-expl${showExp?' show':''}" id="mce${i}">${item.x}</div></div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">📝 ¿Qué significa? — Trivia de slang</div>
+  <div class="ex-instr">Choose the correct meaning or usage of each Mexican slang expression. Read the context carefully!</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${MC.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="mc_ok">—</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="mc_err">—</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="mc_p">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="mc_pg" style="width:${pct}%"></div></div></div></div>
+  <div class="mc-list">${qHTML}</div>
+  <div class="fb" id="mc_fb"></div>
+  <div class="actions"><button class="btn btn-cyan" id="mc_chk" onclick="checkMC()" ${mcChecked?'disabled':''}>Check all</button><button class="btn btn-ghost" onclick="mcAnswers={};mcChecked=false;renderMC()">↺ Reset</button></div></div>`;
+}
+function answerMC(qi,oi){
+  if(mcChecked)return;
+  if(mcAnswers[qi]!==undefined){const p=document.getElementById(`mco${qi}_${mcAnswers[qi]}`);if(p)p.classList.remove('mc-ok','mc-err');}
+  mcAnswers[qi]=oi;
+  const b=document.getElementById(`mco${qi}_${oi}`);if(b)b.classList.add(oi===MC[qi].a?'mc-ok':'mc-err');
+  const e=document.getElementById('mce'+qi);if(e)e.classList.add('show');
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const el=document.getElementById('mc_p');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('mc_pg');if(pg)pg.style.width=pct+'%';
+}
+function checkMC(){
+  mcChecked=true;let ok=0;MC.forEach((item,i)=>{if(mcAnswers[i]===item.a)ok++;});
+  const pct=Math.round(ok/MC.length*100);
+  document.getElementById('mc_ok').textContent=ok;document.getElementById('mc_err').textContent=MC.length-ok;
+  document.getElementById('mc_pg').style.width='100%';document.getElementById('mc_p').textContent='100%';
+  const fb=document.getElementById('mc_fb');
+  fb.className='fb show '+(pct>=85?'ok':'partial');
+  fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${MC.length}.</strong> ${pct>=85?'¡Chingón! You know Mexican slang!':'Study the flashcards and try again.'}`;
+  document.getElementById('mc_chk').disabled=true;renderMC();
+}
+
+/* ══════════════════════════════════
+   EX 2 — ¿SE USA ASÍ? VERDADERO/FALSO (16)
+   Tests correct vs incorrect usage in context
+══════════════════════════════════ */
+const ERRORS=[
+  ['"¡Qué onda, señor director!" — diciéndole así a tu director en una reunión formal.',true,'better: "Buenos días, señor director"','INCORRECT ❌ — "¿Qué onda?" is informal (Nivel 2). Never use with bosses or authority figures in formal settings. Stick to "buenos días" or "buenas tardes."'],
+  ['"La neta, no entendí el tema." — diciéndolo entre amigos estudiantes.',false,null,'CORRECT ✓ — "La neta" (honestly/for real) between classmates is totally natural. Nivel 2, safe in informal contexts. ✓'],
+  ['"¡No manches! ¿En serio cuesta mil pesos?" — expresando sorpresa al ver un precio.',false,null,'CORRECT ✓ — "No manches" is the safe all-contexts version. Expressing surprise at a price is a perfect use case. ✓'],
+  ['"Me late mucho tu propuesta." — diciéndoselo a tu jefe en una junta de trabajo.',true,'better: "Me parece muy buena tu propuesta"','INCORRECT ❌ — "Me late" (I\'m feeling it / sounds good) is informal (Nivel 2). Avoid in professional meetings — use "me parece muy buena" or "me parece excelente."'],
+  ['"Échame el paro con el proyecto, ¿sí?" — pidiéndole ayuda a un compañero de trabajo casual.',false,null,'CORRECT ✓ — "Echar el paro" (help out/do a favor) at Nivel 3 works fine between coworkers with a casual relationship. ✓'],
+  ['"Vamos por unas chelas después del trabajo, ¿no?" — invitando a compañeros de confianza.',false,null,'CORRECT ✓ — "Chelas" (beers) at Nivel 2-3 is perfectly normal between colleagues you know well. ✓'],
+  ['"Ese güey de tu jefe está bien gacho." — usándolo con el señor de recursos humanos al reportar un problema.',true,'never use in formal HR context','INCORRECT ❌ — "Güey" (Nivel 3) and "gacho" (Nivel 3) are too informal for HR. This could get you in serious trouble professionally.'],
+  ['"¿Cómo está la banda?" — preguntando por un grupo de amigos.',false,null,'CORRECT ✓ — "La banda" = the crew/friends. Asking about a group of friends this way is natural and casual. Nivel 2. ✓'],
+  ['"No hay pedo, lo resolvemos." — respondiendo a un problema con un compañero de confianza.',false,null,'CORRECT ✓ — "No hay pedo" (no problem / we\'re good) works fine between people who know each other well. Still Nivel 4, so read the context. ✓'],
+  ['"Necesito el reporte en chinga para el cliente." — diciéndoselo a un empleado que acaba de entrar.',true,'better: "Necesito el reporte urgente / de inmediato"','INCORRECT ❌ — "En chinga" (urgently/ASAP) is Nivel 4. With a new employee, this crosses a professional line. Use "urgente" or "de inmediato."'],
+  ['"Ese lugar está muy fresa, mejor vamos a otro." — describiéndolo entre amigos.',false,null,'CORRECT ✓ — "Fresa" (posh/preppy) between friends describing a place is completely casual and appropriate. Nivel 2-3. ✓'],
+  ['"¡A huevo que sí, voy a la fiesta!" — respondiendo a un amigo.',false,null,'CORRECT ✓ — "A huevo" (hell yeah) is Nivel 4 but perfectly normal in informal conversation with close friends. ✓'],
+  ['"Chingón" usándolo como cumplido: "Estuvo chingón el partido, ¿sí o qué?"',false,null,'CORRECT ✓ — Between friends, "chingón" absolutely works as a compliment (awesome/badass). Context and relationship make all the difference. Nivel 4. ✓'],
+  ['"Me vale madre lo que opinen" — diciéndoselo a tus profesores cuando critican tu trabajo.',true,'extremely inappropriate in academic setting','INCORRECT ❌ — "Me vale madre" (I don\'t give a damn) is Nivel 5. Saying this to professors would be extremely rude and disrespectful — could have serious academic consequences.'],
+  ['"¿Qué onda con la tarea?" — preguntándole a un compañero de clase.',false,null,'CORRECT ✓ — "¿Qué onda?" with classmates asking about homework is completely natural. Nivel 2. ✓'],
+  ['"Ándale, ya vámonos, se nos hace tarde." — diciéndoselo a tus amigos.',false,null,'CORRECT ✓ — "Ándale" (come on/let\'s go) is Nivel 2 and works perfectly in casual situations with friends. ✓'],
+];
+
+function renderErrorHunt(){
+  ehAnswered={};
+  let html=`<div class="panel"><div class="ex-title">❓ ¿Se usa así? — Verdadero o falso</div>
+  <div class="ex-instr">Is this slang being used <em>correctly</em> for the context described? The right word in the wrong context is still a mistake!</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${ERRORS.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="eh_ok">0</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="eh_err">0</span></div><div class="prog-w"><div class="prog-l">Progress: <span id="eh_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="eh_pg" style="width:0%"></div></div></div></div>
+  <div class="eh-list">`;
+  ERRORS.forEach(([s,hasErr,,exp],i)=>{
+    html+=`<div class="eh-item" id="ehi${i}"><div class="eh-n">${i+1}</div>
+    <div class="eh-body"><div class="eh-sent" id="ehs${i}">"${s}"</div>
+    <div class="eh-btns"><button class="eh-btn eh-yes" onclick="judgeEh(${i},false)">✅ Correcto</button><button class="eh-btn eh-no" onclick="judgeEh(${i},true)">❌ Incorrecto</button></div>
+    <div class="eh-exp" id="ehe${i}">${exp}</div></div></div>`;
+  });
+  html+=`</div><div class="fb" id="eh_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="ehAnswered={};renderErrorHunt()">↺ Reset</button></div></div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+function judgeEh(idx,saysErr){
+  if(ehAnswered[idx]!==undefined)return;
+  const [s,hasErr,fix,exp]=ERRORS[idx];
+  const correct=saysErr===hasErr;
+  ehAnswered[idx]=correct;
+  const item=document.getElementById('ehi'+idx);
+  item.classList.add('revealed',correct?'eh-ok':'eh-bad');
+  item.querySelectorAll('.eh-btn').forEach(b=>b.disabled=true);
+  const chosen=item.querySelector(saysErr?'.eh-no':'.eh-yes');
+  if(chosen)chosen.classList.add(correct?'cho-ok':'cho-err');
+  if(hasErr&&fix){const se=document.getElementById('ehs'+idx);se.innerHTML=`"${s}" <span class="eh-fix">→ ${fix}</span>`;}
+  document.getElementById('ehe'+idx).classList.add('show');
+  const total=Object.keys(ehAnswered).length;
+  const ok=Object.values(ehAnswered).filter(v=>v).length;
+  document.getElementById('eh_ok').textContent=ok;
+  document.getElementById('eh_err').textContent=total-ok;
+  document.getElementById('eh_pct').textContent=Math.round(total/ERRORS.length*100)+'%';
+  document.getElementById('eh_pg').style.width=Math.round(total/ERRORS.length*100)+'%';
+  if(total===ERRORS.length){
+    const pct=Math.round(ok/ERRORS.length*100);
+    const fb=document.getElementById('eh_fb');
+    fb.className='fb show '+(pct>=80?'ok':'partial');
+    fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${ok}/${ERRORS.length}.</strong> ${pct>=80?'¡Chido! You understand slang in context!':'Remember: level matters just as much as meaning.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 3 — CLASIFICA (drag & sort, 6 buckets)
+══════════════════════════════════ */
+const SORT_BUCKETS=[
+  {id:'bas', label:'Lo básico',       icon:'✅', sub:'órale, sale, chido...',  col:'var(--bas2)',  bg:'rgba(52,211,153,.06)', bd:'rgba(52,211,153,.22)'},
+  {id:'gen', label:'Gente',           icon:'🤙', sub:'güey, carnal, banda...',  col:'var(--gen2)',  bg:'rgba(244,114,182,.06)',bd:'rgba(244,114,182,.22)'},
+  {id:'trab',label:'Trabajo y lana',  icon:'💰', sub:'chamba, lana, codo...',  col:'var(--trab2)', bg:'rgba(251,191,36,.06)', bd:'rgba(251,191,36,.22)'},
+  {id:'emo', label:'Emociones',       icon:'😤', sub:'chale, hueva, oso...',   col:'var(--emo2)',  bg:'rgba(96,165,250,.06)', bd:'rgba(96,165,250,.22)'},
+  {id:'fies',label:'Diversión',       icon:'🎉', sub:'chela, antro, rola...', col:'var(--fies2)', bg:'rgba(167,139,250,.06)',bd:'rgba(167,139,250,.22)'},
+  {id:'fuel',label:'Solo c/ confianza',icon:'🔥',sub:'no mames, qué pedo...',  col:'var(--fuel2)', bg:'rgba(248,113,113,.06)',bd:'rgba(248,113,113,.22)'},
+];
+const SORT_CARDS=[
+  {id:'s1', t:'¡Órale, vamos!',        b:'bas', x:'Lo básico — órale = okay/let\'s go.'},
+  {id:'s2', t:'La neta',               b:'bas', x:'Lo básico — la neta = honestly/the truth.'},
+  {id:'s3', t:'Aguas con el escalón',  b:'bas', x:'Lo básico — aguas = watch out!'},
+  {id:'s4', t:'Simón / Nel',           b:'bas', x:'Lo básico — simón/nel = yes/no (casual).'},
+  {id:'s5', t:'Güey / Wey',            b:'gen', x:'Gente — güey = dude/bro (between friends).'},
+  {id:'s6', t:'Mi carnal',             b:'gen', x:'Gente — carnal = bro/close friend.'},
+  {id:'s7', t:'La banda',              b:'gen', x:'Gente — la banda = the crew/friends.'},
+  {id:'s8', t:'Es bien fresa',         b:'gen', x:'Gente — fresa = posh/preppy/snobby.'},
+  {id:'s9', t:'Tengo chamba',          b:'trab',x:'Trabajo — chamba = work/job.'},
+  {id:'s10',t:'No traigo lana',        b:'trab',x:'Trabajo y lana — lana = money/cash.'},
+  {id:'s11',t:'Es muy codo',           b:'trab',x:'Trabajo y lana — codo = stingy/cheap.'},
+  {id:'s12',t:'Échame el paro',        b:'trab',x:'Trabajo — echar el paro = help me out.'},
+  {id:'s13',t:'¡Chale!',               b:'emo', x:'Emociones — chale = ugh/that sucks.'},
+  {id:'s14',t:'Me da hueva',           b:'emo', x:'Emociones — me da hueva = I can\'t be bothered.'},
+  {id:'s15',t:'Me sacó de onda',       b:'emo', x:'Emociones — sacar de onda = threw me off.'},
+  {id:'s16',t:'¡Qué oso!',             b:'emo', x:'Emociones — qué oso = how embarrassing.'},
+  {id:'s17',t:'Vamos por chelas',      b:'fies',x:'Diversión — chelas = beers.'},
+  {id:'s18',t:'Vamos al antro',        b:'fies',x:'Diversión — antro = nightclub.'},
+  {id:'s19',t:'Pon una rola',          b:'fies',x:'Diversión — rola = song/track.'},
+  {id:'s20',t:'Se están ligando',      b:'fies',x:'Diversión — ligar = to flirt/pick up.'},
+  {id:'s21',t:'¡No mames!',            b:'fuel',x:'Solo con confianza — no mames = Level 5.'},
+  {id:'s22',t:'Ni pedo',               b:'fuel',x:'Solo con confianza — ni pedo = oh well (Level 4).'},
+  {id:'s23',t:'Está chingón',          b:'fuel',x:'Solo con confianza — chingón = badass (Level 4).'},
+  {id:'s24',t:'¡A huevo!',             b:'fuel',x:'Solo con confianza — a huevo = hell yeah (Level 4).'},
+];
+let sortCards2=[],sortPlaced2={},sortChecked2=false,tapSel2=null;
+
+function renderSort(){
+  sortCards2=[...SORT_CARDS];sortPlaced2={};sortChecked2=false;tapSel2=null;
+  const shuffled=[...sortCards2].sort(()=>Math.random()-.5);
+  const pile=shuffled.map(c=>`<div class="sort-card" id="sc_${c.id}" draggable="true"
+    ondragstart="dragItem='${c.id}';setTimeout(()=>{const e=document.getElementById('sc_${c.id}');if(e)e.classList.add('ghost');},0)"
+    ondragend="const e=document.getElementById('sc_${c.id}');if(e)e.classList.remove('ghost');dragItem=null"
+    onclick="tapCard2('${c.id}')">${c.t}</div>`).join('');
+  const bucks=SORT_BUCKETS.map(b=>`<div class="sort-bucket" id="bk2_${b.id}"
+    style="background:${b.bg};border:2px dashed ${b.bd}"
+    ondragover="event.preventDefault();this.classList.add('drag-over')"
+    ondragleave="this.classList.remove('drag-over')"
+    ondrop="dropSort2(event,'${b.id}')"
+    onclick="tapBucket2('${b.id}')">
+    <div class="bucket-title" style="color:${b.col}">${b.icon} ${b.label}</div>
+    <div class="bucket-sub">${b.sub}</div>
+  </div>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">📊 Clasifica el slang</div>
+  <div class="ex-instr">Sort each expression into the correct category. Tap a card then tap a bucket on mobile. Drag and drop on desktop.</div>
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;color:var(--muted2);margin-bottom:8px">Expresiones (${sortCards2.length})</div>
+  <div class="sort-pile" id="sPile2">${pile}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px;margin-bottom:12px">${bucks}</div>
+  <div class="fb" id="srtFb2"></div>
+  <div class="actions"><button class="btn btn-cyan" id="srtChk2" onclick="checkSort2()" disabled>Check</button><button class="btn btn-ghost" onclick="renderSort()">↺ Reset</button></div></div>`;
+}
+function tapCard2(id){
+  if(sortPlaced2[id])return;
+  const c=document.getElementById('sc_'+id);if(!c)return;
+  if(tapSel2===id){c.style.boxShadow='';tapSel2=null;return;}
+  if(tapSel2){const p=document.getElementById('sc_'+tapSel2);if(p)p.style.boxShadow='';}
+  tapSel2=id;c.style.boxShadow='0 0 0 3px var(--cyan)';
+}
+function tapBucket2(bId){if(!tapSel2)return;placeSort2(tapSel2,bId);tapSel2=null;}
+function dropSort2(e,bId){
+  e.preventDefault();document.getElementById('bk2_'+bId).classList.remove('drag-over');
+  if(!dragItem||sortPlaced2[dragItem])return;placeSort2(dragItem,bId);
+}
+function placeSort2(id,bId){
+  sortPlaced2[id]=bId;const card=document.getElementById('sc_'+id);const bk=document.getElementById('bk2_'+bId);
+  if(!card||!bk)return;card.style.boxShadow='';card.classList.remove('ghost');card.draggable=false;
+  const b=SORT_BUCKETS.find(x=>x.id===bId);if(b)card.style.borderColor=b.col;
+  card.onclick=()=>returnSort2(id);bk.appendChild(card);
+  if(Object.keys(sortPlaced2).length===sortCards2.length){const btn=document.getElementById('srtChk2');if(btn)btn.disabled=false;}
+}
+function returnSort2(id){
+  if(sortChecked2)return;delete sortPlaced2[id];const c=document.getElementById('sc_'+id);const pile=document.getElementById('sPile2');
+  if(!c||!pile)return;c.style.borderColor='';c.style.boxShadow='';c.draggable=true;c.onclick=()=>tapCard2(id);pile.appendChild(c);
+  const btn=document.getElementById('srtChk2');if(btn)btn.disabled=true;
+}
+function checkSort2(){
+  sortChecked2=true;let ok=0;
+  sortCards2.forEach(item=>{const c=document.getElementById('sc_'+item.id);if(!c)return;
+    const isOk=sortPlaced2[item.id]===item.b;if(isOk)ok++;
+    c.className='sort-card '+(isOk?'c-ok':'c-err');c.draggable=false;c.onclick=null;
+    if(!isOk){const b=SORT_BUCKETS.find(x=>x.id===item.b);c.innerHTML=`${item.t}<span style="font-size:.7rem;display:block;margin-top:2px">→ ${b?b.icon+' '+b.label:item.b}</span>`;}
+    c.title=item.x;
+  });
+  const pct=Math.round(ok/sortCards2.length*100);
+  const fb=document.getElementById('srtFb2');fb.className='fb show '+(pct>=80?'ok':'partial');
+  fb.innerHTML=`<strong>${ok}/${sortCards2.length} (${pct}%).</strong> Red cards show the correct category.`;
+  document.getElementById('srtChk2').disabled=true;
+}
+
+/* ══════════════════════════════════
+   EX 4 — SPEED ROUND (30)
+   English description → type the slang
+══════════════════════════════════ */
+const SPEED=[
+  {q:'The most essential Mexican greeting: "What\'s up?"',hint:'qué onda',a:'que onda',also:['qué onda']},
+  {q:'Agreement: "Okay / Sounds good" (2 letters + vowel)',hint:'órale',a:'orale',also:['órale']},
+  {q:'Agreement: very simple "OK / deal"',hint:'sale',a:'sale',also:[]},
+  {q:'"The truth is / Honestly"',hint:'la neta',a:'la neta',also:['neta']},
+  {q:'"Cool / Great" (safe, level 1)',hint:'padre',a:'padre',also:[]},
+  {q:'"Cool / Great" (level 2, common in CDMX)',hint:'chido',a:'chido',also:['chida']},
+  {q:'"No way! / Seriously!" (SAFE version)',hint:'no manches',a:'no manches',also:[]},
+  {q:'"Watch out! / Heads up!" (warning)',hint:'aguas',a:'aguas',also:[]},
+  {q:'"Right away / Quickly"',hint:'de volada',a:'de volada',also:[]},
+  {q:'"I like it / Sounds good to me"',hint:'me late',a:'me late',also:[]},
+  {q:'"Yes" (casual single word)',hint:'simón',a:'simon',also:['simón']},
+  {q:'"No" (casual single word)',hint:'nel',a:'nel',also:[]},
+  {q:'"Work / Job" (most common slang)',hint:'chamba',a:'chamba',also:[]},
+  {q:'"Money / Cash"',hint:'lana',a:'lana',also:[]},
+  {q:'"Stingy / Cheap (with money)"',hint:'codo',a:'codo',also:[]},
+  {q:'"To help out / Do a favor"',hint:'echar el paro',a:'echar el paro',also:['echar paro','el paro']},
+  {q:'"Beer" (casual)',hint:'chela',a:'chela',also:['chelas']},
+  {q:'"Nightclub"',hint:'antro',a:'antro',also:[]},
+  {q:'"Song / Track"',hint:'rola',a:'rola',also:[]},
+  {q:'"Gossip / Tea"',hint:'chisme',a:'chisme',also:[]},
+  {q:'"Ugh / That sucks" (CDMX expression)',hint:'chale',a:'chale',also:[]},
+  {q:'"I can\'t be bothered / Too lazy"',hint:'me da hueva',a:'me da hueva',also:['hueva']},
+  {q:'"How embarrassing! / So cringe"',hint:'qué oso',a:'que oso',also:['qué oso']},
+  {q:'"It threw me off / Weirded me out"',hint:'me sacó de onda',a:'me saco de onda',also:['me sacó de onda','saco de onda']},
+  {q:'"Dude / Bro" (between friends, Nivel 3)',hint:'güey',a:'guey',also:['güey','wey']},
+  {q:'"Close friend / Bro" (flesh-related origin)',hint:'carnal',a:'carnal',also:[]},
+  {q:'"Posh / Preppy / Snobby"',hint:'fresa',a:'fresa',also:[]},
+  {q:'"Pardon? / Yes?" (very Mexican response)',hint:'mande',a:'mande',also:[]},
+  {q:'"To hang out casually / chill"',hint:'cotorrear',a:'cotorrear',also:['cotorreo']},
+  {q:'"To be alert / Pay attention / Watch out"',hint:'ponte trucha',a:'ponte trucha',also:['trucha']},
+];
+
+function renderSpeed(){
+  if(spTimer){clearInterval(spTimer);spTimer=null;}
+  spIdx=0;spOk=0;spErr=0;spStreak=0;spAnswered=false;
+  const arr=[...SPEED];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  window.__sp=arr;
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">⚡ Speed round</div>
+  <div class="ex-instr">Read the English description and type the Mexican slang! Accents not required. 12 seconds each.</div>
+  <div class="sp-wrap" id="spWrap"><div class="sp-start"><div style="font-size:2.8rem">🇲🇽⚡</div><h2>¿Cómo se dice?</h2><p style="color:var(--muted);max-width:400px">30 slang expressions — type the Mexican Spanish word or phrase from the English description.</p><button class="btn btn-cyan" onclick="startSpeed()">¡Ándale!</button></div></div></div>`;
+}
+function startSpeed(){spIdx=0;spOk=0;spErr=0;spStreak=0;nextQ();}
+function nextQ(){
+  const arr=window.__sp;
+  if(spIdx>=arr.length){endSpeed();return;}
+  spAnswered=false;const item=arr[spIdx];spTimeLeft=12;
+  document.getElementById('spWrap').innerHTML=`
+    <div class="sp-stats"><div class="spst"><div class="sl">Q</div><div class="sv w">${spIdx+1}/${arr.length}</div></div><div class="spst"><div class="sl">OK</div><div class="sv g">${spOk}</div></div><div class="spst"><div class="sl">Miss</div><div class="sv b">${spErr}</div></div></div>
+    <div class="streak${spStreak>=3?' on':''}" id="stk">🔥 x${spStreak}</div>
+    <div class="sp-card"><div class="sp-q">${item.q}</div><div class="sp-hint">💡 ${item.hint}</div></div>
+    <div class="tmr-row"><div class="tmr-trk"><div class="tmr-fil" id="tF" style="width:100%;transition:width 1s linear"></div></div><div class="tmr-n" id="tN">12</div></div>
+    <div class="sp-row"><input id="sInp" class="sp-inp" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="escribe el slang…" onkeydown="if(event.key==='Enter')submitQ()"><button class="btn btn-cyan" onclick="submitQ()" style="flex-shrink:0">→</button></div>
+    <div class="sp-fb" id="sFb" style="opacity:0"></div>`;
+  setTimeout(()=>{const i=document.getElementById('sInp');if(i)i.focus();},50);
+  if(spTimer)clearInterval(spTimer);
+  spTimer=setInterval(()=>{
+    spTimeLeft--;
+    const f=document.getElementById('tF'),n=document.getElementById('tN');
+    if(f)f.style.width=Math.max(0,(spTimeLeft/12)*100)+'%';
+    if(n){n.textContent=spTimeLeft;n.style.color=spTimeLeft<=3?'var(--bad)':spTimeLeft<=6?'var(--warn)':'var(--muted2)';}
+    if(spTimeLeft<=0){clearInterval(spTimer);spTimer=null;if(!spAnswered)submitQ();}
+  },1000);
+}
+function submitQ(){
+  const arr=window.__sp;
+  const inp=document.getElementById('sInp');if(!inp||spAnswered)return;
+  spAnswered=true;if(spTimer){clearInterval(spTimer);spTimer=null;}inp.disabled=true;
+  const item=arr[spIdx];const nt=normS(inp.value);const na=normS(item.a);
+  const isOk=nt===na||item.also.map(normS).includes(nt)||(nt.length>3&&(na.includes(nt)||nt.includes(na)));
+  if(isOk){spOk++;spStreak++;}else{spErr++;spStreak=0;}
+  const fb=document.getElementById('sFb');
+  if(fb){fb.style.opacity='1';
+    if(!inp.value.trim()){fb.className='sp-fb err';fb.innerHTML=`⏱ → <strong>${item.hint}</strong>`;}
+    else if(isOk){fb.className='sp-fb ok';fb.innerHTML=`✓ Correct!${spStreak>=3?' 🔥 x'+spStreak:''}`;}
+    else{fb.className='sp-fb err';fb.innerHTML=`✗ <strong>${inp.value}</strong> → <strong>${item.hint}</strong>`;}}
+  if(spStreak>=3){const cf=document.getElementById('cf');cf.textContent='🔥 x'+spStreak;cf.classList.remove('pop');void cf.offsetWidth;cf.classList.add('pop');}
+  spIdx++;setTimeout(nextQ,isOk?700:1600);
+}
+function endSpeed(){
+  const pct=Math.round(spOk/SPEED.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('spWrap').innerHTML=`<div class="sp-start"><div style="font-size:3rem">${emo}</div><h2>${spOk}/${SPEED.length}</h2><p style="color:var(--muted)">${pct>=90?'¡Chingón! You really know your slang!':pct>=70?'¡Qué chido! Getting there.':pct>=50?'¡Sale! Keep studying.':'Review the flashcards first, güey.'}</p><button class="btn btn-cyan" onclick="startSpeed()">↺ Try again</button></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 5 — REFERENCIA
+══════════════════════════════════ */
+function renderReference(){
+  const catRows=(cat,items)=>items.map(item=>{
+    const lvlColor=LVL_COL[item.lvl]||'#888';
+    return `<tr><td style="font-family:var(--display);font-weight:900;font-size:.92rem">${item.es}</td>
+    <td style="color:var(--muted2);font-style:italic;font-size:.78rem">${item.lit}</td>
+    <td style="font-weight:600">${item.eq}</td>
+    <td><span style="color:${lvlColor};font-weight:800;font-size:.78rem">${'●'.repeat(item.lvl)} ${item.lvl}</span></td>
+    <td style="color:var(--muted2);font-size:.74rem">${item.reg.replace('Todo México','🌎').replace('Norte/noroeste','🔼N').replace('Urbano, jóvenes','📱').replace('CDMX','🏙️').replace('Redes sociales','📲')}</td></tr>`;
+  }).join('');
+
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📄 Referencia completa — Slang Mexicano Actual</div>
+  <div class="ex-instr">Complete guide to all 90 expressions. Nivel scale: 🟢1=suave · 🟡2=informal · 🟠3=muy informal · 🔴4=fuerte · 💀5=vulgar</div>
+
+  <div class="ref-alert">⚠️ <strong>Regla de oro:</strong> When in doubt, don't. Nivel 4-5 expressions are common in real Mexico but can be very offensive in the wrong context. Start with Nivel 1-2 expressions and expand as you build relationships and confidence.</div>
+
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+    ${Object.entries(CATS).map(([k,v])=>`<div style="padding:7px 14px;border-radius:10px;background:${v.bg};border:1px solid ${v.bd};font-size:.8rem;font-weight:700;color:${v.col}">${v.icon} ${v.label} (${SLANG.filter(s=>s.cat===k).length})</div>`).join('')}
+  </div>
+
+  ${Object.entries(CATS).map(([k,v])=>`
+  <div class="ref-section">
+    <div class="ref-h3" style="color:${v.col};background:${v.bg}">${v.icon} ${v.label}</div>
+    <table class="ref-table">
+      <tr><th>Slang</th><th>Literal</th><th>Significado</th><th>Nivel</th><th>Región</th></tr>
+      ${catRows(k,SLANG.filter(s=>s.cat===k))}
+    </table>
+  </div>`).join('')}
+
+  <div class="ref-tip">💡 <strong>Las más útiles para empezar (Nivel 1-2):</strong> qué onda, órale, sale, neta, padre, chido, no manches, aguas, me late, simón/nel, de volada, chamba, lana, chela, banda, rola, chisme, cotorrear, mande, la vibra.</div>
+  <div class="ref-alert">🔴 <strong>Solo entre confianza (Nivel 4-5):</strong> güey, qué pedo, no mames, ni pedo, no hay pedo, a huevo, cabrón, chingón, se mamó, me vale madre, en chinga. Apréndalas para reconocerlas — úsalas solo cuando conozcas bien a la persona y el contexto.</div>
+  </div>`;
+}
+
+/* ══════════════════════════════════
+   SMART AUDIO SYSTEM
+   Picks the best available es-MX voice,
+   falls back gracefully on any device
+══════════════════════════════════ */
+let _bestVoice = null;
+let _voiceReady = false;
+let _voiceError = false;
+
+function initVoices() {
+  if (!window.speechSynthesis) { _voiceError = true; return; }
+  const pick = () => {
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices.length) return;
+
+    // Priority list — best quality first
+    const priority = [
+      v => v.name === 'Paulina',                          // iOS/macOS neural MX voice
+      v => v.name.includes('Paulina'),
+      v => v.lang === 'es-MX' && v.localService,         // any local es-MX
+      v => v.lang === 'es-MX',                            // remote es-MX
+      v => v.name.includes('Google') && v.lang.startsWith('es'), // Google es
+      v => v.lang === 'es-419',                           // Latin American Spanish
+      v => v.lang.startsWith('es') && v.localService,    // any local Spanish
+      v => v.lang.startsWith('es'),                       // any Spanish
+    ];
+
+    for (const test of priority) {
+      const found = voices.find(test);
+      if (found) { _bestVoice = found; break; }
+    }
+    _voiceReady = true;
+  };
+
+  pick();
+  if (!_voiceReady) {
+    window.speechSynthesis.onvoiceschanged = pick;
+    // Fallback: try again after 800ms (Chrome async loading)
+    setTimeout(pick, 800);
+  }
+}
+
+// Call immediately and on load
+initVoices();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initVoices);
+}
+
+let _currentUtt = null;
+
+function speak(text, btn) {
+  if (!window.speechSynthesis) {
+    if (btn) { btn.textContent = '🔇 No audio'; btn.classList.add('bad'); }
+    return;
+  }
+
+  // Stop anything playing
+  window.speechSynthesis.cancel();
+  _currentUtt = null;
+
+  // Reset all audio buttons
+  document.querySelectorAll('.btn-audio, .chat-audio-btn').forEach(b => {
+    b.classList.remove('playing');
+    if (b.dataset.orig) b.innerHTML = b.dataset.orig;
+  });
+
+  const utt = new SpeechSynthesisUtterance(text);
+
+  // Apply best available voice
+  if (_bestVoice) utt.voice = _bestVoice;
+  utt.lang   = _bestVoice ? _bestVoice.lang : 'es-MX';
+  utt.rate   = 0.82;   // slightly slower than natural — good for learners
+  utt.pitch  = 1.0;
+  utt.volume = 1.0;
+
+  if (btn) {
+    if (!btn.dataset.orig) btn.dataset.orig = btn.innerHTML;
+    btn.classList.add('playing');
+    btn.innerHTML = '🔊 ▶';
+  }
+
+  utt.onend = () => {
+    _currentUtt = null;
+    if (btn) {
+      btn.classList.remove('playing');
+      if (btn.dataset.orig) btn.innerHTML = btn.dataset.orig;
+    }
+  };
+  utt.onerror = () => {
+    _currentUtt = null;
+    if (btn) {
+      btn.classList.remove('playing');
+      if (btn.dataset.orig) btn.innerHTML = btn.dataset.orig;
+    }
+  };
+
+  _currentUtt = utt;
+  window.speechSynthesis.speak(utt);
+}
+
+// Render a small voice-info bar showing which voice is in use
+function voiceBar() {
+  if (!window.speechSynthesis) return '<div class="voice-bar"><span class="voice-status">⚠️ Audio not supported on this browser/device.</span></div>';
+  const name  = _bestVoice ? _bestVoice.name  : 'system default';
+  const lang  = _bestVoice ? _bestVoice.lang  : 'es';
+  const local = _bestVoice && _bestVoice.localService ? '✅ local (best)' : '🌐 remote';
+  return `<div class="voice-bar">
+    <span class="voice-status">🔊 Voice: <strong>${name}</strong> · ${lang} · ${local}</span>
+    <span class="voice-status" style="margin-left:auto;opacity:.7">Tip: on iOS, "Paulina" sounds the most natural.</span>
+  </div>`;
+}
+
+/* ══════════════════════════════════
+   EX 4 — CHATS REALES
+   12 WhatsApp-style conversations
+   Student reads the whole exchange and
+   answers what's happening / what slang means
+   in context — not isolated word definitions
+══════════════════════════════════ */
+let chatAnswers = {};
+
+const CHATS = [
+  {
+    ctx: 'Grupo de WhatsApp de amigos el viernes por la tarde',
+    msgs: [
+      {side:'left', av:'👩', who:'Sofía', text:'¿Qué onda banda? ¿Algo pa hoy?', audio:'¿Qué onda banda? ¿Algo para hoy?'},
+      {side:'left', av:'👨', who:'Diego', text:'Yo jalo si van a cotorrear por el centro', audio:'Yo jalo si van a cotorrear por el centro'},
+      {side:'right',av:'🙋', who:'Tú', text:'Sale, en una hora caemos al café de siempre', audio:'Sale, en una hora caemos al café de siempre'},
+      {side:'left', av:'👩', who:'Sofía', text:'¡Órale! Yo también jalo. ¿Traen lana o vamos al cajero?', audio:'Órale, yo también jalo. ¿Traen lana o vamos al cajero?'},
+    ],
+    q: 'In this conversation, "jalar" means:',
+    opts: ['to pull something heavy', 'to be in / to join the plan', 'to leave somewhere', 'to drink beer'],
+    a: 1,
+    exp: '"Jalar" = to be in / to join. "Yo jalo" = I\'m in. "¿También jalas?" = are you in too? It\'s about joining a plan, not physically pulling anything. Also notice: "lana" = money, "sale" = okay, "caemos" = we\'ll show up.',
+  },
+  {
+    ctx: 'Chat privado entre compañeros de trabajo (confianza)',
+    msgs: [
+      {side:'left', av:'👨', who:'Rodrigo', text:'Bróder, ¿ya viste el correo del jefe?', audio:'Bróder, ¿ya viste el correo del jefe?'},
+      {side:'right',av:'🙋', who:'Tú', text:'Sí. No mames, ¿en serio quiere la presentación para mañana?', audio:'Sí, no mames, ¿en serio quiere la presentación para mañana?'},
+      {side:'left', av:'👨', who:'Rodrigo', text:'La neta sí. Ya está cabrón el tiempo que nos dio.', audio:'La neta sí. Ya está cabrón el tiempo que nos dio.'},
+      {side:'right',av:'🙋', who:'Tú', text:'Órale pues, hay que chambear en chinga esta tarde.', audio:'Órale pues, hay que chambear en chinga esta tarde.'},
+    ],
+    q: '"Hay que chambear en chinga" means:',
+    opts: ['we need to go out drinking tonight', 'we need to work very fast / urgently', 'we need to ask for help', 'we need to cancel the presentation'],
+    a: 1,
+    exp: '"Chambear" = to work. "En chinga" = urgently / very fast (Nivel 4). Together: we need to work really fast. Also: "la neta" = honestly, "está cabrón" = it\'s tough/intense, "no mames" = no way.',
+  },
+  {
+    ctx: 'Mensaje de tu amigo Memo después de una fiesta',
+    msgs: [
+      {side:'left', av:'😵', who:'Memo', text:'Bróder... estoy muy crudo. No puedo ni levantarme.', audio:'Bróder, estoy muy crudo. No puedo ni levantarme.'},
+      {side:'right',av:'🙋', who:'Tú', text:'Jajaja qué pedo te pusiste anoche', audio:'Jajaja qué pedo te pusiste anoche'},
+      {side:'left', av:'😵', who:'Memo', text:'Ni me recuerdes. Fue una peda bien cabrona.', audio:'Ni me recuerdes. Fue una peda bien cabrona.'},
+      {side:'right',av:'🙋', who:'Tú', text:'Aguas la próxima vez 😂', audio:'Aguas la próxima vez'},
+    ],
+    q: '"Estoy muy crudo" means:',
+    opts: ['I\'m eating raw food', 'I\'m very hungover', 'I\'m very tired from work', 'I\'m sick with a cold'],
+    a: 1,
+    exp: '"Crudo/a" = hungover. "Peda" = a drinking party/night. "Qué pedo te pusiste" = you got so wasted. "Aguas" here = watch out / be careful next time.',
+  },
+  {
+    ctx: 'Tu compañera de clase te pide ayuda por WhatsApp',
+    msgs: [
+      {side:'left', av:'👩‍🎓', who:'Valeria', text:'Oye, ¿me puedes echar un paro con el proyecto?', audio:'Oye, ¿me puedes echar un paro con el proyecto?'},
+      {side:'right',av:'🙋', who:'Tú', text:'Simón, ¿en qué te atascaste?', audio:'Simón, ¿en qué te atascaste?'},
+      {side:'left', av:'👩‍🎓', who:'Valeria', text:'No entiendo la parte del análisis. Me sacó de onda.', audio:'No entiendo la parte del análisis. Me sacó de onda.'},
+      {side:'right',av:'🙋', who:'Tú', text:'Nel problema, de volada te lo explico.', audio:'Nel problema, de volada te lo explico.'},
+    ],
+    q: 'What does "me sacó de onda" mean in this context?',
+    opts: ['it made her very happy', 'it confused / threw her off', 'it made her fall asleep', 'it made her work faster'],
+    a: 1,
+    exp: '"Sacar de onda" = to throw someone off / confuse them. "Me sacó de onda" = it confused me / I didn\'t get it. Also: "echar un paro" = help out, "simón" = yes, "nel problema" = no problem, "de volada" = right away.',
+  },
+  {
+    ctx: 'Conversación entre amigos después del trabajo',
+    msgs: [
+      {side:'left', av:'🧑', who:'Paco', text:'¿Qué onda? ¿Caemos al antro o qué?', audio:'¿Qué onda? ¿Caemos al antro o qué?'},
+      {side:'left', av:'👩', who:'Maru', text:'Chale, yo traigo mucha hueva hoy. Estoy agüitada.', audio:'Chale, yo traigo mucha hueva hoy. Estoy agüitada.'},
+      {side:'right',av:'🙋', who:'Tú', text:'Qué gacho. ¿Qué te pasó?', audio:'Qué gacho, ¿qué te pasó?'},
+      {side:'left', av:'👩', who:'Maru', text:'Es que reprobé el examen. Me vale, vamos por chelas mejor.', audio:'Es que reprobé el examen. Me vale, vamos por chelas mejor.'},
+    ],
+    q: 'Maru says "traigo mucha hueva" and "estoy agüitada." What\'s her mood?',
+    opts: ['excited and happy', 'angry and aggressive', 'lazy/drained and feeling down', 'confused and distracted'],
+    a: 2,
+    exp: '"Traer hueva" = to feel lazy/drained. "Agüitada" = feeling sad/bummed out. Together they paint a picture of someone feeling low-energy and emotionally down. "Chale" = that sucks, "gacho" = that\'s rough.',
+  },
+  {
+    ctx: 'Tu amiga te cuenta algo por mensaje',
+    msgs: [
+      {side:'left', av:'😄', who:'Bere', text:'¡No mames! ¿Ya viste el chisme?', audio:'No mames, ¿ya viste el chisme?'},
+      {side:'right',av:'🙋', who:'Tú', text:'Nel, cuéntame. ¿Qué pasó?', audio:'Nel, cuéntame, ¿qué pasó?'},
+      {side:'left', av:'😄', who:'Bere', text:'Luis y Ana se están ligando. Los vieron en el antro.', audio:'Luis y Ana se están ligando. Los vieron en el antro.'},
+      {side:'right',av:'🙋', who:'Tú', text:'¡No manches! ¿Neta? Qué oso para sus demás amigos.', audio:'No manches, ¿neta? Qué oso para sus demás amigos.'},
+    ],
+    q: 'What does "se están ligando" mean?',
+    opts: ['they\'re tying something together', 'they\'re flirting with each other', 'they\'re fighting', 'they\'re working on a project'],
+    a: 1,
+    exp: '"Ligar" = to flirt / to pick someone up romantically. "Se están ligando" = they\'re flirting with each other. Also: "chisme" = gossip, "neta" = for real?, "qué oso" = how embarrassing.',
+  },
+  {
+    ctx: 'Mensaje de tu jefa pidiéndote trabajo urgente',
+    msgs: [
+      {side:'left', av:'👩‍💼', who:'Jefa', text:'Necesito el reporte para las 3pm, ¿puedes?', audio:'Necesito el reporte para las 3pm, ¿puedes?'},
+      {side:'right',av:'🙋', who:'Tú (a tu amigo por otro chat)', text:'No mames, mi jefa se pasó de lanza. Ya son las 2pm.', audio:'No mames, mi jefa se pasó de lanza. Ya son las 2pm.'},
+      {side:'left', av:'👨', who:'Amigo', text:'Qué gacho. Ponte trucha y hazlo en chinga.', audio:'Qué gacho. Ponte trucha y hazlo en chinga.'},
+      {side:'right',av:'🙋', who:'Tú', text:'Sale, ya ando en eso de volada.', audio:'Sale, ya ando en eso de volada.'},
+    ],
+    q: '"Se pasó de lanza" means your boss:',
+    opts: ['was very kind and helpful', 'went too far / asked too much', 'arrived late to a meeting', 'gave you a raise'],
+    a: 1,
+    exp: '"Pasarse de lanza" = to go too far / to cross a line. Here: the boss is asking too much on too short notice. "Ponte trucha" = be sharp/focus, "en chinga" = fast/urgently, "de volada" = right away.',
+  },
+  {
+    ctx: 'Tu amigo te cuenta que conoció a alguien',
+    msgs: [
+      {side:'left', av:'😏', who:'Carlos', text:'Oye, en la fiesta de ayer le tiré la onda a una chava.', audio:'Oye, en la fiesta de ayer le tiré la onda a una chava.'},
+      {side:'right',av:'🙋', who:'Tú', text:'¿Y qué? ¿Sí te peló?', audio:'¿Y qué? ¿Sí te peló?'},
+      {side:'left', av:'😏', who:'Carlos', text:'Sí, nos pusimos a cotorrear y me rayé: tiene hasta carro.', audio:'Sí, nos pusimos a cotorrear y me rayé: tiene hasta carro.'},
+      {side:'right',av:'🙋', who:'Tú', text:'¡Qué chido! ¿La vas a volver a ver?', audio:'Qué chido, ¿la vas a volver a ver?'},
+    ],
+    q: '"Me rayé" in this context means:',
+    opts: ['he got scratched / hurt', 'he scored / got lucky (she\'s great!)', 'he got confused', 'he had to leave'],
+    a: 1,
+    exp: '"Rayarse" = to score / get lucky with something great. Here Carlos is excited because this person is even better than expected. "Tirar la onda" = to flirt, "cotorrear" = to chat/hang out casually.',
+  },
+  {
+    ctx: 'Grupo de trabajo antes de una reunión importante',
+    msgs: [
+      {side:'left', av:'👩', who:'Ana', text:'¿Están listos? La presentación está top.', audio:'¿Están listos? La presentación está top.'},
+      {side:'left', av:'👨', who:'Marco', text:'Simón. Aunque la neta estoy nervioso.', audio:'Simón. Aunque la neta estoy nervioso.'},
+      {side:'right',av:'🙋', who:'Tú', text:'No hay pedo. Todos jalamos bien en esto. Al cien.', audio:'No hay pedo. Todos jalamos bien en esto. Al cien.'},
+      {side:'left', av:'👩', who:'Ana', text:'¡Órale pues! ¡Que chingón sea!', audio:'Órale pues, que chingón sea.'},
+    ],
+    q: '"No hay pedo" and "al cien" together express:',
+    opts: ['there\'s a serious problem', 'no worries, everything is 100% good', 'we need to work faster', 'let\'s cancel the meeting'],
+    a: 1,
+    exp: '"No hay pedo" = no problem / no worries (Nivel 4). "Al cien" = at 100% / everything\'s great. Together they\'re reassuring the team. "Top" = excellent, "simón" = yes, "que chingón sea" = let it be awesome!',
+  },
+  {
+    ctx: 'Mensaje de tu roommate',
+    msgs: [
+      {side:'left', av:'🧑', who:'Roommate', text:'Bróder, ¿me das el rol a la tienda? No traigo feria pa el camión.', audio:'Bróder, ¿me das el rol a la tienda? No traigo feria pa el camión.'},
+      {side:'right',av:'🙋', who:'Tú', text:'Nel, ahorita no puedo. Tengo chamba.',audio:'Nel, ahorita no puedo. Tengo chamba.'},
+      {side:'left', av:'🧑', who:'Roommate', text:'Qué codo. Siempre tienes pretexto.', audio:'Qué codo. Siempre tienes pretexto.'},
+      {side:'right',av:'🙋', who:'Tú', text:'Chale 😂 Te lo juro que tengo trabajo en chinga.', audio:'Chale, te lo juro que tengo trabajo en chinga.'},
+    ],
+    q: 'Your roommate calls you "codo." What does this imply?',
+    opts: ['that you\'re very busy', 'that you\'re being cheap / unhelpful with favors', 'that you\'re a good friend', 'that you work too much'],
+    a: 1,
+    exp: '"Codo" = stingy / tight with money or favors. The roommate is accusing you of making excuses to avoid helping. "Dar el rol" = to give a ride, "feria" = money/change, "nel" = nope.',
+  },
+  {
+    ctx: 'Historia que te cuenta una amiga sobre alguien de la oficina',
+    msgs: [
+      {side:'left', av:'😤', who:'Luisa', text:'¿Ya supiste? El nuevo compañero llegó de godín: traje, maletín, todo.', audio:'¿Ya supiste? El nuevo compañero llegó de godín: traje, maletín, todo.'},
+      {side:'right',av:'🙋', who:'Tú', text:'Jajaja ¿y qué onda? ¿Es fresa?', audio:'Jajaja ¿y qué onda? ¿Es fresa?'},
+      {side:'left', av:'😤', who:'Luisa', text:'La neta sí está un poco fifí. Pero la banda dice que es chido.', audio:'La neta sí está un poco fifí. Pero la banda dice que es chido.'},
+      {side:'right',av:'🙋', who:'Tú', text:'Equis, esperamos a conocerlo bien.', audio:'Equis, esperamos a conocerlo bien.'},
+    ],
+    q: 'What\'s the overall impression of the new coworker?',
+    opts: ['everyone loves him immediately', 'he seems posh/fancy but the group says he\'s cool — wait and see', 'nobody likes him at all', 'he didn\'t show up to work'],
+    a: 1,
+    exp: 'Mix of signals: "fifí" + "fresa" = he seems fancy/bougie, BUT "la banda dice que es chido" = the crew says he\'s cool. "Equis" = meh, let\'s wait. Great example of slang painting a nuanced social picture.',
+  },
+  {
+    ctx: 'Mensaje de tu amiga tarde en la noche',
+    msgs: [
+      {side:'left', av:'😴', who:'Karen', text:'Bróder ya me cayó el veinte de que se me fue el camión.', audio:'Bróder ya me cayó el veinte de que se me fue el camión.'},
+      {side:'right',av:'🙋', who:'Tú', text:'¿Sí? Aguas. ¿Estás bien?', audio:'¿Sí? Aguas. ¿Estás bien?'},
+      {side:'left', av:'😴', who:'Karen', text:'Sí, ni pedo. Pido un Didi. Solo me dio hueva ir antes.', audio:'Sí, ni pedo. Pido un Didi. Solo me dio hueva ir antes.'},
+      {side:'right',av:'🙋', who:'Tú', text:'Jajaja ya ves. Cuídate.', audio:'Jajaja ya ves. Cuídate.'},
+    ],
+    q: '"Cayó el veinte" is a classic Mexican expression. What does it mean?',
+    opts: ['she dropped 20 pesos', 'she finally realized / it clicked', 'she missed the bus on purpose', 'she paid 20 pesos for the bus'],
+    a: 1,
+    exp: '"Caer el veinte" = to finally realize something (it clicked / the penny dropped). From old public phone tokens worth 20 centavos — when you dropped the coin, the call connected. "Ni pedo" = oh well, "me dio hueva" = I was too lazy.',
+  },
+];
+
+function renderChats() {
+  chatAnswers = {};
+  const tot = CHATS.length;
+
+  const html = CHATS.map((conv, i) => {
+    const bubbles = conv.msgs.map(m => `
+      <div class="chat-row ${m.side}">
+        <div class="chat-av">${m.av}</div>
+        <div>
+          <div class="chat-who">${m.who}</div>
+          <div class="chat-bub">
+            ${m.text}
+            ${m.audio ? `<button class="chat-audio-btn" onclick="speak('${m.audio.replace(/'/g,"\\'")}',this)" title="🔊 Listen">🔊</button>` : ''}
+          </div>
+        </div>
+      </div>`).join('');
+
+    const opts = conv.opts.map((o, oi) =>
+      `<button class="conv-opt" id="co${i}_${oi}" onclick="answerChat(${i},${oi})">${o}</button>`
+    ).join('');
+
+    return `<div class="conv-card" id="cc${i}">
+      <div class="conv-header">📍 <strong>${conv.ctx}</strong></div>
+      <div class="conv-body">${bubbles}</div>
+      <div class="conv-q">👉 ${conv.q}</div>
+      <div class="conv-opts">${opts}</div>
+      <div class="conv-exp" id="cexp${i}"></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('exContainer').innerHTML = `<div class="panel">
+  <div class="ex-title">📱 Chats reales — Slang en contexto</div>
+  ${voiceBar()}
+  <div class="ex-instr">Read the whole WhatsApp conversation, then answer the question. Click 🔊 on any bubble to hear it. Real slang makes sense in <em>context</em> — not in isolation!</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="ch_ok">0</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="ch_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="ch_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="ch_pg" style="width:0%"></div></div></div>
+  </div>
+  <div class="conv-list">${html}</div>
+  <div class="fb" id="ch_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="chatAnswers={};renderChats()">↺ Reset</button></div></div>`;
+}
+
+function answerChat(qi, oi) {
+  if (chatAnswers[qi] !== undefined) return;
+  const conv = CHATS[qi];
+  const isOk = oi === conv.a;
+  chatAnswers[qi] = isOk;
+
+  const card = document.getElementById('cc' + qi);
+  if (card) card.classList.add(isOk ? 'ok' : 'err');
+
+  conv.opts.forEach((_, x) => {
+    const b = document.getElementById(`co${qi}_${x}`);
+    if (!b) return;
+    b.disabled = true;
+    if (x === conv.a) b.classList.add('co-show');
+    else if (x === oi && !isOk) b.classList.add('co-err');
+  });
+
+  const e = document.getElementById('cexp' + qi);
+  if (e) { e.classList.add('show'); e.innerHTML = (isOk ? '✓ ' : '✗ ') + conv.exp; }
+
+  const tot = Object.keys(chatAnswers).length;
+  const ok  = Object.values(chatAnswers).filter(v => v).length;
+  document.getElementById('ch_ok').textContent  = ok;
+  document.getElementById('ch_err').textContent = tot - ok;
+  document.getElementById('ch_pct').textContent = Math.round(tot / CHATS.length * 100) + '%';
+  document.getElementById('ch_pg').style.width  = Math.round(tot / CHATS.length * 100) + '%';
+
+  if (tot === CHATS.length) {
+    const pct = Math.round(ok / tot * 100);
+    const fb  = document.getElementById('ch_fb');
+    fb.className = 'fb show ' + (pct >= 85 ? 'ok' : 'partial');
+    fb.innerHTML = `${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Chingón! You read Mexican conversations like a native!':'Study the flashcards and try again — context is everything.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   PATCH: Replace renderReference with
+   searchable version
+══════════════════════════════════ */
+function renderReference() {
+  const LVL_COL_REF = {1:'#22c55e',2:'#84cc16',3:'#f59e0b',4:'#ef4444',5:'#9f1239'};
+  const LVL_EMOJI   = {1:'🟢',2:'🟡',3:'🟠',4:'🔴',5:'💀'};
+
+  function buildRows(query) {
+    const q = normS(query || '');
+    const filtered = q.length < 2
+      ? SLANG
+      : SLANG.filter(s =>
+          normS(s.es).includes(q) ||
+          normS(s.eq).includes(q) ||
+          normS(s.lit).includes(q) ||
+          normS(CATS[s.cat]?.label||'').includes(q)
+        );
+
+    const hl = (str) => q.length >= 2
+      ? str.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'),
+          '<span class="rr-highlight">$1</span>')
+      : str;
+
+    return { count: filtered.length, html: filtered.map(item => {
+      const cat = CATS[item.cat];
+      const lc  = LVL_COL_REF[item.lvl];
+      return `<div class="ref-row">
+        <div class="rr-es" style="color:${cat.col}" onclick="speak('${item.es.replace(/'/g,"\\'")}',null)">${hl(item.es)}</div>
+        <div class="rr-lit">${hl(item.lit)}</div>
+        <div class="rr-eq">${hl(item.eq)}</div>
+        <div class="rr-meta">
+          <span class="rr-lvl" style="color:${lc}">${LVL_EMOJI[item.lvl]} Nivel ${item.lvl}</span>
+          <span class="rr-reg">${item.reg.replace('Todo México','🌎 Todo MX').replace('Norte/noroeste','🔼 Norte').replace('Urbano, jóvenes','📱 Jóvenes').replace('CDMX','🏙️ CDMX').replace('Redes sociales','📲 Redes')}</span>
+        </div>
+      </div>`;
+    }).join('') };
+  }
+
+  const { count, html } = buildRows('');
+
+  document.getElementById('exContainer').innerHTML = `<div class="panel">
+  <div class="ex-title">📄 Referencia — ${SLANG.length} expresiones</div>
+  <div class="ex-instr">Search any slang, meaning, or category. Click any expression to <em>hear it</em>. Nivel: 🟢1 suave → 💀5 vulgar.</div>
+  ${voiceBar()}
+  <input class="ref-search" id="refSearch" placeholder="Search slang, meaning, or category… (e.g. 'money', 'chida', 'fiesta')" oninput="updateRefSearch(this.value)" autocomplete="off">
+  <div class="ref-count" id="refCount">Showing all ${count} expressions</div>
+  <div id="refRows">${html}</div>
+  <div class="ref-tip" style="margin-top:16px">💡 <strong>Start with Nivel 1-2</strong> — qué onda, órale, sale, neta, padre, chido, no manches, aguas, me late, de volada, chamba, lana, chela, banda, rola, chisme, cotorrear, mande.</div>
+  <div class="ref-alert" style="margin-top:8px">🔴 <strong>Nivel 4-5 — only with close friends:</strong> güey, qué pedo, no mames, ni pedo, a huevo, cabrón, chingón, me vale madre, en chinga.</div>
+  </div>`;
+}
+
+function updateRefSearch(q) {
+  const { count, html } = buildRefRows(q);
+  const el = document.getElementById('refRows');
+  const ct = document.getElementById('refCount');
+  if (el) el.innerHTML = html;
+  if (ct) ct.textContent = count < SLANG.length
+    ? `Showing ${count} of ${SLANG.length} expressions`
+    : `Showing all ${count} expressions`;
+}
+
+// Need buildRefRows to be accessible from oninput
+function buildRefRows(query) {
+  const LVL_COL_REF = {1:'#22c55e',2:'#84cc16',3:'#f59e0b',4:'#ef4444',5:'#9f1239'};
+  const LVL_EMOJI   = {1:'🟢',2:'🟡',3:'🟠',4:'🔴',5:'💀'};
+  const q = normS(query || '');
+  const filtered = q.length < 2
+    ? SLANG
+    : SLANG.filter(s =>
+        normS(s.es).includes(q) ||
+        normS(s.eq).includes(q) ||
+        normS(s.lit).includes(q) ||
+        normS(CATS[s.cat]?.label||'').includes(q)
+      );
+  const hl = (str) => q.length >= 2
+    ? str.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'),
+        '<span class="rr-highlight">$1</span>')
+    : str;
+  return { count: filtered.length, html: filtered.map(item => {
+    const cat = CATS[item.cat];
+    const lc  = LVL_COL_REF[item.lvl];
+    return `<div class="ref-row">
+      <div class="rr-es" style="color:${cat.col}" onclick="speak('${item.es.replace(/'/g,"\\'")}',null)">${hl(item.es)}</div>
+      <div class="rr-lit">${hl(item.lit)}</div>
+      <div class="rr-eq">${hl(item.eq)}</div>
+      <div class="rr-meta">
+        <span class="rr-lvl" style="color:${lc}">${LVL_EMOJI[item.lvl]} Nivel ${item.lvl}</span>
+        <span class="rr-reg">${item.reg.replace('Todo México','🌎 Todo MX').replace('Norte/noroeste','🔼 Norte').replace('Urbano, jóvenes','📱 Jóvenes').replace('CDMX','🏙️ CDMX').replace('Redes sociales','📲 Redes')}</span>
+      </div>
+    </div>`;
+  }).join('') };
+}
+
+/* ── also add audio button + voiceBar to flash front card ── */
+const _origRenderVCCard = typeof renderFlashCard !== 'undefined' ? renderFlashCard : null;
+
+goEx(0);
+</script>
+</body>
+</html>

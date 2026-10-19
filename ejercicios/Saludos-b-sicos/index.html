@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saludos y Presentaciones v2 | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --sal:#34d399;--sal2:#6ee7b7;
+  --des:#f472b6;--des2:#ff91cd;
+  --pre:#fbbf24;--pre2:#fde68a;
+  --exp:#60a5fa;--exp2:#93c5fd;
+  --morning:#fbbf24;--afternoon:#f97316;--night:#818cf8;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 15% 10%,rgba(52,211,153,.13),transparent 35%),radial-gradient(ellipse at 85% 15%,rgba(244,114,182,.1),transparent 35%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(980px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.2rem,2.5vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--sal),#fff 40%,var(--des));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.85rem;margin-top:4px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ex-tabs{display:flex;gap:4px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:7px;overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:7px 10px;font-weight:800;font-family:var(--font);font-size:.71rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;transform:translateY(-1px)}
+.etab-icon{font-size:1.1rem;line-height:1}
+.etab-label{font-size:.57rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:22px 26px;box-shadow:var(--shadow)}
+.ex-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.85rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:16px}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:90px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;transition:width .35s;background:linear-gradient(90deg,var(--sal),var(--des))}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none}
+.btn-green{background:linear-gradient(135deg,var(--sal),#10b981);color:#052e16}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),#00bfff);color:#07111f}
+.btn-audio{background:rgba(37,217,255,.15);border:1.5px solid rgba(37,217,255,.35);color:var(--cyan);border-radius:9px;padding:6px 12px;font-size:.78rem;font-weight:800;cursor:pointer;transition:.13s;font-family:var(--font)}
+.btn-audio:hover{background:rgba(37,217,255,.25)}
+.btn-audio.playing{background:rgba(37,217,255,.3);border-color:var(--cyan)}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.err{background:rgba(239,68,68,.11);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+
+/* ── VOCAB CARDS ── */
+.vc-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.vc-fbtn{border:0;border-radius:9px;padding:5px 13px;font-size:.73rem;font-weight:800;font-family:var(--font);cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);color:var(--muted);border:1.5px solid transparent}
+.vc-fbtn.active{color:white}
+.vc-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.vc-prow{display:flex;align-items:center;gap:12px;width:100%;max-width:660px}
+.vc-cnt{font-size:.8rem;font-weight:800;color:var(--muted2);white-space:nowrap}
+.vc-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.vc-fil{height:100%;border-radius:999px;transition:width .4s}
+.vc-card{width:100%;max-width:660px;min-height:270px;perspective:1000px;cursor:pointer}
+.vc-inner{position:relative;width:100%;min-height:270px;transition:transform .5s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.vc-card.flipped .vc-inner{transform:rotateY(180deg)}
+.vc-front,.vc-back{position:absolute;inset:0;border-radius:20px;padding:24px 26px;backface-visibility:hidden;display:flex;flex-direction:column;gap:8px;min-height:270px}
+.vc-back{transform:rotateY(180deg)}
+.vc-emoji{font-size:2.8rem;line-height:1}
+.vc-es{font-family:var(--display);font-size:2.1rem;font-weight:900;line-height:1.1}
+.vc-pron{font-size:.82rem;color:var(--muted2);font-style:italic}
+.vc-ex{font-size:.88rem;line-height:1.65;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:10px;margin-top:2px}
+.vc-when{font-size:.78rem;color:var(--muted2);line-height:1.5;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.vc-hint{font-size:.72rem;color:var(--muted2);text-align:center;font-style:italic;margin-top:auto}
+.vc-nav{display:flex;gap:8px;align-items:center;justify-content:center;width:100%;max-width:660px}
+.vc-audio-row{display:flex;align-items:center;gap:8px;margin-top:4px}
+
+/* ── CHAT BUBBLES ── */
+.chat-scene{font-size:.75rem;color:var(--muted2);font-style:italic;padding:8px 14px;margin-bottom:4px;background:rgba(255,255,255,.03);border-radius:8px;border-left:3px solid rgba(255,255,255,.08)}
+.chat-wrap{display:flex;flex-direction:column;gap:10px;padding:4px 0 12px}
+.chat-msg{display:flex;align-items:flex-end;gap:8px}
+.chat-msg.right{flex-direction:row-reverse}
+.chat-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.chat-bubble{max-width:80%;padding:10px 14px;border-radius:18px;font-size:.92rem;line-height:1.55;font-weight:500;position:relative}
+.chat-msg.left .chat-bubble{background:rgba(255,255,255,.09);border-radius:4px 18px 18px 18px}
+.chat-msg.right .chat-bubble{background:rgba(52,211,153,.18);border:1px solid rgba(52,211,153,.25);border-radius:18px 4px 18px 18px}
+.chat-speaker{font-size:.62rem;font-weight:800;text-transform:uppercase;color:var(--muted2);margin-bottom:3px}
+.chat-audio{background:none;border:0;cursor:pointer;font-size:1rem;opacity:.6;transition:.13s;padding:2px 4px;border-radius:5px}
+.chat-audio:hover{opacity:1;background:rgba(255,255,255,.1)}
+
+/* ── LISTENING EX ── */
+.listen-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;padding:20px 22px;margin-bottom:12px}
+.listen-card.ok{border-color:var(--good);background:rgba(34,197,94,.05)}
+.listen-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.listen-btn-big{width:100%;padding:16px;background:rgba(37,217,255,.1);border:2px dashed rgba(37,217,255,.3);border-radius:14px;cursor:pointer;font-family:var(--font);font-size:1rem;font-weight:800;color:var(--cyan);transition:.15s;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px}
+.listen-btn-big:hover{background:rgba(37,217,255,.18);border-color:var(--cyan)}
+.listen-btn-big.played{border-style:solid}
+.listen-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.listen-opt{border:0;border-radius:12px;padding:11px 16px;font-weight:700;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left}
+.listen-opt:hover:not([disabled]){border-color:rgba(37,217,255,.4);background:rgba(37,217,255,.08);transform:translateY(-1px)}
+.listen-opt[disabled]{cursor:default;transform:none}
+.listen-opt.l-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.listen-opt.l-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.listen-opt.l-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.listen-exp{display:none;font-size:.8rem;color:var(--muted);margin-top:8px;line-height:1.55;padding:7px 11px;background:rgba(255,255,255,.04);border-radius:8px}
+.listen-exp.show{display:block}
+
+/* ── DIALOGUES (choice from chat) ── */
+.dial-wrap{display:flex;flex-direction:column;gap:16px}
+.dial-block{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:18px;padding:18px}
+.dial-block.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.dial-block.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.dial-opts{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+.dial-opt{border:0;border-radius:10px;padding:11px 16px;font-weight:600;font-family:var(--font);font-size:.92rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left;display:flex;align-items:center;gap:8px}
+.dial-opt:hover:not([disabled]){transform:translateX(4px);border-color:rgba(37,217,255,.35)}
+.dial-opt[disabled]{cursor:default;transform:none}
+.dial-opt.d-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.dial-opt.d-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.dial-opt.d-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.dial-exp{display:none;font-size:.8rem;color:var(--muted);margin-top:10px;line-height:1.55;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.dial-exp.show{display:block}
+
+/* ── FILL-IN ── */
+.fill-list{display:flex;flex-direction:column;gap:14px}
+.fill-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;padding:18px}
+.fill-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.fill-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.fill-ctx{font-size:.76rem;color:var(--muted2);font-style:italic;margin-bottom:8px}
+.fill-q{font-size:1rem;line-height:1.8;font-weight:600;margin-bottom:10px}
+.fill-blank{display:inline-block;border-bottom:2.5px solid var(--cyan);min-width:90px;text-align:center;padding:0 4px;color:var(--cyan);font-weight:800;font-family:var(--display);font-size:1rem}
+.fill-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px}
+.fill-chip{border:0;border-radius:9px;padding:8px 16px;font-weight:700;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.fill-chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.fill-chip.used{opacity:.22;cursor:not-allowed}
+.fill-chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.fill-chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.15);color:#fca5a5}
+.fill-exp{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:6px;padding:7px 11px;background:rgba(255,255,255,.04);border-radius:8px}
+.fill-exp.show{display:block}
+
+/* ── FORMAL/INFORMAL ── */
+.fi-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;padding:18px;margin-bottom:12px}
+.fi-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.fi-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.fi-scene{font-size:.8rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.fi-q{font-size:1rem;font-weight:700;line-height:1.55;margin-bottom:12px}
+.fi-btns{display:flex;gap:10px;flex-wrap:wrap}
+.fi-btn{border:0;border-radius:12px;padding:12px 22px;font-weight:800;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.14s}
+.fi-btn:hover:not([disabled]){transform:translateY(-2px)}
+.fi-btn[disabled]{cursor:default;transform:none;opacity:.6}
+.fi-formal{background:rgba(96,165,250,.15);border:1.5px solid rgba(96,165,250,.35);color:var(--exp2)}
+.fi-informal{background:rgba(52,211,153,.15);border:1.5px solid rgba(52,211,153,.35);color:var(--sal2)}
+.fi-btn.fi-ok{background:rgba(34,197,94,.2);border-color:var(--good);color:#86efac}
+.fi-btn.fi-err{background:rgba(239,68,68,.15);border-color:var(--bad);color:#fca5a5}
+.fi-exp{display:none;font-size:.8rem;color:var(--muted);margin-top:10px;line-height:1.55;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.fi-exp.show{display:block}
+
+/* ── BUILD THE DIALOGUE (unscramble) ── */
+.build-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;padding:18px;margin-bottom:14px}
+.build-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.build-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.build-ctx{font-size:.76rem;color:var(--muted2);font-style:italic;margin-bottom:10px}
+.build-drop{min-height:54px;background:rgba(37,217,255,.04);border:1.5px dashed rgba(37,217,255,.22);border-radius:11px;padding:10px;display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
+.build-drop.drag-over{border-color:var(--cyan);background:rgba(37,217,255,.1)}
+.build-pile{display:flex;flex-wrap:wrap;gap:7px;padding:10px;background:rgba(255,255,255,.03);border-radius:11px;margin-bottom:10px;min-height:46px}
+.build-chip{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:9px;padding:8px 14px;font-size:.88rem;font-weight:600;cursor:grab;user-select:none;transition:.13s}
+.build-chip:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.build-chip.ghost{opacity:.3}
+.build-chip.b-ok{background:rgba(34,197,94,.14);border-color:var(--good);color:#86efac;cursor:default}
+.build-chip.b-err{background:rgba(239,68,68,.1);border-color:var(--bad);color:#fca5a5;font-size:.8rem}
+.build-placed{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 13px;font-size:.88rem;cursor:pointer;transition:.12s}
+.build-placed:hover{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08)}
+.build-exp{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.build-exp.show{display:block}
+
+/* ── SPEED ── */
+.sp-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-stats{display:flex;gap:9px}
+.spst{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spst .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.spst .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spst .sv.g{color:var(--good)}.spst .sv.b{color:var(--bad)}.spst .sv.w{color:var(--warn)}
+.sp-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:20px;text-align:center;width:100%;max-width:520px}
+.sp-en{font-size:.85rem;color:var(--muted2);margin-bottom:6px}
+.sp-q{font-family:var(--display);font-size:1.3rem;font-weight:900;line-height:1.3;margin-bottom:10px}
+.sp-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:520px}
+.sp-opt{border:0;border-radius:12px;padding:12px 16px;font-weight:700;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.sp-opt:hover:not([disabled]){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sp-opt.sp-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.sp-opt.sp-err{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.sp-opt.sp-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.sp-opt[disabled]{cursor:default;transform:none}
+.sp-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:520px}
+.sp-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.sp-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.sp-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.streak{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak.on{display:inline-flex;align-items:center;gap:4px}
+.cf{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.cf.pop{animation:cfk .7s ease forwards}
+@keyframes cfk{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+
+/* ── REFERENCE ── */
+.ref-section{margin-bottom:20px}
+.ref-h3{font-family:var(--display);font-size:.92rem;font-weight:800;padding:6px 14px;border-radius:9px;display:inline-flex;align-items:center;gap:6px;margin-bottom:10px}
+.ref-table{width:100%;border-collapse:collapse;font-size:.83rem;margin-bottom:10px}
+.ref-table th{padding:6px 12px;font-size:.6rem;font-weight:800;text-transform:uppercase;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+.ref-table td{padding:7px 12px;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.6}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-table tr:hover td{background:rgba(255,255,255,.02)}
+.td-es{font-family:var(--display);font-size:.95rem;font-weight:800}
+.td-pron{color:var(--muted2);font-style:italic;font-size:.78rem}
+.td-en{color:var(--muted);font-size:.82rem}
+.td-when{color:var(--muted2);font-size:.76rem}
+.time-bar{display:flex;border-radius:12px;overflow:hidden;margin-bottom:14px;height:48px}
+.time-seg{flex:1;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-direction:column;gap:1px}
+.tip{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:10px 14px;font-size:.83rem;color:#bbf7d0;line-height:1.6;margin-bottom:10px}
+.warning{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:10px 14px;font-size:.83rem;color:#fde68a;line-height:1.6;margin-bottom:10px}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:14px 12px}.listen-opts{grid-template-columns:1fr}.sp-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="cf" id="cf"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Saludos, Despedidas y Presentaciones</h1>
+      <p>Your first Spanish words — greetings, farewells and introductions. With <strong>audio</strong>, dialogues, and 8 different exercise types.</p>
+      <div class="badges">
+        <span class="badge">🆕 A1 Total Beginner</span>
+        <span class="badge" style="border-color:rgba(37,217,255,.4);color:var(--cyan)">🔊 Audio included</span>
+        <span class="badge" style="border-color:rgba(52,211,153,.4);color:var(--sal2)">👋 Saludos</span>
+        <span class="badge" style="border-color:rgba(244,114,182,.4);color:var(--des2)">✌️ Despedidas</span>
+        <span class="badge" style="border-color:rgba(251,191,36,.4);color:var(--pre2)">🙋 Presentaciones</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">📖</span><span class="etab-label">Vocab<br>+audio</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">🔊</span><span class="etab-label">Escucha<br>y elige</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">💬</span><span class="etab-label">Diá-<br>logos</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">✏️</span><span class="etab-label">Com-<br>pleta</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">🎩</span><span class="etab-label">¿Formal<br>o no?</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">🔤</span><span class="etab-label">Construye<br>el diálogo</span></button>
+  <button class="etab" id="etab-6" onclick="goEx(6)"><span class="etab-icon">⚡</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-7" onclick="goEx(7)"><span class="etab-icon">📄</span><span class="etab-label">Refer-<br>encia</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> &middot; Your Mexican Friend</p>
+</div>
+<script>
+/* ── Audio via Web Speech API ── */
+let currentUtterance=null;
+function speak(text,btn){
+  if(!window.speechSynthesis)return;
+  if(currentUtterance){window.speechSynthesis.cancel();currentUtterance=null;}
+  if(btn){document.querySelectorAll('.btn-audio,.chat-audio,.listen-btn-big').forEach(b=>{b.classList.remove('playing');if(b.textContent.trim()!=='🔊')b.textContent='🔊 Listen';});}
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-MX';u.rate=0.85;u.pitch=1;
+  u.onstart=()=>{if(btn){btn.classList.add('playing');if(btn.classList.contains('listen-btn-big'))btn.innerHTML='🔊 Playing...';else btn.textContent='🔊▶';}};
+  u.onend=()=>{if(btn){btn.classList.remove('playing');if(btn.classList.contains('listen-btn-big'))btn.innerHTML='🔊 Listen again';else btn.textContent='🔊';}currentUtterance=null;};
+  u.onerror=()=>{currentUtterance=null;};
+  currentUtterance=u;
+  window.speechSynthesis.speak(u);
+}
+function seededShuffle(arr,seed){const a=[...arr];let s=seed;for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+
+let vcIdx=0,vcFilter='all',vcFlipped=false,vcCards=[];
+let listenAns={},dialAns={},fillAns={},fiAns={};
+let buildDrag=null,buildPlaced={},buildChecked={};
+let spIdx=0,spOk=0,spErr=0,spStreak=0;
+
+function goEx(n){
+  [0,1,2,3,4,5,6,7].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===n));
+  [renderVocab,renderListen,renderDialogos,renderFill,renderFormal,renderBuild,renderSpeed,renderRef][n]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const CATS={
+  sal:{label:'Saludos',col:'var(--sal)',bg:'rgba(52,211,153,.1)',bd:'rgba(52,211,153,.28)'},
+  des:{label:'Despedidas',col:'var(--des)',bg:'rgba(244,114,182,.1)',bd:'rgba(244,114,182,.28)'},
+  pre:{label:'Presentarse',col:'var(--pre)',bg:'rgba(251,191,36,.1)',bd:'rgba(251,191,36,.28)'},
+  exp:{label:'Expresiones',col:'var(--exp)',bg:'rgba(96,165,250,.1)',bd:'rgba(96,165,250,.28)'},
+};
+const TIME_COLOR={morning:'rgba(251,191,36,.15)',afternoon:'rgba(249,115,22,.15)',night:'rgba(129,140,248,.15)',any:'rgba(255,255,255,.06)'};
+const TIME_LABEL={morning:'☀️ morning',afternoon:'🌤️ afternoon',night:'🌙 night',any:'🕐 anytime'};
+
+/* ══════════════════════════════════
+   VOCAB DATA — 42 expressions
+══════════════════════════════════ */
+const VOCAB=[
+  /* SALUDOS */
+  {cat:'sal',time:'any',emoji:'👋',es:'Hola',en:'Hello / Hi',pron:'OH-lah',
+   ex:'— ¡Hola! ¿Cómo estás?\n— ¡Hola! Muy bien, gracias.',
+   when:'Any time of day, anyone. Most common greeting in Spanish.'},
+  {cat:'sal',time:'morning',emoji:'🌅',es:'Buenos días',en:'Good morning',pron:'BWEH-nos DEE-as',
+   ex:'— Buenos días, ¿cómo amaneció?\n— Muy bien, ¿y usted?',
+   when:'Sunrise → noon. Literally "good days" (plural).'},
+  {cat:'sal',time:'afternoon',emoji:'☀️',es:'Buenas tardes',en:'Good afternoon',pron:'BWEH-nas TAR-des',
+   ex:'— Buenas tardes. ¿En qué le puedo ayudar?\n— Buenas tardes, busco al señor García.',
+   when:'Noon → ~7pm. Also common when arriving somewhere.'},
+  {cat:'sal',time:'night',emoji:'🌙',es:'Buenas noches',en:'Good evening / Good night',pron:'BWEH-nas NOH-ches',
+   ex:'— Buenas noches, ¿tiene reservación?\n— Sí, a nombre de López.',
+   when:'Sunset onward. Used as BOTH "good evening" (greeting) AND "good night" (farewell).'},
+  {cat:'sal',time:'any',emoji:'🤙',es:'¿Qué onda?',en:'What\'s up? (Mexico)',pron:'keh ON-dah',
+   ex:'— ¡Qué onda, carnal! ¿Cómo estás?\n— ¡Todo bien! ¿Y tú?',
+   when:'🇲🇽 Very Mexican, very casual. Friends only — never with teachers or bosses!'},
+  {cat:'sal',time:'any',emoji:'😊',es:'¿Cómo estás?',en:'How are you? (informal)',pron:'KOH-moh es-TAHS',
+   ex:'— ¡Hola! ¿Cómo estás?\n— Bien, gracias. ¿Y tú?',
+   when:'Informal — friends, family, classmates. Always ask back: "¿Y tú?"'},
+  {cat:'sal',time:'any',emoji:'🎩',es:'¿Cómo está usted?',en:'How are you? (formal)',pron:'KOH-moh es-TAH oos-TED',
+   ex:'— Buenos días. ¿Cómo está usted?\n— Muy bien, gracias. ¿Y usted?',
+   when:'Formal — with elders, bosses, strangers, teachers.'},
+  {cat:'sal',time:'any',emoji:'🙋',es:'¿Cómo te va?',en:'How\'s it going?',pron:'KOH-moh teh VAH',
+   ex:'— ¿Cómo te va en el nuevo trabajo?\n— Muy bien, me gusta mucho.',
+   when:'Casual. Great when you haven\'t seen someone in a while.'},
+  {cat:'sal',time:'any',emoji:'👍',es:'¿Todo bien?',en:'Everything good? / All good?',pron:'TOH-doh BYEN',
+   ex:'— ¡Hola! ¿Todo bien?\n— ¡Sí, todo bien! ¿Y tú?',
+   when:'Very casual and common in Mexico. Quick check-in with friends.'},
+  /* RESPUESTAS a saludos */
+  {cat:'sal',time:'any',emoji:'✅',es:'Bien, gracias',en:'Fine, thank you',pron:'BYEN GRAH-syahs',
+   ex:'— ¿Cómo estás?\n— Bien, gracias. ¿Y tú?',
+   when:'Standard positive response. Always follow with "¿Y tú?" or "¿Y usted?"'},
+  {cat:'sal',time:'any',emoji:'😄',es:'Muy bien',en:'Very well / Great',pron:'MWEE BYEN',
+   ex:'— Buenos días. ¿Cómo está?\n— ¡Muy bien, gracias!',
+   when:'Enthusiastic response — shows you\'re doing great.'},
+  {cat:'sal',time:'any',emoji:'😐',es:'Más o menos',en:'So-so / More or less',pron:'mas oh MEH-nos',
+   ex:'— ¿Cómo estás?\n— Más o menos... estoy un poco cansado.',
+   when:'When things are OK but not great. Honest and casual.'},
+  /* DESPEDIDAS */
+  {cat:'des',time:'any',emoji:'👋',es:'Adiós',en:'Goodbye',pron:'ah-DYOS',
+   ex:'— Adiós, cuídate.\n— ¡Adiós! Hasta pronto.',
+   when:'Can feel final — for everyday "see you later", "hasta luego" is more natural.'},
+  {cat:'des',time:'any',emoji:'🔜',es:'Hasta luego',en:'See you later',pron:'AH-stah LWEH-goh',
+   ex:'— Me voy. ¡Hasta luego!\n— ¡Hasta luego! Que te vaya bien.',
+   when:'Most common casual goodbye. Doesn\'t literally mean "later today."'},
+  {cat:'des',time:'any',emoji:'📅',es:'Hasta mañana',en:'See you tomorrow',pron:'AH-stah mah-NYAH-nah',
+   ex:'— ¡Hasta mañana, profe!\n— ¡Hasta mañana, nos vemos a las 9!',
+   when:'When you\'ll see the person specifically the next day.'},
+  {cat:'des',time:'any',emoji:'⏰',es:'Hasta pronto',en:'See you soon',pron:'AH-stah PRON-toh',
+   ex:'— ¡Fue un placer conocerte! ¡Hasta pronto!\n— ¡Igualmente! ¡Hasta pronto!',
+   when:'When you\'ll see them again but not necessarily tomorrow.'},
+  {cat:'des',time:'any',emoji:'🙏',es:'Que te vaya bien',en:'Take care / All the best',pron:'keh teh VAH-yah BYEN',
+   ex:'— Que te vaya bien en el viaje.\n— ¡Gracias! ¡Igualmente!',
+   when:'Warm goodbye wishing someone well. Very common in Mexico.'},
+  {cat:'des',time:'any',emoji:'💪',es:'Cuídate (mucho)',en:'Take care (of yourself)',pron:'KWEE-dah-teh (MOO-choh)',
+   ex:'— ¡Cuídate mucho!\n— ¡Tú también! Hasta luego.',
+   when:'"Cuídate" = take care. "Cuídate mucho" = take care a lot. Add at the end of any goodbye.'},
+  {cat:'des',time:'any',emoji:'🤝',es:'Nos vemos',en:'See you / We\'ll see each other',pron:'nos VEH-mos',
+   ex:'— ¡Nos vemos el martes!\n— ¡Sí, nos vemos! ¡Hasta entonces!',
+   when:'Very natural Mexican goodbye — literally "we\'ll see each other."'},
+  {cat:'des',time:'night',emoji:'😴',es:'Que descanses',en:'Rest well / Sleep well',pron:'keh des-KAN-ses',
+   ex:'— Ya me voy a dormir. ¡Buenas noches!\n— ¡Que descanses! Hasta mañana.',
+   when:'Said at night when someone is going to sleep. Warm and caring.'},
+  /* PRESENTARSE */
+  {cat:'pre',time:'any',emoji:'🙋',es:'Me llamo...',en:'My name is...',pron:'meh YAH-moh',
+   ex:'— Hola, me llamo Carlos. ¿Y tú?\n— Me llamo Denisse. ¡Mucho gusto!',
+   when:'Most natural way to say your name. Literally "I call myself..."'},
+  {cat:'pre',time:'any',emoji:'🪪',es:'Mi nombre es...',en:'My name is... (formal)',pron:'mee NOM-breh es',
+   ex:'— Mi nombre es Ana García.\n— Mucho gusto, licenciada García.',
+   when:'A bit more formal than "me llamo". Used in professional introductions.'},
+  {cat:'pre',time:'any',emoji:'😄',es:'Soy...',en:'I am... (+ name)',pron:'soy',
+   ex:'— ¡Hola! Soy Pedro, el nuevo estudiante.\n— ¡Bienvenido, Pedro!',
+   when:'Simple and direct. "Soy + name" — works in any situation.'},
+  {cat:'pre',time:'any',emoji:'🤝',es:'Mucho gusto',en:'Nice to meet you',pron:'MOO-choh GOOS-toh',
+   ex:'— Me llamo Jorge.\n— Mucho gusto, Jorge. Yo soy María.',
+   when:'Said when meeting someone for the first time. Very common and polite.'},
+  {cat:'pre',time:'any',emoji:'😍',es:'Encantado / Encantada',en:'Delighted to meet you',pron:'en-kan-TAH-doh/dah',
+   ex:'— Encantado de conocerle, doctor.\n— El gusto es mío.',
+   when:'"Encantado" = man speaking. "Encantada" = woman speaking. Slightly more formal.'},
+  {cat:'pre',time:'any',emoji:'🔄',es:'Igualmente',en:'Likewise / Same to you',pron:'ee-gwal-MEN-teh',
+   ex:'— Mucho gusto.\n— Igualmente.',
+   when:'Perfect response to "mucho gusto" or "encantado/a."'},
+  {cat:'pre',time:'any',emoji:'🌍',es:'Soy de...',en:'I\'m from...',pron:'soy deh',
+   ex:'— ¿De dónde eres?\n— Soy de los Estados Unidos, de Nueva York.',
+   when:'"Soy de" + city or country. Common question when meeting someone new.'},
+  {cat:'pre',time:'any',emoji:'🎂',es:'Tengo ___ años',en:'I am ___ years old',pron:'TEN-goh ___ AH-nyos',
+   ex:'— ¿Cuántos años tienes?\n— Tengo 28 años. ¿Y tú?\n— Yo tengo 30.',
+   when:'In Spanish you "HAVE" years, not "are" years old. Always "tener" for age!'},
+  {cat:'pre',time:'any',emoji:'❓',es:'¿Cómo te llamas?',en:'What\'s your name? (informal)',pron:'KOH-moh teh YAH-mas',
+   ex:'— ¡Hola! ¿Cómo te llamas?\n— Me llamo Laura. ¿Y tú?\n— Yo soy Marcos.',
+   when:'Informal — asking a friend, classmate, or someone your age.'},
+  {cat:'pre',time:'any',emoji:'🎩',es:'¿Cómo se llama usted?',en:'What\'s your name? (formal)',pron:'KOH-moh seh YAH-mah oos-TED',
+   ex:'— Buenos días. ¿Cómo se llama usted?\n— Me llamo Roberto Sánchez, mucho gusto.',
+   when:'Formal — asking an elder, professor, doctor, or boss.'},
+  {cat:'pre',time:'any',emoji:'🌍',es:'¿De dónde eres?',en:'Where are you from? (informal)',pron:'deh DON-deh EH-res',
+   ex:'— ¿De dónde eres?\n— Soy de Japón. ¿Y tú?\n— Yo soy de México.',
+   when:'Informal, casual. One of the most common questions when meeting someone.'},
+  /* EXPRESIONES */
+  {cat:'exp',time:'any',emoji:'✅',es:'Sí',en:'Yes',pron:'see',
+   ex:'— ¿Hablas español?\n— Sí, un poco.',
+   when:'Simple yes. The accent on "sí" distinguishes it from "si" (if).'},
+  {cat:'exp',time:'any',emoji:'❌',es:'No',en:'No',pron:'no',
+   ex:'— ¿Eres de México?\n— No, soy de Brasil.',
+   when:'Same in both languages! Easy one.'},
+  {cat:'exp',time:'any',emoji:'🙏',es:'Por favor',en:'Please',pron:'por fah-BOR',
+   ex:'— Un agua, por favor.\n— Claro, enseguida.',
+   when:'Always polite when asking for something. Never hurts to add it!'},
+  {cat:'exp',time:'any',emoji:'💚',es:'Gracias / Muchas gracias',en:'Thank you / Thank you very much',pron:'GRAH-syahs / MOO-chas GRAH-syahs',
+   ex:'— Aquí tiene su cambio.\n— ¡Muchas gracias!',
+   when:'"Gracias" = thanks. "Muchas gracias" = thank you very much.'},
+  {cat:'exp',time:'any',emoji:'😊',es:'De nada',en:'You\'re welcome',pron:'deh NAH-dah',
+   ex:'— ¡Gracias por tu ayuda!\n— ¡De nada! Para eso estamos.',
+   when:'The standard "you\'re welcome." Also common: "Con gusto" (with pleasure).'},
+  {cat:'exp',time:'any',emoji:'😎',es:'Con gusto',en:'With pleasure / My pleasure',pron:'kon GOOS-toh',
+   ex:'— ¿Me puedes ayudar?\n— ¡Con gusto!',
+   when:'Warm alternative to "de nada". Very common in Mexico — shows you\'re happy to help.'},
+  {cat:'exp',time:'any',emoji:'😅',es:'Perdón / Disculpe',en:'Sorry / Excuse me',pron:'per-DON / dis-KOOL-peh',
+   ex:'— ¡Perdón! No te vi.\n— No te preocupes.',
+   when:'"Perdón" is more casual. "Disculpe" is slightly more formal. Both work in any situation.'},
+  {cat:'exp',time:'any',emoji:'🤔',es:'No entiendo',en:'I don\'t understand',pron:'no en-TYEN-doh',
+   ex:'— No entiendo. ¿Puede explicar de nuevo?\n— Claro, con mucho gusto.',
+   when:'Essential for beginners! Don\'t be afraid to say this — people will help you.'},
+  {cat:'exp',time:'any',emoji:'🐢',es:'Más despacio, por favor',en:'More slowly, please',pron:'mas des-PAH-syoh por fah-BOR',
+   ex:'— Más despacio, por favor. Soy principiante.\n— ¡Claro! Des-pa-cio...',
+   when:'Add this after "no entiendo" — ask them to slow down!'},
+  {cat:'exp',time:'any',emoji:'🔄',es:'¿Puede repetir?',en:'Can you repeat that?',pron:'PWEH-deh reh-peh-TEER',
+   ex:'— ¿Puede repetir, por favor?\n— Sí, claro: "Buenos días."',
+   when:'Ask someone to repeat what they said. Works with any level.'},
+  {cat:'exp',time:'any',emoji:'🙂',es:'¡Claro (que sí)!',en:'Of course! / Sure!',pron:'KLAH-roh (keh see)',
+   ex:'— ¿Me ayudas?\n— ¡Claro que sí! Con mucho gusto.',
+   when:'Very common in Mexico. Much warmer than just "sí." Shows enthusiasm.'},
+  {cat:'exp',time:'any',emoji:'😶',es:'No sé',en:'I don\'t know',pron:'no seh',
+   ex:'— ¿Dónde está el baño?\n— No sé, lo siento.',
+   when:'Simple and essential. "Lo siento" (I\'m sorry) naturally follows it.'},
+];
+
+/* EX 0 — VOCAB CARDS */
+function getVC(){return vcFilter==='all'?VOCAB:VOCAB.filter(v=>v.cat===vcFilter);}
+
+function renderVocab(){
+  vcCards=getVC();if(vcIdx>=vcCards.length)vcIdx=0;
+  vcFlipped=false;renderVCCard();
+}
+function renderVCCard(){
+  if(!vcCards.length){document.getElementById('exContainer').innerHTML='<div class="panel"><p>No cards.</p></div>';return;}
+  const item=vcCards[vcIdx];
+  const cat=CATS[item.cat];
+  const pct=Math.round((vcIdx+1)/vcCards.length*100);
+  const timeBg=TIME_COLOR[item.time]||TIME_COLOR.any;
+  const timeLbl=TIME_LABEL[item.time]||'';
+  const hasAudio=!!window.speechSynthesis;
+  const fbtns=[{id:'all',lbl:'All'},...Object.entries(CATS).map(([k,v])=>({id:k,lbl:v.label}))].map(f=>`<button class="vc-fbtn${vcFilter===f.id?' active':''}" style="${vcFilter===f.id?`background:${CATS[f.id]?.bg||'rgba(255,255,255,.1)'};border-color:${CATS[f.id]?.bd||'rgba(255,255,255,.25)'};color:${CATS[f.id]?.col||'var(--text)'}`:''};" onclick="setVC('${f.id}')">${f.lbl}</button>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📖 Vocabulary cards — ${VOCAB.length} expressions + 🔊 audio</div>
+  <div class="ex-instr">Front: Spanish expression + pronunciation guide. Back: English, example dialogue, and when to use it. Click <em>🔊 Listen</em> to hear it pronounced!</div>
+  <div class="vc-filter">${fbtns}</div>
+  <div class="vc-wrap">
+    <div class="vc-prow">
+      <span class="vc-cnt">${vcIdx+1}/${vcCards.length}</span>
+      <div class="vc-trk"><div class="vc-fil" style="width:${pct}%;background:${cat.col}"></div></div>
+      <span class="vc-cnt" style="color:${cat.col}">${cat.label}</span>
+    </div>
+    <div class="vc-card${vcFlipped?' flipped':''}" id="vcCard" onclick="flipVC()">
+      <div class="vc-inner">
+        <div class="vc-front" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:.65rem;font-weight:900;text-transform:uppercase;color:${cat.col};letter-spacing:.08em">${cat.label}</span>
+            <span style="font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:999px;background:${timeBg};color:var(--muted)">${timeLbl}</span>
+          </div>
+          <div style="font-size:2.5rem;line-height:1">${item.emoji}</div>
+          <div class="vc-es" style="color:${cat.col}">${item.es}</div>
+          <div class="vc-pron">🔊 /${item.pron}/</div>
+          ${hasAudio?`<button class="btn-audio" onclick="event.stopPropagation();speak('${item.es.replace(/\?/g,'').replace(/\./g,'')}',this)">🔊 Listen</button>`:''}
+          <div class="vc-hint">👆 Click card to flip</div>
+        </div>
+        <div class="vc-back" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:1.6rem">${item.emoji}</span>
+            <div>
+              <div style="font-family:var(--display);font-weight:900;font-size:1.4rem;color:${cat.col}">${item.es}</div>
+              <div style="font-size:.95rem;color:var(--muted);margin-top:2px">${item.en}</div>
+            </div>
+            ${hasAudio?`<button class="btn-audio" onclick="event.stopPropagation();speak('${item.es.replace(/\?/g,'').replace(/\./g,'')}',this)" style="margin-left:auto">🔊</button>`:''}
+          </div>
+          <div class="vc-ex">${item.ex.replace(/\n/g,'<br>')}</div>
+          <div class="vc-when">📌 <strong>When:</strong> ${item.when}</div>
+        </div>
+      </div>
+    </div>
+    <div class="vc-nav">
+      <button class="btn btn-ghost" onclick="prevVC()" ${vcIdx===0?'disabled':''}>← Prev</button>
+      <button class="btn btn-ghost" onclick="flipVC()">↺ Flip</button>
+      <button class="btn btn-green" onclick="nextVC()" ${vcIdx===vcCards.length-1?'disabled':''}>Next →</button>
+    </div>
+  </div></div>`;
+}
+function flipVC(){vcFlipped=!vcFlipped;const c=document.getElementById('vcCard');if(c)c.classList.toggle('flipped',vcFlipped);}
+function nextVC(){vcIdx=Math.min(vcCards.length-1,vcIdx+1);vcFlipped=false;renderVCCard();}
+function prevVC(){vcIdx=Math.max(0,vcCards.length-1,vcIdx-1);vcFlipped=false;renderVCCard();}
+function setVC(f){vcFilter=f;vcIdx=0;renderVocab();}
+
+/* ══════════════════════════════════
+   EX 1 — ESCUCHA Y ELIGE (listen & choose)
+   20 items: hear the audio, pick the English meaning or situation
+══════════════════════════════════ */
+const LISTEN=[
+  {text:'Hola',q:'What does this mean?',
+   opts:['Goodbye','Hello / Hi','Please','Thank you'],a:1,
+   exp:'"Hola" = Hello / Hi. The most common greeting in Spanish — used any time of day.'},
+  {text:'Buenos días',q:'What does this mean?',
+   opts:['Good evening','Good night','Good morning','Good afternoon'],a:2,
+   exp:'"Buenos días" = Good morning. Use this from sunrise until about noon.'},
+  {text:'Buenas tardes',q:'When would you hear this?',
+   opts:['7am when someone arrives at work','9pm leaving a restaurant','3pm at a shop','11pm at home'],a:2,
+   exp:'"Buenas tardes" = Good afternoon. Used from noon until sunset (~7pm).'},
+  {text:'Buenas noches',q:'What is this used for?',
+   opts:['Morning greeting only','Afternoon greeting only','Evening greeting and good night farewell','Only when going to sleep'],a:2,
+   exp:'"Buenas noches" is BOTH "good evening" (greeting) AND "good night" (farewell). It works in both directions!'},
+  {text:'¿Cómo estás?',q:'What is the person asking?',
+   opts:['What\'s your name?','Where are you from?','How are you?','How old are you?'],a:2,
+   exp:'"¿Cómo estás?" = How are you? (informal). The natural follow-up to "Hola."'},
+  {text:'Bien, gracias',q:'This is a response to what question?',
+   opts:['¿Cómo te llamas?','¿Cómo estás?','¿De dónde eres?','¿Cuántos años tienes?'],a:1,
+   exp:'"Bien, gracias" = Fine, thanks. The standard positive reply to "¿Cómo estás?"'},
+  {text:'Mucho gusto',q:'When do you say this?',
+   opts:['When leaving a party','When meeting someone for the first time','When thanking someone','When ordering food'],a:1,
+   exp:'"Mucho gusto" = Nice to meet you. Always said when being introduced to someone new.'},
+  {text:'Me llamo Carlos',q:'What information is this person sharing?',
+   opts:['Their age','Where they\'re from','Their name','What they do'],a:2,
+   exp:'"Me llamo Carlos" = My name is Carlos. "Llamarse" is the verb for names in Spanish.'},
+  {text:'Soy de México',q:'What does this tell you?',
+   opts:['Their name','Their age','Where they\'re from','Their job'],a:2,
+   exp:'"Soy de México" = I\'m from Mexico. "Soy de" + place = where you\'re from.'},
+  {text:'Tengo veinticinco años',q:'What is this person telling you?',
+   opts:['Their name','Their height','Their age (25 years old)','Their phone number'],a:2,
+   exp:'"Tengo 25 años" = I am 25 years old. In Spanish you "HAVE" (tener) years — not "are" years old!'},
+  {text:'Hasta luego',q:'When would you say this?',
+   opts:['When arriving somewhere','When meeting someone','When saying goodbye','When ordering food'],a:2,
+   exp:'"Hasta luego" = See you later. The most common casual goodbye in Spanish.'},
+  {text:'Hasta mañana',q:'What does this mean?',
+   opts:['See you soon','See you tomorrow','See you next week','Goodbye forever'],a:1,
+   exp:'"Hasta mañana" = See you tomorrow. Use when you\'ll see the person the next day.'},
+  {text:'Cuídate',q:'You hear this at the end of a conversation. What does it mean?',
+   opts:['Come back soon','Take care of yourself','Nice to meet you','Thank you'],a:1,
+   exp:'"Cuídate" = Take care. A warm way to close a goodbye in Mexican Spanish.'},
+  {text:'Por favor',q:'You\'re ordering in a restaurant. You say...',
+   opts:['Por favor, de nada','Un café, por favor','Mucho gusto, adiós','Hasta luego, gracias'],a:1,
+   exp:'"Por favor" = please. "Un café, por favor" = A coffee, please. Always add it when asking!'},
+  {text:'De nada',q:'When do you say this?',
+   opts:['After someone says "gracias"','After someone says "hola"','After saying goodbye','When you don\'t know something'],a:0,
+   exp:'"De nada" = You\'re welcome. It\'s the standard response after someone says "gracias."'},
+  {text:'No entiendo',q:'This learner is saying...',
+   opts:['I don\'t speak Spanish','I don\'t understand','I don\'t like this','I don\'t know your name'],a:1,
+   exp:'"No entiendo" = I don\'t understand. Essential for beginners! Say it without shame.'},
+  {text:'¿Puede repetir, más despacio por favor?',q:'The person is asking to...',
+   opts:['Stop talking','Say it again more slowly','Speak louder','Write it down'],a:1,
+   exp:'"¿Puede repetir, más despacio?" = Can you repeat, more slowly? Two key beginner phrases together!'},
+  {text:'¿Qué onda?',q:'Who would typically say this?',
+   opts:['A teacher to a student','A boss in a meeting','A friend texting you in Mexico','A hotel receptionist'],a:2,
+   exp:'"¿Qué onda?" = What\'s up? This is informal Mexican slang — used with friends, never in formal situations.'},
+  {text:'Que te vaya bien',q:'This is said...',
+   opts:['When meeting someone','As a warm goodbye','When ordering food','When asking someone\'s name'],a:1,
+   exp:'"Que te vaya bien" = Take care / All the best. A warm send-off used in Mexico when parting.'},
+  {text:'Nos vemos',q:'What does "nos vemos" literally mean?',
+   opts:['We see each other (= see you)','We love each other','We hear each other','We know each other'],a:0,
+   exp:'"Nos vemos" = literally "we see each other" → meaning "see you!" Very natural and common in Mexico.'},
+];
+
+function renderListen(){
+  listenAns={};
+  const tot=LISTEN.length;
+  const html=LISTEN.map((item,i)=>{
+    const played=false;
+    const opts=item.opts.map((o,oi)=>`<button class="listen-opt" id="lo${i}_${oi}" onclick="answerListen(${i},${oi})">${o}</button>`).join('');
+    return `<div class="listen-card" id="lc${i}">
+      <button class="listen-btn-big" id="lb${i}" onclick="speak('${item.text}',this)" data-played="0">🔊 Listen — click to hear</button>
+      <div style="font-size:.82rem;color:var(--muted2);margin-bottom:10px;font-style:italic">${i+1}/${tot}. ${item.q}</div>
+      <div class="listen-opts">${opts}</div>
+      <div class="listen-exp" id="le${i}"></div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🔊 Escucha y elige</div>
+  <div class="ex-instr">Click <em>🔊 Listen</em> to hear the Spanish expression, then choose the correct answer. You can listen as many times as you want!</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="l_ok">0</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="l_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="l_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="l_pg" style="width:0%"></div></div></div>
+  </div>
+  ${html}
+  <div class="fb" id="l_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="listenAns={};renderListen()">↺ Reset</button></div></div>`;
+}
+function answerListen(qi,oi){
+  if(listenAns[qi]!==undefined)return;
+  const item=LISTEN[qi];const isOk=oi===item.a;
+  listenAns[qi]=isOk;
+  const card=document.getElementById('lc'+qi);
+  if(card)card.classList.add(isOk?'ok':'err');
+  item.opts.forEach((_,x)=>{const b=document.getElementById(`lo${qi}_${x}`);if(!b)return;b.disabled=true;if(x===item.a)b.classList.add('l-show');else if(x===oi&&!isOk)b.classList.add('l-err');});
+  const e=document.getElementById('le'+qi);if(e){e.classList.add('show');e.innerHTML=`${isOk?'✓':'✗'} ${item.exp}`;}
+  const tot=Object.keys(listenAns).length;
+  const ok=Object.values(listenAns).filter(v=>v).length;
+  document.getElementById('l_ok').textContent=ok;
+  document.getElementById('l_err').textContent=tot-ok;
+  document.getElementById('l_pct').textContent=Math.round(tot/LISTEN.length*100)+'%';
+  document.getElementById('l_pg').style.width=Math.round(tot/LISTEN.length*100)+'%';
+  if(tot===LISTEN.length){
+    const pct=Math.round(ok/tot*100);
+    const fb=document.getElementById('l_fb');
+    fb.className='fb show '+(pct>=85?'ok':'partial');
+    fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'Excellent listening!':'Go back to vocab cards and listen more.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 2 — DIÁLOGOS (chat bubbles, 18 situations)
+══════════════════════════════════ */
+const DIALOGOS=[
+  {scene:'8am, arriving at your Spanish class',
+   chat:[{side:'left',avatar:'👩‍🏫',who:'Teacher',text:'Buenos días a todos.',audio:'Buenos días a todos'}],
+   q:'What do you say back?',
+   opts:['¡Buenas noches, maestra!','¡Buenos días, maestra!','¡Hasta luego, maestra!','¡Adiós!'],a:1,
+   exp:'"Buenos días" — it\'s 8am (morning), so "buenos días" is correct. "Buenas noches" would be night, wrong time!'},
+  {scene:'Meeting your classmate Ana for the first time',
+   chat:[{side:'left',avatar:'👩',who:'Ana',text:'Hola, me llamo Ana. ¿Y tú?',audio:'Hola, me llamo Ana'}],
+   q:'You respond with your name. What do you say?',
+   opts:['Adiós, Ana.','De nada.','Hola Ana, me llamo [tu nombre]. Mucho gusto.','No entiendo.'],a:2,
+   exp:'"Me llamo [tu nombre]. Mucho gusto." — introduce yourself and say nice to meet you. ¡Siempre funciona!'},
+  {scene:'Your friend asks how you are',
+   chat:[{side:'left',avatar:'🧑',who:'Amigo',text:'¡Hola! ¿Cómo estás?',audio:'Hola, ¿cómo estás?'}],
+   q:'You\'re doing great. What do you say?',
+   opts:['Más o menos.','Hasta luego.','¡Muy bien, gracias! ¿Y tú?','No sé.'],a:2,
+   exp:'"¡Muy bien, gracias! ¿Y tú?" — great and enthusiastic. Always ask back — it\'s basic courtesy!'},
+  {scene:'Someone thanks you for helping',
+   chat:[{side:'left',avatar:'👨',who:'Persona',text:'¡Muchas gracias por tu ayuda!',audio:'Muchas gracias por tu ayuda'}],
+   q:'You respond:',
+   opts:['Hasta mañana.','¡De nada! Con mucho gusto.','Mucho gusto.','No entiendo.'],a:1,
+   exp:'"De nada! Con mucho gusto." — you\'re welcome + with pleasure. Warm and very natural in Mexico.'},
+  {scene:'The teacher spoke too fast',
+   chat:[{side:'left',avatar:'👩‍🏫',who:'Teacher',text:'La conjugación del verbo ser en presente es...',audio:'La conjugación del verbo ser en presente es'}],
+   q:'You didn\'t understand. You say:',
+   opts:['Sí, entiendo todo.','Adiós, maestra.','Perdón, no entiendo. ¿Puede repetir más despacio?','Mucho gusto.'],a:2,
+   exp:'"Perdón, no entiendo. ¿Puede repetir más despacio?" — three key phrases in one: sorry + I don\'t understand + can you repeat more slowly.'},
+  {scene:'3pm, entering a shop in Mexico City',
+   chat:[{side:'left',avatar:'🛍️',who:'Vendedor',text:'¡Bienvenido! ¿En qué le puedo ayudar?',audio:'Bienvenido, ¿en qué le puedo ayudar?'}],
+   q:'You greet back. What time-appropriate greeting do you use?',
+   opts:['¡Buenos días!','¡Buenas noches!','¡Buenas tardes!','¡Hasta luego!'],a:2,
+   exp:'"Buenas tardes" — 3pm is afternoon. Días = morning (until noon), Tardes = afternoon, Noches = evening/night.'},
+  {scene:'Your friend is leaving after visiting',
+   chat:[{side:'left',avatar:'🧑',who:'Amigo',text:'Bueno, ya me voy. ¡Fue un placer!',audio:'Bueno, ya me voy, fue un placer'}],
+   q:'You say a warm goodbye:',
+   opts:['¡Hola!','¡Que te vaya bien! ¡Cuídate mucho!','¿Cómo te llamas?','Por favor.'],a:1,
+   exp:'"Que te vaya bien! Cuídate mucho!" — all the best + take care. A warm, complete Mexican goodbye.'},
+  {scene:'You meet your friend\'s boss (formal)',
+   chat:[{side:'left',avatar:'👔',who:'Jefe de tu amigo',text:'Buenas tardes. ¿Cómo está usted?',audio:'Buenas tardes, ¿cómo está usted?'}],
+   q:'He used "usted" — you should respond:',
+   opts:['¿Qué onda?','Bien, gracias. ¿Y usted?','Muy bien. ¿Y tú?','¡Nos vemos!'],a:1,
+   exp:'"Bien, gracias. ¿Y usted?" — match the formal "usted" when responding to someone who used it first.'},
+  {scene:'A Mexican friend texts you casually',
+   chat:[{side:'left',avatar:'📱',who:'Amigo por WhatsApp',text:'¡Qué onda! ¿Cómo vas?',audio:'Qué onda, ¿cómo vas?'}],
+   q:'You respond casually:',
+   opts:['Buenos días.','¡Todo bien! ¿Y tú qué?','Mucho gusto.','¡Hasta mañana!'],a:1,
+   exp:'"¡Todo bien! ¿Y tú qué?" — casual and natural. Match the energy of "¿qué onda?" with something equally informal.'},
+  {scene:'It\'s 10pm, saying goodbye to your host family',
+   chat:[{side:'left',avatar:'👨‍👩‍👧',who:'Familia anfitriona',text:'¡Que descanses!',audio:'Que descanses'}],
+   q:'You respond:',
+   opts:['¡Buenos días!','¡Igualmente! ¡Buenas noches!','¿Cómo estás?','Soy de los Estados Unidos.'],a:1,
+   exp:'"Igualmente! Buenas noches!" — "igualmente" = same to you, and "buenas noches" is perfect for 10pm.'},
+  {scene:'Someone introduces themselves',
+   chat:[{side:'left',avatar:'🙋',who:'Persona nueva',text:'Hola, soy la profesora Ruiz.',audio:'Hola, soy la profesora Ruiz'}],
+   q:'You respond:',
+   opts:['Hasta luego.','¡Encantado/a de conocerla, profesora!','¿Qué onda?','No sé.'],a:1,
+   exp:'"Encantado/a de conocerla" — when meeting someone professional, "encantado/a" is more formal than "mucho gusto." Use "-a" if you\'re a woman, "-o" if you\'re a man.'},
+  {scene:'You want to know your new classmate\'s name',
+   chat:[{side:'right',avatar:'🙋',who:'Tú',text:'¿Cómo te llamas?',audio:'¿Cómo te llamas?'}],
+   q:'Your classmate responds:',
+   opts:['Tengo 20 años.','Me llamo Roberto.','Soy de Guadalajara.','De nada.'],a:1,
+   exp:'"Me llamo Roberto" — the correct response to "¿cómo te llamas?" is always "me llamo + nombre."'},
+  {scene:'You need to ask the professor\'s name formally',
+   chat:[{side:'right',avatar:'🙋',who:'Tú',text:'___',audio:'¿Cómo se llama usted?'}],
+   q:'You ask formally. What do you say?',
+   opts:['¿Cómo te llamas?','¿Cómo se llama usted?','¿Cuál es tu nombre?','¿Cómo estás?'],a:1,
+   exp:'"¿Cómo se llama usted?" — use "usted" with professors, elders, and strangers to show respect.'},
+  {scene:'Making an introduction with your age',
+   chat:[{side:'right',avatar:'🙋',who:'Tú',text:'Me llamo Sam. Soy de Canadá. ___ 22 años.',audio:'Me llamo Sam. Soy de Canadá. Tengo 22 años.'}],
+   q:'Complete: "___ 22 años" (I am 22)',
+   opts:['Soy 22','Estoy 22','Tengo 22','Hay 22'],a:2,
+   exp:'"Tengo 22 años" — in Spanish, you "HAVE" (tener) years. Never say "soy 22 años" — that\'s a very common mistake!'},
+  {scene:'Asking someone where they\'re from',
+   chat:[{side:'left',avatar:'👩',who:'Compañera',text:'¿De dónde eres tú?',audio:'¿De dónde eres tú?'}],
+   q:'You answer (you\'re from Australia):',
+   opts:['Tengo 25 años.','Mucho gusto.','Soy de Australia.','Me llamo Kate.'],a:2,
+   exp:'"Soy de Australia" — "¿De dónde eres?" asks for your country/city of origin. Answer with "soy de" + place.'},
+  {scene:'Someone bumps into you by accident',
+   chat:[{side:'left',avatar:'🤷',who:'Persona en la calle',text:'¡Oh! Perdón, no te vi.',audio:'Perdón, no te vi'}],
+   q:'You respond:',
+   opts:['¡Gracias!','No te preocupes.','Mucho gusto.','Hasta luego.'],a:1,
+   exp:'"No te preocupes" = don\'t worry. A natural, friendly response when someone accidentally bumps into you.'},
+  {scene:'Leaving class on a Friday',
+   chat:[{side:'left',avatar:'👩‍🏫',who:'Maestra',text:'¡Que tengan un buen fin de semana!',audio:'Que tengan un buen fin de semana'}],
+   q:'You respond:',
+   opts:['¡Igualmente, maestra! ¡Hasta el lunes!','¡Buenos días!','Soy de México.','Mucho gusto.'],a:0,
+   exp:'"Igualmente, maestra! Hasta el lunes!" — "igualmente" = same to you, and "hasta el lunes" = see you Monday. Perfect farewell!'},
+  {scene:'After a great first meeting',
+   chat:[{side:'left',avatar:'👨',who:'Nueva persona',text:'Fue un placer conocerte.',audio:'Fue un placer conocerte'}],
+   q:'"Fue un placer conocerte" means:',
+   opts:['Goodbye, see you later','It was a pleasure to meet you','How are you doing?','Where are you from?'],a:1,
+   exp:'"Fue un placer conocerte" = It was a pleasure to meet you. A formal and warm closing to a first meeting.'},
+];
+
+function renderDialogos(){
+  dialAns={};
+  const tot=DIALOGOS.length;
+  const html=DIALOGOS.map((d,i)=>{
+    const chat=d.chat.map(m=>`<div class="chat-msg ${m.side}">
+      <div class="chat-avatar">${m.avatar}</div>
+      <div>
+        <div class="chat-speaker">${m.who}</div>
+        <div class="chat-bubble">${m.text} ${m.audio?`<button class="chat-audio" onclick="speak('${m.audio}',this)" title="Listen">🔊</button>`:''}</div>
+      </div>
+    </div>`).join('');
+    const opts=d.opts.map((o,oi)=>`<button class="dial-opt" id="dd${i}_${oi}" onclick="answerDial(${i},${oi})">${o}</button>`).join('');
+    return `<div class="dial-block" id="db${i}">
+      <div class="chat-scene">📍 ${d.scene}</div>
+      <div class="chat-wrap">${chat}</div>
+      <div style="font-size:.85rem;font-weight:700;margin-bottom:8px;color:var(--muted)">👉 ${d.q}</div>
+      <div class="dial-opts">${opts}</div>
+      <div class="dial-exp" id="dexp${i}"></div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">💬 Diálogos — ¿Qué respondes?</div>
+  <div class="ex-instr">Read the situation and chat, then choose the best response. Click 🔊 on any bubble to hear it! Think about: <em>time of day</em>, <em>formal vs informal</em>, and <em>context</em>.</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="d_ok">0</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="d_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="d_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="d_pg" style="width:0%"></div></div></div>
+  </div>
+  <div class="dial-wrap">${html}</div>
+  <div class="fb" id="d_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="dialAns={};renderDialogos()">↺ Reset</button></div></div>`;
+}
+function answerDial(qi,oi){
+  if(dialAns[qi]!==undefined)return;
+  const d=DIALOGOS[qi];const isOk=oi===d.a;
+  dialAns[qi]=isOk;
+  const block=document.getElementById('db'+qi);
+  if(block)block.classList.add(isOk?'ok':'err');
+  d.opts.forEach((_,x)=>{const b=document.getElementById(`dd${qi}_${x}`);if(!b)return;b.disabled=true;if(x===d.a)b.classList.add('d-show');else if(x===oi&&!isOk)b.classList.add('d-err');});
+  const e=document.getElementById('dexp'+qi);if(e){e.classList.add('show');e.innerHTML=`${isOk?'✓':'✗'} ${d.exp}`;}
+  const tot=Object.keys(dialAns).length;
+  const ok=Object.values(dialAns).filter(v=>v).length;
+  document.getElementById('d_ok').textContent=ok;
+  document.getElementById('d_err').textContent=tot-ok;
+  document.getElementById('d_pct').textContent=Math.round(tot/DIALOGOS.length*100)+'%';
+  document.getElementById('d_pg').style.width=Math.round(tot/DIALOGOS.length*100)+'%';
+  if(tot===DIALOGOS.length){
+    const pct=Math.round(ok/tot*100);
+    const fb=document.getElementById('d_fb');
+    fb.className='fb show '+(pct>=85?'ok':'partial');
+    fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Excelente! You handle conversations naturally!':'Review the vocab cards and try again.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 3 — COMPLETA LA FRASE (18)
+══════════════════════════════════ */
+const FILLS=[
+  {ctx:'7am, arriving at work',q:'— ___, señora López. ¿Cómo está?',qen:'Good morning, Mrs. López.',opts:['Buenas noches','Buenos días','Hasta luego','De nada'],a:1,exp:'"Buenos días" — 7am is morning. "Noches" would be wrong (that\'s evening/night).'},
+  {ctx:'Your new coworker asks your name',q:'— Me ___ Ana García. ¿Y usted?',qen:'My name is Ana García.',opts:['llamo','estoy','soy','tengo'],a:0,exp:'"Me llamo" — the verb llamarse is used for names. "Me llamo Ana."'},
+  {ctx:'Meeting someone for the first time',q:'— Hola, soy Pedro. — ___, Pedro.',qen:'Nice to meet you, Pedro.',opts:['Hasta luego','Mucho gusto','De nada','No sé'],a:1,exp:'"Mucho gusto" = nice to meet you. Always said when being introduced.'},
+  {ctx:'Someone says thank you',q:'— Gracias. — ___, para eso estamos.',qen:'You\'re welcome!',opts:['Perdón','Adiós','De nada','Hola'],a:2,exp:'"De nada" = you\'re welcome. "Para eso estamos" = that\'s what we\'re here for. Very warm.'},
+  {ctx:'You didn\'t understand what was said',q:'— ___, ¿puede repetir más despacio?',qen:'Sorry, can you repeat more slowly?',opts:['Gracias','Perdón','Adiós','Mucho gusto'],a:1,exp:'"Perdón" = excuse me / sorry. Use it to politely interrupt or ask for help.'},
+  {ctx:'Saying goodbye until the next day',q:'— ¡___, nos vemos mañana a las 9!',qen:'See you tomorrow at 9!',opts:['Hasta mañana','Hasta pronto','Hola','Buenos días'],a:0,exp:'"Hasta mañana" specifically = see you tomorrow. "Hasta pronto" = see you soon (no specific day).'},
+  {ctx:'Telling your age',q:'— ¿Cuántos años tienes? — Tengo 24 ___.',qen:'I am 24 years old.',opts:['años','días','horas','meses'],a:0,exp:'"Años" = years. Never say "soy 24 años" — always "tengo + número + años."'},
+  {ctx:'Asking where someone is from',q:'— ¿De dónde ___? — Soy de Colombia.',qen:'Where are you from? I\'m from Colombia.',opts:['estás','tienes','eres','llamas'],a:2,exp:'"¿De dónde eres?" — "ser" (eres) is used for origin, a permanent characteristic.'},
+  {ctx:'Politely asking for water',q:'— Un vaso de agua, ___.',qen:'A glass of water, please.',opts:['gracias','por favor','de nada','mucho gusto'],a:1,exp:'"Por favor" = please. Add it to any request to be polite — always a good move!'},
+  {ctx:'It\'s 9pm. Greeting your host family.',q:'— ¡___, familia! ¿Cómo les fue?',qen:'Good evening, family! How did it go?',opts:['Buenos días','Buenas tardes','Buenas noches','Buenos'],a:2,exp:'"Buenas noches" — 9pm is clearly nighttime. "Buenas tardes" ends around sunset.'},
+  {ctx:'Saying "my name is" more formally',q:'— Mi ___ es Carlos Ramírez.',qen:'My name is Carlos Ramírez.',opts:['ciudad','trabajo','nombre','edad'],a:2,exp:'"Mi nombre es" — a bit more formal than "me llamo". Common in professional settings.'},
+  {ctx:'Your friend is leaving; you want to say "take care"',q:'— ¡___ mucho, que todo te salga bien!',qen:'Take great care of yourself!',opts:['Cuídate','Gracias','Hasta','Soy'],a:0,exp:'"Cuídate mucho" = take great care of yourself. One of the warmest Mexican goodbyes.'},
+  {ctx:'Responding to "mucho gusto"',q:'— Mucho gusto. — ___.',qen:'Likewise!',opts:['De nada','Perdón','Igualmente','Hasta luego'],a:2,exp:'"Igualmente" = likewise. The perfect, natural response to "mucho gusto."'},
+  {ctx:'You want to respond enthusiastically to "¿cómo estás?"',q:'— ¿Cómo estás? — ___ bien, ¡gracias!',qen:'Very well, thanks!',opts:['Más o menos','Muy','Hasta','Poco'],a:1,exp:'"Muy bien" = very well. Sounds much more enthusiastic than just "bien."'},
+  {ctx:'Your friend texts: "¿Qué onda?" You respond casually',q:'— ¿Qué onda? — ___ bien, ¿y tú?',qen:'All good, and you?',opts:['Mucho gusto','Todo','Buenos días','Adiós'],a:1,exp:'"Todo bien" = all good. Very casual and natural response to "¿qué onda?"'},
+  {ctx:'Someone holds the door open for you',q:'— (te cede el paso) — ¡___, muy amable!',qen:'Thank you, very kind!',opts:['Perdón','Hasta luego','Gracias','De nada'],a:2,exp:'"Gracias" = thank you. "Muy amable" = very kind — a great phrase to add to a thank you!'},
+  {ctx:'After a goodbye, someone wishes you well',q:'— Que te vaya bien. — ¡___, igualmente!',qen:'Thanks, same to you!',opts:['Perdón','Gracias','Hola','Buenos días'],a:1,exp:'"Gracias, igualmente" = thanks, same to you. Perfect response to any well-wishing farewell.'},
+  {ctx:'Your professor asks how you are (formal)',q:'— ¿Cómo está usted? — Bien, gracias. ¿Y ___?',qen:'Fine, thanks. And you? (formal)',opts:['tú','usted','él','nosotros'],a:1,exp:'"¿Y usted?" — when someone uses "usted" (formal), always match with "usted" in return, not "tú."'},
+];
+
+function renderFill(){
+  fillAns={};
+  const tot=FILLS.length;
+  const html=FILLS.map((f,i)=>{
+    const chips=f.opts.map((o,oi)=>`<button class="fill-chip" id="fc_chip${i}_${oi}" onclick="answerFill(${i},${oi})">${o}</button>`).join('');
+    return `<div class="fill-card" id="fcard${i}">
+      <div class="fill-ctx">📍 ${f.ctx}</div>
+      <div class="fill-q" id="fq${i}">${f.q.replace('___','<span class="fill-blank" id="fb${i}">___</span>')} <span style="font-size:.75rem;color:var(--muted2);font-style:italic">(${f.qen})</span></div>
+      <div class="fill-chips" id="fchips${i}">${chips}</div>
+      <div class="fill-exp" id="fexp${i}"></div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">✏️ Completa la frase</div>
+  <div class="ex-instr">Choose the word that fits the blank. The English translation is shown in <em>italics</em>. Think about <em>time of day</em>, <em>formality</em>, and <em>context</em>.</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="fi_ok">0</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="fi_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="fi_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="fi_pg" style="width:0%"></div></div></div>
+  </div>
+  <div class="fill-list">${html}</div>
+  <div class="fb" id="fi_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="fillAns={};renderFill()">↺ Reset</button></div></div>`;
+}
+function answerFill(qi,oi){
+  if(fillAns[qi]!==undefined)return;
+  const f=FILLS[qi];const isOk=oi===f.a;
+  fillAns[qi]=isOk;
+  const card=document.getElementById('fcard'+qi);
+  if(card)card.classList.add(isOk?'ok':'err');
+  const blank=document.getElementById('fb'+qi);
+  if(blank)blank.innerHTML=`<span class="fill-chip ${isOk?'chip-ok':'chip-err'}" style="cursor:default">${f.opts[oi]}</span>${!isOk?` <span class="fill-chip chip-ok" style="cursor:default">${f.opts[f.a]}</span>`:''}`;
+  document.querySelectorAll(`[id^="fc_chip${qi}_"]`).forEach(c=>{c.disabled=true;c.classList.add('used');});
+  const e=document.getElementById('fexp'+qi);if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+f.exp;}
+  const tot=Object.keys(fillAns).length;
+  const ok=FILLS.filter((_,i2)=>fillAns[i2]===FILLS[i2]?.a).length;
+  document.getElementById('fi_ok').textContent=ok;
+  document.getElementById('fi_err').textContent=tot-ok;
+  document.getElementById('fi_pct').textContent=Math.round(tot/FILLS.length*100)+'%';
+  document.getElementById('fi_pg').style.width=Math.round(tot/FILLS.length*100)+'%';
+  if(tot===FILLS.length){
+    const pct=Math.round(ok/tot*100);
+    const fb=document.getElementById('fi_fb');
+    fb.className='fb show '+(pct>=85?'ok':'partial');
+    fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Muy bien!':'Review and try again.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 4 — ¿FORMAL O INFORMAL? (16)
+══════════════════════════════════ */
+const FORMAL=[
+  {scene:'Your professor asks: "¿Cómo está usted?"',
+   q:'You respond. Which version is correct?',
+   opts:['Bien, ¿y tú?','Bien, ¿y usted?'],formal:1,
+   exp:'Match the formality level! The professor used "usted" → you must respond with "usted", not "tú."'},
+  {scene:'Texting your Mexican best friend',
+   q:'How do you ask "how are you?"',
+   opts:['¿Cómo está usted?','¿Qué onda? ¿Cómo estás?'],formal:1,
+   exp:'With close friends, use informal: "¿cómo estás?" or even "¿qué onda?" "¿Cómo está usted?" would sound very strange and cold!'},
+  {scene:'You\'re at a job interview',
+   q:'How do you introduce yourself?',
+   opts:['Hola, me llamo Ana, soy de México, tengo 25 años.','Buenos días, mi nombre es Ana García. Mucho gusto en conocerle.'],formal:1,
+   exp:'Job interview = formal. "Buenos días", "mi nombre es", "mucho gusto en conocerle" — all formal markers.'},
+  {scene:'Greeting your friend\'s 5-year-old child',
+   q:'What do you say?',
+   opts:['¡Buenos días! ¿Cómo está usted?','¡Hola! ¿Cómo te llamas? ¿Cuántos años tienes?'],formal:1,
+   exp:'Children use informal "tú." "¿Usted?" with a child would sound absurd! Use "tú" forms.'},
+  {scene:'Asking the hotel receptionist their name',
+   q:'Which is more appropriate?',
+   opts:['¿Cómo te llamas?','¿Cómo se llama usted?'],formal:1,
+   exp:'Hotel staff = service professional = formal. Use "¿cómo se llama usted?" to be respectful.'},
+  {scene:'Your roommate\'s grandmother visits',
+   q:'How do you greet her?',
+   opts:['¡Hola! ¿Qué onda?','Buenas tardes, señora. ¿Cómo está usted?'],formal:1,
+   exp:'Always use "usted" with elderly people — it shows respect. "¿Qué onda?" with a grandmother would be rude!'},
+  {scene:'Saying goodbye to a classmate you see daily',
+   q:'Natural goodbye between classmates:',
+   opts:['Hasta mañana. Que le vaya bien.','¡Nos vemos mañana! ¡Cuídate!'],formal:1,
+   exp:'"Nos vemos mañana! Cuídate!" — classmates use informal "tú" forms. "Que le vaya bien" (with "le") is too formal.'},
+  {scene:'You didn\'t understand your doctor\'s explanation',
+   q:'How do you ask them to repeat?',
+   opts:['Perdón, no entiendo. ¿Puede repetir más despacio?','Oye, no entendí. ¿Puedes repetir?'],formal:0,
+   exp:'With a doctor: formal! "¿Puede repetir?" (usted) is correct. "¿Puedes repetir?" (tú) would be too casual.'},
+  {scene:'Meeting a new student in class (your same age)',
+   q:'Which introduction is more natural?',
+   opts:['Encantado de conocerle, mucho gusto en saludarle.','Hola, me llamo Sam. ¿Y tú cómo te llamas?'],formal:1,
+   exp:'Same age classmate = informal. "Hola, me llamo Sam" is natural. The first option is overly formal.'},
+  {scene:'WhatsApp voice message to a friend',
+   q:'You start the message:',
+   opts:['Buenos días. Mi nombre es Carlos García.','¡Qué onda! Soy yo, Carlos.'],formal:1,
+   exp:'"¡Qué onda! Soy yo, Carlos." — casual and natural for a friend\'s voice note. The first is formal and robotic.'},
+  {scene:'Leaving the doctor\'s office',
+   q:'Appropriate goodbye to the doctor:',
+   opts:['Hasta luego, ¡cuídate mucho!','Hasta luego, doctor. Que tenga buen día.'],formal:1,
+   exp:'"Que tenga buen día" uses "usted" (tenga = usted form). Correct for professional situations.'},
+  {scene:'Your boss asks "¿Cómo le va?"',
+   q:'("Le" = used with usted). You respond:',
+   opts:['Muy bien, ¿y tú?','Muy bien, gracias. ¿Y usted?'],formal:1,
+   exp:'Your boss used "usted" (le va) → you match with "usted": "¿Y usted?" Not "¿Y tú?"'},
+  {scene:'Meeting someone your exact age at a party',
+   q:'Natural first exchange:',
+   opts:['¿Cómo se llama usted? Mucho gusto de conocerle.','¡Hola! Soy María. ¿Cómo te llamas?'],formal:1,
+   exp:'"¡Hola! Soy María. ¿Cómo te llamas?" — same age at a party = casual/informal. The "usted" option sounds stiff.'},
+  {scene:'A child says "mucho gusto" to you after being introduced',
+   q:'You respond:',
+   opts:['Igualmente, ¿cómo está usted?','Igualmente, ¿cuántos años tienes?'],formal:1,
+   exp:'With a child: always "tú." "¿Cuántos años tienes?" (informal) is perfect. "¿Usted?" with a child is wrong.'},
+  {scene:'Formal email opening in Spanish',
+   q:'Which is correct for a formal email greeting?',
+   opts:['¡Hola! ¿Qué onda?','Buenos días, me dirijo a usted para...'],formal:1,
+   exp:'"Buenos días, me dirijo a usted para..." — formal writing uses "usted" and proper greetings. "¿Qué onda?" in a formal email would be very unprofessional.'},
+  {scene:'Your neighbor (who is your age) waves at you',
+   q:'Natural response:',
+   opts:['Buenos días, ¿cómo está usted?','¡Hola! ¿Cómo estás?'],formal:1,
+   exp:'"¡Hola! ¿Cómo estás?" — neighbor of the same age = informal. "¿Cómo está usted?" would be oddly cold.'},
+];
+let fiAnswers={};
+
+function renderFormal(){
+  fiAnswers={};
+  const tot=FORMAL.length;
+  const html=FORMAL.map((f,i)=>{
+    const done=fiAnswers[i]!==undefined;
+    return `<div class="fi-card" id="fic${i}">
+      <div class="fi-scene">📍 ${f.scene}</div>
+      <div class="fi-q">${f.q}</div>
+      <div class="fi-btns">
+        ${f.opts.map((o,oi)=>`<button class="fi-btn fi-${oi===f.formal?'formal':'informal'}" id="fi${i}_${oi}" onclick="answerFI(${i},${oi})">${oi===f.formal?'🎩':''} ${o}</button>`).join('')}
+      </div>
+      <div class="fi-exp" id="fiexp${i}"></div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🎩 ¿Formal o informal?</div>
+  <div class="ex-instr">Read the situation and choose the most appropriate response. In Spanish, choosing between <em>tú (informal)</em> and <em>usted (formal)</em> matters a lot!</div>
+  <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+    <div style="padding:8px 14px;border-radius:10px;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.25);font-size:.8rem;color:var(--exp2)">🎩 <strong>Formal (usted)</strong>: bosses, doctors, elders, strangers</div>
+    <div style="padding:8px 14px;border-radius:10px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.25);font-size:.8rem;color:var(--sal2)"><strong>Informal (tú)</strong>: friends, family, classmates, same age</div>
+  </div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="ff_ok">0</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="ff_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Answered: <span id="ff_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="ff_pg" style="width:0%"></div></div></div>
+  </div>
+  ${html}
+  <div class="fb" id="ff_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="fiAnswers={};renderFormal()">↺ Reset</button></div></div>`;
+}
+function answerFI(qi,oi){
+  if(fiAnswers[qi]!==undefined)return;
+  const f=FORMAL[qi];const isOk=oi===f.formal;
+  fiAnswers[qi]=isOk;
+  const card=document.getElementById('fic'+qi);
+  if(card)card.classList.add(isOk?'ok':'err');
+  [0,1].forEach(x=>{const b=document.getElementById(`fi${qi}_${x}`);if(!b)return;b.disabled=true;if(x===f.formal)b.classList.add('fi-ok');else if(x===oi&&!isOk)b.classList.add('fi-err');});
+  const e=document.getElementById('fiexp'+qi);if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+f.exp;}
+  const tot=Object.keys(fiAnswers).length;
+  const ok=Object.values(fiAnswers).filter(v=>v).length;
+  document.getElementById('ff_ok').textContent=ok;
+  document.getElementById('ff_err').textContent=tot-ok;
+  document.getElementById('ff_pct').textContent=Math.round(tot/FORMAL.length*100)+'%';
+  document.getElementById('ff_pg').style.width=Math.round(tot/FORMAL.length*100)+'%';
+  if(tot===FORMAL.length){
+    const pct=Math.round(ok/tot*100);
+    const fb=document.getElementById('ff_fb');
+    fb.className='fb show '+(pct>=85?'ok':'partial');
+    fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Perfecto! You know when to be formal!':'Remember: usted = boss/elder/stranger, tú = friends/family/peers.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 5 — CONSTRUYE EL DIÁLOGO (unscramble, 8 dialogues)
+   Drag/click lines into the correct order
+══════════════════════════════════ */
+const BUILD=[
+  {ctx:'Complete self-introduction — put these lines in order',
+   lines:['Me llamo Sam Johnson.','¡Hola! Buenos días.','Soy de Los Ángeles, California.','Tengo 24 años. Mucho gusto.'],
+   answer:[1,0,2,3],
+   exp:'Natural order: 1) ¡Hola! Buenos días (greeting), 2) Me llamo Sam Johnson (name), 3) Soy de Los Ángeles (origin), 4) Tengo 24 años. Mucho gusto (age + nice to meet you).'},
+  {ctx:'Meeting a new classmate — 4 lines of a conversation',
+   lines:['Mucho gusto, Carlos. Yo me llamo Sara.','¡Hola! Me llamo Carlos. ¿Y tú?','¿De dónde eres, Sara?','Soy de Argentina. ¿Y tú?'],
+   answer:[1,0,2,3],
+   exp:'1) Hola + introduce yourself, 2) respond + give your name, 3) ask where they\'re from, 4) answer + ask back.'},
+  {ctx:'Formal introduction in a meeting',
+   lines:['Mucho gusto, señora Martínez. ¿En qué puedo ayudarle?','Buenos días.','Igualmente. Por favor, tome asiento.','Mi nombre es Patricia Martínez, vengo de parte de la empresa Global.'],
+   answer:[1,3,0,2],
+   exp:'1) Buenos días (greeting), 2) introduce yourself formally, 3) respond + offer help, 4) "Igualmente" (likewise) + invite to sit.'},
+  {ctx:'Saying a proper farewell to a friend',
+   lines:['¡Hasta luego! ¡Cuídate mucho!','Bueno, ya me tengo que ir.','¡Tú también! ¡Nos vemos pronto!','¿Ya te vas? ¡Qué rápido!'],
+   answer:[1,3,0,2],
+   exp:'1) "Ya me tengo que ir" (I have to go), 2) "¿Ya te vas?" (surprised), 3) "Hasta luego, cuídate" (farewell), 4) "Tú también, nos vemos" (take care too, see you).'},
+  {ctx:'Asking for help when you don\'t understand',
+   lines:['Claro, con mucho gusto. ¿Qué no entendiste?','Perdón, no entiendo. ¿Puede repetir?','Gracias, ahora sí entiendo.','"Buenos días" significa "good morning."'],
+   answer:[1,0,3,2],
+   exp:'1) "Perdón, no entiendo" (excuse me, I don\'t understand), 2) teacher offers to help, 3) teacher explains the meaning, 4) "Gracias, ahora sí entiendo" (thank you, now I understand).'},
+  {ctx:'Late evening arrival at a hotel',
+   lines:['Buenas noches. ¿Tiene reservación?','Sí, a nombre de Johnson. Tengo reservación para dos noches.','Perfecto. Aquí tiene su llave. ¡Que descanse!','Buenas noches.'],
+   answer:[3,0,1,2],
+   exp:'1) Guest says "Buenas noches" (arriving late), 2) receptionist greets + asks about reservation, 3) guest confirms reservation, 4) receptionist gives key + "Que descanse" (rest well).'},
+  {ctx:'First day of Spanish class — teacher and student',
+   lines:['Mucho gusto, Marco. ¿De dónde eres?','Buenos días, clase. Me llamo profesora García.','Soy de Italia. Estoy aprendiendo español.','Buenos días, profesora. Yo me llamo Marco.'],
+   answer:[1,3,0,2],
+   exp:'1) Teacher greets the class, 2) student greets + gives name, 3) teacher asks where student is from, 4) student says origin + reason for learning Spanish.'},
+  {ctx:'Quick hello between friends in the street',
+   lines:['¡Todo bien! ¿Y tú? ¿Cómo te va?','¡Hola! ¿Qué onda? ¿Cómo estás?','¡Nos vemos! ¡Cuídate!','Muy bien, gracias. Oye, ya me tengo que ir.'],
+   answer:[1,0,3,2],
+   exp:'1) Quick "Hola + ¿qué onda?" greeting, 2) "Todo bien, ¿y tú?" response, 3) "Muy bien, ya me tengo que ir" (transition to goodbye), 4) "Nos vemos, cuídate" (casual farewell).'},
+];
+
+let buildState={};
+let buildDragItem=null;
+
+function renderBuild(){
+  buildState={};
+  BUILD.forEach((_,i)=>{buildState[i]={placed:[],done:false,ok:false};});
+  renderBuildBody();
+}
+function renderBuildBody(){
+  const tot=BUILD.length;
+  const done=Object.values(buildState).filter(s=>s.done).length;
+  const ok=Object.values(buildState).filter(s=>s.ok).length;
+  const pct=Math.round(done/tot*100);
+  const cards=BUILD.map((item,idx)=>{
+    const st=buildState[idx];
+    const orderedLine=(wi)=>`<div class="build-placed" onclick="${!st.done?`removeBuildLine(${idx},${wi})`:''}">
+      ${item.lines[wi]}</div>`;
+    const dropZone=`<div class="build-drop" id="bdrop${idx}" 
+      ondragover="event.preventDefault();this.classList.add('drag-over')"
+      ondragleave="this.classList.remove('drag-over')"
+      ondrop="dropBuildLine(event,${idx})">
+      ${st.placed.length?st.placed.map(wi=>orderedLine(wi)).join(''):'<span style="font-size:.8rem;color:var(--muted2);font-style:italic;padding:4px">Click lines below to add them in order…</span>'}
+    </div>`;
+    const pile=item.lines.map((line,wi)=>{
+      const used=st.placed.includes(wi);
+      let cls='build-chip';
+      if(st.done){const pos=item.answer.indexOf(wi);const actual=st.placed.indexOf(wi);cls+= pos===actual?' b-ok':' b-err';}
+      return `<div class="${cls}${used?' ghost':''}" draggable="true"
+        ondragstart="buildDragItem=${wi};event.dataTransfer.setData('text','${wi}')"
+        onclick="${!st.done&&!used?`addBuildLine(${idx},${wi})`:''}"
+        style="${used?'pointer-events:none':''}">${line}</div>`;
+    }).join('');
+    return `<div class="build-card${st.done?(st.ok?' ok':' err'):''}" id="bc${idx}">
+      <div class="build-ctx">📍 ${item.ctx}</div>
+      ${dropZone}
+      <div class="build-pile">${pile}</div>
+      <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+        <button class="btn btn-green" style="padding:6px 14px;font-size:.78rem" onclick="checkBuild(${idx})" ${st.placed.length===item.lines.length&&!st.done?'':'disabled'} id="bchk${idx}">Check</button>
+        <button class="btn btn-ghost" style="padding:6px 14px;font-size:.78rem" onclick="resetBuild(${idx})">↺</button>
+      </div>
+      <div class="build-exp${st.done?' show':''}" id="bexp${idx}">${st.done?(st.ok?'✓ ':'✗ Correct order: '+item.answer.map(wi=>'"'+item.lines[wi]+'"').join(' → ')+'<br>'+item.exp):''}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🔤 Construye el diálogo</div>
+  <div class="ex-instr">Click the lines in the correct order to build the dialogue. Think about what comes first logically — greeting, then name, then origin, etc.</div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div>
+    <div class="sc"><span class="l">OK</span><span class="v g" id="b_ok">${ok}</span></div>
+    <div class="sc"><span class="l">Miss</span><span class="v b" id="b_err">${done-ok}</span></div>
+    <div class="prog-w"><div class="prog-l">Progress: ${pct}%</div><div class="prog-t"><div class="prog-f" id="b_pg" style="width:${pct}%"></div></div></div>
+  </div>
+  ${cards}
+  <div class="actions"><button class="btn btn-ghost" onclick="renderBuild()">↺ Reset all</button></div></div>`;
+}
+function addBuildLine(idx,wi){
+  const st=buildState[idx];
+  if(st.done||st.placed.includes(wi))return;
+  st.placed.push(wi);
+  const chk=document.getElementById('bchk'+idx);
+  if(chk)chk.disabled=st.placed.length!==BUILD[idx].lines.length;
+  renderBuildBody();
+}
+function removeBuildLine(idx,wi){
+  const st=buildState[idx];
+  if(st.done)return;
+  st.placed=st.placed.filter(x=>x!==wi);
+  renderBuildBody();
+}
+function dropBuildLine(e,idx){
+  e.preventDefault();document.getElementById('bdrop'+idx).classList.remove('drag-over');
+  const wi=parseInt(e.dataTransfer.getData('text'));
+  if(!isNaN(wi))addBuildLine(idx,wi);
+}
+function resetBuild(idx){buildState[idx]={placed:[],done:false,ok:false};renderBuildBody();}
+function checkBuild(idx){
+  const item=BUILD[idx];const st=buildState[idx];
+  st.ok=JSON.stringify(st.placed)===JSON.stringify(item.answer);
+  st.done=true;
+  renderBuildBody();
+  const done=Object.values(buildState).filter(s=>s.done).length;
+  const ok=Object.values(buildState).filter(s=>s.ok).length;
+  const e1=document.getElementById('b_ok');if(e1)e1.textContent=ok;
+  const e2=document.getElementById('b_err');if(e2)e2.textContent=done-ok;
+  const pg=document.getElementById('b_pg');if(pg)pg.style.width=Math.round(done/BUILD.length*100)+'%';
+}
+
+/* ══════════════════════════════════
+   EX 6 — SPEED ROUND (24 Q, choose from 4 options)
+   Improved: NO typing under pressure — just click!
+══════════════════════════════════ */
+const SP_ITEMS=[
+  {en:'Hello / Hi',q:'How do you say "hello" in Spanish?',a:'Hola',opts:['Adiós','Hola','Gracias','Perdón']},
+  {en:'Good morning',q:'How do you say "good morning"?',a:'Buenos días',opts:['Buenas noches','Buenos días','Buenas tardes','Hasta luego']},
+  {en:'Good afternoon',q:'How do you say "good afternoon"?',a:'Buenas tardes',opts:['Buenas noches','Buenos días','Buenas tardes','Hola']},
+  {en:'Good evening / Good night',q:'How do you say "good evening/night"?',a:'Buenas noches',opts:['Buenos días','Hasta pronto','Buenas noches','Buenas tardes']},
+  {en:'How are you? (informal)',q:'"How are you?" — informal version',a:'¿Cómo estás?',opts:['¿Cómo está usted?','¿Qué onda?','¿Cómo estás?','¿De dónde eres?']},
+  {en:'What\'s up? (Mexican slang)',q:'"What\'s up?" in Mexican slang',a:'¿Qué onda?',opts:['¿Qué pasa?','¿Qué onda?','¿Cómo estás?','¿Cuántos años?']},
+  {en:'Fine, thanks',q:'"Fine, thanks" — typical response',a:'Bien, gracias',opts:['Mucho gusto','De nada','Bien, gracias','Hasta luego']},
+  {en:'Very well!',q:'"Very well!" — enthusiastic',a:'¡Muy bien!',opts:['Más o menos','¡Muy bien!','Buenas noches','Perdón']},
+  {en:'So-so / More or less',q:'"So-so / more or less"',a:'Más o menos',opts:['Más o menos','Muy bien','De nada','Hola']},
+  {en:'Goodbye',q:'How do you say "goodbye"?',a:'Adiós',opts:['Hola','Por favor','Adiós','Gracias']},
+  {en:'See you later',q:'"See you later" — most common',a:'Hasta luego',opts:['Hasta mañana','Hasta luego','Hasta pronto','Adiós']},
+  {en:'See you tomorrow',q:'"See you tomorrow"',a:'Hasta mañana',opts:['Hasta luego','Hasta pronto','Hasta mañana','Cuídate']},
+  {en:'See you soon',q:'"See you soon"',a:'Hasta pronto',opts:['Hasta mañana','Hasta luego','Hasta pronto','Nos vemos']},
+  {en:'See you! (literally "we\'ll see each other")',q:'"We\'ll see each other" — common goodbye',a:'Nos vemos',opts:['Cuídate','Nos vemos','Adiós','De nada']},
+  {en:'Take care!',q:'"Take care (of yourself)!"',a:'¡Cuídate!',opts:['¡Gracias!','¡Hasta luego!','¡Cuídate!','¡Perdón!']},
+  {en:'My name is...',q:'"My name is..." — most natural way',a:'Me llamo...',opts:['Me llamo...','Soy de...','Tengo...','Mi nombre es...']},
+  {en:'Nice to meet you',q:'"Nice to meet you"',a:'Mucho gusto',opts:['De nada','Mucho gusto','Igualmente','Encantado']},
+  {en:'Likewise / Same to you',q:'"Likewise" — response to "mucho gusto"',a:'Igualmente',opts:['Igualmente','De nada','Perdón','Cuídate']},
+  {en:'I\'m from...',q:'"I\'m from..." + place',a:'Soy de...',opts:['Soy de...','Tengo...','Me llamo...','Estoy de...']},
+  {en:'I am 25 years old',q:'"I am 25 years old" (how to say age)',a:'Tengo 25 años',opts:['Soy 25 años','Estoy 25 años','Tengo 25 años','Hay 25 años']},
+  {en:'Please',q:'How do you say "please"?',a:'Por favor',opts:['Gracias','De nada','Perdón','Por favor']},
+  {en:'Thank you',q:'How do you say "thank you"?',a:'Gracias',opts:['Por favor','De nada','Gracias','Perdón']},
+  {en:'You\'re welcome',q:'"You\'re welcome"',a:'De nada',opts:['Gracias','Por favor','De nada','Sí']},
+  {en:'I don\'t understand',q:'"I don\'t understand"',a:'No entiendo',opts:['No sé','No entiendo','No hablo','No quiero']},
+];
+let spItems=[],spAnswered2={};
+
+function renderSpeed(){
+  spItems=[...SP_ITEMS];for(let i=spItems.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[spItems[i],spItems[j]]=[spItems[j],spItems[i]];}
+  spIdx=0;spOk=0;spErr=0;spStreak=0;spAnswered2={};
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">⚡ Speed round</div>
+  <div class="ex-instr">See the English, choose the Spanish! Click the correct option. No typing, no stress — just pick and learn!</div>
+  <div class="sp-wrap" id="spWrap"><div class="sp-start"><div style="font-size:3rem">⚡</div><h2>English → Spanish</h2><p style="color:var(--muted);max-width:380px">24 questions — greetings, farewells and key expressions. Click the right answer!</p><button class="btn btn-green" onclick="startSpeed()">¡Empezamos!</button></div></div></div>`;
+}
+function startSpeed(){spIdx=0;spOk=0;spErr=0;spStreak=0;nextSp();}
+function nextSp(){
+  if(spIdx>=spItems.length){endSpeed();return;}
+  const item=spItems[spIdx];
+  const shuffled=seededShuffle([...item.opts],spIdx*17+3);
+  const opts=shuffled.map(o=>`<button class="sp-opt" onclick="answerSp('${o}','${item.a}',this)">${o}</button>`).join('');
+  document.getElementById('spWrap').innerHTML=`
+    <div class="sp-stats"><div class="spst"><div class="sl">Q</div><div class="sv w">${spIdx+1}/${spItems.length}</div></div><div class="spst"><div class="sl">OK</div><div class="sv g">${spOk}</div></div><div class="spst"><div class="sl">Miss</div><div class="sv b">${spErr}</div></div></div>
+    <div class="streak${spStreak>=3?' on':''}" id="stk">🔥 x${spStreak}</div>
+    <div class="sp-card">
+      <div class="sp-en">🇬🇧 ${item.q}</div>
+      <div class="sp-q">🇲🇽 ???</div>
+    </div>
+    <div class="sp-opts">${opts}</div>
+    <div class="sp-fb" id="sFb" style="opacity:0"></div>`;
+}
+function answerSp(chosen,correct,btn){
+  if(spAnswered2[spIdx])return;spAnswered2[spIdx]=true;
+  const isOk=chosen===correct;
+  if(isOk){spOk++;spStreak++;}else{spErr++;spStreak=0;}
+  document.querySelectorAll('.sp-opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===correct)b.classList.add('sp-show');
+    else if(b===btn&&!isOk)b.classList.add('sp-err');
+  });
+  const fb=document.getElementById('sFb');
+  if(fb){fb.style.opacity='1';fb.className=`sp-fb ${isOk?'ok':'err'}`;fb.innerHTML=isOk?`✓ Correct!${spStreak>=3?' 🔥 x'+spStreak:''}`:`✗ It's "${correct}"`;}
+  if(spStreak>=3){const cf=document.getElementById('cf');cf.textContent='🔥 x'+spStreak;cf.classList.remove('pop');void cf.offsetWidth;cf.classList.add('pop');}
+  const stk=document.getElementById('stk');if(stk){stk.className='streak'+(spStreak>=3?' on':'');stk.textContent='🔥 x'+spStreak;}
+  spIdx++;setTimeout(nextSp,isOk?800:1600);
+}
+function endSpeed(){
+  const pct=Math.round(spOk/spItems.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('spWrap').innerHTML=`<div class="sp-start"><div style="font-size:3rem">${emo}</div><h2>${spOk}/${spItems.length}</h2><p style="color:var(--muted)">${pct>=90?'¡Excelente! You know all the expressions!':pct>=70?'¡Muy bien! Getting there!':pct>=50?'Good start! Keep studying.':'Review the vocab cards first.'}</p><button class="btn btn-green" onclick="startSpeed()">↺ Play again</button></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 7 — REFERENCE CARD
+══════════════════════════════════ */
+function renderRef(){
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📄 Reference card — Your complete cheat sheet</div>
+  <div class="ex-instr">Save this for quick reference! Click 🔊 on any expression to hear it.</div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--morning);background:rgba(251,191,36,.1)">⏰ When to use which greeting</div>
+    <div class="time-bar">
+      <div class="time-seg" style="background:rgba(251,191,36,.15);color:var(--morning)"><span style="font-size:1rem">☀️</span><span>Buenos días</span><span style="font-size:.65rem;opacity:.7">until ~noon</span></div>
+      <div class="time-seg" style="background:rgba(249,115,22,.15);color:#fdba74"><span style="font-size:1rem">🌤️</span><span>Buenas tardes</span><span style="font-size:.65rem;opacity:.7">noon → sunset</span></div>
+      <div class="time-seg" style="background:rgba(129,140,248,.2);color:#a5b4fc"><span style="font-size:1rem">🌙</span><span>Buenas noches</span><span style="font-size:.65rem;opacity:.7">sunset onward</span></div>
+      <div class="time-seg" style="background:rgba(255,255,255,.07);color:var(--muted)"><span style="font-size:1rem">🕐</span><span>Hola</span><span style="font-size:.65rem;opacity:.7">any time!</span></div>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--sal2);background:rgba(52,211,153,.1)">👋 Saludos</div>
+    <table class="ref-table">
+      <tr><th>Español</th><th>Pronunciation</th><th>English</th><th>When</th></tr>
+      ${[['Hola','OH-lah','Hello / Hi','Any time, anyone'],['Buenos días','BWEH-nos DEE-as','Good morning','Sunrise → noon'],['Buenas tardes','BWEH-nas TAR-des','Good afternoon','Noon → sunset'],['Buenas noches','BWEH-nas NOH-ches','Good evening/night','Sunset → midnight'],['¿Cómo estás?','KOH-moh es-TAHS','How are you?','Informal (tú)'],['¿Cómo está usted?','...oos-TED','How are you?','Formal (usted)'],['¿Cómo te va?','KOH-moh teh VAH','How\'s it going?','Casual'],['¿Qué onda?','keh ON-dah','What\'s up? 🇲🇽','Friends only!'],['¿Todo bien?','TOH-doh BYEN','Everything good?','Casual check-in']].map(r=>`<tr><td class="td-es" style="cursor:pointer" onclick="speak('${r[0]}',null)">🔊 ${r[0]}</td><td class="td-pron">${r[1]}</td><td class="td-en">${r[2]}</td><td class="td-when">${r[3]}</td></tr>`).join('')}
+    </table>
+    <div class="tip">💡 <strong>Responses:</strong> "Bien, gracias. ¿Y tú?" (informal) · "Muy bien, gracias. ¿Y usted?" (formal) · "Más o menos." (so-so)</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--des2);background:rgba(244,114,182,.1)">✌️ Despedidas</div>
+    <table class="ref-table">
+      <tr><th>Español</th><th>English</th><th>Notes</th></tr>
+      ${[['Adiós','Goodbye','Can feel final'],['Hasta luego','See you later','Most common'],['Hasta mañana','See you tomorrow','Specific: next day'],['Hasta pronto','See you soon','Unspecified "soon"'],['Nos vemos','See you / We\'ll see each other','Very natural in MX 🇲🇽'],['Cuídate (mucho)','Take care','Warm & affectionate'],['Que te vaya bien','All the best / Take care','Wishing someone well'],['Que descanses','Rest well','Said at night'],['Buenas noches','Good night','Also farewell at night']].map(r=>`<tr><td class="td-es" style="cursor:pointer" onclick="speak('${r[0]}',null)">🔊 ${r[0]}</td><td class="td-en">${r[1]}</td><td class="td-when">${r[2]}</td></tr>`).join('')}
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--pre2);background:rgba(251,191,36,.1)">🙋 Presentaciones</div>
+    <table class="ref-table">
+      <tr><th>Español</th><th>English</th><th>Notes</th></tr>
+      ${[['Me llamo...','My name is...','Most natural'],['Mi nombre es...','My name is...','Slightly formal'],['Soy...','I am... (+ name)','Direct & simple'],['Mucho gusto','Nice to meet you','First meeting'],['Encantado/a','Delighted to meet you','-o men, -a women'],['Igualmente','Likewise','Reply to mucho gusto'],['Soy de...','I\'m from...','+ city or country'],['Tengo ___ años','I am ___ years old','Literally: I have years!'],['¿Cómo te llamas?','What\'s your name?','Informal'],['¿Cómo se llama usted?','What\'s your name?','Formal'],['¿De dónde eres?','Where are you from?','Informal']].map(r=>`<tr><td class="td-es" style="cursor:pointer" onclick="speak('${r[0].replace('...','').replace('___','')}',null)">🔊 ${r[0]}</td><td class="td-en">${r[1]}</td><td class="td-when">${r[2]}</td></tr>`).join('')}
+    </table>
+    <div class="warning">⚠️ <strong>Age rule!</strong> In Spanish: "Tengo 25 años" (I HAVE 25 years), NOT "Soy 25 años" — very common mistake!</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--exp2);background:rgba(96,165,250,.1)">🔑 Expresiones esenciales</div>
+    <table class="ref-table">
+      <tr><th>Español</th><th>English</th></tr>
+      ${[['Sí / No','Yes / No'],['Por favor','Please'],['Gracias / Muchas gracias','Thank you / Thank you very much'],['De nada','You\'re welcome'],['Con gusto','With pleasure (warm alternative)'],['Perdón / Disculpe','Sorry / Excuse me'],['No entiendo','I don\'t understand'],['Más despacio, por favor','More slowly, please'],['¿Puede repetir?','Can you repeat?'],['No sé','I don\'t know'],['¡Claro (que sí)!','Of course!'],['Muy amable','Very kind (when thanking someone)']].map(r=>`<tr><td class="td-es" style="cursor:pointer" onclick="speak('${r[0].replace(/\//g,'').split('(')[0].trim()}',null)">🔊 ${r[0]}</td><td class="td-en">${r[1]}</td></tr>`).join('')}
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--ud2);background:rgba(167,139,250,.08)">🎩 Formal (usted) vs Informal (tú)</div>
+    <table class="ref-table">
+      <tr><th>Situation</th><th>Use TÚ (informal)</th><th>Use USTED (formal)</th></tr>
+      <tr><td class="td-when">Relationship</td><td style="color:var(--sal2)">Friends, family, peers, children</td><td style="color:var(--exp2)">Bosses, elders, strangers, doctors</td></tr>
+      <tr><td class="td-when">"How are you?"</td><td style="color:var(--sal2)">¿Cómo <strong>estás</strong>?</td><td style="color:var(--exp2)">¿Cómo <strong>está usted</strong>?</td></tr>
+      <tr><td class="td-when">"What's your name?"</td><td style="color:var(--sal2)">¿Cómo <strong>te llamas</strong>?</td><td style="color:var(--exp2)">¿Cómo <strong>se llama usted</strong>?</td></tr>
+      <tr><td class="td-when">And you?</td><td style="color:var(--sal2)">¿Y <strong>tú</strong>?</td><td style="color:var(--exp2)">¿Y <strong>usted</strong>?</td></tr>
+    </table>
+    <div class="tip">💡 <strong>Rule of thumb:</strong> When in doubt, use <strong>usted</strong> — it shows respect. The other person will tell you "puedes tutearme" (you can use "tú" with me) if they prefer informal.</div>
+  </div>
+  </div>`;
+}
+
+goEx(0);
+</script>
+</body>
+</html>

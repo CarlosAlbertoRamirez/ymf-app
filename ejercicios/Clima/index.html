@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Clima y la Ropa | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --clima:#60a5fa;--clima2:#93c5fd;--climabg:rgba(96,165,250,.1);--climabd:rgba(96,165,250,.3);
+  --ropa:#f472b6;--ropa2:#ff91cd;--ropabg:rgba(244,114,182,.1);--ropabd:rgba(244,114,182,.3);
+  --mex:#34d399;--mex2:#6ee7b7;--mexbg:rgba(52,211,153,.1);--mexbd:rgba(52,211,153,.3);
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 12% 8%,rgba(96,165,250,.13),transparent 32%),radial-gradient(ellipse at 88% 10%,rgba(52,211,153,.1),transparent 30%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(1020px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--clima),#fff 45%,var(--mex));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.85rem;margin-top:4px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ex-tabs{display:flex;gap:4px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:7px;overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:7px 10px;font-weight:800;font-family:var(--font);font-size:.72rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:58px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;transform:translateY(-1px)}
+.etab-icon{font-size:1.1rem;line-height:1}
+.etab-label{font-size:.58rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:22px 26px;box-shadow:var(--shadow)}
+.ex-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.85rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:16px}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:90px}.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;transition:width .35s;background:linear-gradient(90deg,var(--clima),var(--mex))}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}.btn:disabled{opacity:.38;cursor:not-allowed;transform:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),#00bfff);color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+.btn-audio{background:rgba(37,217,255,.12);border:1.5px solid rgba(37,217,255,.28);color:var(--cyan);border-radius:8px;padding:4px 10px;font-size:.74rem;font-weight:800;cursor:pointer;transition:.13s;font-family:var(--font);display:inline-flex;align-items:center;gap:4px}
+.btn-audio:hover{background:rgba(37,217,255,.22)}.btn-audio.playing{animation:ablink .8s infinite}
+@keyframes ablink{0%,100%{opacity:1}50%{opacity:.5}}
+/* FLASHCARDS */
+.fc-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.fc-fbtn{border:0;border-radius:9px;padding:5px 13px;font-size:.73rem;font-weight:800;font-family:var(--font);cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);color:var(--muted);border:1.5px solid transparent}
+.fc-fbtn.active{color:white}
+.fc-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.fc-prow{display:flex;align-items:center;gap:12px;width:100%;max-width:660px}
+.fc-cnt{font-size:.8rem;font-weight:800;color:var(--muted2);white-space:nowrap}
+.fc-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.fc-fil{height:100%;border-radius:999px;transition:width .4s}
+.fc-card{width:100%;max-width:660px;min-height:260px;perspective:1000px;cursor:pointer}
+.fc-inner{position:relative;width:100%;min-height:260px;transition:transform .5s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.fc-card.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;border-radius:20px;padding:24px 26px;backface-visibility:hidden;display:flex;flex-direction:column;gap:9px;min-height:260px}
+.fc-back{transform:rotateY(180deg)}
+.fc-emoji{font-size:3rem;line-height:1}
+.fc-es{font-family:var(--display);font-size:2rem;font-weight:900;line-height:1.1}
+.fc-en{font-size:.95rem;font-weight:600;color:var(--muted)}
+.fc-pron{font-size:.8rem;color:var(--muted2);font-style:italic}
+.fc-ex{font-size:.88rem;line-height:1.65;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:10px}
+.fc-note{font-size:.77rem;color:var(--muted2);line-height:1.5;padding:7px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.fc-hint{font-size:.72rem;color:var(--muted2);text-align:center;font-style:italic;margin-top:auto}
+.fc-nav{display:flex;gap:8px;align-items:center;justify-content:center;width:100%;max-width:660px}
+/* MC */
+.mc-grid{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px}
+.mc-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.mc-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.mc-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.07);border-radius:6px;padding:3px 8px;flex-shrink:0;margin-top:2px}
+.mc-q{font-size:.98rem;line-height:1.65;flex:1}
+.mc-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding-left:28px}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px}
+.mc-opt{border:0;border-radius:10px;padding:8px 15px;font-weight:700;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);border-color:rgba(37,217,255,.35)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.mok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.merr{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mshow{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-exp{display:none;font-size:.79rem;color:var(--muted);line-height:1.6;margin-top:7px;padding:7px 12px 7px 28px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-exp.show{display:block}
+/* ROPA VISUAL CARDS */
+.ropa-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.ropa-card{border-radius:16px;overflow:hidden;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);transition:.14s}
+.ropa-card:hover{transform:translateY(-2px)}
+.ropa-card.ok{border-color:var(--good)}
+.ropa-card.err{border-color:var(--bad)}
+.ropa-emoji-box{font-size:3rem;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(160deg,#180a30,#240f44);min-height:100px;position:relative}
+.ropa-weather{position:absolute;top:8px;right:8px;font-size:1.4rem}
+.ropa-q{padding:10px 14px 6px;font-size:.9rem;font-weight:700;line-height:1.4}
+.ropa-qen{font-size:.74rem;color:var(--muted2);font-style:italic;display:block;margin-top:2px;padding:0 14px 8px}
+.ropa-opts{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.ropa-opt{border:0;padding:10px 8px;font-weight:800;font-family:var(--font);font-size:.82rem;cursor:pointer;color:white;transition:.12s;line-height:1.3;text-align:center}
+.ropa-opt:nth-child(1){background:#7c3aed}.ropa-opt:nth-child(2){background:#1d4ed8}
+.ropa-opt:nth-child(3){background:#b45309}.ropa-opt:nth-child(4){background:#065f46}
+.ropa-opt:hover:not([disabled]){filter:brightness(1.2)}
+.ropa-opt[disabled]{cursor:default}
+.ropa-opt.r-ok{box-shadow:inset 0 0 0 3px #86efac}
+.ropa-opt.r-err{opacity:.35}
+.ropa-exp{display:none;font-size:.76rem;padding:8px 12px;background:rgba(0,0,0,.3);color:var(--muted);line-height:1.5;text-align:center}
+.ropa-exp.show{display:block}
+/* DIAL */
+.dial-wrap{display:flex;flex-direction:column;gap:16px}
+.chat-scene{font-size:.75rem;color:var(--muted2);font-style:italic;padding:8px 14px;border-radius:8px;background:rgba(255,255,255,.03);border-left:3px solid rgba(255,255,255,.08);margin-bottom:4px}
+.chat-body{display:flex;flex-direction:column;gap:8px;padding:0 0 10px}
+.chat-row{display:flex;align-items:flex-end;gap:8px}
+.chat-row.right{flex-direction:row-reverse}
+.chat-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;background:rgba(255,255,255,.08)}
+.chat-bub{max-width:80%;padding:9px 13px;border-radius:16px;font-size:.9rem;line-height:1.55}
+.chat-row.left .chat-bub{background:rgba(255,255,255,.09);border-radius:4px 16px 16px 16px}
+.chat-row.right .chat-bub{background:rgba(96,165,250,.16);border:1px solid rgba(96,165,250,.22);border-radius:16px 4px 16px 16px}
+.chat-who{font-size:.6rem;font-weight:900;text-transform:uppercase;color:var(--muted2);margin-bottom:3px}
+.chat-en{font-size:.73rem;color:var(--muted2);font-style:italic;margin-top:3px}
+.chat-audio{background:none;border:0;cursor:pointer;font-size:.9rem;padding:2px 4px;border-radius:5px;opacity:.55;transition:.13s}
+.chat-audio:hover{opacity:1;background:rgba(255,255,255,.1)}
+.dial-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:18px;padding:16px}
+.dial-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.dial-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.dial-q{font-size:.87rem;font-weight:700;color:var(--muted);margin:10px 0 8px}
+.dial-opts{display:flex;flex-direction:column;gap:7px}
+.dial-opt{border:0;border-radius:10px;padding:10px 15px;font-weight:600;font-family:var(--font);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left}
+.dial-opt:hover:not([disabled]){transform:translateX(4px);border-color:rgba(37,217,255,.35)}
+.dial-opt[disabled]{cursor:default;transform:none}
+.dial-opt.dok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.dial-opt.derr{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.dial-opt.dshow{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.dial-exp{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:8px;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.dial-exp.show{display:block}
+/* FILL */
+.fill-list{display:flex;flex-direction:column;gap:12px}
+.fill-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;padding:15px 17px}
+.fill-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.fill-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.fill-ctx{font-size:.72rem;color:var(--muted2);font-style:italic;margin-bottom:6px}
+.fill-q{font-size:1rem;line-height:1.85;font-weight:600;margin-bottom:4px}
+.fill-en{font-size:.76rem;color:var(--muted2);font-style:italic;margin-bottom:10px}
+.fill-blank{display:inline-block;border-bottom:2.5px solid var(--cyan);min-width:90px;text-align:center;padding:0 4px;color:var(--cyan);font-weight:800;font-family:var(--display);font-size:1rem}
+.fill-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:6px}
+.fill-chip{border:0;border-radius:9px;padding:7px 14px;font-weight:700;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.fill-chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.fill-chip.used{opacity:.22;cursor:not-allowed}
+.fill-chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.fill-chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.15);color:#fca5a5}
+.fill-exp{display:none;font-size:.8rem;color:var(--muted);margin-top:6px;padding:7px 10px;background:rgba(255,255,255,.04);border-radius:8px;line-height:1.55}
+.fill-exp.show{display:block}
+/* SPEED */
+.sp-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-stats{display:flex;gap:9px}
+.spst{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spst .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.spst .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spst .sv.g{color:var(--good)}.spst .sv.b{color:var(--bad)}.spst .sv.w{color:var(--warn)}
+.sp-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:22px;text-align:center;width:100%;max-width:540px}
+.sp-emoji{font-size:3rem;margin-bottom:6px}
+.sp-q{font-size:1rem;line-height:1.6}
+.sp-en{font-size:.82rem;color:var(--muted2);font-style:italic;margin-top:3px}
+.sp-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:540px}
+.sp-opt{border:0;border-radius:12px;padding:11px 14px;font-weight:700;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:var(--text);text-align:left}
+.sp-opt:hover:not([disabled]){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sp-opt[disabled]{cursor:default;transform:none}
+.sp-opt.spok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.sp-opt.sperr{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.sp-opt.spshow{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.sp-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:540px}
+.sp-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.sp-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.sp-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.streak{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak.on{display:inline-flex;align-items:center;gap:4px}
+.cf{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.cf.pop{animation:cfk .7s ease forwards}
+@keyframes cfk{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+/* REF */
+.ref-search{width:100%;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.25);color:var(--text);border-radius:11px;padding:10px 16px;font-family:var(--font);font-size:.95rem;outline:none;transition:.15s;margin-bottom:12px}
+.ref-search:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.ref-search::placeholder{color:var(--muted2)}
+.ref-row{display:flex;gap:10px;align-items:center;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04);flex-wrap:wrap;transition:.12s;cursor:pointer}
+.ref-row:hover{background:rgba(255,255,255,.03)}
+.rr-em{font-size:1.4rem;width:30px;text-align:center;flex-shrink:0}
+.rr-es{font-family:var(--display);font-weight:900;font-size:.95rem;min-width:170px}
+.rr-en{color:var(--muted2);font-style:italic;font-size:.82rem;flex:1}
+.rr-note{font-size:.7rem;color:var(--muted2);width:100%;padding-top:3px;border-top:1px solid rgba(255,255,255,.04)}
+.hl{background:rgba(37,217,255,.2);border-radius:3px;padding:0 2px}
+/* CALENDAR */
+.cal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.cal-month{border-radius:12px;padding:10px 12px;text-align:center;border:1.5px solid rgba(255,255,255,.08)}
+.cal-name{font-family:var(--display);font-size:.82rem;font-weight:900;margin-bottom:4px}
+.cal-emoji{font-size:1.4rem;margin-bottom:4px}
+.cal-desc{font-size:.68rem;color:var(--muted2);line-height:1.4}
+.cal-temp{font-size:.72rem;font-weight:800;margin-top:4px}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:14px 12px}.cal-grid{grid-template-columns:repeat(3,1fr)}.ropa-grid{grid-template-columns:1fr 1fr}.sp-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="cf" id="cf"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>El Clima y la Ropa 🌤️🇲🇽</h1>
+      <p>Mexican Spanish for weather and clothing: useful everyday vocabulary, natural phrases, and casual expressions from CDMX.</p>
+      <div class="badges">
+        <span class="badge">🆕 A1–A2</span>
+        <span class="badge" style="border-color:var(--climabd);color:var(--clima2)">🌤️ Clima general</span>
+        <span class="badge" style="border-color:var(--ropabd);color:var(--ropa2)">👕 Ropa</span>
+        <span class="badge" style="border-color:var(--mexbd);color:var(--mex2)">🇲🇽 México específico</span>
+        <span class="badge" style="border-color:rgba(37,217,255,.4);color:var(--cyan)">🔊 Audio</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">📖</span><span class="etab-label">Flash-<br>cards</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">🌤️</span><span class="etab-label">¿Qué<br>tiempo?</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">👕</span><span class="etab-label">¿Qué<br>ropa?</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">💬</span><span class="etab-label">Diá-<br>logos</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">✏️</span><span class="etab-label">Com-<br>pleta</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">🔀</span><span class="etab-label">Trans-<br>forma</span></button>
+  <button class="etab" id="etab-6" onclick="goEx(6)"><span class="etab-icon">⚡</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-7" onclick="goEx(7)"><span class="etab-icon">📄</span><span class="etab-label">Refer-<br>encia</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · Your Mexican Friend</p>
+</div>
+<script>
+let _voice=null;
+function initVoice(){if(!window.speechSynthesis)return;const pick=()=>{const vs=window.speechSynthesis.getVoices();if(!vs.length)return;const tests=[v=>v.name==='Paulina',v=>v.name.includes('Paulina'),v=>v.lang==='es-MX'&&v.localService,v=>v.lang==='es-MX',v=>v.name.includes('Google')&&v.lang.startsWith('es'),v=>v.lang.startsWith('es')&&v.localService,v=>v.lang.startsWith('es')];for(const t of tests){const f=vs.find(t);if(f){_voice=f;break;}}};pick();if(window.speechSynthesis.onvoiceschanged!==undefined)window.speechSynthesis.onvoiceschanged=pick;setTimeout(pick,800);}
+initVoice();
+function speak(text,btn){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();document.querySelectorAll('.btn-audio,.chat-audio').forEach(b=>{b.classList.remove('playing');if(b.textContent.includes('▶'))b.textContent='🔊';});const u=new SpeechSynthesisUtterance(text);if(_voice)u.voice=_voice;u.lang=_voice?_voice.lang:'es-MX';u.rate=0.82;u.pitch=1;if(btn){btn.classList.add('playing');const orig=btn.textContent;btn.textContent='🔊▶';u.onend=u.onerror=()=>{btn.classList.remove('playing');btn.textContent=orig;};}window.speechSynthesis.speak(u);}
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+function seededShuffle(arr,seed){const a=[...arr];let s=seed;for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let fcIdx=0,fcFilter='all',fcFlipped=false,fcCards=[];
+let mc1Ans={},ropaAns={},dialAns={},fillAns={};
+let spIdx=0,spOk=0,spErr=0,spStreak=0,spAns2={};let refFilter='all';
+
+function goEx(n){[0,1,2,3,4,5,6,7].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===n));[renderFlash,renderMC1,renderRopa,renderDial,renderFill,renderTransform,renderSpeed,renderRef][n]();window.scrollTo({top:0,behavior:'smooth'});}
+
+const CATS={
+  clima:{label:'🌤️ Clima',col:'var(--clima)',col2:'var(--clima2)',bg:'var(--climabg)',bd:'var(--climabd)'},
+  ropa: {label:'👕 Ropa',  col:'var(--ropa)', col2:'var(--ropa2)', bg:'var(--ropabg)', bd:'var(--ropabd)'},
+  mex:  {label:'🇲🇽 México',col:'var(--mex)',  col2:'var(--mex2)',  bg:'var(--mexbg)',  bd:'var(--mexbd)'},
+  coloq:{label:'🗣️ CDMX: coloquial',col:'var(--warn)',col2:'#fde68a',bg:'rgba(245,158,11,.1)',bd:'rgba(245,158,11,.3)'},
+};
+
+/* ══════════════════════════════════
+   VOCABULARY — 50 items
+   cat: clima | ropa | mex
+   Fields: emoji, es, en, pron, ex_es, ex_en, note
+══════════════════════════════════ */
+const VOC=[
+  /* CLIMA (22) */
+  {cat:'clima',emoji:'☀️',es:'Hace calor.',en:'It\'s hot.',pron:'AH-seh kah-LOR',
+   ex_es:'¡Hace mucho calor hoy! ¿Tienes agua?',ex_en:'It\'s so hot today! Do you have water?',
+   note:'The verb is HACER, not SER/ESTAR. "Hace calor" NOT "está calor." One of the most common weather mistakes.'},
+  {cat:'clima',emoji:'🥶',es:'Hace frío.',en:'It\'s cold.',pron:'AH-seh FREE-oh',
+   ex_es:'Hace frío en las mañanas. Lleva un suéter.',ex_en:'It\'s cold in the mornings. Bring a sweater.',
+   note:'Same pattern: HACER. "Hace mucho frío" = it\'s very cold. "Qué frío" = how cold (exclamation).'},
+  {cat:'clima',emoji:'💨',es:'Hace viento.',en:'It\'s windy.',pron:'AH-seh BYEN-toh',
+   ex_es:'Hace mucho viento hoy, agárrate el sombrero.',ex_en:'It\'s very windy today, hold onto your hat.',
+   note:'"Hace viento" = it\'s windy. "El viento" = the wind. "Hay viento" also works. "Ventoso" = windy (adjective).'},
+  {cat:'clima',emoji:'🌧️',es:'Llueve. / Está lloviendo.',en:'It\'s raining.',pron:'YWE-beh / es-TAH yo-BYEN-doh',
+   ex_es:'Está lloviendo mucho, no salgas sin paraguas.',ex_en:'It\'s raining a lot, don\'t go out without an umbrella.',
+   note:'"Llover" = to rain (irregular verb). "Está lloviendo" = it\'s raining (right now). "Llovió" = it rained (past). "Llueve mucho" = it rains a lot (habit).'},
+  {cat:'clima',emoji:'⛅',es:'Está nublado.',en:'It\'s cloudy.',pron:'es-TAH noo-BLAH-doh',
+   ex_es:'Hoy está nublado pero no creo que llueva.',ex_en:'Today it\'s cloudy but I don\'t think it\'ll rain.',
+   note:'Uses ESTAR (temporary state). "Las nubes" = the clouds. "Muy nublado" = very overcast. "Medio nublado" = partly cloudy.'},
+  {cat:'clima',emoji:'☀️',es:'Está despejado.',en:'It\'s clear / sunny.',pron:'es-TAH des-peh-HAH-doh',
+   ex_es:'¡Qué bonito día! Está completamente despejado.',ex_en:'What a beautiful day! It\'s completely clear.',
+   note:'"Despejado" = clear (sky). "Soleado" also works. "Hace sol" = it\'s sunny. All very common.'},
+  {cat:'clima',emoji:'❄️',es:'Nieva. / Está nevando.',en:'It\'s snowing.',pron:'NYEH-bah / es-TAH neh-BAN-doh',
+   ex_es:'En la sierra nieva en diciembre.',ex_en:'In the mountains it snows in December.',
+   note:'"Nevar" = to snow. Snow is rare in most of Mexico — only the high mountains and the far north. "La nieve" = snow (or ice cream in Mexico!).'},
+  {cat:'clima',emoji:'⛈️',es:'Hay tormenta.',en:'There\'s a storm.',pron:'AYE tor-MEN-tah',
+   ex_es:'Hay tormenta, mejor quédate en casa.',ex_en:'There\'s a storm, better stay home.',
+   note:'"Tormenta" = storm. "Hay tormenta" = there\'s a storm. "Truena" = it\'s thundering. "Relampaguea" = there\'s lightning.'},
+  {cat:'clima',emoji:'🌫️',es:'Hay niebla.',en:'It\'s foggy.',pron:'AYE NYEB-lah',
+   ex_es:'Hay mucha niebla en la carretera, maneja con cuidado.',ex_en:'There\'s a lot of fog on the highway, drive carefully.',
+   note:'"Niebla" = fog. "Hay niebla" = it\'s foggy. "Bruma" = light mist/haze. Common in highland cities like CDMX early morning.'},
+  {cat:'clima',emoji:'🌈',es:'Hay un arcoíris.',en:'There\'s a rainbow.',pron:'AYE ar-koh-EE-rees',
+   ex_es:'¡Mira, hay un arcoíris después de la lluvia!',ex_en:'Look, there\'s a rainbow after the rain!',
+   note:'"Arcoíris" = rainbow. A rainbow can appear after the rain.'},
+  {cat:'clima',emoji:'🌡️',es:'La temperatura / los grados',en:'The temperature / degrees',pron:'tem-peh-rah-TOO-rah / GRAH-dos',
+   ex_es:'La temperatura está a 28 grados centígrados.',ex_en:'The temperature is 28 degrees Celsius.',
+   note:'Mexico uses Celsius (centígrados). "Grados centígrados" = Celsius. 30°C = very hot, 15°C = cool, 5°C = cold for most Mexicans.'},
+  {cat:'clima',emoji:'🌅',es:'el pronóstico del tiempo',en:'the weather forecast',pron:'proh-NOS-tee-koh del TYEM-poh',
+   ex_es:'Según el pronóstico, mañana va a llover.',ex_en:'According to the forecast, it\'s going to rain tomorrow.',
+   note:'"El pronóstico" = forecast/prediction. "El tiempo" = weather (also = time). "¿Cómo está el tiempo?" = what\'s the weather like?'},
+  {cat:'clima',emoji:'🌤️',es:'¿Cómo está el clima?',en:'What\'s the weather like?',pron:'KOH-moh es-TAH el KLEE-mah',
+   ex_es:'¿Cómo está el clima en Cancún en agosto?',ex_en:'What\'s the weather like in Cancún in August?',
+   note:'"El clima" = the climate/weather. "El tiempo" also works. "¿Cómo está el tiempo allá?" = what\'s the weather like there?'},
+  {cat:'clima',emoji:'🌞',es:'el verano / la primavera',en:'summer / spring',pron:'beh-RAH-noh / pree-mah-BEH-rah',
+   ex_es:'El verano en México es muy caluroso.',ex_en:'Summer in Mexico is very hot.',
+   note:'In Mexico: verano (summer) = hot and rainy. Primavera (spring) = warm and pleasant. Mexico\'s seasons are less dramatic than Europe/North America.'},
+  {cat:'clima',emoji:'🍂',es:'el otoño / el invierno',en:'autumn / winter',pron:'oh-TOH-nyoh / een-BYER-noh',
+   ex_es:'En invierno hace frío en el norte de México.',ex_en:'In winter it\'s cold in northern Mexico.',
+   note:'Otoño (autumn) = mild, October-November. Invierno (winter) = December-February, cold in the north, mild in central/south Mexico.'},
+  {cat:'clima',emoji:'🌡️',es:'hace calor / mucho calor / un calor horrible',en:'it\'s hot / very hot / terribly hot',pron:'AH-seh kah-LOR',
+   ex_es:'¡Hace un calor horrible! ¿Dónde está el abanico?',ex_en:'It\'s terribly hot! Where\'s the fan?',
+   note:'Degrees of heat: "hace calor" → "hace mucho calor" → "hace un calor horrible/espantoso/infernal." Mexicans are very expressive about heat!'},
+  {cat:'clima',emoji:'🌬️',es:'Refresca.',en:'It\'s getting cooler / There\'s a breeze.',pron:'reh-FRES-kah',
+   ex_es:'En las tardes refresca un poco.',ex_en:'In the afternoons it gets a bit cooler.',
+   note:'"Refrescar" = to cool down/freshen up. "Ya refrescó" = it cooled down already. Very common in Mexican weather talk, especially in tropical areas.'},
+  {cat:'clima',emoji:'💧',es:'la humedad',en:'humidity',pron:'oo-meh-DAHD',
+   ex_es:'En Veracruz la humedad es insoportable en agosto.',ex_en:'In Veracruz the humidity is unbearable in August.',
+   note:'"La humedad" = humidity. "Húmedo" = humid. "Calor húmedo" = humid heat (coastal). "Calor seco" = dry heat (northern Mexico). Very different experiences!'},
+  {cat:'clima',emoji:'🌂',es:'Va a llover.',en:'It\'s going to rain.',pron:'bah ah yoh-BER',
+   ex_es:'Llévate el paraguas, va a llover.',ex_en:'Take your umbrella, it\'s going to rain.',
+   note:'"Va a + infinitive" = it\'s going to. "Va a llover" = it\'s going to rain. "Puede llover" = it might rain. "Hay probabilidad de lluvia" = there\'s a chance of rain.'},
+  {cat:'clima',emoji:'🌤️',es:'Hace sol.',en:'The sun is shining / It\'s sunny.',pron:'AH-seh sol',
+   ex_es:'Hace mucho sol, ponte bloqueador.',ex_en:'The sun is really shining, put on sunscreen.',
+   note:'In Mexican Spanish, "hace sol" is the natural everyday option. You can also say "hay mucho sol" or "el sol está fuerte."'},
+  {cat:'clima',emoji:'🧊',es:'Hay heladas.',en:'There\'s frost.',pron:'AYE eh-LAH-das',
+   ex_es:'En enero hay heladas en el Bajío.',ex_en:'In January there\'s frost in the Bajío region.',
+   note:'"Helada" = frost. "Helar" = to freeze. "Está helando" = it\'s freezing. Common in highland Mexico (Toluca, Zacatecas) in winter.'},
+  {cat:'clima',emoji:'🌤️',es:'un día despejado / un día lluvioso',en:'a clear day / a rainy day',pron:'DEE-ah des-peh-HAH-doh / yoo-BYOH-soh',
+   ex_es:'Hoy es un día lluvioso, mejor nos quedamos en casa.',ex_en:'Today is a rainy day, better we stay home.',
+   note:'"Despejado" = clear/sunny. "Lluvioso" = rainy. "Nublado" = cloudy. "Soleado" = sunny. Common weather adjectives for describing a day.'},
+  /* ROPA (18) */
+  {cat:'ropa',emoji:'🧥',es:'el abrigo',en:'coat / overcoat',pron:'ah-BREE-goh',
+   ex_es:'Lleva el abrigo, hace mucho frío afuera.',ex_en:'Take your coat, it\'s very cold outside.',
+   note:'Heavy coat for cold weather. "Abrígate" = bundle up / dress warmly. Very common advice from Mexican moms and grandmas!'},
+  {cat:'ropa',emoji:'🧶',es:'el suéter',en:'sweater / jumper',pron:'SWEH-ter',
+   ex_es:'Ponte un suéter, ya está refrescando.',ex_en:'Put on a sweater, it\'s getting cooler.',
+   note:'"Suéter" (from English "sweater") is the standard word. "Chamarra" = jacket/hoodie. Essential in CDMX where mornings are cool even in summer.'},
+  {cat:'ropa',emoji:'🧤',es:'los guantes',en:'gloves',pron:'GWAN-tes',
+   ex_es:'¿Dónde están mis guantes? ¡Hace un frío!',ex_en:'Where are my gloves? It\'s so cold!',
+   note:'"Los guantes" = gloves. "Una guante" doesn\'t exist — always plural in Spanish. Common in northern Mexico and highland cities in winter.'},
+  {cat:'ropa',emoji:'🧣',es:'la bufanda',en:'scarf',pron:'boo-FAN-dah',
+   ex_es:'Ponte la bufanda antes de salir.',ex_en:'Put on your scarf before going out.',
+   note:'"Bufanda" = scarf. "Chal" = shawl. In Mexico, a bufanda for 15°C is completely normal — Mexicans feel cold at temperatures that feel mild to many foreigners!'},
+  {cat:'ropa',emoji:'🌂',es:'el paraguas / la sombrilla',en:'umbrella',pron:'pah-RAH-gwas / som-BREE-yah',
+   ex_es:'No olvides el paraguas, el pronóstico dice lluvia.',ex_en:'Don\'t forget your umbrella, the forecast says rain.',
+   note:'"Paraguas" = umbrella (for rain). "Sombrilla" = parasol/sun umbrella (or also rain umbrella in Mexico). Both work. Useful during rainy months.'},
+  {cat:'ropa',emoji:'😎',es:'los lentes de sol',en:'sunglasses',pron:'LEN-tes de sol',
+   ex_es:'Hace mucho sol, necesito mis lentes de sol.',ex_en:'The sun is very strong, I need my sunglasses.',
+   note:'"Lentes de sol" or "lentes oscuros" = sunglasses. Essential in Mexico — the sun is intense year-round. "Gafas de sol" is the Spain term.'},
+  {cat:'ropa',emoji:'🧢',es:'la gorra / el sombrero',en:'baseball cap / hat',pron:'GOH-rah / som-BREH-roh',
+   ex_es:'Ponte la gorra, está haciendo mucho sol.',ex_en:'Put on your cap, the sun is very strong.',
+   note:'"Gorra" = baseball cap. "Sombrero" = hat with a brim. "El sombrero de palma" = the iconic wide-brim Mexican hat. Very practical in Mexican sun.'},
+  {cat:'ropa',emoji:'👟',es:'los tenis',en:'sneakers / trainers',pron:'TEH-nees',
+   ex_es:'Con este calor, mejor me pongo tenis.',ex_en:'In this heat, better I wear sneakers.',
+   note:'"Tenis" = sneakers/trainers in Mexican Spanish (from "tennis shoes"). "Zapatos" = dress shoes. "Botas" = boots. "Huaraches" = traditional sandals.'},
+  {cat:'ropa',emoji:'👡',es:'las sandalias / los huaraches',en:'sandals',pron:'san-DAH-lyahs / wah-RAH-ches',
+   ex_es:'Con tanto calor, me puse mis sandalias.',ex_en:'With so much heat, I put on my sandals.',
+   note:'"Sandalias" = sandals. "Huaraches" = traditional Mexican leather sandals, iconic and very comfortable. Perfect for warm weather.'},
+  {cat:'ropa',emoji:'🩱',es:'el traje de baño',en:'swimsuit / bathing suit',pron:'TRAH-heh de BAH-nyoh',
+   ex_es:'No olvides el traje de baño para la playa.',ex_en:'Don\'t forget your swimsuit for the beach.',
+   note:'"Traje de baño" = swimsuit (any type). "Bañador" is the Spain term. Essential for Mexico\'s beautiful coasts — Pacific, Gulf and Caribbean.'},
+  {cat:'ropa',emoji:'🧴',es:'el bloqueador / el protector solar',en:'sunscreen',pron:'bloh-keh-ah-DOR / pro-tek-TOR so-LAR',
+   ex_es:'Siempre usa bloqueador en la playa.',ex_en:'Always use sunscreen at the beach.',
+   note:'"Bloqueador" = sunscreen in Mexican Spanish. "Protector solar" also used. Mexico\'s UV index is among the highest in the world. SPF 50+ recommended.'},
+  {cat:'ropa',emoji:'🧴',es:'el repelente de mosquitos',en:'mosquito repellent',pron:'reh-peh-LEN-teh de mos-KEE-tos',
+   ex_es:'En la temporada de lluvias usa repelente.',ex_en:'During rainy season use mosquito repellent.',
+   note:'Essential during Mexico\'s rainy season (June-October) especially in tropical and coastal areas. "Los mosquitos" = mosquitoes. "La picadura" = bite.'},
+  {cat:'ropa',emoji:'🧥',es:'la chamarra',en:'jacket / hoodie',pron:'chah-MAH-rah',
+   ex_es:'Lleva tu chamarra, las noches están frescas.',ex_en:'Take your jacket, the nights are cool.',
+   note:'"Chamarra" is the Mexican word for jacket. Very versatile — can be a light windbreaker or a heavy winter jacket. "Sudadera con capucha" = hoodie.'},
+  {cat:'ropa',emoji:'👕',es:'la camiseta / la playera',en:'T-shirt',pron:'kah-mee-SEH-tah / plah-YEH-rah',
+   ex_es:'Con este calor solo me pongo una playera.',ex_en:'In this heat I\'m just wearing a T-shirt.',
+   note:'"Playera" is the Mexican word for T-shirt. "Camiseta" also used. "Camiseta" in Spain sometimes means underwear — "playera" is safer in Mexico!'},
+  {cat:'ropa',emoji:'👖',es:'el pantalón / los pants',en:'pants / trousers / sweatpants',pron:'pan-tah-LON / pants',
+   ex_es:'Con el frío, mejor unos pants.',ex_en:'In the cold, better some sweatpants.',
+   note:'"Pantalón" = pants/trousers. "Pants" (from English) = sweatpants/tracksuit bottoms. "Jeans" = jeans. "Shorts" = shorts. Very used in Mexican Spanish.'},
+  {cat:'ropa',emoji:'🥾',es:'las botas',en:'boots',pron:'BOH-tas',
+   ex_es:'Si va a llover, mejor ponte las botas.',ex_en:'If it\'s going to rain, better wear your boots.',
+   note:'"Botas" = boots. "Botas de lluvia" = rain boots. "Botas de montaña" = hiking boots. Useful during rainy season and cold weather.'},
+  {cat:'ropa',emoji:'🩴',es:'las chanclas',en:'flip-flops / slippers',pron:'CHAN-klahs',
+   ex_es:'En casa con este calor, me pongo las chanclas.',ex_en:'At home in this heat, I wear flip-flops.',
+   note:'"Chanclas" = flip-flops or slippers. Iconic Mexican footwear — also famously used by Mexican moms as a disciplinary instrument! "La chancla" is a cultural icon.'},
+  {cat:'ropa',emoji:'🎩',es:'el impermeable',en:'raincoat',pron:'eem-per-meh-AH-bleh',
+   ex_es:'Cómprate un impermeable para la temporada de lluvias.',ex_en:'Buy yourself a raincoat for the rainy season.',
+   note:'"Impermeable" = raincoat. "Poncho" = traditional Mexican rain poncho (also used). Very useful during Mexico\'s June-October rainy season.'},
+  /* MEXICO (10) */
+  {cat:'mex',emoji:'🌧️',es:'la temporada de lluvias',en:'the rainy season',pron:'tem-poh-RAH-dah de YOO-byahs',
+   ex_es:'En gran parte de México, la temporada de lluvias suele ser de junio a octubre.',ex_en:'In much of Mexico, the rainy season is usually from June to October.',
+   note:'In much of Mexico, rainy months are usually between June and October, although dates vary by region. In CDMX, afternoon rain is common during these months.'},
+  {cat:'mex',emoji:'🌬️',es:'el norte',en:'the Norte (cold northern wind)',pron:'el NOR-teh',
+   ex_es:'Ya entró el norte, hace un frío horrible en Veracruz.',ex_en:'The norte arrived, it\'s terribly cold in Veracruz.',
+   note:'Cold wind masses from the north that hit the Gulf coast (Veracruz, Tamaulipas) in winter. Temperatures can drop 20°C in hours. "Entró el norte" = the norte arrived.'},
+  {cat:'mex',emoji:'⛈️',es:'el aguacero',en:'heavy rainstorm / downpour',pron:'ah-gwah-SEH-roh',
+   ex_es:'Está cayendo un aguacero, espera que pare.',ex_en:'There\'s a heavy downpour, wait for it to stop.',
+   note:'An aguacero is a sudden, heavy downpour. In CDMX, it can happen in the afternoon during rainy months.'},
+  {cat:'mex',emoji:'🌀',es:'el huracán / el ciclón',en:'hurricane / cyclone',pron:'oo-rah-KAN / see-KLON',
+   ex_es:'El huracán toca tierra en la costa del Pacífico.',ex_en:'The hurricane makes landfall on the Pacific coast.',
+   note:'Mexico\'s coasts are affected by hurricanes — Pacific (June-Nov), Atlantic/Gulf (June-Nov). "Alerta de huracán" = hurricane warning. "Categoría X" = category X.'},
+  {cat:'mex',emoji:'🧊',es:'el granizo',en:'hail',pron:'grah-NEE-soh',
+   ex_es:'Cayó granizo enorme en la CDMX ayer.',ex_en:'Huge hail fell in CDMX yesterday.',
+   note:'"Granizo" = hail. Surprisingly common in Mexico City during rainy season. Can get quite large. "Granizar" = to hail. "Está granizando" = it\'s hailing.'},
+  {cat:'mex',emoji:'🧥',es:'una mañana fresca en la CDMX',en:'a cool morning in Mexico City',pron:'OO-nah mah-NYAH FRES-kah en lah seh-deh-ehm-EKS',
+   ex_es:'En la mañana hace fresco; por eso traje una chamarra.',ex_en:'It is cool in the morning, so I brought a jacket.',
+   note:'In CDMX, people often take a chamarra or suéter when the morning feels cool. This is useful everyday vocabulary, not a fixed slang term.'},
+  {cat:'mex',emoji:'🏔️',es:'el clima de la Ciudad de México',en:'Mexico City\'s climate (unique!)',pron:'KLEE-mah de lah syoo-DAHD de MEH-hee-koh',
+   ex_es:'La CDMX tiene un clima muy variado: fresco de mañana, caluroso al mediodía y lluvioso en la tarde.',ex_en:'Mexico City has a very varied climate: cool in the morning, hot at noon, rainy in the afternoon.',
+   note:'CDMX often has cool mornings, warmer afternoons, and rain later in the day during the rainy season. A light layer and an umbrella are practical.'},
+  {cat:'mex',emoji:'🌊',es:'el clima tropical',en:'tropical climate (coasts)',pron:'KLEE-mah troh-pee-KAL',
+   ex_es:'Cancún tiene clima tropical: calor y humedad todo el año.',ex_en:'Cancún has a tropical climate: heat and humidity all year.',
+   note:'Mexico\'s coasts (Cancún, Puerto Vallarta, Acapulco, Veracruz) have hot humid tropical climates year-round. 30°C+ with high humidity. Very different from highland Mexico.'},
+  {cat:'mex',emoji:'🌵',es:'el clima seco / el desierto',en:'dry climate / desert',pron:'KLEE-mah SEH-koh / deh-SYER-toh',
+   ex_es:'En Sonora el clima es muy seco y los veranos son extremos.',ex_en:'In Sonora the climate is very dry and summers are extreme.',
+   note:'Northern Mexico (Sonora, Chihuahua, Baja California) has desert/semi-arid climate. Summers reach 45°C+, but winters can be cold. "Calor seco" = dry heat, very different from coastal humidity.'},
+  {cat:'mex',emoji:'🌤️',es:'un clima templado',en:'a temperate climate',pron:'KLEE-mah tem-PLAH-doh',
+   ex_es:'En algunas ciudades del centro de México, el clima suele ser templado.',ex_en:'In some cities in central Mexico, the weather is usually temperate.',
+   note:'"Templado" describes weather that is neither very hot nor very cold. Use it to compare climates in different parts of Mexico.'},
+];
+
+
+/* ── NATURAL MEXICAN + CDMX PHRASES — 15 items ── */
+const COLOQ_VOC=[
+  {cat:'coloq',emoji:'🥵',es:'¡Hace un calorón!',en:'It\'s scorching hot!',pron:'AH-seh oon kah-loh-RON',
+   ex_es:'¡Hace un calorón hoy! No aguanto.',ex_en:'It\'s scorching hot today! I can\'t take it.',
+   note:'🗣️ Mexican Spanish — \"calorón\" is an emphatic, casual way to say there is intense heat. It is stronger than \"hace mucho calor.\"'},
+  {cat:'coloq',emoji:'🥶',es:'¡Qué frío!',en:'It\'s so cold!',pron:'keh FREE-oh',
+   ex_es:'¡Qué frío hace esta mañana! ¿Dónde está mi suéter?',ex_en:'It\'s so cold this morning! Where is my sweater?',
+   note:'🗣️ Mexican Spanish — simple, natural and very common. You can also say \"hace un frío horrible\" when you want emphasis.'},
+  {cat:'coloq',emoji:'🌧️',es:'Está lloviendo bien duro.',en:'It\'s raining really hard.',pron:'es-TAH yo-BYEN-doh byen DOO-roh',
+   ex_es:'No salgas todavía, está lloviendo bien duro.',ex_en:'Don\'t go out yet; it\'s raining really hard.',
+   note:'🗣️ Casual Mexican Spanish — \"bien duro\" intensifies the action. Use it with friends and in everyday speech.'},
+  {cat:'coloq',emoji:'☔',es:'Está cayendo un aguacero.',en:'There\'s a heavy downpour.',pron:'es-TAH kah-YEN-doh oon ah-gwah-SEH-roh',
+   ex_es:'Espérate un poco, está cayendo un aguacero.',ex_en:'Wait a little; there\'s a heavy downpour.',
+   note:'🗣️ Mexican Spanish — \"aguacero\" is a sudden, heavy rain. It is a very useful everyday word during the rainy season.'},
+  {cat:'coloq',emoji:'🌦️',es:'Ya se viene la lluvia.',en:'The rain is coming.',pron:'yah seh BYEN-eh lah YOO-byah',
+   ex_es:'Mira esas nubes, ya se viene la lluvia. Agarra el paraguas.',ex_en:'Look at those clouds; the rain is coming. Grab the umbrella.',
+   note:'🗣️ Natural Mexican Spanish — said when dark clouds are moving in. In casual speech, \"ya viene la lluvia\" is clear and widely understood.'},
+  {cat:'coloq',emoji:'⚠️🌧️',es:'¡Aguas, va a llover!',en:'Watch out, it\'s going to rain!',pron:'AH-gwas bah ah yoh-BER',
+   ex_es:'¡Aguas, va a llover! Mete la ropa.',ex_en:'Watch out, it\'s going to rain! Bring the laundry in.',
+   note:'🗣️ CDMX / central Mexico — \"aguas\" means \"watch out.\" It is casual and common in many situations, not only with rain.'},
+  {cat:'coloq',emoji:'🌧️⏱️',es:'Al rato llueve.',en:'It will probably rain later.',pron:'al RAH-toh YWE-beh',
+   ex_es:'Está muy nublado; al rato llueve.',ex_en:'It\'s very cloudy; it will probably rain later.',
+   note:'🗣️ Mexican Spanish — \"al rato\" usually means later, in a little while, or at some point soon. The exact time depends on context.'},
+  {cat:'coloq',emoji:'🌤️',es:'Ya paró de llover.',en:'It stopped raining.',pron:'yah pah-ROH de yoh-BER',
+   ex_es:'Ya paró de llover, ahora sí podemos salir.',ex_en:'It stopped raining; now we can go out.',
+   note:'🗣️ Neutral Mexican Spanish — this is a natural everyday way to say that the rain stopped.'},
+  {cat:'coloq',emoji:'😰',es:'Me estoy derritiendo.',en:'I\'m melting.',pron:'meh es-TOY deh-ree-TYEN-doh',
+   ex_es:'Me estoy derritiendo con este calor. Prende el ventilador.',ex_en:'I\'m melting in this heat. Turn on the fan.',
+   note:'🗣️ Mexican Spanish — a common exaggeration for extreme heat. \"Abanico\" and \"ventilador\" are both understood in Mexico.'},
+  {cat:'coloq',emoji:'🥶',es:'Traigo un frío cañón.',en:'I\'m really cold.',pron:'TRAI-goh oon FREE-oh kah-NYON',
+   ex_es:'Traigo un frío cañón, ¿me prestas una chamarra?',ex_en:'I\'m really cold; can you lend me a jacket?',
+   note:'🗣️ CDMX / casual Mexican Spanish — \"cañón\" works as an intensifier: very, really, a lot. It is informal but not offensive.'},
+  {cat:'coloq',emoji:'🌬️',es:'Hace mucho aire.',en:'It\'s very windy.',pron:'AH-seh MOO-choh AI-reh',
+   ex_es:'Hace mucho aire; agárrate la gorra.',ex_en:'It\'s very windy; hold on to your cap.',
+   note:'🗣️ Mexican Spanish — \"hacer aire\" is a natural everyday alternative to \"hacer viento.\" Both are understood.'},
+  {cat:'coloq',emoji:'☁️',es:'Ya se puso gris el cielo.',en:'The sky turned gray.',pron:'yah seh POO-soh grees el SYEH-loh',
+   ex_es:'Ya se puso gris el cielo; seguro llueve al rato.',ex_en:'The sky turned gray; it will probably rain later.',
+   note:'🗣️ Natural Mexican Spanish — a simple visual way to say that clouds are moving in.'},
+  {cat:'coloq',emoji:'❄️',es:'Está helando.',en:'It\'s freezing.',pron:'es-TAH eh-LAN-doh',
+   ex_es:'Está helando afuera; no salgas sin chamarra.',ex_en:'It\'s freezing outside; do not go out without a jacket.',
+   note:'🗣️ Mexican Spanish — used for very cold weather and sometimes as an exaggeration when it simply feels extremely cold.'},
+  {cat:'coloq',emoji:'🌡️',es:'Se siente más frío de lo que marca.',en:'It feels colder than the temperature says.',pron:'seh SYEN-teh mahs FREE-oh de loh keh MAR-kah',
+   ex_es:'Dice 14 grados, pero se siente más frío de lo que marca.',ex_en:'It says 14 degrees, but it feels colder than the temperature says.',
+   note:'🗣️ Natural Mexican Spanish — useful when the thermometer and your experience do not match. Very common in CDMX weather conversations.'},
+  {cat:'coloq',emoji:'⛈️',es:'¡Aguas, ya va a tronar!',en:'Watch out, it\'s about to storm!',pron:'AH-gwas yah bah ah troh-NAR',
+   ex_es:'¡Aguas, ya va a tronar! Mete la ropa del tendedero.',ex_en:'Watch out, it\'s about to storm! Bring in the clothes from the line.',
+   note:'🗣️ CDMX / central Mexico — \"va a tronar\" literally refers to thunder, and in everyday speech it warns that a storm is coming.'},
+];
+
+// Merge coloquial into VOC
+VOC.push(...COLOQ_VOC);
+
+let fcCards2=[];
+function getFC(){return fcFilter==='all'?VOC:VOC.filter(v=>v.cat===fcFilter);}
+
+function renderFlash(){
+  fcCards2=getFC();if(fcIdx>=fcCards2.length)fcIdx=0;
+  fcFlipped=false;renderFCCard();
+}
+function renderFCCard(){
+  if(!fcCards2.length){document.getElementById('exContainer').innerHTML='<div class="panel"><p>No cards.</p></div>';return;}
+  const item=fcCards2[fcIdx];const cat=CATS[item.cat];
+  const pct=Math.round((fcIdx+1)/fcCards2.length*100);
+  const hasAudio=!!window.speechSynthesis;
+  const fbtns=[{id:'all',lbl:'All ('+VOC.length+')'},...Object.entries(CATS).map(([k,v])=>({id:k,lbl:v.label}))].map(f=>`<button class="fc-fbtn${fcFilter===f.id?' active':''}" style="${fcFilter===f.id?`background:${CATS[f.id]?.bg||'rgba(255,255,255,.1)'};border-color:${CATS[f.id]?.bd||'rgba(255,255,255,.25)'};color:${CATS[f.id]?.col2||'var(--text)'}`:''};" onclick="setFC('${f.id}')">${f.lbl}</button>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📖 Flashcards — ${VOC.length} words + 🔊 audio</div>
+  <div class="ex-instr">Front: Spanish + pronunciation. Back: English, real example in both languages, and cultural/grammar notes. <em>Click card to flip!</em></div>
+  <div class="fc-filter">${fbtns}</div>
+  <div class="fc-wrap">
+    <div class="fc-prow">
+      <span class="fc-cnt">${fcIdx+1}/${fcCards2.length}</span>
+      <div class="fc-trk"><div class="fc-fil" style="width:${pct}%;background:${cat.col}"></div></div>
+      <span class="fc-cnt" style="color:${cat.col2}">${cat.label}</span>
+    </div>
+    <div class="fc-card${fcFlipped?' flipped':''}" id="fcCard" onclick="flipFC()">
+      <div class="fc-inner">
+        <div class="fc-front" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <span style="font-size:.65rem;font-weight:900;text-transform:uppercase;color:${cat.col2};letter-spacing:.08em">${cat.label}</span>
+          <div class="fc-emoji">${item.emoji}</div>
+          <div class="fc-es" style="color:${cat.col2}">${item.es}</div>
+          <div class="fc-pron">🔊 /${item.pron}/</div>
+          ${hasAudio?`<button class="btn-audio" onclick="event.stopPropagation();speak('${item.es.replace(/'/g,"\\'").replace(/\./g,'')}',this)">🔊 Listen</button>`:''}
+          <div class="fc-hint">👆 Click to flip</div>
+        </div>
+        <div class="fc-back" style="background:${cat.bg};border:1.5px solid ${cat.bd}">
+          <span style="font-size:.65rem;font-weight:900;text-transform:uppercase;color:${cat.col2};letter-spacing:.08em">${cat.label}</span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:1.8rem">${item.emoji}</span>
+            <div>
+              <div class="fc-es" style="color:${cat.col2};font-size:1.4rem">${item.es}</div>
+              <div class="fc-en">${item.en}</div>
+            </div>
+            ${hasAudio?`<button class="btn-audio" onclick="event.stopPropagation();speak('${item.es.replace(/'/g,"\\'").replace(/\./g,'')}',this)" style="margin-left:auto">🔊</button>`:''}
+          </div>
+          <div class="fc-ex">🇲🇽 <em>${item.ex_es}</em><br>🇬🇧 <span style="color:var(--muted2)">${item.ex_en}</span></div>
+          <div class="fc-note">📌 ${item.note}</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="btn btn-ghost" onclick="prevFC()" ${fcIdx===0?'disabled':''}>← Prev</button>
+      <button class="btn btn-ghost" onclick="flipFC()">↺ Flip</button>
+      <button class="btn btn-cyan" onclick="nextFC()" ${fcIdx===fcCards2.length-1?'disabled':''}>Next →</button>
+    </div>
+  </div></div>`;
+}
+function flipFC(){fcFlipped=!fcFlipped;document.getElementById('fcCard')?.classList.toggle('flipped',fcFlipped);}
+function nextFC(){fcIdx=Math.min(fcCards2.length-1,fcIdx+1);fcFlipped=false;renderFCCard();}
+function prevFC(){fcIdx=Math.max(0,fcIdx-1);fcFlipped=false;renderFCCard();}
+function setFC(f){fcFilter=f;fcIdx=0;renderFlash();}
+
+/* ══════════════════════════════════
+   EX 1 — ¿QUÉ TIEMPO HACE? MC (20)
+   See situation/emoji → choose correct weather expression
+══════════════════════════════════ */
+const MC1=[
+  {emoji:'☀️🌡️',q:'It\'s 35°C and the sun is blazing. Which phrase describes this?',
+   opts:['Hace mucho calor.','Hace mucho frío.','Está lloviendo.','Hay niebla.'],a:0,
+   x:'"Hace mucho calor" = it\'s very hot. Remember: weather uses HACER, not SER/ESTAR. "Hace calor" NOT "está calor."'},
+  {emoji:'🥶❄️',q:'It\'s 2°C. Your fingers are frozen.',
+   opts:['Hace calor.','¡Hace un frío horrible!','Está despejado.','Hay un arcoíris.'],a:1,
+   x:'"¡Hace un frío horrible!" = it\'s terribly cold! Degrees of cold: hace frío → hace mucho frío → hace un frío horrible/espantoso.'},
+  {emoji:'🌧️💧',q:'It\'s raining right now, at this moment.',
+   opts:['Llueve mucho.','Llovió.','Está lloviendo.','Va a llover.'],a:2,
+   x:'"Está lloviendo" = it\'s raining (right now, continuous). "Llueve" = it rains (habit). "Llovió" = it rained (past). "Va a llover" = it\'s going to rain (future).'},
+  {emoji:'⛅☁️',q:'The sky is covered in gray clouds, no sun visible.',
+   opts:['Está despejado.','Está nublado.','Hace sol.','Nieva.'],a:1,
+   x:'"Está nublado" = it\'s cloudy. Uses ESTAR (temporary state). "Las nubes" = clouds. "Muy nublado" = very overcast.'},
+  {emoji:'☀️🌤️',q:'Beautiful blue sky, not a cloud in sight.',
+   opts:['Hay tormenta.','Está nublado.','Está despejado.','Hay niebla.'],a:2,
+   x:'"Está despejado" = it\'s clear/sunny. "Soleado" also works. "Hace sol" = the sun is out. All correct for a clear day.'},
+  {emoji:'💨🍃',q:'Strong wind is blowing. Trees are swaying.',
+   opts:['Hace calor.','Hay niebla.','Hace viento.','Nieva.'],a:2,
+   x:'"Hace viento" = it\'s windy. "El viento" = the wind. "Hay mucho viento" also works. "Ventoso" = windy (adjective).'},
+  {emoji:'⛈️⚡',q:'Thunder, lightning, heavy rain. What\'s happening?',
+   opts:['Está despejado.','Hay tormenta.','Refresca.','Hay un arcoíris.'],a:1,
+   x:'"Hay tormenta" = there\'s a storm. "Truena" = it\'s thundering. "Relampaguea" = there\'s lightning. "Hay tormenta eléctrica" = electrical storm.'},
+  {emoji:'❄️🌨️',q:'White flakes are falling from the sky in the mountains.',
+   opts:['Llueve.','Está granizando.','Nieva.','Hay niebla.'],a:2,
+   x:'"Nieva" = it\'s snowing. "Está nevando" = it\'s snowing (right now). "La nieve" = snow (or ice cream in Mexico!). Rare in most of Mexico — only high mountains.'},
+  {emoji:'🌫️🌁',q:'You can barely see 10 meters ahead of you on the road.',
+   opts:['Hace viento.','Hay niebla.','Hace sol.','Está despejado.'],a:1,
+   x:'"Hay niebla" = it\'s foggy. "Niebla" = fog. Common in highland cities like CDMX early morning. "Bruma" = light mist/haze.'},
+  {emoji:'🌈',q:'After the rain, something colorful appears in the sky.',
+   opts:['Hay tormenta.','Está granizando.','Hay un arcoíris.','Hay niebla.'],a:2,
+   x:'"Hay arcoíris" = there\'s a rainbow. Beautiful and very common in Mexico after afternoon rainy-season showers. "Mira, hay un arcoíris!"'},
+  {emoji:'⛈️🧊',q:'Small ice pellets are falling from the sky.',
+   opts:['Está nevando.','Está lloviendo.','Está granizando.','Hay niebla.'],a:2,
+   x:'"Hay granizo" = there\'s hail. "Granizar" = to hail. Surprisingly common in Mexico City during rainy season. "Está granizando" = it\'s hailing.'},
+  {emoji:'🌤️📱',q:'You check the weather app before leaving. It says "probabilidad de lluvia: 80%."',
+   opts:['El pronóstico dice que va a llover.','Está lloviendo ahora.','Ya llovió.','No va a llover.'],a:0,
+   x:'"El pronóstico" = the forecast. "Va a llover" = it\'s going to rain. "Probabilidad de lluvia" = chance of rain. Checking the forecast is useful during rainy months.'},
+  {emoji:'🌡️28°C',q:'The thermometer shows 28 degrees. How do you describe this?',
+   opts:['La temperatura está a 28 grados.','Hace 28 frío.','Son 28 calientes.','El tiempo tiene 28.'],a:0,
+   x:'"La temperatura está a 28 grados" = the temperature is 28 degrees. Mexico uses Celsius. "Grados centígrados" = Celsius. 28°C feels warm to many people.'},
+  {emoji:'🌅🌤️',q:'It\'s a cool evening after a hot day. Things are getting more comfortable.',
+   opts:['Hace mucho calor.','Ya refrescó.','Está nevando.','Hay tormenta.'],a:1,
+   x:'"Ya refrescó" = it already cooled down. "Refrescar" = to cool down/freshen. "Está refrescando" = it\'s getting cooler. Very common in Mexico\'s afternoons.'},
+  {emoji:'💧🌡️',q:'30°C but the air feels suffocating and heavy — especially on the coast.',
+   opts:['Hace calor seco.','Hay mucha humedad.','Está nevando.','Hace frío húmedo.'],a:1,
+   x:'"Hay mucha humedad" = there\'s a lot of humidity. "Húmedo" = humid. Coastal Mexico (Veracruz, Cancún) has intense humid heat. "Calor húmedo" = humid heat, different from dry heat.'},
+  {emoji:'🌬️🥶',q:'In Veracruz: it\'s winter. A cold wind suddenly arrives from the north.',
+   opts:['Está lloviendo.','Ya entró el norte.','Nieva.','Hay tormenta tropical.'],a:1,
+   x:'"Ya entró el norte" = the Norte (cold northern wind) arrived. Nortes are cold wind masses that hit Mexico\'s Gulf coast in winter. Temperatures can drop dramatically in hours.'},
+  {emoji:'⛈️🌧️',q:'It\'s 3pm in June in Mexico City. Suddenly it starts raining very hard.',
+   opts:['Hay un aguacero.','Hay una nevada.','Está despejado.','Hace calor seco.'],a:0,
+   x:'"Hay un aguacero" = there\'s a heavy downpour. An aguacero is a heavy downpour. In CDMX, they can occur in the afternoon during rainy months.'},
+  {emoji:'🌀💨',q:'A powerful tropical storm is heading toward the coast of Cancún.',
+   opts:['Hay un aguacero.','Hay un huracán.','Hay niebla.','Hace viento suave.'],a:1,
+   x:'"Hay un huracán" = there\'s a hurricane. Mexico\'s Caribbean and Pacific coasts face hurricane season June-November. "Categoría 1-5" = hurricane category.'},
+  {emoji:'🏙️🌤️',q:'It\'s morning in CDMX. The sky is clear but it\'s only 12°C.',
+   opts:['Hace mucho calor, es verano.','Está fresco, típico de la CDMX.','Está nevando.','Hace calor seco.'],a:1,
+   x:'"Está fresco, típico de la CDMX" = it\'s cool, typical of CDMX. CDMX mornings are often cool, even in summer. "Fresco" = pleasantly cool, not cold.'},
+  {emoji:'🌤️🌈',q:'During the rainy months, what is useful to carry?',
+   opts:['Las sandalias.','El traje de baño.','El paraguas.','Los lentes de sol.'],a:2,
+   x:'"El paraguas" = umbrella. During Mexico\'s rainy season, afternoon rain is common. An umbrella or light raincoat (impermeable) is useful in your bag.'},
+];
+
+function renderMC1(){
+  const tot=MC1.length;
+  const html=MC1.map((item,i)=>{
+    const done=mc1Ans[i]!==undefined;
+    const opts=seededShuffle([...item.opts.map((o,oi)=>({o,oi}))],i*11+3);
+    const btns=opts.map(({o,oi})=>{
+      let cls='mc-opt';
+      if(done){if(oi===item.a)cls+=' mshow';else if(mc1Ans[i]===oi&&oi!==item.a)cls+=' merr';}
+      return `<button class="${cls}" id="mc1${i}_${oi}" onclick="answerMC1(${i},${oi})" ${done?'disabled':''}>${o}</button>`;
+    }).join('');
+    return `<div class="mc-card${done?(mc1Ans[i]===item.a?' ok':' err'):''}" id="mc1c${i}">
+      <div class="mc-top"><span class="mc-num">${i+1}</span><span class="mc-q" style="font-size:1.1rem">${item.emoji} ${item.q}</span></div>
+      <div class="mc-opts">${btns}</div>
+      <div class="mc-exp${done?' show':''}" id="mc1e${i}">${item.x}</div>
+    </div>`;
+  }).join('');
+  const done=Object.keys(mc1Ans).length;
+  const ok=Object.values(mc1Ans).filter(v=>v).length;
+  const pct=Math.round(done/tot*100);
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🌤️ ¿Qué tiempo hace? — 20 questions</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">
+    <div style="background:rgba(96,165,250,.1);border:1.5px solid rgba(96,165,250,.3);border-radius:14px;padding:14px">
+      <div style="font-family:var(--display);font-size:.82rem;font-weight:900;color:var(--clima2);margin-bottom:8px">🔨 HACER</div>
+      <div style="font-size:.78rem;color:var(--muted);line-height:1.8">Hace calor<br>Hace frío<br>Hace viento<br>Hace sol</div>
+      <div style="font-size:.68rem;color:var(--clima2);margin-top:6px;font-weight:700">For heat, cold, wind, sun</div>
+    </div>
+    <div style="background:rgba(52,211,153,.1);border:1.5px solid rgba(52,211,153,.3);border-radius:14px;padding:14px">
+      <div style="font-family:var(--display);font-size:.82rem;font-weight:900;color:var(--mex2);margin-bottom:8px">📍 ESTAR</div>
+      <div style="font-size:.78rem;color:var(--muted);line-height:1.8">Está nublado<br>Está despejado<br>Está lloviendo<br>Está nevando</div>
+      <div style="font-size:.68rem;color:var(--mex2);margin-top:6px;font-weight:700">For states & continuous action</div>
+    </div>
+    <div style="background:rgba(244,114,182,.1);border:1.5px solid rgba(244,114,182,.3);border-radius:14px;padding:14px">
+      <div style="font-family:var(--display);font-size:.82rem;font-weight:900;color:var(--ropa2);margin-bottom:8px">✅ HAY</div>
+      <div style="font-size:.78rem;color:var(--muted);line-height:1.8">Hay tormenta<br>Hay niebla<br>Hay granizo<br>Hay arcoíris</div>
+      <div style="font-size:.68rem;color:var(--ropa2);margin-top:6px;font-weight:700">For weather events</div>
+    </div>
+  </div>
+  <div class="ex-instr">Choose the correct weather expression. Watch the verb — HACER/ESTAR/HAY — context makes all the difference!</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="m1_ok">${ok}</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="m1_err">${done-ok}</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="m1_pct">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="m1_pg" style="width:${pct}%"></div></div></div></div>
+  <div class="mc-grid">${html}</div>
+  <div class="fb" id="m1_fb"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="mc1Ans={};renderMC1()">↺ Reset</button></div></div>`;
+}
+function answerMC1(qi,oi){
+  if(mc1Ans[qi]!==undefined)return;
+  const item=MC1[qi];const isOk=oi===item.a;
+  mc1Ans[qi]=oi;
+  document.getElementById('mc1c'+qi).classList.add(isOk?'ok':'err');
+  document.querySelectorAll(`[id^="mc1${qi}_"]`).forEach(b=>{b.disabled=true;if(b.id===`mc1${qi}_${item.a}`)b.classList.add('mshow');else if(b.id===`mc1${qi}_${oi}`&&!isOk)b.classList.add('merr');});
+  document.getElementById('mc1e'+qi).classList.add('show');
+  const tot=Object.keys(mc1Ans).length;const ok=Object.values(mc1Ans).filter(v=>v===item.a||MC1[parseInt(Object.keys(mc1Ans).at(-1))].a===v).length;
+  const okCount=MC1.filter((_,i)=>mc1Ans[i]===MC1[i].a).length;
+  document.getElementById('m1_ok').textContent=okCount;document.getElementById('m1_err').textContent=tot-okCount;
+  document.getElementById('m1_pct').textContent=Math.round(tot/MC1.length*100)+'%';
+  document.getElementById('m1_pg').style.width=Math.round(tot/MC1.length*100)+'%';
+  if(tot===MC1.length){const pct=Math.round(okCount/tot*100);const fb=document.getElementById('m1_fb');fb.className='fb show '+(pct>=85?'ok':'partial');fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${okCount}/${tot}.</strong> ${pct>=85?'¡Excelente! You read the weather like a native!':'Study the flashcards and try again.'}`;}
+}
+
+/* ══════════════════════════════════
+   EX 2 — ¿QUÉ ROPA TE PONES? (16 visual cards)
+   Weather emoji → choose the right clothing
+══════════════════════════════════ */
+const ROPA_Q=[
+  {weather:'☀️🌡️40°C',situation:'It\'s 40°C in Cancún. Beach day!',
+   opts:['el abrigo','el traje de baño + bloqueador','la bufanda + guantes','el impermeable'],a:1,
+   exp:'☀️ Beach in extreme heat: "el traje de baño" (swimsuit) + "el bloqueador" (sunscreen). Mexico\'s UV index is very high. SPF 50+ recommended!'},
+  {weather:'🥶❄️5°C',situation:'CDMX winter morning: 5°C',
+   opts:['las sandalias','la playera','el abrigo + bufanda + guantes','el traje de baño'],a:2,
+   exp:'🥶 For cold weather: "el abrigo" (coat) + "la bufanda" (scarf) + "los guantes" (gloves). Even though 5°C might feel mild to some, Mexicans dress in full winter gear!'},
+  {weather:'🌧️💧',situation:'Rainy season afternoon in CDMX — it\'s about to pour',
+   opts:['los lentes de sol','el paraguas + impermeable','el traje de baño','las chanclas'],a:1,
+   exp:'🌧️ For rain: "el paraguas" (umbrella) or "el impermeable" (raincoat). During rainy months, it is useful to keep one in your bag.'},
+  {weather:'☀️💨25°C',situation:'Sunny but windy — perfect weather, but breezy',
+   opts:['el abrigo pesado','la chamarra ligera + lentes de sol','los guantes','el impermeable'],a:1,
+   exp:'💨 For mild/breezy weather: a light jacket ("chamarra ligera") + sunglasses ("lentes de sol"). 25°C is lovely — no need for heavy clothing!'},
+  {weather:'🌧️🌩️',situation:'Big storm is arriving. You need to go out.',
+   opts:['las sandalias + playera','el traje de baño','el impermeable + botas','los lentes de sol'],a:2,
+   exp:'⛈️ In a storm: "el impermeable" (raincoat) + "las botas" (boots) to keep dry. "Las botas de lluvia" (rain boots) are ideal.'},
+  {weather:'☀️🏖️',situation:'Day at the beach in Puerto Vallarta — hot and sunny',
+   opts:['el abrigo + bufanda','el traje de baño + bloqueador + sombrero','los guantes + botas','el impermeable'],a:1,
+   exp:'🏖️ Beach essentials: "traje de baño" (swimsuit) + "bloqueador" (sunscreen) + "sombrero" (hat). Mexico\'s UV index is among the highest in the world!'},
+  {weather:'🌅15°C',situation:'Cool spring morning in CDMX — cool CDMX morning',
+   opts:['el traje de baño','las chanclas + playera','el suéter + chamarra','los guantes + abrigo'],a:2,
+   exp:'🌅 For "mañana fresca en CDMX" (15°C): "el suéter" (sweater) + "la chamarra" (jacket). Mexicans layer up at this temperature. CDMX mornings are often cool.'},
+  {weather:'🌬️❄️Norte',situation:'A "norte" arrived in Veracruz — cold wind, dropped to 12°C',
+   opts:['las sandalias + lentes de sol','el abrigo + bufanda + chamarra','el traje de baño','los tenis ligeros'],a:1,
+   exp:'🌬️ For "el norte": full winter layers — abrigo + bufanda + chamarra. Nortes bring sudden cold to the Gulf coast. Temperatures can drop 15°C in a few hours!'},
+  {weather:'🌤️🏔️',situation:'Hiking in the mountains of Oaxaca — variable weather',
+   opts:['el traje de baño','los tenis + chamarra + gorra + bloqueador','las chanclas','la bufanda sola'],a:1,
+   exp:'🏔️ For mountain hiking: tenis (sneakers) + chamarra (jacket) + gorra (cap) + bloqueador (sunscreen). Mountain weather changes fast — layer up!'},
+  {weather:'🌧️🌈',situation:'Quick afternoon shower just ended — now sunny again',
+   opts:['el paraguas','el impermeable','los lentes de sol','el abrigo'],a:2,
+   exp:'🌈 After the rain in Mexico: "los lentes de sol" (sunglasses). Mexican afternoon rains pass quickly and the sun comes back strong. Rainbow time!'},
+  {weather:'☀️🏜️45°C',situation:'Desert north Mexico (Sonora) — summer extreme heat',
+   opts:['el abrigo + bufanda','playera + pantalón ligero + sombrero + bloqueador + lentes','el traje de baño en la calle','el suéter'],a:1,
+   exp:'🌵 Desert heat (45°C+): light clothing + sombrero + bloqueador + lentes de sol. "Calor seco" (dry heat) but extreme. Stay hydrated — "toma mucha agua."'},
+  {weather:'🌧️💧',situation:'Rainy season is starting. What to ALWAYS carry in your bag in Mexico?',
+   opts:['el traje de baño','el abrigo','el paraguas o impermeable','los guantes'],a:2,
+   exp:'🌧️ During the rainy season, carry "el paraguas" (umbrella) or "el impermeable" (raincoat). In CDMX, afternoon rain is common in the rainy months.'},
+  {weather:'❄️🏔️',situation:'Visiting the Popocatépetl volcano base (3,000m+)',
+   opts:['el traje de baño','el abrigo pesado + guantes + botas','las sandalias','el paraguas solo'],a:1,
+   exp:'🏔️ High altitude cold: "abrigo pesado" (heavy coat) + "guantes" (gloves) + "botas" (boots). It can snow or frost at high altitudes in Mexico even in summer!'},
+  {weather:'🌡️28°C',situation:'Warm afternoon in Guadalajara — perfect tapatío weather',
+   opts:['el abrigo + bufanda','tenis + pantalón + playera','el traje de baño','los guantes + chamarra'],a:1,
+   exp:'😊 For Guadalajara\'s "eternal spring" (28°C): comfortable casual wear — tenis + pantalón + playera. No extremes needed. Perfect weather!'},
+  {weather:'☀️🦟',situation:'Tropical beach at night in Cancún — it\'s warm but mosquitoes are out',
+   opts:['el abrigo','nada, hace calor','pantalón ligero + playera + repelente de mosquitos','el traje de baño solo'],a:2,
+   exp:'🦟 Tropical night: light clothing + "repelente de mosquitos" (mosquito repellent). Essential in tropical Mexico, especially during rainy season. "Los mosquitos pican" = mosquitoes bite.'},
+  {weather:'🌧️❄️',situation:'Cold and rainy day in the highlands of Mexico (December)',
+   opts:['el traje de baño','las sandalias','abrigo + botas + paraguas o impermeable','playera + tenis'],a:2,
+   exp:'🌧️🥶 Cold + rainy: "abrigo" + "botas" + "paraguas o impermeable." Layering is key. "Abrígate bien" = bundle up well. Mexican winter highlands can be really cold and wet!'},
+];
+
+function renderRopa(){
+  const tot=ROPA_Q.length;
+  const html=ROPA_Q.map((item,i)=>{
+    const done=ropaAns[i]!==undefined;
+    const opts=seededShuffle(item.opts.map((o,oi)=>({o,oi})),i*13+5);
+    const btns=opts.map(({o,oi},bi)=>{
+      const colors=['#7c3aed','#1d4ed8','#b45309','#065f46'];
+      let cls=`ropa-opt`;const isCorrect=oi===item.a;
+      if(done){if(isCorrect)cls+=' r-ok';else cls+=' r-err';}
+      return `<button class="${cls}" style="background:${done?(isCorrect?'#065f46':'#374151'):colors[bi%4]}" onclick="answerRopa(${i},${oi})" ${done?'disabled':''}>${o}</button>`;
+    }).join('');
+    return `<div class="ropa-card${done?(ropaAns[i]?' ok':' err'):''}" id="ropc${i}">
+      <div class="ropa-emoji-box"><div style="font-size:2.5rem">${item.weather}</div></div>
+      <div class="ropa-q">${item.situation}</div>
+      <span class="ropa-qen">What do you wear?</span>
+      <div class="ropa-opts">${btns}</div>
+      <div class="ropa-exp${done?' show':''}" id="rope${i}">${item.exp}</div>
+    </div>`;
+  }).join('');
+  const done=Object.keys(ropaAns).length;
+  const ok=ROPA_Q.filter((_,i)=>ropaAns[i]).length;
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">👕 ¿Qué ropa te pones? — 16 situations</div>
+  <div class="ex-instr">Look at the weather and situation. Choose the right clothing for Mexico. Think about <em>which specific items</em> you need!</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="rp_ok">${ok}</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="rp_err">${done-ok}</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="rp_pct">${Math.round(done/tot*100)}%</span></div><div class="prog-t"><div class="prog-f" id="rp_pg" style="width:${Math.round(done/tot*100)}%"></div></div></div></div>
+  <div class="ropa-grid">${html}</div>
+  <div class="fb" id="rp_fb"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="ropaAns={};renderRopa()">↺ Reset</button></div></div>`;
+}
+function answerRopa(qi,oi){
+  if(ropaAns[qi]!==undefined)return;
+  const item=ROPA_Q[qi];const isOk=oi===item.a;
+  ropaAns[qi]=isOk;
+  document.getElementById('ropc'+qi).classList.add(isOk?'ok':'err');
+  document.getElementById('rope'+qi).classList.add('show');
+  document.querySelectorAll(`#ropc${qi} .ropa-opt`).forEach(b=>{b.disabled=true;});
+  const tot=Object.keys(ropaAns).length;const ok=ROPA_Q.filter((_,i)=>ropaAns[i]).length;
+  document.getElementById('rp_ok').textContent=ok;document.getElementById('rp_err').textContent=tot-ok;
+  document.getElementById('rp_pct').textContent=Math.round(tot/ROPA_Q.length*100)+'%';
+  document.getElementById('rp_pg').style.width=Math.round(tot/ROPA_Q.length*100)+'%';
+  if(tot===ROPA_Q.length){const pct=Math.round(ok/tot*100);const fb=document.getElementById('rp_fb');fb.className='fb show '+(pct>=85?'ok':'partial');fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Perfecto! You dress for the Mexican weather!':'Review the flashcards and try again.'}`;}
+}
+
+/* ══════════════════════════════════
+   EX 3 — DIÁLOGOS (10)
+   Bilingual chat conversations about weather in Mexico
+══════════════════════════════════ */
+const DIALS=[
+  {scene:'WhatsApp conversation before a trip to CDMX 📱',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'Hola Ana, voy a la CDMX la próxima semana. ¿Cómo está el clima allá?',en:'Hi Ana, I\'m going to CDMX next week. What\'s the weather like there?'},
+     {side:'left',av:'👩',who:'Ana',es:'Depende. ¿En qué mes?',en:'It depends. Which month?'},
+     {side:'right',av:'🙋',who:'Tú',es:'En julio.',en:'In July.'},
+     {side:'left',av:'👩',who:'Ana',es:'Ah, es temporada de lluvias. Hace calor de día pero llueve en las tardes. Lleva un paraguas.',en:'Ah, it\'s rainy season. It\'s hot during the day but it rains in the afternoons. Bring an umbrella.'},
+   ],
+   q:'"Temporada de lluvias" in Mexico refers to...',
+   opts:['the dry season (December-February)','the rainy season (approximately June-October)','the hurricane season only on coasts','the cloudy season in winter'],a:1,
+   exp:'"Temporada de lluvias" = rainy season, usually June to October in much of Mexico, depending on the region. In CDMX: hot mornings, rainy afternoons. A paraguas (umbrella) is useful.'},
+  {scene:'On the phone — asking about the weather in Cancún 📞',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'¿Cómo está el tiempo en Cancún ahora?',en:'What\'s the weather like in Cancún right now?'},
+     {side:'left',av:'👨',who:'Amigo en Cancún',es:'¡Hace un calor horrible! Como 35 grados con mucha humedad.',en:'It\'s terribly hot! About 35 degrees with high humidity.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Y llueve mucho?',en:'And does it rain a lot?'},
+     {side:'left',av:'👨',who:'Amigo',es:'Sí, en las tardes cae un aguacero, pero pasa rápido.',en:'Yes, in the afternoons there\'s a heavy downpour, but it passes quickly.'},
+   ],
+   q:'"Cae un aguacero" describes what kind of rain?',
+   opts:['a light drizzle all day','a sudden heavy rainstorm, usually brief','rain that lasts all week','a gentle warm rain'],a:1,
+   exp:'"Un aguacero" = a sudden, heavy downpour. Very typical in tropical and highland Mexico during rainy season. They usually last 30-60 minutes and then clear up.'},
+  {scene:'Getting ready in the morning in CDMX 🌅',
+   chat:[
+     {side:'left',av:'👵',who:'Abuela',es:'Antes de salir, agárrate una chamarra. Hace frío.',en:'Before going out, grab a jacket. It\'s cold.'},
+     {side:'right',av:'🙋',who:'Tú',es:'Abuela, son 15 grados, no hace tanto frío.',en:'Grandma, it\'s 15 degrees, it\'s not that cold.'},
+     {side:'left',av:'👵',who:'Abuela',es:'¡Ay! Para nosotros los chilangos, sí hace frío. ¡Y lleva el paraguas también!',en:'Oh! For us chilangos, it IS cold. And take your umbrella too!'},
+     {side:'right',av:'🙋',who:'Tú',es:'Jaja, está bien, abuela.',en:'Haha, alright, grandma.'},
+   ],
+   q:'Why does the grandma say "para nosotros los chilangos, sí hace frío" at 15°C?',
+   opts:['Because grandmas are always cold','Because 15°C is scientifically cold','Because CDMX people ("chilangos") are famous for feeling cold at temperatures others find mild','Because it\'s winter in Mexico'],a:2,
+   exp:'"Mañana fresca en CDMX" = the famous sensitivity to cold of Mexico City residents. 15°C in CDMX = full winter coats. Foreigners from cold countries often find this funny. But the high altitude and humidity DO make it feel colder!'},
+  {scene:'Planning what to wear 👕',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'¿Qué ropa llevo para el viaje a Puerto Vallarta?',en:'What clothes should I take for the trip to Puerto Vallarta?'},
+     {side:'left',av:'👩',who:'Amiga',es:'Ropa ligera, traje de baño, lentes de sol y mucho bloqueador.',en:'Light clothes, swimsuit, sunglasses and lots of sunscreen.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Nada de suéter?',en:'No sweater?'},
+     {side:'left',av:'👩',who:'Amiga',es:'¡Para nada! Hace calor todo el día. Solo lleva el paraguas por si llueve en la tarde.',en:'Not at all! It\'s hot all day. Just bring an umbrella in case it rains in the afternoon.'},
+   ],
+   q:'What is "el bloqueador" that the friend recommends?',
+   opts:['a mosquito repellent','sunscreen','a type of sunhat','a waterproof jacket'],a:1,
+   exp:'"El bloqueador" or "protector solar" = sunscreen. Absolutely essential in Mexico\'s coastal areas where UV index is extreme. Use sunscreen suitable for your skin and the conditions.'},
+  {scene:'Checking the forecast 📱',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'¿Viste el pronóstico para mañana?',en:'Did you see the forecast for tomorrow?'},
+     {side:'left',av:'👦',who:'Compañero',es:'Sí, dice que va a llover por la tarde. Temperatura máxima de 22 grados.',en:'Yes, it says it\'s going to rain in the afternoon. Maximum temperature of 22 degrees.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Y por la mañana?',en:'And in the morning?'},
+     {side:'left',av:'👦',who:'Compañero',es:'Por la mañana estará despejado y fresco; así suele estar en la CDMX.',en:'In the morning it will be clear and cool, as always in CDMX.'},
+   ],
+   q:'"Temperatura máxima de 22 grados" means...',
+   opts:['the temperature will be 22°C all day','the highest temperature of the day will be 22°C','the minimum temperature is 22°C','it feels like 22°C'],a:1,
+   exp:'"Temperatura máxima" = maximum/high temperature (the warmest point of the day). "Temperatura mínima" = minimum/low (coldest, usually at night). Forecasts always give both in Mexico.'},
+  {scene:'Veracruz in January — Norte warning 🌬️',
+   chat:[
+     {side:'left',av:'📱',who:'Mensaje del grupo',es:'¡Ojo! Ya está entrando el norte. Baja mucho la temperatura esta noche.',en:'Heads up! The Norte is arriving. Temperature drops a lot tonight.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Qué es "el norte" exactamente?',en:'What is "el norte" exactly?'},
+     {side:'left',av:'👩',who:'Amiga veracruzana',es:'Es una masa de aire frío que viene del norte. De repente baja de 28 a 12 grados.',en:'It\'s a cold air mass from the north. It suddenly drops from 28 to 12 degrees.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¡Qué cambio tan drástico! ¿Qué me pongo?',en:'What a dramatic change! What should I wear?'},
+   ],
+   q:'What makes "el norte" unusual weather?',
+   opts:['it rains for weeks','temperatures drop suddenly and dramatically in a few hours','it only happens in summer','it\'s specific to Mexico City'],a:1,
+   exp:'"El norte" = a cold air mass from northern US/Canada that hits Mexico\'s Gulf coast (Veracruz, Tamaulipas) in winter. Can drop temperatures 15-20°C in hours. Very dramatic and famous.'},
+  {scene:'Preparing for a hike in the mountains 🏔️',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'Mañana subimos al Nevado de Toluca. ¿Qué llevo?',en:'Tomorrow we climb Nevado de Toluca (volcano). What should I bring?'},
+     {side:'left',av:'👨',who:'Guía',es:'Abrigo grueso, guantes, bufanda y botas. Aunque haga sol, hay heladas arriba.',en:'Thick coat, gloves, scarf and boots. Even if it\'s sunny, there\'s frost up there.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Y bloqueador?',en:'And sunscreen?'},
+     {side:'left',av:'👨',who:'Guía',es:'También, el sol en la montaña es muy intenso. Y lleva agua, el aire es muy seco.',en:'Also, the mountain sun is very intense. And bring water, the air is very dry.'},
+   ],
+   q:'What does "hay heladas arriba" mean about the mountain?',
+   opts:['there\'s ice cream up there','there\'s frost/freezing temperatures at the top','it snows heavily all year','the water is frozen below'],a:1,
+   exp:'"Heladas" = frost/freezing temperatures. "Helar" = to freeze. "Hay heladas" = there\'s frost. At high altitude in Mexico (4,000m+), frost is common even in summer. Bring warm clothing.'},
+  {scene:'Beach day in Oaxaca — afternoon warning 🌊',
+   chat:[
+     {side:'left',av:'☀️',who:'Aplicación del clima',es:'Alerta: probabilidad de lluvia 90% después de las 3pm.',en:'Alert: 90% chance of rain after 3pm.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¡Pero ahora está despejado y hace sol!',en:'But right now it\'s clear and sunny!'},
+     {side:'left',av:'👩',who:'Local',es:'A veces pasa así: amanece despejado y en la tarde llueve. Disfruta la mañana y revisa el pronóstico antes de hacer planes.',en:'That\'s how it is here. Mornings are always clear but it rains in the afternoon. Enjoy the morning and leave the beach before 3.'},
+   ],
+   q:'What is the typical weather pattern during Mexico\'s rainy season?',
+   opts:['it rains all day continuously','mornings are clear/sunny, afternoons bring rain','it only rains at night','rain is random and unpredictable'],a:1,
+   exp:'In many places, especially in central Mexico, rainy months can bring clearer mornings and rain later in the day. Patterns vary by location and day.'},
+  {scene:'Describing different climates to a friend 🌎',
+   chat:[
+     {side:'right',av:'🙋',who:'Tú',es:'¿Cuál es la diferencia entre el clima de CDMX y el de Mérida?',en:'What\'s the difference between CDMX\'s climate and Mérida\'s?'},
+     {side:'left',av:'👩',who:'Amiga mexicana',es:'¡Son totalmente distintos! La CDMX tiene clima templado, fresco. Mérida es tropical: calor y humedad todo el año.',en:'They\'re completely different! CDMX has a temperate, cool climate. Mérida is tropical: heat and humidity all year.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Y el norte, como Monterrey?',en:'And the north, like Monterrey?'},
+     {side:'left',av:'👩',who:'Amiga',es:'Monterrey tiene veranos muy extremos, más de 40 grados, e inviernos fríos. Muy diferente a todo.',en:'Monterrey has very extreme summers, over 40 degrees, and cold winters. Very different from everything.'},
+   ],
+   q:'Mexico\'s climate is best described as...',
+   opts:['uniform throughout the country — hot everywhere','very diverse — highland, tropical, desert and temperate climates all exist','only hot and only tropical','similar to Spain\'s climate'],a:1,
+   exp:'Mexico has extraordinary climate diversity: tropical coasts (Cancún, Veracruz), temperate highlands (CDMX, Guadalajara), desert north (Sonora, Chihuahua), and everything in between. This is one of Mexico\'s most amazing geographical features!'},
+  {scene:'Getting caught in the rain without an umbrella 🌧️',
+   chat:[
+     {side:'left',av:'👦',who:'Amigo',es:'¡Empezó a llover! ¿No traes paraguas?',en:'It started raining! Don\'t you have an umbrella?'},
+     {side:'right',av:'🙋',who:'Tú',es:'¡No! Lo dejé en casa. ¡Qué tonto!',en:'No! I left it at home. How silly of me!'},
+     {side:'left',av:'👦',who:'Amigo',es:'Espérate, esto es un aguacero. En un rato para.',en:'Wait, this is a downpour. It\'ll stop in half an hour.'},
+     {side:'right',av:'🙋',who:'Tú',es:'¿Y si no para?',en:'And if it doesn\'t stop?'},
+     {side:'left',av:'👦',who:'Amigo',es:'Compramos unos impermeables desechables en el Oxxo.',en:'We\'ll buy some disposable raincoats at the Oxxo.'},
+   ],
+   q:'What does the friend suggest if the rain doesn\'t stop?',
+   opts:['wait in the car','buy disposable raincoats at the Oxxo convenience store','take a taxi','go back home'],a:1,
+   exp:'"Impermeables desechables" = disposable raincoats, sold in Oxxo and many stores. The Oxxo (on every corner in Mexico!) is the go-to for emergency items during rainy season. Very practical!'},
+];
+
+function renderDial(){
+  dialAns={};
+  const tot=DIALS.length;
+  const html=DIALS.map((d,i)=>{
+    const msgs=d.chat.map(m=>`<div class="chat-row ${m.side}">
+      <div class="chat-av">${m.av}</div>
+      <div>
+        <div class="chat-who">${m.who}</div>
+        <div class="chat-bub">
+          ${m.es}
+          <button class="chat-audio" onclick="speak('${m.es.replace(/'/g,"\\'")}',this)" title="🔊">🔊</button>
+          <div class="chat-en">${m.en}</div>
+        </div>
+      </div>
+    </div>`).join('');
+    const opts=d.opts.map((o,oi)=>`<button class="dial-opt" id="do${i}_${oi}" onclick="answerDial(${i},${oi})">${o}</button>`).join('');
+    return `<div class="dial-card" id="dc${i}">
+      <div class="chat-scene">📍 ${d.scene}</div>
+      <div class="chat-body">${msgs}</div>
+      <div class="dial-q">${d.q}</div>
+      <div class="dial-opts">${opts}</div>
+      <div class="dial-exp" id="de${i}"></div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">💬 Diálogos — 10 weather conversations</div>
+  <div class="ex-instr">Read the chat with English translations below each line. Click 🔊 to hear any line. Then answer the question about weather, culture or vocabulary.</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="da_ok">0</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="da_err">0</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="da_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="da_pg" style="width:0%"></div></div></div></div>
+  <div class="dial-wrap">${html}</div>
+  <div class="fb" id="da_fb"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="dialAns={};renderDial()">↺ Reset</button></div></div>`;
+}
+function answerDial(qi,oi){
+  if(dialAns[qi]!==undefined)return;
+  const d=DIALS[qi];const isOk=oi===d.a;
+  dialAns[qi]=isOk;
+  const card=document.getElementById('dc'+qi);if(card)card.classList.add(isOk?'ok':'err');
+  d.opts.forEach((_,x)=>{const b=document.getElementById(`do${qi}_${x}`);if(!b)return;b.disabled=true;if(x===d.a)b.classList.add('dshow');else if(x===oi&&!isOk)b.classList.add('derr');});
+  const e=document.getElementById('de'+qi);if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+d.exp;}
+  const tot=Object.keys(dialAns).length;const ok=Object.values(dialAns).filter(v=>v).length;
+  document.getElementById('da_ok').textContent=ok;document.getElementById('da_err').textContent=tot-ok;
+  document.getElementById('da_pct').textContent=Math.round(tot/DIALS.length*100)+'%';
+  document.getElementById('da_pg').style.width=Math.round(tot/DIALS.length*100)+'%';
+  if(tot===DIALS.length){const pct=Math.round(ok/tot*100);const fb=document.getElementById('da_fb');fb.className='fb show '+(pct>=85?'ok':'partial');fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Excelente! You understand Mexican weather talk!':'Review the flashcards and try again.'}`;}
+}
+
+/* ══════════════════════════════════
+   EX 4 — COMPLETA (18)
+══════════════════════════════════ */
+const FILLS=[
+  {ctx:'Grammar rule — weather verbs',q:'Hoy ___ mucho calor en Cancún.',qe:'Today it\'s very hot in Cancún.',
+   opts:['está','es','hace','hay'],a:2,exp:'"Hace calor" — weather uses HACER, not SER/ESTAR. "Hace calor/frío/viento" is the rule. "Está calor" is WRONG.'},
+  {ctx:'Describing cloudy weather',q:'El cielo está completamente ___, no se ve el sol.',qe:'The sky is completely ___, you can\'t see the sun.',
+   opts:['despejado','nublado','lluvioso','ventoso'],a:1,exp:'"Nublado" = cloudy. "El cielo está nublado" = the sky is cloudy. "Muy nublado" = overcast. ESTAR for temporary weather states.'},
+  {ctx:'The rain is happening right now',q:'¡No salgas! Está ___ mucho.',qe:'Don\'t go out! It\'s raining a lot.',
+   opts:['lloviendo','llover','llovió','llueve'],a:0,exp:'"Está lloviendo" = it\'s raining (right now). "Llueve" = it rains (habit). "Llovió" = it rained (past). Use "está + gerundio" for what\'s happening now.'},
+  {ctx:'Mexico\'s rainy season',q:'En gran parte de México, la ___ de lluvias suele ser de junio a octubre.',qe:'Mexico\'s rainy ___ is from June to October.',
+   opts:['mes','estación','temporada','época'],a:2,exp:'"La temporada de lluvias" = the rainy season. "Temporada" is the specific word for "season" in this context. "Estación" = the four seasons (spring, summer, etc.).'},
+  {ctx:'Typical rainy afternoon in CDMX',q:'En la CDMX, en julio a veces ___ un aguacero por la tarde.',qe:'In CDMX, July afternoons are rainy — there\'s always a downpour.',
+   opts:['hace','está','cae','llueve'],a:2,exp:'"Cae un aguacero" = a heavy downpour comes down. "Está cayendo un aguacero" = it is happening right now.'},
+  {ctx:'Asking about the weather',q:'¿Cómo ___ el clima en Guadalajara?',qe:'What is the weather like in Guadalajara?',
+   opts:['hace','está','es','tiene'],a:1,exp:'"¿Cómo está el clima?" = what\'s the weather like? ESTAR for current/temporary conditions. "El clima de Guadalajara es templado" (general characteristic) uses SER.'},
+  {ctx:'Getting dressed for cold weather',q:'Ponte el ___. Hace mucho frío afuera.',qe:'Put on your ___. It\'s very cold outside.',
+   opts:['traje de baño','abrigo','bloqueador','paraguas'],a:1,exp:'"El abrigo" = coat. "Ponte el abrigo" = put on your coat. "Abrígate" = bundle up. Essential in cold Mexican mornings.'},
+  {ctx:'Rain protection',q:'Lleva el ___, dice el pronóstico que va a llover.',qe:'Take your ___, the forecast says it\'s going to rain.',
+   opts:['sombrero','bloqueador','paraguas','abrigo'],a:2,exp:'"El paraguas" = umbrella. Essential during Mexico\'s rainy season. "¿Traes paraguas?" = do you have an umbrella? Common question in rainy months.'},
+  {ctx:'Beach clothing',q:'Para ir a la playa en agosto necesitas traje de baño y mucho ___.',qe:'To go to the beach in August you need a swimsuit and lots of ___.',
+   opts:['abrigo','paraguas','guantes','bloqueador'],a:3,exp:'"El bloqueador" = sunscreen. Useful at Mexican beaches. "El sol pega muy fuerte" = the sun hits very hard. The sun can be very strong.'},
+  {ctx:'Winter in northern Mexico',q:'En enero en Monterrey ___ mucho frío.',qe:'In January in Monterrey it\'s very cold.',
+   opts:['está','es','hace','hay'],a:2,exp:'"Hace mucho frío" — again, HACER for weather. Monterrey in January can get close to 0°C. "Hace un frío de locos" = it\'s crazy cold.'},
+  {ctx:'Sunny and clear',q:'Hoy está completamente ___. ¡Perfecto para el parque!',qe:'Today it\'s completely clear. Perfect for the park!',
+   opts:['nublado','lloviendo','despejado','helando'],a:2,exp:'"Está despejado" = it\'s clear/sunny. "Completamente despejado" = not a cloud in sight. "Qué día tan bonito" = what a beautiful day.'},
+  {ctx:'Cold northern wind — Veracruz',q:'Ya ___ el norte. Bajó la temperatura de golpe.',qe:'The norte has arrived. The temperature dropped suddenly.',
+   opts:['llegó','entró','cayó','vino'],a:1,exp:'"Ya entró el norte" = the Norte arrived. "Entrar" is the standard verb with "el norte." "Entró el norte" = the cold front came in. "De golpe" = suddenly.'},
+  {ctx:'Asking about temperature',q:'¿A cuántos ___ está la temperatura?',qe:'How many ___ is the temperature?',
+   opts:['metros','horas','grados','kilos'],a:2,exp:'"¿A cuántos grados está?" = what temperature is it in degrees? "La temperatura está a 25 grados" = the temperature is 25 degrees. Mexico uses Celsius.'},
+  {ctx:'Foggy morning in CDMX',q:'Esta mañana hay mucha ___ en la carretera.',qe:'This morning there\'s a lot of ___ on the highway.',
+   opts:['lluvia','viento','niebla','nieve'],a:2,exp:'"La niebla" = fog. "Hay niebla" = it\'s foggy. Common in CDMX and highland cities early morning. "Visibilidad reducida" = reduced visibility.'},
+  {ctx:'It\'s going to rain',q:'Llévate el paraguas, ___ a llover.',qe:'Take your umbrella, it\'s going to rain.',
+   opts:['está','va','hace','hay'],a:1,exp:'"Va a llover" = it\'s going to rain. "Ir a + infinitive" = going to (future). "Va a hacer calor" = it\'s going to be hot. "Va a nevar" = it\'s going to snow.'},
+  {ctx:'Mosquito protection in tropical Mexico',q:'En la costa necesitas ___ de mosquitos.',qe:'On the coast you need mosquito ___.',
+   opts:['paraguas','bloqueador','repelente','suéter'],a:2,exp:'"Repelente de mosquitos" = mosquito repellent. Essential in tropical/coastal Mexico, especially during rainy season. "Los mosquitos pican mucho en la noche" = mosquitoes bite a lot at night.'},
+  {ctx:'Describing the weather forecast',q:'Según el ___, mañana va a llover por la tarde.',qe:'According to the ___, it\'s going to rain tomorrow afternoon.',
+   opts:['periódico','pronóstico','semáforo','noticiario'],a:1,exp:'"El pronóstico del tiempo" = the weather forecast. "Según el pronóstico" = according to the forecast. "El pronóstico dice que..." = the forecast says that...'},
+  {ctx:'Clima → Ropa: connecting weather to clothing',q:'Hace mucho calor, entonces me pongo el ___ de baño.',qe:'It is very hot, so I put on my ___.',
+   opts:['suéter','abrigo','traje','impermeable'],a:2,exp:'"Traje de baño" = swimsuit. "Entonces" = so/therefore. The connection: calor extremo → ropa de playa. "Me pongo" = I put on.'},
+  {ctx:'Clima → Ropa: cold weather',q:'¡Qué frío hace, abrígate con tu ___ y ___.',qe:'It is freezing — bundle up with your ___ and ___.',
+   opts:['sandalias y playera','abrigo y bufanda','lentes y gorra','traje de baño y chanclas'],a:1,exp:'"Abrígate" = bundle up. "Abrigo + bufanda" = coat + scarf. A practical cold-weather combination in CDMX. "Hace mucho frío" is a natural everyday expression.'},
+  {ctx:'Clima → Ropa: rainy afternoon',q:'Ya se viene la lluvia. Lleva el ___ por si acaso.',qe:'The rain is coming. Take your ___ just in case.',
+   opts:['bloqueador','sombrero','paraguas','traje de baño'],a:2,exp:'"Ya se viene la lluvia" = the rain is coming (colloquial CDMX). "Por si acaso" = just in case. "El paraguas" = umbrella. It is useful during rainy months.'},
+  {ctx:'Clima → Ropa: beach day',q:'Hace un calorón en la playa. Necesitas ___ sí o sí.',qe:'It is scorching at the beach. You definitely need ___.',
+   opts:['guantes','bloqueador solar','bufanda','botas'],a:1,exp:'"Calorón" = scorching heat (colloquial). "Sí o sí" = definitely/no matter what. "El bloqueador solar" = sunscreen. Useful at Mexican beaches when the sun is strong.'},
+  {ctx:'Clima → Ropa: morning surprise',q:'Salí con playera pero el cielo ya se puso gris y ___ frío.',qe:'I went out in a T-shirt but the sky is overcast and it is ___.',
+   opts:['está','es','hace','hay'],a:2,exp:'"Hace frío" = it is cold. Even if you dressed for warmth, CDMX mornings can surprise you. "El cielo ya se puso gris" = the sky is completely overcast — classic CDMX colloquial expression.'},
+];
+
+function renderFill(){
+  fillAns={};
+  const html=FILLS.map((f,i)=>{
+    const chips=f.opts.map((o,oi)=>`<button class="fill-chip" id="fc${i}_${oi}" onclick="answerFill(${i},${oi})">${o}</button>`).join('');
+    return `<div class="fill-card" id="fcard${i}">
+      <div class="fill-ctx">📌 ${f.ctx}</div>
+      <div class="fill-q" id="fq${i}">${f.q.replace('___','<span class="fill-blank" id="fb${i}">___</span>')}</div>
+      <div class="fill-en">${f.qe}</div>
+      <div class="fill-chips">${chips}</div>
+      <div class="fill-exp" id="fexp${i}"></div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">✏️ Completa la frase — 18 sentences</div>
+  <div class="ex-instr">Choose the correct word. Watch out for the grammar rule: <em>weather uses HACER</em> (hace calor, hace frío, hace viento) — not SER or ESTAR!</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${FILLS.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="fi_ok">0</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="fi_err">0</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="fi_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="fi_pg" style="width:0%"></div></div></div></div>
+  <div class="fill-list">${html}</div>
+  <div class="fb" id="fi_fb"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="fillAns={};renderFill()">↺ Reset</button></div></div>`;
+}
+function answerFill(qi,oi){
+  if(fillAns[qi]!==undefined)return;
+  const f=FILLS[qi];const isOk=oi===f.a;fillAns[qi]=isOk;
+  document.getElementById('fcard'+qi).classList.add(isOk?'ok':'err');
+  const blank=document.getElementById('fb'+qi);if(blank)blank.innerHTML=`<span class="fill-chip ${isOk?'chip-ok':'chip-err'}" style="cursor:default">${f.opts[oi]}</span>${!isOk?` <span class="fill-chip chip-ok" style="cursor:default">${f.opts[f.a]}</span>`:''}`;
+  document.querySelectorAll(`[id^="fc${qi}_"]`).forEach(c=>{c.disabled=true;c.classList.add('used');});
+  const e=document.getElementById('fexp'+qi);if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+f.exp;}
+  const tot=Object.keys(fillAns).length;const ok=FILLS.filter((_,i)=>fillAns[i]).length;
+  document.getElementById('fi_ok').textContent=ok;document.getElementById('fi_err').textContent=tot-ok;
+  document.getElementById('fi_pct').textContent=Math.round(tot/FILLS.length*100)+'%';
+  document.getElementById('fi_pg').style.width=Math.round(tot/FILLS.length*100)+'%';
+  if(tot===FILLS.length){const pct=Math.round(ok/tot*100);const fb=document.getElementById('fi_fb');fb.className='fb show '+(pct>=85?'ok':'partial');fb.innerHTML=`${pct>=85?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=85?'¡Muy bien!':'Remember: HACER for weather — hace calor/frío/viento.'}`;}
+}
+
+/* ══════════════════════════════════
+   EX 5 — SPEED ROUND (25, click-based)
+══════════════════════════════════ */
+const SP=[
+  {emoji:'☀️🌡️',q:'It\'s hot.',a:'Hace calor.',opts:['Hace calor.','Está calor.','Es calor.','Hay calor.']},
+  {emoji:'🥶❄️',q:'It\'s cold.',a:'Hace frío.',opts:['Hace frío.','Está frío.','Es frío.','Hay frío.']},
+  {emoji:'💨',q:'It\'s windy.',a:'Hace viento.',opts:['Hay viento.','Hace viento.','Está viento.','Es viento.']},
+  {emoji:'🌧️',q:'It\'s raining (right now)',a:'Está lloviendo.',opts:['Llueve.','Llovió.','Está lloviendo.','Va a llover.']},
+  {emoji:'⛅',q:'It\'s cloudy.',a:'Está nublado.',opts:['Es nublado.','Hace nublado.','Está nublado.','Hay nublado.']},
+  {emoji:'☀️',q:'It\'s clear / sunny.',a:'Está despejado.',opts:['Está despejado.','Hace despejado.','Es despejado.','Hay despejado.']},
+  {emoji:'❄️',q:'It\'s snowing.',a:'Está nevando.',opts:['Llueve.','Está nevando.','Hace nieve.','Hay nieve.']},
+  {emoji:'⛈️',q:'There\'s a storm.',a:'Hay tormenta.',opts:['Hace tormenta.','Hay tormenta.','Está tormenta.','Es tormenta.']},
+  {emoji:'🌫️',q:'It\'s foggy.',a:'Hay niebla.',opts:['Hace niebla.','Hay niebla.','Está niebla.','Es niebla.']},
+  {emoji:'🌈',q:'There\'s a rainbow.',a:'Hay un arcoíris.',opts:['Hace arcoíris.','Hay un arcoíris.','Está arcoíris.','Es arcoíris.']},
+  {emoji:'🧊',q:'It\'s hailing.',a:'Está granizando.',opts:['Está granizando.','Está granizando.','Hace granizo.','Llueve granizo.']},
+  {emoji:'🌧️☀️',q:'In much of Mexico, rainy season is often when?',a:'De junio a octubre, aproximadamente.',opts:['De enero a mayo.','De junio a octubre, aproximadamente.','De diciembre a febrero.','Todo el año.']},
+  {emoji:'🌬️🥶',q:'Sudden cold wind hitting the Gulf coast in winter',a:'El norte.',opts:['El aguacero.','El huracán.','El norte.','La helada.']},
+  {emoji:'⛈️💧',q:'Sudden heavy afternoon downpour (CDMX style)',a:'El aguacero.',opts:['La tormenta tropical.','El norte.','El aguacero.','La lluvia ligera.']},
+  {emoji:'🧥',q:'Heavy coat (for cold weather)',a:'El abrigo.',opts:['La chamarra.','El suéter.','El abrigo.','El impermeable.']},
+  {emoji:'🧶',q:'Sweater (very common in CDMX mornings)',a:'El suéter.',opts:['El abrigo.','El suéter.','La bufanda.','La chamarra.']},
+  {emoji:'🌂',q:'Umbrella',a:'El paraguas.',opts:['La sombrilla.','El impermeable.','El paraguas.','La capa.']},
+  {emoji:'🧣',q:'Scarf',a:'La bufanda.',opts:['Los guantes.','La bufanda.','El gorro.','El chal.']},
+  {emoji:'🧤',q:'Gloves',a:'Los guantes.',opts:['Las botas.','Los guantes.','Los calcetines.','Las sandalias.']},
+  {emoji:'😎',q:'Sunglasses',a:'Los lentes de sol.',opts:['La gorra.','El sombrero.','Los lentes de sol.','El bloqueador.']},
+  {emoji:'🧴',q:'Sunscreen',a:'El bloqueador.',opts:['El repelente.','El bloqueador.','El paraguas.','El sombrero.']},
+  {emoji:'🩱',q:'Swimsuit',a:'El traje de baño.',opts:['El traje de baño.','Las sandalias.','La playera.','Los shorts.']},
+  {emoji:'👕',q:'T-shirt (Mexican word)',a:'La playera.',opts:['La camiseta.','La playera.','La blusa.','El uniforme.']},
+  {emoji:'🥾',q:'Rain boots / boots for wet weather',a:'Las botas.',opts:['Las chanclas.','Los tenis.','Las botas.','Las sandalias.']},
+  {emoji:'🩴',q:'Flip-flops (common Mexican word)',a:'Las chanclas.',opts:['Las sandalias.','Las chanclas.','Los huaraches.','Los tenis.']},
+  {emoji:'☀️💨',q:'Sun is shining AND it is windy — pick the right verb combo',a:'Hace sol y hace viento.',opts:['Está sol y está viento.','Hace sol y hace viento.','Hay sol y hay viento.','Está soleado y ventoso.']},
+  {emoji:'🌧️',q:'It just started raining — right this second',a:'Está lloviendo.',opts:['Llueve.','Está lloviendo.','Hay lluvia ahora.','Hace lluvia.']},
+  {emoji:'⛅',q:'Half cloud, half sun — typical CDMX afternoon',a:'Está medio nublado.',opts:['Hace nublado.','Hay nubes medias.','Está medio nublado.','Es nublado.']},
+  {emoji:'⛈️',q:'Thunder, lightning — which verb?',a:'Hay tormenta.',opts:['Hace tormenta.','Está tormenta.','Hay tormenta.','Es tormenta eléctrica.']},
+  {emoji:'❄️',q:'Frost on the ground this morning',a:'Hay heladas.',opts:['Hace heladas.','Está helando el piso.','Hay heladas.','Es helado.']},
+  {emoji:'🌫️',q:'Fog on the highway — low visibility',a:'Hay niebla.',opts:['Hace niebla.','Está niebla.','Hay niebla.','Hay neblina y niebla.']},
+  {emoji:'🌡️🔥',q:'35°C — colloquial Mexican way to express this',a:'¡Hace un calorón!',opts:['Hace mucho sol.','¡Hace un calorón!','Hay calor extremo.','Está muy caloroso.']},
+  {emoji:'🌧️⏹️',q:'The rain just stopped. What do you say?',a:'Ya paró de llover.',opts:['Ya no llueve.','Ya paró de llover.','La lluvia terminó.','Ya dejó de llover.']}
+];
+
+/* ══════════════════════════════════
+   EX 5 — TRANSFORMA (temporal: present→past→future)
+   14 items: see present weather sentence, choose past OR future form
+   Key teaching: hace→hacía/hizo, está→estaba/estuvo, hay→había/hubo
+   + coloquial forms in past/future
+══════════════════════════════════ */
+const TRANSFORM=[
+  {orig:'Hoy hace mucho calor.',ctx:'How did you say this YESTERDAY? (past description)',
+   tense:'past',
+   correct:'Ayer hacía mucho calor.',
+   wrong:['Ayer hizo mucho calor.','Ayer hace calor.','Ayer había mucho calor.'],
+   exp:'"Hacía" (imperfecto) describes the weather as background or a state. "Hizo" (pretérito) is possible for a completed weather event, but "hacía" is the natural option for a description.'},
+  {orig:'Está lloviendo ahora.',ctx:'How did you describe this YESTERDAY afternoon?',
+   tense:'past',
+   correct:'Ayer estaba lloviendo.',
+   wrong:['Ayer estuviera lloviendo.','Ayer llovió.','Ayer había lloviendo.'],
+   exp:'"Estaba lloviendo" = it was raining (ongoing action). "Llovió" = it rained (completed event).'},
+  {orig:'Hace frío hoy.',ctx:'What will the weather be TOMORROW? (forecast)',
+   tense:'future',
+   correct:'Mañana va a hacer frío.',
+   wrong:['Mañana hacía frío.','Mañana hace frío.','Mañana va a frío.'],
+   exp:'"Va a hacer frío" is the most natural everyday future form in Mexican Spanish.'},
+  {orig:'Hay tormenta esta tarde.',ctx:'How do you describe the storm that happened LAST WEEK?',
+   tense:'past',
+   correct:'La semana pasada hubo una tormenta muy fuerte.',
+   wrong:['La semana pasada había tormenta.','La semana pasada hay tormenta.','La semana pasada estaba tormenta.'],
+   exp:'"Hubo" is used for a completed event: there was a storm. "Había" gives background information.'},
+  {orig:'Está muy nublado hoy.',ctx:'Describe the cloudy weather you saw ALL WEEK last month.',
+   tense:'past',
+   correct:'Toda la semana estaba muy nublado.',
+   wrong:['Toda la semana nublaba.','Toda la semana había nublado.','Toda la semana está nublado.'],
+   exp:'"Estaba nublado" describes an ongoing condition in the past.'},
+  {orig:'Va a llover mañana.',ctx:'Turn this into a question about NEXT WEEK weather.',
+   tense:'future',
+   correct:'¿Va a llover la próxima semana?',
+   wrong:['¿Llovía la próxima semana?','¿Lloverá mañana?','¿Hay lluvia próxima?'],
+   exp:'"¿Va a llover?" is a natural question about future weather.'},
+  {orig:'Hoy hace un calorón. (coloquial)',ctx:'How would you have described LAST SUMMER heat?',
+   tense:'past',
+   correct:'El verano pasado hacía un calorón todos los días.',
+   wrong:['El verano pasado hizo un calorón todos los días.','El verano pasado hace un calorón.','El verano pasado había calorón.'],
+   exp:'"Hacía un calorón" is a casual emphatic way to describe recurring intense heat in the past.'},
+  {orig:'Ya paró de llover.',ctx:'How would you say the rain will probably stop soon?',
+   tense:'future',
+   correct:'Espera, ya va a dejar de llover.',
+   wrong:['Espera, ya dejó de llover.','Espera, ya va a llover.','Espera, ya paraba de llover.'],
+   exp:'"Va a dejar de llover" means it is going to stop raining. It is a natural everyday Mexican expression.'},
+  {orig:'Hace viento hoy.',ctx:'What will the weather be NEXT WEDNESDAY according to the forecast?',
+   tense:'future',
+   correct:'El miércoles va a hacer viento.',
+   wrong:['El miércoles hacía viento.','El miércoles hace viento.','El miércoles va viento.'],
+   exp:'"Va a hacer viento" uses ir a + infinitive to talk about future weather.'},
+  {orig:'Hay niebla en la carretera.',ctx:'Describe the fog that was there WHEN YOU DROVE (ongoing background).',
+   tense:'past',
+   correct:'Había mucha niebla cuando manejé.',
+   wrong:['Hubo mucha niebla cuando manejé.','Estaba niebla cuando manejé.','Había niebla cuando manejo.'],
+   exp:'"Había niebla" sets the scene; "manejé" is the specific completed action.'},
+  {orig:'¡Qué frío!',ctx:'Your friend says it was like this EVERY MORNING last winter.',
+   tense:'past',
+   correct:'Todas las mañanas hacía mucho frío.',
+   wrong:['Todas las mañanas hizo mucho frío.','Todas las mañanas hace frío.','Todas las mañanas había frío.'],
+   exp:'"Hacía mucho frío" is used for repeated or ongoing cold weather in the past.'},
+  {orig:'Está cayendo un aguacero.',ctx:'Warn your friend this will happen THIS AFTERNOON.',
+   tense:'future',
+   correct:'Esta tarde va a caer un aguacero.',
+   wrong:['Esta tarde cayó un aguacero.','Esta tarde caía un aguacero.','Esta tarde hay cayó un aguacero.'],
+   exp:'"Va a caer un aguacero" is a natural way to warn about a heavy downpour later today.'},
+  {orig:'Está granizando afuera.',ctx:'How do you tell what happened LAST TUESDAY in CDMX?',
+   tense:'past',
+   correct:'El martes pasado hubo granizo en la CDMX.',
+   wrong:['El martes pasado había granizo.','El martes pasado estaba granizo.','El martes pasado granizaba siempre.'],
+   exp:'"Hubo granizo" describes a completed hail event on a specific day.'},
+  {orig:'¡Aguas, ya va a tronar!',ctx:'How would you say the storm ALREADY PASSED?',
+   tense:'past',
+   correct:'Ya tronó. Ya pasó la tormenta.',
+   wrong:['Ya tronaba.','Va a tronar mañana.','Ya trona.'],
+   exp:'"Ya tronó" means it already thundered. "Ya pasó la tormenta" makes clear that the storm is over.'},
+];
+
+let trAns={};
+function renderTransform(){
+  trAns={};
+  const tot=TRANSFORM.length;
+  const html=TRANSFORM.map((item,i)=>{
+    const opts=seededShuffle([item.correct,...item.wrong],i*11+7);
+    const chips=opts.map((o,oi)=>`<button class="fill-chip" id="tc${i}_${oi}" onclick="answerTr(${i},${JSON.stringify(o).replace(/'/g,"\'")})">${o}</button>`).join('');
+    const tensePill=item.tense==='past'?
+      '<span style="background:rgba(96,165,250,.15);border:1px solid rgba(96,165,250,.3);color:var(--clima2);border-radius:999px;padding:2px 10px;font-size:.68rem;font-weight:900">↩️ Past</span>':
+      '<span style="background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.3);color:var(--mex2);border-radius:999px;padding:2px 10px;font-size:.68rem;font-weight:900">→ Future</span>';
+    return `<div class="fill-card" id="tcard${i}">
+      <div class="fill-ctx">📌 ${tensePill} ${item.ctx}</div>
+      <div style="font-size:.95rem;font-weight:700;line-height:1.7;margin-bottom:6px;color:var(--muted)">Original: <em style="color:var(--text)">${item.orig}</em></div>
+      <div class="fill-chips" id="tch${i}">${chips}</div>
+      <div class="fill-exp" id="texp${i}"></div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🔀 Transforma — Presente → Pasado & Futuro</div>
+  <div class="ex-instr">You see a weather sentence in the present. Transform it to the <em>past or future</em> as indicated. This is where grammar really matters — <em>hacía vs hizo, había vs hubo</em>.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+    <div style="background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.25);border-radius:12px;padding:12px;font-size:.8rem;line-height:1.7">
+      <div style="font-weight:900;color:var(--clima2);margin-bottom:4px">↩️ PAST — key forms</div>
+      hace calor → <strong style="color:var(--clima2)">hacía</strong> calor (habit/description)<br>
+      hace calor → <strong style="color:var(--clima2)">hizo</strong> calor (specific event)<br>
+      hay tormenta → <strong style="color:var(--clima2)">había</strong> (background) / <strong style="color:var(--clima2)">hubo</strong> (event)<br>
+      está lloviendo → <strong style="color:var(--clima2)">estaba</strong> lloviendo
+    </div>
+    <div style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);border-radius:12px;padding:12px;font-size:.8rem;line-height:1.7">
+      <div style="font-weight:900;color:var(--mex2);margin-bottom:4px">→ FUTURE — natural Mexican Spanish</div>
+      hace calor → <strong style="color:var(--mex2)">va a hacer</strong> calor<br>
+      llueve → <strong style="color:var(--mex2)">va a llover</strong><br>
+      hay tormenta → <strong style="color:var(--mex2)">va a haber</strong> tormenta<br>
+      está nevando → <strong style="color:var(--mex2)">va a estar</strong> nevando
+    </div>
+  </div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="tr_ok">0</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="tr_err">0</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="tr_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="tr_pg" style="width:0%"></div></div></div></div>
+  <div class="fill-list">${html}</div>
+  <div class="fb" id="tr_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="trAns={};renderTransform()">↺ Reset</button></div></div>`;
+}
+function answerTr(qi,chosen){
+  if(trAns[qi]!==undefined)return;
+  const item=TRANSFORM[qi];const isOk=chosen===item.correct;
+  trAns[qi]=isOk;
+  document.getElementById('tcard'+qi).classList.add(isOk?'ok':'err');
+  document.querySelectorAll(`[id^="tc${qi}_"]`).forEach(b=>{
+    b.disabled=true;b.classList.add('used');
+    if(b.textContent===item.correct)b.classList.add('chip-ok');
+    else if(b.textContent===chosen&&!isOk)b.classList.add('chip-err');
+  });
+  const e=document.getElementById('texp'+qi);if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+item.exp;}
+  const tot=Object.keys(trAns).length;const ok=Object.values(trAns).filter(v=>v).length;
+  document.getElementById('tr_ok').textContent=ok;document.getElementById('tr_err').textContent=tot-ok;
+  document.getElementById('tr_pct').textContent=Math.round(tot/TRANSFORM.length*100)+'%';
+  document.getElementById('tr_pg').style.width=Math.round(tot/TRANSFORM.length*100)+'%';
+  if(tot===TRANSFORM.length){
+    const pct=Math.round(ok/tot*100);const fb=document.getElementById('tr_fb');
+    fb.className='fb show '+(pct>=75?'ok':'partial');
+    fb.innerHTML=`${pct>=75?'🏆':'📖'} <strong>${ok}/${tot}.</strong> ${pct>=75?'¡Excelente! You can use weather in past AND future!':'Focus on había vs hubo and "va a hacer" for future.'}`;
+  }
+}
+
+
+function renderSpeed(){
+  const arr=seededShuffle([...SP],42);window.__sp=arr;
+  spIdx=0;spOk=0;spErr=0;spStreak=0;spAns2={};
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">⚡ Speed round</div>
+  <div class="ex-instr">See the emoji + English. Choose the correct Spanish. Watch the <em>verb</em> choices — grammar matters!</div>
+  <div class="sp-wrap" id="spWrap"><div class="sp-start"><div style="font-size:2.8rem">⚡🌤️</div><h2>Clima + Ropa</h2><p style="color:var(--muted);max-width:400px">25 items — weather expressions, clothing vocabulary and Mexico climate facts.</p><button class="btn btn-cyan" onclick="startSp()">¡Empezamos!</button></div></div></div>`;
+}
+function startSp(){spIdx=0;spOk=0;spErr=0;spStreak=0;nextSp();}
+function nextSp(){
+  const arr=window.__sp;if(spIdx>=arr.length){endSp();return;}
+  const item=arr[spIdx];
+  const shuffled=seededShuffle([...item.opts],spIdx*13+5);
+  const opts=shuffled.map(o=>`<button class="sp-opt" onclick="answerSp('${o.replace(/'/g,"\\'")}','${item.a.replace(/'/g,"\\'")}',this)">${o}</button>`).join('');
+  document.getElementById('spWrap').innerHTML=`
+    <div class="sp-stats"><div class="spst"><div class="sl">Q</div><div class="sv w">${spIdx+1}/${arr.length}</div></div><div class="spst"><div class="sl">OK</div><div class="sv g">${spOk}</div></div><div class="spst"><div class="sl">Miss</div><div class="sv b">${spErr}</div></div></div>
+    <div class="streak${spStreak>=3?' on':''}" id="stk">🔥 x${spStreak}</div>
+    <div class="sp-card"><div class="sp-emoji">${item.emoji}</div><div class="sp-q">${item.q}</div></div>
+    <div class="sp-opts">${opts}</div>
+    <div class="sp-fb" id="sFb" style="opacity:0"></div>`;
+}
+function answerSp(chosen,correct,btn){
+  if(spAns2[spIdx])return;spAns2[spIdx]=true;
+  const isOk=chosen===correct;
+  if(isOk){spOk++;spStreak++;}else{spErr++;spStreak=0;}
+  document.querySelectorAll('.sp-opt').forEach(b=>{b.disabled=true;if(b.textContent===correct)b.classList.add('spshow');else if(b===btn&&!isOk)b.classList.add('sperr');});
+  const fb=document.getElementById('sFb');if(fb){fb.style.opacity='1';fb.className=`sp-fb ${isOk?'ok':'err'}`;fb.innerHTML=isOk?`✓ Correct!${spStreak>=3?' 🔥 x'+spStreak:''}`:`✗ "${correct}"`;}
+  if(spStreak>=3){const cf=document.getElementById('cf');cf.textContent='🔥 x'+spStreak;cf.classList.remove('pop');void cf.offsetWidth;cf.classList.add('pop');}
+  const stk=document.getElementById('stk');if(stk){stk.className='streak'+(spStreak>=3?' on':'');stk.textContent='🔥 x'+spStreak;}
+  spIdx++;setTimeout(nextSp,isOk?800:1600);
+}
+function endSp(){
+  const pct=Math.round(spOk/SP.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('spWrap').innerHTML=`<div class="sp-start"><div style="font-size:3rem">${emo}</div><h2>${spOk}/${SP.length}</h2><p style="color:var(--muted)">${pct>=90?'¡Excelente! You know the weather and clothing!':pct>=70?'¡Muy bien! Getting there.':pct>=50?'Good start — keep practicing!':'Study the flashcards first.'}</p><button class="btn btn-cyan" onclick="startSp()">↺ Try again</button></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 6 — REFERENCE (searchable + Mexico climate calendar)
+══════════════════════════════════ */
+function buildRefRows(q){
+  const sq=normS(q||'');
+  const base=refFilter==='all'?VOC:VOC.filter(v=>v.cat===refFilter);
+  const filtered=sq.length<2?base:base.filter(v=>normS(v.es).includes(sq)||normS(v.en).includes(sq)||normS(CATS[v.cat]?.label||'').includes(sq)||normS(v.note||'').includes(sq));
+  const hl=str=>sq.length>=2?str.replace(new RegExp('('+sq.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<span class="hl">$1</span>'):str;
+  let prev='';let html='';
+  filtered.forEach(item=>{
+    const cat=CATS[item.cat];
+    if(item.cat!==prev){prev=item.cat;html+=`<div style="font-family:var(--display);font-size:.88rem;font-weight:900;padding:7px 12px;border-radius:9px;display:inline-flex;align-items:center;gap:6px;margin:14px 0 8px;background:${cat.bg};color:${cat.col2}">${cat.label}</div>`;}
+    html+=`<div class="ref-row" onclick="speak('${item.es.replace(/'/g,"\\'").replace(/\./g,'')}',null)">
+      <div class="rr-em">${item.emoji}</div>
+      <div class="rr-es" style="color:${cat.col2}">${hl(item.es)}</div>
+      <div class="rr-en">${hl(item.en)}</div>
+      ${item.note?`<div class="rr-note">💡 ${item.note.slice(0,80)}${item.note.length>80?'…':''}</div>`:''}
+    </div>`;
+  });
+  return {count:filtered.length,html};
+}
+
+const CAL=[
+  {m:'Jan',e:'🥶',d:'Cold & dry. Nortes on Gulf coast. Frost in highlands. North: very cold.',t:'CDMX: 5–21°C',bg:'rgba(96,165,250,.12)',bd:'rgba(96,165,250,.3)',c:'var(--clima2)'},
+  {m:'Feb',e:'🌤️',d:'Dry season continues. Warming up. Nice weather in most of Mexico.',t:'CDMX: 7–22°C',bg:'rgba(96,165,250,.1)',bd:'rgba(96,165,250,.25)',c:'var(--clima2)'},
+  {m:'Mar',e:'☀️',d:'Dry & warm. Spring begins. Some wind. Good travel month.',t:'CDMX: 9–25°C',bg:'rgba(251,191,36,.1)',bd:'rgba(251,191,36,.3)',c:'var(--extra2)'},
+  {m:'Apr',e:'🌸',d:'Warm and pleasant. Dry season ending. Ideal weather throughout Mexico.',t:'CDMX: 11–26°C',bg:'rgba(244,114,182,.1)',bd:'rgba(244,114,182,.3)',c:'var(--ropa2)'},
+  {m:'May',e:'🌡️',d:'Hottest month in many areas. First rains may begin. Humid on coast.',t:'CDMX: 13–27°C',bg:'rgba(249,115,22,.12)',bd:'rgba(249,115,22,.3)',c:'var(--rest2)'},
+  {m:'Jun',e:'🌧️',d:'Rainy months begin in many areas. Afternoon rain is common in CDMX and highlands.',t:'CDMX: 13–24°C',bg:'rgba(52,211,153,.1)',bd:'rgba(52,211,153,.3)',c:'var(--mex2)'},
+  {m:'Jul',e:'⛈️',d:'Rainy season; afternoon rain is common. Hurricane season affects some coasts.',t:'CDMX: 13–22°C',bg:'rgba(52,211,153,.12)',bd:'rgba(52,211,153,.3)',c:'var(--mex2)'},
+  {m:'Aug',e:'🌧️',d:'Rainy months continue in many areas. Coastal heat and humidity are common.',t:'CDMX: 13–22°C',bg:'rgba(52,211,153,.12)',bd:'rgba(52,211,153,.3)',c:'var(--mex2)'},
+  {m:'Sep',e:'🌀',d:'Hurricane season affects some coasts. Rain is still common inland.',t:'CDMX: 12–21°C',bg:'rgba(239,68,68,.1)',bd:'rgba(239,68,68,.25)',c:'#fca5a5'},
+  {m:'Oct',e:'🍂',d:'Rain can begin to taper off in some regions. Conditions vary by location.',t:'CDMX: 10–22°C',bg:'rgba(251,191,36,.1)',bd:'rgba(251,191,36,.3)',c:'var(--extra2)'},
+  {m:'Nov',e:'🌤️',d:'Dry season returns. Pleasant temperatures. Día de Muertos!',t:'CDMX: 7–22°C',bg:'rgba(96,165,250,.1)',bd:'rgba(96,165,250,.25)',c:'var(--clima2)'},
+  {m:'Dec',e:'🥶🎄',d:'Cold mornings. Posadas. Nortes active. Dry but cold highlands.',t:'CDMX: 5–20°C',bg:'rgba(96,165,250,.12)',bd:'rgba(96,165,250,.3)',c:'var(--clima2)'},
+];
+
+function renderRef(){
+  const {count,html}=buildRefRows('');
+  const cal=CAL.map(m=>`<div class="cal-month" style="background:${m.bg};border-color:${m.bd}">
+    <div class="cal-name" style="color:${m.c}">${m.m}</div>
+    <div class="cal-emoji">${m.e}</div>
+    <div class="cal-desc">${m.d}</div>
+    <div class="cal-temp" style="color:${m.c}">${m.t}</div>
+  </div>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📄 Referencia — Vocabulario + Calendario del clima de México</div>
+  <div class="ex-instr">Search in English or Spanish. Click any entry to hear it. Plus: Mexico\'s climate calendar by month!</div>
+
+  <div style="font-family:var(--display);font-size:.95rem;font-weight:900;margin-bottom:10px;color:var(--mex2)">🇲🇽 Mexico Climate Calendar — CDMX temperatures</div>
+  <div class="cal-grid">${cal}</div>
+
+  <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:10px 14px;font-size:.82rem;color:#fde68a;margin-bottom:16px;line-height:1.6">
+    ⚠️ <strong>Key rules to remember:</strong> HACER for weather: <strong>hace calor / frío / viento</strong>. ESTAR for states: <strong>está nublado / despejado</strong>. HAY for existence: <strong>hay tormenta / niebla / granizo</strong>. Always carry a paraguas in CDMX during June-October!
+  </div>
+
+  <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px">
+    <button onclick="refFilter='all';updateRef(document.getElementById('refQ').value)" style="border:0;border-radius:9px;padding:5px 12px;font-size:.73rem;font-weight:800;cursor:pointer;background:rgba(255,255,255,.1);color:var(--text);font-family:var(--font)">All</button>
+    <button onclick="refFilter='clima';updateRef(document.getElementById('refQ').value)" style="border:0;border-radius:9px;padding:5px 12px;font-size:.73rem;font-weight:800;cursor:pointer;background:var(--climabg);color:var(--clima2);font-family:var(--font)">🌤️ Clima</button>
+    <button onclick="refFilter='ropa';updateRef(document.getElementById('refQ').value)" style="border:0;border-radius:9px;padding:5px 12px;font-size:.73rem;font-weight:800;cursor:pointer;background:var(--ropabg);color:var(--ropa2);font-family:var(--font)">👕 Ropa</button>
+    <button onclick="refFilter='mex';updateRef(document.getElementById('refQ').value)" style="border:0;border-radius:9px;padding:5px 12px;font-size:.73rem;font-weight:800;cursor:pointer;background:var(--mexbg);color:var(--mex2);font-family:var(--font)">🇲🇽 México</button>
+    <button onclick="refFilter='coloq';updateRef(document.getElementById('refQ').value)" style="border:0;border-radius:9px;padding:5px 12px;font-size:.73rem;font-weight:800;cursor:pointer;background:rgba(245,158,11,.12);color:#fde68a;font-family:var(--font)">🗣️ Coloquial</button>
+  </div>
+  <input class="ref-search" id="refQ" placeholder="Search… e.g. 'rain', 'cold', 'sweater', 'aguacero', 'calorón'" oninput="updateRef(this.value)" autocomplete="off">
+  <div style="font-size:.73rem;color:var(--muted2);font-weight:700;margin-bottom:10px" id="refCnt">Showing all ${count} words</div>
+  <div id="refRows">${html}</div>
+  </div>`
+}
+function updateRef(q){
+  const {count,html}=buildRefRows(q);
+  const el=document.getElementById('refRows');if(el)el.innerHTML=html;
+  const ct=document.getElementById('refCnt');if(ct)ct.textContent=count<VOC.length?`Showing ${count} of ${VOC.length} words`:`Showing all ${count} words`;
+}
+
+goEx(0);
+</script>
+</body>
+</html>

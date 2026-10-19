@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pretérito vs Imperfecto | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --pret:#f472b6;--pret2:#ff91cd;--pret3:rgba(244,114,182,.12);--pretbd:rgba(244,114,182,.3);
+  --imp:#60a5fa;--imp2:#93c5fd;--imp3:rgba(96,165,250,.12);--impbd:rgba(96,165,250,.3);
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 15% 8%,rgba(244,114,182,.12),transparent 35%),radial-gradient(ellipse at 85% 10%,rgba(96,165,250,.1),transparent 35%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(1020px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--pret),#fff 45%,var(--imp));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.85rem;margin-top:4px;line-height:1.5}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.ex-tabs{display:flex;gap:4px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:7px;overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:7px 10px;font-weight:800;font-family:var(--font);font-size:.72rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;transform:translateY(-1px)}
+.etab-icon{font-size:1.1rem;line-height:1}
+.etab-label{font-size:.58rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:22px 26px;box-shadow:var(--shadow)}
+.ex-title{font-family:var(--display);font-size:1.15rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.85rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;margin-bottom:16px}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:90px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;transition:width .35s;background:linear-gradient(90deg,var(--pret),var(--imp))}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none}
+.btn-pret{background:linear-gradient(135deg,var(--pret),#e11d80);color:white}
+.btn-imp{background:linear-gradient(135deg,var(--imp),#2563eb);color:white}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+
+/* ── TENSE PILLS ── */
+.pill-p{background:var(--pret3);border:1px solid var(--pretbd);color:var(--pret2);border-radius:999px;padding:2px 10px;font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;display:inline-block}
+.pill-i{background:var(--imp3);border:1px solid var(--impbd);color:var(--imp2);border-radius:999px;padding:2px 10px;font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;display:inline-block}
+.pret-txt{color:var(--pret2);font-weight:800}
+.imp-txt{color:var(--imp2);font-weight:800}
+
+/* ── EXPLANATION CARDS (EX 0) ── */
+.exp-section{margin-bottom:20px}
+.exp-section-title{font-family:var(--display);font-size:1rem;font-weight:900;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.concept-card{border-radius:16px;padding:18px;border:2px solid}
+.concept-title{font-family:var(--display);font-size:1.1rem;font-weight:900;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.concept-def{font-size:.88rem;line-height:1.7;color:var(--muted);margin-bottom:10px}
+.concept-def strong{color:var(--text)}
+.signal-grid{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.signal-tag{border-radius:7px;padding:4px 9px;font-size:.74rem;font-weight:700;font-family:var(--display)}
+.story-demo{background:rgba(0,0,0,.25);border-radius:14px;padding:18px;line-height:2.1;font-size:.95rem;margin-bottom:14px}
+.story-p{background:var(--pret3);border:1px solid var(--pretbd);border-radius:6px;padding:1px 7px;color:var(--pret2);font-weight:800}
+.story-i{background:var(--imp3);border:1px solid var(--impbd);border-radius:6px;padding:1px 7px;color:var(--imp2);font-weight:800}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted)}
+.analogy-box{background:rgba(255,255,255,.04);border-radius:14px;padding:16px 18px;border-left:4px solid var(--warn)}
+.analogy-title{font-size:.8rem;font-weight:800;color:var(--warn);margin-bottom:8px;text-transform:uppercase;letter-spacing:.07em}
+
+/* ── CONJUGATION CARDS (EX 1) ── */
+.conj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.conj-card{border-radius:16px;overflow:hidden;border:2px solid}
+.conj-verb{padding:14px 18px;font-family:var(--display);font-size:1.2rem;font-weight:900;display:flex;align-items:center;justify-content:space-between}
+.conj-type{font-size:.7rem;font-weight:700;opacity:.7}
+.conj-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.conj-table td{padding:7px 18px;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.4}
+.conj-table tr:last-child td{border-bottom:none}
+.conj-table .sub{color:var(--muted2);font-size:.8rem;width:90px}
+.conj-table .form{font-family:var(--display);font-weight:800;font-size:.95rem}
+.conj-note{padding:10px 18px;font-size:.77rem;color:var(--muted2);line-height:1.5;background:rgba(0,0,0,.2)}
+.irreg-badge{font-size:.62rem;font-weight:900;border-radius:5px;padding:2px 6px;background:rgba(245,158,11,.18);color:var(--warn);margin-left:6px}
+
+/* ── MC ── */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 16px}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}
+.mc-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0;margin-top:2px}
+.mc-sent{font-size:1rem;line-height:1.7;flex:1}
+.mc-blank{display:inline-block;min-width:90px;border-bottom:2.5px solid rgba(37,217,255,.4);text-align:center;font-weight:800;color:var(--cyan);padding:0 4px}
+.mc-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding-left:28px}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px}
+.mc-opt{border:0;border-radius:10px;padding:7px 14px;font-weight:800;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.mc-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.mc-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mc-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-opt.pret-opt:hover:not([disabled]){border-color:var(--pretbd);background:var(--pret3)}
+.mc-opt.imp-opt:hover:not([disabled]){border-color:var(--impbd);background:var(--imp3)}
+.mc-expl{display:none;font-size:.79rem;color:var(--muted);line-height:1.6;margin-top:7px;padding:7px 12px 7px 28px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-expl.show{display:block}
+
+/* ── STORY FILL-IN (EX 3) ── */
+.story-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:18px;padding:22px 24px;margin-bottom:16px}
+.story-title{font-family:var(--display);font-size:1.05rem;font-weight:900;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.story-text{font-size:.97rem;line-height:2.4;color:var(--text)}
+.story-blank{display:inline-block;min-width:110px;border-bottom:2.5px solid rgba(37,217,255,.4);text-align:center;cursor:pointer;transition:.13s;padding:0 4px;font-weight:700}
+.story-blank:hover:not(.done){border-color:var(--cyan);background:rgba(37,217,255,.07);border-radius:5px 5px 0 0}
+.story-blank.done-p{border-color:var(--pret2);color:var(--pret2);font-weight:900;font-family:var(--display);border-bottom:2.5px solid}
+.story-blank.done-i{border-color:var(--imp2);color:var(--imp2);font-weight:900;font-family:var(--display);border-bottom:2.5px solid}
+.story-blank.wrong{border-color:var(--bad);color:var(--bad);font-weight:900;font-family:var(--display)}
+.blank-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:100;backdrop-filter:blur(4px)}
+.blank-modal-box{background:linear-gradient(160deg,#100028,#1e0045);border:1.5px solid rgba(37,217,255,.25);border-radius:20px;padding:24px 28px;width:min(480px,92%);box-shadow:var(--shadow)}
+.blank-modal-sent{font-size:1rem;line-height:1.7;margin-bottom:16px;color:var(--muted);font-style:italic}
+.blank-modal-sent strong{color:var(--text);font-style:normal}
+.blank-modal-opts{display:flex;flex-direction:column;gap:8px}
+.blank-modal-opt{border:0;border-radius:11px;padding:11px 18px;font-weight:800;font-family:var(--display);font-size:.92rem;cursor:pointer;transition:.14s;text-align:left}
+.blank-modal-close{font-size:.78rem;color:var(--muted2);cursor:pointer;text-align:center;margin-top:14px;padding:6px;border-radius:8px;transition:.13s}
+.blank-modal-close:hover{background:rgba(255,255,255,.07)}
+
+/* ── SORT (EX 5) ── */
+.sort-pile{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;min-height:52px;margin-bottom:12px}
+.sort-bucket{border-radius:14px;padding:12px;min-height:70px;display:flex;flex-direction:column;gap:6px;transition:.2s}
+.sort-bucket.drag-over{box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.bucket-title{font-family:var(--display);font-size:.78rem;font-weight:900;text-align:center;margin-bottom:3px}
+.sort-chip{border-radius:9px;padding:7px 12px;font-size:.84rem;font-weight:600;cursor:grab;user-select:none;transition:.15s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12)}
+.sort-chip:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sort-chip.ghost{opacity:.35}
+.sort-chip.c-ok{cursor:default}
+.sort-chip.c-err{font-size:.78rem}
+
+/* ── SPEED ── */
+.sp-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-stats{display:flex;gap:9px}
+.spst{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spst .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;color:var(--muted2)}
+.spst .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spst .sv.g{color:var(--good)}.spst .sv.b{color:var(--bad)}.spst .sv.w{color:var(--warn)}
+.sp-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:20px;text-align:center;width:100%;max-width:540px}
+.sp-tense{font-size:.72rem;font-weight:900;border-radius:999px;padding:4px 12px;display:inline-block;margin-bottom:8px}
+.sp-q{font-size:1rem;line-height:1.7;margin-bottom:4px}
+.sp-hint{font-size:.77rem;color:var(--muted2);font-style:italic}
+.sp-row{display:flex;gap:8px;justify-content:center;width:100%;max-width:540px}
+.sp-inp{flex:1;max-width:260px;background:rgba(255,255,255,.07);border:1.5px solid rgba(37,217,255,.3);border-radius:11px;padding:10px 14px;font-family:var(--display);font-size:1rem;font-weight:800;color:var(--text);outline:none;transition:.15s}
+.sp-inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(37,217,255,.1)}
+.sp-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:540px}
+.sp-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.sp-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.tmr-row{display:flex;align-items:center;gap:9px;width:100%;max-width:540px}
+.tmr-trk{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.tmr-fil{height:100%;border-radius:999px;transition:width 1s linear;background:linear-gradient(90deg,var(--pret),var(--imp))}
+.tmr-n{font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--muted2);min-width:22px;text-align:right}
+.sp-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.sp-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.streak{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak.on{display:inline-flex;align-items:center;gap:4px}
+.cf{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999}
+.cf.pop{animation:cfk .7s ease forwards}
+@keyframes cfk{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+
+/* ── REFERENCE ── */
+.ref-section{margin-bottom:18px}
+.ref-h3{font-family:var(--display);font-size:.92rem;font-weight:800;padding:6px 14px;border-radius:9px;display:inline-flex;align-items:center;gap:6px;margin-bottom:10px}
+.ref-table{width:100%;border-collapse:collapse;font-size:.83rem}
+.ref-table th{padding:6px 12px;font-size:.6rem;font-weight:800;text-transform:uppercase;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+.ref-table td{padding:7px 12px;border-bottom:1px solid rgba(255,255,255,.04);line-height:1.6;vertical-align:top}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-tip{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:10px 14px;font-size:.83rem;color:#bbf7d0;line-height:1.6;margin-bottom:10px}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.concept-grid{grid-template-columns:1fr}.conj-grid{grid-template-columns:1fr}.panel{padding:14px 12px}}
+
+/* ── AUDIO ── */
+.btn-audio{background:rgba(37,217,255,.12);border:1.5px solid rgba(37,217,255,.28);color:var(--cyan);border-radius:8px;padding:4px 10px;font-size:.74rem;font-weight:800;cursor:pointer;transition:.13s;font-family:var(--font);display:inline-flex;align-items:center;gap:4px;vertical-align:middle;margin-left:6px}
+.btn-audio:hover{background:rgba(37,217,255,.22);border-color:var(--cyan)}
+.btn-audio.playing{background:rgba(37,217,255,.25);animation:pulse .9s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+/* ── TRANSFORM EX ── */
+.tr-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;padding:18px;margin-bottom:12px}
+.tr-card.ok{border-color:var(--good);background:rgba(34,197,94,.04)}
+.tr-card.err{border-color:var(--bad);background:rgba(239,68,68,.04)}
+.tr-source{font-size:.98rem;font-weight:700;line-height:1.7;margin-bottom:4px}
+.tr-ctx{font-size:.76rem;color:var(--muted2);font-style:italic;margin-bottom:10px}
+.tr-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px}
+.tr-chip{border:0;border-radius:9px;padding:8px 15px;font-weight:700;font-family:var(--display);font-size:.9rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--text)}
+.tr-chip:hover:not([disabled]){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.tr-chip.t-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.tr-chip.t-err{border-color:var(--bad);background:rgba(239,68,68,.15);color:#fca5a5}
+.tr-chip[disabled]{cursor:default;transform:none;opacity:.5}
+.tr-exp{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:7px;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:8px}
+.tr-exp.show{display:block}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="cf" id="cf"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Pretérito vs Imperfecto</h1>
+      <p>Master the two Spanish past tenses through <strong>stories and context</strong> — not grammar rules. Learn <em>when</em> to use each one, not just <em>how</em> to conjugate it.</p>
+      <div class="badges">
+        <span class="badge">B1&#8211;B2</span>
+        <span class="badge" style="border-color:var(--pretbd);color:var(--pret2)">&#128247; Pretérito — action/completed</span>
+        <span class="badge" style="border-color:var(--impbd);color:var(--imp2)">&#127912; Imperfecto — background/state</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">&#128218;</span><span class="etab-label">Expli-<br>cación</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">&#128100;</span><span class="etab-label">Conju-<br>gación</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">&#128221;</span><span class="etab-label">Elige el<br>tiempo</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">&#128196;</span><span class="etab-label">Completa<br>la historia</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">&#128260;</span><span class="etab-label">Trans-<br>forma</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">&#10067;</span><span class="etab-label">¿Por<br>qué?</span></button>
+  <button class="etab" id="etab-6" onclick="goEx(6)"><span class="etab-icon">&#128202;</span><span class="etab-label">Clasi-<br>fica</span></button>
+  <button class="etab" id="etab-7" onclick="goEx(7)"><span class="etab-icon">&#9889;</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-8" onclick="goEx(8)"><span class="etab-icon">&#128196;</span><span class="etab-label">Refer-<br>encia</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> &middot; Your Mexican Friend</p>
+</div>
+<script>
+function normS(s){return(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+function seededShuffle(arr,seed){const a=[...arr];let s=seed;for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)&0xffffffff;const j=Math.abs(s)%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let mcAnswers={},mcChecked=false;
+let storyAnswers={};
+let whyAnswers={},whyChecked=false;
+let dragItem=null,sortPlaced={},sortChecked=false,tapSel=null;
+let spIdx=0,spOk=0,spErr=0,spStreak=0,spTimer=null,spTimeLeft=0,spAnswered=false;
+
+/* Smart audio — picks best es-MX voice */
+let _voice=null;
+function initVoice(){if(!window.speechSynthesis)return;const pick=()=>{const vs=window.speechSynthesis.getVoices();if(!vs.length)return;const p=[v=>v.name==='Paulina',v=>v.name.includes('Paulina'),v=>v.lang==='es-MX'&&v.localService,v=>v.lang==='es-MX',v=>v.name.includes('Google')&&v.lang.startsWith('es'),v=>v.lang.startsWith('es')&&v.localService,v=>v.lang.startsWith('es')];for(const t of p){const f=vs.find(t);if(f){_voice=f;break;}}};pick();if(!_voice&&window.speechSynthesis.onvoiceschanged!==undefined)window.speechSynthesis.onvoiceschanged=pick;setTimeout(pick,800);}
+initVoice();
+function speak(text,btn){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('.btn-audio').forEach(b=>{b.classList.remove('playing');b.textContent='🔊';});
+  const u=new SpeechSynthesisUtterance(text);
+  if(_voice)u.voice=_voice;
+  u.lang=_voice?_voice.lang:'es-MX';u.rate=0.82;u.pitch=1.0;
+  if(btn){btn.classList.add('playing');btn.textContent='🔊▶';}
+  u.onend=()=>{if(btn){btn.classList.remove('playing');btn.textContent='🔊';}};
+  u.onerror=()=>{if(btn){btn.classList.remove('playing');btn.textContent='🔊';}};
+  window.speechSynthesis.speak(u);
+}
+
+function goEx(idx){
+  [0,1,2,3,4,5,6,7,8].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===idx));
+  [renderExpl,renderConj,renderMC,renderStory,renderTransform,renderWhy,renderSort,renderSpeed,renderRef][idx]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ══════════════════════════════════
+   EX 0 — EXPLANATION (narrative-first)
+══════════════════════════════════ */
+function renderExpl(){
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📚 Pretérito vs Imperfecto — la clave está en la historia</div>
+  <div class="ex-instr">Forget grammar rules for a moment. Think of telling a story: you need a <em>canvas</em> (background) and <em>events</em> that happen on it. That's exactly what these two tenses do.</div>
+
+  <div class="exp-section">
+    <div class="analogy-box" style="margin-bottom:20px">
+      <div class="analogy-title">🎬 The movie analogy</div>
+      <div style="font-size:.88rem;line-height:1.75;color:var(--muted)">
+        Imagine a movie scene. The <span class="imp-txt">imperfecto</span> sets the scene — the weather, what people looked like, what was normally happening. The <span class="pret-txt">pretérito</span> is the action — what happened, what changed, what moved the story forward.<br><br>
+        <strong style="color:var(--text)">Llovía</strong> <span class="pill-i">IMP</span> y las calles <strong style="color:var(--text)">estaban</strong> <span class="pill-i">IMP</span> vacías cuando de repente <strong style="color:var(--text)">apareció</strong> <span class="pill-p">PRET</span> un hombre con un abrigo rojo.
+        <br><span style="font-size:.8rem;color:var(--muted2);font-style:italic">It was raining and the streets were empty when suddenly a man in a red coat appeared.</span>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card" style="background:var(--pret3);border-color:var(--pretbd)">
+        <div class="concept-title"><span class="pill-p">PRETÉRITO</span></div>
+        <div class="concept-def">
+          <strong>Completed actions</strong> — things that happened at a specific moment and are done.<br><br>
+          📸 Think of it as a <strong>photograph</strong>: a single frozen moment.<br><br>
+          • <em>Llegué</em> a las 8. (I arrived at 8.)<br>
+          • <em>Comió</em> y se fue. (She ate and left.)<br>
+          • <em>Vivieron</em> en Oaxaca tres años. (They lived in Oaxaca for 3 years — and then they stopped.)
+        </div>
+        <div><div style="font-size:.72rem;font-weight:900;color:var(--pret2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Signal words</div>
+        <div class="signal-grid">
+          ${['ayer','el lunes','de repente','entonces','luego','al final','en ese momento','una vez','el año pasado','de niño (una vez)','finalmente','en cuanto'].map(w=>`<span class="signal-tag" style="background:rgba(244,114,182,.15);color:var(--pret2);border:1px solid var(--pretbd)">${w}</span>`).join('')}
+        </div></div>
+      </div>
+      <div class="concept-card" style="background:var(--imp3);border-color:var(--impbd)">
+        <div class="concept-title"><span class="pill-i">IMPERFECTO</span></div>
+        <div class="concept-def">
+          <strong>Ongoing background</strong> — states, descriptions, habits, or actions that were in progress.<br><br>
+          🖼️ Think of it as a <strong>painting</strong>: atmosphere, mood, what things looked like.<br><br>
+          • <em>Llovía</em> mucho. (It was raining a lot.)<br>
+          • <em>Tenía</em> 10 años. (I was 10 years old.)<br>
+          • <em>Íbamos</em> al mercado todos los domingos. (We used to go to the market every Sunday.)
+        </div>
+        <div><div style="font-size:.72rem;font-weight:900;color:var(--imp2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Signal words</div>
+        <div class="signal-grid">
+          ${['siempre','todos los días','de niño/a','antes','normalmente','mientras','generalmente','cada semana','era','tenía','había','en aquella época','con frecuencia'].map(w=>`<span class="signal-tag" style="background:rgba(96,165,250,.15);color:var(--imp2);border:1px solid var(--impbd)">${w}</span>`).join('')}
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-section">
+    <div class="exp-section-title">📖 A story in action — both tenses together</div>
+    <div style="font-size:.78rem;color:var(--muted2);margin-bottom:10px">The pink words moved the story forward. The blue words painted the background.</div>
+    <div class="story-demo">
+      <span class="story-i">Era</span> una mañana tranquila. <span class="story-i">Hacía</span> frío y <span class="story-i">había</span> muy poca gente en la calle. Yo <span class="story-i">caminaba</span> hacia el café cuando de repente <span class="story-p">vi</span> a mi ex. <span class="story-p">Me detuve</span> en seco. Ella también <span class="story-p">se detuvo</span>. <span class="story-i">Llevaba</span> un sombrero verde que yo <span class="story-i">nunca había visto</span>. <span class="story-p">Sonrió</span>, <span class="story-p">dijo</span> "hola" y <span class="story-p">siguió</span> caminando.
+    </div>
+    <button class="btn-audio" style="margin-bottom:10px" onclick="speak('Era una mañana tranquila. Hacía frío y había muy poca gente en la calle. Yo caminaba hacia el café cuando de repente vi a mi ex. Me detuve en seco. Ella también se detuvo. Llevaba un sombrero verde que yo nunca había visto. Sonrió, dijo hola y siguió caminando.',this)">🔊 Listen to the whole story</button>
+    <div class="legend">
+      <div class="legend-item"><span class="story-p" style="border-radius:5px;padding:2px 8px">pretérito</span> = action happened, story moves forward</div>
+      <div class="legend-item"><span class="story-i" style="border-radius:5px;padding:2px 8px">imperfecto</span> = setting, state, description</div>
+    </div>
+  </div>
+
+  <div class="exp-section">
+    <div class="exp-section-title">⚠️ The 4 trickiest cases</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px">
+      <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px">
+        <div style="font-weight:800;margin-bottom:6px;font-size:.88rem">1. Duration: how long vs started-and-stopped</div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.65">
+          <span class="imp-txt">Vivía</span> en México. (I lived there — ongoing, no end mentioned)<br>
+          <span class="pret-txt">Viví</span> en México dos años. (I lived there for 2 years — done, finished)
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px">
+        <div style="font-weight:800;margin-bottom:6px;font-size:.88rem">2. Interruption: two tenses together</div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.65">
+          <span class="imp-txt">Dormía</span> cuando <span class="pret-txt">sonó</span> el teléfono.<br>
+          (I WAS sleeping [IMP] when the phone rang [PRET] — the action interrupted the background.)
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px">
+        <div style="font-weight:800;margin-bottom:6px;font-size:.88rem">3. querer / saber / conocer change meaning</div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.65">
+          <span class="imp-txt">Sabía</span> la respuesta. (I knew the answer — state)<br>
+          <span class="pret-txt">Supe</span> la noticia ayer. (I found out the news — moment of learning)
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:14px">
+        <div style="font-weight:800;margin-bottom:6px;font-size:.88rem">4. Age / time is always imperfecto</div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.65">
+          <span class="imp-txt">Tenía</span> 8 años cuando <span class="pret-txt">aprendí</span> a nadar.<br>
+          (I was 8 [IMP=state] when I learned [PRET=event])
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-pret" onclick="goEx(1)">See conjugations →</button>
+    <button class="btn btn-imp" onclick="goEx(2)">Go to exercises →</button>
+  </div></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 1 — CONJUGATION REFERENCE CARDS
+══════════════════════════════════ */
+const CONJ_VERBS=[
+  /* PRETÉRITO */
+  {tense:'pret',verb:'hablar',type:'-AR regular',irreg:false,
+   forms:[['yo','hablé'],['tú','hablaste'],['él/ella','habló'],['nosotros','hablamos'],['ellos/uds.','hablaron']],
+   note:'Regular -AR: -é, -aste, -ó, -amos, -aron. Note: nosotros same as present!'},
+  {tense:'pret',verb:'comer',type:'-ER regular',irreg:false,
+   forms:[['yo','comí'],['tú','comiste'],['él/ella','comió'],['nosotros','comimos'],['ellos/uds.','comieron']],
+   note:'Regular -ER: -í, -iste, -ió, -imos, -ieron.'},
+  {tense:'pret',verb:'vivir',type:'-IR regular',irreg:false,
+   forms:[['yo','viví'],['tú','viviste'],['él/ella','vivió'],['nosotros','vivimos'],['ellos/uds.','vivieron']],
+   note:'Regular -IR: same endings as -ER in pretérito.'},
+  {tense:'pret',verb:'ser / ir',type:'irregular (same forms!)',irreg:true,
+   forms:[['yo','fui'],['tú','fuiste'],['él/ella','fue'],['nosotros','fuimos'],['ellos/uds.','fueron']],
+   note:'⚠️ SER and IR are IDENTICAL in pretérito. Context tells you which one it is: "fui al mercado" (ir) vs "fue difícil" (ser).'},
+  {tense:'pret',verb:'tener',type:'irregular',irreg:true,
+   forms:[['yo','tuve'],['tú','tuviste'],['él/ella','tuvo'],['nosotros','tuvimos'],['ellos/uds.','tuvieron']],
+   note:'Stem change: ten- → tuv-. Pattern: tuve, tuviste, tuvo, tuvimos, tuvieron.'},
+  {tense:'pret',verb:'hacer',type:'irregular',irreg:true,
+   forms:[['yo','hice'],['tú','hiciste'],['él/ella','hizo'],['nosotros','hicimos'],['ellos/uds.','hicieron']],
+   note:'hice → hizo (spelling: c→z before o to preserve [s] sound). Common verb, memorize it!'},
+  {tense:'pret',verb:'estar',type:'irregular',irreg:true,
+   forms:[['yo','estuve'],['tú','estuviste'],['él/ella','estuvo'],['nosotros','estuvimos'],['ellos/uds.','estuvieron']],
+   note:'Stem: estuv-. Same pattern as tener.'},
+  {tense:'pret',verb:'poder',type:'irregular',irreg:true,
+   forms:[['yo','pude'],['tú','pudiste'],['él/ella','pudo'],['nosotros','pudimos'],['ellos/uds.','pudieron']],
+   note:'Stem: pud-. "Pude ir" = I was able to go (and did); "podía ir" (imp) = I could go (ongoing ability).'},
+  {tense:'pret',verb:'decir',type:'irregular (stem + j)',irreg:true,
+   forms:[['yo','dije'],['tú','dijiste'],['él/ella','dijo'],['nosotros','dijimos'],['ellos/uds.','dijeron']],
+   note:'Stem: dij-. Note: ellos form is "dijeron" NOT "dijieron" — no i after j.'},
+  {tense:'pret',verb:'venir',type:'irregular',irreg:true,
+   forms:[['yo','vine'],['tú','viniste'],['él/ella','vino'],['nosotros','vinimos'],['ellos/uds.','vinieron']],
+   note:'Stem: vin-. "Vine" = I came (completed). "Venía" (imp) = I was coming / I used to come.'},
+  /* IMPERFECTO */
+  {tense:'imp',verb:'hablar',type:'-AR regular',irreg:false,
+   forms:[['yo','hablaba'],['tú','hablabas'],['él/ella','hablaba'],['nosotros','hablábamos'],['ellos/uds.','hablaban']],
+   note:'Regular -AR imperfecto: -aba, -abas, -aba, -ábamos, -aban. Only 3 irregular verbs in the whole tense!'},
+  {tense:'imp',verb:'comer',type:'-ER regular',irreg:false,
+   forms:[['yo','comía'],['tú','comías'],['él/ella','comía'],['nosotros','comíamos'],['ellos/uds.','comían']],
+   note:'Regular -ER/-IR imperfecto: -ía, -ías, -ía, -íamos, -ían. Easy pattern — always the accent on the í.'},
+  {tense:'imp',verb:'ser',type:'irregular',irreg:true,
+   forms:[['yo','era'],['tú','eras'],['él/ella','era'],['nosotros','éramos'],['ellos/uds.','eran']],
+   note:'One of only 3 irregular imperfecto verbs. "Era" is extremely common — "era niño", "era tarde", "era difícil".'},
+  {tense:'imp',verb:'ir',type:'irregular',irreg:true,
+   forms:[['yo','iba'],['tú','ibas'],['él/ella','iba'],['nosotros','íbamos'],['ellos/uds.','iban']],
+   note:'Second of 3 irregular imperfecto verbs. "Iba" = was going / used to go. "Íbamos al parque" = we used to go to the park.'},
+  {tense:'imp',verb:'ver',type:'irregular (slightly)',irreg:true,
+   forms:[['yo','veía'],['tú','veías'],['él/ella','veía'],['nosotros','veíamos'],['ellos/uds.','veían']],
+   note:'Third irregular: keeps the "e" from the infinitive. "Veía" = was seeing / used to watch. Common: "veía mucha tele de niño."'},
+  {tense:'imp',verb:'tener',type:'-ER regular (imperfecto)',irreg:false,
+   forms:[['yo','tenía'],['tú','tenías'],['él/ella','tenía'],['nosotros','teníamos'],['ellos/uds.','tenían']],
+   note:'Follows -ER pattern. "Tenía" = I had / I was having. Super common: "tenía 5 años", "tenía hambre", "tenía miedo".'},
+];
+
+function renderConj(){
+  const pretCards=CONJ_VERBS.filter(v=>v.tense==='pret');
+  const impCards=CONJ_VERBS.filter(v=>v.tense==='imp');
+  function makeCard(v){
+    const rows=v.forms.map(([sub,form])=>`<tr><td class="conj-table-sub" style="color:var(--muted2);padding:7px 18px;font-size:.8rem;width:100px">${sub}</td><td style="font-family:var(--display);font-weight:800;font-size:.95rem;padding:7px 18px">${form}</td></tr>`).join('');
+    const col=v.tense==='pret'?'var(--pret2)':'var(--imp2)';
+    const bg=v.tense==='pret'?'var(--pret3)':'var(--imp3)';
+    const bd=v.tense==='pret'?'var(--pretbd)':'var(--impbd)';
+    return `<div class="conj-card" style="background:${bg};border-color:${bd}">
+      <div class="conj-verb" style="background:rgba(0,0,0,.2);color:${col}">
+        <span>${v.verb}${v.irreg?'<span class="irreg-badge">irregular</span>':''}</span>
+        <span class="conj-type">${v.type}</span>
+      </div>
+      <table class="conj-table"><tbody>${rows}</tbody></table>
+      <div class="conj-note">${v.note}</div>
+    </div>`;
+  }
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📋 Conjugaciones — Pretérito & Imperfecto</div>
+  <div class="ex-instr">Good news: the <em>imperfecto only has 3 irregular verbs</em> (ser, ir, ver). The pretérito has more but they follow predictable stem patterns.</div>
+
+  <div style="margin-bottom:18px">
+    <div class="ref-h3" style="color:var(--pret2);background:var(--pret3)">📸 PRETÉRITO (${pretCards.length} verbs)</div>
+    <div class="conj-grid">${pretCards.map(makeCard).join('')}</div>
+  </div>
+  <div>
+    <div class="ref-h3" style="color:var(--imp2);background:var(--imp3)">🖼️ IMPERFECTO (${impCards.length} verbs)</div>
+    <div class="conj-grid">${impCards.map(makeCard).join('')}</div>
+  </div>
+  <div class="ref-tip" style="margin-top:14px">💡 <strong>Imperfecto shortcut:</strong> Only 3 irregular verbs ever! ser→era, ir→iba, ver→veía. Everything else follows the -aba / -ía pattern. Learn those 3 and you're done.</div>
+  </div>`;
+}
+
+/* ══════════════════════════════════
+   EX 2 — ELIGE EL TIEMPO MC (50)
+   Context sentences — choose pret or imp form
+   Mix of: completed action, habit, interruption, state, description
+══════════════════════════════════ */
+const MC=[
+  {s:'La reunión ___ tres horas.',en:'The meeting lasted three hours.',
+   opts:['duraba','duró','dura','duraría'],a:1,
+   why:'pret',x:'Even though duration is involved, it is a completed, bounded event. "Duró tres horas" = it lasted 3 hours (and then ended). Compare: "duraba horas" (imperfecto) = it used to last hours (ongoing habit).'},
+  {s:'Mientras nosotros ___, los niños ___.',en:'While we were eating, the children were playing.',
+   opts:['comíamos / jugaban','comimos / jugaron','comimos / jugaban','comíamos / jugaron'],a:0,
+   why:'imp',x:'"Mientras" with two simultaneous ongoing actions = both imperfecto. They were both happening at the same time in the background.'},
+  /* INTERRUPTION patterns (8) */,
+  {s:'¿A qué hora ___ ayer?',en:'What time did you arrive yesterday?',
+   opts:['llegabas','llegaste','llegas','llegarías'],a:1,
+   why:'pret',x:'"Ayer" = yesterday = specific completed time frame. "¿Llegaste?" = pretérito for a specific completed arrival.'},
+  {s:'No ___ a nadie en la fiesta.',en:'I didn\'t know anyone at the party.',
+   opts:['conocí','conocía','conozco','conociera'],a:1,
+   why:'imp',x:'"Conocía" [IMP] = state: being acquainted with people. Not knowing anyone is a state that describes the whole time you were there, not a specific event.'},
+  {s:'___ cuando ___ que cancelar el vuelo.',en:'We were already boarding when we found out we had to cancel the flight.',
+   opts:['Abordábamos / supimos','Abordamos / sabíamos','Abordábamos / sabíamos','Abordamos / supimos'],a:0,
+   why:'both',x:'"Abordábamos" [IMP] = we were in the process of boarding (ongoing). "Supimos" [PRET] = we found out (moment of learning, pret of saber).'},
+  {s:'Antes de conocerte, yo ___ muy tímido.',en:'Before meeting you, I used to be very shy.',
+   opts:['fui','era','soy','sería'],a:1,
+   why:'imp',x:'Describing a past personality trait / state. "Era" = imperfecto of ser — states of being are almost always imperfecto.'},
+  {s:'El lunes pasado ___ a mi ex en el café.',en:'Last Monday I ran into my ex at the café.',
+   opts:['veía','vi','veo','había visto'],a:1,
+   why:'pret',x:'"El lunes pasado" = specific day = completed. "Vi" (pret of ver) = I saw (a specific moment).'},
+  {s:'Ella siempre ___ tarde a las reuniones.',en:'She was always late to meetings.',
+   opts:['llegó','llegaba','llega','llegaría'],a:1,
+   why:'imp',x:'"Siempre" = always = characteristic behavior/habit. Imperfecto describes personality or recurring patterns.'},
+  {s:'Al final, ___ una decisión difícil.',en:'In the end, she made a difficult decision.',
+   opts:['tomaba','tomó','toma','tomaría'],a:1,
+   why:'pret',x:'"Al final" = signals the conclusion of a sequence of events. Pretérito: "tomó" = she made/took (completed).'},
+  {s:'No ___ qué decir en ese momento.',en:'I didn\'t know what to say at that moment.',
+   opts:['supe','sabía','sé','supiera'],a:1,
+   why:'imp',x:'"Sabía" [IMP] = state of knowing/not knowing. Being at a loss for words is a state, not a specific event of "finding out."'},
+  {s:'El niño ___ en la calle cuando su mamá lo ___.',en:'The child was playing in the street when his mom called him.',
+   opts:['jugaba / llamó','jugó / llamaba','jugaba / llamaba','jugó / llamó'],a:0,
+   why:'both',x:'"Jugaba" [IMP] = ongoing activity. "Llamó" [PRET] = specific moment of being called. Interruption pattern.'},
+  /* TRICKY / MEANING-CHANGE (10) */,
+  {s:'Ayer ___ que mañana llega Juan.',en:'Yesterday I found out that Juan is arriving tomorrow.',
+   opts:['sabía','supe','sé','supiera'],a:1,
+   why:'pret',x:'"Supe" [PRET] = I found out (the specific moment of learning the information). "Sabía" would mean I already knew.'},
+  {s:'Cuando ___ estudiante, ___ hasta las 2am.',en:'When I was a student, I used to study until 2am.',
+   opts:['era / estudiaba','fui / estudié','era / estudié','fui / estudiaba'],a:0,
+   why:'imp',x:'Both describe a habitual state during a period: "era estudiante" (state: being a student) and "estudiaba" (habit: studying until 2am). Both imperfecto.'},
+  {s:'No ___ hambre, así que no ___.',en:'I wasn\'t hungry, so I didn\'t eat.',
+   opts:['tuve / comí','tenía / comí','tuve / comía','tenía / comía'],a:1,
+   why:'both',x:'"Tenía hambre" [IMP] = state of hunger (or lack of it). "Comí" [PRET] = the specific completed decision/action of not eating.'},
+  {s:'Se me ___ la tarjeta en el cajero.',en:'My card got swallowed by the ATM.',
+   opts:['tragaba','tragaría','tragó','se me tragó'],a:3,
+   why:'pret',x:'A specific completed event that happened once. "Se me tragó la tarjeta" — pretérito for the single completed action.'},
+  {s:'No ___ que ella ___ casada.',en:'I didn\'t know she was married.',
+   opts:['supe / estuvo','sabía / estaba','supe / estaba','sabía / estuvo'],a:1,
+   why:'imp',x:'"Sabía" [IMP] = ongoing state of not knowing (not a specific moment of finding out). "Estaba casada" [IMP] = being married is a state, not an event.'},
+  {s:'La primera vez que ___ sushi, no me ___.',en:'The first time I tried sushi, I didn\'t like it.',
+   opts:['probé / gustó','probaba / gustaba','probé / gustaba','probaba / gustó'],a:0,
+   why:'pret',x:'"La primera vez" = a specific, unique moment. "Probé" [PRET] = the specific act of trying. "Gustó" [PRET] = the reaction was immediate and completed.'},
+  {s:'Cuando ___ pequeña, ___ mucho a mis abuelos.',en:'When I was little, I used to see my grandparents a lot.',
+   opts:['fui / vi','era / veía','era / vi','fui / veía'],a:1,
+   why:'imp',x:'"Cuando era pequeña" = during childhood (state). "Veía" = used to see (habitual activity in that period). Both imperfecto.'},
+  {s:'Cuando ___ a Luis, ___ muy diferente.',en:'When I met Luis, he looked very different.',
+   opts:['conocía / era','conocí / era','conocía / fue','conocí / fue'],a:1,
+   why:'both',x:'"Conocí" [PRET] = the specific moment of meeting someone for the first time (event). "Era" [IMP] = he was/looked like (ongoing description/state at that time).'},
+  {s:'Me ___ mucho el estómago durante el viaje.',en:'My stomach hurt a lot during the trip.',
+   opts:['dolió','dolía','duele','dolería'],a:1,
+   why:'imp',x:'Physical states/sensations that were ongoing are imperfecto. "Me dolía el estómago" = I had a stomachache (as a continuous state during the trip).'},
+  {s:'Esa noche no ___ dormir.',en:'That night I couldn\'t sleep.',
+   opts:['podía','pude','puedo','pudiera'],a:1,
+   why:'pret',x:'"Esa noche" = a specific completed night. "Pude" in negative = I was unable to (and it didn\'t happen). Pretérito for a specific failed attempt.'},
+  {s:'Antes, la gente ___ mucho más cartas.',en:'Before, people used to write many more letters.',
+   opts:['escribió','escribía','escribirá','escribe'],a:1,
+   why:'imp',x:'"Antes" = in the past (no specific time) = ongoing habit of a past era. "Escribía" = imperfecto for what used to be the norm.'},
+  {s:'El año pasado Ana ___ tres meses en Oaxaca.',en:'Last year Ana lived in Oaxaca for three months.',
+   opts:['vivía','vivió','vive','había vivido'],a:1,
+   why:'pret',x:'"Tres meses" defines a completed, bounded period — the living in Oaxaca had a clear start and end. Pretérito. If we said "vivía en Oaxaca" (no time limit mentioned), it would be ongoing background.'},
+  {s:'El cielo ___ nublado y ___ mucho frío cuando salimos.',en:'The sky was gray and it was cold when we went out.',
+   opts:['estuvo / hizo','estaba / hacía','era / hacía','estuvo / hacía'],a:1,
+   why:'imp',x:'"Estaba nublado" [IMP] = sky state (temporary, use estar). "Hacía frío" [IMP] = ongoing weather background. Both describe the background conditions, not specific weather events.'},
+  {s:'___ un libro interesante cuando la luz ___.',en:'I was reading an interesting book when the light went out.',
+   opts:['Leía / se fue','Leí / se iba','Leía / se iba','Leí / se fue'],a:0,
+   why:'both',x:'Background action [IMP: leía] interrupted by a sudden event [PRET: se fue]. The light going out is the specific completed interrupting event.'},
+  {s:'De repente ___ un ruido enorme en la cocina.',en:'Suddenly there was a huge noise in the kitchen.',
+   opts:['había','hubiera','hubo','habría'],a:2,
+   why:'pret',x:'"De repente" signals a sudden event — this is pretérito territory. "Hubo" (pret of haber) = there was (as a specific occurrence).'},
+  {s:'El niño ___ 7 años y ya ___ leer perfectamente.',en:'The child was 7 years old and could already read perfectly.',
+   opts:['tuvo / pudo','tenía / podía','tiene / puede','tendría / podría'],a:1,
+   why:'imp',x:'Age (tenía X años) is ALWAYS imperfecto — it\'s a state, not an event. "Podía" = was able to (ongoing ability, not a specific moment of doing it).'},
+  {s:'___ la tele cuando ___ el teléfono.',en:'I was watching TV when the phone rang.',
+   opts:['Veía / sonó','Vi / sonaba','Veía / sonaba','Vi / sonó'],a:0,
+   why:'both',x:'Classic interruption pattern: IMP (ongoing background: was watching) + PRET (sudden event: rang). "Veía" [IMP] + "sonó" [PRET].'},
+  {s:'Finalmente ___ convencer al jefe.',en:'I finally managed to convince the boss.',
+   opts:['podía','pude','puedo','pudiera'],a:1,
+   why:'pret',x:'"Pude" [PRET] = managed to (succeeded — completed). "Podía" [IMP] = was able to (ongoing ability, but doesn\'t say whether it happened).'},
+  {s:'De joven, mi papá ___ mucho al fútbol.',en:'When he was young, my dad used to play a lot of soccer.',
+   opts:['jugó','jugaba','juega','jugaría'],a:1,
+   why:'imp',x:'"De joven" = during youth (indefinite ongoing period). Habitual activity = imperfecto.'},
+  {s:'___ al médico y me ___ que era gripe.',en:'I went to the doctor and he told me it was the flu.',
+   opts:['Iba / decía','Fui / dijo','Fui / decía','Iba / dijo'],a:1,
+   why:'pret',x:'Two completed consecutive actions: went [PRET] → told me [PRET]. "Dijo" = pret of decir = told (specific completed statement).'},
+  {s:'El parque ___ enorme y ___ muchos árboles viejos.',en:'The park was enormous and had many old trees.',
+   opts:['fue / tuvo','era / tenía','fue / tenía','era / tuvo'],a:1,
+   why:'imp',x:'Pure physical description of a place. Both descriptions are ongoing states. Imperfecto paints the picture.'},
+  {s:'El agua ___ muy fría pero el niño ___ de todas formas.',en:'The water was very cold but the child swam anyway.',
+   opts:['era / nadó','fue / nadaba','era / nadaba','fue / nadó'],a:0,
+   why:'both',x:'"Era fría" [IMP] = description of the water\'s temperature (state). "Nadó" [PRET] = the specific completed action of swimming.'},
+  {s:'Mi abuela siempre ___ en la cocina cuando yo llegaba.',en:'My grandmother was always cooking in the kitchen when I arrived.',
+   opts:['cocinó','cocinaba','cocina','cocinaría'],a:1,
+   why:'imp',x:'"Siempre" = always = recurring habit. Plus she was doing it when I arrived (background action). Classic imperfecto.'},
+  {s:'Cuando ___ la noticia, ___ inmediatamente.',en:'When I heard the news, I called immediately.',
+   opts:['supe / llamé','sabía / llamaba','supe / llamaba','sabía / llamé'],a:0,
+   why:'pret',x:'Two consecutive completed events. "Supe" (pret of saber) = I found out (moment of learning). "Llamé" = I called. Both move the story forward.'},
+  {s:'Antes no ___ hablar español, pero ahora ___.',en:'Before I couldn\'t speak Spanish, but now I can.',
+   opts:['pude / puedo','podía / puedo','podía / pude','pude / podía'],a:1,
+   why:'imp',x:'"Antes... podía" [IMP] = I lacked the ability (ongoing state in the past). "Ahora puedo" = present ability. Not a specific event.'},
+  {s:'Ese día, todo ___.',en:'That day, everything changed.',
+   opts:['cambiaba','cambió','cambia','cambiaría'],a:1,
+   why:'pret',x:'"Ese día" = specific day. A pivotal moment that moved the story. Pretérito: "cambió" = changed (and that change was complete).'},
+  /* HABITS & ONGOING — imperfecto (12) */,
+  {s:'Todos los domingos, mi familia ___ a misa.',en:'Every Sunday my family used to go to mass.',
+   opts:['fue','iba','va','irá'],a:1,
+   why:'imp',x:'"Todos los domingos" = every Sunday = recurring habit. "Iba" = imperfecto of ir for the repeated background routine.'},
+  {s:'Ella ___ muy bien cuando de repente se le ___ un tacón.',en:'She was dancing very well when she suddenly broke her heels.',
+   opts:['bailaba / rompió','bailó / rompió','bailaba / rompió','bailaba / se le rompió'],a:3,
+   why:'both',x:'"Bailaba" [IMP] = ongoing graceful dancing (background). "Se le rompió" [PRET] = the sudden unfortunate event. Classic structure.'},
+  {s:'Ayer ___ al mercado y ___ todo lo que necesitaba.',en:'Yesterday I went to the market and bought everything I needed.',
+   opts:['fui / compré','iba / compraba','fui / compraba','iba / compré'],a:0,
+   why:'pret',x:'Both actions are completed and happened at a specific time (ayer). Pretérito moves the story: went → bought → done.'},
+  {s:'La casa ___ pequeña y ___ muchas ventanas.',en:'The house was small and had many windows.',
+   opts:['fue / tuvo','era / tenía','fue / tenía','era / tuvo'],a:1,
+   why:'imp',x:'Describing a place (state/appearance). Both "era" and "tenía" are imperfecto — describing the ongoing characteristics of the house.'},
+  {s:'___ las 3am cuando finalmente ___ a dormir.',en:'It was 3am when I finally fell asleep.',
+   opts:['Eran / me dormí','Fueron / me dormía','Eran / me dormía','Fueron / me dormí'],a:0,
+   why:'both',x:'Telling time = "eran las 3" [IMP] — time setting is always imperfecto. "Me dormí" [PRET] = finally fell asleep (the specific completed moment of falling asleep).'},
+  {s:'Mis abuelos ___ a México en 1975.',en:'My grandparents came to Mexico in 1975.',
+   opts:['venían','vinieron','vienen','vendrían'],a:1,
+   why:'pret',x:'Specific year (1975) = completed event. "Vinieron" = pretérito of venir.'},
+  {s:'De niño, ___ al parque todos los sábados.',en:'As a child, I used to go to the park every Saturday.',
+   opts:['fui','iba','voy','iré'],a:1,
+   why:'imp',x:'"De niño" + "todos los sábados" = childhood habit, repeated regularly. Imperfecto paints the recurring background of childhood.'},
+  {s:'El restaurante ___ muy popular; siempre ___ lleno.',en:'The restaurant was very popular; it was always full.',
+   opts:['fue / estuvo','era / estaba','fue / estaba','era / estuvo'],a:1,
+   why:'imp',x:'"Era popular" = state/characteristic (IMP). "Siempre estaba lleno" = ongoing recurring state (IMP). No specific events — pure description.'},
+  {s:'Nosotros ___ los platos cuando ___ la alarma de incendio.',en:'We were washing the dishes when the fire alarm went off.',
+   opts:['lavábamos / sonó','lavamos / sonaba','lavamos / sonó','lavábamos / sonaba'],a:0,
+   why:'both',x:'"Lavábamos" [IMP] = ongoing activity. "Sonó" [PRET] = specific event that interrupted it. "Sonó la alarma" = it rang (completed).'},
+  {s:'Cuando era niño, ___ ser astronauta.',en:'When I was a child, I wanted to be an astronaut.',
+   opts:['quise','quería','quiero','querría'],a:1,
+   why:'imp',x:'"Quería" [IMP] = ongoing childhood wish/desire (a state of wanting). "Quise" [PRET] would mean I tried to / I decided to — a specific moment, not a persistent childhood dream.'},
+  /* DESCRIPTION / STATE (8) */,
+  {s:'En los 90, la gente no ___ internet.',en:'In the 90s, people didn\'t have the internet.',
+   opts:['tuvo','tenía','tiene','tendría'],a:1,
+   why:'imp',x:'Describing the state of an era (los 90s, no specific day). "Tenía" (imperfecto) = habitual state of not having something.'},
+  {s:'___ por el parque cuando de repente ___ a María.',en:'I was walking through the park when I suddenly saw María.',
+   opts:['Caminaba / vi','Caminé / veía','Caminé / vi','Caminaba / veía'],a:0,
+   why:'both',x:'"Caminaba" [IMP] = ongoing background action. "Vi" [PRET] = the sudden event that happened within it. "De repente" signals the PRET.'},
+  {s:'¿___ cuando ___ el terremoto?',en:'Were you sleeping when the earthquake happened?',
+   opts:['Dormías / ocurrió','Dormiste / ocurría','Dormiste / ocurrió','Dormías / ocurría'],a:0,
+   why:'both',x:'"¿Dormías?" [IMP] = were you in the state of sleeping? Background. "Ocurrió" [PRET] = the specific event of the earthquake happening.'},
+]
+
+const _MC_CLEAN=MC.filter(m=>m&&m.s);
+const MCO=_MC_CLEAN.map((_,i)=>seededShuffle([0,1,2,3],i*17+5));
+// Reassign MC to cleaned version for all uses
+MC.splice(0,MC.length,..._MC_CLEAN);
+
+function renderMC(){
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const html=MC.map((item,i)=>{
+    const ord=MCO[i];
+    const opts=ord.map(oi=>{
+      const o=item.opts[oi];let cls='mc-opt';
+      const isPret=!o.includes('ba')&&!o.includes('ía')&&o!=='era'&&o!=='iba'&&o!=='veía'&&!o.includes('aban')&&!o.includes('ías')&&!o.includes('ían')||false;
+      if(mcChecked){if(oi===item.a)cls+=' mc-show';else if(mcAnswers[i]===oi&&oi!==item.a)cls+=' mc-err';}
+      else if(mcAnswers[i]===oi)cls+=oi===item.a?' mc-ok':' mc-err';
+      return `<button class="${cls}" id="mco${i}_${oi}" onclick="answerMC(${i},${oi})" ${mcChecked?'disabled':''}>${o}</button>`;
+    }).join('');
+    const showExp=mcChecked||(mcAnswers[i]!==undefined);
+    return `<div class="mc-card"><div class="mc-top"><span class="mc-num">${i+1}</span><span class="mc-sent">${item.s.replace(/___/g,'<span class="mc-blank">___</span>')}</span></div><div class="mc-en">${item.en}</div><div class="mc-opts">${opts}</div><div class="mc-expl${showExp?' show':''}" id="mce${i}">${item.x}</div></div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">📝 Elige el tiempo — 50 oraciones en contexto</div>
+  <div class="ex-instr">Choose the correct past tense form. No hints — decide from context alone. Ask yourself: <em>is this a photo (completed) or a painting (background/habit)?</em></div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${MC.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="mc_ok">—</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="mc_err">—</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="mc_p">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="mc_pg" style="width:${pct}%"></div></div></div></div>
+  <div class="mc-list">${html}</div>
+  <div class="fb" id="mc_fb"></div>
+  <div class="actions"><button class="btn btn-cyan" id="mc_chk" onclick="checkMC()" ${mcChecked?'disabled':''}>Check all</button><button class="btn btn-ghost" onclick="mcAnswers={};mcChecked=false;renderMC()">↺ Reset</button></div></div>`;
+}
+function answerMC(qi,oi){
+  if(mcChecked)return;
+  if(mcAnswers[qi]!==undefined){const p=document.getElementById(`mco${qi}_${mcAnswers[qi]}`);if(p)p.classList.remove('mc-ok','mc-err');}
+  mcAnswers[qi]=oi;
+  const b=document.getElementById(`mco${qi}_${oi}`);if(b)b.classList.add(oi===MC[qi].a?'mc-ok':'mc-err');
+  const e=document.getElementById('mce'+qi);if(e)e.classList.add('show');
+  const pct=Math.round(Object.keys(mcAnswers).length/MC.length*100);
+  const el=document.getElementById('mc_p');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('mc_pg');if(pg)pg.style.width=pct+'%';
+}
+function checkMC(){
+  mcChecked=true;let ok=0;MC.forEach((item,i)=>{if(mcAnswers[i]===item.a)ok++;});
+  const pct=Math.round(ok/MC.length*100);
+  document.getElementById('mc_ok').textContent=ok;document.getElementById('mc_err').textContent=MC.length-ok;
+  document.getElementById('mc_pg').style.width='100%';document.getElementById('mc_p').textContent='100%';
+  const fb=document.getElementById('mc_fb');
+  fb.className='fb show '+(pct>=80?'ok':'partial');
+  fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${ok}/${MC.length}.</strong> ${pct>=80?'Excellent command of past tenses!':'Focus on the interruption pattern and signal words.'}`;
+  document.getElementById('mc_chk').disabled=true;renderMC();
+}
+
+
+/* ══════════════════════════════════
+   EX 3 — COMPLETA LA HISTORIA (5 mini-stories)
+   Fixed distractors: correct + wrong tense of SAME verb
+   + present + 3rd person error
+══════════════════════════════════ */
+const STORIES=[
+  {
+    title:'🦅 El día que perdí mi cartera en el metro de la CDMX',
+    en:'A travel mishap story — completed actions with background details.',
+    blanks:[
+      {verb:'ser',tense:'imp',form:'Era',pres:'Es',pretAlt:'Fue',impAlt:'Eran',
+       hint:'ser — setting the scene (what time of day it was)'},
+      {verb:'haber',tense:'imp',form:'había',pres:'hay',pretAlt:'hubo',impAlt:'habían',
+       hint:'haber — describing how many people (background state)'},
+      {verb:'tener',tense:'imp',form:'tenía',pres:'tengo',pretAlt:'tuve',impAlt:'teníamos',
+       hint:'tener — I had (a state I was in at that moment)'},
+      {verb:'buscar',tense:'pret',form:'busqué',pres:'busco',pretAlt:'buscaba',impAlt:'buscábamos',
+       hint:'buscar — a specific completed search action'},
+      {verb:'darse cuenta',tense:'pret',form:'me di cuenta',pres:'me doy cuenta',pretAlt:'me daba cuenta',impAlt:'nos dimos cuenta',
+       hint:'darse cuenta — the moment of realization (specific event)'},
+      {verb:'desaparecer',tense:'imp',form:'había desaparecido',pres:'ha desaparecido',pretAlt:'desapareció',impAlt:'desaparecían',
+       hint:'desaparecer — state that existed at that point (it was already gone)'},
+      {verb:'sentir',tense:'pret',form:'sentí',pres:'siento',pretAlt:'sentía',impAlt:'sentíamos',
+       hint:'sentir — the specific emotional reaction in that instant'},
+      {verb:'acercarse',tense:'pret',form:'se acercó',pres:'se acerca',pretAlt:'se acercaba',impAlt:'se acercaron',
+       hint:'acercarse — a specific completed movement'},
+      {verb:'preguntar',tense:'pret',form:'preguntó',pres:'pregunta',pretAlt:'preguntaba',impAlt:'preguntaron',
+       hint:'preguntar — a specific completed verbal action'},
+      {verb:'irse',tense:'imp',form:'iba',pres:'va',pretAlt:'fue',impAlt:'iban',
+       hint:'ir — background ongoing movement (she was already walking away while helping)'},
+    ],
+    text:`[0] un martes normal. En el vagón [1] tanta gente que casi no podía respirar. Yo [2] mochila, audífonos y una actitud de turista cien por ciento obvia. En una de las estaciones, el vagón se llenó más todavía y alguien me empujó. Cuando llegué a mi parada, [3] mi bolsillo trasero y [4] de que mi cartera [5]. Al principio [6] pánico puro. De repente, una señora de unos sesenta años [7] y me [8] en español muy rápido si yo era el güero de la mochila azul. Antes de que pudiera responder, sacó mi cartera de su bolsa y me la devolvió sin pedir nada a cambio. Antes de que pudiera agradecerle, ya [9] caminando entre la gente.`,
+  },
+  {
+    title:'🌮 Cuando mi abuela me enseñó a hacer tamales',
+    en:'A childhood memory — habits and repeated actions mixed with specific events.',
+    blanks:[
+      {verb:'tener',tense:'imp',form:'Tenía',pres:'Tengo',pretAlt:'Tuve',impAlt:'Teníamos',
+       hint:'tener — my age (age is ALWAYS imperfecto)'},
+      {verb:'ir',tense:'imp',form:'íbamos',pres:'vamos',pretAlt:'fuimos',impAlt:'iban',
+       hint:'ir — a habitual action we did regularly'},
+      {verb:'levantarse',tense:'imp',form:'nos levantábamos',pres:'nos levantamos',pretAlt:'nos levantamos',impAlt:'se levantaban',
+       hint:'levantarse — habitual time we woke up (routine)'},
+      {verb:'oler',tense:'imp',form:'olía',pres:'huele',pretAlt:'olió',impAlt:'olían',
+       hint:'oler — ongoing sensory background (the smell was there all morning)'},
+      {verb:'contar',tense:'imp',form:'contaba',pres:'cuenta',pretAlt:'contó',impAlt:'contaban',
+       hint:'contar — she used to tell (habitual recurring action)'},
+      {verb:'escuchar',tense:'imp',form:'escuchábamos',pres:'escuchamos',pretAlt:'escuchamos',impAlt:'escuchaban',
+       hint:'escuchar — habitual listening while working'},
+      {verb:'caerse',tense:'pret',form:'se me cayó',pres:'se me cae',pretAlt:'se me caía',impAlt:'se nos cayó',
+       hint:'caerse — specific completed accident (it happened once)'},
+      {verb:'reírse',tense:'pret',form:'se rió',pres:'se ríe',pretAlt:'se reía',impAlt:'se rieron',
+       hint:'reírse — specific completed reaction in that moment'},
+      {verb:'decir',tense:'pret',form:'dijo',pres:'dice',pretAlt:'decía',impAlt:'dijeron',
+       hint:'decir — a specific statement she made (completed verbal act)'},
+      {verb:'aprender',tense:'pret',form:'aprendí',pres:'aprendo',pretAlt:'aprendía',impAlt:'aprendimos',
+       hint:'aprender — the specific moment/event of learning something'},
+    ],
+    text:`[0] 7 años la primera vez que hice tamales con mi abuela. Cada diciembre [1] a su casa desde el 23 para ayudar con las posadas. Siempre [2] muy temprano, antes de que saliera el sol. La cocina [3] a masa y chile desde las 6 de la mañana. Mi abuela [4] historias mientras extendíamos la masa en las hojas de maíz y nosotros [5] con los oídos bien abiertos. En un momento, [6] toda la olla de mole en el suelo. Mi abuela [7] tanto que tuvo que apoyarse en la estufa. Luego [8]: "El mole hay que botarlo, pero la historia de cómo lo tiraste te va a durar toda la vida." Ese día [9] que los accidentes también son parte de la tradición.`,
+  },
+  {
+    title:'✈️ La noche que perdí mi vuelo en Cancún',
+    en:'Travel story — combination of interrupted actions and completed events.',
+    blanks:[
+      {verb:'llegar',tense:'pret',form:'llegué',pres:'llego',pretAlt:'llegaba',impAlt:'llegamos',
+       hint:'llegar — specific completed arrival at airport'},
+      {verb:'haber',tense:'imp',form:'había',pres:'hay',pretAlt:'hubo',impAlt:'habían',
+       hint:'haber — describing the background state (there was/were)'},
+      {verb:'esperar',tense:'imp',form:'esperaba',pres:'espero',pretAlt:'esperé',impAlt:'esperábamos',
+       hint:'esperar — ongoing background action (I was in the process of waiting)'},
+      {verb:'darse cuenta',tense:'pret',form:'me di cuenta',pres:'me doy cuenta',pretAlt:'me daba cuenta',impAlt:'nos dimos cuenta',
+       hint:'darse cuenta — specific moment of realization'},
+      {verb:'decir',tense:'imp',form:'decía',pres:'dice',pretAlt:'dijo',impAlt:'decían',
+       hint:'decir — ongoing background display (the board was showing)'},
+      {verb:'salir',tense:'pret',form:'había salido',pres:'ha salido',pretAlt:'salió',impAlt:'salieron',
+       hint:'salir — state that already existed (the flight had already left)'},
+      {verb:'ir',tense:'pret',form:'fui',pres:'voy',pretAlt:'iba',impAlt:'fuimos',
+       hint:'ir — specific completed movement (fui directo al mostrador)'},
+      {verb:'explicar',tense:'pret',form:'expliqué',pres:'explico',pretAlt:'explicaba',impAlt:'explicamos',
+       hint:'explicar, yo — I explained (specific completed action)'},
+      {verb:'decir',tense:'pret',form:'dijo',pres:'dice',pretAlt:'decía',impAlt:'dijeron',
+       hint:'decir, ella — she told me (specific completed statement)'},
+      {verb:'quedarse',tense:'pret',form:'me quedé',pres:'me quedo',pretAlt:'me quedaba',impAlt:'nos quedamos',
+       hint:'quedarse — completed decision/action of staying all night'},
+    ],
+    text:`[0] al aeropuerto de Cancún exactamente 42 minutos antes de mi vuelo. [1] mucha gente pero el check-in iba rápido. Yo [2] tranquilamente en la fila cuando de repente [3] de algo: el número de mi vuelo no aparecía en ningún monitor. El tablero [4] que mi vuelo a la Ciudad de México ya [5]. [6] directo al mostrador y le [7] la situación al agente. El agente [8] con calma que el vuelo había despegado 20 minutos antes — mi boleto era para las 6am, no las 6pm. Al final, [9] en el aeropuerto toda la noche esperando el siguiente vuelo. Paradójicamente, fue la mejor noche del viaje: conocí a tres mochileros argentinos y amanecimos en la playa.`,
+  },
+  {
+    title:'🏫 Mi primer día de trabajo en México',
+    en:'Personal experience — descriptions of state vs. specific events that happened.',
+    blanks:[
+      {verb:'ser',tense:'imp',form:'Era',pres:'Es',pretAlt:'Fue',impAlt:'Eran',
+       hint:'ser — describing what kind of day it was (background quality)'},
+      {verb:'estar',tense:'imp',form:'estaba',pres:'está',pretAlt:'estuvo',impAlt:'estaban',
+       hint:'estar — my emotional state (ongoing feeling, not a specific event)'},
+      {verb:'conocer',tense:'pret',form:'conocí',pres:'conozco',pretAlt:'conocía',impAlt:'conocimos',
+       hint:'conocer — meeting someone for the first time (specific moment, PRET changes meaning)'},
+      {verb:'hablar',tense:'imp',form:'hablaba',pres:'habla',pretAlt:'habló',impAlt:'hablaban',
+       hint:'hablar — ongoing background description (she spoke... as a characteristic)'},
+      {verb:'entender',tense:'imp',form:'entendía',pres:'entiendo',pretAlt:'entendí',impAlt:'entendíamos',
+       hint:'entender — ongoing state of not understanding (not a specific moment)'},
+      {verb:'invitar',tense:'pret',form:'me invitaron',pres:'me invitan',pretAlt:'me invitaban',impAlt:'nos invitaron',
+       hint:'invitar — a specific completed invitation'},
+      {verb:'pedir',tense:'pret',form:'pedí',pres:'pido',pretAlt:'pedía',impAlt:'pedimos',
+       hint:'pedir — specific completed action of ordering'},
+      {verb:'costar',tense:'imp',form:'costaban',pres:'cuestan',pretAlt:'costaron',impAlt:'costaba',
+       hint:'costar, ellos (tacos) — ongoing price, plural subject matches plural tacos'},
+      {verb:'darse cuenta',tense:'pret',form:'me di cuenta',pres:'me doy cuenta',pretAlt:'me daba cuenta',impAlt:'nos dimos cuenta',
+       hint:'darse cuenta — specific moment of realization'},
+      {verb:'ser',tense:'imp',form:'iba a ser',pres:'va a ser',pretAlt:'fue',impAlt:'eran',
+       hint:'ser — a background realization about the future (was going to be)'},
+    ],
+    text:`[0] lunes y yo [1] muy nervioso. En la sala de juntas [2] a mis nuevos compañeros. Mi jefa directa se llamaba Ale y [3] tan rápido que yo casi no [4] nada de lo que decía. A la hora del almuerzo, [5] a comer con ellos. [6] unos tacos de canasta porque no sabía qué más pedir y [7] muy poco — como diez pesos cada uno. Cuando fui a pagar [8] de que no traía efectivo. Un compañero que se llamaba Marco pagó por mí sin decir nada. Ese día [9] un año muy largo pero muy bueno.`,
+  },
+  {
+    title:'🎭 La obra de teatro que nadie olvidó',
+    en:'Past narrative — interrupted actions, sequences, and descriptions all together.',
+    blanks:[
+      {verb:'ser',tense:'imp',form:'era',pres:'es',pretAlt:'fue',impAlt:'eran',
+       hint:'ser — what kind of night it was (background description)'},
+      {verb:'haber',tense:'imp',form:'había',pres:'hay',pretAlt:'hubo',impAlt:'habían',
+       hint:'haber — background scene (there were people, already there)'},
+      {verb:'estar',tense:'imp',form:'estaba',pres:'está',pretAlt:'estuvo',impAlt:'estaban',
+       hint:'estar — ongoing state of being (where the protagonist was)'},
+      {verb:'salir',tense:'pret',form:'salió',pres:'sale',pretAlt:'salía',impAlt:'salieron',
+       hint:'salir — specific completed entrance onto stage (moved the story)'},
+      {verb:'aplaudir',tense:'pret',form:'aplaudió',pres:'aplaude',pretAlt:'aplaudía',impAlt:'aplaudieron',
+       hint:'aplaudir — the whole audience did it (specific completed collective action)'},
+      {verb:'empezar',tense:'pret',form:'empezó',pres:'empieza',pretAlt:'empezaba',impAlt:'empezaron',
+       hint:'empezar — specific moment the play began (moved the story forward)'},
+      {verb:'recordar',tense:'imp',form:'recordaba',pres:'recuerda',pretAlt:'recordó',impAlt:'recordaban',
+       hint:'recordar — ongoing state of not remembering (in progress when something else happened)'},
+      {verb:'caerse',tense:'pret',form:'se cayó',pres:'se cae',pretAlt:'se caía',impAlt:'se cayeron',
+       hint:'se cayó — specific completed accident (interrupted the forgetting)'},
+      {verb:'reírse',tense:'pret',form:'se rió',pres:'se ríe',pretAlt:'se reía',impAlt:'se rieron',
+       hint:'reírse — specific reaction of the audience (completed)'},
+      {verb:'aplaudir',tense:'pret',form:'aplaudieron',pres:'aplauden',pretAlt:'aplaudían',impAlt:'aplaudía',
+       hint:'aplaudir — the final completed standing ovation'},
+    ],
+    text:`La noche del estreno [0] perfecta. En el teatro [1] más de doscientas personas sentadas en silencio. El protagonista, Diego, [2] entre bastidores, completamente paralizado de nervios. Entonces [3] al escenario. Todo el público [4]. La obra [5]. Diego [6] su segundo parlamento cuando de repente [7] de la tarima. El público [8] tanto que Diego también se rió. Improvisó una línea: "Y así fue como el personaje perdió la guerra." Al final, todos [9] de pie durante varios minutos.`,
+  },
+];
+
+let storyState={};
+
+function renderStory(){
+  storyState={};
+  STORIES.forEach((_,i)=>{storyState[i]={answers:{},done:false};});
+  renderStoryBody();
+}
+
+function renderStoryBody(){
+  const cards=STORIES.map((st,si)=>{
+    const state=storyState[si];
+    const wordsArr=st.text.split(/(\[\d+\])/);
+    const textHTML=wordsArr.map(part=>{
+      const m=part.match(/\[(\d+)\]/);
+      if(!m)return part;
+      const bi=parseInt(m[1]);
+      const blank=st.blanks[bi];
+      const ans=state.answers[bi];
+      let cls='story-blank';let txt='___';
+      if(ans!==undefined){
+        const isOk=normS(ans)===normS(blank.form);
+        cls='story-blank '+(isOk?'done-'+(blank.tense==='pret'?'p':'i'):'wrong');
+        txt=ans;
+      }
+      if(state.done&&ans===undefined){cls='story-blank done-'+(blank.tense==='pret'?'p':'i');txt=blank.form;}
+      const onclick=state.done?'':`onclick="openBlankModal(${si},${bi})"`;
+      return `<span class="${cls}" ${onclick} title="${blank.hint}">${txt}</span>`;
+    }).join('');
+    const filled=Object.keys(state.answers).length;
+    const total=st.blanks.length;
+    const ok=state.done?st.blanks.filter((_,bi)=>normS(state.answers[bi])===normS(st.blanks[bi].form)).length:0;
+    return `<div class="story-card">
+      <div class="story-title">${st.title}</div>
+      <div style="font-size:.77rem;color:var(--muted2);font-style:italic;margin-bottom:12px">${st.en}</div>
+      <div class="story-text" id="stxt${si}">${textHTML}</div>
+      ${state.done?`<div style="margin-top:12px;font-size:.82rem;color:var(--muted2)">
+        <span class="pill-p">Pink = pretérito</span> &nbsp; <span class="pill-i">Blue = imperfecto</span> &nbsp;
+        Score: <strong style="color:${ok===total?'var(--good)':'var(--warn)'}">${ok}/${total}</strong>
+      </div>`:''}
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <button class="btn btn-cyan" style="padding:7px 14px;font-size:.8rem" onclick="checkStory(${si})" ${filled===total&&!state.done?'':'disabled'} id="stchk${si}">Check ✓</button>
+        <button class="btn btn-ghost" style="padding:7px 14px;font-size:.8rem" onclick="revealStory(${si})">Show answers</button>
+        <button class="btn btn-ghost" style="padding:7px 14px;font-size:.8rem" onclick="resetStory(${si})">↺ Reset</button>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📖 Completa la historia — 5 relatos</div>
+  <div class="ex-instr">Click a blank to choose the form. No labels — decide from context. <span class="pill-p">Pink</span> = pretérito, <span class="pill-i">blue</span> = imperfecto after checking.</div>
+  <div class="legend" style="margin-bottom:14px">
+    <span style="font-size:.8rem;color:var(--muted2)">Hover any blank to see the verb + hint. The 4 options will always be: correct form / wrong tense / wrong person / present tense.</span>
+  </div>
+  ${cards}
+  </div>`;
+}
+
+function openBlankModal(si,bi){
+  const st=STORIES[si];const blank=st.blanks[bi];
+  const state=storyState[si];if(state.done)return;
+  // Fixed distractors: correct + wrong tense of same verb + wrong person + present
+  const opts=seededShuffle([
+    {form:blank.form, correct:true},
+    {form:blank.pretAlt, correct:false},
+    {form:blank.impAlt, correct:false},
+    {form:blank.pres, correct:false},
+  ].filter((o,i,arr)=>arr.findIndex(x=>normS(x.form)===normS(o.form))===i), si*7+bi*3);
+
+  const contextText=st.text.replace(/\[(\d+)\]/g,(m,n)=>{
+    const n2=parseInt(n);
+    if(n2===bi)return `<strong style="color:var(--cyan)">___</strong>`;
+    const a=state.answers[n2];
+    return a||st.blanks[n2].form;
+  });
+
+  document.body.insertAdjacentHTML('beforeend',`<div class="blank-modal" id="bm${si}_${bi}" onclick="if(event.target===this)closeModal('bm${si}_${bi}')">
+    <div class="blank-modal-box">
+      <div class="blank-modal-sent">${contextText}</div>
+      <div style="font-size:.74rem;font-weight:800;color:var(--muted2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">Verb: ${blank.verb} — ${blank.hint}</div>
+      <div class="blank-modal-opts">
+        ${opts.map(o=>`<button class="blank-modal-opt" style="background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:var(--text)" onclick="selectBlank(${si},${bi},'${o.form.replace(/'/g,"\\'")}','bm${si}_${bi}')">${o.form}</button>`).join('')}
+      </div>
+      <div class="blank-modal-close" onclick="closeModal('bm${si}_${bi}')">✕ Cancel</div>
+    </div>
+  </div>`);
+}
+function closeModal(id){const el=document.getElementById(id);if(el)el.remove();}
+function selectBlank(si,bi,form,mid){storyState[si].answers[bi]=form;closeModal(mid);renderStoryBody();}
+function checkStory(si){storyState[si].done=true;renderStoryBody();}
+function revealStory(si){STORIES[si].blanks.forEach((_,bi)=>{storyState[si].answers[bi]=STORIES[si].blanks[bi].form;});storyState[si].done=true;renderStoryBody();}
+function resetStory(si){storyState[si]={answers:{},done:false};renderStoryBody();}
+
+
+
+/* ══════════════════════════════════
+   EX 4 — TRANSFORMA LA ORACIÓN (16)
+   Student sees a sentence in one tense + new context
+   and picks the correct transformed version.
+   This forces understanding that the MEANING changes,
+   not just the form.
+══════════════════════════════════ */
+const TRANSFORM=[
+  {orig:'Siempre comía tacos los viernes. (imperfecto — hábito)',
+   ctx:'Now say it happened ONE specific Friday last week.',
+   correct:'El viernes pasado comí tacos.',
+   wrong:['El viernes pasado comía tacos.','Siempre comí tacos los viernes.','El viernes pasado como tacos.'],
+   exp:'"Comí" (pretérito) — adding "el viernes pasado" turns the habit into a single specific completed event. The imperfecto "comía" would still mean "used to eat."'},
+  {orig:'Llegué tarde al trabajo. (pretérito — evento único)',
+   ctx:'Now say this was something you did EVERY day at your old job.',
+   correct:'Siempre llegaba tarde al trabajo.',
+   wrong:['Siempre llegué tarde al trabajo.','Ayer llegaba tarde al trabajo.','Siempre llego tarde al trabajo.'],
+   exp:'"Llegaba" (imperfecto) — "siempre" signals a recurring habit. "Llegué" would describe a single arrival on one specific day, which contradicts "siempre."'},
+  {orig:'Vivía en Guadalajara. (imperfecto — estado continuo)',
+   ctx:'Now say she lived there for exactly 3 years.',
+   correct:'Vivió en Guadalajara tres años.',
+   wrong:['Vivía en Guadalajara tres años.','Vivió en Guadalajara siempre.','Vive en Guadalajara tres años.'],
+   exp:'"Vivió" (pretérito) — "tres años" defines a bounded, completed period. The imperfecto "vivía" would leave the duration open-ended with no clear end.'},
+  {orig:'De repente, alguien gritó. (pretérito — evento súbito)',
+   ctx:'Now describe what was happening in the background when someone screamed.',
+   correct:'Todos bailaban cuando alguien gritó.',
+   wrong:['Todos bailaron cuando alguien gritó.','Todos bailaban cuando alguien gritaba.','Todos bailaban cuando alguien grita.'],
+   exp:'"Bailaban" (imperfecto) + "gritó" (pretérito) — classic interruption: background action [IMP] interrupted by sudden event [PRET]. "Bailaron" would make both actions completed and sequential, not an interruption.'},
+  {orig:'Sabía que ella era profesora. (imperfecto — estado mental)',
+   ctx:'Now say you FOUND OUT she was a professor (a specific moment of learning).',
+   correct:'Supe que ella era profesora.',
+   wrong:['Sabía que ella fue profesora.','Supe que ella fue profesora.','Conocí que ella era profesora.'],
+   exp:'"Supe" (pretérito) — when "saber" is in pretérito, it means "to find out" (a specific moment of learning). "Sabía" = I already knew (an ongoing state). The second part stays imperfecto because being a professor is still a description/state.'},
+  {orig:'Conocía a tu hermano. (imperfecto — estar familiarizado)',
+   ctx:'Now say the first time you met her brother (a specific event).',
+   correct:'Conocí a tu hermano en una fiesta.',
+   wrong:['Conocía a tu hermano en una fiesta.','Supe a tu hermano en una fiesta.','Conocí a tu hermano siempre.'],
+   exp:'"Conocí" (pretérito) — when "conocer" is in pretérito, it means "to meet for the first time." "Conocía" = I was already acquainted with him (ongoing familiarity). A completely different meaning!'},
+  {orig:'No pude dormir. (pretérito — intento fallido específico)',
+   ctx:'Now say you generally weren\'t able to sleep during that difficult period.',
+   correct:'No podía dormir en esa época.',
+   wrong:['No pude dormir en esa época.','No podía dormir ayer.','No puedo dormir en esa época.'],
+   exp:'"Podía" (imperfecto) — "en esa época" + ongoing inability = state, not a single night\'s attempt. "No pude" would describe one specific night when you tried and failed.'},
+  {orig:'Mi abuela hacía tamales en Navidad. (imperfecto — hábito)',
+   ctx:'Now say the LAST time she made tamales was in 2019.',
+   correct:'La última vez que hizo tamales fue en 2019.',
+   wrong:['La última vez que hacía tamales fue en 2019.','La última vez que hizo tamales era en 2019.','La última vez que hace tamales fue en 2019.'],
+   exp:'"Hizo" (pretérito) — "la última vez" specifies a single, completed occasion. "Hacía" would still imply an ongoing habit. "Fue" is also pretérito for the same reason.'},
+  {orig:'El examen estuvo muy difícil. (pretérito — evento completado)',
+   ctx:'Now describe how exams at that school GENERALLY were.',
+   correct:'Los exámenes siempre eran muy difíciles.',
+   wrong:['Los exámenes siempre estuvieron muy difíciles.','Los exámenes siempre estaban muy difíciles.','Los exámenes siempre son muy difíciles.'],
+   exp:'"Eran" (imperfecto of ser) — describing a general characteristic of the exams as a pattern. Note: "ser" for inherent quality uses imperfecto for ongoing characteristic. "Estuvieron" would refer to specific completed exams, not the general pattern.'},
+  {orig:'Llovió toda la tarde. (pretérito — duración completada)',
+   ctx:'Now describe the weather as background when something else happened.',
+   correct:'Llovía cuando llegué a casa.',
+   wrong:['Llovió cuando llegué a casa.','Llovía cuando llegué a cas y ya terminó.','Llueve cuando llegué a casa.'],
+   exp:'"Llovía" (imperfecto) — the rain is now BACKGROUND for the arrival event. "Llovió cuando llegué" would make them two completed sequential events, not rain-as-setting.'},
+  {orig:'Ella llegó a las 9. (pretérito — hora específica)',
+   ctx:'Now say she USED TO arrive at 9 every day.',
+   correct:'Ella llegaba a las 9 todos los días.',
+   wrong:['Ella llegó a las 9 todos los días.','Ella llegaba a las 9 ayer.','Ella llega a las 9 todos los días.'],
+   exp:'"Llegaba" (imperfecto) — "todos los días" signals the habit. "Llegó" would mean she arrived once on one specific day.'},
+  {orig:'Tuve mucho trabajo esta semana. (pretérito — semana completada)',
+   ctx:'Now say having a lot of work was your normal situation back then.',
+   correct:'En esa época siempre tenía mucho trabajo.',
+   wrong:['En esa época siempre tuve mucho trabajo.','En esa época tenía mucho trabajo esta semana.','En esa época siempre tiene mucho trabajo.'],
+   exp:'"Tenía" (imperfecto) — "siempre" + "en esa época" = habitual ongoing state. "Tuve" would refer to a specific completed period of having work, not a general state.'},
+  {orig:'Leí ese libro en tres días. (pretérito — completado)',
+   ctx:'Describe what you were doing when your friend called.',
+   correct:'Leía ese libro cuando me llamó mi amigo.',
+   wrong:['Leí ese libro cuando me llamó mi amigo.','Leía ese libro cuando me llamaba mi amigo.','Leía ese libro cuando me llamó mi amiga.'],
+   exp:'"Leía" (imperfecto) + "llamó" (pretérito) — the reading is the ongoing background, the call is the interrupting event. "Leí cuando llamó" would make both completed sequential actions, losing the interruption meaning.'},
+  {orig:'Quise ir pero no pude. (pretérito — intento/intención específica)',
+   ctx:'Now describe the ongoing feeling of wanting to go (without implying you tried).',
+   correct:'Quería ir pero tenía mucho trabajo.',
+   wrong:['Quise ir pero tenía mucho trabajo.','Quería ir pero no pude.','Quería ir pero tuve mucho trabajo.'],
+   exp:'"Quería" (imperfecto) = I wanted to go (an ongoing feeling/desire). "Quise" (pretérito) = I tried / I made an attempt to go — a specific moment of decision or effort, stronger than just wanting.'},
+  {orig:'Vi esa película tres veces. (pretérito — repetición completada)',
+   ctx:'Now say this was something you did every weekend as a kid.',
+   correct:'De niño veía películas todos los fines de semana.',
+   wrong:['De niño vi películas todos los fines de semana.','De niño veía esa película todos los fines de semana.','De niño veo películas todos los fines de semana.'],
+   exp:'"Veía" (imperfecto) — childhood habit = imperfecto. "Vi" would describe a specific occasion, contradicting "todos los fines de semana."'},
+  {orig:'Había mucha gente en la plaza. (imperfecto — estado de fondo)',
+   ctx:'Now say a specific large crowd gathered for the concert.',
+   correct:'Hubo mucha gente en el concierto.',
+   wrong:['Había mucha gente en el concierto.','Hubo mucha gente en la plaza siempre.','Hay mucha gente en el concierto.'],
+   exp:'"Hubo" (pretérito of haber) — describes a specific event/occurrence: a crowd gathered for this particular concert. "Había" = there was (as background or ongoing state). Two completely different framings of the same reality!'},
+];
+
+let trAns={};
+
+function renderTransform(){
+  trAns={};
+  const tot=TRANSFORM.length;
+  const html=TRANSFORM.map((item,i)=>{
+    const opts=seededShuffle([item.correct,...item.wrong],i*11+3);
+    const chips=opts.map((o,oi)=>`<button class="tr-chip" id="tc${i}_${oi}" onclick="answerTransform(${i},'${o.replace(/'/g,"\\'")}')">${o}</button>`).join('');
+    return `<div class="tr-card" id="trc${i}">
+      <div class="tr-source"><span class="pill-i">Original:</span> <em style="color:var(--muted)">${item.orig}</em></div>
+      <div class="tr-ctx">💬 <strong>New context:</strong> ${item.ctx}</div>
+      <div class="tr-chips">${chips}</div>
+      <div class="tr-exp" id="te${i}"></div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">🔀 Transforma la oración</div>
+  <div class="ex-instr">You're given a sentence and a <strong>new context</strong>. Choose the version that fits the new context. This isn't just about changing forms — the <em>meaning changes too</em>.</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${tot}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="tr_ok">0</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="tr_err">0</span></div><div class="prog-w"><div class="prog-l">Answered: <span id="tr_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="tr_pg" style="width:0%"></div></div></div></div>
+  ${html}
+  <div class="fb" id="tr_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="trAns={};renderTransform()">↺ Reset</button></div></div>`;
+}
+
+function answerTransform(qi,chosen){
+  if(trAns[qi]!==undefined)return;
+  const item=TRANSFORM[qi];
+  const isOk=chosen===item.correct;
+  trAns[qi]=isOk;
+  const card=document.getElementById('trc'+qi);if(card)card.classList.add(isOk?'ok':'err');
+  // Disable all chips, highlight correct
+  document.querySelectorAll(`[id^="tc${qi}_"]`).forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===item.correct)b.classList.add('t-ok');
+    else if(b.textContent===chosen&&!isOk)b.classList.add('t-err');
+  });
+  const e=document.getElementById('te'+qi);
+  if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ ':'✗ ')+item.exp;}
+  const done=Object.keys(trAns).length;
+  const ok=Object.values(trAns).filter(v=>v).length;
+  document.getElementById('tr_ok').textContent=ok;
+  document.getElementById('tr_err').textContent=done-ok;
+  document.getElementById('tr_pct').textContent=Math.round(done/TRANSFORM.length*100)+'%';
+  document.getElementById('tr_pg').style.width=Math.round(done/TRANSFORM.length*100)+'%';
+  if(done===TRANSFORM.length){
+    const pct=Math.round(ok/done*100);
+    const fb=document.getElementById('tr_fb');
+    fb.className='fb show '+(pct>=80?'ok':'partial');
+    fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${ok}/${done}.</strong> ${pct>=80?'Excellent! You understand meaning, not just form.':'Pay attention to how the meaning shifts between tenses.'}`;
+  }
+}
+
+
+/* ══════════════════════════════════
+   EX 5 — ¿POR QUÉ? (choose tense + reason)
+   Harder: first choose pret or imp, then choose WHY
+   20 sentences, 2-step answer
+══════════════════════════════════ */
+const WHY=[
+  {s:'Cuando era pequeño, [tenía miedo] de los perros.',form:'tenía miedo',tense:'imp',
+   why:'State/feeling — being afraid is a description of an ongoing emotional state, not a specific event.',
+   reasons:['State/feeling — ongoing emotional background','Completed action — he stopped being afraid','Specific event that happened once','Result of something that happened']},
+  {s:'Ayer [llegué] tarde al trabajo por el tráfico.',form:'llegué',tense:'pret',
+   why:'Completed action with specific time marker (ayer). The late arrival happened and is done.',
+   reasons:['Completed action with specific time marker (ayer)','Habitual lateness — used to happen all the time','Description of ongoing state','Background setting for another event']},
+  {s:'La película [era] muy aburrida, así que [me fui].',form:'era / me fui',tense:'both',
+   why:'"Era" describes the movie (ongoing quality/state) → imperfecto. "Me fui" is the completed reaction → pretérito.',
+   reasons:['Description (era = IMP) → completed action (me fui = PRET)','Both are completed sequential actions','Both describe background states','Habitual pattern in the past']},
+  {s:'Siempre [desayunábamos] juntos cuando vivíamos cerca.',form:'desayunábamos',tense:'imp',
+   why:'"Siempre" signals a habitual, repeated action in the past. Imperfecto is used for routines.',
+   reasons:['Habitual/routine action ("siempre")','Specific completed breakfast on one day','The breakfast was interrupted by something','Background description of the kitchen']},
+  {s:'De repente, [apareció] un hombre con un abrigo rojo.',form:'apareció',tense:'pret',
+   why:'"De repente" = suddenly = signals an unexpected, instantaneous completed event. Always pretérito.',
+   reasons:['Sudden completed event ("de repente")','Habitual action that used to happen','Ongoing background action','Description of the man\'s appearance']},
+  {s:'Llovía cuando [salí] de la oficina.',form:'salí',tense:'pret',
+   why:'"Llovía" [IMP] sets the background. "Salí" is the specific completed action that happened within that background.',
+   reasons:['Specific completed action within the IMP background','Both verbs should be imperfecto here','Habitual routine of leaving the office','State of being outside in the rain']},
+  {s:'Mis padres [vivían] en Monterrey antes de mudarse a CDMX.',form:'vivían',tense:'imp',
+   why:'Describes an ongoing state (living somewhere) during an unspecified period in the past, without a defined start or end.',
+   reasons:['Ongoing state in the past — no defined end mentioned','Completed action with specific time limit','Sudden event in the story','A habitual weekend activity']},
+  {s:'Mis padres [vivieron] tres años en Monterrey.',form:'vivieron',tense:'pret',
+   why:'"Tres años" defines the duration as bounded and complete. The living there started, lasted 3 years, and ended.',
+   reasons:['Completed with a defined time limit (tres años)','Ongoing state — they still live there','Habitual activity of visiting Monterrey','Background description of the city']},
+  {s:'[Tenía] 15 años cuando [conocí] a mi mejor amiga.',form:'tenía / conocí',tense:'both',
+   why:'Age is always IMP (state). "Conocí" = the specific moment of meeting someone for the first time = PRET.',
+   reasons:['Age = state [IMP]; meeting someone = specific moment [PRET]','Both describe ongoing states from childhood','Both are completed actions with specific time','Age = completed; meeting = ongoing']},
+  {s:'Finalmente [pude] terminar el proyecto.',form:'pude',tense:'pret',
+   why:'"Pude" in PRET means "I managed to / I succeeded." "Finalmente" confirms completion. "Podía" would just mean ongoing ability.',
+   reasons:['Completed success — "managed to" (PRET of poder)','Ongoing ability — "was able to"','Habitual capability in the past','Description of the project\'s difficulty']},
+  {s:'No [sabía] que ella era tu hermana.',form:'sabía',tense:'imp',
+   why:'Knowing/not knowing is a mental STATE — ongoing. Not a specific moment of finding out.',
+   reasons:['Ongoing mental state — not knowing continuously','Specific moment of finding out (use supe for that)','Completed action of learning something','Background description of the sister']},
+  {s:'Ayer [supe] que me habían aceptado.',form:'supe',tense:'pret',
+   why:'"Supe" (PRET of saber) = the specific moment I found out. The news arrived at a point in time.',
+   reasons:['Specific moment of finding out — "supe" changes meaning in PRET','Ongoing state of knowing for a long time','Habitual learning about news','Background to another event']},
+  {s:'El cuarto [era] pequeño pero [tenía] mucha luz.',form:'era / tenía',tense:'imp',
+   why:'Both are descriptions of the room\'s ongoing qualities/characteristics. Pure background description = IMP.',
+   reasons:['Both describe ongoing characteristics (size, light)','Both are completed observations','One describes, one is an action','Habitual state of the room on weekends']},
+  {s:'[Comí] en ese restaurante una sola vez.',form:'comí',tense:'pret',
+   why:'"Una sola vez" = a single, bounded occasion. The meal happened once and is complete.',
+   reasons:['Single completed event ("una sola vez")','Habitual eating at that restaurant','Background description of the food','Ongoing state of being in the restaurant']},
+  {s:'Mientras ella [hablaba], yo [tomé] apuntes.',form:'hablaba / tomé',tense:'both',
+   why:'"Mientras" + IMP = while she was speaking (background). "Tomé apuntes" = the ongoing note-taking action I was doing in the foreground. Actually both could work; "tomaba" also OK here but "tomé" emphasizes the completed session.',
+   reasons:['While she spoke [IMP background] I took notes [PRET completed session]','Both describe simultaneous habits','She interrupted while I was taking notes','Background of what I knew before']},
+  {s:'Antes, [íbamos] al cine todos los viernes.',form:'íbamos',tense:'imp',
+   why:'"Antes" + "todos los viernes" = habitual past routine. No specific Friday is mentioned. Imperfecto.',
+   reasons:['Habitual routine ("antes... todos los viernes")','A specific Friday that they went','The cinema closed — that\'s why they stopped','Background for a specific Friday event']},
+  {s:'La primera vez que [probé] picante, [lloré].',form:'probé / lloré',tense:'pret',
+   why:'"La primera vez" = a unique, specific occasion. Both events happened at that one specific moment.',
+   reasons:['Single specific occurrence ("la primera vez")','Habitual reaction to spicy food','Ongoing taste sensitivity','Background description of the food']},
+  {s:'El semáforo [estaba] en verde cuando [pasé].',form:'estaba / pasé',tense:'both',
+   why:'"Estaba" [IMP] = the traffic light was in a state (green). "Pasé" [PRET] = the specific completed action of crossing.',
+   reasons:['State of the light [IMP] + specific crossing action [PRET]','Both describe what the driver was doing','Both are completed events in sequence','Background of the street\'s layout']},
+  {s:'No [quería] ir a la fiesta pero al final [fui].',form:'quería / fui',tense:'both',
+   why:'"Quería" [IMP] = ongoing state of not wanting (a feeling). "Fui" [PRET] = the completed action of going anyway.',
+   reasons:['Ongoing desire/feeling [IMP] + completed action [PRET]','Both describe completed refusals','Both are ongoing states of mind','Habitual party attendance pattern']},
+  {s:'Esa noche no [pude] dormir de los nervios.',form:'pude',tense:'pret',
+   why:'"Esa noche" = specific night. "No pude" in PRET = I failed to achieve sleep (specific unsuccessful attempt).',
+   reasons:['Specific failed attempt on one night ("esa noche")','Habitual insomnia from nerves','Ongoing inability to sleep in general','Background description of nervousness']},
+];
+
+let whyState={};
+
+function renderWhy(){
+  whyState={};WHY.forEach((_,i)=>{whyState[i]={done:false,ok:false};});
+  const html=WHY.map((item,i)=>{
+    const highlighted=item.s.replace(/\[([^\]]+)\]/,`<strong style="color:var(--warn)">$1</strong>`);
+    const tenseBtns=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+      <button class="btn btn-pret" id="wb_p${i}" style="padding:7px 14px;font-size:.8rem" onclick="selectWhy(${i},'pret')">📸 Pretérito</button>
+      <button class="btn btn-imp" id="wb_i${i}" style="padding:7px 14px;font-size:.8rem" onclick="selectWhy(${i},'imp')">🖼️ Imperfecto</button>
+      <button class="btn btn-ghost" id="wb_b${i}" style="padding:7px 14px;font-size:.8rem;border-color:rgba(255,200,0,.3);color:#fde68a" onclick="selectWhy(${i},'both')">🔀 Ambos</button>
+    </div>`;
+    return `<div class="mc-card" id="wc${i}">
+      <div class="mc-top"><span class="mc-num">${i+1}</span><span class="mc-sent">${highlighted}</span></div>
+      <div class="mc-en" style="margin-bottom:12px">${item.why.split('.')[0]}?</div>
+      ${tenseBtns}
+      <div id="wr${i}" style="display:none">
+        <div style="font-size:.82rem;font-weight:800;color:var(--muted2);margin-bottom:8px">Now choose WHY:</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          ${seededShuffle([item.why,...item.reasons.filter(r=>normS(r)!==normS(item.why))],i*13).map((r,ri)=>`<button class="mc-opt" id="wrb${i}_${ri}" onclick="answerWhy(${i},${ri},${seededShuffle([item.why,...item.reasons.filter(r=>normS(r)!==normS(item.why))],i*13).indexOf(r)===0?'true':'false'})">${r}</button>`).join('')}
+        </div>
+      </div>
+      <div class="mc-expl" id="we${i}"></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">❓ ¿Por qué? — Tense + Reason</div>
+  <div class="ex-instr">The bold word(s) are given. First: is it pretérito, imperfecto, or both? Then: choose the reason why. Understanding <em>why</em> is more powerful than memorizing rules.</div>
+  <div class="score-bar"><div class="sc"><span class="l">Total</span><span class="v">${WHY.length}</span></div><div class="sc"><span class="l">OK</span><span class="v g" id="w_ok">0</span></div><div class="sc"><span class="l">Miss</span><span class="v b" id="w_err">0</span></div><div class="prog-w"><div class="prog-l">Progress: <span id="w_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="w_pg" style="width:0%"></div></div></div></div>
+  ${html}
+  <div class="fb" id="w_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="whyState={};WHY.forEach((_,i)=>{whyState[i]={done:false,ok:false};});renderWhy()">↺ Reset</button></div></div>`;
+}
+
+function selectWhy(idx,tense){
+  const item=WHY[idx];
+  const isOk=tense===item.tense;
+  const btns=['pret','imp','both'].forEach(t=>{
+    const b=document.getElementById(`wb_${t[0]}${idx}`);
+    if(b){b.disabled=true;if(t===item.tense)b.style.opacity='1';else b.style.opacity='.3';}
+  });
+  const wr=document.getElementById('wr'+idx);
+  if(!isOk){
+    // Wrong tense — show explanation immediately
+    whyState[idx]={done:true,ok:false};
+    const e=document.getElementById('we'+idx);
+    if(e){e.classList.add('show');e.innerHTML=`✗ This is <strong>${item.tense==='both'?'both tenses':item.tense==='pret'?'pretérito':'imperfecto'}</strong>. ${item.why}`;}
+    updateWhyScore();
+  } else {
+    // Correct tense — show the "why" step
+    if(wr)wr.style.display='block';
+  }
+}
+
+function answerWhy(idx,ri,isCorrectStr){
+  const isOk=isCorrectStr==='true';
+  whyState[idx]={done:true,ok:isOk};
+  document.querySelectorAll(`[id^="wrb${idx}_"]`).forEach(b=>{
+    b.disabled=true;
+    const isThis=parseInt(b.id.split('_')[1])===ri;
+    if(isThis)b.classList.add(isOk?'mc-ok':'mc-err');
+  });
+  // Find and highlight correct
+  const item=WHY[idx];
+  const allOpts=seededShuffle([item.why,...item.reasons.filter(r=>normS(r)!==normS(item.why))],idx*13);
+  allOpts.forEach((r,x)=>{if(normS(r)===normS(item.why)){const b=document.getElementById(`wrb${idx}_${x}`);if(b)b.classList.add('mc-show');}});
+  const e=document.getElementById('we'+idx);
+  if(e){e.classList.add('show');e.innerHTML=(isOk?'✓ Exactly right! ':'✗ ')+item.why;}
+  updateWhyScore();
+}
+
+function updateWhyScore(){
+  const done=Object.values(whyState).filter(s=>s.done).length;
+  const ok=Object.values(whyState).filter(s=>s.ok).length;
+  document.getElementById('w_ok').textContent=ok;
+  document.getElementById('w_err').textContent=done-ok;
+  document.getElementById('w_pct').textContent=Math.round(done/WHY.length*100)+'%';
+  document.getElementById('w_pg').style.width=Math.round(done/WHY.length*100)+'%';
+  if(done===WHY.length){
+    const pct=Math.round(ok/WHY.length*100);
+    const fb=document.getElementById('w_fb');
+    fb.className='fb show '+(pct>=75?'ok':'partial');
+    fb.innerHTML=`${pct>=75?'🏆':'📖'} <strong>${ok}/${WHY.length}.</strong> ${pct>=75?'Excellent! You understand not just HOW but WHY.':'Focus on the explanations — understanding the reason helps more than memorizing.'}`;
+  }
+}
+
+/* ══════════════════════════════════
+   EX 6 — DRAG & SORT (classify signal words)
+   2 buckets: pretérito signals / imperfecto signals
+   + 1 "neutral" bucket (can work with either)
+══════════════════════════════════ */
+const SORT_BUCKETS=[
+  {id:'pret',label:'Pretérito 📸',sub:'signals a completed, specific event',col:'var(--pret2)',bg:'rgba(244,114,182,.07)',bd:'var(--pretbd)'},
+  {id:'imp', label:'Imperfecto 🖼️',sub:'signals habit, background, or state',col:'var(--imp2)', bg:'rgba(96,165,250,.07)', bd:'var(--impbd)'},
+];
+const SORT_CARDS=[
+  {id:'c1', t:'ayer',          b:'pret', x:'"Ayer" = yesterday = specific completed day → pretérito.'},
+  {id:'c2', t:'de repente',    b:'pret', x:'"De repente" = suddenly = signals an instantaneous event → pretérito.'},
+  {id:'c3', t:'entonces',      b:'pret', x:'"Entonces" = then (moving the story forward) → pretérito action.'},
+  {id:'c4', t:'al final',      b:'pret', x:'"Al final" = in the end = conclusion of a sequence → pretérito.'},
+  {id:'c5', t:'el lunes',      b:'pret', x:'"El lunes" = specific day = completed event → pretérito.'},
+  {id:'c6', t:'una vez',       b:'pret', x:'"Una vez" = once (a single occasion) → pretérito.'},
+  {id:'c7', t:'en ese momento',b:'pret', x:'"En ese momento" = at that moment = instantaneous event → pretérito.'},
+  {id:'c8', t:'finalmente',    b:'pret', x:'"Finalmente" = finally = completion of something → pretérito.'},
+  {id:'c9', t:'siempre',       b:'imp',  x:'"Siempre" = always = habitual/recurring pattern → imperfecto.'},
+  {id:'c10',t:'todos los días',b:'imp',  x:'"Todos los días" = every day = habitual routine → imperfecto.'},
+  {id:'c11',t:'de niño/a',     b:'imp',  x:'"De niño/a" = as a child = ongoing period → imperfecto.'},
+  {id:'c12',t:'antes',         b:'imp',  x:'"Antes" = before/in the past (no specific time) = habitual or ongoing → imperfecto.'},
+  {id:'c13',t:'mientras',      b:'imp',  x:'"Mientras" = while = two things happening simultaneously → typically imperfecto for the background action.'},
+  {id:'c14',t:'generalmente',  b:'imp',  x:'"Generalmente" = generally = habitual pattern → imperfecto.'},
+  {id:'c15',t:'en aquella época',b:'imp',x:'"En aquella época" = in those times = describing an era → imperfecto.'},
+  {id:'c16',t:'normalmente',   b:'imp',  x:'"Normalmente" = normally = habitual → imperfecto.'},
+  {id:'c17',t:'cada semana',   b:'imp',  x:'"Cada semana" = every week = recurring habit → imperfecto.'},
+  {id:'c18',t:'cuando era niño',b:'imp', x:'"Cuando era niño" = when I was a child = background period → imperfecto.'},
+  {id:'c19',t:'el año pasado', b:'pret', x:'"El año pasado" = last year = specific completed period → pretérito.'},
+  {id:'c20',t:'en 2010',       b:'pret', x:'A specific year = completed, bounded time → pretérito.'},
+];
+
+function renderSort(){
+  sortPlaced={};sortChecked=false;tapSel=null;
+  const shuffled=[...SORT_CARDS].sort(()=>Math.random()-.5);
+  const pile=shuffled.map(c=>`<div class="sort-chip" id="sc_${c.id}" draggable="true"
+    ondragstart="dragItem='${c.id}';setTimeout(()=>{const e=document.getElementById('sc_${c.id}');if(e)e.classList.add('ghost');},0)"
+    ondragend="const e=document.getElementById('sc_${c.id}');if(e)e.classList.remove('ghost');dragItem=null"
+    onclick="tapCard('${c.id}')">${c.t}</div>`).join('');
+  const bucks=SORT_BUCKETS.map(b=>`<div class="sort-bucket" id="bk_${b.id}"
+    style="background:${b.bg};border:2px dashed ${b.bd};flex:1;min-width:220px"
+    ondragover="event.preventDefault();this.classList.add('drag-over')"
+    ondragleave="this.classList.remove('drag-over')"
+    ondrop="dropCard(event,'${b.id}')"
+    onclick="tapBucket('${b.id}')">
+    <div class="bucket-title" style="color:${b.col}">${b.label}</div>
+    <div style="font-size:.65rem;color:var(--muted2);text-align:center;margin-bottom:4px">${b.sub}</div>
+  </div>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">📊 Clasifica las señales</div>
+  <div class="ex-instr">Sort each signal word or phrase into the tense it typically signals. Learning these triggers will help you choose the right tense automatically!</div>
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;color:var(--muted2);margin-bottom:8px">Signal words (${SORT_CARDS.length})</div>
+  <div class="sort-pile" id="sPile">${pile}</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">${bucks}</div>
+  <div class="fb" id="srtFb"></div>
+  <div class="actions"><button class="btn btn-cyan" id="srtChk" onclick="checkSort()" disabled>Check</button><button class="btn btn-ghost" onclick="renderSort()">↺ Reset</button></div></div>`;
+}
+function tapCard(id){
+  if(sortPlaced[id])return;const c=document.getElementById('sc_'+id);if(!c)return;
+  if(tapSel===id){c.style.boxShadow='';tapSel=null;return;}
+  if(tapSel){const p=document.getElementById('sc_'+tapSel);if(p)p.style.boxShadow='';}
+  tapSel=id;c.style.boxShadow='0 0 0 3px var(--cyan)';
+}
+function tapBucket(bId){if(!tapSel)return;placeCard(tapSel,bId);tapSel=null;}
+function dropCard(e,bId){e.preventDefault();document.getElementById('bk_'+bId).classList.remove('drag-over');if(!dragItem||sortPlaced[dragItem])return;placeCard(dragItem,bId);}
+function placeCard(id,bId){
+  sortPlaced[id]=bId;const card=document.getElementById('sc_'+id);const bk=document.getElementById('bk_'+bId);
+  if(!card||!bk)return;card.style.boxShadow='';card.classList.remove('ghost');card.draggable=false;
+  const b=SORT_BUCKETS.find(x=>x.id===bId);if(b)card.style.borderColor=b.col;
+  card.onclick=()=>{if(sortChecked)return;delete sortPlaced[id];const c=document.getElementById('sc_'+id);const pile=document.getElementById('sPile');if(!c||!pile)return;c.style.borderColor='';c.style.boxShadow='';c.draggable=true;c.onclick=()=>tapCard(id);pile.appendChild(c);const btn=document.getElementById('srtChk');if(btn)btn.disabled=true;};
+  bk.appendChild(card);
+  if(Object.keys(sortPlaced).length===SORT_CARDS.length){const btn=document.getElementById('srtChk');if(btn)btn.disabled=false;}
+}
+function checkSort(){
+  sortChecked=true;let ok=0;
+  SORT_CARDS.forEach(item=>{const c=document.getElementById('sc_'+item.id);if(!c)return;
+    const isOk=sortPlaced[item.id]===item.b;if(isOk)ok++;
+    const b=SORT_BUCKETS.find(x=>x.id===item.b);
+    c.className='sort-chip '+(isOk?'c-ok':'c-err');c.draggable=false;c.onclick=null;
+    if(isOk&&b)c.style.borderColor=b.col;
+    if(!isOk){const rb=SORT_BUCKETS.find(x=>x.id===item.b);c.innerHTML=`${item.t}<span style="font-size:.7rem;display:block;margin-top:2px">→ ${rb?rb.label:item.b}</span>`;}
+    c.title=item.x;
+  });
+  const pct=Math.round(ok/SORT_CARDS.length*100);
+  const fb=document.getElementById('srtFb');fb.className='fb show '+(pct>=80?'ok':'partial');
+  fb.innerHTML=`<strong>${ok}/${SORT_CARDS.length} (${pct}%).</strong> Hover/tap red items to see the correct category and why.`;
+  document.getElementById('srtChk').disabled=true;
+}
+
+/* ══════════════════════════════════
+   EX 7 — SPEED ROUND (30)
+   Prompt → type conjugated form
+   Mix of pret + imp, all persons
+══════════════════════════════════ */
+const SPEED=[
+  {q:'hablar — yo — pretérito',hint:'hablé',a:'hable',also:['hablé']},
+  {q:'hablar — yo — imperfecto',hint:'hablaba',a:'hablaba',also:[]},
+  {q:'comer — tú — pretérito',hint:'comiste',a:'comiste',also:[]},
+  {q:'comer — ella — imperfecto',hint:'comía',a:'comia',also:['comía']},
+  {q:'vivir — nosotros — pretérito',hint:'vivimos',a:'vivimos',also:[]},
+  {q:'vivir — ellos — imperfecto',hint:'vivían',a:'vivian',also:['vivían']},
+  {q:'ser — yo — pretérito',hint:'fui',a:'fui',also:[]},
+  {q:'ser — tú — imperfecto',hint:'eras',a:'eras',also:[]},
+  {q:'ir — ella — pretérito',hint:'fue',a:'fue',also:[]},
+  {q:'ir — nosotros — imperfecto',hint:'íbamos',a:'ibamos',also:['íbamos']},
+  {q:'tener — yo — pretérito',hint:'tuve',a:'tuve',also:[]},
+  {q:'tener — yo — imperfecto',hint:'tenía',a:'tenia',also:['tenía']},
+  {q:'hacer — él — pretérito',hint:'hizo',a:'hizo',also:[]},
+  {q:'hacer — yo — pretérito',hint:'hice',a:'hice',also:[]},
+  {q:'estar — yo — pretérito',hint:'estuve',a:'estuve',also:[]},
+  {q:'estar — ellas — imperfecto',hint:'estaban',a:'estaban',also:[]},
+  {q:'poder — yo — pretérito',hint:'pude',a:'pude',also:[]},
+  {q:'poder — tú — imperfecto',hint:'podías',a:'podias',also:['podías']},
+  {q:'decir — yo — pretérito',hint:'dije',a:'dije',also:[]},
+  {q:'decir — ellos — pretérito',hint:'dijeron',a:'dijeron',also:[]},
+  {q:'venir — yo — pretérito',hint:'vine',a:'vine',also:[]},
+  {q:'ver — ella — imperfecto',hint:'veía',a:'veia',also:['veía']},
+  {q:'saber — yo — pretérito (I found out)',hint:'supe',a:'supe',also:[]},
+  {q:'querer — yo — imperfecto (I wanted)',hint:'quería',a:'queria',also:['quería']},
+  {q:'hablar — usted — pretérito',hint:'habló',a:'hablo',also:['habló']},
+  {q:'llegar — nosotros — pretérito',hint:'llegamos',a:'llegamos',also:[]},
+  {q:'ver — yo — pretérito',hint:'vi',a:'vi',also:[]},
+  {q:'conocer — yo — pretérito (I met)',hint:'conocí',a:'conoci',also:['conocí']},
+  {q:'haber (hay) — pretérito',hint:'hubo',a:'hubo',also:[]},
+  {q:'haber (había) — imperfecto',hint:'había',a:'habia',also:['había']},
+];
+
+function renderSpeed(){
+  if(spTimer){clearInterval(spTimer);spTimer=null;}
+  spIdx=0;spOk=0;spErr=0;spStreak=0;spAnswered=false;
+  const arr=[...SPEED];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  window.__sp=arr;
+  document.getElementById('exContainer').innerHTML=`<div class="panel"><div class="ex-title">⚡ Speed round — Conjugaciones</div>
+  <div class="ex-instr">Type the correct conjugated form. Accents are optional — the answer is accepted without them.</div>
+  <div class="sp-wrap" id="spWrap"><div class="sp-start"><div style="font-size:2.8rem">⚡</div><h2>Conjugar en contexto</h2><p style="color:var(--muted);max-width:420px">30 conjugations — pretérito and imperfecto, regular and irregular.</p><button class="btn btn-cyan" onclick="startSpeed()">¡Empezamos!</button></div></div></div>`;
+}
+function startSpeed(){spIdx=0;spOk=0;spErr=0;spStreak=0;nextQ();}
+function nextQ(){
+  const arr=window.__sp;
+  if(spIdx>=arr.length){endSpeed();return;}
+  spAnswered=false;const item=arr[spIdx];spTimeLeft=12;
+  const isPret=item.hint===normS(item.hint)?true:item.q.includes('pretérito');
+  const tenseTag=item.q.includes('pretérito')?`<span class="sp-tense" style="background:var(--pret3);color:var(--pret2);border:1px solid var(--pretbd)">📸 Pretérito</span>`:`<span class="sp-tense" style="background:var(--imp3);color:var(--imp2);border:1px solid var(--impbd)">🖼️ Imperfecto</span>`;
+  document.getElementById('spWrap').innerHTML=`
+    <div class="sp-stats"><div class="spst"><div class="sl">Q</div><div class="sv w">${spIdx+1}/${arr.length}</div></div><div class="spst"><div class="sl">OK</div><div class="sv g">${spOk}</div></div><div class="spst"><div class="sl">Miss</div><div class="sv b">${spErr}</div></div></div>
+    <div class="streak${spStreak>=3?' on':''}" id="stk">🔥 x${spStreak}</div>
+    <div class="sp-card">${tenseTag}<div class="sp-q">${item.q}</div><div class="sp-hint">💡 ${item.hint}</div></div>
+    <div class="tmr-row"><div class="tmr-trk"><div class="tmr-fil" id="tF" style="width:100%;transition:width 1s linear"></div></div><div class="tmr-n" id="tN">12</div></div>
+    <div class="sp-row"><input id="sInp" class="sp-inp" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="conjugate…" onkeydown="if(event.key==='Enter')submitQ()"><button class="btn btn-cyan" onclick="submitQ()" style="flex-shrink:0">→</button></div>
+    <div class="sp-fb" id="sFb" style="opacity:0"></div>`;
+  setTimeout(()=>{const i=document.getElementById('sInp');if(i)i.focus();},50);
+  if(spTimer)clearInterval(spTimer);
+  spTimer=setInterval(()=>{
+    spTimeLeft--;const f=document.getElementById('tF'),n=document.getElementById('tN');
+    if(f)f.style.width=Math.max(0,(spTimeLeft/12)*100)+'%';
+    if(n){n.textContent=spTimeLeft;n.style.color=spTimeLeft<=3?'var(--bad)':spTimeLeft<=5?'var(--warn)':'var(--muted2)';}
+    if(spTimeLeft<=0){clearInterval(spTimer);spTimer=null;if(!spAnswered)submitQ();}
+  },1000);
+}
+function submitQ(){
+  const arr=window.__sp;
+  const inp=document.getElementById('sInp');if(!inp||spAnswered)return;
+  spAnswered=true;if(spTimer){clearInterval(spTimer);spTimer=null;}inp.disabled=true;
+  const item=arr[spIdx];const nt=normS(inp.value);const na=normS(item.a);
+  const isOk=nt===na||item.also.map(normS).includes(nt);
+  if(isOk){spOk++;spStreak++;}else{spErr++;spStreak=0;}
+  const fb=document.getElementById('sFb');
+  if(fb){fb.style.opacity='1';
+    if(!inp.value.trim()){fb.className='sp-fb err';fb.innerHTML=`⏱ → <strong>${item.hint}</strong>`;}
+    else if(isOk){fb.className='sp-fb ok';fb.innerHTML=`✓ Correct!${spStreak>=3?' 🔥 x'+spStreak:''}`;}
+    else{fb.className='sp-fb err';fb.innerHTML=`✗ <strong>${inp.value}</strong> → <strong>${item.hint}</strong>`;}}
+  if(spStreak>=3){const cf=document.getElementById('cf');cf.textContent='🔥 x'+spStreak;cf.classList.remove('pop');void cf.offsetWidth;cf.classList.add('pop');}
+  spIdx++;setTimeout(nextQ,isOk?700:1500);
+}
+function endSpeed(){
+  const pct=Math.round(spOk/SPEED.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('spWrap').innerHTML=`<div class="sp-start"><div style="font-size:3rem">${emo}</div><h2>${spOk}/${SPEED.length}</h2><p style="color:var(--muted)">${pct>=90?'¡Excelente! Perfect conjugations!':pct>=70?'¡Muy bien! Almost there.':pct>=50?'Good start. Review irregulars.':'Review the conjugation cards first.'}</p><button class="btn btn-cyan" onclick="startSpeed()">↺ Try again</button></div>`;
+}
+
+/* ══════════════════════════════════
+   EX 8 — REFERENCE
+══════════════════════════════════ */
+function renderRef(){
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-title">📄 Reference card — Pretérito vs Imperfecto</div>
+  <div class="ex-instr">Your complete guide. The key insight: these tenses don't just say WHEN something happened — they say HOW you're framing it in the story.</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px">
+    <div style="background:var(--pret3);border:1.5px solid var(--pretbd);border-radius:14px;padding:16px">
+      <div class="ref-h3" style="color:var(--pret2);background:transparent;padding:0 0 8px;margin:0 0 10px;border-bottom:1px solid var(--pretbd)">📸 Pretérito — uses</div>
+      ${[['Completed action','Llegué a las 8.'],['Sequence of events','Llegué, comí, dormí.'],['Specific moment','De repente, vi algo.'],['Bounded duration','Vivió allí 3 años.'],['Moment of learning (saber/conocer)','Supe la noticia ayer.'],['Interrupting event','...cuando sonó el teléfono.']].map(([use,ex])=>`<div style="font-size:.82rem;margin-bottom:8px"><strong style="color:var(--pret2)">${use}</strong><br><span style="color:var(--muted);font-style:italic">${ex}</span></div>`).join('')}
+    </div>
+    <div style="background:var(--imp3);border:1.5px solid var(--impbd);border-radius:14px;padding:16px">
+      <div class="ref-h3" style="color:var(--imp2);background:transparent;padding:0 0 8px;margin:0 0 10px;border-bottom:1px solid var(--impbd)">🖼️ Imperfecto — uses</div>
+      ${[['Background/setting','Llovía y hacía frío.'],['Ongoing habit','Íbamos al mercado los domingos.'],['State or description','Era alto y tenía ojos azules.'],['Age (always!)','Tenía 10 años.'],['Time (always!)','Eran las 3am.'],['Interrupted action','Dormía cuando...']].map(([use,ex])=>`<div style="font-size:.82rem;margin-bottom:8px"><strong style="color:var(--imp2)">${use}</strong><br><span style="color:var(--muted);font-style:italic">${ex}</span></div>`).join('')}
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--warn);background:rgba(245,158,11,.08)">⚡ Verbs that change meaning</div>
+    <table class="ref-table">
+      <tr><th>Verb</th><th>Imperfecto</th><th>Pretérito</th></tr>
+      ${[['saber','sabía = I knew (state)','supe = I found out (moment)'],['conocer','conocía = I knew/was familiar with','conocí = I met for the first time'],['poder','podía = I was able to (capacity)','pude = I managed to / succeeded'],['querer','quería = I wanted (feeling)','quise = I tried / decided to'],['tener','tenía = I had (possession/state)','tuve = I had (got, received, experienced)'],['haber','había = there was/were (background)','hubo = there was/were (event occurred)']].map(r=>`<tr><td style="font-family:var(--display);font-weight:800;color:var(--warn)">${r[0]}</td><td style="color:var(--imp2)">${r[1]}</td><td style="color:var(--pret2)">${r[2]}</td></tr>`).join('')}
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--pret2);background:var(--pret3)">📸 Pretérito signal words</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+      ${['ayer','anteayer','el lunes','el año pasado','en 2010','de repente','entonces','luego','después','al final','finalmente','en ese momento','una vez','la primera vez','en cuanto'].map(w=>`<span style="background:var(--pret3);border:1px solid var(--pretbd);color:var(--pret2);border-radius:7px;padding:4px 10px;font-size:.78rem;font-weight:700">${w}</span>`).join('')}
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-h3" style="color:var(--imp2);background:var(--imp3)">🖼️ Imperfecto signal words</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+      ${['siempre','nunca','todos los días','cada semana','de niño/a','de joven','antes','normalmente','generalmente','mientras','en aquella época','cuando era pequeño','con frecuencia','a menudo','era / tenía / había / estaba'].map(w=>`<span style="background:var(--imp3);border:1px solid var(--impbd);color:var(--imp2);border-radius:7px;padding:4px 10px;font-size:.78rem;font-weight:700">${w}</span>`).join('')}
+    </div>
+  </div>
+
+  <div class="ref-tip">💡 <strong>The #1 rule:</strong> Ask yourself "is this a snapshot (photo) or a painting?" If it's a specific completed moment → pretérito. If it's background, description, or habit → imperfecto. When in doubt, ask: "did this action MOVE the story forward, or did it SET THE SCENE?"</div>
+  </div>`;
+}
+
+goEx(0);
+</script>
+</body>
+</html>

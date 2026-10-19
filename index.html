@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>YMF Spanish</title>
+<meta name="description" content="Interactive Mexican Spanish exercises from A1 to B2 — by Your Mexican Friend.">
+<meta name="theme-color" content="#0d0d12">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YMF Spanish">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0d12; --surface: #15151e; --surface2: #1d1d29;
+    --border: rgba(255,255,255,0.08); --accent: #b14fff; --neon: #d97bff;
+    --text: #f0eaf8; --muted: #8b82a0;
+    --a1: #39e6a0; --a2: #4fc3f7; --b1: #f5c842; --b2: #ff7c5c;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --nav-h: 64px;
+  }
+  html, body { background: var(--bg); color: var(--text); height: 100%; }
+  body { font-family: 'Inter', system-ui, sans-serif; font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, .display { font-family: 'Space Grotesk', system-ui, sans-serif; letter-spacing: -0.01em; }
+
+  /* ---------- layout ---------- */
+  #app { max-width: 640px; margin: 0 auto; min-height: 100%; padding: calc(var(--safe-top) + 12px) 16px calc(var(--nav-h) + var(--safe-bottom) + 24px); }
+  .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .topbar img { width: 40px; height: 40px; border-radius: 12px; }
+  .topbar .t1 { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700; font-size: 18px; }
+  .topbar .t2 { font-size: 12px; color: var(--muted); }
+  .topbar .spacer { flex: 1; }
+  .pill { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 99px; background: var(--surface2); border: 1px solid var(--border); color: var(--muted); }
+  .pill.off { color: #ffb36b; border-color: rgba(255,179,107,.35); }
+  .section-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 26px 0 10px; }
+  .page-title { font-size: 28px; font-weight: 700; margin: 4px 0 4px; }
+  .page-sub { color: var(--muted); font-size: 14px; }
+
+  /* ---------- hero progress ---------- */
+  .hero { position: relative; overflow: hidden; border-radius: 22px; padding: 20px; background: linear-gradient(140deg, #2a1048, #15151e 70%); border: 1px solid rgba(177,79,255,.3); display: flex; align-items: center; gap: 18px; }
+  .hero::after { content: ''; position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; background: radial-gradient(circle, rgba(217,123,255,.35), transparent 70%); pointer-events: none; }
+  .ring { --p: 0; width: 76px; height: 76px; flex: none; border-radius: 50%; background: conic-gradient(var(--neon) calc(var(--p) * 1%), rgba(255,255,255,.08) 0); display: grid; place-items: center; }
+  .ring span { width: 60px; height: 60px; border-radius: 50%; background: #1a1226; display: grid; place-items: center; font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700; font-size: 17px; }
+  .hero h2 { font-size: 20px; line-height: 1.2; }
+  .hero p { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+  /* ---------- continue card ---------- */
+  .continue { margin-top: 14px; display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); }
+  .continue .lbl { font-size: 11px; color: var(--neon); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+  .continue .nm { font-weight: 600; }
+  .continue .go { margin-left: auto; width: 36px; height: 36px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; font-weight: 700; flex: none; }
+
+  /* ---------- level grid ---------- */
+  .levels { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .level-card { position: relative; padding: 16px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); overflow: hidden; min-height: 118px; display: flex; flex-direction: column; }
+  .level-card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--c); }
+  .level-card .code { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700; font-size: 26px; color: var(--c); }
+  .level-card .name { font-weight: 600; font-size: 14px; }
+  .level-card .meta { margin-top: auto; font-size: 12px; color: var(--muted); }
+  .bar { height: 5px; border-radius: 99px; background: rgba(255,255,255,.07); margin-top: 8px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--c, var(--neon)); border-radius: 99px; transition: width .4s; }
+
+  /* ---------- tools ---------- */
+  .tools { display: grid; gap: 10px; }
+  .tool { display: flex; gap: 12px; align-items: center; padding: 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); }
+  .tool .ic { font-size: 22px; width: 42px; height: 42px; border-radius: 12px; background: var(--surface2); display: grid; place-items: center; flex: none; }
+  .tool .nm { font-weight: 600; font-size: 14px; }
+  .tool .ds { color: var(--muted); font-size: 12px; }
+
+  /* ---------- chips & search ---------- */
+  .chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin: 0 -16px; padding-left: 16px; padding-right: 16px; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; padding: 8px 14px; border-radius: 99px; font-size: 13px; font-weight: 500; background: var(--surface); border: 1px solid var(--border); color: var(--muted); }
+  .chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .search { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 0 14px; margin: 16px 0 12px; }
+  .search input { flex: 1; background: none; border: 0; outline: 0; color: var(--text); font: inherit; font-size: 16px; padding: 13px 0; }
+  .search input::placeholder { color: var(--muted); }
+
+  /* ---------- exercise list ---------- */
+  .list { display: grid; gap: 8px; margin-top: 14px; }
+  .ex { display: flex; align-items: center; gap: 12px; padding: 13px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); text-align: left; width: 100%; }
+  .ex .dot { width: 34px; height: 34px; border-radius: 10px; flex: none; display: grid; place-items: center; font-size: 12px; font-weight: 700; font-family: 'Space Grotesk', system-ui, sans-serif; color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); }
+  .ex.done .dot { background: var(--c); color: #0d0d12; }
+  .ex .info { flex: 1; min-width: 0; }
+  .ex .nm { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ex .sub { font-size: 12px; color: var(--muted); display: flex; gap: 8px; align-items: center; }
+  .ex .tag-off { color: var(--a1); }
+  .ex .tag-on { color: var(--muted); opacity: .8; }
+  .ex .star { color: var(--b1); }
+  .empty { text-align: center; color: var(--muted); padding: 40px 12px; }
+
+  /* ---------- progress page ---------- */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .stat { padding: 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); text-align: center; }
+  .stat b { display: block; font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 24px; }
+  .stat span { font-size: 12px; color: var(--muted); }
+  .lvl-row { padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); margin-bottom: 8px; }
+  .lvl-row .top { display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; }
+  .lvl-row .top span { color: var(--muted); font-weight: 500; }
+  .links { display: grid; gap: 8px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 16px; border-radius: 14px; font-weight: 600; background: var(--surface); border: 1px solid var(--border); width: 100%; }
+  .btn.primary { background: linear-gradient(135deg, #8b2fd9, var(--accent)); border-color: transparent; box-shadow: 0 6px 24px rgba(177,79,255,.35); }
+  .btn.ghost { background: none; color: var(--muted); }
+
+  /* ---------- install banner ---------- */
+  .install { margin-top: 14px; display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 16px; background: rgba(57,230,160,.08); border: 1px solid rgba(57,230,160,.3); }
+  .install .tx { flex: 1; font-size: 13px; }
+  .install .tx b { display: block; font-size: 14px; }
+  .install button.go { padding: 8px 14px; border-radius: 10px; background: var(--a1); color: #0d0d12; font-weight: 700; font-size: 13px; }
+  .install button.x { color: var(--muted); font-size: 18px; padding: 4px; }
+
+  /* ---------- bottom nav ---------- */
+  nav.tabs { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; height: calc(var(--nav-h) + var(--safe-bottom)); padding-bottom: var(--safe-bottom); background: rgba(13,13,18,.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid var(--border); display: flex; justify-content: center; }
+  nav.tabs .in { display: flex; width: 100%; max-width: 640px; }
+  nav.tabs a { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 500; color: var(--muted); }
+  nav.tabs a svg { width: 22px; height: 22px; }
+  nav.tabs a.on { color: var(--neon); }
+
+  /* ---------- exercise viewer ---------- */
+  #viewer { position: fixed; inset: 0; z-index: 50; background: var(--bg); display: none; flex-direction: column; }
+  #viewer.open { display: flex; animation: up .22s ease-out; }
+  @keyframes up { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .vbar { display: flex; align-items: center; gap: 6px; padding: calc(var(--safe-top) + 8px) 8px 8px; background: var(--surface); border-bottom: 1px solid var(--border); }
+  .vbar .ib { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; flex: none; }
+  .vbar .ib svg { width: 22px; height: 22px; }
+  .vbar .ttl { flex: 1; min-width: 0; }
+  .vbar .ttl b { display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .vbar .ttl span { font-size: 11px; color: var(--muted); }
+  .vbar .done-btn { padding: 8px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; background: var(--surface2); border: 1px solid var(--border); white-space: nowrap; }
+  .vbar .done-btn.on { background: var(--a1); color: #0d0d12; border-color: var(--a1); }
+  .vbar .fav.on { color: var(--b1); }
+  .vframe { flex: 1; position: relative; background: #fff; }
+  .vframe iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: var(--bg); }
+  .vmsg { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 24px; background: var(--bg); color: var(--muted); }
+  .vmsg b { display: block; color: var(--text); font-size: 18px; margin-bottom: 6px; font-family: 'Space Grotesk', system-ui, sans-serif; }
+  .loader { width: 36px; height: 36px; border-radius: 50%; border: 3px solid rgba(255,255,255,.1); border-top-color: var(--neon); animation: spin .8s linear infinite; margin: 0 auto 12px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- sheet & toast ---------- */
+  .sheet-bg { position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,.6); display: none; align-items: flex-end; justify-content: center; }
+  .sheet-bg.open { display: flex; }
+  .sheet { width: 100%; max-width: 640px; background: var(--surface); border-radius: 22px 22px 0 0; padding: 22px 20px calc(var(--safe-bottom) + 20px); border-top: 1px solid var(--border); }
+  .sheet h3 { font-size: 20px; margin-bottom: 12px; }
+  .sheet ol { padding-left: 20px; display: grid; gap: 8px; margin-bottom: 18px; color: var(--muted); }
+  .sheet ol b { color: var(--text); }
+  .toast { position: fixed; z-index: 70; left: 50%; bottom: calc(var(--nav-h) + var(--safe-bottom) + 16px); transform: translateX(-50%) translateY(20px); opacity: 0; transition: .25s; background: var(--surface2); border: 1px solid var(--border); padding: 10px 16px; border-radius: 12px; font-size: 14px; pointer-events: none; white-space: nowrap; }
+  .toast.show { opacity: 1; transform: translateX(-50%); }
+  #viewer.open ~ .toast { bottom: calc(var(--safe-bottom) + 20px); }
+</style>
+</head>
+<body>
+
+<main id="app"></main>
+
+<nav class="tabs" aria-label="Main">
+  <div class="in">
+    <a href="#/" data-tab="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>
+      Home
+    </a>
+    <a href="#/explore" data-tab="explore">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      Explore
+    </a>
+    <a href="#/progress" data-tab="progress">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+      Progress
+    </a>
+  </div>
+</nav>
+
+<section id="viewer" aria-modal="true" role="dialog">
+  <div class="vbar">
+    <button class="ib" id="v-back" aria-label="Back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18 9 12l6-6"/></svg>
+    </button>
+    <div class="ttl"><b id="v-title"></b><span id="v-sub"></span></div>
+    <button class="ib fav" id="v-fav" aria-label="Favorite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg>
+    </button>
+    <button class="done-btn" id="v-done">Mark done</button>
+  </div>
+  <div class="vframe" id="v-frame"></div>
+</section>
+
+<div class="sheet-bg" id="ios-sheet">
+  <div class="sheet">
+    <h3>Install on iPhone</h3>
+    <ol>
+      <li>Open this page in <b>Safari</b>.</li>
+      <li>Tap the <b>Share</b> button (square with an arrow).</li>
+      <li>Choose <b>Add to Home Screen</b>.</li>
+      <li>Tap <b>Add</b>. Done — YMF is on your home screen.</li>
+    </ol>
+    <button class="btn primary" id="ios-close">Got it</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

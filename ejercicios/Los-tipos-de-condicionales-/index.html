@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oraciones Condicionales | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;
+  --c0:#34d399;--c1:#f97316;--c2:#a78bfa;--c3:#f472b6;--cm:#25d9ff;
+  --font:'DM Sans',system-ui,sans-serif;--display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(37,217,255,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 20% 10%,rgba(167,139,250,.12),transparent 35%),radial-gradient(ellipse at 80% 15%,rgba(34,211,153,.07),transparent 35%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(960px,96%);margin:14px auto 60px;display:flex;flex-direction:column;gap:14px}
+.hero{border-radius:22px;padding:26px 30px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.hero-in{position:relative;z-index:1}
+.hero-top{display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.logo-box{width:56px;height:56px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--magenta)}
+.hero h1{font-family:var(--display);font-size:clamp(1.2rem,3vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--c0),var(--c1) 30%,var(--c2) 60%,var(--c3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:.86rem;margin-top:3px;line-height:1.55}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:3px 11px;font-size:.7rem;font-weight:700;color:var(--muted)}
+/* QUICK REF TABLE */
+.qref-table{width:100%;border-collapse:collapse;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.qref-table th{text-align:left;padding:10px 14px;font-size:.66rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.08)}
+.qref-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);font-size:.86rem;vertical-align:top}
+.qref-table tr:last-child td{border-bottom:0}
+.qref-table tr:hover td{background:rgba(255,255,255,.02)}
+.qref-type{font-family:var(--display);font-weight:900;font-size:.9rem;white-space:nowrap}
+.qref-struct{font-family:var(--display);font-size:.82rem;font-weight:800;line-height:1.6}
+.qref-struct em{font-style:normal}
+.qref-idea{font-size:.8rem;color:var(--muted2);line-height:1.5}
+/* TABS */
+.tabs-wrap{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.tabs-bar{display:flex;overflow-x:auto;border-bottom:1px solid rgba(255,255,255,.07);scrollbar-width:none}
+.tabs-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;border:0;background:transparent;color:var(--muted2);font-family:var(--font);font-size:.8rem;font-weight:700;padding:13px 22px;cursor:pointer;transition:.2s;border-bottom:2.5px solid transparent;white-space:nowrap}
+.tab-btn:hover{color:var(--text)}.tab-btn.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+.tab-panel{display:none;padding:28px 30px}.tab-panel.visible{display:block}
+/* EXPLANATION */
+.expl-box{border-radius:16px;padding:20px 22px;margin-bottom:20px;border:1.5px solid}
+.expl-title{font-family:var(--display);font-size:1.1rem;font-weight:900;margin-bottom:14px}
+.expl-body{font-size:.9rem;color:var(--muted);line-height:1.9}
+.expl-body strong{color:var(--text)}
+.expl-body em{font-style:normal;font-weight:700}
+/* STRUCTURE BOX */
+.struct-box{border-radius:11px;padding:12px 16px;margin:12px 0;font-family:var(--display);font-size:.95rem;font-weight:800;line-height:1.8}
+.struct-box span{opacity:.6;font-size:.8rem;font-weight:700}
+/* EXAMPLES */
+.ex-list{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.ex-item{background:rgba(255,255,255,.03);border-radius:11px;padding:11px 15px;border-left:4px solid}
+.ex-item .es{font-weight:700;font-size:.93rem;margin-bottom:3px}
+.ex-item .en{font-size:.8rem;color:var(--muted2);font-style:italic}
+.ex-item .note{font-size:.74rem;color:var(--muted2);margin-top:3px}
+/* WARNING */
+.warn-box{background:rgba(239,68,68,.07);border:1.5px solid rgba(239,68,68,.25);border-radius:11px;padding:11px 15px;margin:12px 0;font-size:.85rem;line-height:1.7}
+.warn-box strong{color:#fca5a5}
+/* CONTRAST */
+.contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.contrast-card{border-radius:12px;padding:13px 15px;border:1.5px solid}
+.contrast-label{font-size:.64rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+.contrast-sent{font-weight:700;font-size:.9rem;margin-bottom:4px;line-height:1.5}
+.contrast-note{font-size:.76rem;color:var(--muted2);line-height:1.5}
+/* FLASHCARDS */
+.fc-scene{perspective:900px;width:100%;max-width:460px;margin:0 auto 12px;height:170px;cursor:pointer}
+.fc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.fc-card.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:18px;text-align:center;border:1.5px solid}
+.fc-front{background:rgba(255,255,255,.04)}
+.fc-back{transform:rotateY(180deg);background:rgba(255,255,255,.06)}
+.fc-cond{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.fc-sent{font-family:var(--display);font-size:1rem;font-weight:900;line-height:1.5;margin-bottom:6px}
+.fc-en{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.5}
+.fc-note{font-size:.72rem;color:var(--muted2);margin-top:5px}
+.fc-nav{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:12px}
+.fc-counter{font-size:.76rem;font-weight:800;color:var(--muted2)}
+.btn-fc{border:0;border-radius:9px;padding:6px 16px;font-weight:800;font-family:var(--font);font-size:.8rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(255,255,255,.11)}
+.btn-fc:hover{background:rgba(255,255,255,.14)}
+/* EXERCISES */
+.ex-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.ex-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.ex-title{font-family:var(--display);font-size:.8rem;font-weight:900;color:var(--cyan);text-transform:uppercase;letter-spacing:.05em}
+.score-row{display:flex;align-items:center;gap:8px}
+.score-pill{background:rgba(167,139,250,.15);color:#c4b5fd;border-radius:999px;padding:3px 12px;font-size:.7rem;font-weight:800;border:1px solid rgba(167,139,250,.3)}
+.btn-restart{border:1px solid rgba(249,115,22,.35);border-radius:999px;padding:3px 10px;font-weight:800;font-family:var(--font);font-size:.68rem;cursor:pointer;background:rgba(249,115,22,.08);color:#f97316}
+.wb-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px 14px;margin-bottom:14px;font-size:.82rem;color:var(--muted2)}
+.wb-box strong{color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px}
+.q-list{display:flex;flex-direction:column;gap:13px}
+.q-item{font-size:.92rem}
+.q-num{font-size:.68rem;font-weight:900;color:var(--muted2);margin-right:4px}
+.q-stem{font-weight:600;margin-bottom:5px;line-height:1.75}
+.q-sub{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:7px;padding-left:8px;border-left:2px solid rgba(255,255,255,.1)}
+.blank{display:inline-block;border-bottom:2.5px solid var(--cyan);min-width:120px;text-align:center;padding:0 4px;color:var(--cyan);font-weight:900;font-family:var(--display);font-size:.95rem}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.chip{border:0;border-radius:9px;padding:7px 14px;font-weight:800;font-family:var(--display);font-size:.88rem;cursor:pointer;transition:.13s;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.11);color:var(--text)}
+.chip:hover:not([disabled]):not(.used){transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.chip.used{opacity:.18;cursor:not-allowed}
+.chip.chip-ok{border-color:var(--good);background:rgba(34,197,94,.18);color:#86efac}
+.chip.chip-err{border-color:var(--bad);background:rgba(239,68,68,.14);color:#fca5a5}
+.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.mc-opt{border:0;border-radius:10px;padding:9px 14px;font-weight:700;font-family:var(--font);font-size:.88rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);color:var(--text);text-align:left}
+.mc-opt:hover:not([disabled]){transform:translateY(-1px);border-color:rgba(37,217,255,.4)}
+.mc-opt[disabled]{cursor:default;transform:none}
+.mc-opt.sel-correct{border-color:var(--good);background:rgba(34,197,94,.15);color:#86efac}
+.mc-opt.sel-wrong{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.show-correct{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.q-input{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:9px;padding:9px 13px;color:var(--text);font-family:var(--font);font-size:.9rem;outline:none;transition:.2s;width:100%;margin-bottom:4px}
+.q-input:focus{border-color:rgba(37,217,255,.4)}.q-input[disabled]{opacity:.65}
+.q-input.inp-ok{border-color:var(--good);background:rgba(34,197,94,.06)}
+.q-input.inp-err{border-color:var(--bad);background:rgba(239,68,68,.05)}
+.btn-check{border:0;border-radius:8px;padding:7px 16px;font-weight:800;font-family:var(--font);font-size:.8rem;cursor:pointer;transition:.13s;background:rgba(37,217,255,.12);border:1.5px solid rgba(37,217,255,.28);color:var(--cyan);margin-top:6px}
+.btn-check:hover{background:rgba(37,217,255,.2)}.btn-check[disabled]{opacity:.4}
+.q-fb{display:none;font-size:.8rem;color:var(--muted);margin-top:6px;padding:7px 11px;border-radius:8px;background:rgba(255,255,255,.04);line-height:1.65}
+.q-fb.show{display:block}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:4px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.contrast-grid{grid-template-columns:1fr}.mc-opts{grid-template-columns:1fr}.tab-panel{padding:18px 14px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-top">
+      <div class="logo-box">YMF</div>
+      <div>
+        <h1>Oraciones Condicionales</h1>
+        <p>Tipo 0 · Tipo 1 · Tipo 2 · Tipo 3 · Mixtas · Nivel B1–B2 · Español mexicano neutro</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge" style="border-color:rgba(52,211,153,.4);color:var(--c0)">🟢 Tipo 0 — Verdad general</span>
+      <span class="badge" style="border-color:rgba(249,115,22,.4);color:var(--c1)">🟠 Tipo 1 — Real/posible</span>
+      <span class="badge" style="border-color:rgba(167,139,250,.4);color:var(--c2)">🟣 Tipo 2 — Irreal presente</span>
+      <span class="badge" style="border-color:rgba(244,114,182,.4);color:var(--c3)">🩷 Tipo 3 — Irreal pasado</span>
+      <span class="badge" style="border-color:rgba(37,217,255,.4);color:var(--cm)">🔀 Mixtas</span>
+      <span class="badge">By Carlos &amp; Denisse</span>
+    </div>
+  </div>
+</header>
+<!-- QUICK REFERENCE TABLE -->
+<div style="background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)">
+  <table class="qref-table">
+    <thead><tr>
+      <th>Tipo</th><th>Condición (SI)</th><th>Resultado</th><th>Significado</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><div class="qref-type" style="color:var(--c0)">🟢 Tipo 0</div><div class="qref-idea">Verdad general</div></td>
+        <td><div class="qref-struct"><em style="color:var(--c0)">si</em> + presente indicativo</div></td>
+        <td><div class="qref-struct">presente indicativo</div></td>
+        <td><div class="qref-idea">Siempre cierto, hechos científicos</div></td>
+      </tr>
+      <tr>
+        <td><div class="qref-type" style="color:var(--c1)">🟠 Tipo 1</div><div class="qref-idea">Real / posible</div></td>
+        <td><div class="qref-struct"><em style="color:var(--c1)">si</em> + presente indicativo</div></td>
+        <td><div class="qref-struct">futuro / imperativo</div></td>
+        <td><div class="qref-idea">Posible en el futuro</div></td>
+      </tr>
+      <tr>
+        <td><div class="qref-type" style="color:var(--c2)">🟣 Tipo 2</div><div class="qref-idea">Irreal presente</div></td>
+        <td><div class="qref-struct"><em style="color:var(--c2)">si</em> + imperfecto subjuntivo</div></td>
+        <td><div class="qref-struct">condicional simple</div></td>
+        <td><div class="qref-idea">Hipótesis — no es real ahora</div></td>
+      </tr>
+      <tr>
+        <td><div class="qref-type" style="color:var(--c3)">🩷 Tipo 3</div><div class="qref-idea">Irreal pasado</div></td>
+        <td><div class="qref-struct"><em style="color:var(--c3)">si</em> + pluscuamperfecto subj.</div></td>
+        <td><div class="qref-struct">condicional perfecto</div></td>
+        <td><div class="qref-idea">No ocurrió — lamento o hipótesis</div></td>
+      </tr>
+      <tr>
+        <td><div class="qref-type" style="color:var(--cm)">🔀 Mixta</div><div class="qref-idea">Combinada</div></td>
+        <td><div class="qref-struct"><em style="color:var(--cm)">si</em> + pluscuamperfecto subj.</div></td>
+        <td><div class="qref-struct">condicional simple</div></td>
+        <td><div class="qref-idea">Pasado irreal → resultado presente</div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="tabs-wrap">
+  <div class="tabs-bar" id="tabsBar"></div>
+  <div id="tabContents"></div>
+</div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · yourmexicanfriend.com</p>
+</div>
+<script>
+const TABS=[
+// ── 0: TIPO 0 ─────────────────────────────────────────────────────────────────
+{title:'🟢 Tipo 0',color:'var(--c0)',
+expl:`<strong>Tipo 0 — Verdad general o científica</strong><br><br>
+<div class="struct-box" style="background:rgba(52,211,153,.1);border:1.5px solid rgba(52,211,153,.3);color:var(--c0)">
+  <em style="color:var(--muted2);font-size:.75rem">SI</em> + presente indicativo &nbsp;→&nbsp; presente indicativo
+</div>
+Se usa para expresar hechos que son <em>siempre ciertos</em> — leyes naturales, hábitos, consecuencias automáticas.<br>
+A diferencia del tipo 1, aquí <strong>no hay condición real</strong>: es una relación causa-efecto garantizada.<br><br>
+<strong>Nota:</strong> <em>Si</em> puede sustituirse por <em>cuando</em> sin cambiar el significado.`,
+examples:[
+  {es:'Si calientas el agua, <strong>hierve</strong>.',en:'If you heat water, it boils.',note:'→ Ley física.'},
+  {es:'Si no comes, <strong>tienes</strong> hambre.',en:'If you don\'t eat, you get hungry.',note:'→ Consecuencia biológica.'},
+  {es:'Si mezclas azul y amarillo, <strong>obtienes</strong> verde.',en:'If you mix blue and yellow, you get green.',note:'→ Verdad científica.'},
+  {es:'Si estudias, <strong>aprendes</strong>.',en:'If you study, you learn.',note:'→ Causa-efecto habitual.'},
+  {es:'Si la dejas al sol, la mantequilla <strong>se derrite</strong>.',en:'If you leave it in the sun, butter melts.',note:'→ Hecho general.'},
+],
+flashcards:[
+  {front:'Si + presente → presente',frontSub:'Tipo 0 — verdad general',back:'Si calientas el agua, hierve.',backEn:'If you heat water, it boils.'},
+  {front:'Siempre cierto',frontSub:'Tipo 0 — causa y efecto',back:'Si no comes, tienes hambre.',backEn:'If you don\'t eat, you get hungry.'},
+  {front:'Ley o hábito',frontSub:'Tipo 0 — intercambiable con "cuando"',back:'Si mezclas azul y amarillo, obtienes verde.',backEn:'If you mix blue and yellow, you get green.'},
+  {front:'Sin si → cuando',frontSub:'Tipo 0 — equivalencia',back:'Cuando estudias, aprendes. = Si estudias, aprendes.',backEn:'Both mean the same in Type 0.'},
+],
+exercises:[
+  {type:'fill',title:'A. Completa con la forma correcta (presente → presente)',
+   wb:['sube','tienes','mezclas','sacas','no duermes','llegas','calientas'],
+   qs:[
+     {stem:'Si ___ el agua a 100°C, hierve.',sub:'If you ___ water to 100°C, it boils.',a:'calientas'},
+     {stem:'Si no comes, ___ hambre.',sub:'If you don\'t eat, you ___ hungry.',a:'tienes'},
+     {stem:'Si ___ azul y rojo, obtienes morado.',sub:'If you ___ blue and red, you get purple.',a:'mezclas'},
+     {stem:'Si ___ la leche del refrigerador, se pone tibia.',sub:'If you ___ the milk from the fridge, it gets warm.',a:'sacas'},
+     {stem:'Si no ___ bien, te cansas más.',sub:'If you ___ well, you get more tired.',a:'no duermes'},
+   ]},
+  {type:'mc',title:'B. ¿Cuál es la oración tipo 0 correcta?',
+   qs:[
+     {stem:'¿Cuál expresa una verdad general?',opts:['Si estudiaré, aprobaré.','Si estudias, aprendes.','Si estudiaras, aprobarías.','Si hubieras estudiado, habrías aprobado.'],a:1,fb:'Tipo 0: Si + presente → presente. Causa-efecto siempre cierto.'},
+     {stem:'¿Qué se puede usar en lugar de "si" en el tipo 0?',opts:['aunque','mientras','cuando','porque'],a:2,fb:'En el tipo 0, <em>si</em> y <em>cuando</em> son intercambiables: "Si calientas el agua, hierve" = "Cuando calientas el agua, hierve."'},
+     {stem:'¿Cuál NO es un ejemplo de tipo 0?',opts:['Si mezclas rojo y azul, obtienes morado.','Si no como, tengo hambre.','Si tuviera dinero, viajaría.','Si no duermes, te cansas.'],a:2,fb:'La opción C usa imperfecto de subjuntivo → es tipo 2 (hipótesis irreal), no tipo 0.'},
+   ]},
+  {type:'translate',title:'C. Traduce al español',
+   qs:[
+     {stem:'If you heat water, it boils.',a:'Si calientas el agua, hierve.'},
+     {stem:'If you don\'t sleep, you get tired.',a:'Si no duermes, te cansas.'},
+     {stem:'If you mix blue and red, you get purple.',a:'Si mezclas azul y rojo, obtienes morado.'},
+     {stem:'If you study, you learn.',a:'Si estudias, aprendes.'},
+   ]},
+]},
+
+// ── 1: TIPO 1 ─────────────────────────────────────────────────────────────────
+{title:'🟠 Tipo 1',color:'var(--c1)',
+expl:`<strong>Tipo 1 — Real o posible</strong><br><br>
+<div class="struct-box" style="background:rgba(249,115,22,.1);border:1.5px solid rgba(249,115,22,.3);color:var(--c1)">
+  <em style="color:var(--muted2);font-size:.75rem">SI</em> + presente indicativo &nbsp;→&nbsp; futuro / imperativo / presente
+</div>
+La condición es <em>real y posible</em> — el hablante considera que puede ocurrir.<br>
+La consecuencia puede expresarse en futuro (más formal), imperativo (orden/consejo) o presente (coloquial).<br><br>
+<div class="warn-box">⚠️ <strong>Nunca</strong> se usa <em>si</em> + futuro o condicional en la cláusula de condición.<br>
+❌ <del>Si llegarás tarde, avísame.</del> &nbsp;✅ <strong>Si llegas tarde, avísame.</strong></div>`,
+examples:[
+  {es:'Si <strong>llueve</strong> mañana, no <strong>saldremos</strong>.',en:'If it rains tomorrow, we won\'t go out.',note:'→ Posible en el futuro.'},
+  {es:'Si <strong>tienes</strong> tiempo, <strong>llámame</strong>.',en:'If you have time, call me.',note:'→ Condición + imperativo.'},
+  {es:'Si no <strong>estudias</strong>, no <strong>vas a pasar</strong>.',en:'If you don\'t study, you\'re not going to pass.',note:'→ Advertencia — ir a + infinitivo.'},
+  {es:'Si <strong>consigo</strong> el trabajo, <strong>te invito</strong> a cenar.',en:'If I get the job, I\'ll take you out to dinner.',note:'→ Plan condicional.'},
+  {es:'Si <strong>hay</strong> lugares disponibles, <strong>reservaré</strong> hoy.',en:'If there are available spots, I\'ll book today.',note:'→ Condición verificable.'},
+],
+flashcards:[
+  {front:'Si + presente → futuro',frontSub:'Tipo 1 — posible',back:'Si llueve mañana, no saldremos.',backEn:'If it rains tomorrow, we won\'t go out.'},
+  {front:'Si + presente → imperativo',frontSub:'Tipo 1 — consejo/orden',back:'Si tienes tiempo, llámame.',backEn:'If you have time, call me.'},
+  {front:'Si + presente → ir a + inf.',frontSub:'Tipo 1 — advertencia coloquial',back:'Si no estudias, no vas a pasar.',backEn:'If you don\'t study, you\'re not going to pass.'},
+  {front:'Condición posible',frontSub:'Tipo 1 — plan condicional',back:'Si consigo el trabajo, te invito a cenar.',backEn:'If I get the job, I\'ll take you out to dinner.'},
+  {front:'⚠️ ERROR COMÚN',frontSub:'Tipo 1 — NUNCA si + futuro',back:'❌ Si llegarás tarde... → ✅ Si llegas tarde...',backEn:'Never use future after "si" in the condition clause.'},
+],
+exercises:[
+  {type:'fill',title:'A. Completa la cláusula de resultado (futuro o imperativo)',
+   wb:['llegaremos','avísame','compraremos','lloverá','podrás','te ayudaré','saldrá'],
+   qs:[
+     {stem:'Si salimos temprano, ___ a tiempo.',sub:'If we leave early, we\'ll arrive on time.',a:'llegaremos'},
+     {stem:'Si tienes algún problema, ___ .',sub:'If you have any problem, let me know.',a:'avísame'},
+     {stem:'Si hay descuento, ___ dos.',sub:'If there\'s a discount, we\'ll buy two.',a:'compraremos'},
+     {stem:'Si terminas pronto, ___ salir más temprano.',sub:'If you finish soon, you\'ll be able to leave earlier.',a:'podrás'},
+     {stem:'Si me lo pides, ___ con gusto.',sub:'If you ask me, I\'ll help you gladly.',a:'te ayudaré'},
+   ]},
+  {type:'fill',title:'B. Completa la cláusula SI (presente indicativo)',
+   wb:['tienes','llueve','consigo','no estudias','hay','llega'],
+   qs:[
+     {stem:'Si ___ mañana, cancelaremos el picnic.',sub:'If it ___ tomorrow, we\'ll cancel the picnic.',a:'llueve'},
+     {stem:'Si ___ el empleo, te aviso.',sub:'If I ___ the job, I\'ll let you know.',a:'consigo'},
+     {stem:'Si ___ , no vas a pasar el examen.',sub:'If you ___ , you\'re not going to pass the exam.',a:'no estudias'},
+     {stem:'Si ___ tarde, llámame.',sub:'If he/she ___ late, call me.',a:'llega'},
+   ]},
+  {type:'mc',title:'C. ¿Cuál es correcto?',
+   qs:[
+     {stem:'Elige la oración tipo 1 correcta:',opts:['Si llegarás tarde, avísame.','Si llegas tarde, avisarás.','Si llegas tarde, avísame.','Si llegaras tarde, avísame.'],a:2,fb:'Tipo 1: <strong>Si + presente indicativo → imperativo</strong>. Nunca si + futuro.'},
+     {stem:'"Si consigo el trabajo, ___." ¿Qué va?',opts:['te invitaría a cenar.','te invite a cenar.','te invitara a cenar.','te invito a cenar.'],a:3,fb:'Tipo 1 puede usar presente en lugar de futuro en contextos coloquiales: <strong>te invito</strong>.'},
+     {stem:'"Si hay tiempo, ___ el museo." ¿Qué va?',opts:['visitaríamos','visitaremos','visitáramos','hubiéramos visitado'],a:1,fb:'Tipo 1: si + presente → <strong>futuro: visitaremos</strong>.'},
+   ]},
+  {type:'translate',title:'D. Traduce al español',
+   qs:[
+     {stem:'If it rains tomorrow, we won\'t go out.',a:'Si llueve mañana, no saldremos.'},
+     {stem:'If you have time, call me.',a:'Si tienes tiempo, llámame.'},
+     {stem:'If I get the job, I\'ll invite you to dinner.',a:'Si consigo el trabajo, te invito a cenar./Si consigo el trabajo, te invitaré a cenar.'},
+     {stem:'If you don\'t study, you\'re not going to pass.',a:'Si no estudias, no vas a pasar.'},
+   ]},
+]},
+
+// ── 2: TIPO 2 ─────────────────────────────────────────────────────────────────
+{title:'🟣 Tipo 2',color:'var(--c2)',
+expl:`<strong>Tipo 2 — Hipótesis irreal en el presente</strong><br><br>
+<div class="struct-box" style="background:rgba(167,139,250,.1);border:1.5px solid rgba(167,139,250,.3);color:var(--c2)">
+  <em style="color:var(--muted2);font-size:.75rem">SI</em> + imperfecto de subjuntivo &nbsp;→&nbsp; condicional simple
+</div>
+La condición es <em>irreal o muy poco probable en el presente o futuro</em>.<br>
+El hablante sabe que la situación no es real, pero imagina qué pasaría.<br><br>
+<strong>Imperfecto de subjuntivo:</strong> <em>-ara/-ase</em> (hablar → hablara/hablase) · <em>-iera/-iese</em> (comer → comiera) · igual para -ir.<br><br>
+<strong>Equivalentes formales:</strong><br>
+<em>De + infinitivo</em> puede sustituir la cláusula si: <em>De tener dinero, viajaría.</em><br>
+<em>Yo que tú + condicional</em> = consejo: <em>Yo que tú, hablaría con ella.</em>`,
+examples:[
+  {es:'Si <strong>tuviera</strong> más tiempo, <strong>viajaría</strong> más.',en:'If I had more time, I would travel more.',note:'→ No tengo más tiempo — hipótesis.'},
+  {es:'Si <strong>fuera</strong> rico, no <strong>trabajaría</strong>.',en:'If I were rich, I wouldn\'t work.',note:'→ No soy rico — situación irreal.'},
+  {es:'Si ella <strong>hablara</strong> español, <strong>conseguiría</strong> el empleo.',en:'If she spoke Spanish, she would get the job.',note:'→ No habla español — hipótesis.'},
+  {es:'Si <strong>pudiéramos</strong>, <strong>ayudaríamos</strong> más.',en:'If we could, we would help more.',note:'→ No podemos — condición irreal.'},
+  {es:'¿Qué <strong>harías</strong> si <strong>perdieras</strong> el trabajo?',en:'What would you do if you lost your job?',note:'→ Pregunta hipotética.'},
+  {es:'Si no <strong>existieran</strong> los teléfonos, la vida <strong>sería</strong> muy diferente.',en:'If phones didn\'t exist, life would be very different.',note:'→ Suposición sobre el mundo.'},
+],
+flashcards:[
+  {front:'Si + imp. subj. → condicional',frontSub:'Tipo 2 — irreal presente',back:'Si tuviera dinero, viajaría.',backEn:'If I had money, I would travel.'},
+  {front:'No soy rico — hipótesis',frontSub:'Tipo 2 — situación irreal',back:'Si fuera rico, no trabajaría.',backEn:'If I were rich, I wouldn\'t work.'},
+  {front:'De + infinitivo',frontSub:'Tipo 2 — forma formal',back:'De tener tiempo, te ayudaría.',backEn:'If I had time, I would help you.'},
+  {front:'Yo que tú + condicional',frontSub:'Tipo 2 — consejo',back:'Yo que tú, hablaría con ella directamente.',backEn:'If I were you, I would talk to her directly.'},
+  {front:'¿Qué harías si...?',frontSub:'Tipo 2 — pregunta hipotética',back:'¿Qué harías si perdieras el trabajo?',backEn:'What would you do if you lost your job?'},
+  {front:'pudiera → podría',frontSub:'Tipo 2 — irregulares comunes',back:'Si pudiéramos, ayudaríamos más.',backEn:'If we could, we would help more.'},
+],
+exercises:[
+  {type:'fill',title:'A. Completa con el imperfecto de subjuntivo',
+   wb:['tuviera','fuera','hablara','pudiera','viviera','supiera','existieran'],
+   qs:[
+     {stem:'Si ___ más dinero, compraría un coche nuevo. (tener)',sub:'If I had more money, I would buy a new car.',a:'tuviera'},
+     {stem:'Si ella ___ español, conseguiría el trabajo. (hablar)',sub:'If she spoke Spanish, she would get the job.',a:'hablara'},
+     {stem:'Si ___ más joven, estudiaría otro idioma. (ser/yo)',sub:'If I were younger, I would study another language.',a:'fuera'},
+     {stem:'¿Qué harías si ___ el trabajo? (perder/tú → perdiera)',sub:'What would you do if you lost your job?',a:'perdieras'},
+     {stem:'Si no ___ teléfonos, la vida sería muy diferente. (existir)',sub:'If phones didn\'t exist, life would be very different.',a:'existieran'},
+   ]},
+  {type:'fill',title:'B. Completa con el condicional simple',
+   wb:['viajaría','compraríamos','hablaría','ayudarían','sería','estudiaríamos'],
+   qs:[
+     {stem:'Si tuviera tiempo libre, ___ por todo México. (viajar/yo)',sub:'If I had free time, I would travel through all of Mexico.',a:'viajaría'},
+     {stem:'Yo que tú, ___ con ella directamente. (hablar)',sub:'If I were you, I would talk to her directly.',a:'hablaría'},
+     {stem:'Si pudieran, nos ___ más. (ayudar/ellos)',sub:'If they could, they would help us more.',a:'ayudarían'},
+     {stem:'Si no fuera tan caro, ___ dos. (comprar/nosotros)',sub:'If it weren\'t so expensive, we would buy two.',a:'compraríamos'},
+   ]},
+  {type:'mc',title:'C. Identifica el tipo 2',
+   qs:[
+     {stem:'¿Cuál es una oración tipo 2 correcta?',opts:['Si tengo tiempo, te llamo.','Si tuviera tiempo, te llamaría.','Si tuve tiempo, te llamé.','Si hubiera tenido tiempo, te habría llamado.'],a:1,fb:'Tipo 2: <strong>Si + imperfecto de subj. → condicional simple</strong>: <em>tuviera → llamaría</em>.'},
+     {stem:'"De tener más experiencia, conseguiría el trabajo." ¿Qué equivale a esto?',opts:['Si tengo más experiencia, conseguiré el trabajo.','Si tuviera más experiencia, conseguiría el trabajo.','Si hubiera tenido más experiencia, habría conseguido el trabajo.','Cuando tenga más experiencia, conseguiré el trabajo.'],a:1,fb:'<em>De + infinitivo</em> = <em>si + imperfecto de subj.</em> → tipo 2.'},
+     {stem:'"Si ___ más joven, estudiaría medicina." ¿Qué forma va?',opts:['soy','seré','sería','fuera'],a:3,fb:'Tipo 2: <em>si + imperfecto de subj.</em>: <strong>fuera</strong> (irregular de SER).'},
+   ]},
+  {type:'translate',title:'D. Traduce al español',
+   qs:[
+     {stem:'If I had more time, I would travel more.',a:'Si tuviera más tiempo, viajaría más.'},
+     {stem:'If she spoke Spanish, she would get the job.',a:'Si hablara español, conseguiría el trabajo.'},
+     {stem:'What would you do if you lost your job?',a:'¿Qué harías si perdieras el trabajo?'},
+     {stem:'If I were you, I would talk to her.',a:'Yo que tú, hablaría con ella./Si fuera tú, hablaría con ella.'},
+     {stem:'If phones didn\'t exist, life would be very different.',a:'Si no existieran los teléfonos, la vida sería muy diferente.'},
+   ]},
+]},
+
+// ── 3: TIPO 3 ─────────────────────────────────────────────────────────────────
+{title:'🩷 Tipo 3',color:'var(--c3)',
+expl:`<strong>Tipo 3 — Hipótesis irreal en el pasado</strong><br><br>
+<div class="struct-box" style="background:rgba(244,114,182,.1);border:1.5px solid rgba(244,114,182,.3);color:var(--c3)">
+  <em style="color:var(--muted2);font-size:.75rem">SI</em> + pluscuamperfecto de subjuntivo &nbsp;→&nbsp; condicional perfecto
+</div>
+La condición <em>no ocurrió en el pasado</em>. Expresa lamento o especulación sobre algo que ya no puede cambiar.<br><br>
+<strong>Pluscuamperfecto de subj.:</strong> hubiera/hubiese + participio<br>
+<strong>Condicional perfecto:</strong> habría/habrías/habría + participio<br><br>
+<strong>Formal/literario:</strong> <em>De + infinitivo compuesto</em> = si + pluscuamperfecto subj.<br>
+<em>De haber sabido, no habría dicho nada.</em>`,
+examples:[
+  {es:'Si <strong>hubiera estudiado</strong> más, <strong>habría aprobado</strong>.',en:'If I had studied more, I would have passed.',note:'→ No estudié — no aprobé.'},
+  {es:'Si ella <strong>hubiera llegado</strong> a tiempo, <strong>habría conseguido</strong> el trabajo.',en:'If she had arrived on time, she would have gotten the job.',note:'→ Llegó tarde — no consiguió el trabajo.'},
+  {es:'Si <strong>hubiéramos sabido</strong> la verdad, no <strong>habríamos</strong> tomado esa decisión.',en:'If we had known the truth, we wouldn\'t have made that decision.',note:'→ No sabíamos — tomamos la decisión.'},
+  {es:'¿Qué <strong>habrías hecho</strong> si <strong>hubieras estado</strong> en mi lugar?',en:'What would you have done if you had been in my place?',note:'→ Pregunta hipotética sobre el pasado.'},
+  {es:'De <strong>haber llegado</strong> antes, <strong>habría visto</strong> la presentación.',en:'If I had arrived earlier, I would have seen the presentation.',note:'→ De + inf. compuesto = si + pluscuamperfecto subj.'},
+],
+flashcards:[
+  {front:'Si + pluscuamp. subj. → cond. perfecto',frontSub:'Tipo 3 — irreal pasado',back:'Si hubiera estudiado, habría aprobado.',backEn:'If I had studied, I would have passed.'},
+  {front:'Lamento sobre el pasado',frontSub:'Tipo 3 — ya no se puede cambiar',back:'Si ella hubiera llegado a tiempo, habría conseguido el trabajo.',backEn:'If she had arrived on time, she would have gotten the job.'},
+  {front:'hubiera + participio',frontSub:'Tipo 3 — pluscuamperfecto de subj.',back:'Si hubiéramos sabido, no habríamos dicho nada.',backEn:'If we had known, we wouldn\'t have said anything.'},
+  {front:'habría + participio',frontSub:'Tipo 3 — condicional perfecto',back:'¿Qué habrías hecho tú en mi lugar?',backEn:'What would you have done in my place?'},
+  {front:'De + inf. compuesto',frontSub:'Tipo 3 — forma literaria/formal',back:'De haber llegado antes, habría visto todo.',backEn:'If I had arrived earlier, I would have seen everything.'},
+  {front:'No ocurrió → consecuencia perdida',frontSub:'Tipo 3 — estructura completa',back:'Si hubieran avisado, habríamos esperado.',backEn:'If they had let us know, we would have waited.'},
+],
+exercises:[
+  {type:'fill',title:'A. Completa con el pluscuamperfecto de subjuntivo',
+   wb:['hubiera estudiado','hubiera llegado','hubiéramos sabido','hubieran avisado','hubiera tenido','hubiera hablado'],
+   qs:[
+     {stem:'Si ___ más, habría aprobado el examen.',sub:'If I had studied more, I would have passed the exam.',a:'hubiera estudiado'},
+     {stem:'Si ella ___ a tiempo, habría conseguido el trabajo.',sub:'If she had arrived on time, she would have gotten the job.',a:'hubiera llegado'},
+     {stem:'Si ___ la verdad, no habríamos actuado así.',sub:'If we had known the truth, we wouldn\'t have acted like that.',a:'hubiéramos sabido'},
+     {stem:'Si ellos ___ antes, los habríamos esperado.',sub:'If they had let us know earlier, we would have waited for them.',a:'hubieran avisado'},
+     {stem:'Si ___ más dinero, me habría comprado el coche. (yo)',sub:'If I had had more money, I would have bought the car.',a:'hubiera tenido'},
+   ]},
+  {type:'fill',title:'B. Completa con el condicional perfecto',
+   wb:['habría aprobado','habría conseguido','habríamos actuado','habrían esperado','habría comprado','habría venido'],
+   qs:[
+     {stem:'Si hubiera estudiado más, ___ el examen.',sub:'If I had studied more, I ___ the exam.',a:'habría aprobado'},
+     {stem:'Si ella hubiera llegado a tiempo, ___ el trabajo.',sub:'If she had arrived on time, she ___ the job.',a:'habría conseguido'},
+     {stem:'Si hubiéramos sabido, no ___ así.',sub:'If we had known, we ___ differently.',a:'habríamos actuado'},
+     {stem:'Si me hubieran invitado, ___ con gusto.',sub:'If they had invited me, I ___ gladly.',a:'habría venido'},
+   ]},
+  {type:'mc',title:'C. ¿Tipo 3 o no?',
+   qs:[
+     {stem:'¿Cuál es una oración tipo 3 correcta?',opts:['Si tuviera tiempo, te ayudaría.','Si tienes tiempo, ayúdame.','Si hubiera tenido tiempo, te habría ayudado.','Si tengo tiempo, te ayudaré.'],a:2,fb:'Tipo 3: <strong>Si + pluscuamperfecto subj. → condicional perfecto</strong>.'},
+     {stem:'"De haber estudiado más, habría aprobado." — ¿Qué tipo es?',opts:['Tipo 1','Tipo 2','Tipo 3','Mixta'],a:2,fb:'<em>De + infinitivo compuesto</em> = <em>si + pluscuamperfecto de subj.</em> → tipo 3.'},
+     {stem:'"Si ___ antes, habríamos llegado a tiempo." ¿Qué forma va?',opts:['salimos','saliéramos','hubiéramos salido','habríamos salido'],a:2,fb:'Tipo 3: <em>si + pluscuamperfecto de subj.</em>: <strong>hubiéramos salido</strong>.'},
+   ]},
+  {type:'translate',title:'D. Traduce al español',
+   qs:[
+     {stem:'If I had studied more, I would have passed.',a:'Si hubiera estudiado más, habría aprobado.'},
+     {stem:'If she had arrived on time, she would have gotten the job.',a:'Si hubiera llegado a tiempo, habría conseguido el trabajo.'},
+     {stem:'What would you have done in my place?',a:'¿Qué habrías hecho en mi lugar?'},
+     {stem:'If we had known the truth, we wouldn\'t have made that decision.',a:'Si hubiéramos sabido la verdad, no habríamos tomado esa decisión.'},
+     {stem:'If they had told us, we would have waited.',a:'Si nos hubieran dicho, habríamos esperado.'},
+   ]},
+]},
+
+// ── 4: MIXTAS ─────────────────────────────────────────────────────────────────
+{title:'🔀 Mixtas',color:'var(--cm)',
+expl:`<strong>Condicionales mixtas — Pasado irreal → resultado presente</strong><br><br>
+<div class="struct-box" style="background:rgba(37,217,255,.08);border:1.5px solid rgba(37,217,255,.3);color:var(--cm)">
+  <em style="color:var(--muted2);font-size:.75rem">SI</em> + pluscuamperfecto de subjuntivo &nbsp;→&nbsp; condicional simple
+</div>
+La condición es <em>irreal en el pasado</em> pero el resultado es <em>un estado en el presente</em>.<br>
+La mezcla es: condición tipo 3 + resultado tipo 2.<br><br>
+<div class="contrast-grid">
+  <div class="contrast-card" style="border-color:rgba(244,114,182,.3);background:rgba(244,114,182,.05)">
+    <div class="contrast-label" style="color:var(--c3)">PASADO (condición)</div>
+    <div class="contrast-sent">Si hubiera dormido bien anoche...</div>
+    <div class="contrast-note">Algo que no ocurrió en el pasado.</div>
+  </div>
+  <div class="contrast-card" style="border-color:rgba(37,217,255,.3);background:rgba(37,217,255,.05)">
+    <div class="contrast-label" style="color:var(--cm)">PRESENTE (resultado)</div>
+    <div class="contrast-sent">...no estaría tan cansado ahora.</div>
+    <div class="contrast-note">Estado actual que se ve afectado.</div>
+  </div>
+</div>`,
+examples:[
+  {es:'Si <strong>hubiera dormido</strong> bien, no <strong>estaría</strong> tan cansado ahora.',en:'If I had slept well, I wouldn\'t be so tired now.',note:'→ No dormí → estoy cansado AHORA.'},
+  {es:'Si <strong>hubiera estudiado</strong> medicina, ahora <strong>sería</strong> médico.',en:'If I had studied medicine, I would be a doctor now.',note:'→ No estudié medicina → no soy médico.'},
+  {es:'Si no <strong>hubieran emigrado</strong>, todavía <strong>vivirían</strong> aquí.',en:'If they hadn\'t emigrated, they would still live here.',note:'→ Emigraron → no viven aquí ahora.'},
+  {es:'Si <strong>hubieras aprendido</strong> inglés, ahora <strong>tendrías</strong> más oportunidades.',en:'If you had learned English, you would have more opportunities now.',note:'→ No aprendiste → no tienes tantas oportunidades.'},
+  {es:'Si no <strong>hubiera comido</strong> tanto, no me <strong>dolería</strong> el estómago.',en:'If I hadn\'t eaten so much, my stomach wouldn\'t hurt.',note:'→ Comí mucho → me duele el estómago AHORA.'},
+],
+flashcards:[
+  {front:'Pasado irreal → presente',frontSub:'Mixta — cláusula pasada, resultado presente',back:'Si hubiera dormido bien, no estaría cansado.',backEn:'If I had slept well, I wouldn\'t be tired (now).'},
+  {front:'Condición tipo 3 + resultado tipo 2',frontSub:'Mixta — estructura',back:'Si hubiera estudiado medicina, sería médico.',backEn:'If I had studied medicine, I would be a doctor.'},
+  {front:'hubiera + participio → condicional simple',frontSub:'Mixta — formas verbales',back:'Si hubieran emigrado, todavía vivirían aquí.',backEn:'If they hadn\'t emigrated, they would still live here.'},
+  {front:'Efecto en el presente',frontSub:'Mixta — resultado actual visible',back:'Si no hubiera comido tanto, no me dolería el estómago.',backEn:'If I hadn\'t eaten so much, my stomach wouldn\'t hurt.'},
+],
+exercises:[
+  {type:'fill',title:'A. Completa la mixta correctamente',
+   wb:['hubiera dormido','hubiera estudiado','hubieran llegado','hubiera aprendido','no hubiera comido'],
+   qs:[
+     {stem:'Si ___ bien anoche, no estaría tan cansado hoy.',sub:'If I had slept well last night, I wouldn\'t be so tired today.',a:'hubiera dormido'},
+     {stem:'Si ___ medicina, ahora sería médico.',sub:'If I had studied medicine, I would be a doctor now.',a:'hubiera estudiado'},
+     {stem:'Si ellos ___ antes, ya estarían en casa.',sub:'If they had arrived earlier, they would already be home.',a:'hubieran llegado'},
+     {stem:'Si ___ inglés antes, ahora tendría más opciones.',sub:'If I had learned English before, I would have more options now.',a:'hubiera aprendido'},
+   ]},
+  {type:'mc',title:'B. ¿Qué tipo de condicional es?',
+   qs:[
+     {stem:'"Si hubiera estudiado medicina, ahora sería médico." ¿Qué tipo es?',opts:['Tipo 1','Tipo 2','Tipo 3','Mixta'],a:3,fb:'Mixta: condición pasada (<em>hubiera estudiado</em>) → resultado presente (<em>sería</em> = ahora).'},
+     {stem:'"Si hubiera llegado a tiempo, habría conseguido el trabajo." ¿Qué tipo es?',opts:['Tipo 1','Tipo 2','Tipo 3','Mixta'],a:2,fb:'Tipo 3: condición pasada + resultado también pasado (<em>habría conseguido</em>).'},
+     {stem:'"Si no hubiera comido tanto, no me dolería el estómago." ¿Qué tipo es?',opts:['Tipo 2','Tipo 3','Mixta','Tipo 1'],a:2,fb:'Mixta: el comer fue en el pasado (<em>hubiera comido</em>) pero el dolor es ahora (<em>dolería</em> = estado presente).'},
+     {stem:'¿Cuál es la diferencia entre tipo 3 y mixta?',opts:['No hay diferencia','Tipo 3: pasado → pasado; Mixta: pasado → presente','Mixta: presente → pasado; Tipo 3: pasado → pasado','Tipo 3 usa condicional simple'],a:1,fb:'Tipo 3: condición pasada → resultado también pasado. Mixta: condición pasada → resultado en el presente.'},
+   ]},
+  {type:'translate',title:'C. Traduce',
+   qs:[
+     {stem:'If I had slept well, I wouldn\'t be so tired.',a:'Si hubiera dormido bien, no estaría tan cansado.'},
+     {stem:'If you had learned English, you would have more opportunities now.',a:'Si hubieras aprendido inglés, ahora tendrías más oportunidades.'},
+     {stem:'If they hadn\'t emigrated, they would still live here.',a:'Si no hubieran emigrado, todavía vivirían aquí.'},
+   ]},
+]},
+
+// ── 5: MEZCLA FINAL ───────────────────────────────────────────────────────────
+{title:'🔥 Mezcla',color:'var(--magenta)',
+examples:[],
+flashcards:[],
+exercises:[
+  {type:'mc',title:'A. Identifica el tipo de condicional',
+   qs:[
+     {stem:'"Si estudias, aprendes." ¿Qué tipo es?',opts:['Tipo 1','Tipo 0','Tipo 2','Mixta'],a:1,fb:'Tipo 0: verdad general / causa-efecto siempre cierto.'},
+     {stem:'"Si llueve mañana, no saldremos." ¿Qué tipo es?',opts:['Tipo 0','Tipo 1','Tipo 2','Tipo 3'],a:1,fb:'Tipo 1: condición posible en el futuro.'},
+     {stem:'"Si tuviera más dinero, viajaría." ¿Qué tipo es?',opts:['Tipo 1','Tipo 3','Tipo 2','Mixta'],a:2,fb:'Tipo 2: hipótesis irreal en el presente.'},
+     {stem:'"Si hubiera estudiado, habría aprobado." ¿Qué tipo es?',opts:['Tipo 2','Tipo 3','Mixta','Tipo 1'],a:1,fb:'Tipo 3: condición irreal en el pasado, resultado también pasado.'},
+     {stem:'"Si hubiera dormido bien, no estaría tan cansado." ¿Qué tipo es?',opts:['Tipo 3','Tipo 2','Tipo 1','Mixta'],a:3,fb:'Mixta: condición pasada → resultado presente.'},
+     {stem:'"Si caliento el agua, hierve." ¿Qué tipo es?',opts:['Tipo 1','Tipo 2','Tipo 0','Tipo 3'],a:2,fb:'Tipo 0: ley natural / hecho siempre cierto.'},
+   ]},
+  {type:'fill',title:'B. Mezcla — completa con la forma correcta',
+   wb:['llueve','tuviera','hubiera estudiado','estaría','estudias','hubiera dormido','saldremos','viajaría'],
+   qs:[
+     {stem:'Si ___ , aprendes. (tipo 0)',sub:'If you study, you learn.',a:'estudias'},
+     {stem:'Si ___ mañana, no ___ . (tipo 1)',sub:'If it rains tomorrow, we won\'t go out.',a:'llueve'},
+     {stem:'Si ___ más tiempo, ___ más. (tipo 2)',sub:'If I had more time, I would travel more.',a:'tuviera'},
+     {stem:'Si ___ más, habría aprobado. (tipo 3)',sub:'If I had studied more, I would have passed.',a:'hubiera estudiado'},
+     {stem:'Si ___ bien anoche, no ___ tan cansado. (mixta)',sub:'If I had slept well last night, I wouldn\'t be so tired.',a:'hubiera dormido'},
+   ]},
+  {type:'translate',title:'C. Mezcla completa — Traduce al español',
+   qs:[
+     {stem:'If you heat water, it boils. (Type 0)',a:'Si calientas el agua, hierve.'},
+     {stem:'If I have time, I\'ll call you. (Type 1)',a:'Si tengo tiempo, te llamo./Si tengo tiempo, te llamaré.'},
+     {stem:'If I were rich, I wouldn\'t work. (Type 2)',a:'Si fuera rico, no trabajaría.'},
+     {stem:'If she had arrived on time, she would have gotten the job. (Type 3)',a:'Si hubiera llegado a tiempo, habría conseguido el trabajo.'},
+     {stem:'If I had studied medicine, I would be a doctor now. (Mixed)',a:'Si hubiera estudiado medicina, ahora sería médico.'},
+     {stem:'What would you do if you lost your job? (Type 2)',a:'¿Qué harías si perdieras el trabajo?'},
+     {stem:'If I had known, I would have acted differently. (Type 3)',a:'Si hubiera sabido, habría actuado diferente.'},
+   ]},
+]},
+];
+</script>
+<script>
+const renderedTabs=new Set();
+const answers={};
+const fcState={};
+const COLORS=['var(--c0)','var(--c1)','var(--c2)','var(--c3)','var(--cm)','var(--magenta)'];
+
+function normalize(s){
+  return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[¿?¡!.,;:'"]/g,'').replace(/\s+/g,' ');
+}
+function checkAns(user,correct){
+  const u=normalize(user);
+  const alts=correct.split('/').map(a=>normalize(a));
+  if(alts.some(a=>u===a||u.includes(a)||a.includes(u)))return true;
+  const uC=u.replace(/^(yo|tu|el|ella|usted|nosotros|ellos|ellas|ustedes|me|se|te|le|nos)\s+/,'')
+            .replace(/\bpor\b\s*/g,'').replace(/\s+/g,' ').trim();
+  return alts.some(a=>{
+    const aC=a.replace(/^(yo|tu|el|ella|usted|nosotros|ellos|ellas|ustedes|me|se|te|le|nos)\s+/,'')
+              .replace(/\bpor\b\s*/g,'').replace(/\s+/g,' ').trim();
+    return uC===aC||uC.includes(aC)||aC.includes(uC);
+  });
+}
+
+function switchTab(i){
+  document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  if(!renderedTabs.has(i)){renderTab(i);renderedTabs.add(i);}
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('visible'));
+  const p=document.getElementById('panel'+i);if(p)p.classList.add('visible');
+}
+
+function buildTabsBar(){
+  const bar=document.getElementById('tabsBar');
+  TABS.forEach((t,i)=>{
+    const btn=document.createElement('button');
+    btn.className='tab-btn'+(i===0?' active':'');
+    btn.textContent=t.title;
+    btn.onclick=()=>switchTab(i);
+    bar.appendChild(btn);
+  });
+}
+
+function renderTab(i){
+  const t=TABS[i];const col=t.color||COLORS[i]||'var(--cyan)';
+  const container=document.getElementById('tabContents');
+  const panel=document.createElement('div');
+  panel.className='tab-panel'+(i===0?' visible':'');
+  panel.id='panel'+i;
+  let html=`<div style="font-family:var(--display);font-size:1.2rem;font-weight:900;color:${col};margin-bottom:18px">${t.title}</div>`;
+
+  // EXPLANATION
+  if(t.expl){
+    html+=`<div class="expl-box" style="background:${col}11;border-color:${col}44">
+      <div class="expl-title" style="color:${col}">📖 Estructura y uso</div>
+      <div class="expl-body">${t.expl}</div>
+    </div>`;
+  }
+
+  // EXAMPLES
+  if(t.examples&&t.examples.length>0){
+    html+=`<div style="font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);margin-bottom:10px">💬 Ejemplos</div>
+    <div class="ex-list">`;
+    t.examples.forEach(e=>{
+      html+=`<div class="ex-item" style="border-color:${col}">
+        <div class="es">${e.es}</div>
+        <div class="en">${e.en}</div>
+        ${e.note?`<div class="note">${e.note}</div>`:''}
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+
+  // FLASHCARDS
+  if(t.flashcards&&t.flashcards.length>0){
+    const fcKey='fc'+i;
+    fcState[fcKey]={idx:0,flipped:false,cards:t.flashcards};
+    html+=`<div class="ex-card" style="margin-bottom:16px">
+    <div class="ex-header"><div class="ex-title" style="color:${col}">🃏 Flashcards — haz clic para voltear</div></div>
+    <div class="fc-nav">
+      <button class="btn-fc" onclick="fcPrev('${fcKey}')">← Anterior</button>
+      <span class="fc-counter" id="fcctr_${fcKey}">1 / ${t.flashcards.length}</span>
+      <button class="btn-fc" onclick="fcNext('${fcKey}')">Siguiente →</button>
+    </div>
+    <div class="fc-scene" onclick="fcFlip('${fcKey}')">
+      <div class="fc-card" id="fccard_${fcKey}">
+        <div class="fc-face fc-front" style="border-color:${col}55">
+          <div class="fc-cond" style="color:${col}" id="fcfront_${fcKey}">${t.flashcards[0].front}</div>
+          <div class="fc-note" id="fcsub_${fcKey}">${t.flashcards[0].frontSub||''}</div>
+          <div style="font-size:.7rem;color:var(--muted2);margin-top:8px">Haz clic para ver el ejemplo →</div>
+        </div>
+        <div class="fc-face fc-back" style="border-color:${col}44">
+          <div class="fc-sent" style="color:${col}" id="fcback_${fcKey}">${t.flashcards[0].back}</div>
+          <div class="fc-en" id="fcen_${fcKey}">${t.flashcards[0].backEn||''}</div>
+        </div>
+      </div>
+    </div></div>`;
+  }
+
+  // EXERCISES
+  (t.exercises||[]).forEach((ex,ei)=>{
+    const key=`${i}_${ei}`;
+    html+=`<div class="ex-card">
+    <div class="ex-header">
+      <div class="ex-title" style="color:${col}">${ex.title}</div>
+      <div class="score-row">
+        <span class="score-pill" id="score_${key}">0 / ${ex.qs.length} respondidas</span>
+        <button class="btn-restart" onclick="restartEx('${key}',${i},${ei})">🔄 Reiniciar</button>
+      </div>
+    </div>`;
+
+    if(ex.type==='fill'){
+      html+=`<div class="wb-box"><strong>Banco de palabras</strong>${ex.wb.join(' &nbsp;·&nbsp; ')}</div><div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const qkey=`${key}_${qi}`;
+        const parts=q.stem.split('___');
+        const stemHTML=parts.length>=2
+          ?parts[0]+`<span class="blank" id="blank_${qkey}" style="border-color:${col};color:${col}"></span>`+parts.slice(1).join('___')
+          :q.stem;
+        html+=`<div class="q-item" id="qitem_${qkey}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> ${stemHTML}</div>
+          ${q.sub?`<div class="q-sub">${q.sub}</div>`:''}
+          <div class="chip-row" id="chips_${qkey}">${ex.wb.map(w=>`<button class="chip" onclick="answerChip('${qkey}','${w.replace(/'/g,"\\'")}','${q.a.replace(/'/g,"\\'")}','${key}')">${w}</button>`).join('')}</div>
+          <div class="q-fb" id="fb_${qkey}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+    } else if(ex.type==='mc'){
+      html+=`<div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const qkey=`${key}_${qi}`;
+        html+=`<div class="q-item" id="qitem_${qkey}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> ${q.stem}</div>
+          ${q.sub?`<div class="q-sub">${q.sub}</div>`:''}
+          <div class="mc-opts">${q.opts.map((o,oi)=>`<button class="mc-opt" onclick="answerMC('${qkey}',${oi},${q.a},'${key}')">${o}</button>`).join('')}</div>
+          <div class="q-fb" id="fb_${qkey}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+    } else if(ex.type==='translate'){
+      html+=`<div class="q-list">`;
+      ex.qs.forEach((q,qi)=>{
+        const qkey=`${key}_${qi}`;
+        html+=`<div class="q-item" id="qitem_${qkey}">
+          <div class="q-stem"><span class="q-num">${qi+1}.</span> ${q.stem}</div>
+          ${q.sub?`<div class="q-sub">${q.sub}</div>`:''}
+          <input type="text" class="q-input" id="inp_${qkey}" placeholder="Escribe tu traducción..."
+            onkeydown="if(event.key==='Enter')checkTranslate('${qkey}','${q.a.replace(/'/g,"\\'")}','${key}')">
+          <button class="btn-check" onclick="checkTranslate('${qkey}','${q.a.replace(/'/g,"\\'")}','${key}')">Verificar ✓</button>
+          <div class="q-fb" id="fb_${qkey}"></div>
+        </div>`;
+      });
+      html+=`</div>`;
+    }
+    html+=`</div>`;
+  });
+
+  panel.innerHTML=html;
+  container.appendChild(panel);
+}
+
+function fcFlip(k){const c=document.getElementById('fccard_'+k);const s=fcState[k];if(!s)return;s.flipped=!s.flipped;c.classList.toggle('flipped',s.flipped);}
+function fcNext(k){const s=fcState[k];if(!s)return;s.idx=(s.idx+1)%s.cards.length;s.flipped=false;fcUpdate(k);}
+function fcPrev(k){const s=fcState[k];if(!s)return;s.idx=(s.idx-1+s.cards.length)%s.cards.length;s.flipped=false;fcUpdate(k);}
+function fcUpdate(k){
+  const s=fcState[k];const c=s.cards[s.idx];
+  const card=document.getElementById('fccard_'+k);if(card)card.classList.remove('flipped');
+  const set=(id,val)=>{const el=document.getElementById(id+'_'+k);if(el)el.textContent=val;};
+  set('fcfront',c.front);set('fcsub',c.frontSub||'');set('fcback',c.back);set('fcen',c.backEn||'');
+  const ctr=document.getElementById('fcctr_'+k);if(ctr)ctr.textContent=(s.idx+1)+' / '+s.cards.length;
+}
+
+function answerChip(qkey,chosen,correct,key){
+  if(answers[qkey]!==undefined)return;
+  const ok=normalize(chosen)===normalize(correct);
+  answers[qkey]=ok;
+  const blank=document.getElementById('blank_'+qkey);
+  if(blank){blank.textContent=chosen;blank.style.color=ok?'var(--good)':'var(--bad)';}
+  document.querySelectorAll(`#chips_${qkey} .chip`).forEach(btn=>{
+    btn.disabled=true;
+    if(normalize(btn.textContent)===normalize(chosen))btn.classList.add(ok?'chip-ok':'chip-err');
+    else btn.classList.add('used');
+  });
+  const fb=document.getElementById('fb_'+qkey);
+  if(fb){fb.innerHTML=ok?'✅ ¡Correcto!':'❌ Respuesta correcta: <strong>'+correct+'</strong>';fb.classList.add('show');}
+  updateScore(key);
+}
+
+function answerMC(qkey,chosen,correct,key){
+  if(answers[qkey]!==undefined)return;
+  const ok=chosen===correct;answers[qkey]=ok;
+  const item=document.getElementById('qitem_'+qkey);
+  item.querySelectorAll('.mc-opt').forEach((btn,j)=>{
+    btn.disabled=true;
+    if(j===correct)btn.classList.add('show-correct');
+    else if(j===chosen)btn.classList.add('sel-wrong');
+  });
+  const ti=parseInt(qkey.split('_')[0]),ei=parseInt(qkey.split('_')[1]),qi=parseInt(qkey.split('_')[2]);
+  const q=TABS[ti].exercises[ei].qs[qi];
+  const fb=document.getElementById('fb_'+qkey);
+  if(fb){fb.innerHTML=(ok?'✅ ':'❌ ')+(q.fb||'Respuesta correcta marcada en verde.');fb.classList.add('show');}
+  updateScore(key);
+}
+
+function checkTranslate(qkey,correct,key){
+  if(answers[qkey]!==undefined)return;
+  const inp=document.getElementById('inp_'+qkey);
+  if(!inp||!inp.value.trim()){alert('Escribe tu respuesta primero.');return;}
+  const ok=checkAns(inp.value,correct);
+  answers[qkey]=ok;
+  inp.disabled=true;inp.classList.add(ok?'inp-ok':'inp-err');
+  const fb=document.getElementById('fb_'+qkey);
+  if(fb){fb.innerHTML=ok?'✅ ¡Muy bien!':'❌ Referencia: <strong>'+correct+'</strong>';fb.classList.add('show');}
+  const btn=inp.nextElementSibling;if(btn)btn.disabled=true;
+  updateScore(key);
+}
+
+function updateScore(key){
+  const [ti,ei]=key.split('_').map(Number);
+  const ex=TABS[ti].exercises[ei];
+  const done=ex.qs.filter((_,qi)=>answers[`${key}_${qi}`]!==undefined).length;
+  const sc=document.getElementById('score_'+key);if(sc)sc.textContent=done+' / '+ex.qs.length+' respondidas';
+}
+
+function restartEx(key,ti,ei){
+  const ex=TABS[ti].exercises[ei];
+  ex.qs.forEach((_,qi)=>{
+    const qkey=`${key}_${qi}`;delete answers[qkey];
+    const col=TABS[ti].color||COLORS[ti]||'var(--cyan)';
+    const blank=document.getElementById('blank_'+qkey);if(blank){blank.textContent='';blank.style.color=col;}
+    document.querySelectorAll(`#chips_${qkey} .chip`).forEach(b=>{b.disabled=false;b.className='chip';});
+    const item=document.getElementById('qitem_'+qkey);
+    if(item){
+      item.querySelectorAll('.mc-opt').forEach(b=>{b.disabled=false;b.className='mc-opt';});
+      const inp=item.querySelector('.q-input');if(inp){inp.disabled=false;inp.value='';inp.className='q-input';}
+      const btn=item.querySelector('.btn-check');if(btn)btn.disabled=false;
+    }
+    const fb=document.getElementById('fb_'+qkey);if(fb){fb.innerHTML='';fb.className='q-fb';}
+  });
+  updateScore(key);
+}
+
+buildTabsBar();
+renderTab(0);
+renderedTabs.add(0);
+</script>
+</body>
+</html>

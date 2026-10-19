@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ser vs. Estar | Your Mexican Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#25d9ff;--cyan2:#00bfff;--magenta:#ff2bbf;--magenta2:#ff4fd8;
+  --bg1:#070019;--bg2:#160033;--text:#f0f0ff;--muted:#a8abce;--muted2:#5a5d8a;
+  --good:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+  --ser:#f472b6;--ser2:#ff91cd;
+  --est:#25d9ff;--est2:#7ee8ff;
+  --font:'DM Sans',system-ui,sans-serif;
+  --display:'Syne',system-ui,sans-serif;
+  --shadow:0 20px 40px rgba(0,0,0,.4),0 0 28px rgba(255,43,191,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:radial-gradient(ellipse at 10% 10%,rgba(255,43,191,.13),transparent 28%),radial-gradient(ellipse at 90% 15%,rgba(37,217,255,.09),transparent 28%),linear-gradient(155deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+.app{width:min(980px,96%);margin:14px auto 40px;display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:22px;padding:22px 26px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0c0030,#280060);border:2px solid rgba(37,217,255,.28);box-shadow:0 0 18px rgba(255,43,191,.22);font-family:var(--display);font-size:.9rem;font-weight:900;color:var(--magenta);text-shadow:1px 1px 0 var(--cyan)}
+.hero-text h1{font-family:var(--display);font-size:clamp(1.5rem,2.8vw,2.5rem);font-weight:900;line-height:.95;background:linear-gradient(90deg,var(--ser) 0%,#fff 40%,var(--est) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-text p{color:var(--muted);font-size:.86rem;line-height:1.5;margin-top:4px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.badge{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.pill-ser{background:rgba(244,114,182,.15);border:1px solid rgba(244,114,182,.35);border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:800;color:var(--ser2)}
+.pill-est{background:rgba(37,217,255,.12);border:1px solid rgba(37,217,255,.3);border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:800;color:var(--est2)}
+.ex-tabs{display:flex;gap:6px;background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:18px;padding:8px;box-shadow:var(--shadow);overflow-x:auto;scrollbar-width:none}
+.ex-tabs::-webkit-scrollbar{display:none}
+.etab{flex-shrink:0;border:0;border-radius:11px;padding:9px 12px;font-weight:800;font-family:var(--font);font-size:.78rem;cursor:pointer;transition:.16s;color:var(--muted2);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.etab:hover{background:rgba(255,255,255,.07);color:var(--text)}
+.etab.active{background:linear-gradient(135deg,var(--magenta),var(--magenta2));color:white;box-shadow:0 3px 0 rgba(0,0,0,.2);transform:translateY(-1px)}
+.etab-icon{font-size:1.2rem;line-height:1}
+.etab-label{font-size:.65rem;text-align:center;line-height:1.2;opacity:.9}
+.panel{background:linear-gradient(180deg,rgba(18,4,42,.97),rgba(24,10,52,.97));border:1px solid rgba(37,217,255,.13);border-radius:20px;padding:24px 28px;box-shadow:var(--shadow)}
+.ex-header{margin-bottom:16px}
+.ex-title{font-family:var(--display);font-size:1.2rem;font-weight:900;margin-bottom:6px}
+.ex-instr{font-size:.86rem;color:var(--muted);line-height:1.6;padding:9px 14px;background:rgba(37,217,255,.07);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0}
+.ex-instr em{color:var(--cyan);font-style:normal;font-weight:700}
+.score-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sc{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:6px 12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.sc .l{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.sc .v{font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--cyan)}
+.sc .v.g{color:var(--good)}.sc .v.b{color:var(--bad)}
+.prog-w{flex:1;min-width:100px}
+.prog-l{font-size:.65rem;color:var(--muted2);font-weight:700;margin-bottom:3px}
+.prog-t{height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.prog-f{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ser),var(--est));transition:width .35s}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:11px;padding:9px 18px;font-weight:800;font-family:var(--font);font-size:.83rem;cursor:pointer;transition:.15s;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0);box-shadow:none}
+.btn:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#07111f}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(37,217,255,.18)}
+.fb{display:none;margin-top:10px;padding:10px 15px;border-radius:10px;font-size:.88rem;font-weight:500;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:rgba(34,197,94,.12);border-left:4px solid var(--good);color:#bbf7d0;border-radius:0 11px 11px 0}
+.fb.err{background:rgba(239,68,68,.11);border-left:4px solid var(--bad);color:#fecaca;border-radius:0 11px 11px 0}
+.fb.partial{background:rgba(245,158,11,.1);border-left:4px solid var(--warn);color:#fde68a;border-radius:0 11px 11px 0}
+/* MC */
+.mc-list{display:flex;flex-direction:column;gap:10px}
+.mc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;padding:15px 17px}
+.mc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px}
+.mc-num{font-size:.62rem;font-weight:900;background:rgba(255,255,255,.06);border-radius:6px;padding:3px 7px;flex-shrink:0;margin-top:2px}
+.mc-sent{font-size:1rem;line-height:1.65;flex:1}
+.mc-blank{display:inline-block;min-width:52px;border-bottom:2.5px solid rgba(37,217,255,.4);padding:0 4px;text-align:center;font-weight:800;color:var(--cyan)}
+.mc-en{font-size:.78rem;color:var(--muted2);font-style:italic;margin-bottom:10px;padding-left:28px}
+.mc-opts{display:flex;flex-wrap:wrap;gap:7px;padding-left:28px;margin-bottom:3px}
+.mc-opt{border:0;border-radius:10px;padding:9px 26px;font-weight:900;font-family:var(--display);font-size:1.05rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.mc-opt.ser-opt:hover:not(:disabled){border-color:var(--ser);background:rgba(244,114,182,.12);color:var(--ser2);transform:translateY(-1px)}
+.mc-opt.est-opt:hover:not(:disabled){border-color:var(--est);background:rgba(37,217,255,.1);color:var(--est2);transform:translateY(-1px)}
+.mc-opt:disabled{cursor:default;transform:none}
+.mc-opt.mc-ok{border-color:var(--good);background:rgba(34,197,94,.14);color:#86efac}
+.mc-opt.mc-err{border-color:var(--bad);background:rgba(239,68,68,.12);color:#fca5a5}
+.mc-opt.mc-show{border-color:var(--good);background:rgba(34,197,94,.1);color:#86efac}
+.mc-expl{display:none;font-size:.8rem;color:var(--muted);line-height:1.55;margin-top:7px;padding:8px 12px 8px 28px;background:rgba(255,255,255,.04);border-radius:8px}
+.mc-expl.show{display:block}
+.mc-rule{font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.mc-rule.ser{color:var(--ser2)}.mc-rule.est{color:var(--est2)}
+/* CONTRAST */
+.contrast-grid{display:flex;flex-direction:column;gap:16px}
+.contrast-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px 18px}
+.contrast-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.cp-card{border-radius:12px;padding:13px 15px}
+.cp-card.ser-card{background:rgba(244,114,182,.07);border:1.5px solid rgba(244,114,182,.22)}
+.cp-card.est-card{background:rgba(37,217,255,.06);border:1.5px solid rgba(37,217,255,.2)}
+.cp-label{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;margin-bottom:6px}
+.ser-lbl{color:var(--ser2)}.est-lbl{color:var(--est2)}
+.cp-sent{font-size:.97rem;color:var(--text);line-height:1.5;margin-bottom:3px;font-weight:600}
+.cp-en{font-size:.76rem;color:var(--muted2);font-style:italic;margin-bottom:5px}
+.cp-mean{font-size:.78rem;font-weight:700}
+.ser-mean{color:var(--ser2)}.est-mean{color:var(--est2)}
+.contrast-q{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px}
+.cq-text{font-size:.93rem;margin-bottom:8px;line-height:1.5}
+.cq-opts{display:flex;gap:7px;flex-wrap:wrap}
+.cq-opt{border:0;border-radius:8px;padding:7px 16px;font-weight:800;font-family:var(--font);font-size:.85rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.cq-opt:hover:not(:disabled){background:rgba(255,255,255,.12)}
+.cq-opt:disabled{cursor:default}
+.cq-opt.ok{background:rgba(34,197,94,.16);border-color:var(--good);color:#86efac}
+.cq-opt.bad{background:rgba(239,68,68,.12);border-color:var(--bad);color:#fca5a5}
+/* ERROR HUNT */
+.eh-list{display:flex;flex-direction:column;gap:9px}
+.eh-item{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:13px 15px;display:flex;align-items:flex-start;gap:11px}
+.eh-item.correct-sentence{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.05)}
+.eh-item.wrong-sentence{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.05)}
+.eh-num{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:var(--muted2);flex-shrink:0;margin-top:1px}
+.eh-body{flex:1}
+.eh-sent{font-size:.97rem;line-height:1.6}
+.wrong-word{color:var(--bad);text-decoration:underline wavy var(--bad);font-weight:700}
+.eh-correction{font-size:.82rem;font-weight:700;color:var(--good);margin-left:5px}
+.eh-judge-row{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+.eh-judge-btn{border:0;border-radius:9px;padding:7px 15px;font-weight:800;font-family:var(--font);font-size:.82rem;cursor:pointer;transition:.14s;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--text)}
+.eh-correct-btn:hover:not(:disabled){border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.1);color:#86efac}
+.eh-error-btn:hover:not(:disabled){border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08);color:#fca5a5}
+.eh-judge-btn:disabled{cursor:default;opacity:.5}
+.judge-chosen-ok{border-color:var(--good)!important;background:rgba(34,197,94,.18)!important;color:#86efac!important;opacity:1!important}
+.judge-chosen-err{border-color:var(--bad)!important;background:rgba(239,68,68,.14)!important;color:#fca5a5!important;opacity:1!important}
+.eh-exp{display:none;font-size:.79rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);line-height:1.55}
+.revealed .eh-exp{display:block}
+/* SORT */
+.sort-pile{display:flex;flex-wrap:wrap;gap:7px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;min-height:52px;margin-bottom:12px}
+.sort-bucket{border-radius:14px;padding:11px;min-height:80px;display:flex;flex-direction:column;gap:6px;transition:background .2s}
+.sort-bucket.drag-over{box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.bucket-title{font-family:var(--display);font-size:.78rem;font-weight:900;text-align:center}
+.bucket-sub{font-size:.62rem;color:var(--muted2);text-align:center;line-height:1.3}
+.sort-card{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:9px;padding:7px 12px;font-size:.84rem;font-weight:600;cursor:grab;user-select:none;transition:.15s;line-height:1.4}
+.sort-card:hover{transform:translateY(-2px);border-color:rgba(37,217,255,.4)}
+.sort-card:active{cursor:grabbing}
+.sort-card.drag-ghost{opacity:.35}
+.sort-card.card-correct{background:rgba(34,197,94,.14);border-color:var(--good);color:#86efac;cursor:default}
+.sort-card.card-wrong{background:rgba(239,68,68,.1);border-color:var(--bad);color:#fca5a5;font-size:.78rem}
+/* SPEED */
+.speed-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.speed-stats{display:flex;gap:9px}
+.spstat{background:rgba(255,255,255,.05);border:1px solid rgba(37,217,255,.12);border-radius:11px;padding:7px 14px;text-align:center}
+.spstat .sl{font-size:.56rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2)}
+.spstat .sv{font-family:var(--display);font-size:1.2rem;font-weight:900;color:var(--cyan)}
+.spstat .sv.g{color:var(--good)}.spstat .sv.b{color:var(--bad)}.spstat .sv.w{color:var(--warn)}
+.speed-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 20px;text-align:center;width:100%;max-width:500px}
+.speed-sent{font-size:1.08rem;line-height:1.7;color:var(--text);margin-bottom:4px}
+.speed-sent em{font-style:normal;font-weight:900;color:var(--warn);background:rgba(245,158,11,.12);border-radius:5px;padding:0 5px}
+.speed-hint{font-size:.77rem;color:var(--muted2);font-style:italic}
+.speed-btns{display:flex;gap:14px;justify-content:center}
+.speed-btn{border:0;border-radius:14px;padding:13px 32px;font-weight:900;font-family:var(--display);font-size:1.15rem;cursor:pointer;transition:.15s;box-shadow:0 4px 0 rgba(0,0,0,.25);min-width:130px}
+.speed-btn.ser-btn{background:linear-gradient(135deg,var(--ser),var(--ser2));color:#07111f}
+.speed-btn.est-btn{background:linear-gradient(135deg,var(--est),var(--est2));color:#07111f}
+.speed-btn:hover{transform:translateY(-3px)}
+.speed-btn:active{transform:translateY(0);box-shadow:none}
+.speed-btn:disabled{opacity:.3;cursor:not-allowed;transform:none;box-shadow:none}
+.speed-fb{min-height:38px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:600;border-radius:9px;padding:0 14px;width:100%;max-width:500px}
+.speed-fb.ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#86efac}
+.speed-fb.err{background:rgba(239,68,68,.11);border:1px solid rgba(239,68,68,.22);color:#fca5a5}
+.timer-row{display:flex;align-items:center;gap:9px;width:100%;max-width:500px}
+.timer-track{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.timer-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ser),var(--est));transition:width 1s linear}
+.timer-num{font-family:var(--display);font-size:.85rem;font-weight:900;color:var(--muted2);min-width:18px;text-align:right}
+.streak-badge{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:999px;padding:4px 12px;font-size:.74rem;font-weight:800;color:#fcd34d;display:none}
+.streak-badge.show{display:inline-flex;align-items:center;gap:4px}
+.speed-start{text-align:center;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.speed-start h2{font-family:var(--display);font-size:1.4rem;font-weight:900}
+.speed-start p{color:var(--muted);font-size:.87rem;max-width:380px;line-height:1.6}
+.combo-flash{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:2rem;font-weight:900;color:var(--warn);pointer-events:none;opacity:0;z-index:999;text-shadow:0 0 20px rgba(245,158,11,.5)}
+.combo-flash.anim{animation:cf .7s ease forwards}
+@keyframes cf{0%{opacity:1;transform:translate(-50%,-60%) scale(.8)}40%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-40%) scale(1)}}
+/* REF */
+.ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.ref-col{border-radius:14px;padding:16px}
+.ref-col.ser-col{background:rgba(244,114,182,.06);border:1.5px solid rgba(244,114,182,.2)}
+.ref-col.est-col{background:rgba(37,217,255,.05);border:1.5px solid rgba(37,217,255,.18)}
+.ref-col-title{font-family:var(--display);font-size:1.1rem;font-weight:900;margin-bottom:12px}
+.ref-row{padding:7px 0;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:8px;align-items:flex-start}
+.ref-key{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;min-width:100px;flex-shrink:0;margin-top:2px}
+.ref-val{font-size:.83rem;color:var(--muted);line-height:1.5}
+.ref-val em{font-style:normal;color:var(--text)}
+.note-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:15px 17px;margin-bottom:14px}
+.note-box h3{font-family:var(--display);font-size:.95rem;font-weight:800;margin-bottom:10px;color:var(--warn)}
+.adj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:9px}
+.adj-card{background:rgba(255,255,255,.04);border-radius:10px;padding:11px 13px;border:1px solid rgba(255,255,255,.07)}
+.adj-word{font-family:var(--display);font-size:.95rem;font-weight:900;margin-bottom:6px;color:var(--warn)}
+.adj-row{font-size:.8rem;line-height:1.5}
+.adj-ser{color:var(--ser2);font-weight:700}.adj-est{color:var(--est2);font-weight:700}
+.creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
+.creator span{color:var(--magenta2)}
+@media(max-width:600px){.panel{padding:16px 13px}.contrast-pair,.ref-grid{grid-template-columns:1fr}.speed-btns{gap:10px}.speed-btn{min-width:110px;padding:12px 18px}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="combo-flash" id="comboFlash"></div>
+<header class="hero">
+  <div class="hero-in">
+    <div class="logo-box">YMF</div>
+    <div class="hero-text">
+      <h1>Ser vs. Estar</h1>
+      <p>Six exercises to master the most confusing contrast in Spanish. Both mean "to be" — but they work completely differently.</p>
+      <div class="badges">
+        <span class="badge">A2–B1</span>
+        <span class="badge" style="border-color:rgba(244,114,182,.35);color:var(--ser2)">SER — D.O.C.T.O.R.</span>
+        <span class="badge" style="border-color:rgba(37,217,255,.35);color:var(--est2)">ESTAR — P.L.A.C.E.</span>
+        <span class="badge">Adjectives that change meaning</span>
+        <span class="badge">By Carlos &amp; Denisse</span>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ex-tabs">
+  <button class="etab active" id="etab-0" onclick="goEx(0)"><span class="etab-icon">📝</span><span class="etab-label">Multiple<br>choice</span></button>
+  <button class="etab" id="etab-1" onclick="goEx(1)"><span class="etab-icon">🔀</span><span class="etab-label">Mismo adj.<br>distinto verbo</span></button>
+  <button class="etab" id="etab-2" onclick="goEx(2)"><span class="etab-icon">🔍</span><span class="etab-label">Error<br>hunter</span></button>
+  <button class="etab" id="etab-3" onclick="goEx(3)"><span class="etab-icon">🗂️</span><span class="etab-label">Drag &<br>sort</span></button>
+  <button class="etab" id="etab-4" onclick="goEx(4)"><span class="etab-icon">⚡</span><span class="etab-label">Speed<br>round</span></button>
+  <button class="etab" id="etab-5" onclick="goEx(5)"><span class="etab-icon">📚</span><span class="etab-label">Referencia</span></button>
+</div>
+<div id="exContainer"></div>
+<p class="creator">By <span>Carlos &amp; Denisse</span> · Your Mexican Friend</p>
+</div>
+<script>
+/* ═══════════════════════════════════════
+   EX 1 — MC (50 questions, ser / estar)
+═══════════════════════════════════════ */
+const MC = [
+  {sent:'Ella ___ de Guadalajara.',              en:'She is from Guadalajara.',                  opts:['es','está','son','estoy'],      ans:0, rule:'ser',   exp:'Origen → <strong>SER</strong>. "Ser de" = de dónde es alguien.'},
+  {sent:'Este queso ___ de Francia.',            en:'This cheese is from France.',               opts:['está','estoy','es','son'],      ans:2, rule:'ser',   exp:'Origen/material → <strong>SER</strong>.'},
+  {sent:'Mi padre ___ médico.',                  en:'My father is a doctor.',                    opts:['está','estamos','son','es'],    ans:3, rule:'ser',   exp:'Profesión permanente → <strong>SER</strong>.'},
+  {sent:'Ella ___ de camarera este verano.',     en:'She is working as a waitress this summer.', opts:['es','son','está','estoy'],      ans:2, rule:'estar', exp:'Trabajo temporal ("estar de") → <strong>ESTAR</strong>. Indica un rol provisional.'},
+  {sent:'Las llaves ___ en la mesa.',            en:'The keys are on the table.',                opts:['son','es','estoy','están'],     ans:3, rule:'estar', exp:'Ubicación de objeto → <strong>ESTAR</strong>.'},
+  {sent:'La fiesta ___ en mi casa.',             en:'The party is at my house.',                 opts:['está','estamos','es','son'],    ans:2, rule:'ser',   exp:'Ubicación de un evento → <strong>SER</strong>. Los eventos usan SER, no ESTAR.'},
+  {sent:'Mi hermana ___ en el hospital.',        en:'My sister is at the hospital.',             opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Ubicación de persona → <strong>ESTAR</strong>.'},
+  {sent:'Hoy ___ martes.',                       en:'Today is Tuesday.',                         opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'Día de la semana → <strong>SER</strong>.'},
+  {sent:'___ las tres de la tarde.',             en:'It is three in the afternoon.',             opts:['Están','Estamos','Son','Soy'],  ans:2, rule:'ser',   exp:'Hora → <strong>SER</strong>. Para "las X" usamos son.'},
+  {sent:'___ en primavera ahora.',               en:'It is spring now.',                         opts:['Es','Somos','Son','Estamos'],   ans:3, rule:'estar', exp:'Estación con "estar en" → <strong>ESTAR</strong>. "Estamos en primavera."'},
+  {sent:'Diego ___ muy alto.',                   en:'Diego is very tall.',                       opts:['está','estoy','es','estamos'],  ans:2, rule:'ser',   exp:'Característica física permanente → <strong>SER</strong>.'},
+  {sent:'Ella ___ muy delgada últimamente.',     en:'She has been looking very thin lately.',    opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Cambio de apariencia temporal → <strong>ESTAR</strong>.'},
+  {sent:'Mi jefe ___ de buen humor hoy.',        en:'My boss is in a good mood today.',          opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Estado de ánimo temporal → <strong>ESTAR</strong>.'},
+  {sent:'Ella ___ muy nerviosa antes del examen.',en:'She is very nervous before the exam.',     opts:['es','son','está','soy'],        ans:2, rule:'estar', exp:'Estado emocional temporal → <strong>ESTAR</strong>.'},
+  {sent:'La mesa ___ de madera.',                en:'The table is made of wood.',                opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'Material → <strong>SER</strong>. "Ser de" indica de qué está hecho algo.'},
+  {sent:'Ella ___ mi esposa.',                   en:'She is my wife.',                           opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'Relación personal → <strong>SER</strong>. Define el vínculo.'},
+  {sent:'Ella ___ casada desde enero.',          en:'She has been married since January.',       opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Estado civil → <strong>ESTAR</strong>. El estado legal usa ESTAR.'},
+  {sent:'El chocolate ___ dulce.',               en:'Chocolate is sweet.',                       opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'Propiedad inherente → <strong>SER</strong>. El chocolate siempre es dulce.'},
+  {sent:'Esta sopa ___ demasiado salada.',       en:'This soup is too salty.',                   opts:['es','son','estoy','está'],      ans:3, rule:'estar', exp:'Sabor percibido en el momento → <strong>ESTAR</strong>. Esta vez está así.'},
+  {sent:'El libro ___ escrito por Rulfo.',       en:'The book was written by Rulfo.',            opts:['estaba','estuvo','está','fue'], ans:3, rule:'ser',   exp:'Voz pasiva → <strong>SER</strong>. "Fue escrito" usa SER para narrar la acción.'},
+  {sent:'El informe ya ___ terminado.',          en:'The report is already finished.',           opts:['es','son','fue','está'],        ans:3, rule:'estar', exp:'Resultado de una acción → <strong>ESTAR</strong>. El estado resultante usa ESTAR.'},
+  {sent:'Carlos ___ muy simpático.',             en:'Carlos is very nice.',                      opts:['está','estoy','estamos','es'],  ans:3, rule:'ser',   exp:'Rasgo de personalidad permanente → <strong>SER</strong>.'},
+  {sent:'Carlos ___ muy simpático hoy.',         en:'Carlos is being very nice today.',          opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Comportamiento inusual hoy → <strong>ESTAR</strong>. Implica que no siempre es así.'},
+  {sent:'El personaje ___ muerto al final.',     en:'The character is dead at the end.',         opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'"Muerto" usa <strong>ESTAR</strong>. Es el resultado de un cambio, no una identidad.'},
+  {sent:'El concierto ___ en el Zócalo.',        en:'The concert is at the Zócalo.',             opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'Ubicación de evento → <strong>SER</strong>. Donde "tiene lugar" algo usa SER.'},
+  {sent:'El libro ___ abierto sobre la mesa.',   en:'The book is open on the table.',            opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Posición/estado físico de un objeto → <strong>ESTAR</strong>.'},
+  {sent:'El café ___ caliente.',                 en:'The coffee is hot.',                        opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Temperatura/estado temporal → <strong>ESTAR</strong>.'},
+  {sent:'Este restaurante ___ muy rico.',        en:'This restaurant\'s food is delicious.',     opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'"Estar rico" = delicioso. "Ser rico" = tener mucho dinero.'},
+  {sent:'Mi tío ___ muy rico.',                  en:'My uncle is very wealthy.',                 opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'"Ser rico" = adinerado. "Estar rico" = estar delicioso.'},
+  {sent:'Esta manzana ___ verde todavía.',       en:'This apple is still unripe.',               opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'"Estar verde" = sin madurar. "Ser verde" = el color verde.'},
+  {sent:'¿Ya ___ despierto? Son las diez.',      en:'Are you already awake? It\'s ten.',         opts:['eres','somos','soy','estás'],   ans:3, rule:'estar', exp:'"Estar despierto" = awake. "Ser despierto" = ser listo/inteligente.'},
+  {sent:'El paciente ___ muy grave.',            en:'The patient is in critical condition.',     opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'"Estar grave" = estado crítico de salud. "Ser grave" = ser una persona seria.'},
+  {sent:'Ella ___ muy lista para su edad.',      en:'She is very clever for her age.',           opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'"Ser listo" = ser inteligente. "Estar listo" = estar preparado.'},
+  {sent:'La puerta ___ abierta.',                en:'The door is open.',                         opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Estado resultante → <strong>ESTAR</strong>. La puerta fue abierta.'},
+  {sent:'Nosotros ___ de vacaciones.',           en:'We are on vacation.',                       opts:['somos','son','soy','estamos'],  ans:3, rule:'estar', exp:'Estado temporal → <strong>ESTAR</strong>. Las vacaciones no son permanentes.'},
+  {sent:'La reunión ___ a las diez.',            en:'The meeting is at ten.',                    opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'Hora/tiempo de un evento → <strong>SER</strong>.'},
+  {sent:'El aeropuerto ___ muy lejos.',          en:'The airport is very far.',                  opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Ubicación de lugar físico → <strong>ESTAR</strong>.'},
+  {sent:'Esa canción ___ de los años 80.',       en:'That song is from the 80s.',                opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'Origen/época → <strong>SER</strong>.'},
+  {sent:'El mercado ___ cerrado los domingos.',  en:'The market is closed on Sundays.',          opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Estado/condición → <strong>ESTAR</strong>. Resultado de cerrar.'},
+  {sent:'Mis padres ___ de México.',             en:'My parents are from Mexico.',               opts:['están','estamos','estoy','son'],ans:3, rule:'ser',   exp:'Origen → <strong>SER</strong>.'},
+  {sent:'Mi hermano ___ enfermo esta semana.',   en:'My brother is sick this week.',             opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Estado de salud temporal → <strong>ESTAR</strong>.'},
+  {sent:'___ las cinco en punto.',               en:'It is exactly five o\'clock.',              opts:['Están','Estamos','Estoy','Son'],ans:3, rule:'ser',   exp:'Hora → <strong>SER</strong>. Plural porque son "las cinco".'},
+  {sent:'Ellos ___ muy aburridos en casa.',      en:'They are very bored at home.',              opts:['son','es','soy','están'],       ans:3, rule:'estar', exp:'"Estar aburrido" = sentirse aburrido ahora. "Ser aburrido" = ser una persona sin gracia.'},
+  {sent:'Ese profesor ___ muy aburrido.',        en:'That teacher is very boring.',              opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'"Ser aburrido" = rasgo de personalidad permanente.'},
+  {sent:'El edificio ___ de cristal y acero.',   en:'The building is made of glass and steel.',  opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'Material → <strong>SER</strong>.'},
+  {sent:'¿___ listo para salir?',                en:'Are you ready to go?',                      opts:['Eres','Somos','Soy','Estás'],   ans:3, rule:'estar', exp:'"Estar listo" = estar preparado. "Ser listo" = ser inteligente.'},
+  {sent:'Hoy ___ el cinco de mayo.',             en:'Today is May fifth.',                       opts:['está','estoy','están','es'],    ans:3, rule:'ser',   exp:'Fecha → <strong>SER</strong>.'},
+  {sent:'El contrato ya ___ firmado.',           en:'The contract is already signed.',           opts:['es','son','fue','está'],        ans:3, rule:'estar', exp:'Resultado de una acción → <strong>ESTAR</strong>.'},
+  {sent:'___ ingenieros los dos.',               en:'Both of us are engineers.',                 opts:['Estamos','Estoy','Están','Somos'],ans:3,rule:'ser',  exp:'Profesión → <strong>SER</strong>. "Somos ingenieros."'},
+  {sent:'El cielo ___ muy nublado hoy.',         en:'The sky is very cloudy today.',             opts:['es','son','soy','está'],        ans:3, rule:'estar', exp:'Estado meteorológico temporal → <strong>ESTAR</strong>.'},
+];
+
+
+/* ═══════════════════════════════════════
+   EX 2 — CONTRAST (adjectives that change meaning)
+═══════════════════════════════════════ */
+const CONTRAST = [
+  { adj:'RICO',
+    ser:{sent:'Mi abuelo es muy rico.',       en:'My grandfather is very wealthy.',    mean:'Adinerado, tiene mucho dinero.'},
+    est:{sent:'Este pozole está riquísimo.',  en:'This pozole is absolutely delicious.',mean:'Delicioso, tiene muy buen sabor.'},
+    q:'¿En cuál "rico" describe el sabor de una comida?',
+    opts:['Mi abuelo es muy rico.','Este pozole está riquísimo.'], ans:1,
+    exp:'"Ser rico" = tener dinero. "Estar rico" = estar delicioso.' },
+  { adj:'VERDE',
+    ser:{sent:'El coche es verde.',           en:'The car is (the color) green.',      mean:'Verde es el color del coche.'},
+    est:{sent:'Esta fruta está verde.',       en:'This fruit is unripe.',              mean:'Sin madurar todavía.'},
+    q:'¿Cuál significa que la fruta no está lista para comer?',
+    opts:['El coche es verde.','Esta fruta está verde.'], ans:1,
+    exp:'"Ser verde" = color. "Estar verde" = sin madurar, o informalmente, sin experiencia.' },
+  { adj:'DESPIERTO',
+    ser:{sent:'Esa niña es muy despierta.',   en:'That girl is very sharp / clever.',  mean:'Inteligente, espabilada por naturaleza.'},
+    est:{sent:'¿Ya estás despierto?',         en:'Are you already awake?',             mean:'Ha dejado de dormir.'},
+    q:'¿Cuál pregunta si alguien ha dejado de dormir?',
+    opts:['Esa niña es muy despierta.','¿Ya estás despierto?'], ans:1,
+    exp:'"Ser despierto" = ser listo/inteligente. "Estar despierto" = awake, no estar durmiendo.' },
+  { adj:'GRAVE',
+    ser:{sent:'Es un asunto muy grave.',      en:'It\'s a very serious matter.',       mean:'Serio, de mucha importancia.'},
+    est:{sent:'El paciente está grave.',      en:'The patient is in critical condition.',mean:'En mal estado de salud, en riesgo.'},
+    q:'¿Cuál se usa en contexto médico para alguien en peligro?',
+    opts:['Es un asunto muy grave.','El paciente está grave.'], ans:1,
+    exp:'"Ser grave" = ser serio/importante. "Estar grave" = estar en estado crítico de salud.' },
+  { adj:'ABURRIDO',
+    ser:{sent:'Ese profesor es muy aburrido.',en:'That teacher is very boring.',        mean:'Tiene una personalidad sin gracia.'},
+    est:{sent:'Estoy aburrido en casa.',      en:'I\'m bored at home.',                mean:'Me siento aburrido ahora mismo.'},
+    q:'¿Cuál describe cómo se siente alguien en este momento?',
+    opts:['Ese profesor es muy aburrido.','Estoy aburrido en casa.'], ans:1,
+    exp:'"Ser aburrido" = rasgo de personalidad. "Estar aburrido" = sentirse aburrido ahora.' },
+  { adj:'LISTO',
+    ser:{sent:'Mi hermana es muy lista.',     en:'My sister is very clever.',          mean:'Inteligente, espabilada.'},
+    est:{sent:'¿Estás listo para salir?',     en:'Are you ready to go?',               mean:'Preparado para hacer algo.'},
+    q:'¿Cuál pregunta si alguien ya está preparado?',
+    opts:['Mi hermana es muy lista.','¿Estás listo para salir?'], ans:1,
+    exp:'"Ser listo" = ser inteligente. "Estar listo" = estar preparado/ready.' },
+];
+
+/* ═══════════════════════════════════════
+   EX 3 — ERROR HUNT (15 sentences)
+═══════════════════════════════════════ */
+const ERRORS = [
+  ['La fiesta está en mi casa el sábado.',             true,  'es',    'ERROR: La ubicación de eventos usa <strong>SER</strong>. → La fiesta <strong>es</strong> en mi casa.'],
+  ['Ella es muy cansada hoy.',                         true,  'está',  'ERROR: Estado físico temporal → <strong>ESTAR</strong>. → Ella <strong>está</strong> muy cansada hoy.'],
+  ['El aeropuerto es muy lejos del centro.',           true,  'está',  'ERROR: Ubicación de lugar físico → <strong>ESTAR</strong>. → El aeropuerto <strong>está</strong> muy lejos.'],
+  ['Son las ocho de la mañana.',                       false, null,    'CORRECTO: La hora usa SER. "Son las ocho." ✓'],
+  ['Mi padre está médico.',                            true,  'es',    'ERROR: Profesión permanente → <strong>SER</strong>. → Mi padre <strong>es</strong> médico.'],
+  ['Este café está muy caliente.',                     false, null,    'CORRECTO: Estado/temperatura temporal → ESTAR. ✓'],
+  ['El libro fue escrito por ella.',                   false, null,    'CORRECTO: Agente en voz pasiva → SER. "Fue escrito" ✓'],
+  ['Él está muerto — murió hace años.',                false, null,    'CORRECTO: "Muerto" usa ESTAR. Es el resultado de un cambio. ✓'],
+  ['La reunión es a las diez.',                        false, null,    'CORRECTO: Hora de un evento → SER. ✓'],
+  ['Esta sopa es demasiado salada.',                   true,  'está',  'ERROR: Sabor percibido en el momento → <strong>ESTAR</strong>. → Esta sopa <strong>está</strong> demasiado salada.'],
+  ['Ella es casada desde el año pasado.',              true,  'está',  'ERROR: Estado civil → <strong>ESTAR</strong>. → Ella <strong>está</strong> casada.'],
+  ['¿Estás listo? El taxi ya llegó.',                  false, null,    'CORRECTO: "Estar listo" = preparado. ✓'],
+  ['El mercado es cerrado los domingos.',              true,  'está',  'ERROR: Estado resultante → <strong>ESTAR</strong>. → El mercado <strong>está</strong> cerrado.'],
+  ['Para ser tan joven, es muy maduro.',               false, null,    'CORRECTO: Característica → SER. Comparación → para. ✓'],
+  ['Mi hermano es muy enfermo esta semana.',           true,  'está',  'ERROR: Estado de salud temporal → <strong>ESTAR</strong>. → Mi hermano <strong>está</strong> muy enfermo.'],
+];
+
+/* ═══════════════════════════════════════
+   EX 4 — DRAG & SORT (specific use-case buckets)
+═══════════════════════════════════════ */
+const SORT_BUCKETS_DATA = [
+  {id:'desc',    label:'Descripción física',   icon:'🧍', sub:'Características físicas permanentes',         col:'#f472b6', bg:'rgba(244,114,182,.07)', bdr:'rgba(244,114,182,.25)'},
+  {id:'ocup',    label:'Profesión',            icon:'💼', sub:'Trabajo o carrera permanente',                col:'#a78bfa', bg:'rgba(167,139,250,.07)', bdr:'rgba(167,139,250,.25)'},
+  {id:'caract',  label:'Personalidad',         icon:'🌟', sub:'Rasgos de carácter permanentes',              col:'#fbbf24', bg:'rgba(251,191,36,.06)',  bdr:'rgba(251,191,36,.22)'},
+  {id:'tiempo',  label:'Tiempo / Fecha / Hora',icon:'🕐', sub:'Días, fechas, horas, estaciones',             col:'#34d399', bg:'rgba(52,211,153,.06)',  bdr:'rgba(52,211,153,.22)'},
+  {id:'origen',  label:'Origen / Material',    icon:'🌍', sub:'De dónde es / de qué está hecho',             col:'#fb923c', bg:'rgba(251,146,60,.06)',  bdr:'rgba(251,146,60,.22)'},
+  {id:'evento',  label:'Ubicación de evento',  icon:'🎉', sub:'Dónde "tiene lugar" algo',                    col:'#ff91cd', bg:'rgba(244,114,182,.06)', bdr:'rgba(244,114,182,.2)'},
+  {id:'ubic',    label:'Ubicación física',     icon:'📍', sub:'Dónde está una persona u objeto',             col:'#25d9ff', bg:'rgba(37,217,255,.06)',  bdr:'rgba(37,217,255,.2)'},
+  {id:'estado',  label:'Estado / Emoción',     icon:'😊', sub:'Cómo se siente / estado temporal',            col:'#86efac', bg:'rgba(34,197,94,.06)',   bdr:'rgba(34,197,94,.2)'},
+  {id:'result',  label:'Resultado',            icon:'✅', sub:'El resultado de una acción (participio)',      col:'#7ee8ff', bg:'rgba(37,217,255,.06)',  bdr:'rgba(37,217,255,.18)'},
+  {id:'relacion',label:'Relación',             icon:'👫', sub:'Vínculos personales y estado civil',          col:'#c4b5fd', bg:'rgba(167,139,250,.06)', bdr:'rgba(167,139,250,.2)'},
+];
+const SORT_ITEMS = [
+  {id:'s1',  text:'Él es muy alto.',                    correct:'desc',    exp:'Descripción física permanente → SER (D).'},
+  {id:'s2',  text:'Ella es ingeniera.',                 correct:'ocup',    exp:'Profesión permanente → SER (O).'},
+  {id:'s3',  text:'Carlos es muy simpático.',           correct:'caract',  exp:'Rasgo de personalidad → SER (C).'},
+  {id:'s4',  text:'Hoy es lunes.',                      correct:'tiempo',  exp:'Día de la semana → SER (T).'},
+  {id:'s5',  text:'Somos de Oaxaca.',                   correct:'origen',  exp:'Origen → SER (O).'},
+  {id:'s6',  text:'El concierto es en el parque.',      correct:'evento',  exp:'Ubicación de evento → SER. Los eventos usan SER.'},
+  {id:'s7',  text:'El banco está en la esquina.',       correct:'ubic',    exp:'Ubicación de lugar físico → ESTAR (L).'},
+  {id:'s8',  text:'Estoy muy cansado hoy.',             correct:'estado',  exp:'Estado físico temporal → ESTAR (C).'},
+  {id:'s9',  text:'La puerta está cerrada.',            correct:'result',  exp:'Resultado de una acción → ESTAR (resultado).'},
+  {id:'s10', text:'Ella es mi esposa.',                 correct:'relacion', exp:'Relación personal → SER (R).'},
+  {id:'s11', text:'La mesa es de madera.',              correct:'origen',  exp:'Material → SER (O — origen/material).'},
+  {id:'s12', text:'Son las cinco.',                     correct:'tiempo',  exp:'Hora → SER (T).'},
+  {id:'s13', text:'Mi papá está en casa.',              correct:'ubic',    exp:'Ubicación de persona → ESTAR (L).'},
+  {id:'s14', text:'Ella está casada.',                  correct:'relacion', exp:'Estado civil → ESTAR. El estado legal usa ESTAR.'},
+  {id:'s15', text:'El café está caliente.',             correct:'estado',  exp:'Temperatura/estado temporal → ESTAR (C).'},
+  {id:'s16', text:'El informe ya está escrito.',        correct:'result',  exp:'Resultado → ESTAR. "Ya está hecho."'},
+  {id:'s17', text:'Él es abogado.',                     correct:'ocup',    exp:'Profesión → SER (O).'},
+  {id:'s18', text:'Ella está triste hoy.',              correct:'estado',  exp:'Estado emocional temporal → ESTAR (E).'},
+  {id:'s19', text:'La boda es en la playa.',            correct:'evento',  exp:'Ubicación de evento → SER. No ESTAR.'},
+  {id:'s20', text:'El libro es de García Márquez.',     correct:'origen',  exp:'Autoría/origen → SER (O).'},
+  {id:'s21', text:'Mis llaves están en mi bolsa.',      correct:'ubic',    exp:'Ubicación de objeto → ESTAR (L).'},
+  {id:'s22', text:'Él es muy trabajador.',              correct:'caract',  exp:'Rasgo de personalidad → SER (C).'},
+  {id:'s23', text:'Hoy es el 15 de septiembre.',        correct:'tiempo',  exp:'Fecha → SER (T).'},
+  {id:'s24', text:'Ella es mi mejor amiga.',            correct:'relacion', exp:'Relación personal → SER (R).'},
+  {id:'s25', text:'Él está muy delgado últimamente.',   correct:'estado',  exp:'Cambio de apariencia temporal → ESTAR (C — condition).'},
+];
+
+/* ═══════════════════════════════════════
+   EX 5 — SPEED ROUND
+═══════════════════════════════════════ */
+const SPEED = [
+  {q:'Ella ___ de México.',                     hint:'origen',                  ans:'ser'},
+  {q:'El aeropuerto ___ lejos.',                hint:'ubicación de lugar',       ans:'estar'},
+  {q:'Hoy ___ martes.',                         hint:'día de la semana',         ans:'ser'},
+  {q:'El café ___ caliente.',                   hint:'temperatura temporal',     ans:'estar'},
+  {q:'Mi madre ___ doctora.',                   hint:'profesión',                ans:'ser'},
+  {q:'La puerta ___ abierta.',                  hint:'resultado',                ans:'estar'},
+  {q:'___ las nueve de la noche.',              hint:'hora',                     ans:'ser'},
+  {q:'Él ___ muy cansado hoy.',                 hint:'estado físico temporal',   ans:'estar'},
+  {q:'La fiesta ___ en mi casa.',               hint:'ubicación de evento',      ans:'ser'},
+  {q:'Ella ___ casada.',                        hint:'estado civil',             ans:'estar'},
+  {q:'El edificio ___ de cristal.',             hint:'material',                 ans:'ser'},
+  {q:'Estamos ___ de vacaciones.',              hint:'estado temporal',          ans:'estar'},
+  {q:'Él ___ muy simpático.',                   hint:'personalidad permanente',  ans:'ser'},
+  {q:'Mi hermano ___ enfermo.',                 hint:'estado de salud',          ans:'estar'},
+  {q:'El libro fue escrito ___ por ella.',      hint:'voz pasiva',               ans:'ser'},
+  {q:'El contrato ya ___ firmado.',             hint:'resultado',                ans:'estar'},
+  {q:'Son ___ de Guadalajara.',                 hint:'origen',                   ans:'ser'},
+  {q:'El mercado ___ cerrado.',                 hint:'estado resultante',        ans:'estar'},
+  {q:'La reunión ___ a las diez.',              hint:'hora de un evento',        ans:'ser'},
+  {q:'Él ___ muy nervioso antes del examen.',   hint:'emoción temporal',         ans:'estar'},
+  {q:'Este pozole ___ riquísimo.',              hint:'sabor percibido ahora',    ans:'estar'},
+  {q:'Mi tío ___ muy rico.',                    hint:'adinerado',                ans:'ser'},
+  {q:'¿___ listo para salir?',                  hint:'preparado',                ans:'estar'},
+  {q:'Ella ___ mi esposa.',                     hint:'relación personal',        ans:'ser'},
+  {q:'El paciente ___ grave.',                  hint:'estado de salud crítico',  ans:'estar'},
+  {q:'Hoy ___ el cinco de mayo.',               hint:'fecha',                    ans:'ser'},
+  {q:'La mesa ___ de madera.',                  hint:'material',                 ans:'ser'},
+  {q:'Él ___ muerto.',                          hint:'excepción famosa',         ans:'estar'},
+  {q:'El concierto ___ en el Zócalo.',          hint:'ubicación de evento',      ans:'ser'},
+  {q:'Estoy muy ___ aburrido aquí.',            hint:'sentirse aburrido',        ans:'estar'},
+];
+
+/* ═══════════════════════════════════════
+   STATE
+═══════════════════════════════════════ */
+let currentEx=0;
+let mc_answers={}, mc_checked=false;
+let contrast_answered={};
+let eh_answered={};
+let dragItem=null, sortPlaced={}, sortChecked=false, tapSelected=null;
+let speedIdx=0,speedOk=0,speedErr=0,speedStreak=0,speedTimer=null,speedTimeLeft=0,speedAnswered=false;
+
+function goEx(idx){
+  currentEx=idx;
+  [0,1,2,3,4,5].forEach(i=>document.getElementById('etab-'+i).classList.toggle('active',i===idx));
+  [renderMC,renderContrast,renderErrorHunt,renderSort,renderSpeed,renderReference][idx]();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── MC ── */
+// Pre-compute a stable shuffled order for each question's options
+// so position is random but consistent within a session
+function seededShuffle(arr, seed){
+  const a=[...arr]; let s=seed;
+  for(let i=a.length-1;i>0;i--){
+    s=(s*1664525+1013904223)&0xffffffff;
+    const j=Math.abs(s)%(i+1);
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+// For each question, store shuffled indices once per page load
+const MC_ORDER = MC.map((item,i)=>seededShuffle([0,1,2,3], i*7+13));
+
+function renderMC(){
+  const answered=Object.keys(mc_answers).length;
+  const pct=Math.round(answered/MC.length*100);
+  const qHTML=MC.map((item,i)=>{
+    const order=MC_ORDER[i]; // shuffled positions: e.g. [2,0,3,1]
+    const optHTML=order.map((origIdx, displayPos)=>{
+      const o=item.opts[origIdx];
+      const isSer=o==='es'||o==='son'||o==='somos'||o==='soy'||o==='fue';
+      let cls='mc-opt '+(isSer?'ser-opt':'est-opt');
+      if(mc_checked){
+        if(origIdx===item.ans) cls+=' mc-show';
+        else if(mc_answers[i]===origIdx&&origIdx!==item.ans) cls+=' mc-err';
+      } else if(mc_answers[i]===origIdx) cls+=origIdx===item.ans?' mc-ok':' mc-err';
+      return `<button class="${cls}" id="mco_${i}_${origIdx}" onclick="answerMC(${i},${origIdx})" ${mc_checked?'disabled':''}>${o}</button>`;
+    }).join('');
+    const ruleColor=item.rule==='ser'?'var(--ser2)':'var(--est2)';
+    const explShow=mc_checked||(mc_answers[i]!==undefined);
+    return `<div class="mc-card">
+      <div class="mc-top"><span class="mc-num" style="color:${ruleColor}">${i+1}</span><span class="mc-sent">${item.sent.replace('___','<span class="mc-blank">___</span>')}</span></div>
+      <div class="mc-en">${item.en}</div>
+      <div class="mc-opts">${optHTML}</div>
+      <div class="mc-expl ${explShow?'show':''}" id="mcexp_${i}"><span class="mc-rule ${item.rule}">Regla: ${item.rule.toUpperCase()}</span> ${item.exp}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header">
+    <div class="ex-title">📝 Multiple choice</div>
+    <div class="ex-instr">Choose <span class="pill-ser">SER</span> or <span class="pill-est">ESTAR</span> for each sentence. The number color gives a subtle hint: 🩷 ser · 🔵 estar — but try to reason it out first. 50 sentences total.</div>
+  </div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${MC.length}</span></div>
+    <div class="sc"><span class="l">Correctas</span><span class="v g" id="mc_ok">—</span></div>
+    <div class="sc"><span class="l">Errores</span><span class="v b" id="mc_err">—</span></div>
+    <div class="prog-w"><div class="prog-l">Respondidas: <span id="mc_pct">${pct}%</span></div><div class="prog-t"><div class="prog-f" id="mc_prog" style="width:${pct}%"></div></div></div>
+  </div>
+  <div class="mc-list">${qHTML}</div>
+  <div class="fb" id="mc_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="mc_check" onclick="checkMC()" ${mc_checked?'disabled':''}>Revisar todo</button>
+    <button class="btn btn-ghost" onclick="mc_answers={};mc_checked=false;renderMC()">↺ Reiniciar</button>
+  </div></div>`;
+}
+function answerMC(qi,origIdx){
+  if(mc_checked)return;
+  if(mc_answers[qi]!==undefined){
+    const p=document.getElementById(`mco_${qi}_${mc_answers[qi]}`);
+    if(p)p.classList.remove('mc-ok','mc-err');
+  }
+  mc_answers[qi]=origIdx;
+  const isOk=origIdx===MC[qi].ans;
+  const btn=document.getElementById(`mco_${qi}_${origIdx}`);
+  if(btn)btn.classList.add(isOk?'mc-ok':'mc-err');
+  const exp=document.getElementById(`mcexp_${qi}`);
+  if(exp)exp.classList.add('show');
+  const pct=Math.round(Object.keys(mc_answers).length/MC.length*100);
+  const el=document.getElementById('mc_pct');if(el)el.textContent=pct+'%';
+  const pg=document.getElementById('mc_prog');if(pg)pg.style.width=pct+'%';
+}
+function checkMC(){
+  mc_checked=true;
+  let ok=0;
+  MC.forEach((item,i)=>{if(mc_answers[i]===item.ans)ok++;});
+  const pct=Math.round(ok/MC.length*100);
+  document.getElementById('mc_ok').textContent=ok;
+  document.getElementById('mc_err').textContent=MC.length-ok;
+  document.getElementById('mc_prog').style.width='100%';
+  document.getElementById('mc_pct').textContent='100%';
+  const fb=document.getElementById('mc_fb');
+  if(pct===100){fb.className='fb show ok';fb.innerHTML='🏆 <strong>¡Perfecto! 50/50.</strong> Dominas ser y estar.';}
+  else if(pct>=75){fb.className='fb show ok';fb.innerHTML=`👍 <strong>${ok}/50.</strong> Muy bien. Lee las explicaciones de los errores.`;}
+  else if(pct>=50){fb.className='fb show partial';fb.innerHTML=`📖 <strong>${ok}/50.</strong> Recuerda: D.O.C.T.O.R. → SER · P.L.A.C.E. → ESTAR.`;}
+  else{fb.className='fb show err';fb.innerHTML=`💪 <strong>${ok}/50.</strong> Revisa la tabla de referencia y vuelve a intentarlo.`;}
+  document.getElementById('mc_check').disabled=true;
+  renderMC();
+}
+
+/* ── CONTRAST ── */
+function renderContrast(){
+  contrast_answered={};
+  let html=`<div class="panel"><div class="ex-header"><div class="ex-title">🔀 Mismo adjetivo, distinto verbo</div>
+  <div class="ex-instr">These adjectives <em>change their meaning completely</em> depending on whether you use <span class="pill-ser">SER</span> or <span class="pill-est">ESTAR</span>. Study both, then answer the question.</div></div><div class="contrast-grid">`;
+  CONTRAST.forEach((item,idx)=>{
+    html+=`<div class="contrast-item">
+      <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--warn);margin-bottom:10px">${item.adj}</div>
+      <div class="contrast-pair">
+        <div class="cp-card ser-card"><div class="cp-label ser-lbl">🩷 SER</div><div class="cp-sent">${item.ser.sent}</div><div class="cp-en">${item.ser.en}</div><div class="cp-mean ser-mean">→ ${item.ser.mean}</div></div>
+        <div class="cp-card est-card"><div class="cp-label est-lbl">🔵 ESTAR</div><div class="cp-sent">${item.est.sent}</div><div class="cp-en">${item.est.en}</div><div class="cp-mean est-mean">→ ${item.est.mean}</div></div>
+      </div>
+      <div class="contrast-q">
+        <div class="cq-text">❓ ${item.q}</div>
+        <div class="cq-opts">${item.opts.map((o,oi)=>`<button class="cq-opt" id="cqo_${idx}_${oi}" onclick="answerContrast(${idx},${oi})">${o}</button>`).join('')}</div>
+        <div class="fb" id="cqfb_${idx}"></div>
+      </div></div>`;
+  });
+  html+=`</div></div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+function answerContrast(idx,chosen){
+  if(contrast_answered[idx]!==undefined)return;
+  contrast_answered[idx]=chosen;
+  const item=CONTRAST[idx];
+  const isOk=chosen===item.ans;
+  [0,1].forEach(oi=>{
+    const btn=document.getElementById(`cqo_${idx}_${oi}`);
+    if(!btn)return;btn.disabled=true;
+    if(oi===chosen&&isOk)btn.classList.add('ok');
+    else if(oi===chosen&&!isOk)btn.classList.add('bad');
+    else if(oi===item.ans)btn.classList.add('ok');
+  });
+  const fb=document.getElementById(`cqfb_${idx}`);
+  fb.className='fb show '+(isOk?'ok':'err');
+  fb.innerHTML=isOk?`✓ <strong>¡Correcto!</strong> ${item.exp}`:`✗ ${item.exp}`;
+}
+
+/* ── ERROR HUNT ── */
+function renderErrorHunt(){
+  eh_answered={};
+  let html=`<div class="panel"><div class="ex-header"><div class="ex-title">🔍 Error hunter</div>
+  <div class="ex-instr">Read each sentence. Is <span class="pill-ser">SER</span> or <span class="pill-est">ESTAR</span> used <em>correctly</em>? Decide before seeing the explanation.</div></div>
+  <div class="score-bar">
+    <div class="sc"><span class="l">Total</span><span class="v">${ERRORS.length}</span></div>
+    <div class="sc"><span class="l">Aciertos</span><span class="v g" id="eh_ok">0</span></div>
+    <div class="sc"><span class="l">Errores</span><span class="v b" id="eh_err">0</span></div>
+    <div class="prog-w"><div class="prog-l">Progreso: <span id="eh_pct">0%</span></div><div class="prog-t"><div class="prog-f" id="eh_prog" style="width:0%"></div></div></div>
+  </div><div class="eh-list">`;
+  ERRORS.forEach(([sent,,,exp],idx)=>{
+    html+=`<div class="eh-item" id="ehi_${idx}">
+      <div class="eh-num">${idx+1}</div>
+      <div class="eh-body">
+        <div class="eh-sent" id="ehsent_${idx}">${sent}</div>
+        <div class="eh-judge-row">
+          <button class="eh-judge-btn eh-correct-btn" onclick="judgeEh(${idx},false)">✅ Correcto</button>
+          <button class="eh-judge-btn eh-error-btn" onclick="judgeEh(${idx},true)">❌ Tiene error</button>
+        </div>
+        <div class="eh-exp" id="ehexp_${idx}">${exp}</div>
+      </div></div>`;
+  });
+  html+=`</div><div class="fb" id="eh_fb" style="margin-top:12px"></div>
+  <div class="actions"><button class="btn btn-ghost" onclick="eh_answered={};renderErrorHunt()">↺ Reiniciar</button></div></div>`;
+  document.getElementById('exContainer').innerHTML=html;
+}
+function judgeEh(idx,studentSaysError){
+  if(eh_answered[idx]!==undefined)return;
+  const [sent,hasErr,correction,exp]=ERRORS[idx];
+  const correct=studentSaysError===hasErr;
+  eh_answered[idx]=correct;
+  const item=document.getElementById('ehi_'+idx);
+  item.classList.add('revealed',correct?'correct-sentence':'wrong-sentence');
+  item.querySelectorAll('.eh-judge-btn').forEach(b=>b.disabled=true);
+  const chosen=item.querySelector(studentSaysError?'.eh-error-btn':'.eh-correct-btn');
+  if(chosen)chosen.classList.add(correct?'judge-chosen-ok':'judge-chosen-err');
+  if(hasErr&&correction){
+    const sentEl=document.getElementById('ehsent_'+idx);
+    let h=sent;
+    ['es','está','son','están','somos','estamos','fue','era'].forEach(v=>{
+      if(correction!==v){const re=new RegExp(`\\b${v}\\b`,'gi');h=h.replace(re,`<span class="wrong-word">${v}</span>`);}
+    });
+    sentEl.innerHTML=h+` <span class="eh-correction">→ <strong>${correction}</strong></span>`;
+  }
+  document.getElementById('ehexp_'+idx).classList.add('show');
+  const total=Object.keys(eh_answered).length;
+  const totalOk=Object.values(eh_answered).filter(v=>v).length;
+  document.getElementById('eh_ok').textContent=totalOk;
+  document.getElementById('eh_err').textContent=total-totalOk;
+  document.getElementById('eh_pct').textContent=Math.round(total/ERRORS.length*100)+'%';
+  document.getElementById('eh_prog').style.width=Math.round(total/ERRORS.length*100)+'%';
+  if(total===ERRORS.length){
+    const pct=Math.round(totalOk/ERRORS.length*100);
+    const fb=document.getElementById('eh_fb');
+    fb.className='fb show '+(pct>=80?'ok':'partial');
+    fb.innerHTML=`${pct>=80?'🏆':'📖'} <strong>${totalOk}/${ERRORS.length}.</strong> ${pct>=80?'¡Excelente!':'Repasa las reglas marcadas en rojo.'}`;
+  }
+}
+
+/* ── SORT ── */
+function renderSort(){
+  sortPlaced={}; sortChecked=false; tapSelected=null;
+  const shuffled=[...SORT_ITEMS].sort(()=>Math.random()-.5);
+  const pile=shuffled.map(item=>`<div class="sort-card" id="sc_${item.id}" draggable="true"
+    ondragstart="dragStart(event,'${item.id}')" ondragend="dragEnd(event)"
+    onclick="tapCard('${item.id}')">${item.text}</div>`).join('');
+  const buckHTML=SORT_BUCKETS_DATA.map(b=>`<div class="sort-bucket" id="bucket-${b.id}"
+    style="background:${b.bg};border:2px dashed ${b.bdr};min-height:80px"
+    ondragover="event.preventDefault();this.classList.add('drag-over')"
+    ondragleave="this.classList.remove('drag-over')"
+    ondrop="dropInto(event,'${b.id}')" onclick="bucketTap('${b.id}')">
+    <div class="bucket-title" style="color:${b.col}">${b.icon} ${b.label}</div>
+    <div class="bucket-sub">${b.sub}</div>
+  </div>`).join('');
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">🗂️ Drag & sort</div>
+  <div class="ex-instr">Drag each sentence to the correct <em>grammar rule</em> — not just SER or ESTAR, but <em>why</em>. Is it a profession? A location? A result? Tap a card, then tap a bucket on mobile.</div></div>
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);margin-bottom:8px">Sentences — drag or tap → tap bucket</div>
+  <div class="sort-pile" id="sortPile">${pile}</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:9px;margin-bottom:12px">${buckHTML}</div>
+  <div class="fb" id="sort_fb"></div>
+  <div class="actions">
+    <button class="btn btn-cyan" id="sort_check" onclick="checkSort()" disabled>Revisar</button>
+    <button class="btn btn-ghost" onclick="renderSort()">↺ Reiniciar</button>
+  </div></div>`;
+}
+function dragStart(e,id){dragItem=id;setTimeout(()=>{const c=document.getElementById('sc_'+id);if(c)c.classList.add('drag-ghost');},0);}
+function dragEnd(){if(dragItem){const c=document.getElementById('sc_'+dragItem);if(c)c.classList.remove('drag-ghost');}dragItem=null;}
+function dropInto(e,bucket){
+  e.preventDefault();
+  const id=e.dataTransfer?e.dataTransfer.getData('text'):dragItem;
+  document.getElementById('bucket-'+bucket).classList.remove('drag-over');
+  if(!id||sortPlaced[id])return;
+  placeCard(id,bucket);
+}
+function tapCard(id){
+  if(sortPlaced[id])return;
+  const card=document.getElementById('sc_'+id);if(!card)return;
+  if(tapSelected===id){card.style.boxShadow='';tapSelected=null;return;}
+  if(tapSelected){const p=document.getElementById('sc_'+tapSelected);if(p)p.style.boxShadow='';}
+  tapSelected=id;card.style.boxShadow='0 0 0 3px var(--cyan)';
+}
+function bucketTap(bucket){if(!tapSelected)return;placeCard(tapSelected,bucket);tapSelected=null;}
+function placeCard(id,bucket){
+  sortPlaced[id]=bucket;
+  const card=document.getElementById('sc_'+id);
+  const bEl=document.getElementById('bucket-'+bucket);
+  if(!card||!bEl)return;
+  card.style.boxShadow='';card.classList.remove('drag-ghost');card.draggable=false;
+  const b=SORT_BUCKETS_DATA.find(x=>x.id===bucket);
+  card.style.borderColor=b?b.col:'rgba(255,255,255,.3)';
+  card.onclick=()=>returnCard(id);bEl.appendChild(card);
+  if(Object.keys(sortPlaced).length===SORT_ITEMS.length){const btn=document.getElementById('sort_check');if(btn)btn.disabled=false;}
+}
+function returnCard(id){
+  if(sortChecked)return;
+  delete sortPlaced[id];
+  const card=document.getElementById('sc_'+id);
+  const pile=document.getElementById('sortPile');
+  if(!card||!pile)return;
+  card.style.borderColor='';card.style.boxShadow='';card.draggable=true;
+  card.onclick=()=>tapCard(id);pile.appendChild(card);
+  const btn=document.getElementById('sort_check');if(btn)btn.disabled=true;
+}
+function checkSort(){
+  sortChecked=true;let ok=0;
+  SORT_ITEMS.forEach(item=>{
+    const card=document.getElementById('sc_'+item.id);if(!card)return;
+    const isOk=sortPlaced[item.id]===item.correct;if(isOk)ok++;
+    card.className='sort-card '+(isOk?'card-correct':'card-wrong');
+    card.draggable=false;card.onclick=null;
+    if(!isOk){const b=SORT_BUCKETS_DATA.find(x=>x.id===item.correct);card.innerHTML=`${item.text}<span style="font-size:.7rem;display:block;margin-top:3px">→ ${b?b.icon+' '+b.label:item.correct}</span>`;}
+    card.title=item.exp;
+  });
+  const pct=Math.round(ok/SORT_ITEMS.length*100);
+  const fb=document.getElementById('sort_fb');
+  fb.className='fb show '+(pct>=80?'ok':pct>=55?'partial':'err');
+  fb.innerHTML=`<strong>${ok}/${SORT_ITEMS.length} (${pct}%).</strong> Las tarjetas rojas muestran el cubo correcto.`;
+  document.getElementById('sort_check').disabled=true;
+}
+
+/* ── SPEED ── */
+function renderSpeed(){
+  if(speedTimer){clearInterval(speedTimer);speedTimer=null;}
+  speedIdx=0;speedOk=0;speedErr=0;speedStreak=0;speedAnswered=false;
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">⚡ Speed round</div>
+  <div class="ex-instr"><span class="pill-ser">SER</span> or <span class="pill-est">ESTAR</span>? You have <em>5 seconds</em>. Trust the hint. Build a streak!</div></div>
+  <div class="speed-wrap" id="speedWrap">
+    <div class="speed-start"><div style="font-size:2.8rem">⚡</div><h2>¿Ser o Estar?</h2>
+    <p>Tap the correct verb before time runs out. Streaks of 3+ earn a combo!</p>
+    <button class="btn btn-cyan" onclick="startSpeed()">¡Empezar!</button></div>
+  </div></div>`;
+}
+function startSpeed(){speedIdx=0;speedOk=0;speedErr=0;speedStreak=0;nextSpeedQ();}
+function nextSpeedQ(){
+  if(speedIdx>=SPEED.length){endSpeed();return;}
+  speedAnswered=false;
+  const item=SPEED[speedIdx];speedTimeLeft=5;
+  document.getElementById('speedWrap').innerHTML=`
+    <div class="speed-stats">
+      <div class="spstat"><div class="sl">Pregunta</div><div class="sv w">${speedIdx+1}/${SPEED.length}</div></div>
+      <div class="spstat"><div class="sl">Correctas</div><div class="sv g">${speedOk}</div></div>
+      <div class="spstat"><div class="sl">Errores</div><div class="sv b">${speedErr}</div></div>
+    </div>
+    <div class="streak-badge ${speedStreak>=3?'show':''}" id="streakB">🔥 Racha: ${speedStreak}</div>
+    <div class="speed-card">
+      <div class="speed-sent">${item.q.replace('___','<em>___</em>')}</div>
+      <div class="speed-hint">💡 ${item.hint}</div>
+    </div>
+    <div class="timer-row">
+      <div class="timer-track"><div class="timer-fill" id="tFill" style="width:100%;transition:width 1s linear"></div></div>
+      <div class="timer-num" id="tNum">5</div>
+    </div>
+    <div class="speed-btns">
+      <button class="speed-btn ser-btn" id="sbSer" onclick="answerSpeed('ser')">SER</button>
+      <button class="speed-btn est-btn" id="sbEst" onclick="answerSpeed('estar')">ESTAR</button>
+    </div>
+    <div class="speed-fb" id="sFb" style="opacity:0"></div>`;
+  if(speedTimer)clearInterval(speedTimer);
+  speedTimer=setInterval(()=>{
+    speedTimeLeft--;
+    const f=document.getElementById('tFill'),n=document.getElementById('tNum');
+    if(f)f.style.width=Math.max(0,(speedTimeLeft/5)*100)+'%';
+    if(n){n.textContent=speedTimeLeft;n.style.color=speedTimeLeft<=1?'var(--bad)':speedTimeLeft<=3?'var(--warn)':'var(--muted2)';}
+    if(speedTimeLeft<=0){clearInterval(speedTimer);speedTimer=null;if(!speedAnswered)answerSpeed(null);}
+  },1000);
+}
+function answerSpeed(chosen){
+  if(speedAnswered)return;speedAnswered=true;
+  if(speedTimer){clearInterval(speedTimer);speedTimer=null;}
+  const item=SPEED[speedIdx];
+  const isOk=chosen===item.ans;
+  if(isOk){speedOk++;speedStreak++;}else{speedErr++;speedStreak=0;}
+  ['sbSer','sbEst'].forEach(id=>{const b=document.getElementById(id);if(b)b.disabled=true;});
+  const fb=document.getElementById('sFb');
+  if(fb){
+    fb.style.opacity='1';
+    if(!chosen){fb.className='speed-fb err';fb.innerHTML=`⏱ Time! → <strong>${item.ans.toUpperCase()}</strong>`;}
+    else if(isOk){fb.className='speed-fb ok';fb.innerHTML=`✓ <strong>¡Correcto!</strong>${speedStreak>=3?' 🔥 x'+speedStreak:''}`;}
+    else{fb.className='speed-fb err';fb.innerHTML=`✗ Era <strong>${item.ans.toUpperCase()}</strong> (${item.hint})`;}
+  }
+  if(speedStreak>=3){const cf=document.getElementById('comboFlash');cf.textContent='🔥 x'+speedStreak;cf.classList.remove('anim');void cf.offsetWidth;cf.classList.add('anim');}
+  speedIdx++;setTimeout(nextSpeedQ,isOk?700:1300);
+}
+function endSpeed(){
+  const pct=Math.round(speedOk/SPEED.length*100);
+  const emo=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  document.getElementById('speedWrap').innerHTML=`<div class="speed-start">
+    <div style="font-size:3rem">${emo}</div><h2>${speedOk}/${SPEED.length} correctas</h2>
+    <p style="color:var(--muted)">${pct>=90?'¡Perfecto! Ser y estar no te confunden.':pct>=70?'¡Muy bien! Repasa los casos que fallaste.':pct>=50?'Buen intento. Fíjate en la pista.':'Revisa la tabla de referencia.'}</p>
+    <button class="btn btn-cyan" onclick="startSpeed()">↺ Intentar de nuevo</button></div>`;
+}
+
+/* ── REFERENCE ── */
+function renderReference(){
+  document.getElementById('exContainer').innerHTML=`<div class="panel">
+  <div class="ex-header"><div class="ex-title">📚 Tabla de referencia</div>
+  <div class="ex-instr">Your complete guide to SER vs ESTAR. Use the D.O.C.T.O.R. / P.L.A.C.E. acronyms as your anchor.</div></div>
+
+  <div class="ref-grid">
+    <div class="ref-col ser-col">
+      <div class="ref-col-title" style="color:var(--ser2)">🩷 SER — D.O.C.T.O.R.</div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--ser2)">Description</span><span class="ref-val">Características físicas esenciales. <em>Él es alto.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--ser2)">Occupation</span><span class="ref-val">Profesión permanente. <em>Ella es ingeniera.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--ser2)">Characteristic</span><span class="ref-val">Personalidad inherente. <em>Es muy simpático.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--ser2)">Time</span><span class="ref-val">Hora, día, fecha. <em>Hoy es martes. Son las 5.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--ser2)">Origin</span><span class="ref-val">De dónde es / material. <em>Es de México. Es de madera.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--ser2)">Relation</span><span class="ref-val">Relaciones y pertenencia. <em>Es mi hermano.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--ser2)">⚡ Eventos</span><span class="ref-val">Dónde tiene lugar algo. <em>La fiesta es aquí.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--ser2)">Voz pasiva</span><span class="ref-val">Acción. <em>Fue escrito por ella.</em></span></div>
+    </div>
+    <div class="ref-col est-col">
+      <div class="ref-col-title" style="color:var(--est2)">🔵 ESTAR — P.L.A.C.E.</div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--est2)">Position</span><span class="ref-val">Posición física. <em>Está sentado.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--est2)">Location</span><span class="ref-val">Dónde están personas/objetos. <em>Está en casa.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--est2)">Action</span><span class="ref-val">Gerundio. <em>Está comiendo.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--est2)">Condition</span><span class="ref-val">Estado temporal / resultado. <em>Está abierto. Está firmado.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--est2)">Emotion</span><span class="ref-val">Cómo se siente ahora. <em>Estoy feliz. Estás nervioso.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--est2)">⚡ Estado civil</span><span class="ref-val">casado, soltero, divorciado… <em>Está casada.</em></span></div>
+      <div class="ref-row"><span class="ref-key" style="color:var(--est2)">⚡ "Muerto"</span><span class="ref-val">Resultado de cambio. <em>Está muerto.</em></span></div>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <h3>⚠️ Adjetivos que cambian de significado</h3>
+    <div class="adj-grid">
+      ${[
+        {w:'rico',       s:'wealthy',          e:'delicious / tasty'},
+        {w:'verde',      s:'(color) green',     e:'unripe / inexperienced'},
+        {w:'despierto',  s:'clever / sharp',    e:'awake'},
+        {w:'grave',      s:'serious (situation)',e:'critically ill'},
+        {w:'aburrido',   s:'boring (personality)',e:'bored (feeling)'},
+        {w:'listo',      s:'clever / smart',    e:'ready / prepared'},
+        {w:'malo',       s:'bad (character)',    e:'sick / in bad shape'},
+        {w:'bueno',      s:'good (character)',   e:'tasty / in good health'},
+        {w:'seguro',     s:'safe (place/thing)', e:'sure / certain (person)'},
+        {w:'muerto',     s:'(no use with SER)', e:'dead (always ESTAR)'},
+      ].map(a=>`<div class="adj-card">
+        <div class="adj-word">${a.w}</div>
+        <div class="adj-row"><span class="adj-ser">SER ${a.w}</span> = ${a.s}</div>
+        <div class="adj-row"><span class="adj-est">ESTAR ${a.w}</span> = ${a.e}</div>
+      </div>`).join('')}
+    </div>
+  </div>
+
+  <div class="note-box">
+    <h3>⚡ Casos especiales</h3>
+    <div style="display:flex;flex-direction:column;gap:7px;font-size:.84rem;line-height:1.6">
+      <div><span style="color:var(--est2);font-weight:700">Estar muerto</span> — Siempre ESTAR. La muerte es el resultado de un cambio, no una identidad.</div>
+      <div><span style="color:var(--ser2);font-weight:700">Ser mi esposa</span> vs <span style="color:var(--est2);font-weight:700">estar casada</span> — Relación (SER) vs estado civil (ESTAR).</div>
+      <div><span style="color:var(--ser2);font-weight:700">La fiesta es aquí</span> — Los eventos usan SER para su ubicación, no ESTAR.</div>
+      <div><span style="color:var(--est2);font-weight:700">Estar de camarera</span> — Trabajo temporal usa "estar de + profesión".</div>
+      <div><span style="color:var(--ser2);font-weight:700">Es dulce</span> (propiedad) vs <span style="color:var(--est2);font-weight:700">está salada</span> (percepción del momento).</div>
+    </div>
+  </div>
+  </div>`;
+}
+
+goEx(0);
+</script>
+</body>
+</html>
