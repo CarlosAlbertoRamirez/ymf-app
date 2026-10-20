@@ -1,13 +1,13 @@
 /* YMF Spanish — service worker
    Cada vez que agregues ejercicios o cambies archivos, sube el número de VERSION
    para que los teléfonos descarguen la versión nueva. */
-const VERSION = 'ymf-v3';
+const VERSION = 'ymf-v6';
 const FONTS = 'ymf-fonts';
 
 importScripts('data.js'); // trae EXERCISES para precargar los ejercicios locales
 
 const SHELL = [
-  './', 'index.html', 'app.js', 'data.js', 'manifest.webmanifest',
+  './', 'index.html', 'privacy.html', 'app.js', 'data.js', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png', 'icons/apple-touch-icon.png',
 ];
 const LOCAL_EXERCISES = EXERCISES.filter(e => e.local).map(e => e.local);

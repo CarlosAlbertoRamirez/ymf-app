@@ -49,3 +49,20 @@ En `data.js` agrega un bloque dentro de `EXERCISES`:
 },
 ```
 Categorías válidas: Grammar, Tenses, Vocabulary, Pronouns, Reading, Culture, Test.
+
+## Suscripción por correo (opcional)
+Los correos llegan a un Google Form y se guardan en una hoja de Google Sheets.
+
+1. Entra a https://forms.google.com con tu cuenta de Gmail → **Formulario en blanco**.
+2. Título: `YMF Spanish — Suscriptores`.
+3. Agrega una pregunta de **Respuesta corta** llamada `Email`.
+   En **Configuración → Respuestas**, deja **apagado** "Recopilar direcciones de correo" y "Limitar a 1 respuesta" (si no, Google pide iniciar sesión y el envío desde la app falla).
+4. Arriba, pestaña **Respuestas** → **Vincular con Hojas de cálculo** (ahí verás los correos).
+5. Menú **⋮** (tres puntos) → **Obtener enlace prellenado**.
+6. En la pregunta Email escribe `test` → **Obtener enlace** → **Copiar enlace**.
+7. En `data.js`, pega ese enlace entre las comillas de la primera línea:
+   `const SUBSCRIBE_FORM_LINK = 'https://docs.google.com/forms/d/e/.../viewform?usp=pp_url&entry.123456=test';`
+8. En `sw.js` sube la versión (`ymf-v7`, etc.) y sube los cambios.
+
+Mientras `SUBSCRIBE_FORM_LINK` esté vacío, la opción de suscribirse no aparece en la app.
+Para dar de baja a alguien, borra su fila en la hoja de cálculo.

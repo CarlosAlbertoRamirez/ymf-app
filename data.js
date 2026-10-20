@@ -1,3 +1,8 @@
+// ===== SUSCRIPCIÓN POR CORREO =====
+// Pega aquí el "enlace prellenado" de tu Google Form (ver README, sección Suscripción).
+// Mientras esté vacío, la opción de suscribirse no aparece en la app.
+const SUBSCRIBE_FORM_LINK = '';
+
 // Catálogo generado desde Index-septiembre. "local" = incluido en la app (funciona sin internet).
 const EXERCISES = [
  {
