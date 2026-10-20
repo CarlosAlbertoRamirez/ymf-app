@@ -371,7 +371,7 @@ function closeViewer() {
   currentEx = null;
   try { speechSynthesis.cancel(); } catch {}
   // Vacía el iframe cuando termina de bajar el panel
-  closeTimer = setTimeout(() => { $('#v-frame').innerHTML = ''; }, 440);
+  closeTimer = setTimeout(() => { $('#v-frame').innerHTML = ''; if (pendingReload) location.reload(); }, 440);
 }
 
 function syncViewerButtons() {
@@ -481,6 +481,24 @@ route();
 flushPendingEmail();
 
 /* ---------- service worker (modo offline) ---------- */
+// Cuando llega una versión nueva, la app se recarga sola una vez.
+// Si el alumno está a mitad de un ejercicio, espera a que lo cierre.
+let pendingReload = false;
+function reloadForUpdate() {
+  if (currentEx) { pendingReload = true; return; }
+  location.reload();
+}
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  const hadController = !!navigator.serviceWorker.controller;
+  let reloading = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!hadController || reloading) return;
+    reloading = true;
+    reloadForUpdate();
+  });
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' })
+      .then(reg => reg.update())
+      .catch(() => {});
+  });
 }

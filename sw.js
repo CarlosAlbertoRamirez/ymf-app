@@ -1,7 +1,7 @@
 /* YMF Spanish — service worker
    Cada vez que agregues ejercicios o cambies archivos, sube el número de VERSION
    para que los teléfonos descarguen la versión nueva. */
-const VERSION = 'ymf-v6';
+const VERSION = 'ymf-v7';
 const FONTS = 'ymf-fonts';
 
 importScripts('data.js'); // trae EXERCISES para precargar los ejercicios locales
@@ -15,7 +15,8 @@ const LOCAL_EXERCISES = EXERCISES.filter(e => e.local).map(e => e.local);
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(VERSION)
-      .then(c => c.addAll([...SHELL, ...new Set(LOCAL_EXERCISES)]))
+      // cache: 'reload' = siempre baja la versión nueva del servidor, no la que el navegador guardó
+      .then(c => c.addAll([...SHELL, ...new Set(LOCAL_EXERCISES)].map(u => new Request(u, { cache: 'reload' }))))
       .then(() => self.skipWaiting())
   );
 });
