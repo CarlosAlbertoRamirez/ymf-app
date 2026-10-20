@@ -4,10 +4,10 @@
    Progreso y favoritos se guardan en el teléfono (localStorage). */
 
 const LEVELS = {
-  A1: { name: 'Beginner',           color: 'var(--a1)' },
-  A2: { name: 'Basic',              color: 'var(--a2)' },
-  B1: { name: 'Intermediate',       color: 'var(--b1)' },
-  B2: { name: 'Upper intermediate', color: 'var(--b2)' },
+  A1: { name: 'Beginner',           color: 'var(--a1)', card: 'nopal',    cardName: 'El Nopal',       tilt: -2.5 },
+  A2: { name: 'Basic',              color: 'var(--a2)', card: 'mariachi', cardName: 'El Mariachi',    tilt: 2 },
+  B1: { name: 'Intermediate',       color: 'var(--b1)', card: 'catrina',  cardName: 'La Catrina',     tilt: 1.5 },
+  B2: { name: 'Upper intermediate', color: 'var(--b2)', card: 'aguila',   cardName: 'El Águila Real', tilt: -2 },
 };
 const CATS = {
   Grammar: 'Grammar', Tenses: 'Tenses', Vocabulary: 'Vocabulary',
@@ -97,6 +97,59 @@ function levelRows() {
       ${ticks(list)}
     </a>`;
   }).join('')}</div>`;
+}
+
+/* ---------- Lotería: cada nivel es una carta, cada ejercicio un frijolito ---------- */
+// Posiciones fijas (pero "al azar") de los frijolitos sobre cada carta
+function beanSpots(code, n) {
+  let seed = [...code].reduce((a, ch) => a * 31 + ch.charCodeAt(0), 7) >>> 0;
+  const rnd = () => { seed = (seed + 0x6D2B79F5) >>> 0; let t = seed; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const spots = [];
+  for (let i = 0; i < n; i++) {
+    let best = null, bestGap = -1;
+    for (let k = 0; k < 14; k++) {            // busca un lugar que no encime a los demás
+      const x = 14 + rnd() * 72, y = 17 + rnd() * 60;
+      const gap = Math.min(99, ...spots.map(p => Math.hypot((p.x - x) * 0.66, p.y - y)));
+      if (gap > bestGap) { best = { x, y }; bestGap = gap; }
+    }
+    best.r = Math.round(rnd() * 160 - 80);
+    spots.push(best);
+  }
+  return spots;
+}
+
+// Cuántos frijolitos ya vio el alumno, para animar solo los nuevos
+const seenBeans = store.get('seenBeans', {});
+
+function loteriaCard(code) {
+  const L = LEVELS[code];
+  const list = inLevel(code);
+  const d = doneCount(list);
+  const full = d === list.length;
+  const seen = Math.min(seenBeans[code] ?? d, d);
+  const beans = beanSpots(code, d).map((p, i) => {
+    const fresh = i >= seen;
+    return `<i class="${fresh ? 'fresh' : ''}" style="left:${p.x.toFixed(1)}%;top:${p.y.toFixed(1)}%;--br:${p.r}deg${fresh ? `;--delay:${(i - seen) * 110 + 250}ms` : ''}"></i>`;
+  }).join('');
+  const stampFresh = full && (seenBeans[code] ?? 0) < list.length;
+  seenBeans[code] = d;
+  return `<a class="lcard press" href="#/level/${code}" style="--c:${L.color};--tilt:${L.tilt}deg" aria-label="${code} ${L.name}, ${L.cardName} card, ${d} of ${list.length} done${full ? ', complete' : ''}">
+    <span class="lcard-paper">
+      <img src="img/loteria/${L.card}.webp" alt="" width="600" height="900" decoding="async">
+      <span class="beans" aria-hidden="true">${beans}</span>
+      ${full ? `<span class="stamp${stampFresh ? ' fresh' : ''}" aria-hidden="true">¡Lotería!</span>` : ''}
+    </span>
+    <span class="lcard-cap">
+      <span class="lv"><b>${code}</b> ${L.name}</span>
+      <span class="ct">${full ? 'Complete' : `${d} of ${list.length}`}</span>
+    </span>
+  </a>`;
+}
+
+function loteria() {
+  const html = `<div class="loteria">${Object.keys(LEVELS).map(loteriaCard).join('')}</div>`;
+  store.set('seenBeans', seenBeans);
+  return html;
 }
 
 function exRow(e, { showCat = true } = {}) {
@@ -238,8 +291,8 @@ function Home() {
       <span class="play" aria-hidden="true">${ICON.play}</span>
     </button>` : ''}
     ${installBanner()}
-    <h2 class="h2">Levels</h2>
-    ${levelRows()}
+    <h2 class="h2">Levels<span>Tap a card</span></h2>
+    ${loteria()}
     ${subscribeNudge()}
     <h2 class="h2">Free tools</h2>
     <div class="group">${tools}</div>`;
@@ -252,11 +305,14 @@ function Level(code) {
   const cats = [...new Set(list.map(e => e.cat))];
   const d = doneCount(list);
   return `<a href="#/" class="back press">${ICON.back}Home</a>
-    <div style="--c:${L.color}">
-      <h1 class="page-title"><span style="color:var(--c)">${code}</span> ${L.name}</h1>
-      <p class="page-sub">${d} of ${plural(list.length, 'exercise', 'exercises')} done</p>
-      ${ticks(list)}
+    <div class="lvl-hero" style="--c:${L.color};--tilt:${L.tilt}deg">
+      <img class="lvl-card" src="img/loteria/${L.card}.webp" alt="${L.cardName} Lotería card" width="600" height="900">
+      <div class="lvl-text">
+        <h1 class="page-title"><span style="color:var(--c)">${code}</span> ${L.name}</h1>
+        <p class="page-sub">${d === list.length ? '¡Lotería! Every exercise done.' : `${d} of ${plural(list.length, 'exercise', 'exercises')} done`}</p>
+      </div>
     </div>
+    <div style="--c:${L.color}">${ticks(list)}</div>
     ${cats.map(c => {
       const items = list.filter(e => e.cat === c);
       return `<h2 class="h2">${CATS[c] || c}<span>${items.length}</span></h2>
