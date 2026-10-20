@@ -4,10 +4,10 @@
    Progreso y favoritos se guardan en el teléfono (localStorage). */
 
 const LEVELS = {
-  A1: { name: 'Beginner',           color: 'var(--a1)', card: 'nopal',    cardName: 'El Nopal',       tilt: -2.5 },
-  A2: { name: 'Basic',              color: 'var(--a2)', card: 'mariachi', cardName: 'El Mariachi',    tilt: 2 },
-  B1: { name: 'Intermediate',       color: 'var(--b1)', card: 'catrina',  cardName: 'La Catrina',     tilt: 1.5 },
-  B2: { name: 'Upper intermediate', color: 'var(--b2)', card: 'aguila',   cardName: 'El Águila Real', tilt: -2 },
+  A1: { name: 'Beginner',           color: 'var(--a1)', card: 'a1-mariachi', cardName: 'El Mariachi',    tilt: -2.5 },
+  A2: { name: 'Elementary',         color: 'var(--a2)', card: 'a2-nopal',    cardName: 'El Nopal',       tilt: 2 },
+  B1: { name: 'Intermediate',       color: 'var(--b1)', card: 'b1-catrina',  cardName: 'La Catrina',     tilt: 1.5 },
+  B2: { name: 'Upper intermediate', color: 'var(--b2)', card: 'b2-aguila',   cardName: 'El Águila Real', tilt: -2 },
 };
 const CATS = {
   Grammar: 'Grammar', Tenses: 'Tenses', Vocabulary: 'Vocabulary',
@@ -140,8 +140,8 @@ function loteriaCard(code) {
       ${full ? `<span class="stamp${stampFresh ? ' fresh' : ''}" aria-hidden="true">¡Lotería!</span>` : ''}
     </span>
     <span class="lcard-cap">
-      <span class="lv"><b>${code}</b> ${L.name}</span>
-      <span class="ct">${full ? 'Complete' : `${d} of ${list.length}`}</span>
+      <span class="bar" aria-hidden="true"><i style="width:${(d / list.length * 100).toFixed(1)}%"></i></span>
+      <span class="ct">${full ? '¡Lotería!' : `${d} of ${list.length}`}</span>
     </span>
   </a>`;
 }
