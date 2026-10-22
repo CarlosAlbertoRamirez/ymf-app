@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.yourmexicanfriend.app",
+        "sha256_cert_fingerprints": ["07:B9:8A:27:3B:03:0F:B0:A1:A7:C2:C6:FC:08:95:5E:1D:96:B7:6C:CA:7C:B0:0D:D8:D1:B1:BB:32:65:57:79"]
+      }
+    }]
