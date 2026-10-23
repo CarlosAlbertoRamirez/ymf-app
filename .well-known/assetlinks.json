@@ -1,8 +1,11 @@
 [{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "com.yourmexicanfriend.app",
-        "sha256_cert_fingerprints": ["07:B9:8A:27:3B:03:0F:B0:A1:A7:C2:C6:FC:08:95:5E:1D:96:B7:6C:CA:7C:B0:0D:D8:D1:B1:BB:32:65:57:79"]
-      }
-    }]
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.yourmexicanfriend.app",
+    "sha256_cert_fingerprints": [
+      "04:FF:8E:3A:E7:E7:88:D5:30:D9:F1:03:13:22:96:7F:40:19:49:4E:8C:FA:DA:4A:B9:2B:B2:60:72:6C:67:48",
+      "07:B9:8A:27:3B:03:0F:B0:A1:A7:C2:C6:FC:08:95:5E:1D:96:B7:6C:CA:7C:B0:0D:D8:D1:B1:BB:32:65:57:79"
+    ]
+  }
+}]
