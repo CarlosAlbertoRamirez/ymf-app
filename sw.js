@@ -1,7 +1,7 @@
 /* YMF Spanish — service worker
    Cada vez que agregues ejercicios o cambies archivos, sube el número de VERSION
    para que los teléfonos descarguen la versión nueva. */
-const VERSION = 'ymf-v10';
+const VERSION = 'ymf-v11';
 const FONTS = 'ymf-fonts';
 
 importScripts('data.js'); // trae EXERCISES para precargar los ejercicios locales

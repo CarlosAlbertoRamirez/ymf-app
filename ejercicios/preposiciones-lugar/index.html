@@ -69,8 +69,8 @@ body{font-family:var(--font);background:radial-gradient(ellipse at 10% 10%,rgba(
 .pic-btn:hover:not([disabled]){filter:brightness(1.15)}
 .pic-btn[disabled]{cursor:default}
 .pic-btn::before{content:attr(data-l);position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:.68rem;opacity:.65;font-weight:900}
-.pic-btn.c1{background:#c0392b}.pic-btn.c2{background:#2980b9}
-.pic-btn.c3{background:#d35400}.pic-btn.c4{background:#27ae60}
+.pic-btn.c1{background:#e11d9a}.pic-btn.c2{background:#0891b2}
+.pic-btn.c3{background:#d97706}.pic-btn.c4{background:#7c3aed}
 .pic-btn.revealed{box-shadow:inset 0 0 0 3px white}
 .pic-btn.revealed::after{content:"✓";position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:.9rem}
 .pic-btn.dim{opacity:.3}
@@ -219,6 +219,21 @@ body{font-family:var(--font);background:radial-gradient(ellipse at 10% 10%,rgba(
 .creator{text-align:center;color:#4a4d78;font-size:.76rem;font-weight:700;margin-top:2px}
 .creator span{color:var(--magenta2)}
 @media(max-width:600px){.panel{padding:14px 12px}.ref-cols{grid-template-columns:1fr}.pic-grid{grid-template-columns:1fr}}
+
+/* YMF brand v2 */
+.logo-box,.hero .logo,.logoBox{padding:0!important;overflow:hidden!important;background:#0c0030!important;border:2px solid rgba(37,217,255,.28)!important;box-shadow:0 0 18px rgba(255,43,191,.18)!important}
+img.ymf-logo{width:72px!important;height:72px!important;max-width:72px!important;object-fit:cover!important;border-radius:18px!important;padding:0!important;display:block}
+.logo-box>img.ymf-logo,.hero .logo>img.ymf-logo,.logoBox>img.ymf-logo{width:100%!important;height:100%!important;max-width:none!important;border-radius:inherit!important}
+.logo-box .logoText,.logoBox .logoText{display:none!important}
+.hero-text h1,.hero h1,.app>header h1,header .brand~h1{background:linear-gradient(90deg,#ff4fd8,#ffffff 48%,#25d9ff)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;color:transparent!important;font-family:'Syne','DM Sans',system-ui,sans-serif!important}
+.app>header:not(.hero){background:radial-gradient(circle at top right,rgba(37,217,255,.16),transparent 38%),linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e)!important;border-bottom:1px solid rgba(37,217,255,.13)}
+.etab.active,.tab.active,.tab-btn.active{background:linear-gradient(135deg,#ff2bbf,#ff4fd8)!important;color:#fff!important}
+.prog-f,.progress-fill,.progress-bar-fill,.bar-fill,.pfill{background:linear-gradient(90deg,#ff2bbf,#25d9ff)!important}
+.btn-primary{background:linear-gradient(135deg,#ff2bbf,#ff4fd8)!important;color:#fff!important;border:0!important}
+.ymf-brandbar{display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border-radius:16px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(37,217,255,.15)}
+.ymf-brandbar img{width:44px;height:44px;border-radius:12px;border:2px solid rgba(37,217,255,.28);object-fit:cover}
+.ymf-brandbar b{display:block;font-family:'Syne','DM Sans',sans-serif;font-size:1rem;background:linear-gradient(90deg,#ff4fd8,#fff 48%,#25d9ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ymf-brandbar span{display:block;font-size:.72rem;color:#a8abce;font-weight:700;margin-top:2px}
 </style>
 </head>
 <body>
@@ -226,7 +241,7 @@ body{font-family:var(--font);background:radial-gradient(ellipse at 10% 10%,rgba(
 <div class="cf" id="cf"></div>
 <header class="hero">
   <div class="hero-in">
-    <div class="logo-box">YMF</div>
+    <div class="logo-box"><img class="ymf-logo" src="data:image/webp;base64,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" alt="YMF"></div>
     <div class="hero-text">
       <h1>Preposiciones de Lugar &amp; Vocabulario</h1>
       <p>Six exercises with prettier cartoon-style illustrations: picture cards, scene quiz, multiple choice, error hunter, speed round, and reference.</p>

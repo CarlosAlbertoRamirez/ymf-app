@@ -6,63 +6,90 @@
     <title>Masterclass: El Reto de las 40 Preguntas (B1-B2)</title>
     <style>
         :root {
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #6366f1;
-            --text: #f8fafc;
-            --text-muted: #94a3b8;
-            --correct: #22c55e;
-            --wrong: #ef4444;
-            --warning: #f59e0b;
+            --bg:#0f172a;
+            --card-bg:#20093e;
+            --accent:#ff2bbf;
+            --text:#f8fafc;
+            --text-muted:#94a3b8;
+            --correct:#22c55e;
+            --wrong:#ef4444;
+            --warning:#f59e0b;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
+            font-family:'DM Sans',system-ui,sans-serif;
+            background-color:var(--bg);
+            color:var(--text);
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh; padding: 20px;
         }
 
-        .app-container { width: 100%; max-width: 850px; background: var(--card-bg); border-radius: 28px; padding: 2rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+        .app-container { width: 100%; max-width: 850px; background:var(--card-bg); border-radius:28px; padding: 2rem; box-shadow:0 25px 50px -12px rgba(0, 0, 0, 0.5); }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .stat-box { background: #334155; padding: 5px 12px; border-radius: 10px; font-weight: bold; font-size: 0.9rem; }
-        .progress-bar { height: 8px; background: #334155; border-radius: 4px; margin-bottom: 2rem; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: 0.4s; }
+        .stat-box { background:#320e5f; padding: 5px 12px; border-radius:10px; font-weight: bold; font-size: 0.9rem; }
+        .progress-bar { height: 8px; background:#320e5f; border-radius:4px; margin-bottom: 2rem; overflow: hidden; }
+        .progress-fill { height: 100%; background:var(--accent); width: 0%; transition: 0.4s; }
         
-        .instruction { color: var(--accent); text-transform: uppercase; font-size: 0.8rem; font-weight: 800; margin-bottom: 0.5rem; }
-        .difficulty { font-size: 0.7rem; padding: 2px 8px; border-radius: 5px; float: right; font-weight: bold; }
-        .dif-medio { background: #92400e; color: #fbbf24; }
-        .dif-difícil { background: #991b1b; color: #f87171; }
+        .instruction { color:var(--accent); text-transform: uppercase; font-size: 0.8rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .difficulty { font-size: 0.7rem; padding: 2px 8px; border-radius:5px; float: right; font-weight: bold; }
+        .dif-medio { background:#92400e; color:#fbbf24; }
+        .dif-difícil { background:#991b1b; color:#f87171; }
         
         .question-text { font-size: 1.3rem; margin-bottom: 2rem; line-height: 1.4; min-height: 60px; }
 
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .opt-btn { background: #2d3748; border: 2px solid transparent; color: white; padding: 1rem; border-radius: 15px; cursor: pointer; text-align: left; transition: 0.2s; font-size: 0.95rem; }
-        .opt-btn:hover { background: #3e4a5f; border-color: var(--accent); }
-        .opt-btn.selected { border-color: var(--accent); background: #3e4a5f; }
+        .opt-btn { background:#2b0c52; border:2px solid transparent; color:white; padding: 1rem; border-radius:15px; cursor: pointer; text-align: left; transition: 0.2s; font-size: 0.95rem; }
+        .opt-btn:hover { background:#3e4a5f; border-color:var(--accent); }
+        .opt-btn.selected { border-color:var(--accent); background:#3e4a5f; }
 
-        .text-input { width: 100%; padding: 1.2rem; background: #0f172a; border: 2px solid #334155; border-radius: 15px; color: white; font-size: 1.2rem; outline: none; }
+        .text-input { width: 100%; padding: 1.2rem; background:#0f172a; border:2px solid rgba(37,217,255,0.16); border-radius:15px; color:white; font-size: 1.2rem; outline:none; }
 
-        #feedback-area { display: none; margin-top: 20px; padding: 1.5rem; border-radius: 15px; border-left: 5px solid var(--accent); background: rgba(255,255,255,0.05); }
+        #feedback-area { display: none; margin-top: 20px; padding: 1.5rem; border-radius:15px; border-left:5px solid var(--accent); background:rgba(255,255,255,0.05); }
 
         .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        .word-item { background: #475569; padding: 8px 15px; border-radius: 8px; cursor: pointer; }
-        .word-drop { min-height: 60px; background: #0f172a; border: 2px dashed #334155; border-radius: 15px; padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .word-item { background:#475569; padding: 8px 15px; border-radius:8px; cursor: pointer; }
+        .word-drop { min-height: 60px; background:#0f172a; border:2px dashed rgba(37,217,255,0.16); border-radius:15px; padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
 
         .actions { display: flex; gap: 10px; margin-top: 2rem; }
-        .main-btn { flex: 1; padding: 12px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; }
-        .btn-submit { background: var(--accent); color: white; }
-        .btn-hint { background: #475569; color: white; max-width: 100px; }
+        .main-btn { flex: 1; padding: 12px; border-radius:12px; border:none; font-weight: bold; cursor: pointer; }
+        .btn-submit { background:var(--accent); color:white; }
+        .btn-hint { background:#475569; color:white; max-width: 100px; }
 
         #results-screen { display: none; text-align: center; }
-        .error-log { text-align: left; background: #0f172a; padding: 15px; border-radius: 15px; margin-top: 20px; max-height: 300px; overflow-y: auto; }
-    </style>
+        .error-log { text-align: left; background:#0f172a; padding: 15px; border-radius:15px; margin-top: 20px; max-height: 300px; overflow-y: auto; }
+    
+/* ===== YMF theme (unificado) ===== */
+html,body{font-family:'DM Sans',system-ui,sans-serif!important;color:#f0f0ff}
+html{background:#0b0122!important}
+body{background:radial-gradient(ellipse at 15% 10%,rgba(255,43,191,.13),transparent 35%),radial-gradient(ellipse at 85% 15%,rgba(37,217,255,.10),transparent 35%),linear-gradient(155deg,#070019,#160033)!important;background-color:#0b0122!important}
+h1,h2,h3,.brand-title,.question-title,.ymf-display{font-family:'Syne','DM Sans',system-ui,sans-serif!important;letter-spacing:-.01em}
+button,input,select,textarea{font-family:'DM Sans',system-ui,sans-serif!important}
+input,select,textarea{background:rgba(255,255,255,.06)!important;color:#f0f0ff!important;border-color:rgba(37,217,255,.22)!important}
+input::placeholder,textarea::placeholder{color:#8a8db5!important}
+::selection{background:rgba(255,43,191,.35)}
+
+/* YMF brand v2 */
+.logo-box,.hero .logo,.logoBox{padding:0!important;overflow:hidden!important;background:#0c0030!important;border:2px solid rgba(37,217,255,.28)!important;box-shadow:0 0 18px rgba(255,43,191,.18)!important}
+img.ymf-logo{width:72px!important;height:72px!important;max-width:72px!important;object-fit:cover!important;border-radius:18px!important;padding:0!important;display:block}
+.logo-box>img.ymf-logo,.hero .logo>img.ymf-logo,.logoBox>img.ymf-logo{width:100%!important;height:100%!important;max-width:none!important;border-radius:inherit!important}
+.logo-box .logoText,.logoBox .logoText{display:none!important}
+.hero-text h1,.hero h1,.app>header h1,header .brand~h1{background:linear-gradient(90deg,#ff4fd8,#ffffff 48%,#25d9ff)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;color:transparent!important;font-family:'Syne','DM Sans',system-ui,sans-serif!important}
+.app>header:not(.hero){background:radial-gradient(circle at top right,rgba(37,217,255,.16),transparent 38%),linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e)!important;border-bottom:1px solid rgba(37,217,255,.13)}
+.etab.active,.tab.active,.tab-btn.active{background:linear-gradient(135deg,#ff2bbf,#ff4fd8)!important;color:#fff!important}
+.prog-f,.progress-fill,.progress-bar-fill,.bar-fill,.pfill{background:linear-gradient(90deg,#ff2bbf,#25d9ff)!important}
+.btn-primary{background:linear-gradient(135deg,#ff2bbf,#ff4fd8)!important;color:#fff!important;border:0!important}
+.ymf-brandbar{display:flex;align-items:center;gap:12px;padding:12px 14px;margin-bottom:12px;border-radius:16px;background:linear-gradient(130deg,#0a0022,#1c0050 55%,#0c002e);border:1px solid rgba(37,217,255,.15)}
+.ymf-brandbar img{width:44px;height:44px;border-radius:12px;border:2px solid rgba(37,217,255,.28);object-fit:cover}
+.ymf-brandbar b{display:block;font-family:'Syne','DM Sans',sans-serif;font-size:1rem;background:linear-gradient(90deg,#ff4fd8,#fff 48%,#25d9ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ymf-brandbar span{display:block;font-size:.72rem;color:#a8abce;font-weight:700;margin-top:2px}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <div class="app-container" id="app">
+<div class="ymf-brandbar"><img src="data:image/webp;base64,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" alt="YMF"><div><b>Your Mexican Friend</b><span>Masterclass: El Reto de las 40 Preguntas (B1-B2)</span></div></div>
     <div id="quiz-ui">
         <div class="header">
             <div class="stats">
@@ -92,7 +119,7 @@
 
     <div id="results-screen">
         <h2>🎉 Resultados del Reto B1/B2</h2>
-        <h1 id="res-percent" style="font-size: 4rem; color: var(--accent);">0%</h1>
+        <h1 id="res-percent" style="font-size: 4rem; color:var(--accent);">0%</h1>
         <p id="res-score"></p>
         <div class="error-log" id="error-log"></div>
         <button class="main-btn btn-submit" style="margin-top: 20px;" onclick="location.reload()">Reintentar nivel B2</button>
@@ -255,7 +282,7 @@
         const log = document.getElementById('error-log');
         log.innerHTML = "<h3>Análisis de puntos débiles:</h3>";
         errors.forEach(e => {
-            log.innerHTML += `<div style="margin-bottom:15px; border-bottom:1px solid #334155; padding-bottom:5px;">
+            log.innerHTML += `<div style="margin-bottom:15px; border-bottom:1px solid rgba(37,217,255,0.16); padding-bottom:5px;">
                 <p style="color:var(--text-muted)">Pregunta: ${e.q}</p>
                 <p style="color:var(--correct)">✔ Correcto: ${e.correct}</p>
                 <small>${e.expl}</small>
