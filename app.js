@@ -14,6 +14,7 @@ const CATS = {
   Pronouns: 'Pronouns', Reading: 'Reading', Culture: 'Culture', Test: 'Tests',
 };
 const LOGO = 'icons/icon-192.png';
+const PLAY_URL = 'https://play.google.com/store/apps/details?id=com.yourmexicanfriend.app';
 
 /* ---------- icons ---------- */
 const ICON = {
@@ -30,6 +31,8 @@ const ICON = {
   shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3.5 5 6v5.5c0 4.3 3 7.7 7 9 4-1.3 7-4.7 7-9V6z"/></svg>',
   phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6.5" y="3" width="11" height="18" rx="2.5"/><path d="M11 17.5h2"/></svg>',
   play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
+  share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="17.5" cy="5.5" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><circle cx="17.5" cy="18.5" r="2.5"/><path d="m8.7 10.8 6.6-3.9M8.7 13.2l6.6 3.9"/></svg>',
+  rate: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3.8 2.5 5.1 5.6.8-4 4 .9 5.6L12 16.6l-5 2.7.9-5.6-4-4 5.6-.8z"/></svg>',
   reset: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3L4.5 9"/><path d="M4.5 4.5V9H9"/></svg>',
 };
 
@@ -267,6 +270,21 @@ $('#sub-form').addEventListener('submit', async e => {
 $('#sub-close').onclick = () => { closeSubSheet(); route(); };
 $('#sub-sheet').onclick = e => { if (e.target.id === 'sub-sheet') { closeSubSheet(); if (isSubscribed()) route(); } };
 
+/* ---------- compartir la app ---------- */
+async function shareApp() {
+  const data = {
+    title: 'YMF Spanish',
+    text: 'I\'m learning real Mexican Spanish with YMF Spanish. Try it:',
+    url: PLAY_URL,
+  };
+  if (navigator.share) {
+    try { await navigator.share(data); } catch {} // si la persona cancela, no pasa nada
+    return;
+  }
+  try { await navigator.clipboard.writeText(data.text + ' ' + data.url); toast('Link copied'); }
+  catch { prompt('Copy this link:', data.url); }
+}
+
 function openSheet() { $('#ios-sheet').classList.add('open'); }
 function closeSheet() { $('#ios-sheet').classList.remove('open'); }
 
@@ -376,6 +394,8 @@ function Progress() {
     <div class="group">
       ${canInstall() ? `<button class="row link-row press" data-install><span class="icon-tile">${ICON.phone}</span><span class="body"><span class="name">Install the app</span></span></button>` : ''}
       ${canSubscribe() ? `<button class="row link-row press" data-subscribe><span class="icon-tile">${ICON.mail}</span><span class="body"><span class="name">Get new exercises by email</span></span></button>` : ''}
+      ${link(PLAY_URL, ICON.rate, 'Rate the app')}
+      <button class="row link-row press" data-share><span class="icon-tile">${ICON.share}</span><span class="body"><span class="name">Share the app</span></span></button>
       ${link('https://www.yourmexicanfriend.com', ICON.globe, 'yourmexicanfriend.com')}
       ${link('https://open.spotify.com/show/5ewwW6KywrSh0JXZxALOg6', ICON.mic, 'Listen to the podcast')}
       ${link('mailto:urmexicanfriend@gmail.com', ICON.mail, 'Write to us', false)}
@@ -489,7 +509,7 @@ window.addEventListener('hashchange', route);
 
 /* ---------- delegated events ---------- */
 app.addEventListener('click', e => {
-  const t = e.target.closest('[data-open],[data-tool],[data-f],[data-install],[data-hide-install],[data-reset],[data-clear],[data-clear-q],[data-subscribe],[data-hide-sub]');
+  const t = e.target.closest('[data-open],[data-tool],[data-f],[data-install],[data-hide-install],[data-reset],[data-clear],[data-clear-q],[data-subscribe],[data-hide-sub],[data-share]');
   if (!t) return;
   if (t.dataset.open) location.hash = '#/ex/' + encodeURIComponent(t.dataset.open);
   else if (t.dataset.tool) location.hash = '#/ex/' + t.dataset.tool;
@@ -497,6 +517,7 @@ app.addEventListener('click', e => {
   else if ('install' in t.dataset) doInstall();
   else if ('hideInstall' in t.dataset) { store.set('hideInstall', true); route(); }
   else if ('subscribe' in t.dataset) openSubSheet();
+  else if ('share' in t.dataset) shareApp();
   else if ('hideSub' in t.dataset) { store.set('hideSubNudge', true); route(); }
   else if ('clear' in t.dataset) { state.filters = { level: 'ALL', cat: 'ALL', q: '' }; route(); }
   else if ('clearQ' in t.dataset) { state.filters.q = ''; route(); $('#q').focus(); }
