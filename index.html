@@ -394,6 +394,56 @@
     *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
     .spinner { animation: none; }
   }
+
+  /* ---- Progress: hub de YMF (tarjetas en vez de lista larga) ---- */
+  .hub-ic { width: 38px; height: 38px; flex: none; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.07); color: var(--cyan); }
+  .hub-ic svg { width: 20px; height: 20px; }
+  .hub-banner { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; padding: 14px 16px; margin-bottom: 10px; border-radius: var(--radius-group); background: linear-gradient(120deg, rgba(72,216,240,.16), rgba(72,216,240,.04)); box-shadow: 0 0 0 1px rgba(72,216,240,.25) inset; color: var(--text); }
+  .hub-banner b { display: block; font-size: 15.5px; }
+  .hub-banner small { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .hub-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hub-big { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; padding: 16px; min-height: 132px; border-radius: var(--radius-group); color: var(--text); text-decoration: none; }
+  .hub-big .hub-ic { margin-bottom: auto; background: rgba(255,255,255,.14); color: #fff; }
+  .hub-big b { font-size: 16px; margin-top: 14px; }
+  .hub-big small { font-size: 12.5px; line-height: 1.3; color: rgba(255,255,255,.78); }
+  .hub-big.rate { background: linear-gradient(145deg, #FF4FB8, #B4207E); box-shadow: 0 10px 28px -12px rgba(255,79,184,.8); }
+  .hub-big.share { background: linear-gradient(145deg, #2CB8D6, #3A3FB0); box-shadow: 0 10px 28px -12px rgba(72,216,240,.6); }
+  .hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .hub-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; text-align: left; padding: 14px; border-radius: var(--radius-group); background: var(--surface); box-shadow: 0 0 0 1px var(--line) inset; color: var(--text); text-decoration: none; }
+  .hub-tile .hub-ic { margin-bottom: 8px; }
+  .hub-tile b { font-size: 15px; }
+  .hub-tile small { font-size: 12.5px; color: var(--muted); }
+  .hub-big.press:active, .hub-tile.press:active, .hub-banner.press:active { opacity: .8; }
+  .hub-foot { display: flex; justify-content: center; align-items: center; gap: 10px; margin: 22px 0 6px; font-size: 13px; color: var(--muted); }
+  .hub-foot a { color: var(--muted); text-decoration: none; }
+  .hub-foot .danger { color: var(--danger); font-size: 13px; }
+
+  /* ---- Tutorial de bienvenida ---- */
+  .tour { position: fixed; inset: 0; z-index: 90; display: flex; align-items: flex-end; justify-content: center; background: rgba(8,4,20,.72); opacity: 0; transition: opacity 240ms var(--ease-out); }
+  .tour[hidden] { display: none; }
+  .tour.open { opacity: 1; }
+  .tour-card { position: relative; width: min(100%, 480px); min-width: 0; overflow: hidden; padding: 18px 0 calc(22px + env(safe-area-inset-bottom)); border-radius: 28px 28px 0 0; background: radial-gradient(circle at 80% 0%, rgba(72,216,240,.14), transparent 45%), radial-gradient(circle at 10% 10%, rgba(255,79,184,.16), transparent 45%), #150F2C; box-shadow: 0 -1px 0 rgba(255,255,255,.08) inset; transform: translateY(24px); transition: transform 300ms var(--ease-out); }
+  .tour.open .tour-card { transform: none; }
+  .tour-skip { position: absolute; top: 14px; right: 16px; z-index: 2; padding: 8px 12px; border-radius: 999px; color: var(--muted); font-size: 14px; font-weight: 700; }
+  .tour-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .tour-track::-webkit-scrollbar { display: none; }
+  .tour-slide { flex: 0 0 100%; scroll-snap-align: center; padding: 26px 28px 6px; text-align: center; }
+  .tour-art { height: 168px; display: grid; place-items: center; margin-bottom: 18px; }
+  .tour-logo { width: 132px; height: 132px; border-radius: 30px; box-shadow: 0 0 0 2px rgba(72,216,240,.3), 0 16px 40px -10px rgba(255,79,184,.6); }
+  .tour-fan { position: relative; width: 220px; height: 160px; }
+  .tour-fan img { position: absolute; left: 50%; bottom: 0; width: 92px; border-radius: 10px; transform-origin: 50% 120%; transform: translateX(-50%) rotate(calc((var(--i) - 1.5) * 13deg)); box-shadow: 0 8px 20px -6px rgba(0,0,0,.7); }
+  .tour-icons { display: flex; gap: 14px; }
+  .tour-icons span { width: 64px; height: 64px; border-radius: 20px; display: grid; place-items: center; background: rgba(255,255,255,.07); color: var(--cyan); box-shadow: 0 0 0 1px var(--line) inset; }
+  .tour-icons span:nth-child(2) { color: #FFD166; transform: translateY(-14px); }
+  .tour-icons span:nth-child(3) { color: var(--pink); }
+  .tour-icons svg { width: 28px; height: 28px; }
+  .tour-slide h2 { font-size: 24px; letter-spacing: -.01em; margin-bottom: 8px; }
+  .tour-slide p { color: var(--muted); font-size: 15.5px; line-height: 1.5; max-width: 340px; margin: 0 auto; }
+  .tour-dots { display: flex; justify-content: center; gap: 7px; margin: 18px 0 16px; }
+  .tour-dots i { width: 7px; height: 7px; border-radius: 99px; background: rgba(255,255,255,.22); transition: width 220ms var(--ease-out), background 220ms; }
+  .tour-dots i.on { width: 22px; background: var(--pink); }
+  .tour-next { display: flex; justify-content: center; width: calc(100% - 48px); margin: 0 24px; height: 50px; font-size: 16px; }
+  @media (prefers-reduced-motion: reduce) { .tour, .tour-card { transition: none; } }
 </style>
 </head>
 <body>
@@ -473,6 +523,7 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<div class="tour" id="tour" hidden></div>
 <script src="data.js"></script>
 <script src="app.js"></script>
 </body>
