@@ -33,6 +33,7 @@ const ICON = {
   play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
   share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="17.5" cy="5.5" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><circle cx="17.5" cy="18.5" r="2.5"/><path d="m8.7 10.8 6.6-3.9M8.7 13.2l6.6 3.9"/></svg>',
   rate: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3.8 2.5 5.1 5.6.8-4 4 .9 5.6L12 16.6l-5 2.7.9-5.6-4-4 5.6-.8z"/></svg>',
+  spark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.9L19 9.7l-4.9 1.8L12 16.5l-1.8-5L5 9.7l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>',
   reset: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3L4.5 9"/><path d="M4.5 4.5V9H9"/></svg>',
 };
 
@@ -391,17 +392,24 @@ function Progress() {
       ? `<div class="group">${favs.map(e => exRow(e)).join('')}</div>`
       : '<div class="group"><p class="empty" style="padding:20px">Tap the star inside any exercise to keep it here.</p></div>'}
     <h2 class="h2">Your Mexican Friend</h2>
-    <div class="group">
-      ${canInstall() ? `<button class="row link-row press" data-install><span class="icon-tile">${ICON.phone}</span><span class="body"><span class="name">Install the app</span></span></button>` : ''}
-      ${canSubscribe() ? `<button class="row link-row press" data-subscribe><span class="icon-tile">${ICON.mail}</span><span class="body"><span class="name">Get new exercises by email</span></span></button>` : ''}
-      ${link(PLAY_URL, ICON.rate, 'Rate the app')}
-      <button class="row link-row press" data-share><span class="icon-tile">${ICON.share}</span><span class="body"><span class="name">Share the app</span></span></button>
-      ${link('https://www.yourmexicanfriend.com', ICON.globe, 'yourmexicanfriend.com')}
-      ${link('https://open.spotify.com/show/5ewwW6KywrSh0JXZxALOg6', ICON.mic, 'Listen to the podcast')}
-      ${link('mailto:urmexicanfriend@gmail.com', ICON.mail, 'Write to us', false)}
-      ${link('privacy.html', ICON.shield, 'Privacy policy', false)}
-      <button class="row link-row danger press" data-reset><span class="icon-tile">${ICON.reset}</span><span class="body"><span class="name">Reset progress</span></span></button>
+    ${canInstall() ? `<button class="hub-banner press" data-install><span class="hub-ic">${ICON.phone}</span><span><b>Install the app</b><small>Practice offline, right from your home screen</small></span></button>` : ''}
+    <div class="hub-duo">
+      <a class="hub-big rate press" href="${PLAY_URL}" target="_blank" rel="noopener"><span class="hub-ic">${ICON.rate}</span><b>Rate the app</b><small>Takes 10 seconds and helps a lot</small></a>
+      <button class="hub-big share press" data-share><span class="hub-ic">${ICON.share}</span><b>Share the app</b><small>Send it to a Spanish learner</small></button>
+    </div>
+    <div class="hub-grid">
+      ${hubTile('https://www.yourmexicanfriend.com', ICON.globe, 'Website', 'Classes & more')}
+      ${hubTile('https://open.spotify.com/show/5ewwW6KywrSh0JXZxALOg6', ICON.mic, 'Podcast', 'Listen on Spotify')}
+      ${hubTile('mailto:urmexicanfriend@gmail.com', ICON.mail, 'Write to us', 'Ideas or bugs', false)}
+      ${canSubscribe() ? `<button class="hub-tile press" data-subscribe><span class="hub-ic">${ICON.mail}</span><b>Newsletter</b><small>New exercises</small></button>` : hubTile('#/progress', ICON.spark, 'Tutorial', 'See the welcome tour', false, 'data-tour')}
+    </div>
+    <div class="hub-foot">
+      <a href="privacy.html">Privacy policy</a><span aria-hidden="true">·</span><button class="danger" data-reset>Reset progress</button>
     </div>`;
+}
+
+function hubTile(href, icon, title, sub, ext = true, attr = '') {
+  return `<a class="hub-tile press" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''} ${attr}><span class="hub-ic">${icon}</span><b>${title}</b><small>${sub}</small></a>`;
 }
 
 /* ---------- exercise viewer ---------- */
@@ -509,7 +517,7 @@ window.addEventListener('hashchange', route);
 
 /* ---------- delegated events ---------- */
 app.addEventListener('click', e => {
-  const t = e.target.closest('[data-open],[data-tool],[data-f],[data-install],[data-hide-install],[data-reset],[data-clear],[data-clear-q],[data-subscribe],[data-hide-sub],[data-share]');
+  const t = e.target.closest('[data-open],[data-tool],[data-f],[data-install],[data-hide-install],[data-reset],[data-clear],[data-clear-q],[data-subscribe],[data-hide-sub],[data-share],[data-tour]');
   if (!t) return;
   if (t.dataset.open) location.hash = '#/ex/' + encodeURIComponent(t.dataset.open);
   else if (t.dataset.tool) location.hash = '#/ex/' + t.dataset.tool;
@@ -518,6 +526,7 @@ app.addEventListener('click', e => {
   else if ('hideInstall' in t.dataset) { store.set('hideInstall', true); route(); }
   else if ('subscribe' in t.dataset) openSubSheet();
   else if ('share' in t.dataset) shareApp();
+  else if ('tour' in t.dataset) { e.preventDefault(); openTour(); }
   else if ('hideSub' in t.dataset) { store.set('hideSubNudge', true); route(); }
   else if ('clear' in t.dataset) { state.filters = { level: 'ALL', cat: 'ALL', q: '' }; route(); }
   else if ('clearQ' in t.dataset) { state.filters.q = ''; route(); $('#q').focus(); }
@@ -578,4 +587,60 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
       .then(reg => reg.update())
       .catch(() => {});
   });
+}
+
+/* ---------- tutorial de bienvenida (solo la primera vez) ---------- */
+const TOUR = [
+  { art: `<img class="tour-logo" src="${LOGO}" alt="">`,
+    title: '¡Bienvenido! Welcome!',
+    text: 'Real Mexican Spanish, from A1 to B2. Free, no account needed. Made by Your Mexican Friend in Mexico City.' },
+  { art: `<div class="tour-fan">${Object.values(LEVELS).map((L, i) => `<img src="img/loteria/${L.card}.webp" alt="" style="--i:${i}">`).join('')}</div>`,
+    title: 'Pick your level',
+    text: 'Each Lotería card is a level. Finish an exercise and a bean lands on your card. Fill it up and shout ¡Lotería!' },
+  { art: `<div class="tour-icons"><span>${ICON.bolt}</span><span>${ICON.star}</span><span>${ICON.check}</span></div>`,
+    title: 'Practice anywhere',
+    text: 'Exercises work offline. Save favorites with the star and track everything in Progress.' },
+];
+
+function openTour() {
+  const el = $('#tour');
+  el.innerHTML = `
+    <div class="tour-card" role="dialog" aria-modal="true" aria-label="Welcome tour">
+      <button class="tour-skip press" data-tour-close>Skip</button>
+      <div class="tour-track">${TOUR.map(t => `<section class="tour-slide"><div class="tour-art">${t.art}</div><h2>${t.title}</h2><p>${t.text}</p></section>`).join('')}</div>
+      <div class="tour-dots">${TOUR.map((_, i) => `<i${i ? '' : ' class="on"'}></i>`).join('')}</div>
+      <button class="btn btn-primary tour-next press" data-tour-next>Next</button>
+    </div>`;
+  el.hidden = false;
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => el.classList.add('open'));
+  const track = el.querySelector('.tour-track');
+  const step = () => Math.round(track.scrollLeft / track.clientWidth);
+  const sync = () => {
+    const i = step();
+    el.querySelectorAll('.tour-dots i').forEach((d, k) => d.classList.toggle('on', k === i));
+    el.querySelector('[data-tour-next]').textContent = i === TOUR.length - 1 ? '¡Empezar!' : 'Next';
+  };
+  track.addEventListener('scroll', sync, { passive: true });
+  el.onclick = e => {
+    if (e.target.closest('[data-tour-close]')) return closeTour();
+    if (e.target.closest('[data-tour-next]')) {
+      const i = step();
+      if (i >= TOUR.length - 1) return closeTour();
+      track.scrollTo({ left: (i + 1) * track.clientWidth, behavior: 'smooth' });
+    }
+  };
+}
+
+function closeTour() {
+  store.set('toured', true);
+  const el = $('#tour');
+  el.classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(() => { el.hidden = true; el.innerHTML = ''; }, 260);
+}
+
+if (!store.get('toured', false)) {
+  if (doneCount(EXERCISES) > 0) store.set('toured', true); // quien ya usa la app no lo necesita
+  else setTimeout(openTour, 400);
 }
